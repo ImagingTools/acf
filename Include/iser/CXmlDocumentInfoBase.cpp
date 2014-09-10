@@ -9,6 +9,12 @@ namespace iser
 {
 
 
+CXmlDocumentInfoBase::CXmlDocumentInfoBase()
+:	m_isCommentEnabled(true)
+{
+}
+
+
 void CXmlDocumentInfoBase::EncodeXml(const QByteArray& text, QByteArray& xmlText)
 {
 	xmlText = "";

@@ -81,7 +81,7 @@ protected:
 	// reimplemented (iview::CShapeBase)
 	virtual i2d::CRect CalcBoundingBox() const;
 
-	i2d::CVector2d m_referencePosition;
+	//i2d::CVector2d m_referencePosition;
 	int m_referenceIndex;
 	QVector<i2d::CVector2d> m_references;
 

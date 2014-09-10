@@ -140,7 +140,7 @@ inline bool TComposedColor<Size>::IsNormalized() const
 	for (int i = 0; i < Size; ++i){
 		double component = BaseClass::GetElement(i);
 
-		if ((component < 0) && (component > 1)){
+		if ((component < 0) || (component > 1)){
 			return false;
 		}
 	}

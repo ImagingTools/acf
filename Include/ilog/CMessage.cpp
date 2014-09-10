@@ -10,7 +10,7 @@
 
 
 namespace ilog
-{		
+{
 
 
 // local variables
@@ -56,7 +56,7 @@ void CMessage::SetMessageValues(
 			int flags,
 			const QDateTime* timeStampPtr)
 {
-	istd::CChangeNotifier notifier(this, allDataChangeIds);
+	BeginChanges(allDataChangeIds);
 
 	m_category = category;
 	m_id = id;
@@ -70,15 +70,19 @@ void CMessage::SetMessageValues(
 	else{
 		m_timeStamp = QDateTime::currentDateTime();
 	}
+
+	EndChanges(allDataChangeIds);
 }
 
 
 void CMessage::SetCategory(istd::IInformationProvider::InformationCategory category)
 {
 	if (category != m_category){
-		istd::CChangeNotifier notifier(this, allDataChangeIds);
+		BeginChanges(allDataChangeIds);
 
 		m_category = category;
+
+		EndChanges(allDataChangeIds);
 	}
 }
 
@@ -86,9 +90,11 @@ void CMessage::SetCategory(istd::IInformationProvider::InformationCategory categ
 void CMessage::SetText(const QString& text)
 {
 	if (text != m_text){
-		istd::CChangeNotifier notifier(this, allDataChangeIds);
+		BeginChanges(allDataChangeIds);
 
 		m_text = text;
+
+		EndChanges(allDataChangeIds);
 	}
 }
 
@@ -96,9 +102,11 @@ void CMessage::SetText(const QString& text)
 void CMessage::SetSource(const QString& source)
 {
 	if (source != m_source){
-		istd::CChangeNotifier notifier(this, allDataChangeIds);
+		BeginChanges(allDataChangeIds);
 
 		m_source = source;
+
+		EndChanges(allDataChangeIds);
 	}
 }
 
@@ -166,24 +174,32 @@ bool CMessage::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mod
 {
 	const CMessage* sourcePtr = dynamic_cast<const CMessage*>(&object);
 	if (sourcePtr){
+		BeginChanges(allDataChangeIds);
+
 		m_category = sourcePtr->m_category;
 		m_id = sourcePtr->m_id;
 		m_text = sourcePtr->m_text;
 		m_source = sourcePtr->m_source;
 		m_flags = sourcePtr->m_flags;
 		m_timeStamp = sourcePtr->m_timeStamp;
-		
+
+		EndChanges(allDataChangeIds);
+
 		return true;
 	}
 
 	const istd::IInformationProvider* informationProviderPtr = dynamic_cast<const istd::IInformationProvider*>(&object);
 	if (informationProviderPtr != NULL){
+		BeginChanges(allDataChangeIds);
+
 		m_category = informationProviderPtr->GetInformationCategory();
 		m_id = informationProviderPtr->GetInformationId();
 		m_text = informationProviderPtr->GetInformationDescription();
 		m_source = informationProviderPtr->GetInformationSource();
 		m_flags = informationProviderPtr->GetInformationFlags();
 		m_timeStamp = informationProviderPtr->GetInformationTimeStamp();
+
+		EndChanges(allDataChangeIds);
 
 		return true;
 	}

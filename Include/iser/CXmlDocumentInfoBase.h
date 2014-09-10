@@ -18,6 +18,8 @@ namespace iser
 class CXmlDocumentInfoBase
 {
 public:
+	CXmlDocumentInfoBase();
+	
 	/**
 		Check if comments in XML document are enabled.
 		It can be used e.g. to store tag descriptions as comments.

@@ -108,8 +108,8 @@ void CSpline::CalcAllSegments() const
 			segment.A(i2d::CVector2d(coeffX[i + 1] - coeffX[i], coeffY[i + 1] - coeffY[i]));
 		}
 	}
-	delete coeffX;
-	delete coeffY;
+	delete[] coeffX;
+	delete[] coeffY;
 
 	m_isInvalidated = false;
 }

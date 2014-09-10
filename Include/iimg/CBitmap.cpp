@@ -23,7 +23,9 @@ CBitmap::CBitmap()
 
 
 CBitmap::CBitmap(const CBitmap& bitmap)
-:	BaseClass(bitmap), m_image(bitmap.m_image)
+:	BaseClass(bitmap), 
+	m_image(bitmap.m_image),
+	m_externalBuffer(NULL)
 {
 }
 

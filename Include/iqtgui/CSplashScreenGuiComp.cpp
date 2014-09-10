@@ -9,6 +9,12 @@ namespace iqtgui
 {
 
 
+CSplashScreenGuiComp::CSplashScreenGuiComp()
+:	m_mainVersionId(0)
+{
+}
+
+
 // protected methods
 
 // reimplemented (iqtgui::CGuiComponentBase)

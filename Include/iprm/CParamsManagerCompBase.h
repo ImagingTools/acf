@@ -107,7 +107,6 @@ protected:
 	I_ATTR(bool, m_allowEditFixedAttrPtr);
 	I_ATTR(QByteArray, m_elementIndexParamId);
 	I_ATTR(QByteArray, m_elementNameParamId);
-	I_FACT(IParamsSet, m_paramSetsFactPtr);
 
 	class ParamSet:
 				public CMultiModelBridgeBase,

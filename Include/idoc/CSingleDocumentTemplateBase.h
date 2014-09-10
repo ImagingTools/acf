@@ -20,6 +20,8 @@ class IDocumentManager;
 class CSingleDocumentTemplateBase: virtual public idoc::IDocumentTemplate
 {
 public:
+	CSingleDocumentTemplateBase();
+
 	const QByteArray& GetDocumentTypeId() const;
 	virtual void SetSupportedFeatures(int featureFlags);
 	virtual void SetDocumentTypeId(const QByteArray& id);

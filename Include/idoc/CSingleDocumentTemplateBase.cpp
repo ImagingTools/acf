@@ -11,6 +11,12 @@ namespace idoc
 {
 
 
+CSingleDocumentTemplateBase::CSingleDocumentTemplateBase()
+:	m_supportedFeatures(0)
+{
+}
+
+
 void CSingleDocumentTemplateBase::SetSupportedFeatures(int featureFlags)
 {
 	m_supportedFeatures = featureFlags;

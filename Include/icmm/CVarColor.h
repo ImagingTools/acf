@@ -123,7 +123,7 @@ inline bool CVarColor::IsNormalized() const
 	for (int i = 0; i < elementsCount; ++i){
 		double component = GetElement(i);
 
-		if ((component < 0) && (component > 1)){
+		if ((component < 0) || (component > 1)){
 			return false;
 		}
 	}
