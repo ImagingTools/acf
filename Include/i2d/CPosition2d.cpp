@@ -31,9 +31,12 @@ void CPosition2d::SetPosition(const CVector2d& position)
 {
 	if (position != m_position){
 		static ChangeSet changeSet(CF_OBJECT_POSITION);
-		istd::CChangeNotifier notifier(this, changeSet);
+
+		BeginChanges(changeSet);
 
 		m_position = position;
+
+		EndChanges(changeSet);
 	}
 }
 
@@ -163,11 +166,13 @@ bool CPosition2d::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	const CPosition2d* position2dPtr = dynamic_cast<const CPosition2d*>(&object);
 
 	if (position2dPtr != NULL){
-		istd::CChangeNotifier notifier(this);
+		BeginChanges(GetAnyChange());;
 
 		SetPosition(position2dPtr->GetPosition());
 
 		CObject2dBase::CopyFrom(object, mode);
+
+		EndChanges(GetAnyChange());
 
 		return true;
 	}

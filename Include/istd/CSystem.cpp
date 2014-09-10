@@ -120,11 +120,11 @@ QString CSystem::FindVariableValue(const QString& varName, bool osEnv)
 #elif defined(__MINGW64__)
 	return "MinGW_64";
 #elif defined(_MSC_VER)
-    #if _MSC_VER >= 1800
+	#if _MSC_VER >= 1800
 	QString retVal = "VC12";
-    #elif _MSC_VER >= 1700
+	#elif _MSC_VER >= 1700
 	QString retVal = "VC11";
-    #elif _MSC_VER >= 1600
+	#elif _MSC_VER >= 1600
 	QString retVal = "VC10";
 	#elif _MSC_VER >= 1500
 	QString retVal = "VC9";
@@ -344,7 +344,7 @@ CSystem::FileDriveInfo CSystem::GetFileDriveInfo(const QString& fileDrivePath)
 		fileDriveInfo.totalBytes = lpTotalNumberOfBytes.QuadPart;
 	}
 #else
-    Q_UNUSED(fileDrivePath);
+	Q_UNUSED(fileDrivePath);
 	// TODO: Add implementation for other plattforms
 #endif
 

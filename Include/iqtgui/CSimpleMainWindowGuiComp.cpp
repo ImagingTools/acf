@@ -777,7 +777,7 @@ QByteArray CSimpleMainWindowGuiComp::VisibleWindowsManager::GetOptionId(int inde
 
 	const ibase::ICommand* commandPtr = m_parentPtr->m_showOtherWindows.GetChild(index);
 	if (commandPtr != NULL){
-        return commandPtr->GetName().toLatin1();
+		return commandPtr->GetName().toLatin1();
 	}
 
 	return "";

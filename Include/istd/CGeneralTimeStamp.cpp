@@ -26,7 +26,7 @@ CGeneralTimeStamp::CGeneralTimeStamp()
 #if QT_VERSION >= 0x040700
 	m_timer.start();
 #else
-    m_timer = QDateTime::currentDateTime();
+	m_timer = QDateTime::currentDateTime();
 #endif
 }
 
@@ -34,9 +34,9 @@ CGeneralTimeStamp::CGeneralTimeStamp()
 double CGeneralTimeStamp::GetTimeTo(const CGeneralTimeStamp& timeStamp) const
 {
 #if QT_VERSION >= 0x040700
-    return m_timer.msecsTo(timeStamp.m_timer) * 0.001 + timeStamp.m_timeShift - m_timeShift;
+	return m_timer.msecsTo(timeStamp.m_timer) * 0.001 + timeStamp.m_timeShift - m_timeShift;
 #else
-    return m_timer.time().msecsTo(timeStamp.m_timer.time()) * 0.001 + timeStamp.m_timeShift - m_timeShift;
+	return m_timer.time().msecsTo(timeStamp.m_timer.time()) * 0.001 + timeStamp.m_timeShift - m_timeShift;
 #endif
 }
 
@@ -53,7 +53,7 @@ void CGeneralTimeStamp::Start(double elapsedTime)
 #if QT_VERSION >= 0x040700
 	m_timer.start();
 #else
-    m_timer = QDateTime::currentDateTime();
+	m_timer = QDateTime::currentDateTime();
 #endif
 }
 
@@ -80,7 +80,7 @@ double CGeneralTimeStamp::GetElapsed() const
 #if QT_VERSION >= 0x040700
 	return m_timer.elapsed() * 0.001 + m_timeShift;
 #else
-    return QDateTime::currentDateTime().time().msecsTo(m_timer.time()) * 0.001 + m_timeShift;
+	return QDateTime::currentDateTime().time().msecsTo(m_timer.time()) * 0.001 + m_timeShift;
 #endif
 #endif
 }

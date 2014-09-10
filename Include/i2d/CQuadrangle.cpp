@@ -62,9 +62,11 @@ const CLine2d& CQuadrangle::GetFirstDiagonal() const
 void CQuadrangle::SetFirstDiagonal(const CLine2d& firstDiagonal)
 {
 	if (m_firstDiagonal != firstDiagonal){
-		istd::CChangeNotifier changePtr(this);
+		BeginChanges(GetAnyChange());;
 		
 		m_firstDiagonal = firstDiagonal;
+
+		EndChanges(GetAnyChange());
 	}
 }
 
@@ -78,9 +80,11 @@ const CLine2d& CQuadrangle::GetSecondDiagonal() const
 void CQuadrangle::SetSecondDiagonal(const CLine2d& secondDiagonal)
 {
 	if (m_secondDiagonal != secondDiagonal){
-		istd::CChangeNotifier changePtr(this);
+		BeginChanges(GetAnyChange());;
 		
 		m_secondDiagonal = secondDiagonal;
+
+		EndChanges(GetAnyChange());
 	}
 }
 
@@ -103,10 +107,13 @@ void CQuadrangle::MoveCenterTo(const CVector2d& position)
 	CVector2d delta = position - GetCenter();
 	if (delta != CVector2d(0, 0)){
 		static ChangeSet changeSet(CF_OBJECT_POSITION);
-		istd::CChangeNotifier notifier(this, changeSet);
+
+		BeginChanges(changeSet);
 
 		m_firstDiagonal.MoveCenterTo(delta + m_firstDiagonal.GetCenter());
 		m_secondDiagonal.MoveCenterTo(delta + m_secondDiagonal.GetCenter());
+
+		EndChanges(changeSet);
 	}
 }
 
@@ -123,23 +130,27 @@ bool CQuadrangle::Transform(
 			double* errorFactorPtr)
 {
 	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(this, changeSet);
+
+	BeginChanges(changeSet);
+
+	bool retVal = false;
 
 	if (errorFactorPtr != NULL){
 		double errorFactor1 = 0;
 		double errorFactor2 = 0;
-		bool retVal =
-					m_firstDiagonal.Transform(transformation, mode, &errorFactor1) &&
+		retVal = m_firstDiagonal.Transform(transformation, mode, &errorFactor1) &&
 					m_secondDiagonal.Transform(transformation, mode, &errorFactor2);
 
-		*errorFactorPtr = errorFactor1 + errorFactor2;
-
-		return retVal;
+		*errorFactorPtr = errorFactor1 + errorFactor2;	   
 	}
-	else{
-		return		m_firstDiagonal.Transform(transformation, mode) &&
+	else{	   
+		retVal = m_firstDiagonal.Transform(transformation, mode) &&
 					m_secondDiagonal.Transform(transformation, mode);
 	}
+
+	EndChanges(changeSet);
+
+	return retVal;
 }
 
 
@@ -149,23 +160,28 @@ bool CQuadrangle::InvTransform(
 			double* errorFactorPtr)
 {
 	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(this, changeSet);
+	BeginChanges(changeSet);
+
+	bool retVal = false;
 
 	if (errorFactorPtr != NULL){
 		double errorFactor1 = 0;
 		double errorFactor2 = 0;
-		bool retVal =
+		retVal =
 					m_firstDiagonal.InvTransform(transformation, mode, &errorFactor1) &&
 					m_secondDiagonal.InvTransform(transformation, mode, &errorFactor2);
 
 		*errorFactorPtr = errorFactor1 + errorFactor2;
 
-		return retVal;
 	}
 	else{
-		return	m_firstDiagonal.InvTransform(transformation, mode) &&
+		retVal = 	m_firstDiagonal.InvTransform(transformation, mode) &&
 				m_secondDiagonal.InvTransform(transformation, mode);
 	}
+
+	EndChanges(changeSet);
+
+	return retVal;
 }
 
 
@@ -181,23 +197,28 @@ bool CQuadrangle::GetTransformed(
 	}
 
 	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(resultQuadranglePtr, changeSet);
+
+	resultQuadranglePtr->BeginChanges(changeSet);
+
+	bool retVal = false;
 
 	if (errorFactorPtr != NULL){
 		double errorFactor1 = 0;
 		double errorFactor2 = 0;
-		bool retVal =
+		retVal =
 					m_firstDiagonal.GetTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode, &errorFactor1) &&
 					m_secondDiagonal.GetTransformed(transformation, resultQuadranglePtr->m_secondDiagonal, mode, &errorFactor2);
 
 		*errorFactorPtr = errorFactor1 + errorFactor2;
-
-		return retVal;
 	}
 	else{
-		return	m_firstDiagonal.GetTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode) &&
+		retVal =	m_firstDiagonal.GetTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode) &&
 				m_secondDiagonal.GetTransformed(transformation, resultQuadranglePtr->m_secondDiagonal, mode);
 	}
+
+	 resultQuadranglePtr->EndChanges(changeSet);
+
+	 return retVal;
 }
 
 
@@ -213,23 +234,28 @@ bool CQuadrangle::GetInvTransformed(
 	}
 
 	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(resultQuadranglePtr, changeSet);
+
+	resultQuadranglePtr->BeginChanges(changeSet);
+
+	bool retVal = false;
 
 	if (errorFactorPtr != NULL){
 		double errorFactor1 = 0;
 		double errorFactor2 = 0;
-		bool retVal =
+		retVal =
 					m_firstDiagonal.GetInvTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode, &errorFactor1) &&
 					m_secondDiagonal.GetInvTransformed(transformation, resultQuadranglePtr->m_secondDiagonal, mode, &errorFactor2);
 
 		*errorFactorPtr = errorFactor1 + errorFactor2;
-
-		return retVal;
 	}
 	else{
-		return		m_firstDiagonal.GetInvTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode) &&
+		retVal =		m_firstDiagonal.GetInvTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode) &&
 					m_secondDiagonal.GetInvTransformed(transformation, resultQuadranglePtr->m_secondDiagonal, mode);
 	}
+
+	resultQuadranglePtr->EndChanges(changeSet);
+
+	return retVal;
 }
 
 
@@ -246,12 +272,14 @@ bool CQuadrangle::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	const CQuadrangle* quadranglesPtr = dynamic_cast<const CQuadrangle*>(&object);
 
 	if (quadranglesPtr != NULL){
-		istd::CChangeNotifier notifier(this);
+		BeginChanges(GetAnyChange());;
 		
 		SetFirstDiagonal(quadranglesPtr->GetFirstDiagonal());
 		SetSecondDiagonal(quadranglesPtr->GetSecondDiagonal());
 
 		CObject2dBase::CopyFrom(object, mode);
+
+		EndChanges(GetAnyChange());
 
 		return true;
 	}

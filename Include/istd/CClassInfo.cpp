@@ -365,7 +365,7 @@ QByteArray CClassInfo::GetUndecoratedName(const QByteArray& rawName)
 	char* demangledName = abi::__cxa_demangle(rawName.constData(), NULL, NULL, &status);
 	QByteArray retVal(demangledName);
 
-    ::free(demangledName);
+	::free(demangledName);
 	
 	return retVal;
 #endif

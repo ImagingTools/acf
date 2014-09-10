@@ -42,9 +42,11 @@ double CAnnulus::GetInnerRadius() const
 void CAnnulus::SetInnerRadius(double innerRadius)
 {
 	if (m_radiusRange.GetMinValue() != innerRadius && innerRadius <= m_radiusRange.GetMaxValue()){
-		istd::CChangeNotifier changePtr(this);
-	
+		BeginChanges(GetAnyChange());
+
 		m_radiusRange.SetMinValue(innerRadius);
+
+		EndChanges(GetAnyChange());
 	}
 }
 
@@ -58,9 +60,11 @@ double CAnnulus::GetOuterRadius() const
 void CAnnulus::SetOuterRadius(double outerRadius)
 {
 	if (m_radiusRange.GetMaxValue() != outerRadius && outerRadius >= m_radiusRange.GetMinValue()){
-		istd::CChangeNotifier changePtr(this);
-	
+		BeginChanges(GetAnyChange());;
+
 		m_radiusRange.SetMaxValue(outerRadius);
+
+		EndChanges(GetAnyChange());
 	}
 }
 
@@ -120,7 +124,7 @@ bool CAnnulus::Transform(
 		return false;
 	}
 
-	istd::CChangeNotifier changePtr(this);
+	BeginChanges(GetAnyChange());
 
 	double scale = affine.GetDeformMatrix().GetApproxScale();
 
@@ -130,6 +134,8 @@ bool CAnnulus::Transform(
 	if (errorFactorPtr != NULL){
 		*errorFactorPtr = 0;
 	}
+
+	EndChanges(GetAnyChange());
 
 	return true;
 }
@@ -150,7 +156,7 @@ bool CAnnulus::InvTransform(
 		return false;
 	}
 
-	istd::CChangeNotifier changePtr(this);
+	BeginChanges(GetAnyChange());
 
 	double scale = affine.GetDeformMatrix().GetApproxScale();
 
@@ -160,6 +166,8 @@ bool CAnnulus::InvTransform(
 	if (errorFactorPtr != NULL){
 		*errorFactorPtr = 0;
 	}
+
+	EndChanges(GetAnyChange());
 
 	return true;
 }
@@ -176,12 +184,16 @@ bool CAnnulus::GetTransformed(
 		return false;
 	}
 
-	istd::CChangeNotifier changePtr(annulusPtr);
+	annulusPtr->BeginChanges(GetAnyChange());
 
 	annulusPtr->m_position = m_position;
 	annulusPtr->m_radiusRange = m_radiusRange;
 
-	return annulusPtr->Transform(transformation, mode, errorFactorPtr);
+	bool retVal = annulusPtr->Transform(transformation, mode, errorFactorPtr);
+
+	annulusPtr->EndChanges(GetAnyChange());
+
+	return retVal;
 }
 
 
@@ -196,12 +208,16 @@ bool CAnnulus::GetInvTransformed(
 		return false;
 	}
 
-	istd::CChangeNotifier changePtr(annulusPtr);
+	annulusPtr->BeginChanges(GetAnyChange());
 
 	annulusPtr->m_position = m_position;
 	annulusPtr->m_radiusRange = m_radiusRange;
 
-	return annulusPtr->Transform(transformation, mode, errorFactorPtr);
+	bool retVal = annulusPtr->Transform(transformation, mode, errorFactorPtr);
+
+	annulusPtr->EndChanges(GetAnyChange());
+
+	return retVal;
 }
 
 
@@ -218,12 +234,14 @@ bool CAnnulus::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	const CAnnulus* annulusPtr = dynamic_cast<const CAnnulus*>(&object);
 
 	if (annulusPtr != NULL){
-		istd::CChangeNotifier notifier(this);
+		BeginChanges(GetAnyChange());;
 
 		m_position = annulusPtr->m_position;
 		m_radiusRange = annulusPtr->m_radiusRange;
 
 		CObject2dBase::CopyFrom(object, mode);
+
+		EndChanges(GetAnyChange());
 
 		return true;
 	}

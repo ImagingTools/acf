@@ -30,41 +30,51 @@ CAffineTransformation2d::CAffineTransformation2d(const i2d::CAffine2d& transform
 
 void CAffineTransformation2d::SetTransformation(const i2d::CAffine2d& transformation)
 {
-	istd::CChangeNotifier changePtr(this);
+	BeginChanges(GetAnyChange());
 
 	m_transformation = transformation;
+
+	EndChanges(GetAnyChange());
 }
 
 
 void CAffineTransformation2d::Reset()
 {
-	istd::CChangeNotifier changePtr(this);
+	BeginChanges(GetAnyChange());
 
 	m_transformation.Reset();
+
+	EndChanges(GetAnyChange());
 }
 
 
 void CAffineTransformation2d::Reset(const CVector2d& translation)
 {
-	istd::CChangeNotifier changePtr(this);
+	BeginChanges(GetAnyChange());
 
 	m_transformation.Reset(translation);
+
+	EndChanges(GetAnyChange());
 }
 
 
 void CAffineTransformation2d::Reset(const CVector2d& translation, double angle, double scale)
 {
-	istd::CChangeNotifier changePtr(this);
+	BeginChanges(GetAnyChange());
 
 	m_transformation.Reset(translation, angle, scale);
+
+	EndChanges(GetAnyChange());
 }
 
 
 void CAffineTransformation2d::Reset(const CVector2d& translation, double angle, const CVector2d& scale)
 {
-	istd::CChangeNotifier changePtr(this);
+	BeginChanges(GetAnyChange());
 
 	m_transformation.Reset(translation, angle, scale);
+
+	EndChanges(GetAnyChange());
 }
 
 
@@ -251,7 +261,7 @@ bool CAffineTransformation2d::CopyFrom(const istd::IChangeable& object, Compatib
 			}
 		}
 
-		istd::CChangeNotifier changePtr(this);
+		BeginChanges(GetAnyChange());
 		
 		m_transformation = sourcePtr->m_transformation;
 
@@ -259,6 +269,8 @@ bool CAffineTransformation2d::CopyFrom(const istd::IChangeable& object, Compatib
 			m_argumentUnitInfoPtr = sourcePtr->m_argumentUnitInfoPtr;
 			m_resultUnitInfoPtr = sourcePtr->m_resultUnitInfoPtr;
 		}
+
+		EndChanges(GetAnyChange());
 
 		return true;
 	}

@@ -246,11 +246,10 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 	}
 
 	static ChangeSet changeSet(CF_MESSAGE_ADDED);
-	istd::CChangeNotifier notifier(this, changeSet);
-	Q_UNUSED(notifier);
+
+	BeginChanges(changeSet);
 
 	m_messages.push_front(messagePtr);
-
 	int messageCategory = messagePtr->GetInformationCategory();
 	if ((m_worstCategory >= 0) && (messageCategory > m_worstCategory)){
 		m_worstCategory = messageCategory;
@@ -260,11 +259,7 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 		while (int(m_messages.size()) > m_maxMessagesCount){
 			Q_ASSERT(!m_messages.isEmpty());
 			const IMessageConsumer::MessagePtr& messageToRemovePtr = m_messages.back();
-
-			static ChangeSet removeChangeSet(CF_MESSAGE_ADDED);
-			istd::CChangeNotifier removeNotifier(this, removeChangeSet);
-			Q_UNUSED(removeNotifier);
-
+			
 			int removeCategory = messageToRemovePtr->GetInformationCategory();
 			if (removeCategory >= m_worstCategory){
 				m_worstCategory = -1;
@@ -277,6 +272,8 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 	if (m_slaveConsumerPtr != NULL){
 		m_slaveConsumerPtr->AddMessage(messagePtr);
 	}
+
+	EndChanges(changeSet);
 }
 
 
