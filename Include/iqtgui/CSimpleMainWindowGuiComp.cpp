@@ -381,7 +381,7 @@ void CSimpleMainWindowGuiComp::UpdateMainWindowComponentsVisibility()
 }
 
 
-bool CSimpleMainWindowGuiComp::IsMainWindowActive(int index) const
+bool CSimpleMainWindowGuiComp::IsMainWindowActive(int /*index*/) const
 {
 	return true;
 }
