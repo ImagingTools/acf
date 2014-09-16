@@ -57,7 +57,7 @@ bool CSpline::CopyFrom(const IChangeable& object, CompatibilityMode /*mode*/)
 	const CSpline* splinePtr = dynamic_cast<const CSpline*>(&object);
 
 	if (splinePtr != NULL){	
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		BaseClass::CopyFrom(object);
 

@@ -13,7 +13,7 @@ namespace i2d
 void CPolyline::SetClosed(bool state)
 {
 	if (m_isClosed != state){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		m_isClosed = state;
 
@@ -121,7 +121,7 @@ bool CPolyline::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	const CPolyline* polylinePtr = dynamic_cast<const CPolyline*>(&object);
 
 	if (polylinePtr != NULL){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		BaseClass::CopyFrom(object, mode);
 

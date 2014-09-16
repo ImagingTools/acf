@@ -166,7 +166,7 @@ bool CPosition2d::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	const CPosition2d* position2dPtr = dynamic_cast<const CPosition2d*>(&object);
 
 	if (position2dPtr != NULL){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		SetPosition(position2dPtr->GetPosition());
 

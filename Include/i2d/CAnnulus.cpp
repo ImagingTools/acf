@@ -60,7 +60,7 @@ double CAnnulus::GetOuterRadius() const
 void CAnnulus::SetOuterRadius(double outerRadius)
 {
 	if (m_radiusRange.GetMaxValue() != outerRadius && outerRadius >= m_radiusRange.GetMinValue()){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		m_radiusRange.SetMaxValue(outerRadius);
 
@@ -234,7 +234,7 @@ bool CAnnulus::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	const CAnnulus* annulusPtr = dynamic_cast<const CAnnulus*>(&object);
 
 	if (annulusPtr != NULL){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		m_position = annulusPtr->m_position;
 		m_radiusRange = annulusPtr->m_radiusRange;

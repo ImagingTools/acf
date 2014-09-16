@@ -62,7 +62,7 @@ const CLine2d& CQuadrangle::GetFirstDiagonal() const
 void CQuadrangle::SetFirstDiagonal(const CLine2d& firstDiagonal)
 {
 	if (m_firstDiagonal != firstDiagonal){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 		
 		m_firstDiagonal = firstDiagonal;
 
@@ -80,7 +80,7 @@ const CLine2d& CQuadrangle::GetSecondDiagonal() const
 void CQuadrangle::SetSecondDiagonal(const CLine2d& secondDiagonal)
 {
 	if (m_secondDiagonal != secondDiagonal){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 		
 		m_secondDiagonal = secondDiagonal;
 
@@ -272,7 +272,7 @@ bool CQuadrangle::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	const CQuadrangle* quadranglesPtr = dynamic_cast<const CQuadrangle*>(&object);
 
 	if (quadranglesPtr != NULL){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 		
 		SetFirstDiagonal(quadranglesPtr->GetFirstDiagonal());
 		SetSecondDiagonal(quadranglesPtr->GetSecondDiagonal());

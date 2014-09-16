@@ -17,7 +17,7 @@ namespace i2d
 void CPolygon::Clear()
 {
 	if (!m_nodes.isEmpty()){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		m_nodes.clear();
 
@@ -29,7 +29,7 @@ void CPolygon::Clear()
 void CPolygon::SetNodesCount(int nodesCount)
 {
 	if (nodesCount != m_nodes.count()){
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		m_nodes.resize(nodesCount);
 
@@ -279,7 +279,7 @@ bool CPolygon::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	const CPolygon* polygonPtr = dynamic_cast<const CPolygon*>(&object);
 
 	if (polygonPtr != NULL){		
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		m_nodes = polygonPtr->m_nodes;
 

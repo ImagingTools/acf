@@ -100,7 +100,7 @@ bool CSplineSegment::CopyFrom(const IChangeable& object, CompatibilityMode /*mod
 	const CSplineSegment* splineSegmentPtr = dynamic_cast<const CSplineSegment*>(&object);
 
 	if (splineSegmentPtr != NULL){	
-		BeginChanges(GetAnyChange());;
+		BeginChanges(GetAnyChange());
 
 		A(splineSegmentPtr->A());
 		B(splineSegmentPtr->B());
