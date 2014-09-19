@@ -1,6 +1,6 @@
-include(../../../Config/QMake/ComponentConfig.pri)
-
 TARGET = PackagePck
+
+include(../../../Config/QMake/ComponentConfig.pri)
 
 LIBS += -lipackage
 

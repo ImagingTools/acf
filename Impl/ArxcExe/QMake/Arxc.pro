@@ -1,7 +1,7 @@
+TARGET = Arxc
+
 include(../../../Config/QMake/ApplicationConfig.pri)
 include(../../../Config/QMake/QtBaseConfig.pri)
-
-TARGET = Arxc
 
 mac*{
 	CONFIG -= app_bundle

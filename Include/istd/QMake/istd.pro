@@ -1,3 +1,4 @@
+TARGET = istd
+
 include(../../../Config/QMake/StaticConfig.pri)
 
-TARGET = istd

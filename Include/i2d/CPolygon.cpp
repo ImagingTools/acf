@@ -17,7 +17,7 @@ namespace i2d
 void CPolygon::Clear()
 {
 	if (!m_nodes.isEmpty()){
-		BeginChanges(GetAnyChange());
+        BeginChanges(GetAnyChange());
 
 		m_nodes.clear();
 
@@ -29,7 +29,7 @@ void CPolygon::Clear()
 void CPolygon::SetNodesCount(int nodesCount)
 {
 	if (nodesCount != m_nodes.count()){
-		BeginChanges(GetAnyChange());
+        BeginChanges(GetAnyChange());
 
 		m_nodes.resize(nodesCount);
 
@@ -54,7 +54,7 @@ bool CPolygon::InsertNode(int index, const i2d::CVector2d& node)
 {
 	BeginChanges(GetAnyChange());
 
-	QVector<i2d::CVector2d>::iterator iter = m_nodes.begin();
+	Nodes::iterator iter = m_nodes.begin();
 	iter += index;
 	m_nodes.insert(iter, node);
 
@@ -68,7 +68,7 @@ bool CPolygon::RemoveNode(int index)
 {
 	BeginChanges(GetAnyChange());
 
-	QVector<i2d::CVector2d>::iterator iter = m_nodes.begin();
+	Nodes::iterator iter = m_nodes.begin();
 	iter += index;
 	m_nodes.erase(iter);
 
@@ -326,7 +326,7 @@ bool CPolygon::ApplyTransform(Nodes& nodes,
 {
 	int nodesCount = nodes.count();
 	
-	QVector<i2d::CVector2d> transPoints;
+    Nodes transPoints;
 
 	for (int nodeIndex = 0; nodeIndex < nodesCount; nodeIndex++){
 		i2d::CVector2d transPoint;
@@ -355,7 +355,7 @@ bool CPolygon::ApplyInverseTransform(
 {
 	int nodesCount = nodes.count();
 	
-	QVector<i2d::CVector2d> transPoints;
+    Nodes transPoints;
 
 	for (int nodeIndex = 0; nodeIndex < nodesCount; nodeIndex++){
 		i2d::CVector2d transPoint;

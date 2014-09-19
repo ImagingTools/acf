@@ -2,9 +2,11 @@
 #define i2d_TDataNodePolyline_included
 
 
+// Qt includes
+#include <QVector>
+
 // ACF includes
 #include "i2d/CDataNodePolylineBase.h"
-
 #include "istd/CChangeNotifier.h"
 
 

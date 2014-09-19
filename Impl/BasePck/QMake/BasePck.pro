@@ -1,6 +1,6 @@
-include(../../../Config/QMake/ComponentConfig.pri)
-
 TARGET = BasePck
+
+include(../../../Config/QMake/ComponentConfig.pri)
 
 QT -= gui
 

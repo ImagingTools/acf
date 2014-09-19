@@ -56,7 +56,7 @@ void CPolypointShape::Draw(QPainter& drawContext) const
 		const IColorSchema& colorSchema = GetColorSchema();
 		const i2d::CRect& clientArea = GetClientRect();
 
-		const QVector<i2d::CVector2d>& points = polypoint.GetPoints();
+		const i2d::CPolypoint::Points& points = polypoint.GetPoints();
 
 		int pointsCount = points.size();
 		for (int pointIndex = 0; pointIndex < pointsCount; ++pointIndex){
@@ -98,7 +98,7 @@ i2d::CRect CPolypointShape::CalcBoundingBox() const
 		Q_ASSERT(&polypoint != NULL);
 
 		const IColorSchema& colorSchema = GetColorSchema();
-		const QVector<i2d::CVector2d>& points = polypoint.GetPoints();
+		const i2d::CPolypoint::Points& points = polypoint.GetPoints();
 
 		if (!points.isEmpty()){
 			istd::CIndex2d sp = GetScreenPosition(points[0]).ToIndex2d();

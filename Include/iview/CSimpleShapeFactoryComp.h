@@ -33,9 +33,9 @@ public:
 	virtual IShape* CreateShape(const i2d::IObject2d& object, bool connectToModel = false) const;
 
 protected:
-	CInteractiveShapeBase* CreateShapeInstance(const i2d::IObject2d& object) const;
+	virtual CInteractiveShapeBase* CreateShapeInstance(const i2d::IObject2d& object) const;
 
-private:
+protected:
 	I_ATTR(bool, m_useInteractiveShapesAttrPtr);
 	I_REF(iview::IColorSchema, m_colorSchemaCompPtr);
 };

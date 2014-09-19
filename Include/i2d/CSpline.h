@@ -2,6 +2,9 @@
 #define i2d_CSpline_included
 
 
+// Qt includes
+#include <QtCore/QVector>
+
 // ACF includes
 #include "i2d/CPolyline.h"
 #include "i2d/CSplineSegment.h"

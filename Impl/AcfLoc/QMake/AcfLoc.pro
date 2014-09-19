@@ -1,6 +1,6 @@
-include(../../../Config/QMake/StaticConfig.pri)
-
 TARGET = AcfLoc
+
+include(../../../Config/QMake/StaticConfig.pri)
 
 
 HEADERS =

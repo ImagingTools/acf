@@ -30,6 +30,8 @@ void COrientedCircleShape::Draw(QPainter& drawContext) const
 	Q_ASSERT(IsDisplayConnected());
 
 	const imod::IModel* modelPtr = GetModelPtr();
+	Q_ASSERT(modelPtr != NULL);
+
 	const i2d::COrientedCircle& circle = *dynamic_cast<const i2d::COrientedCircle*>(modelPtr);
 	Q_ASSERT(&circle != NULL);
 

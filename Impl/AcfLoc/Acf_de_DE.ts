@@ -76,15 +76,15 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     <name>CAbGuiComp</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>B</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -126,15 +126,15 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>X</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Y</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -145,11 +145,11 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Position</source>
-        <translation></translation>
+        <translation type="unfinished">Position</translation>
     </message>
 </context>
 <context>
@@ -163,16 +163,43 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
         <translation>Radien</translation>
     </message>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Position</source>
         <translation>Position</translation>
     </message>
-    <message utf8="both">
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>°</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CArcParamsGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Position</source>
+        <translation type="unfinished">Position</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Radius</translation>
+    </message>
+    <message>
+        <source>Start Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>°</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -242,22 +269,25 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     <name>CButtonBasedSelectionParamGuiComp</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CCalendarGuiComp</name>
+    <message>
+        <source>About...</source>
+        <translation type="unfinished">Über...</translation>
     </message>
 </context>
 <context>
     <name>CCheckableOptionsEditorComp</name>
     <message>
         <source>CCheckableOptionsEditorComp</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CCircleParamsGuiComp</name>
-    <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
     <message>
         <source>Position</source>
         <translation>Position</translation>
@@ -265,6 +295,10 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     <message>
         <source>Radius</source>
         <translation>Radius</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -286,7 +320,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -300,20 +334,39 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
 <context>
     <name>CDoubleRangeSpinEdit</name>
     <message>
+        <source>to</source>
+        <translation>bis</translation>
+    </message>
+    <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>from</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mm</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CElementEditorGui</name>
+    <message>
+        <source>Element Properties</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>to</source>
-        <translation>bis</translation>
+        <source>Element name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -324,7 +377,70 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CExtParamsManagerGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Hinzufügen</translation>
+    </message>
+    <message>
+        <source>Ins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add new element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure selected element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Ins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate selected element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change properties of the selected element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete selected element</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -335,7 +451,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -350,7 +466,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -365,15 +481,15 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>URL</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -388,37 +504,29 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CFilePreviewGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Display navigation bar</source>
         <translation>Navigationsleiste anzeigen</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CFileSystemExplorerGuiComp</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CFileTreeViewGuiComp</name>
-    <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Wildcards * and ? are allowed</source>
-        <translation></translation>
-    </message>
     <message>
         <source>Type filter text here...</source>
         <translation>Bitte den Filtertext hier eintippen...</translation>
@@ -426,10 +534,6 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     <message>
         <source>Reset filter</source>
         <translation>Filter zurücksetzen</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation></translation>
     </message>
     <message>
         <source>Expand all items</source>
@@ -448,8 +552,20 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
         <translation>Ansicht aktualisieren</translation>
     </message>
     <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wildcards * and ? are allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>F5</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -460,7 +576,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -479,7 +595,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -494,7 +610,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -517,7 +633,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -539,7 +655,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     <name>CNameParamGuiComp</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -581,26 +697,26 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>COptionsManagerGuiComp</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>InfoLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OptionDescriptionLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -615,15 +731,15 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Position</source>
-        <translation></translation>
+        <translation type="unfinished">Position</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation></translation>
+        <translation type="unfinished">Radius</translation>
     </message>
 </context>
 <context>
@@ -724,11 +840,11 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -786,35 +902,35 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>X</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Y</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+Ins</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shift+Del</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+C</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+V</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close the line by connecting its last and first point with a line segment.&lt;/p&gt;&lt;p&gt;To uncheck, select a pair of coordinates in the table: the polyline will be opened at that point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Closes the line by connecting its last and first point with a line segment.&lt;/p&gt;&lt;p&gt;Uncloses the line at the selected coordinates in the table (or, if nothing selected, at the latest closing coordinates).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -860,11 +976,11 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Progress</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -887,7 +1003,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -948,7 +1064,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1005,7 +1121,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     <name>CSceneConnectorGuiComp</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1043,7 +1159,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1054,15 +1170,15 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>InfoLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OptionDescriptionLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1073,7 +1189,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1084,7 +1200,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1102,43 +1218,39 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
         <translation>Version</translation>
     </message>
     <message>
-        <source>FormTip</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>ProductName</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>(C) Copyright</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CTextEditorComp</name>
     <message>
         <source>To &amp;Lowercase</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lowercase</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Convert selected block to lowercase characters</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>To &amp;Uppercase</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Uppercase</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Convert selected block to uppercase characters</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1173,14 +1285,14 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CVariableParamGuiComp</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1191,11 +1303,11 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Module</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1230,7 +1342,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>All known documents (%1)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1318,10 +1430,6 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
         <translation>%1 (%2) konnte nicht erzeugt werden</translation>
     </message>
     <message>
-        <source>The runtime version of Qt framework doesn&apos;t match the version used by creation of ACF</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
@@ -1374,30 +1482,6 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
         <translation>Verzeichnis %1 konnte nicht erzeugt werden</translation>
     </message>
     <message>
-        <source>Cannot create path to file</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Second real package definition was ignored %1 (previous: %2)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Cannot load meta description for registry %1 (%2)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Second composed package definition was ignored %1 (previous: %2)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Cannot register package %1 (%2)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Register package directory: %1</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Load configuration file: %1</source>
         <translation>Lade Konfigurationsdatei: %1</translation>
     </message>
@@ -1406,56 +1490,84 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
         <translation>Kann Konfigurationsdatei %1 nicht laden</translation>
     </message>
     <message>
+        <source>The runtime version of Qt framework doesn&apos;t match the version used by creation of ACF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot create path to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second real package definition was ignored %1 (previous: %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot load meta description for registry %1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second composed package definition was ignored %1 (previous: %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot register package %1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Register package directory: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>dependency file</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>qmake dependency file</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Composite component &apos;%1&apos; is undefined</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Package &apos;%1&apos; is undefined</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unknown attribute type: %1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>unnamed%1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1_%2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unnamed-%1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ACF application</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bad tag begin code, is %1, should be %2 (tag &apos;%3&apos;)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot find root tag &apos;%1&apos;</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>[%1, %2] px</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>[Red:%1% (%2), Green:%3% (%4), Blue:%5% (%6) Hue: %7, Saturation: %8, Value: %9]</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>, </source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2102,10 +2214,6 @@ in %1 generiert werden</translation>
 <context>
     <name>ifilegui::CFileDialogLoaderComp</name>
     <message>
-        <source>%1 (%2)</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>All known file types (%1)</source>
         <translation>Alle bekannte Datentypen (%1)</translation>
     </message>
@@ -2116,6 +2224,10 @@ in %1 generiert werden</translation>
     <message>
         <source>Select a file to open</source>
         <translation>Wählen Sie eine Datei</translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2164,7 +2276,7 @@ in %1 generiert werden</translation>
     </message>
     <message>
         <source>Bitmap</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2673,7 +2785,7 @@ in %1 generiert werden</translation>
     </message>
     <message>
         <source>%1 &lt;%2&gt;</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2739,7 +2851,7 @@ in %1 generiert werden</translation>
     <name>iqtgui::CImagePropertiesFrameComp</name>
     <message>
         <source>%1 px/mm</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2858,10 +2970,6 @@ in %1 generiert werden</translation>
         <translation>Information über die Applikatio anzeigen</translation>
     </message>
     <message>
-        <source>Standard</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>&amp;Full Screen</source>
         <translation>&amp;Vollbild</translation>
     </message>
@@ -2893,6 +3001,33 @@ in %1 generiert werden</translation>
         <source>Show global application preferences</source>
         <translation>Zeige globale Applikationseinstellungen</translation>
     </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtprm::CExtParamsManagerGuiComp</name>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameter set &apos;%1&apos; can not be renamed to &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove parameter set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure to remove the parameter set &apos;%1&apos;?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>iqtprm::CFileNameParamGuiComp</name>
@@ -2911,6 +3046,13 @@ in %1 generiert werden</translation>
     <message>
         <source>Select file</source>
         <translation>Datei auswählen</translation>
+    </message>
+</context>
+<context>
+    <name>iqtprm::CSelectionParamGuiComp</name>
+    <message>
+        <source>Reset</source>
+        <translation>Keine Zuordnung</translation>
     </message>
 </context>
 <context>
@@ -2974,74 +3116,81 @@ in %1 generiert werden</translation>
     </message>
     <message>
         <source>Zoom to Fit</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Objects Selection Mode</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Objects Modification Mode</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Points Adding Mode</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Points Removing Mode</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Flip current shape in its bounding box horizontally</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Flip current shape in its bounding box vertically</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotate current shape counterclockwise around its center</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotate current shape clockwise around its center</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reverse current shape orientation</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show/Hide Grid</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show/Hide Ruler</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show/Hide Millimeters</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show/Hide Scrollbars</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iview::CViewport</name>
     <message>
         <source>mm</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>[%1, %2] %3</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>, </source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iwidgets::CCheckableComboBox</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Keine</translation>
     </message>
 </context>
 </TS>

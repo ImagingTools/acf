@@ -1,7 +1,7 @@
+TARGET = QtGuiPck
+
 include(../../../Config/QMake/ComponentConfig.pri)
 include(../../../Config/QMake/QtBaseConfig.pri)
-
-TARGET = QtGuiPck
 
 QT += xml
 

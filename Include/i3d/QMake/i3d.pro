@@ -1,6 +1,5 @@
-include(../../../Config/QMake/StaticConfig.pri)
-
 TARGET = i3d
 
-LIBS += -licomp
-LIBS += -limath
+include(../../../Config/QMake/StaticConfig.pri)
+
+LIBS += -licomp -limath

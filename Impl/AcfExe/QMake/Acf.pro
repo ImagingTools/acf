@@ -1,7 +1,7 @@
+TARGET = Acf
+
 include(../../../Config/QMake/ApplicationConfig.pri)
 include(../../../Config/QMake/QtBaseConfig.pri)
-
-TARGET = Acf
 
 mac*{
 	CONFIG -= app_bundle

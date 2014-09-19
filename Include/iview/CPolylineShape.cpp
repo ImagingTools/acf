@@ -291,7 +291,7 @@ void CPolylineShape::DrawCurve(QPainter& drawContext) const
 				secondPointIndex = 1;
 			}
 
-			if (m_isOrientationVisible && IsSelected()){
+			if (m_isOrientationVisible){
 				const QPen& darkPen = colorSchema.GetPen(IColorSchema::SP_ORIENT_DARK);
 				const QPen& brightPen = colorSchema.GetPen(IColorSchema::SP_ORIENT_BRIGHT);
 

@@ -362,7 +362,7 @@ void CParamsManagerGuiCompBase::UpdateTree()
 		for (int paramSetIndex = 0; paramSetIndex < setsCount; ++paramSetIndex){
 			int flags = objectPtr->GetIndexOperationFlags(paramSetIndex);
 
-			bool isOptionEnabled = paramsListPtr->IsOptionEnabled(paramSetIndex);
+			bool isOptionEnabled = (paramsListPtr == NULL) ? true : paramsListPtr->IsOptionEnabled(paramSetIndex);
 
 			Qt::ItemFlags itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 

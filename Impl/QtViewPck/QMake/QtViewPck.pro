@@ -1,7 +1,7 @@
+TARGET = QtViewPck
+
 include(../../../Config/QMake/ComponentConfig.pri)
 include(../../../Config/QMake/QtBaseConfig.pri)
-
-TARGET = QtViewPck
 
 QT += xml
 

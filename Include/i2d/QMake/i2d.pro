@@ -1,3 +1,4 @@
+TARGET = i2d
+
 include(../../../Config/QMake/StaticConfig.pri)
 
-TARGET = i2d

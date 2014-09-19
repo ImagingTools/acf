@@ -24,11 +24,13 @@ class CPolypoint: public CObject2dBase
 public:
 	CPolypoint();
 
+	typedef QVector<i2d::CVector2d> Points;
+
 	const i2d::CVector2d& GetPoint(int index) const;
 	int GetPointsCount() const;
 	void Insert(const i2d::CVector2d& vector);
 	void Clear();
-	const QVector<i2d::CVector2d>& GetPoints() const;
+	const Points& GetPoints() const;
 
 	// reimplemented (i2d::IObject2d)
 	virtual CVector2d GetCenter() const;
@@ -62,8 +64,6 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	typedef QVector<i2d::CVector2d> Points;
-
 	Points m_points;
 };
 
@@ -74,6 +74,7 @@ inline CPolypoint::CPolypoint()
 {
 }
 
+
 inline const i2d::CVector2d& CPolypoint::GetPoint(int index) const
 {
 	Q_ASSERT(index >= 0 && index < int(m_points.size()));
@@ -81,10 +82,12 @@ inline const i2d::CVector2d& CPolypoint::GetPoint(int index) const
 	return m_points[index];
 }
 
+
 inline int CPolypoint::GetPointsCount() const
 {
 	return int(m_points.size());
 }
+
 
 inline void CPolypoint::Insert(const i2d::CVector2d& vector)
 {
@@ -98,7 +101,7 @@ inline void CPolypoint::Clear()
 }
 
 
-inline const QVector<i2d::CVector2d>& CPolypoint::GetPoints() const
+inline const CPolypoint::Points &CPolypoint::GetPoints() const
 {
 	return m_points;
 }
