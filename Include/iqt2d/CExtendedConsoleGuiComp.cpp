@@ -59,7 +59,7 @@ void CExtendedConsoleGuiComp::OnGuiDestroyed()
 
 bool CExtendedConsoleGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
-	if (eventPtr->type() == QEvent::Resize){
+	if (eventPtr->type() == QEvent::Resize || eventPtr->type() == QEvent::Show){
 		if (CommandsFrame->isVisible() && *m_isFloatingToolbarAttr){
 			CommandsFrame->adjustSize();
 			CommandsFrame->setMaximumWidth(ViewFrame->width());
