@@ -262,7 +262,7 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
 
 			for (int i = 0, itemIndex = 0; i < optionsCount; ++i){
-				if (constraintsPtr->IsOptionEnabled(i)){
+				if (constraintsPtr->IsOptionEnabled(i) || *m_fillWithDisabledOptionsEnabledAttrPtr){
 					QString name = constraintsPtr->GetOptionName(i);
 
 					switchBoxPtr->addItem(name);

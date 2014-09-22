@@ -97,6 +97,7 @@ public:
 		I_ASSIGN(m_labelWidthAttrPtr, "LabelWidth", "Fixed label width (in pixels)", false, 100);
 		I_ASSIGN(m_disableWhenEmptyAttrPtr, "DisableWhenEmpty", "Disable the control when no Option is available", true, false);
 		I_ASSIGN(m_noSelectionAllowedAttrPtr, "NoSelectionAllowed", "Allow the control to reset current index (i.e. set to -1)", true, false);
+		I_ASSIGN(m_fillWithDisabledOptionsEnabledAttrPtr, "FillWithDisabledOptionsEnabled", "Fill combo box also with disabled options, if enabled", true, false);
 	I_END_COMPONENT;
 
 protected:
@@ -140,6 +141,7 @@ private:
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(bool, m_disableWhenEmptyAttrPtr);
 	I_ATTR(bool, m_noSelectionAllowedAttrPtr);
+	I_ATTR(bool, m_fillWithDisabledOptionsEnabledAttrPtr);
 
 	class RadioButtonWidget: public QFrame
 	{
