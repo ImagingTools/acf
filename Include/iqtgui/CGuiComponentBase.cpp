@@ -88,7 +88,7 @@ bool CGuiComponentBase::CreateGui(QWidget* parentPtr)
 			OnGuiRetranslate();
 
 			if (m_styleSheetPathAttrPtr.IsValid()){
-				if (!iqtgui::SetStyleSheet(*m_widgetPtr, *m_styleSheetPathAttrPtr)){
+				if (!iqtgui::SetStyleSheetFromFile(*m_widgetPtr, *m_styleSheetPathAttrPtr)){
 					qDebug("Style sheet file could not be set: %s", (*m_styleSheetPathAttrPtr).toLocal8Bit().constData());
 				}
 			}
