@@ -13,7 +13,7 @@
 #include "iprm/ISelectionParam.h"
 #include "iprm/IOptionsManager.h"
 #include "iprm/IParamsManager.h"
-#include "iprm/INameParam.h"
+#include "iprm/CNameParam.h"
 
 
 namespace iprm
@@ -38,8 +38,9 @@ public:
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(IOptionsManager);
 		I_REGISTER_INTERFACE(IOptionsList);
-		I_ASSIGN(m_elementIndexParamId, "ElementIndexParamId", "ID of index of returned parameter set in manager list", false, "Index");
-		I_ASSIGN(m_elementNameParamId, "ElementNameParamId", "ID of the name of returned parameter set in manager list", false, "Name");
+		I_ASSIGN(m_elementIndexParamIdAttrPtr, "ElementIndexParamId", "ID of index of returned parameter set in manager list", false, "Index");
+		I_ASSIGN(m_elementNameParamIdAttrPtr, "ElementNameParamId", "ID of the name of returned parameter set in manager list", false, "Name");
+		I_ASSIGN(m_elementDescriptionParamIdAttrPtr, "ElementDescriptionParamId", "ID of the description of returned parameter set in manager list", false, "Description");
 		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of references to fixed parameter set", false);
 		I_ASSIGN_MULTI_0(m_fixedSetNamesAttrPtr, "FixedSetNames", "List of fixed parameter names", false);
 		I_ASSIGN_MULTI_0(m_fixedSetDescriptionsAttrPtr, "FixedSetDescriptions", "List of fixed parameter descriptions", false);
@@ -105,8 +106,9 @@ protected:
 	I_ATTR(bool, m_allowDisabledAttrPtr);
 	I_ATTR(bool, m_supportEnablingAttrPtr);
 	I_ATTR(bool, m_allowEditFixedAttrPtr);
-	I_ATTR(QByteArray, m_elementIndexParamId);
-	I_ATTR(QByteArray, m_elementNameParamId);
+	I_ATTR(QByteArray, m_elementIndexParamIdAttrPtr);
+	I_ATTR(QByteArray, m_elementNameParamIdAttrPtr);
+	I_ATTR(QByteArray, m_elementDescriptionParamIdAttrPtr);
 
 	class ParamSet:
 				public CMultiModelBridgeBase,
@@ -139,7 +141,7 @@ protected:
 		istd::TDelPtr<IParamsSet> paramSetPtr;
 		QByteArray typeId;
 		QString name;
-		QString description;
+		iprm::CNameParam description;
 		bool isEnabled;
 		const CParamsManagerCompBase* parentPtr;
 	};

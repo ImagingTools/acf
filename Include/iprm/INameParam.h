@@ -2,9 +2,10 @@
 #define iprm_INameParam_included
 
 
-// ACF includes
+// Qt includes
 #include <QtCore/QString>
 
+// ACF includes
 #include "iser/ISerializable.h"
 
 
@@ -13,7 +14,8 @@ namespace iprm
 
 
 /**
-	Interface for a object containing its name.
+	Interface for a object containing simple text.
+	\todo Rename it to ITextParam
 */
 class INameParam: virtual public iser::ISerializable
 {

@@ -136,7 +136,7 @@ IParamsSet* CParamsManagerCompBase::GetParamsSet(int index) const
 		return m_fixedParamSetsCompPtr[index];
 	}
 
-	if (m_elementIndexParamId.IsValid() || m_elementNameParamId.IsValid()){
+	if (m_elementIndexParamIdAttrPtr.IsValid() || m_elementNameParamIdAttrPtr.IsValid() || m_elementDescriptionParamIdAttrPtr.IsValid()){
 		return const_cast<ParamSet*>(m_paramSets[index - fixedSetsCount].GetPtr());
 	}
 	else{
@@ -246,7 +246,7 @@ QString CParamsManagerCompBase::GetParamsSetDescription(int index) const
 		}
 	}
 
-	return m_paramSets[index - fixedSetsCount]->description;
+	return m_paramSets[index - fixedSetsCount]->description.GetName();
 }
 
 
@@ -259,11 +259,11 @@ void CParamsManagerCompBase::SetParamsSetDescription(int index, const QString& d
 		return;
 	}
 
-	if (m_paramSets[index - fixedSetsCount]->description != description){
+	if (m_paramSets[index - fixedSetsCount]->description.GetName() != description){
 		static ChangeSet changeSet(CF_OPTIONS_CHANGED);
 		istd::CChangeNotifier notifier(this, changeSet);
 
-		m_paramSets[index - fixedSetsCount]->description = description;
+		m_paramSets[index - fixedSetsCount]->description.SetName(description);
 	}
 }
 
@@ -379,12 +379,16 @@ IParamsSet::Ids CParamsManagerCompBase::ParamSet::GetParamIds(bool editableOnly)
 	IParamsSet::Ids ids = paramSetPtr->GetParamIds(editableOnly);
 
 	if (!editableOnly){
-		if (parentPtr->m_elementIndexParamId.IsValid()){
-			ids += *(parentPtr->m_elementIndexParamId);
+		if (parentPtr->m_elementIndexParamIdAttrPtr.IsValid()){
+			ids += *(parentPtr->m_elementIndexParamIdAttrPtr);
 		}
 
-		if (parentPtr->m_elementNameParamId.IsValid()){
-			ids += *(parentPtr->m_elementNameParamId);
+		if (parentPtr->m_elementNameParamIdAttrPtr.IsValid()){
+			ids += *(parentPtr->m_elementNameParamIdAttrPtr);
+		}
+
+		if (parentPtr->m_elementDescriptionParamIdAttrPtr.IsValid()){
+			ids += *(parentPtr->m_elementDescriptionParamIdAttrPtr);
 		}
 	}
 
@@ -397,12 +401,16 @@ const iser::ISerializable* CParamsManagerCompBase::ParamSet::GetParameter(const 
 	Q_ASSERT(paramSetPtr.IsValid());
 	Q_ASSERT(parentPtr != NULL);
 
-	if (parentPtr->m_elementIndexParamId.IsValid() && (id == *(parentPtr->m_elementIndexParamId))){
+	if (parentPtr->m_elementIndexParamIdAttrPtr.IsValid() && (id == *(parentPtr->m_elementIndexParamIdAttrPtr))){
 		return this;
 	}
 
-	if (parentPtr->m_elementNameParamId.IsValid() && (id == *(parentPtr->m_elementNameParamId))){
+	if (parentPtr->m_elementNameParamIdAttrPtr.IsValid() && (id == *(parentPtr->m_elementNameParamIdAttrPtr))){
 		return this;
+	}
+
+	if (parentPtr->m_elementDescriptionParamIdAttrPtr.IsValid() && (id == *(parentPtr->m_elementDescriptionParamIdAttrPtr))){
+		return &description;
 	}
 
 	return paramSetPtr->GetParameter(id);
