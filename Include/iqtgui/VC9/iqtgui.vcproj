@@ -209,6 +209,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCommandsMultiplexerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CCommandsToolBarGuiComp.cpp"
 				>
 			</File>
@@ -340,6 +344,10 @@
 			</File>
 			<File
 				RelativePath="..\CCommandsBinderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCommandsMultiplexerComp.h"
 				>
 			</File>
 			<File

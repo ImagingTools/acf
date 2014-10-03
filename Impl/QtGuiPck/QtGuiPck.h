@@ -30,6 +30,8 @@
 #include "iqtgui/CTableBasedModelEditorComp.h"
 #include "iqtgui/CStatusGuiComp.h"
 #include "iqtgui/CCalendarGuiComp.h"
+#include "iqtgui/CCalendarGuiComp.h"
+#include "iqtgui/CCommandsMultiplexerComp.h"
 
 // ParamGuiPck
 #include "iqtprm/CFileNameParamGuiComp.h"
@@ -99,6 +101,7 @@ typedef iqtgui::CProgressManagerGuiComp ProgressManagerGui;
 typedef iqtgui::CTableBasedModelEditorComp TableBasedModelEditor;
 typedef iqtgui::CStatusGuiComp StatusGui;
 typedef iqtgui::CCalendarGuiComp CalendarGui;
+typedef icomp::TModelCompWrap<iqtgui::CCommandsMultiplexerComp> CommandsMultiplexer;
 
 typedef iqtdoc::CSingletonDocApplicationComp SingletonDocApplication;
 typedef iqtdoc::CDocumentImportExportCommandComp DocumentImportExportCommand;

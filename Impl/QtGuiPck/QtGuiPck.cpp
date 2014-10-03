@@ -203,6 +203,11 @@ I_EXPORT_COMPONENT(
 			"Calendar Widget Date Time");
 
 I_EXPORT_COMPONENT(
+			CommandsMultiplexer,
+			"Multiplexer for the command providers",
+			"Command Selection Mux Multiplexer");
+
+I_EXPORT_COMPONENT(
 			ImagePropertyGui,
 			"Image property viewer",
 			"Observer Display GUI Image Bitmap Property");
