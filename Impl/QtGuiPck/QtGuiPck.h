@@ -24,7 +24,7 @@
 #include "iqtgui/CModelEditorGuiComp.h"
 #include "iqtgui/CImagePropertiesFrameComp.h"
 #include "iqtgui/CCommandsToolBarGuiComp.h"
-#include "iqtgui/CSelectableCommandsProviderComp.h"
+#include "iqtgui/CCommandBasedSelectionControllerComp.h"
 #include "iqtgui/CVersionInfoGuiComp.h"
 #include "iqtgui/CProgressManagerGuiComp.h"
 #include "iqtgui/CTableBasedModelEditorComp.h"
@@ -93,7 +93,7 @@ typedef iqtgui::CImagePropertyGuiComp ImagePropertyGui;
 typedef iqtgui::CModelEditorGuiComp ModelEditorGui;
 typedef iqtgui::CImagePropertiesFrameComp ImagePropertiesFrame;
 typedef iqtgui::CCommandsToolBarGuiComp CommandsToolBar;
-typedef icomp::TModelCompWrap<iqtgui::CSelectableCommandsProviderComp> SelectableCommandsProvider;
+typedef icomp::TModelCompWrap<iqtgui::CCommandBasedSelectionControllerComp> CommandBasedSelectionController;
 typedef iqtgui::CVersionInfoGuiComp VersionInfoGui;
 typedef iqtgui::CProgressManagerGuiComp ProgressManagerGui;
 typedef iqtgui::CTableBasedModelEditorComp TableBasedModelEditor;

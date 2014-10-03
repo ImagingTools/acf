@@ -1,4 +1,4 @@
-#include "iqtgui/CSelectableCommandsProviderComp.h"
+#include "iqtgui/CCommandBasedSelectionControllerComp.h"
 
 
 // ACF includes
@@ -11,7 +11,7 @@ namespace iqtgui
 
 // public methods
 
-CSelectableCommandsProviderComp::CSelectableCommandsProviderComp()
+CCommandBasedSelectionControllerComp::CCommandBasedSelectionControllerComp()
 	:m_commandsList("", 100, ibase::ICommand::CF_GLOBAL_MENU)
 {
 }
@@ -19,7 +19,7 @@ CSelectableCommandsProviderComp::CSelectableCommandsProviderComp()
 
 // reimpemented (ibase::ICommandsProvider)
 
-const ibase::IHierarchicalCommand* CSelectableCommandsProviderComp::GetCommands() const
+const ibase::IHierarchicalCommand* CCommandBasedSelectionControllerComp::GetCommands() const
 {
 	return &m_rootMenuCommand;
 }
@@ -29,7 +29,7 @@ const ibase::IHierarchicalCommand* CSelectableCommandsProviderComp::GetCommands(
 
 // reimpemented (imod::CSingleModelObserverBase)
 
-void CSelectableCommandsProviderComp::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
+void CCommandBasedSelectionControllerComp::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
 {
 	if (!changeSet.Contains(iprm::IOptionsList::CF_OPTIONS_CHANGED) && !changeSet.Contains(iprm::IOptionsList::CF_OPTION_RENAMED)){
 		return;
@@ -41,7 +41,7 @@ void CSelectableCommandsProviderComp::OnUpdate(const istd::IChangeable::ChangeSe
 
 // reimpemented (icomp::IComponent)
 
-void CSelectableCommandsProviderComp::OnComponentCreated()
+void CCommandBasedSelectionControllerComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
@@ -59,7 +59,7 @@ void CSelectableCommandsProviderComp::OnComponentCreated()
 }
 
 
-void CSelectableCommandsProviderComp::OnComponentDestroyed()
+void CCommandBasedSelectionControllerComp::OnComponentDestroyed()
 {
 	EnsureModelDetached();
 
@@ -69,7 +69,7 @@ void CSelectableCommandsProviderComp::OnComponentDestroyed()
 
 // private slots
 
-void CSelectableCommandsProviderComp::OnCommandActivated()
+void CCommandBasedSelectionControllerComp::OnCommandActivated()
 {
 	QAction* actionPtr = dynamic_cast<QAction*>(sender());
 	Q_ASSERT(actionPtr != NULL);
@@ -86,7 +86,7 @@ void CSelectableCommandsProviderComp::OnCommandActivated()
 
 // private methods
 
-void CSelectableCommandsProviderComp::BuildCommands()
+void CCommandBasedSelectionControllerComp::BuildCommands()
 {
 	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 	Q_ASSERT(selectionPtr != NULL);

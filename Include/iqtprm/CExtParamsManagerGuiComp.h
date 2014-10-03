@@ -16,7 +16,6 @@
 #endif
 
 // ACF includes
-#include "iqtgui/IIconProvider.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iprm/IParamsManager.h"
 #include "GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h"

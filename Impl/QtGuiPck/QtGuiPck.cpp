@@ -218,7 +218,7 @@ I_EXPORT_COMPONENT(
 			"Toolbar Command");
 
 I_EXPORT_COMPONENT(
-			SelectableCommandsProvider,
+			CommandBasedSelectionController,
 			"Selectable command list provider",
 			"Selection Command List Actions");
 

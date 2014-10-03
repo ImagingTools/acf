@@ -1,6 +1,5 @@
-#ifndef iqtgui_CSelectableCommandsProviderComp_included
-#define iqtgui_CSelectableCommandsProviderComp_included
-
+#ifndef iqtgui_CCommandBasedSelectionControllerComp_included
+#define iqtgui_CCommandBasedSelectionControllerComp_included
 
 
 // ACF includes
@@ -17,10 +16,10 @@ namespace iqtgui
 
 
 /**
-	Selectable commands provider component.
+	Command-based selection parameter (iprm::ISelectionParam) controller.
 	Menu commands are generated from the selection constraints of the observered selection object.
 */
-class CSelectableCommandsProviderComp:
+class CCommandBasedSelectionControllerComp:
 			public QObject,
 			public icomp::CComponentBase,
 			protected imod::TSingleModelObserverBase<iprm::ISelectionParam>,
@@ -31,7 +30,7 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 	typedef imod::TSingleModelObserverBase<iprm::ISelectionParam> BaseClass2;
 	
-	I_BEGIN_COMPONENT(CSelectableCommandsProviderComp);
+	I_BEGIN_COMPONENT(CCommandBasedSelectionControllerComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_commandSelectionCompPtr, "CommandsSelection", "Commands selector and contstraints provider", true, "CommandsSelection");
 		I_ASSIGN_TO(m_commandSelectionModelCompPtr, m_commandSelectionCompPtr, true);
@@ -43,7 +42,7 @@ public:
 		I_ASSIGN(m_showInToolBarAttrPtr, "ShowInToolBar", "If enabled, the action will be shown in the application's tool bar", false, false);
 	I_END_COMPONENT;
 
-	CSelectableCommandsProviderComp();
+	CCommandBasedSelectionControllerComp();
 
 	// reimpemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
@@ -81,6 +80,6 @@ protected:
 } // namespace iqtgui
 
 
-#endif // !iqtgui_CSelectableCommandsProviderComp_included
+#endif // !iqtgui_CCommandBasedSelectionControllerComp_included
 
 

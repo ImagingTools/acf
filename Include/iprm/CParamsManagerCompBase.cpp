@@ -339,7 +339,7 @@ QString CParamsManagerCompBase::CalculateNewDefaultName() const
 			if (FindParamSetIndex(defaultSetName) < 0){
 				break;
 			}
-		}	
+		}
 	}
 
 	return defaultSetName;
