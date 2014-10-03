@@ -31,7 +31,7 @@ void CBitMemoryWriteArchive::WriteValue(quint32 inputValue, int bitsCount)
 
 		bool bitOn = (inputValue & contextMask) != 0;
 
-		unsigned char& bufferValue = m_dataBuffer[localByteIndex];
+		unsigned char& bufferValue = (unsigned char&)(*(m_dataBuffer.data() + localByteIndex));
 
 		if (bitOn){
 			bufferValue |= 1 << (8 - globalBitIndex - 1);

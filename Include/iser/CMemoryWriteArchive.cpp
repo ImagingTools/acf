@@ -20,7 +20,7 @@ CMemoryWriteArchive::CMemoryWriteArchive(
 
 const void* CMemoryWriteArchive::GetBuffer() const
 {
-	return &m_dataBuffer[0];
+	return m_dataBuffer.constData();
 }
 
 
@@ -52,11 +52,11 @@ bool CMemoryWriteArchive::ProcessData(void* data, int size)
 		return false;
 	}
 
-	DataBuffer::size_type previousSize = m_dataBuffer.size();
+	int previousSize = m_dataBuffer.size();
 
 	m_dataBuffer.resize(previousSize + size);
 
-	std::memcpy(&m_dataBuffer[previousSize], data, size);
+	std::memcpy(m_dataBuffer.data() + previousSize, data, size);
 
 	return true;
 }
