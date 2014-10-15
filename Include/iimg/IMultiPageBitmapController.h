@@ -3,14 +3,11 @@
 
 
 // ACF includes
-#include "istd/IPolymorphic.h"
+#include "iimg/IBitmap.h"
 
 
 namespace iimg
 {
-
-
-class IBitmap;
 
 
 /**
