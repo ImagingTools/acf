@@ -12,6 +12,7 @@
 #include "iser/CArchiveTag.h"
 #include "iprm/IOptionsList.h"
 #include "idoc/IMultiPageDocument.h"
+#include "idoc/IMultiPageDocumentProvider.h"
 #include "idoc/CStandardDocumentMetaInfo.h"
 
 
@@ -233,6 +234,7 @@ bool TMultiPageDocumentWrap<Base>::Serialize(iser::IArchive& archive)
 template <class Base>
 bool TMultiPageDocumentWrap<Base>::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 {
+	// native copy
 	const TMultiPageDocumentWrap<Base>* sourcePtr = dynamic_cast<const TMultiPageDocumentWrap<Base>*>(&object);
 	if (sourcePtr != NULL){
 		istd::CChangeNotifier changePtr(this);
@@ -262,6 +264,50 @@ bool TMultiPageDocumentWrap<Base>::CopyFrom(const istd::IChangeable& object, Com
 		}
 
 		return true;
+	}
+
+	// copy via idoc::IMultiPageDocument
+	const idoc::IMultiPageDocument* docPtr = dynamic_cast<const idoc::IMultiPageDocument*>(&object);
+	if (docPtr != NULL){
+		istd::CChangeNotifier changePtr(this);
+
+		m_documentPages.clear();
+
+		int pagesCount = docPtr->GetPagesCount();
+		for (int pageIndex = 0; pageIndex < pagesCount; ++pageIndex){
+			istd::IChangeable* pagePtr = this->InsertPage();
+			if (pagePtr == NULL){
+				return false;
+			}
+
+			const istd::IChangeable& sourcePage = docPtr->GetDocumentPage(pageIndex);
+			if (!pagePtr->CopyFrom(sourcePage)){
+				return false;
+			}
+
+			const idoc::IDocumentMetaInfo* metaInfoPtr = docPtr->GetPageMetaInfo(pageIndex);
+			if (metaInfoPtr != NULL){
+				if (!m_documentPages[pageIndex].pageMetaInfo.CopyFrom(*metaInfoPtr)){
+					return false;
+				}
+			}
+		}
+
+		if (!BaseClass2::CopyFrom(object, mode)){
+			return false;
+		}
+
+		return true;
+	}
+
+	// copy via idoc::IMultiPageDocumentProvider
+	const idoc::IMultiPageDocumentProvider* docProviderPtr = dynamic_cast<const idoc::IMultiPageDocumentProvider*>(&object);
+	if (docProviderPtr != NULL){
+		const idoc::IMultiPageDocument* docPtr = docProviderPtr->GetDocument();
+		if (docPtr != NULL){	
+			// recursive call
+			return CopyFrom(*docPtr, mode);
+		}
 	}
 
 	return false;
