@@ -9,7 +9,10 @@
 namespace iimg
 {
 
-	
+
+class IBitmap;
+
+
 /**
 	Interface of a controller for handling multi-page bitmaps.
 */
