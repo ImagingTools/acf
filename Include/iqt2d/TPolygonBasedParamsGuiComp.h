@@ -326,12 +326,12 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateToo
 		QMenu& menu = *BaseClass::ToolsButton->menu();
 		menu.clear();
 
-		menu.addAction(QIcon(":/Icons/FlipHorizontal"), tr("Flip horizontally"))->setData(iview::IInteractiveShape::ActionFlipHorizontally);
-		menu.addAction(QIcon(":/Icons/FlipVertical"), tr("Flip vertically"))->setData(iview::IInteractiveShape::ActionFlipVertically);
-		menu.addAction(QIcon(":/Icons/RotateRight"), tr("Rotate clockwise"))->setData(iview::IInteractiveShape::ActionRotateClockwise);
-		menu.addAction(QIcon(":/Icons/RotateLeft"), tr("Rotate counterclockwise"))->setData(iview::IInteractiveShape::ActionRotateCounterclockwise);
+		menu.addAction(QIcon(":/Icons/FlipHorizontal"), QCoreApplication::translate("iqt2d", "Flip horizontally"))->setData(iview::IInteractiveShape::ActionFlipHorizontally);
+		menu.addAction(QIcon(":/Icons/FlipVertical"), QCoreApplication::translate("iqt2d", "Flip vertically"))->setData(iview::IInteractiveShape::ActionFlipVertically);
+		menu.addAction(QIcon(":/Icons/RotateRight"), QCoreApplication::translate("iqt2d", "Rotate clockwise"))->setData(iview::IInteractiveShape::ActionRotateClockwise);
+		menu.addAction(QIcon(":/Icons/RotateLeft"), QCoreApplication::translate("iqt2d", "Rotate counterclockwise"))->setData(iview::IInteractiveShape::ActionRotateCounterclockwise);
 		if (polylinePtr != NULL){
-			menu.addAction(QIcon(":/Icons/Reverse"), tr("Reverse line"))->setData(iview::IInteractiveShape::ActionReverseLine);
+			menu.addAction(QIcon(":/Icons/Reverse"), QCoreApplication::translate("iqt2d", "Reverse line"))->setData(iview::IInteractiveShape::ActionReverseLine);
 		}
 	}
 }

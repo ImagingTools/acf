@@ -7,7 +7,7 @@
           1
         </Id>
         <Number>
-          1156
+          1204
         </Number>
         <Description>
           ACF-Solutions
@@ -18,7 +18,7 @@
           0
         </Id>
         <Number>
-          3516
+          3615
         </Number>
         <Description>
           ACF
@@ -426,7 +426,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="17">
+        <AttributeInfoMap count="18">
           <AttributeInfo>
             <Id>
               AboutDialog
@@ -468,6 +468,22 @@
             </Type>
             <ExportId>
               FixedWidth
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              HelpFile
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              HelpFile
             </ExportId>
             <Data>
               <IsEnabled>

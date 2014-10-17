@@ -73,21 +73,6 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
 </context>
 <context>
-    <name>CAbGuiComp</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CAboutWidgetGuiComp</name>
     <message>
         <source>About...</source>
@@ -126,15 +111,15 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -144,12 +129,12 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
         <translation>Radien</translation>
     </message>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
+        <source>Position</source>
+        <translation>Position</translation>
     </message>
     <message>
-        <source>Position</source>
-        <translation type="unfinished">Position</translation>
+        <source>Form</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -168,38 +153,38 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>CArcParamsGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Position</source>
-        <translation type="unfinished">Position</translation>
+        <translation>Position</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Radius</translation>
+        <translation>Radius</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation></translation>
     </message>
     <message>
         <source>Start Angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Startwinkel</translation>
     </message>
     <message>
         <source>End Angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Endwinkel</translation>
     </message>
     <message>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -269,14 +254,14 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     <name>CButtonBasedSelectionParamGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>CCalendarGuiComp</name>
     <message>
         <source>About...</source>
-        <translation type="unfinished">Über...</translation>
+        <translation>Über...</translation>
     </message>
 </context>
 <context>
@@ -320,7 +305,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -339,15 +324,15 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>from</source>
-        <translation type="unfinished"></translation>
+        <translation>vom</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -377,18 +362,18 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>CExtParamsManagerGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Add</source>
         <translation type="unfinished">Hinzufügen</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ins</source>
@@ -451,7 +436,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -504,7 +489,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -515,14 +500,14 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>CFileSystemExplorerGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -576,7 +561,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -595,7 +580,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -610,7 +595,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -633,7 +618,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -655,7 +640,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     <name>CNameParamGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -697,11 +682,11 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -730,16 +715,16 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
         <translation>Außerhalb</translation>
     </message>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Position</source>
-        <translation type="unfinished">Position</translation>
+        <translation>Position</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Radius</translation>
+        <translation>Radius</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -840,11 +825,11 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -902,62 +887,55 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
     </message>
     <message>
-        <source>Ctrl+Ins</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift+Del</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+V</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Closes the line by connecting its last and first point with a line segment.&lt;/p&gt;&lt;p&gt;Uncloses the line at the selected coordinates in the table (or, if nothing selected, at the latest closing coordinates).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>Form</source>
+        <translation></translation>
     </message>
 </context>
 <context>
-    <name>CProcessorControlGuiComp</name>
+    <name>CComposedParamsSetGuiComp</name>
     <message>
-        <source>Processing</source>
-        <translation type="obsolete">Verarbeitung</translation>
+        <source>Save...</source>
     </message>
     <message>
-        <source>Do single processing step</source>
-        <translation type="obsolete">Einzelschritt ausführen</translation>
+        <source>Remove</source>
+        <translation type="unfinished">Entfernen</translation>
     </message>
     <message>
-        <source>Process</source>
-        <translation type="obsolete">Start</translation>
+        <source>Del</source>
     </message>
     <message>
-        <source>Enable/disable continuous processing</source>
-        <translation type="obsolete">Wiederholbare Verarbeitung ein- und ausschalten</translation>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     </message>
     <message>
-        <source>Save Result...</source>
-        <translation type="obsolete">Ergebnisse abspeichern...</translation>
+        <source>Form</source>
+        <translation></translation>
     </message>
     <message>
-        <source>Parameters</source>
-        <translation type="obsolete">Parameter</translation>
+        <source>URL</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     </message>
     <message>
         <source>Load...</source>
@@ -1003,7 +981,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1064,28 +1042,28 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
+</context>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Wildcards * and ? are allowed</source>
+        <translation>Musters * und ? sind erlaubt</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>F5</source>
+        <translation></translation>
     </message>
 </context>
 <context>
-    <name>CRegistryPropEditorComp</name>
-    <message>
-        <source>Properies of Registry</source>
-        <translation type="obsolete">Eigenschaften von Registry</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">Beschreibung</translation>
-    </message>
-    <message>
-        <source>Registry Info</source>
-        <translation type="obsolete">Information</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">Firma</translation>
-    </message>
-    <message>
         <source>Project</source>
         <translation type="obsolete">Projekt</translation>
     </message>
@@ -1159,7 +1137,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1189,7 +1167,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1200,152 +1178,72 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
-    <name>CSplashScreenGuiComp</name>
-    <message>
-        <source>ApplicationName</source>
-        <translation>Name der Applikation</translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
-        <source>ApplicationType</source>
-        <translation>Typ der Applikation</translation>
+        <source>Remove</source>
+        <translation>Entfernen</translation>
+    </message>
+    </message>
+</context>
+<context>
+    <name>CProgressManagerGuiComp</name>
+    <message>
+        <source>Cancel</source>
     </message>
     <message>
-        <source>Version</source>
-        <translation>Version</translation>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Progress</source>
+        <translation>Ablauf</translation>
+    </message>
+</context>
+<context>
     </message>
     <message>
         <source>ProductName</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>(C) Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
-    <name>CTextEditorComp</name>
-    <message>
-        <source>To &amp;Lowercase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lowercase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Convert selected block to lowercase characters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>To &amp;Uppercase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uppercase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Convert selected block to uppercase characters</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CTextLogGuiComp</name>
-    <message>
-        <source>Severity</source>
-        <translation>Stufe</translation>
-    </message>
-    <message>
-        <source>Any</source>
-        <translation>Beliebig</translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation>Information</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Warnung</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Fehler</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation>Quelle</translation>
-    </message>
-    <message>
-        <source>Type filter text here...</source>
-        <translation>Bitte den Filtertext hier eintippen...</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>CVariableParamGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
-    <name>CVersionInfoGuiComp</name>
-    <message>
-        <source>Version</source>
-        <translation>Version</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Module</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CVideoPlayerGuiComp</name>
-    <message>
-        <source>Current Frame</source>
-        <translation type="obsolete">Aktuelles Frame</translation>
-    </message>
-</context>
-<context>
-    <name>CWizardOptionsListGuiComp</name>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Optionen</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>Gui</name>
     <message>
         <source>Save...</source>
-        <translation>Speichern...</translation>
-    </message>
-    <message>
-        <source>All known documents (%1)
-</source>
-        <translation type="obsolete">Alle bekannten Dokumenttypen (%1)
-</translation>
-    </message>
-    <message>
-        <source>Open Files...</source>
-        <translation>Dateien öffnen...</translation>
-    </message>
-    <message>
-        <source>All known documents (%1)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <source>About</source>
@@ -1378,48 +1276,12 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
         <translation>Das Objekt kann nicht von der Datei geladen werden</translation>
     </message>
     <message>
-        <source>Processing file %1 to %2</source>
-        <translation type="obsolete">Verrbeite Datei %1 zu %2</translation>
-    </message>
-    <message>
-        <source>Opening input file failed (%1)</source>
-        <translation type="obsolete">Öffnen der Eingangsdatei (%1) fehlgeschagen</translation>
-    </message>
-    <message>
-        <source>Opening output file failed (%1)</source>
-        <translation type="obsolete">Öffnen der Ergebnisdatei (%1) fehlgeschagen</translation>
-    </message>
-    <message>
-        <source>Opening license file failed (%1)</source>
-        <translation type="obsolete">Öffnen der Lizenzdatei (%1) fehlgeschagen</translation>
-    </message>
-    <message>
         <source>C++ source file</source>
         <translation>C++ Quellcode Datei</translation>
     </message>
     <message>
-        <source>Dependencies</source>
-        <translation type="obsolete">Abhängigkeiten</translation>
-    </message>
-    <message>
-        <source>Sources and dependencies</source>
-        <translation type="obsolete">Abhängigkeiten und Quellcode</translation>
-    </message>
-    <message>
-        <source>Sources</source>
-        <translation type="obsolete">Quellcode</translation>
-    </message>
-    <message>
-        <source>Processing time: %1 ms</source>
-        <translation type="obsolete">Verarbeitungszeit: %1 ms</translation>
-    </message>
-    <message>
         <source>Gray value %1%</source>
         <translation>Grauwert %1%</translation>
-    </message>
-    <message>
-        <source>RGB value %1%, %2%, %3%</source>
-        <translation type="obsolete">RGB-Wert %1%, %2%, %3%</translation>
     </message>
     <message>
         <source>RGBA value %1%, %2%, %3%, %4%</source>
@@ -1571,637 +1433,7 @@ Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
 </context>
 <context>
-    <name>XpcEditorComp</name>
-    <message>
-        <source>Packages</source>
-        <translation type="obsolete">Pakete</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="obsolete">Hinzufügen</translation>
-    </message>
-</context>
-<context>
-    <name>ibase</name>
-    <message>
-        <source>Object is not serializable</source>
-        <translation type="obsolete">Objekt ist nicht serialisierbar</translation>
-    </message>
-    <message>
-        <source>File extension is not supported</source>
-        <translation type="obsolete">Dateierweiterung wird nicht unterstützt</translation>
-    </message>
-    <message>
-        <source>Archive version is not supported, possible lost of data</source>
-        <translation type="obsolete">Version des Dateiarchives wird nicht unterstützt, moglicher Datenverlust</translation>
-    </message>
-    <message>
-        <source>Cannot serialize object to file</source>
-        <translation type="obsolete">Das Objekt kann nicht in die Datei serialisiert werden</translation>
-    </message>
-    <message>
-        <source>Cannot load object from file </source>
-        <translation type="obsolete">Das Objekt kann nicht von der Datei geladen werden</translation>
-    </message>
-</context>
-<context>
-    <name>icmpstr::CAttributeEditorComp</name>
-    <message>
-        <source>Boolean</source>
-        <translation type="obsolete">Boole&apos;sher Wert</translation>
-    </message>
-    <message>
-        <source>Real number</source>
-        <translation type="obsolete">Reele Zahl</translation>
-    </message>
-    <message>
-        <source>Integer number</source>
-        <translation type="obsolete">Ganzzahl</translation>
-    </message>
-    <message>
-        <source>Boolean value</source>
-        <translation type="obsolete">Bool&apos;scher Wert</translation>
-    </message>
-    <message>
-        <source>String</source>
-        <translation type="obsolete">Zeichenkette</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation type="obsolete">Identifikator</translation>
-    </message>
-    <message>
-        <source>List of integer numbers</source>
-        <translation type="obsolete">Liste von Ganzzahlen</translation>
-    </message>
-    <message>
-        <source>List of real numbers</source>
-        <translation type="obsolete">Liste von reelen Zahlen</translation>
-    </message>
-    <message>
-        <source>List of boolean values</source>
-        <translation type="obsolete">Liste von Bool&apos;schen Werten</translation>
-    </message>
-    <message>
-        <source>List of strings</source>
-        <translation type="obsolete">Liste von Zeichenketten</translation>
-    </message>
-    <message>
-        <source>List of ID&apos;s</source>
-        <translation type="obsolete">Liste von Identifikatoren</translation>
-    </message>
-    <message>
-        <source>Component reference</source>
-        <translation type="obsolete">Referenz zu einer Komponente</translation>
-    </message>
-    <message>
-        <source>List of component reference</source>
-        <translation type="obsolete">Liste von Komponentenreferenzen</translation>
-    </message>
-    <message>
-        <source>&lt;unknown&gt;</source>
-        <translation type="obsolete">&lt;unbekannt&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;multiple component types&gt;</source>
-        <translation type="obsolete">&lt;zusammengesetzte Komponententypen&gt;</translation>
-    </message>
-    <message>
-        <source>Boolean list</source>
-        <translation type="obsolete">Liste von boole&apos;shen Werten</translation>
-    </message>
-    <message>
-        <source>Real number list</source>
-        <translation type="obsolete">Liste von reelen Zahlen</translation>
-    </message>
-    <message>
-        <source>Integer number list</source>
-        <translation type="obsolete">Liste von Ganzzahlen</translation>
-    </message>
-    <message>
-        <source>String list</source>
-        <translation type="obsolete">Liste von Zeichenketten</translation>
-    </message>
-    <message>
-        <source>Reference</source>
-        <translation type="obsolete">Referenz</translation>
-    </message>
-    <message>
-        <source>Multiple reference</source>
-        <translation type="obsolete">Multiple Referenz</translation>
-    </message>
-    <message>
-        <source>More elements selected with the same attribute name and different type</source>
-        <translation type="obsolete">Mehrere Elemente mit demselben Attributnamen und unterschiedlichem Typ ausgewählt</translation>
-    </message>
-    <message>
-        <source>Optional %1</source>
-        <translation type="obsolete">Optionell %1</translation>
-    </message>
-    <message>
-        <source>%1
-Type: %2</source>
-        <translation type="obsolete">%1
-Typ: %2</translation>
-    </message>
-    <message>
-        <source>
-Interfaces:</source>
-        <translation type="obsolete">
-Schnittstellen:</translation>
-    </message>
-    <message>
-        <source>&lt;multi selection&gt;</source>
-        <translation type="obsolete">&lt;multiauswahl&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>icmpstr::CPackageOverviewComp</name>
-    <message>
-        <source>&lt;&lt; Local &gt;&gt;</source>
-        <translation type="obsolete">&lt;&lt;Lokal&gt;&gt;</translation>
-    </message>
-    <message>
-        <source>Group containing components of %2 type</source>
-        <translation type="obsolete">Gruppe beinhaltet Komponente vom Typ %2</translation>
-    </message>
-    <message>
-        <source>Any</source>
-        <translation type="obsolete">Beliebig</translation>
-    </message>
-    <message>
-        <source>Menu for packages</source>
-        <translation type="obsolete">Menu für Packages</translation>
-    </message>
-    <message>
-        <source>&amp;Packages</source>
-        <translation type="obsolete">&amp;Pakete</translation>
-    </message>
-    <message>
-        <source>Packages</source>
-        <translation type="obsolete">Pakete</translation>
-    </message>
-    <message>
-        <source>&amp;Reload All Packages</source>
-        <translation type="obsolete">&amp;Alle Packages neuladen</translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation type="obsolete">Alle Packages neuladen</translation>
-    </message>
-    <message>
-        <source>Reloads all packages form configuration file</source>
-        <translation type="obsolete">Alle Packages neuladen</translation>
-    </message>
-    <message>
-        <source>Component %1</source>
-        <translation type="obsolete">Komponente %1</translation>
-    </message>
-    <message>
-        <source>Component %1.%2</source>
-        <translation type="obsolete">Komponente %1.%2</translation>
-    </message>
-    <message>
-        <source>Local composite component %2</source>
-        <translation type="obsolete">Lokaler Kompositum %2</translation>
-    </message>
-</context>
-<context>
-    <name>icmpstr::CRegistryElementShape</name>
-    <message>
-        <source>Package or component not found</source>
-        <translation type="obsolete">Package oder Komponente nicht gefunden</translation>
-    </message>
-    <message>
-        <source>Embedded: %1</source>
-        <translation type="obsolete">Eingebettet: %1</translation>
-    </message>
-</context>
-<context>
-    <name>icmpstr::CRegistryPropEditorComp</name>
-    <message>
-        <source>Exported Interfaces</source>
-        <translation type="obsolete">Exportierte Schnittstellen</translation>
-    </message>
-    <message>
-        <source>Exported Components</source>
-        <translation type="obsolete">Exportierte Komponenten</translation>
-    </message>
-</context>
-<context>
-    <name>icmpstr::CSceneProviderGuiComp</name>
-    <message>
-        <source>&amp;File</source>
-        <translation type="obsolete">&amp;Datei</translation>
-    </message>
-    <message>
-        <source>&amp;Print...</source>
-        <translation type="obsolete">&amp;Drucken...</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation type="obsolete">Drucken</translation>
-    </message>
-    <message>
-        <source>Prints current document</source>
-        <translation type="obsolete">Das aktuelle Dokument drucken</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Bearbeiten</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation type="obsolete">&amp;Ansicht</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Ansicht</translation>
-    </message>
-    <message>
-        <source>View menu</source>
-        <translation type="obsolete">View Menu</translation>
-    </message>
-    <message>
-        <source>&amp;Auto Fit</source>
-        <translation type="obsolete">&amp;Autoskalierung</translation>
-    </message>
-    <message>
-        <source>Auto Fit</source>
-        <translation type="obsolete">Autoskalierung</translation>
-    </message>
-    <message>
-        <source>Automatical fit contents to view area</source>
-        <translation type="obsolete">Automatische Anpassung der Anzeige an die Fenstergröße</translation>
-    </message>
-    <message>
-        <source>&amp;Fit Contents To View</source>
-        <translation type="obsolete">&amp;Anzeigeskalierung an Fenstergröße anpassen</translation>
-    </message>
-    <message>
-        <source>Fit contents To View</source>
-        <translation type="obsolete">Anzeigeskalierung an Fenstergröße anpassen</translation>
-    </message>
-    <message>
-        <source>Fit contents to view area</source>
-        <translation type="obsolete">Anzeigeskalierung an Fenstergröße anpassen</translation>
-    </message>
-    <message>
-        <source>&amp;Fit View To Contents</source>
-        <translation type="obsolete">&amp;Fenstergröße an die Anzeige anpassen</translation>
-    </message>
-    <message>
-        <source>Fit View To Contents</source>
-        <translation type="obsolete">Fenstergröße an die Anzeige anpassen</translation>
-    </message>
-    <message>
-        <source>Fit view area to contents</source>
-        <translation type="obsolete">Fenstergröße an die Anzeige anpassen</translation>
-    </message>
-    <message>
-        <source>&amp;Reset Zoom</source>
-        <translation type="obsolete">&amp;Skalierung zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Reset Zoom</source>
-        <translation type="obsolete">Skalierung zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Reset scene zoom</source>
-        <translation type="obsolete">Skalierung der Anzeige zurücksetzen</translation>
-    </message>
-    <message>
-        <source>&amp;Select All</source>
-        <translation type="obsolete">&amp;Alles auswählen</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">Alles auswählen</translation>
-    </message>
-    <message>
-        <source>Select all shapes</source>
-        <translation type="obsolete">Alle Elemente auswählen</translation>
-    </message>
-</context>
-<context>
-    <name>icmpstr::CVisualRegistryComp</name>
-    <message>
-        <source>Cannot create %1 (%2)</source>
-        <translation type="obsolete">%1 (%2) konnte nicht erzeugt werden</translation>
-    </message>
-</context>
-<context>
-    <name>icmpstr::CVisualRegistryEditorComp</name>
-    <message>
-        <source>Factory of &apos;%1&apos;</source>
-        <translation type="obsolete">Factory von &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Reference of &apos;%1&apos;</source>
-        <translation type="obsolete">Referenz von &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Bearbeiten</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation type="obsolete">Ausschneiden</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">Kopieren</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation type="obsolete">Einfügen</translation>
-    </message>
-    <message>
-        <source>&amp;Remove</source>
-        <translation type="obsolete">&amp;Entfernen</translation>
-    </message>
-    <message>
-        <source>&amp;Rename Component</source>
-        <translation type="obsolete">&amp;Komponente umbenennen</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete">Komponente umbenennen</translation>
-    </message>
-    <message>
-        <source>Allow to assign new name to selected component</source>
-        <translation type="obsolete">Ausgewählte Komponente umbenennen</translation>
-    </message>
-    <message>
-        <source>Set of commands manipulating registry</source>
-        <translation type="obsolete">Satz von Befehlen für Registrymanipulationen</translation>
-    </message>
-    <message>
-        <source>To &amp;Embedded Composition</source>
-        <translation type="obsolete">Zum &amp;eingebettenen Kompositum konvertieren</translation>
-    </message>
-    <message>
-        <source>To Embedded</source>
-        <translation type="obsolete">Zum eingebettenen Kompositum konvertieren</translation>
-    </message>
-    <message>
-        <source>Make embedded component composition from selected elements.
-It allows to group set of components and manage it as single one</source>
-        <translation type="obsolete">Eingebetteten Kompositum aus den ausgewählten Komponenten erzeugen.
-Dient der Umgruppierung mehrerer Komponenten zu einer einzelnen</translation>
-    </message>
-    <message>
-        <source>&amp;Export To Code...</source>
-        <translation type="obsolete">&amp;Quellcode generieren...</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation type="obsolete">Quellcode generieren</translation>
-    </message>
-    <message>
-        <source>Generates C++ code according to this registry</source>
-        <translation type="obsolete">Generiert C++ Quellcode aus der Registry</translation>
-    </message>
-    <message>
-        <source>&amp;Execute Registry</source>
-        <translation type="obsolete">&amp;Registry ausführen</translation>
-    </message>
-    <message>
-        <source>Start registry execution</source>
-        <translation type="obsolete">Startet Registryausführung</translation>
-    </message>
-    <message>
-        <source>&amp;Abort Registry</source>
-        <translation type="obsolete">&amp;Registryausführung abbrechen</translation>
-    </message>
-    <message>
-        <source>Abort registry execution</source>
-        <translation type="obsolete">Registryausführung abbrechen</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Fehler</translation>
-    </message>
-    <message>
-        <source>Component could not be added</source>
-        <translation type="obsolete">Komponente konnte nicht hinzugefügt werden</translation>
-    </message>
-    <message>
-        <source>Some components could not be added</source>
-        <translation type="obsolete">Komponenten konnten nicht hinzugefügt werden</translation>
-    </message>
-    <message>
-        <source>New component name</source>
-        <translation type="obsolete">Neuer Komponentenname</translation>
-    </message>
-    <message>
-        <source>New embedded component name</source>
-        <translation type="obsolete">Neuer Name für die einbebettete Komponente</translation>
-    </message>
-    <message>
-        <source>Embedded component could not be created!</source>
-        <translation type="obsolete">Eingebettete Komponente konnte nicht erzeugt werden!</translation>
-    </message>
-    <message>
-        <source>C++ code file (*.cpp)</source>
-        <translation type="obsolete">C++ Quellcode Dateien (*.cpp)</translation>
-    </message>
-    <message>
-        <source>Export registry to code</source>
-        <translation type="obsolete">Quellcode generieren</translation>
-    </message>
-    <message>
-        <source>Cannot export to file
-%1</source>
-        <translation type="obsolete">Quellcode konnte nicht
-in %1 generiert werden</translation>
-    </message>
-</context>
-<context>
-    <name>icmpstr::CVisualRegistryScenographerComp</name>
-    <message>
-        <source>Factory of &apos;%1&apos;</source>
-        <translation type="obsolete">Factory von &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Reference of &apos;%1&apos;</source>
-        <translation type="obsolete">Referenz von &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Application Compositor</source>
-        <translation type="obsolete">ACF Compositor</translation>
-    </message>
-    <message>
-        <source>Component name</source>
-        <translation type="obsolete">Komponentenname</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Fehler</translation>
-    </message>
-    <message>
-        <source>Component could not be added</source>
-        <translation type="obsolete">Komponente konnte nicht hinzugefügt werden</translation>
-    </message>
-    <message>
-        <source>Set of commands manipulating registry</source>
-        <translation type="obsolete">Satz von Befehlen für Registrymanipulationen</translation>
-    </message>
-    <message>
-        <source>&amp;Remove Component</source>
-        <translation type="obsolete">&amp;Komponente entfernen</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="obsolete">Komponente entfernen</translation>
-    </message>
-    <message>
-        <source>Remove the selected component from the registry</source>
-        <translation type="obsolete">Ausgewählte Komponente aus der Registry entfernen</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Bearbeiten</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation type="obsolete">Ausschneiden</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">Kopieren</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation type="obsolete">Einfügen</translation>
-    </message>
-    <message>
-        <source>&amp;Remove</source>
-        <translation type="obsolete">&amp;Entfernen</translation>
-    </message>
-    <message>
-        <source>&amp;Rename Component</source>
-        <translation type="obsolete">&amp;Komponente umbenennen</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete">Komponente umbenennen</translation>
-    </message>
-    <message>
-        <source>Allow to assign new name to selected component</source>
-        <translation type="obsolete">Ausgewählte Komponente umbenennen</translation>
-    </message>
-    <message>
-        <source>&amp;Insert Embedded Composition</source>
-        <translation type="obsolete">&amp;Embedded Kompositum hinzufügen</translation>
-    </message>
-    <message>
-        <source>Insert Embedded</source>
-        <translation type="obsolete">Einen neuen eingebettenen Kompositum hinzufügen</translation>
-    </message>
-    <message>
-        <source>Insert new embedded component composition used to group set of components and manage it as single one</source>
-        <translation type="obsolete">Einen neuen eingebettenen Kompositum hinzufügen</translation>
-    </message>
-    <message>
-        <source>To &amp;Embedded Composition</source>
-        <translation type="obsolete">Zum &amp;eingebettenen Kompositum konvertieren</translation>
-    </message>
-    <message>
-        <source>To Embedded</source>
-        <translation type="obsolete">Zum eingebettenen Kompositum konvertieren</translation>
-    </message>
-    <message>
-        <source>Make embedded component composition from selected elements.
-It allows to group set of components and manage it as single one</source>
-        <translation type="obsolete">Eingebetteten Kompositum aus den ausgewählten Komponenten erzeugen.
-Dient der Umgruppierung mehrerer Komponenten zu einer einzelnen</translation>
-    </message>
-    <message>
-        <source>&amp;Export To Code...</source>
-        <translation type="obsolete">&amp;Quellcode generieren...</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation type="obsolete">Quellcode generieren</translation>
-    </message>
-    <message>
-        <source>Generates C++ code according to this registry</source>
-        <translation type="obsolete">Generiert C++ Quellcode aus der Registry</translation>
-    </message>
-    <message>
-        <source>&amp;Execute Registry</source>
-        <translation type="obsolete">&amp;Registry ausführen</translation>
-    </message>
-    <message>
-        <source>Start registry execution</source>
-        <translation type="obsolete">Startet Registryausführung</translation>
-    </message>
-    <message>
-        <source>&amp;Abort Registry</source>
-        <translation type="obsolete">&amp;Registryausführung abbrechen</translation>
-    </message>
-    <message>
-        <source>Abort registry execution</source>
-        <translation type="obsolete">Registryausführung abbrechen</translation>
-    </message>
-    <message>
-        <source>Some components could not be added</source>
-        <translation type="obsolete">Komponenten konnten nicht hinzugefügt werden</translation>
-    </message>
-    <message>
-        <source>&amp;Add Note</source>
-        <translation type="obsolete">&amp;Notiz hinzufügen</translation>
-    </message>
-    <message>
-        <source>Add a note to selected component</source>
-        <translation type="obsolete">Eine Notiz zu der ausgewählten Komponente hinzufügen</translation>
-    </message>
-    <message>
-        <source>&amp;Remove Note</source>
-        <translation type="obsolete">&amp;Notiz entfernen</translation>
-    </message>
-    <message>
-        <source>Remove the note from selected component</source>
-        <translation type="obsolete">Eine ausgewählte Notiz entfernen</translation>
-    </message>
-    <message>
-        <source>New component name</source>
-        <translation type="obsolete">Neuer Komponentenname</translation>
-    </message>
-    <message>
-        <source>New embedded component name</source>
-        <translation type="obsolete">Neuer Name für die einbebettete Komponente</translation>
-    </message>
-    <message>
-        <source>Embedded component could not be created!</source>
-        <translation type="obsolete">Eingebettete Komponente konnte nicht erzeugt werden!</translation>
-    </message>
-    <message>
-        <source>C++ code file (*.cpp)</source>
-        <translation type="obsolete">C++ Quellcode Dateien (*.cpp)</translation>
-    </message>
-    <message>
-        <source>Export registry to code</source>
-        <translation type="obsolete">Quellcode generieren</translation>
-    </message>
-    <message>
-        <source>Cannot export to file
-%1</source>
-        <translation type="obsolete">Quellcode konnte nicht
-in %1 generiert werden</translation>
-    </message>
-</context>
-<context>
     <name>ifile::CFileListProviderComp</name>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">Datei</translation>
-    </message>
-    <message>
-        <source>Modification time</source>
-        <translation type="obsolete">Zuletzt geändert</translation>
-    </message>
     <message>
         <source>Specified path &apos;%1&apos; is not a directory</source>
         <translation>Der angegebener Datepfad &apos;%1&apos; ist kein gültiges Verzeichnis</translation>
@@ -2227,7 +1459,7 @@ in %1 generiert werden</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2276,7 +1508,7 @@ in %1 generiert werden</translation>
     </message>
     <message>
         <source>Bitmap</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2364,69 +1596,6 @@ in %1 generiert werden</translation>
     </message>
 </context>
 <context>
-    <name>iqt2d::CSceneProviderGuiComp</name>
-    <message>
-        <source>&amp;View</source>
-        <translation type="obsolete">&amp;Ansicht</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Ansicht</translation>
-    </message>
-    <message>
-        <source>View menu</source>
-        <translation type="obsolete">View Menu</translation>
-    </message>
-    <message>
-        <source>&amp;Auto Fit</source>
-        <translation type="obsolete">&amp;Autoskalierung</translation>
-    </message>
-    <message>
-        <source>Auto Fit</source>
-        <translation type="obsolete">Autoskalierung</translation>
-    </message>
-    <message>
-        <source>Automatical fit contents to view area</source>
-        <translation type="obsolete">Automatische Anpassung der Anzeige an die Fenstergröße</translation>
-    </message>
-    <message>
-        <source>&amp;Fit Contents To View</source>
-        <translation type="obsolete">&amp;Anzeigeskalierung an Fenstergröße anpassen</translation>
-    </message>
-    <message>
-        <source>Fit contents To View</source>
-        <translation type="obsolete">Anzeigeskalierung an Fenstergröße anpassen</translation>
-    </message>
-    <message>
-        <source>Fit contents to view area</source>
-        <translation type="obsolete">Anzeigeskalierung an Fenstergröße anpassen</translation>
-    </message>
-    <message>
-        <source>&amp;Fit View To Contents</source>
-        <translation type="obsolete">&amp;Fenstergröße an die Anzeige anpassen</translation>
-    </message>
-    <message>
-        <source>Fit View To Contents</source>
-        <translation type="obsolete">Fenstergröße an die Anzeige anpassen</translation>
-    </message>
-    <message>
-        <source>Fit view area to contents</source>
-        <translation type="obsolete">Fenstergröße an die Anzeige anpassen</translation>
-    </message>
-    <message>
-        <source>&amp;Reset Zoom</source>
-        <translation type="obsolete">&amp;Skalierung zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Reset Zoom</source>
-        <translation type="obsolete">Skalierung zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Reset scene zoom</source>
-        <translation type="obsolete">Skalierung der Anzeige zurücksetzen</translation>
-    </message>
-</context>
-<context>
     <name>iqt2d::CTubePolylineParamsGuiComp</name>
     <message>
         <source>Left</source>
@@ -2435,60 +1604,6 @@ in %1 generiert werden</translation>
     <message>
         <source>Right</source>
         <translation>Rechts</translation>
-    </message>
-</context>
-<context>
-    <name>iqt::CBitmapLoaderComp</name>
-    <message>
-        <source>Object is not Qt image</source>
-        <translation type="obsolete">Das Objekt is nicht ein Qt-Bild</translation>
-    </message>
-    <message>
-        <source>Bad image file extension %1</source>
-        <translation type="obsolete">Bilddatei hat eine invalide Dateierweiterung %1</translation>
-    </message>
-    <message>
-        <source>Image file %1 not exist</source>
-        <translation type="obsolete">Bilddatei %1 existiert nicht</translation>
-    </message>
-    <message>
-        <source>Bad image format</source>
-        <translation type="obsolete">Invaides Bildformat</translation>
-    </message>
-    <message>
-        <source>Object is not supported image</source>
-        <translation type="obsolete">Das Objekt ist kein unterstütztes Bild</translation>
-    </message>
-    <message>
-        <source>Cannot load file %1</source>
-        <translation type="obsolete">Die Datei %1 konnte nicht geladen werden</translation>
-    </message>
-    <message>
-        <source>Cannot save file %1</source>
-        <translation type="obsolete">Die Datei %1 konnte nicht gespeichert werden</translation>
-    </message>
-</context>
-<context>
-    <name>iqt::CXslSerializerComp</name>
-    <message>
-        <source>Object is not serializable</source>
-        <translation type="obsolete">Objekt ist nicht serialisierbar</translation>
-    </message>
-    <message>
-        <source>File extension is not supported</source>
-        <translation type="obsolete">Dateierweiterung wird nicht unterstützt</translation>
-    </message>
-    <message>
-        <source>Archive version is not supported, possible lost of data</source>
-        <translation type="obsolete">Version des Dateiarchives wird nicht unterstützt, moglicher Datenverlust</translation>
-    </message>
-    <message>
-        <source>Cannot serialize object to file</source>
-        <translation type="obsolete">Das Objekt kann nicht in die Datei serialisiert werden</translation>
-    </message>
-    <message>
-        <source>Cannot load object from file </source>
-        <translation type="obsolete">Das Objekt kann nicht von der Datei geladen werden</translation>
     </message>
 </context>
 <context>
@@ -2578,18 +1693,6 @@ in %1 generiert werden</translation>
         <translation>Aktullen Dokumentpfad zu der Zwischenablage kopieren</translation>
     </message>
     <message>
-        <source>&amp;Print...</source>
-        <translation type="obsolete">&amp;Drucken...</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation type="obsolete">Drucken</translation>
-    </message>
-    <message>
-        <source>Prints current document</source>
-        <translation type="obsolete">Das aktuelle Dokument drucken</translation>
-    </message>
-    <message>
         <source>&amp;Quit</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -2623,19 +1726,7 @@ in %1 generiert werden</translation>
     </message>
     <message>
         <source>Redo last document changes</source>
-        <translation>Die letzten Änderungen wiederholen</translation>
-    </message>
-    <message>
-        <source>&amp;Full Screen</source>
-        <translation type="obsolete">&amp;Vollbild</translation>
-    </message>
-    <message>
-        <source>Full Screen</source>
-        <translation type="obsolete">Vollbild</translation>
-    </message>
-    <message>
-        <source>Turn full screen mode on/off</source>
-        <translation type="obsolete">Vollbildmodus ein- und ausschalten</translation>
+        <translation>Die letzten Änderungen wieder holen</translation>
     </message>
     <message>
         <source>&amp;Copy Document Path</source>
@@ -2644,10 +1735,6 @@ in %1 generiert werden</translation>
     <message>
         <source>Copy Path</source>
         <translation>Dokumentpfad kopieren</translation>
-    </message>
-    <message>
-        <source>Copy current document path to system clippboard</source>
-        <translation type="obsolete">Den Dateipfad zu dem aktuellen Dokument in die Zwischenablage kopieren</translation>
     </message>
     <message>
         <source>&amp;Open Containing Folder</source>
@@ -2671,20 +1758,6 @@ in %1 generiert werden</translation>
     <message>
         <source>&lt;no name&gt;</source>
         <translation>&lt;unbenannt&gt;</translation>
-    </message>
-    <message>
-        <source>All known documents (%1)
-</source>
-        <translation type="obsolete">Alle bekannten Dokumenttypen (%1)
-</translation>
-    </message>
-    <message>
-        <source>Open Files...</source>
-        <translation type="obsolete">Dateien öffnen...</translation>
-    </message>
-    <message>
-        <source>Save...</source>
-        <translation type="obsolete">Speichern...</translation>
     </message>
     <message>
         <source>Do you want to save your changes made in document
@@ -2785,7 +1858,7 @@ in %1 generiert werden</translation>
     </message>
     <message>
         <source>%1 &lt;%2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2851,7 +1924,7 @@ in %1 generiert werden</translation>
     <name>iqtgui::CImagePropertiesFrameComp</name>
     <message>
         <source>%1 px/mm</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2867,56 +1940,6 @@ in %1 generiert werden</translation>
     <message>
         <source>Depth</source>
         <translation>Tiefe</translation>
-    </message>
-</context>
-<context>
-    <name>iqtgui::CLogGuiComp</name>
-    <message>
-        <source>New informations available</source>
-        <translation type="obsolete">Neue Informationen vorhanden</translation>
-    </message>
-    <message>
-        <source>There are warnings</source>
-        <translation type="obsolete">Warnungen vorhanden</translation>
-    </message>
-    <message>
-        <source>There are errors</source>
-        <translation type="obsolete">Fehler vorhanden</translation>
-    </message>
-    <message>
-        <source>There are critical errors!</source>
-        <translation type="obsolete">Kritische Fehler aufgetreten!</translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation type="obsolete">Information</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Warnung</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Fehler</translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="obsolete">Löschen</translation>
-    </message>
-    <message>
-        <source>Export...</source>
-        <translation type="obsolete">Exportieren...</translation>
-    </message>
-</context>
-<context>
-    <name>iqtgui::CLoginGuiComp</name>
-    <message>
-        <source>Login Error</source>
-        <translation type="obsolete">Loginfehler</translation>
-    </message>
-    <message>
-        <source>Wrong password or user name</source>
-        <translation type="obsolete">Falscher Benutzername oder Passwort</translation>
     </message>
 </context>
 <context>
@@ -2944,18 +1967,6 @@ in %1 generiert werden</translation>
     <message>
         <source>Show and hide toolbars</source>
         <translation>Werzeugleiste ein- und ausblenden</translation>
-    </message>
-    <message>
-        <source>&amp;Settings</source>
-        <translation type="obsolete">&amp;Einstellungen</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="obsolete">Einstellungen</translation>
-    </message>
-    <message>
-        <source>Show global application settings</source>
-        <translation type="obsolete">Globale Applikationseinstellungen anzeigen</translation>
     </message>
     <message>
         <source>&amp;About...</source>
@@ -3003,7 +2014,19 @@ in %1 generiert werden</translation>
     </message>
     <message>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
+    <message>
+        <source>&amp;Help...</source>
+        <translation>&amp;Hilfe...</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <source>Shows application manual</source>
+        <translation>Benutzerhandbuch aufrufen</translation>
     </message>
 </context>
 <context>
@@ -3056,51 +2079,6 @@ in %1 generiert werden</translation>
     </message>
 </context>
 <context>
-    <name>iqtproc::CDocumentProcessingManagerCompBase</name>
-    <message>
-        <source>Processing</source>
-        <translation type="obsolete">Verarbeitung</translation>
-    </message>
-    <message>
-        <source>Document processing actions</source>
-        <translation type="obsolete">Dokumentverarbeitung Kommandos</translation>
-    </message>
-</context>
-<context>
-    <name>iqtproc::CProcessorControlGuiComp</name>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Fehler</translation>
-    </message>
-    <message>
-        <source>Cannot save the output</source>
-        <translation type="obsolete">Ergebnisse können nicht abgespeichert werden</translation>
-    </message>
-    <message>
-        <source>Cannot load parameters</source>
-        <translation type="obsolete">Parameter konnten nicht geladen werden</translation>
-    </message>
-    <message>
-        <source>Cannot save parameters</source>
-        <translation type="obsolete">Parameter konnten nicht abgespeichert werden</translation>
-    </message>
-</context>
-<context>
-    <name>iser::CBinaryReadArchiveBase</name>
-    <message>
-        <source>Bad tag begin code, is </source>
-        <translation type="obsolete">Invalider Tagcode, ist </translation>
-    </message>
-    <message>
-        <source>, should be </source>
-        <translation type="obsolete">, sollte sein</translation>
-    </message>
-    <message>
-        <source> (tag &apos;</source>
-        <translation type="obsolete">(Tagcode &apos;</translation>
-    </message>
-</context>
-<context>
     <name>iview::CConsoleGui</name>
     <message>
         <source>Zoom In</source>
@@ -3116,81 +2094,81 @@ in %1 generiert werden</translation>
     </message>
     <message>
         <source>Zoom to Fit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild fixieren</translation>
     </message>
     <message>
         <source>Objects Selection Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamtobjekt bearbeiten</translation>
     </message>
     <message>
         <source>Objects Modification Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Objektpunkte bearbeiten</translation>
     </message>
     <message>
         <source>Points Adding Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Objektpunkte hinzufügen</translation>
     </message>
     <message>
         <source>Points Removing Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Objektpunkte löschen</translation>
     </message>
     <message>
         <source>Flip current shape in its bounding box horizontally</source>
-        <translation type="unfinished"></translation>
+        <translation>Objekt horizontal um Objektachse spiegeln</translation>
     </message>
     <message>
         <source>Flip current shape in its bounding box vertically</source>
-        <translation type="unfinished"></translation>
+        <translation>Objekt vertikal um Objektachse spiegeln</translation>
     </message>
     <message>
         <source>Rotate current shape counterclockwise around its center</source>
-        <translation type="unfinished"></translation>
+        <translation>Objekt um 90° im Uhrzeigersinn drehen</translation>
     </message>
     <message>
         <source>Rotate current shape clockwise around its center</source>
-        <translation type="unfinished"></translation>
+        <translation>Objekt um 90° gegen Uhrzeigersinn drehen</translation>
     </message>
     <message>
         <source>Reverse current shape orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Polarität ändern</translation>
     </message>
     <message>
         <source>Show/Hide Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Gitter anzeigen</translation>
     </message>
     <message>
         <source>Show/Hide Ruler</source>
-        <translation type="unfinished"></translation>
+        <translation>Messer anzeigen</translation>
     </message>
     <message>
         <source>Show/Hide Millimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Millimeters/Pixels</translation>
     </message>
     <message>
         <source>Show/Hide Scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrollbars anzeigen</translation>
     </message>
 </context>
 <context>
     <name>iview::CViewport</name>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>[%1, %2] %3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>, </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>iwidgets::CCheckableComboBox</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">Keine</translation>
+        <translation>Keine</translation>
     </message>
 </context>
 </TS>

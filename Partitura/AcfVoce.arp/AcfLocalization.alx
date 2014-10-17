@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          2934
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1205
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264194
+          3621
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -40,28 +40,28 @@
   <PositionMap count="2">
     <Element>
       <ComponentName>
-        QtLocalization
+        AcfLocalization
       </ComponentName>
       <X>
         575
       </X>
-      <X>
-        225
-      </X>
+      <Y>
+        375
+      </Y>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        AcfLocalization
+        QtLocalization
       </ComponentName>
       <X>
         575
       </X>
-      <X>
-        375
-      </X>
+      <Y>
+        225
+      </Y>
       <Note>
         
       </Note>
