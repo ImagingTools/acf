@@ -1,29 +1,7 @@
 #include "iqtprm/CExtComposedParamsSetGuiComp.h"
 
 
-// Qt includes
-#include <QtCore/QtGlobal>
-#if QT_VERSION >= 0x050000
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QToolBox>
-#include <QtWidgets/QTabWidget>
-#include <QtWidgets/QGroupBox>
-#include <QtWidgets/QStackedWidget>
-#else
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QToolBox>
-#include <QtGui/QTabWidget>
-#include <QtGui/QGroupBox>
-#include <QtGui/QStackedWidget>
-#endif
-
 // ACF includes
-#include "imod/IModel.h"
-#include "imod/IObserver.h"
 #include "iqt/CSignalBlocker.h"
 #include "iview/IShapeView.h"
 #include "iqt2d/IViewProvider.h"
@@ -41,7 +19,7 @@ void CExtComposedParamsSetGuiComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 
-	int editorsCount = m_editorsCompPtr.GetCount();
+	int editorsCount = qMin(GetPagesCount(), m_editorsCompPtr.GetCount());
 	for (int i = 0; i < editorsCount; ++i){
 		iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(i);
 		if ((guiPtr == NULL) || !guiPtr->IsGuiCreated()){
@@ -64,7 +42,7 @@ void CExtComposedParamsSetGuiComp::UpdateEditor(const istd::IChangeable::ChangeS
 	Q_ASSERT(IsGuiCreated());
 
 	if (!changeSet.Contains(istd::IChangeable::CF_DELEGATED)){
-		int editorsCount = m_editorsCompPtr.GetCount();
+		int editorsCount = qMin(GetPagesCount(), m_editorsCompPtr.GetCount());
 		for (int i = 0; i < editorsCount; ++i){
 			iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(i);
 			if ((guiPtr == NULL) || !guiPtr->IsGuiCreated()){
@@ -88,11 +66,6 @@ void CExtComposedParamsSetGuiComp::SetReadOnly(bool state)
 {
 	int editorsCount = m_editorsCompPtr.GetCount();
 	for (int i = 0; i < editorsCount; ++i){
-		iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(i);
-		if ((guiPtr == NULL) || !guiPtr->IsGuiCreated()){
-			continue;
-		}
-
 		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
 		if (m_connectedEditorsMap.contains(editorPtr)){
 			Q_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
