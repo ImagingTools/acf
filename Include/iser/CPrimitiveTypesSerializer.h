@@ -200,8 +200,17 @@ bool CPrimitiveTypesSerializer::SerializeEnum(
 		
 		if (retVal && !archive.IsStoring()){
 			Q_ASSERT(foundEnumMeta.isValid());
-
-			enumValue = EnumType(foundEnumMeta.keyToValue(enumValueAsText.constData(), &retVal));		
+#if QT_VERSION >= 0x050000
+			enumValue = EnumType(foundEnumMeta.keyToValue(enumValueAsText.constData(), &retVal));
+#else
+			int value = foundEnumMeta.keyToValue(enumValueAsText.constData());
+			if (value >= 0){
+				enumValue = EnumType(value);
+			}
+			else{
+				return false;
+			}
+#endif
 		}
 	}
 	else{
@@ -217,6 +226,10 @@ bool CPrimitiveTypesSerializer::SerializeEnum(
 
 	return retVal;
 }
+
+
+#define I_SERIALIZE_FLAG(Enum, archive, flag) iser::CPrimitiveTypesSerializer::SerializeEnum<int, Enum##ToString, Enum##FromString>(archive, flag);
+#define I_SERIALIZE_ENUM(Enum, archive, enumValue) iser::CPrimitiveTypesSerializer::SerializeEnum<Enum, ToString, FromString>(archive, enumValue);
 
 
 } // namespace iser
