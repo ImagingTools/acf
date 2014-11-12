@@ -162,6 +162,10 @@ iattr::IAttributesProvider::AttributeIds CBaseComponentStaticInfo::GetAttributeM
 {
 	iattr::IAttributesProvider::AttributeIds retVal;
 
+	if (m_baseComponentPtr != NULL){
+		retVal = m_baseComponentPtr->GetAttributeMetaIds();
+	}
+
 	for (		AttributeInfos::const_iterator iter = m_attributeInfos.begin();
 				iter != m_attributeInfos.end();
 				++iter){
