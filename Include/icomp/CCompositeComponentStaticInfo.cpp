@@ -116,10 +116,9 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 		}
 
 		const IRegistryElement& element = *elementInfoPtr->elementPtr;
-		IRegistryElement::Ids attributeIds = element.GetAttributeIds();
-
-		for (		IRegistryElement::Ids::iterator attrIter = attributeIds.begin();
-					attrIter != attributeIds.end();
+		iattr::IAttributesProvider::AttributeIds attributeIds = element.GetAttributeIds();
+		for (		iattr::IAttributesProvider::AttributeIds::ConstIterator attrIter = attributeIds.constBegin();
+					attrIter != attributeIds.constEnd();
 					++attrIter){
 			const QByteArray& attrId = *attrIter;
 			const IRegistryElement::AttributeInfo* attrInfoPtr = element.GetAttributeInfo(attrId);
@@ -253,7 +252,17 @@ CCompositeComponentStaticInfo::AttrAsOptionalDelegator::AttrAsOptionalDelegator(
 }
 
 
-const QByteArray& CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAttributeDescription() const
+// reimplemented (icomp::IAttributeStaticInfo)
+
+IElementStaticInfo::Ids CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const
+{
+	return m_slave.GetRelatedMetaIds(metaGroupId, flags, flagsMask);
+}
+
+
+// reimplemented (iattr::IAttributeMetaInfo)
+
+QString CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAttributeDescription() const
 {
 	return m_slave.GetAttributeDescription();
 }
@@ -265,15 +274,9 @@ const iser::IObject* CCompositeComponentStaticInfo::AttrAsOptionalDelegator::Get
 }
 
 
-QByteArray CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAttributeTypeName() const
+QByteArray CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAttributeTypeId() const
 {
-	return m_slave.GetAttributeTypeName();
-}
-
-
-IElementStaticInfo::Ids CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const
-{
-	return m_slave.GetRelatedMetaIds(metaGroupId, flags, flagsMask);
+	return m_slave.GetAttributeTypeId();
 }
 
 

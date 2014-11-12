@@ -1099,7 +1099,7 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 
 	if (componentInfo.elementPtr.IsValid()){
 		icomp::IRegistryElement& component = *componentInfo.elementPtr;
-		icomp::IRegistryElement::Ids attributeIds = component.GetAttributeIds();
+		iattr::IAttributesProvider::AttributeIds attributeIds = component.GetAttributeIds();
 
 		quint32 componentFlags = component.GetElementFlags();
 
@@ -1132,8 +1132,8 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 					stream << "\n";
 				}
 
-				for (		icomp::IRegistryElement::Ids::const_iterator attributeIter = attributeIds.begin();
-							attributeIter != attributeIds.end();
+				for (		iattr::IAttributesProvider::AttributeIds::ConstIterator attributeIter = attributeIds.constBegin();
+							attributeIter != attributeIds.constEnd();
 							++attributeIter){
 					const QByteArray& attributeId = *attributeIter;
 
@@ -1295,21 +1295,21 @@ bool CRegistryCodeSaverComp::WriteComponentTranslation(
 {
 	if (componentInfo.elementPtr.IsValid()){
 		icomp::IRegistryElement& component = *componentInfo.elementPtr;
-		icomp::IRegistryElement::Ids attributeIds = component.GetAttributeIds();
+		iattr::IAttributesProvider::AttributeIds attributeIds = component.GetAttributeIds();
 
 		quint32 componentFlags = component.GetElementFlags();
 
 		if (!attributeIds.isEmpty() || (componentFlags != 0)){
 			if (!attributeIds.isEmpty()){
-				for (		icomp::IRegistryElement::Ids::const_iterator attributeIter = attributeIds.begin();
-							attributeIter != attributeIds.end();
+				for (		iattr::IAttributesProvider::AttributeIds::ConstIterator attributeIter = attributeIds.constBegin();
+							attributeIter != attributeIds.constEnd();
 							++attributeIter){
 					const QByteArray& attributeId = *attributeIter;
 
 					const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = component.GetAttributeInfo(attributeId);
 
 					if ((attrInfoPtr != NULL) && attrInfoPtr->attributePtr.IsValid()){
-						const icomp::CStringAttribute* stringAttribute = dynamic_cast<const icomp::CStringAttribute*>(attrInfoPtr->attributePtr.GetPtr());
+						const iattr::CStringAttribute* stringAttribute = dynamic_cast<const iattr::CStringAttribute*>(attrInfoPtr->attributePtr.GetPtr());
 						if (stringAttribute != NULL){
 							if (!translationFound){
 								NextLine(stream);
@@ -1325,7 +1325,7 @@ bool CRegistryCodeSaverComp::WriteComponentTranslation(
 							continue;
 						}
 
-						const icomp::CStringListAttribute* stringAttributePtr = dynamic_cast<const icomp::CStringListAttribute*>(attrInfoPtr->attributePtr.GetPtr());
+						const iattr::CStringListAttribute* stringAttributePtr = dynamic_cast<const iattr::CStringListAttribute*>(attrInfoPtr->attributePtr.GetPtr());
 						if (stringAttributePtr != NULL){
 							for (int index = 0; index < stringAttributePtr->GetValuesCount(); index++){
 								if (!translationFound){
@@ -1482,39 +1482,39 @@ bool CRegistryCodeSaverComp::GetAttributeValue(
 			QByteArray& valueString,
 			QByteArray& typeName) const
 {
-	const icomp::CBooleanAttribute* boolAttribute = dynamic_cast<const icomp::CBooleanAttribute*>(&attribute);
+	const iattr::CBooleanAttribute* boolAttribute = dynamic_cast<const iattr::CBooleanAttribute*>(&attribute);
 	if (boolAttribute != NULL){
 		valueString = boolAttribute->GetValue()? "true": "false";
-		typeName = "icomp::CBooleanAttribute";
+		typeName = "iattr::CBooleanAttribute";
 
 		return true;
 	}
 
-	const icomp::CRealAttribute* doubleAttribute = dynamic_cast<const icomp::CRealAttribute*>(&attribute);
+	const iattr::CRealAttribute* doubleAttribute = dynamic_cast<const iattr::CRealAttribute*>(&attribute);
 	if (doubleAttribute != NULL){
 		valueString = QString("%1").arg(doubleAttribute->GetValue()).toLocal8Bit();
-		typeName = "icomp::CRealAttribute";
+		typeName = "iattr::CRealAttribute";
 
 		return true;
 	}
 
-	const icomp::CIntegerAttribute* intAttribute = dynamic_cast<const icomp::CIntegerAttribute*>(&attribute);
+	const iattr::CIntegerAttribute* intAttribute = dynamic_cast<const iattr::CIntegerAttribute*>(&attribute);
 	if (intAttribute != NULL){
 		valueString = QString("%1").arg(intAttribute->GetValue()).toLocal8Bit();
-		typeName = "icomp::CIntegerAttribute";
+		typeName = "iattr::CIntegerAttribute";
 
 		return true;
 	}
 
-	const icomp::CStringAttribute* stringAttribute = dynamic_cast<const icomp::CStringAttribute*>(&attribute);
+	const iattr::CStringAttribute* stringAttribute = dynamic_cast<const iattr::CStringAttribute*>(&attribute);
 	if (stringAttribute != NULL){
 		valueString = "QT_TRANSLATE_NOOP(\"Attribute\", " + GetStringLiteral(stringAttribute->GetValue()) + ")";
-		typeName = "icomp::CStringAttribute";
+		typeName = "iattr::CStringAttribute";
 
 		return true;
 	}
 
-	const icomp::CIdAttribute* idAttributePtr = dynamic_cast<const icomp::CIdAttribute*>(&attribute);
+	const iattr::CIdAttribute* idAttributePtr = dynamic_cast<const iattr::CIdAttribute*>(&attribute);
 	if (idAttributePtr != NULL){
 		valueString = GetIdValueLiteral(idAttributePtr->GetValue());
 
@@ -1532,7 +1532,7 @@ bool CRegistryCodeSaverComp::GetAttributeValue(
 			return true;
 		}
 
-		typeName = "icomp::CIdAttribute";
+		typeName = "iattr::CIdAttribute";
 
 		return true;
 	}
@@ -1548,51 +1548,51 @@ bool CRegistryCodeSaverComp::GetMultiAttributeValue(
 {
 	valueStrings.clear();
 
-	const icomp::CBooleanListAttribute* boolAttribute = dynamic_cast<const icomp::CBooleanListAttribute*>(&attribute);
+	const iattr::CBooleanListAttribute* boolAttribute = dynamic_cast<const iattr::CBooleanListAttribute*>(&attribute);
 	if (boolAttribute != NULL){
 		for (int index = 0; index < boolAttribute->GetValuesCount(); index++){
 			valueStrings.push_back(boolAttribute->GetValueAt(index)? "true": "false");
 		}
 
-		typeName = "icomp::CBooleanListAttribute";
+		typeName = "iattr::CBooleanListAttribute";
 
 		return true;
 	}
 
-	const icomp::CIntegerListAttribute* intAttribute = dynamic_cast<const icomp::CIntegerListAttribute*>(&attribute);
+	const iattr::CIntegerListAttribute* intAttribute = dynamic_cast<const iattr::CIntegerListAttribute*>(&attribute);
 	if (intAttribute != NULL){
 		for (int index = 0; index < intAttribute->GetValuesCount(); index++){
 			valueStrings.push_back(QString("%1").arg(intAttribute->GetValueAt(index)).toLocal8Bit());
 		}
 
-		typeName = "icomp::CIntegerListAttribute";
+		typeName = "iattr::CIntegerListAttribute";
 
 		return true;
 	}
 
-	const icomp::CRealListAttribute* doubleAttribute = dynamic_cast<const icomp::CRealListAttribute*>(&attribute);
+	const iattr::CRealListAttribute* doubleAttribute = dynamic_cast<const iattr::CRealListAttribute*>(&attribute);
 	if (doubleAttribute != NULL){
 		for (int index = 0; index < doubleAttribute->GetValuesCount(); index++){
 			valueStrings.push_back(QString("%1").arg(doubleAttribute->GetValueAt(index)).toLocal8Bit());
 		}
 
-		typeName = "icomp::CRealListAttribute";
+		typeName = "iattr::CRealListAttribute";
 
 		return true;
 	}
 
-	const icomp::CStringListAttribute* stringAttributePtr = dynamic_cast<const icomp::CStringListAttribute*>(&attribute);
+	const iattr::CStringListAttribute* stringAttributePtr = dynamic_cast<const iattr::CStringListAttribute*>(&attribute);
 	if (stringAttributePtr != NULL){
 		for (int index = 0; index < stringAttributePtr->GetValuesCount(); index++){
 			valueStrings.push_back("QT_TRANSLATE_NOOP(\"Attribute\", " + GetStringLiteral(stringAttributePtr->GetValueAt(index)) + ")");
 		}
 
-		typeName = "icomp::CStringListAttribute";
+		typeName = "iattr::CStringListAttribute";
 
 		return true;
 	}
 
-	const icomp::CIdListAttribute* idAttributePtr = dynamic_cast<const icomp::CIdListAttribute*>(&attribute);
+	const iattr::CIdListAttribute* idAttributePtr = dynamic_cast<const iattr::CIdListAttribute*>(&attribute);
 	if (idAttributePtr != NULL){
 		for (int index = 0; index < idAttributePtr->GetValuesCount(); index++){
 			valueStrings.push_back(GetIdValueLiteral(idAttributePtr->GetValueAt(index)));
@@ -1612,7 +1612,7 @@ bool CRegistryCodeSaverComp::GetMultiAttributeValue(
 			return true;
 		}
 
-		typeName = "icomp::CIdListAttribute";
+		typeName = "iattr::CIdListAttribute";
 
 		return true;
 	}

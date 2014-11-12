@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "istd/TIFactory.h"
 #include "iser/ISerializable.h"
 
 
@@ -30,6 +31,11 @@ inline QByteArray IObject::GetFactoryId() const
 
 	return emptyId;
 }
+
+
+// public typedefs
+
+typedef istd::TIFactory<IObject> IObjectFactory;
 
 
 } // namespace iser

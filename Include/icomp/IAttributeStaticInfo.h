@@ -7,42 +7,27 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
-
 #include "iser/IObject.h"
-
-#include "icomp/IComponentStaticInfo.h"
+#include "iattr/IAttributeMetaInfo.h"
+#include "icomp/IElementStaticInfo.h"
 
 
 namespace icomp
 {
 
 
-class IAttributeStaticInfo: virtual public istd::IPolymorphic
+/**
+	Describe component attribute static information.
+*/
+class IAttributeStaticInfo: virtual public iattr::IAttributeMetaInfo
 {
 public:
+	/**
+		Flags signalizing set of attribute properties.
+		Extension of \c iattr::IAttributeMetaInfo::AttributeFlags.
+	*/
 	enum AttributeFlags
 	{
-		/**
-			Active if user declared this attribute as obligatory.
-		*/
-		AF_OBLIGATORY = 1 << 0,
-		/**
-			Active if this attribute can be unset (null).
-			Please note, that sometimes obligatory attributes can be nullable - for example for simple types default value can be taken.
-		*/
-		AF_NULLABLE	= 1 << 1,
-		/**
-			Attribute is single type.
-		*/
-		AF_SINGLE = 1 << 2,
-		/**
-			Attribute is multiple type.
-		*/
-		AF_MULTIPLE = 1 << 3,
-		/**
-			Attribute is simple value type.
-		*/
-		AF_VALUE = 1 << 4,
 		/**
 			Attribute is reference to another component.
 		*/
@@ -54,36 +39,15 @@ public:
 	};
 
 	/**
-		Get description of this attribute.
-	 */
-	virtual const QByteArray& GetAttributeDescription() const = 0;
-
-	/**
-		Get default attribute value.
-		\return	pointer to default attribute value, if set. Elsewhere it returns NULL.
-	*/
-	virtual const iser::IObject* GetAttributeDefaultValue() const = 0;
-
-	/**
-		Return attribute type description.
-	 */
-	virtual QByteArray GetAttributeTypeName() const = 0;
-
-	/**
 		Get related meta information.
 		This information in normally used by references and factories to provide information about related interfaces.
 
 		\param	metaGroupId	ID of data group of asked meta ID's. @sa icomp::IComponentStaticInfo::MetaGroupId
-		\param	flags		flag value of element.
+		\param	flags		flag value of element. \sa iattr::IAttributeMetaInfo::AttributeFlags.
 		\param	flagsMask	mask value of element.
 							Each element has flags. Only elements where element_flag & flagsMask == flags will be returned.
 	*/
 	virtual IElementStaticInfo::Ids GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const = 0;
-
-	/**
-		Get flags of this attribute.
-	 */
-	virtual int GetAttributeFlags() const = 0;
 };
 
 

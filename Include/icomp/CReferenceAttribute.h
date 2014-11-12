@@ -6,7 +6,8 @@
 #include <QtCore/QByteArray>
 
 // ACF includes
-#include "icomp/TAttribute.h"
+#include "iattr/TAttribute.h"
+#include "icomp/IAttributeStaticInfo.h"
 
 
 namespace icomp
@@ -16,15 +17,15 @@ namespace icomp
 /**
 	Special attribute used to store referenced component ID.
 */
-class CReferenceAttribute: public CIdAttribute
+class CReferenceAttribute: public iattr::CIdAttribute
 {
 public:
-	typedef CIdAttribute BaseClass;
+	typedef iattr::CIdAttribute BaseClass;
 
 	enum DefaultAttributeFlags
 	{
-		DAF_OBLIGATORY = IAttributeStaticInfo::AF_OBLIGATORY | IAttributeStaticInfo::AF_SINGLE | IAttributeStaticInfo::AF_REFERENCE,
-		DAF_OPTIONAL = IAttributeStaticInfo::AF_NULLABLE | IAttributeStaticInfo::AF_SINGLE | IAttributeStaticInfo::AF_REFERENCE
+		DAF_OBLIGATORY = iattr::IAttributeMetaInfo::AF_OBLIGATORY | iattr::IAttributeMetaInfo::AF_SINGLE | IAttributeStaticInfo::AF_REFERENCE,
+		DAF_OPTIONAL = iattr::IAttributeMetaInfo::AF_NULLABLE | iattr::IAttributeMetaInfo::AF_SINGLE | IAttributeStaticInfo::AF_REFERENCE
 	};
 
 	CReferenceAttribute();

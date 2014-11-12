@@ -57,6 +57,22 @@ const IElementStaticInfo* CComponentStaticInfoBase::GetSubelementInfo(const QByt
 }
 
 
+//	reimplemented (iattr::IAttributesMetaInfoProvider)
+
+iattr::IAttributesProvider::AttributeIds CComponentStaticInfoBase::GetAttributeMetaIds() const
+{
+	iattr::IAttributesProvider::AttributeIds retVal;
+
+	return retVal;
+}
+
+
+const iattr::IAttributeMetaInfo* CComponentStaticInfoBase::GetAttributeMetaInfo(const QByteArray& attributeId) const
+{
+	return NULL;
+}
+
+
 } // namespace icomp
 
 

@@ -9,9 +9,9 @@
 // ACF includes
 #include "istd/istd.h"
 #include "istd/TDelPtr.h"
-
 #include "iser/ISerializable.h"
 #include "iser/IObject.h"
+#include "iattr/IAttributesProvider.h"
 
 
 namespace icomp
@@ -27,10 +27,11 @@ class IComponentStaticInfo;
 
 	\ingroup ComponentConcept
 */
-class IRegistryElement: virtual public iser::ISerializable
+class IRegistryElement:
+			virtual public iattr::IAttributesProvider,
+			virtual public iser::ISerializable
 {
 public:
-	typedef QSet< QByteArray> Ids;
 	typedef istd::TDelPtr<iser::IObject> AttributePtr;
 
 	enum ChangeFlags
@@ -70,11 +71,6 @@ public:
 		\sa	ElementFlags
 	*/
 	virtual void SetElementFlags(quint32 flags) = 0;
-
-	/**
-		Get ID list of existing attributes.
-	*/
-	virtual Ids GetAttributeIds() const = 0;
 
 	/**
 		Insert new attribute info object to collection of attributes.

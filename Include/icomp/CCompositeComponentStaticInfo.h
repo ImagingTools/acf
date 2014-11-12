@@ -56,10 +56,13 @@ protected:
 					const IAttributeStaticInfo* slavePtr,
 					const iser::IObject* defaultValuePtr);
 
-		virtual const QByteArray& GetAttributeDescription() const;
-		virtual const iser::IObject* GetAttributeDefaultValue() const;
-		virtual QByteArray GetAttributeTypeName() const;
+		// reimplemented (icomp::IAttributeStaticInfo)
 		virtual IElementStaticInfo::Ids GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const;
+
+		// reimplemented (iattr::IAttributeMetaInfo)
+		virtual QString GetAttributeDescription() const;
+		virtual const iser::IObject* GetAttributeDefaultValue() const;
+		virtual QByteArray GetAttributeTypeId() const;
 		virtual int GetAttributeFlags() const;
 
 	private:

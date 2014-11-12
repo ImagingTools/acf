@@ -1,5 +1,5 @@
-#ifndef icomp_TAttribute_included
-#define icomp_TAttribute_included
+#ifndef iattr_TAttribute_included
+#define iattr_TAttribute_included
 
 
 // ACF includes
@@ -9,10 +9,10 @@
 #include "iser/IObject.h"
 #include "iser/CArchiveTag.h"
 #include "iser/TCopySerializedWrap.h"
-#include "icomp/IAttributeStaticInfo.h"
+#include "iattr/IAttributeMetaInfo.h"
 
 
-namespace icomp
+namespace iattr
 {
 
 
@@ -30,8 +30,8 @@ public:
 
 	enum DefaultAttributeFlags
 	{
-		DAF_OBLIGATORY = IAttributeStaticInfo::AF_OBLIGATORY | IAttributeStaticInfo::AF_NULLABLE | IAttributeStaticInfo::AF_SINGLE | IAttributeStaticInfo::AF_VALUE,
-		DAF_OPTIONAL = IAttributeStaticInfo::AF_NULLABLE | IAttributeStaticInfo::AF_SINGLE | IAttributeStaticInfo::AF_VALUE
+		DAF_OBLIGATORY = IAttributeMetaInfo::AF_OBLIGATORY | IAttributeMetaInfo::AF_NULLABLE | IAttributeMetaInfo::AF_SINGLE | IAttributeMetaInfo::AF_VALUE,
+		DAF_OPTIONAL = IAttributeMetaInfo::AF_NULLABLE | IAttributeMetaInfo::AF_SINGLE | IAttributeMetaInfo::AF_VALUE
 	};
 
 	TAttribute();
@@ -177,9 +177,9 @@ typedef TAttribute<QString> CStringAttribute;
 typedef TAttribute<QByteArray> CIdAttribute;
 
 
-} // namespace icomp
+} // namespace iattr
 
 
-#endif // !icomp_TAttribute_included
+#endif // !iattr_TAttribute_included
 
 

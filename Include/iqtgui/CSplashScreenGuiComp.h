@@ -11,10 +11,8 @@
 #endif
 
 // ACF includes
+#include "iattr/TAttribute.h"
 #include "ibase/IApplicationInfo.h"
-
-#include "icomp/TAttribute.h"
-
 #include "iqtgui/TDesignerGuiCompBase.h"
 
 #include "GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h"

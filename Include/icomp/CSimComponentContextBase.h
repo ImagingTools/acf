@@ -9,12 +9,11 @@
 // ACF includes
 #include "istd/TIFactory.h"
 #include "istd/CIdManipBase.h"
-
+#include "iattr/TAttribute.h"
+#include "iattr/TMultiAttribute.h"
 #include "icomp/IComponent.h"
 #include "icomp/IComponentContext.h"
 #include "icomp/IComponentStaticInfo.h"
-#include "icomp/TAttribute.h"
-#include "icomp/TMultiAttribute.h"
 #include "icomp/CRegistryElement.h"
 
 
@@ -84,9 +83,9 @@ public:
 	template <class Attribute>
 	bool SetSingleAttr(const QByteArray& attributeId, const Attribute& attribute)
 	{
-		Q_ASSERT(IsAttributeTypeCorrect<TAttribute<Attribute> >(attributeId));
+		Q_ASSERT(IsAttributeTypeCorrect<iattr::TAttribute<Attribute> >(attributeId));
 
-		return SetAttr(attributeId, new TAttribute<Attribute>(attribute));
+		return SetAttr(attributeId, new iattr::TAttribute<Attribute>(attribute));
 	}
 
 	/**
@@ -97,23 +96,23 @@ public:
 	template <class Attribute>
 	bool InsertMultiAttr(const QByteArray& attributeId, const Attribute& attribute)
 	{
-		Q_ASSERT(IsAttributeTypeCorrect<TMultiAttribute<Attribute> >(attributeId));
+		Q_ASSERT(IsAttributeTypeCorrect<iattr::TMultiAttribute<Attribute> >(attributeId));
 
-		TMultiAttribute<Attribute>* multiAttrPtr = NULL;
+		iattr::TMultiAttribute<Attribute>* multiAttrPtr = NULL;
 
 		const IRegistryElement::AttributeInfo* existingInfoPtr = m_registryElement.GetAttributeInfo(attributeId);
 		if (existingInfoPtr != NULL){
-			multiAttrPtr = dynamic_cast<TMultiAttribute<Attribute>*>(existingInfoPtr->attributePtr.GetPtr());
+			multiAttrPtr = dynamic_cast<iattr::TMultiAttribute<Attribute>*>(existingInfoPtr->attributePtr.GetPtr());
 		}
 		else{
-			IRegistryElement::AttributeInfo* newInfoPtr = m_registryElement.InsertAttributeInfo(attributeId, istd::CClassInfo::GetName<TMultiAttribute<Attribute> >());
+			IRegistryElement::AttributeInfo* newInfoPtr = m_registryElement.InsertAttributeInfo(attributeId, istd::CClassInfo::GetName<iattr::TMultiAttribute<Attribute> >());
 			if (newInfoPtr != NULL){
 				IRegistryElement::AttributePtr& attributePtr = newInfoPtr->attributePtr;
 				if (!attributePtr.IsValid()){
-					attributePtr.SetPtr(new TMultiAttribute<Attribute>);
+					attributePtr.SetPtr(new iattr::TMultiAttribute<Attribute>);
 				}
 
-				multiAttrPtr = dynamic_cast<TMultiAttribute<Attribute>*>(attributePtr.GetPtr());
+				multiAttrPtr = dynamic_cast<iattr::TMultiAttribute<Attribute>*>(attributePtr.GetPtr());
 			}
 		}
 
@@ -158,7 +157,7 @@ bool CSimComponentContextBase::IsAttributeTypeCorrect(const QByteArray& attribut
 {
 	const IAttributeStaticInfo* attributeInfoPtr = m_metaInfo.GetAttributeInfo(attributeId);
 	if (attributeInfoPtr != NULL){
-		QByteArray attributeType = attributeInfoPtr->GetAttributeTypeName();
+		QByteArray attributeType = attributeInfoPtr->GetAttributeTypeId();
 
 		return attributeType == AttrType::GetTypeName();
 	}

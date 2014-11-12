@@ -27,6 +27,10 @@ public:
 	//	reimplemented (icomp::IElementStaticInfo)
 	virtual Ids GetMetaIds(int metaGroupId) const;
 	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const;
+
+	//	reimplemented (iattr::IAttributesMetaInfoProvider)
+	virtual iattr::IAttributesProvider::AttributeIds GetAttributeMetaIds() const;
+	virtual const iattr::IAttributeMetaInfo* GetAttributeMetaInfo(const QByteArray& attributeId) const;
 };
 
 

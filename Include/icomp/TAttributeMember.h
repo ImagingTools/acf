@@ -6,10 +6,10 @@
 #include <QtCore/QCoreApplication>
 
 // ACF includes
+#include "iattr/TAttribute.h"
 #include "icomp/ICompositeComponent.h"
 #include "icomp/IComponentContext.h"
 #include "icomp/IRealAttributeStaticInfo.h"
-#include "icomp/TAttribute.h"
 #include "icomp/CComponentContext.h"
 
 
@@ -233,12 +233,12 @@ class TAttributeMember: public TAttributeMemberBase<Attribute>
 
 
 template <>
-class TAttributeMember< TAttribute<QString> >: public TAttributeMemberBase< TAttribute<QString> >
+class TAttributeMember< iattr::TAttribute<QString> >: public TAttributeMemberBase< iattr::TAttribute<QString> >
 {
 public:
 	QString operator*() const
 	{
-		return QCoreApplication::translate("Attribute", TAttributeMemberBase< TAttribute<QString> >::operator*().toUtf8());
+		return QCoreApplication::translate("Attribute", TAttributeMemberBase< iattr::TAttribute<QString> >::operator*().toUtf8());
 	}
 };
 

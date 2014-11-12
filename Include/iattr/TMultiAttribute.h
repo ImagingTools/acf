@@ -1,5 +1,5 @@
-#ifndef icomp_TMultiAttribute_included
-#define icomp_TMultiAttribute_included
+#ifndef iattr_TMultiAttribute_included
+#define iattr_TMultiAttribute_included
 
 
 // Qt includes
@@ -12,10 +12,10 @@
 #include "iser/IObject.h"
 #include "iser/CArchiveTag.h"
 #include "iser/TCopySerializedWrap.h"
-#include "icomp/IAttributeStaticInfo.h"
+#include "iattr/IAttributeMetaInfo.h"
 
 
-namespace icomp
+namespace iattr
 {
 
 
@@ -33,8 +33,8 @@ public:
 
 	enum DefaultAttributeFlags
 	{
-		DAF_OBLIGATORY = IAttributeStaticInfo::AF_OBLIGATORY | IAttributeStaticInfo::AF_NULLABLE | IAttributeStaticInfo::AF_MULTIPLE | IAttributeStaticInfo::AF_VALUE,
-		DAF_OPTIONAL = IAttributeStaticInfo::AF_NULLABLE | IAttributeStaticInfo::AF_MULTIPLE | IAttributeStaticInfo::AF_VALUE
+		DAF_OBLIGATORY = IAttributeMetaInfo::AF_OBLIGATORY | IAttributeMetaInfo::AF_NULLABLE | IAttributeMetaInfo::AF_MULTIPLE | IAttributeMetaInfo::AF_VALUE,
+		DAF_OPTIONAL = IAttributeMetaInfo::AF_NULLABLE | IAttributeMetaInfo::AF_MULTIPLE | IAttributeMetaInfo::AF_VALUE
 	};
 
 	TMultiAttribute();
@@ -217,7 +217,7 @@ template <typename Value>
 QByteArray TMultiAttribute<Value>::GetTypeName()
 {
 	if (typeid(Value) == typeid(QByteArray)){
-		return "icomp::TMultiAttribute<QByteArray>";
+		return "iattr::TMultiAttribute<QByteArray>";
 	}
 
 	return istd::CClassInfo::GetName<TMultiAttribute<Value> >();
@@ -268,9 +268,9 @@ typedef TMultiAttribute<QString> CStringListAttribute;
 typedef TMultiAttribute<QByteArray> CIdListAttribute;
 
 
-} // namespace icomp
+} // namespace iattr
 
 
-#endif // !icomp_TMultiAttribute_included
+#endif // !iattr_TMultiAttribute_included
 
 

@@ -2,14 +2,14 @@
 #define icomp_CComponentBase_included
 
 
+// ACF includes
 #include "istd/CClassInfo.h"
-
+#include "iattr/TAttribute.h"
+#include "iattr/TMultiAttribute.h"
 #include "icomp/IComponent.h"
 #include "icomp/ICompositeComponent.h"
 #include "icomp/IRealComponentStaticInfo.h"
 #include "icomp/TInterfaceRegistrator.h"
-#include "icomp/TAttribute.h"
-#include "icomp/TMultiAttribute.h"
 #include "icomp/TAttributeMember.h"
 #include "icomp/TMultiAttributeMember.h"
 #include "icomp/TReferenceMember.h"
@@ -210,7 +210,7 @@ inline bool CComponentBase::IsComponentActive() const
 	\ingroup ComponentConcept
 */
 #define I_ATTR(attrType, member)\
-	I_USER_ATTR(icomp::TAttribute< attrType >, member)
+	I_USER_ATTR(iattr::TAttribute< attrType >, member)
 
 /**
 	Declare multiple user type attribute member.
@@ -231,7 +231,7 @@ inline bool CComponentBase::IsComponentActive() const
 	\ingroup ComponentConcept
 */
 #define I_MULTIATTR(attrType, member)\
-	I_USER_MULTIATTR(icomp::TMultiAttribute<attrType>, member)
+	I_USER_MULTIATTR(iattr::TMultiAttribute<attrType>, member)
 
 /**
 	Declare single reference to another component.

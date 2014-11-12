@@ -3,8 +3,8 @@
 
 // ACF includes
 #include "istd/CIdManipBase.h"
-
 #include "icomp/IComponent.h"
+#include "icomp/IAttributeStaticInfo.h"
 
 
 namespace icomp
@@ -129,13 +129,6 @@ IElementStaticInfo::Ids CBaseComponentStaticInfo::GetMetaIds(int metaGroupId) co
 			retVal.insert(iter.key());
 		}
 	}
-	else if (metaGroupId == MGI_ATTRIBUTES){
-		for (		AttributeInfos::const_iterator iter = m_attributeInfos.begin();
-					iter != m_attributeInfos.end();
-					++iter){
-			retVal.insert(iter.key());
-		}
-	}
 	else if (metaGroupId == MGI_SUBELEMENTS){
 		for (		SubelementInfos::const_iterator iter = m_subelementInfos.begin();
 					iter != m_subelementInfos.end();
@@ -160,6 +153,28 @@ const IElementStaticInfo* CBaseComponentStaticInfo::GetSubelementInfo(const QByt
 	else{
 		return NULL;
 	}
+}
+
+
+//	reimplemented (iattr::IAttributesMetaInfoProvider)
+
+iattr::IAttributesProvider::AttributeIds CBaseComponentStaticInfo::GetAttributeMetaIds() const
+{
+	iattr::IAttributesProvider::AttributeIds retVal;
+
+	for (		AttributeInfos::const_iterator iter = m_attributeInfos.begin();
+				iter != m_attributeInfos.end();
+				++iter){
+		retVal.insert(iter.key());
+	}
+
+	return retVal;
+}
+
+
+const iattr::IAttributeMetaInfo* CBaseComponentStaticInfo::GetAttributeMetaInfo(const QByteArray& attributeId) const
+{
+	return CBaseComponentStaticInfo::GetAttributeInfo(attributeId);
 }
 
 

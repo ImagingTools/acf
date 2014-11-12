@@ -1,15 +1,12 @@
 #include "icomp/CRegistry.h"
 
 
+// ACF includes
 #include "istd/CChangeNotifier.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 #include "iser/CMemoryReadArchive.h"
-
 #include "icomp/IComponentStaticInfo.h"
-#include "icomp/TAttribute.h"
-#include "icomp/TMultiAttribute.h"
 #include "icomp/CReferenceAttribute.h"
 #include "icomp/CFactoryAttribute.h"
 #include "icomp/CInterfaceManipBase.h"
@@ -318,18 +315,13 @@ bool CRegistry::RenameElement(const QByteArray& oldElementId, const QByteArray& 
 					continue;
 				}
 
-				IRegistryElement::Ids attrIds = elementPtr->GetAttributeIds();
-
-				for (		IRegistryElement::Ids::iterator attrIdIter = attrIds.begin();
-							attrIdIter != attrIds.end();
+				iattr::IAttributesProvider::AttributeIds attrIds = elementPtr->GetAttributeIds();
+				for (		iattr::IAttributesProvider::AttributeIds::ConstIterator attrIdIter = attrIds.constBegin();
+							attrIdIter != attrIds.constEnd();
 							++attrIdIter){
 					const QByteArray& attributeId = *attrIdIter;
-					const IRegistryElement::AttributeInfo* attrInfoPtr = elementPtr->GetAttributeInfo(attributeId);
-					if (attrInfoPtr == NULL){
-						continue;
-					}
 
-					iser::ISerializable* attributePtr = attrInfoPtr->attributePtr.GetPtr();
+					iser::IObject* attributePtr = elementPtr->GetAttribute(attributeId);
 
 					CReferenceAttribute* referenceAttrPtr = dynamic_cast<CReferenceAttribute*>(attributePtr);
 					if (referenceAttrPtr != NULL){

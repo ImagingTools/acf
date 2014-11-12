@@ -23,7 +23,7 @@ public:
 	TAttributeStaticInfo(
 				icomp::CBaseComponentStaticInfo& staticInfo,
 				const QByteArray& id,
-				const QByteArray& description,
+				const QString& description,
 				const Attribute* defaultValuePtr,
 				int flags,
 				const istd::CClassInfo& relatedInterfaceInfo);
@@ -33,15 +33,17 @@ public:
 	virtual void AddRelatedMetaId(int metaGroupId, const QByteArray& id, int flags);
 
 	// reimplemented (icomp::IAttributeStaticInfo)
-	virtual const QByteArray& GetAttributeDescription() const;
-	virtual const iser::IObject* GetAttributeDefaultValue() const;
-	virtual QByteArray GetAttributeTypeName() const;
 	virtual IElementStaticInfo::Ids GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const;
+
+	// reimplemented (iattr::IAttributeMetaInfo)
+	virtual QString GetAttributeDescription() const;
+	virtual const iser::IObject* GetAttributeDefaultValue() const;
+	virtual QByteArray GetAttributeTypeId() const;
 	virtual int GetAttributeFlags() const;
 
 private:
 	QByteArray m_id;
-	QByteArray m_description;
+	QString m_description;
 	const Attribute* m_defaultValuePtr;
 	int m_attributeFlags;
 
@@ -57,7 +59,7 @@ template <class Attribute>
 TAttributeStaticInfo<Attribute>::TAttributeStaticInfo(
 			icomp::CBaseComponentStaticInfo& staticInfo,
 			const QByteArray& id,
-			const QByteArray& description,
+			const QString& description,
 			const Attribute* defaultValuePtr,
 			int flags,
 			const istd::CClassInfo& relatedInterfaceInfo)
@@ -106,28 +108,7 @@ void TAttributeStaticInfo<Attribute>::AddRelatedMetaId(int metaGroupId, const QB
 }
 
 
-// reimplemented (icomp::IAttributeStaticInfo)
-
-template <class Attribute>
-const QByteArray& TAttributeStaticInfo<Attribute>::GetAttributeDescription() const
-{
-	return m_description;
-}
-
-
-template <class Attribute>
-const iser::IObject* TAttributeStaticInfo<Attribute>::GetAttributeDefaultValue() const
-{
-	return m_defaultValuePtr;
-}
-
-
-template <class Attribute>
-QByteArray TAttributeStaticInfo<Attribute>::GetAttributeTypeName() const
-{
-	return Attribute::GetTypeName();
-}
-
+// reimplemented (iattr::IAttributeMetaInfo)
 
 template <class Attribute>
 IElementStaticInfo::Ids TAttributeStaticInfo<Attribute>::GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const
@@ -151,6 +132,29 @@ IElementStaticInfo::Ids TAttributeStaticInfo<Attribute>::GetRelatedMetaIds(int m
 	}
 
 	return retVal;
+}
+
+
+// reimplemented (icomp::IAttributeStaticInfo)
+
+template <class Attribute>
+QString TAttributeStaticInfo<Attribute>::GetAttributeDescription() const
+{
+	return m_description;
+}
+
+
+template <class Attribute>
+const iser::IObject* TAttributeStaticInfo<Attribute>::GetAttributeDefaultValue() const
+{
+	return m_defaultValuePtr;
+}
+
+
+template <class Attribute>
+QByteArray TAttributeStaticInfo<Attribute>::GetAttributeTypeId() const
+{
+	return Attribute::GetTypeName();
 }
 
 

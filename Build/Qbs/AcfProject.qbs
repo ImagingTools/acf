@@ -12,6 +12,7 @@ Project{
 			"../../Impl/AcfLoc/Qbs/AcfLoc.qbs",
 			"../../Include/istd/Qbs/istd.qbs",
 			"../../Include/iser/Qbs/iser.qbs",
+			"../../Include/iattr/Qbs/iattr.qbs",
 			"../../Include/ilog/Qbs/ilog.qbs",
 			"../../Include/i2d/Qbs/i2d.qbs",
 			"../../Include/iimg/Qbs/iimg.qbs",
