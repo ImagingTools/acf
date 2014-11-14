@@ -258,7 +258,7 @@ bool CPrimitiveTypesSerializer::SerializeQPointF(iser::IArchive& archive, QPoint
 	retVal = retVal && archive.EndTag(yTag);
 
 	if (!archive.IsStoring()){
-		point = QPoint(x, y);
+		point = QPointF(x, y);
 	}
 
 	return retVal;
