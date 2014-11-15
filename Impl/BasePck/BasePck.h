@@ -26,6 +26,7 @@
 #include "idoc/CSerializedUndoManagerComp.h"
 #include "idoc/CTextFileLoaderComp.h"
 #include "idoc/CTextDocumentComp.h"
+#include "idoc/CMultiPageDocumentFilePersistenceComp.h"
 
 #include "ibase/CInstantiatorComp.h"
 #include "ibase/CVersionInfoComp.h"
@@ -112,6 +113,7 @@ typedef idoc::CSelectedDocModelBinderComp SelectedDocModelBinder;
 typedef icomp::TModelCompWrap<idoc::CSerializedUndoManagerComp> SerializedUndoManager;
 typedef idoc::CTextFileLoaderComp TextFileLoader;
 typedef icomp::TModelCompWrap<idoc::CTextDocumentComp> TextDocument;
+typedef idoc::CMultiPageDocumentFilePersistenceComp MultiPageDocumentFilePersistence;
 
 typedef icomp::TModelCompWrap<i2d::CPosition2dComp> Position2d;
 typedef icomp::TModelCompWrap<i2d::CRectangleComp> Rectangle;

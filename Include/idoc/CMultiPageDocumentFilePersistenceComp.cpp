@@ -1,4 +1,4 @@
-#include "iimg/CBitmapDocumentFilePersistenceComp.h"
+#include "idoc/CMultiPageDocumentFilePersistenceComp.h"
 
 
 // Qt includes
@@ -7,28 +7,24 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "iimg/CBitmapLoaderComp.h"
 #include "ifile/CXmlFileReadArchive.h"
 #include "ifile/CXmlFileWriteArchive.h"
 #include "idoc/CStandardDocumentMetaInfo.h"
 
 
-#define DOCUMENT_SUFFIX "mbd"
-
-
-namespace iimg
+namespace idoc
 {
 
 
 // reimplemented (ifile::IFilePersistence)
 
-bool CBitmapDocumentFilePersistenceComp::IsOperationSupported(
-	const istd::IChangeable* dataObjectPtr,
-	const QString* filePathPtr,
-	int flags,
-	bool /*beQuiet*/) const
+bool CMultiPageDocumentFilePersistenceComp::IsOperationSupported(
+			const istd::IChangeable* dataObjectPtr,
+			const QString* filePathPtr,
+			int flags,
+			bool /*beQuiet*/) const
 {
-	if (dataObjectPtr != NULL && dynamic_cast<const iimg::CMultiPageBitmapBase*>(dataObjectPtr) == NULL){
+	if (dataObjectPtr != NULL && dynamic_cast<const idoc::IMultiPageDocument*>(dataObjectPtr) == NULL){
 		return false;
 	}
 
@@ -46,22 +42,18 @@ bool CBitmapDocumentFilePersistenceComp::IsOperationSupported(
 }
 
 
-static iser::CArchiveTag pagesTag("Pages", "Container of the document pages", iser::CArchiveTag::TT_MULTIPLE);
-static iser::CArchiveTag pageFileTag("PageFile", "Single document page", iser::CArchiveTag::TT_LEAF, &pagesTag);
-
-
-int CBitmapDocumentFilePersistenceComp::LoadFromFile(
+int CMultiPageDocumentFilePersistenceComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
-	if (!m_bitmapPersistenceCompPtr.IsValid()){
+	if (!m_pageObjectPersistenceCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component configuration! Component 'BitmapPersistence' was not set");
 
 		return OS_FAILED;
 	}
 
-	iimg::CMultiPageBitmapBase* docPtr = dynamic_cast<iimg::CMultiPageBitmapBase*>(&data);
+	idoc::IMultiPageDocument* docPtr = dynamic_cast<idoc::IMultiPageDocument*>(&data);
 	if (docPtr == NULL){
 		return OS_FAILED;
 	}
@@ -85,27 +77,27 @@ int CBitmapDocumentFilePersistenceComp::LoadFromFile(
 	// Serialize document pages:
 	int pagesCount = docPtr->GetPagesCount();
 
-	retVal = retVal && archive.BeginMultiTag(pagesTag, pageFileTag, pagesCount);
+	retVal = retVal && archive.BeginMultiTag(s_pagesTag, s_pageFileTag, pagesCount);
 
 	for (int pageIndex = 0; pageIndex < pagesCount; ++pageIndex){
 		// load bitmap file
 		QString pageFileName;
 
-		retVal = retVal && archive.BeginTag(pageFileTag);
+		retVal = retVal && archive.BeginTag(s_pageFileTag);
 		retVal = retVal && archive.Process(pageFileName);
-		retVal = retVal && archive.EndTag(pageFileTag);
+		retVal = retVal && archive.EndTag(s_pageFileTag);
 
 		idoc::CStandardDocumentMetaInfo pageMetaInfo;
 		pageMetaInfo.SetMetaInfo(idoc::IDocumentMetaInfo::MIT_TITLE, pageFileName);
 
-		iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(docPtr->InsertPage(&pageMetaInfo));
-		if (bitmapPtr == NULL || pageFileName.isEmpty()){
+		istd::IChangeable* pageObjectPtr = docPtr->InsertPage(&pageMetaInfo);
+		if (pageObjectPtr == NULL || pageFileName.isEmpty()){
 			retVal = false;
 		}
 		else{
 			QString bitmapFilePath = fileInfo.absolutePath() + "/" + pageFileName;
 
-			int loadState = m_bitmapPersistenceCompPtr->LoadFromFile(*bitmapPtr, bitmapFilePath);
+			int loadState = m_pageObjectPersistenceCompPtr->LoadFromFile(*pageObjectPtr, bitmapFilePath);
 
 			retVal = retVal && (loadState == ifile::IFilePersistence::OS_OK);
 		}
@@ -114,24 +106,24 @@ int CBitmapDocumentFilePersistenceComp::LoadFromFile(
 		retVal = retVal && SerializePageMetaInfo(*docPtr, pageIndex, archive);
 	}
 
-	retVal = retVal && archive.EndTag(pagesTag);
+	retVal = retVal && archive.EndTag(s_pagesTag);
 
 	return retVal ? OS_OK : OS_FAILED;
 }
 
 
-int CBitmapDocumentFilePersistenceComp::SaveToFile(
+int CMultiPageDocumentFilePersistenceComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
-	if (!m_bitmapPersistenceCompPtr.IsValid()){
+	if (!m_pageObjectPersistenceCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component configuration! Component 'BitmapPersistence' was not set");
 
 		return OS_FAILED;
 	}
 
-	const iimg::CMultiPageBitmapBase* docPtr = dynamic_cast<const iimg::CMultiPageBitmapBase*>(&data);
+	const idoc::IMultiPageDocument* docPtr = dynamic_cast<const idoc::IMultiPageDocument*>(&data);
 	if (docPtr == NULL){
 		return OS_FAILED;
 	}
@@ -159,18 +151,22 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(
 	bool retVal = true;
 	
 	// Serialize meta info:
-	retVal = retVal && SerializeDocumentMetaInfo(const_cast<iimg::CMultiPageBitmapBase&>(*docPtr), archive);
+	retVal = retVal && SerializeDocumentMetaInfo(const_cast<idoc::IMultiPageDocument&>(*docPtr), archive);
 
 	// Serialize document pages:
 	int pagesCount = docPtr->GetPagesCount();
 
-	retVal = retVal && archive.BeginMultiTag(pagesTag, pageFileTag, pagesCount);
+	retVal = retVal && archive.BeginMultiTag(s_pagesTag, s_pageFileTag, pagesCount);
 
 	for (int pageIndex = 0; pageIndex < pagesCount; ++pageIndex){
-		// write page bitmap
-		QString pageName = docPtr->GetOptionName(pageIndex);
+		QString pageName;
+		const idoc::IDocumentMetaInfo* pageMetaInfoPtr = docPtr->GetPageMetaInfo(pageIndex);
+		if (pageMetaInfoPtr != NULL){
+			pageName = pageMetaInfoPtr->GetMetaInfo(idoc::IDocumentMetaInfo::MIT_TITLE).toString();
+		}
+
 		if (pageName.isEmpty()){
-			pageName = QString::number(pageIndex+1);
+			pageName = QString::number(pageIndex + 1);
 		}
 
 		QString pageFileName = QString("%1_%2.%3")
@@ -178,13 +174,12 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(
 			.arg(pageName)
 			.arg(m_defaultPageSuffix);
 
-		retVal = retVal && archive.BeginTag(pageFileTag);
+		retVal = retVal && archive.BeginTag(s_pageFileTag);
 		retVal = retVal && archive.Process(pageFileName);
-		retVal = retVal && archive.EndTag(pageFileTag);
+		retVal = retVal && archive.EndTag(s_pageFileTag);
 
-		const iimg::IBitmap* bitmapPtr = docPtr->GetBitmap(pageIndex);
-		if ((bitmapPtr != NULL) && retVal){
-			int saveState = (m_bitmapPersistenceCompPtr->SaveToFile(*bitmapPtr, outDir.absoluteFilePath(pageFileName)));
+		if (retVal){
+			int saveState = (m_pageObjectPersistenceCompPtr->SaveToFile(docPtr->GetDocumentPage(pageIndex), outDir.absoluteFilePath(pageFileName)));
 
 			retVal = retVal && (saveState == ifile::IFilePersistence::OS_OK);
 		}
@@ -193,10 +188,10 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(
 		}
 
 		// write page meta info
-		retVal = retVal && SerializePageMetaInfo(const_cast<iimg::CMultiPageBitmapBase&>(*docPtr), pageIndex, archive);
+		retVal = retVal && SerializePageMetaInfo(const_cast<idoc::IMultiPageDocument&>(*docPtr), pageIndex, archive);
 	}
 
-	retVal = retVal && archive.EndTag(pagesTag);
+	retVal = retVal && archive.EndTag(s_pagesTag);
 
 	return retVal ? OS_OK : OS_FAILED;
 }
@@ -204,7 +199,7 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CBitmapDocumentFilePersistenceComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int /*flags*/, bool doAppend) const
+bool CMultiPageDocumentFilePersistenceComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int /*flags*/, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -212,17 +207,17 @@ bool CBitmapDocumentFilePersistenceComp::GetFileExtensions(QStringList& result, 
 
 	bool retVal = true;
 
-	result << DOCUMENT_SUFFIX;
+	result << m_defaultSuffix;
 
 	return retVal;
 }
 
 
-QString CBitmapDocumentFilePersistenceComp::GetTypeDescription(const QString* extensionPtr) const
+QString CMultiPageDocumentFilePersistenceComp::GetTypeDescription(const QString* extensionPtr) const
 {
 	if (extensionPtr != NULL){
-		if (extensionPtr->toLower() == DOCUMENT_SUFFIX){
-			return "Multi Bitmap Document";
+		if (extensionPtr->toLower() == m_defaultSuffix){
+			return "Multi-Page Document";
 		}
 	}
 
@@ -232,16 +227,15 @@ QString CBitmapDocumentFilePersistenceComp::GetTypeDescription(const QString* ex
 
 // reimplemented (icomp::CComponentBase)
 
-void CBitmapDocumentFilePersistenceComp::OnComponentCreated()
+void CMultiPageDocumentFilePersistenceComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	m_defaultSuffix = DOCUMENT_SUFFIX;
-	m_defaultPageSuffix = "bmp";
+	m_defaultSuffix = "mpd";
 
-	if (m_bitmapPersistenceCompPtr.IsValid()){
+	if (m_pageObjectPersistenceCompPtr.IsValid()){
 		QStringList bitmapSuffixes;
-		if (m_bitmapPersistenceCompPtr->GetFileExtensions(bitmapSuffixes, NULL, ifile::IFileTypeInfo::QF_FILE)){
+		if (m_pageObjectPersistenceCompPtr->GetFileExtensions(bitmapSuffixes, NULL, ifile::IFileTypeInfo::QF_FILE)){
 			m_defaultPageSuffix = bitmapSuffixes.first();
 		}
 	}
@@ -250,7 +244,7 @@ void CBitmapDocumentFilePersistenceComp::OnComponentCreated()
 
 // protected methods
 
-bool CBitmapDocumentFilePersistenceComp::SerializeDocumentMetaInfo(iimg::CMultiPageBitmapBase& document, iser::IArchive& archive) const
+bool CMultiPageDocumentFilePersistenceComp::SerializeDocumentMetaInfo(const idoc::IMultiPageDocument& document, iser::IArchive& archive) const
 {
 	bool retVal = true;
 
@@ -266,13 +260,11 @@ bool CBitmapDocumentFilePersistenceComp::SerializeDocumentMetaInfo(iimg::CMultiP
 }
 
 
-bool CBitmapDocumentFilePersistenceComp::SerializePageMetaInfo(iimg::CMultiPageBitmapBase& document, int pageIndex, iser::IArchive& archive) const
+bool CMultiPageDocumentFilePersistenceComp::SerializePageMetaInfo(idoc::IMultiPageDocument& document, int pageIndex, iser::IArchive& archive) const
 {
 	bool retVal = true;
 
-	iser::ISerializable* metaInfoSerializablePtr = dynamic_cast<iser::ISerializable*>(
-		const_cast<idoc::IDocumentMetaInfo*>(document.GetPageMetaInfo(pageIndex))
-		);
+	iser::ISerializable* metaInfoSerializablePtr = dynamic_cast<iser::ISerializable*>(const_cast<idoc::IDocumentMetaInfo*>(document.GetPageMetaInfo(pageIndex)));
 	if (metaInfoSerializablePtr != NULL){
 		static iser::CArchiveTag pageMetaInfoTag("PageMetaInfo", "Single document page meta information", iser::CArchiveTag::TT_GROUP);
 		retVal = retVal && archive.BeginTag(pageMetaInfoTag);
@@ -284,6 +276,13 @@ bool CBitmapDocumentFilePersistenceComp::SerializePageMetaInfo(iimg::CMultiPageB
 }
 
 
-} // namespace iimg
+// private static members
+
+iser::CArchiveTag CMultiPageDocumentFilePersistenceComp::s_pagesTag("Pages", "Container of the document pages", iser::CArchiveTag::TT_MULTIPLE);
+iser::CArchiveTag CMultiPageDocumentFilePersistenceComp::s_pageFileTag("PageFile", "Single document page", iser::CArchiveTag::TT_LEAF, &s_pagesTag);
+
+
+
+} // namespace idoc
 
 

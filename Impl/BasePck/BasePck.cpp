@@ -249,6 +249,11 @@ I_EXPORT_COMPONENT(
 			IM_CATEGORY(I_DATA_MODEL) IM_TAG("Text Document"));
 
 I_EXPORT_COMPONENT(
+			MultiPageDocumentFilePersistence,
+			"Simple text document",
+			IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Document Page"));
+
+I_EXPORT_COMPONENT(
 			SampledFunction2d,
 			"Sampled function with 2-dimensional input",
 			"Function Sample" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Sampling Model"));

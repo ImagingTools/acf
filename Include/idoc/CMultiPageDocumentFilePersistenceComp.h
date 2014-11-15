@@ -1,14 +1,14 @@
-#ifndef ifile_CBitmapDocumentFilePersistenceComp_included
-#define ifile_CBitmapDocumentFilePersistenceComp_included
+#ifndef idoc_CMultiPageDocumentFilePersistenceComp_included
+#define idoc_CMultiPageDocumentFilePersistenceComp_included
 
 
 // ACF includes
 #include "ifile/IFilePersistence.h"
 #include "ilog/TLoggerCompWrap.h"
-#include "iimg/CMultiPageBitmapBase.h"
+#include "idoc/IMultiPageDocument.h"
 
 
-namespace iimg
+namespace idoc
 {
 
 
@@ -21,7 +21,7 @@ namespace iimg
 	2. All files (page bitmaps and meta info) are saved in the document's own directory with the same name as a document file name: <DocumentFileName>.bid
 	3. The same as 2. but the document's directory will be zipped. 
 */
-class CBitmapDocumentFilePersistenceComp:
+class CMultiPageDocumentFilePersistenceComp:
 			public ilog::CLoggerComponentBase,
 			virtual public ifile::IFilePersistence
 {
@@ -35,10 +35,10 @@ public:
 		OM_COMPRESSED_FOLDER
 	};
 
-	I_BEGIN_COMPONENT(CBitmapDocumentFilePersistenceComp);
+	I_BEGIN_COMPONENT(CMultiPageDocumentFilePersistenceComp);
 		I_REGISTER_INTERFACE(ifile::IFileTypeInfo);
 		I_REGISTER_INTERFACE(ifile::IFilePersistence);
-		I_ASSIGN(m_bitmapPersistenceCompPtr, "BitmapPersistence", "Component used for persistence of the single page of the bitmap document", true, "BitmapPersistence");
+		I_ASSIGN(m_pageObjectPersistenceCompPtr, "BitmapPersistence", "Component used for persistence of the single page of the bitmap document", true, "BitmapPersistence");
 		I_ASSIGN(m_operationModeAttrPtr, "OperationMode", "Operation mode", true, OM_COMPRESSED_FOLDER);
 	I_END_COMPONENT;
 
@@ -66,21 +66,24 @@ protected:
 	virtual void OnComponentCreated();
 
 protected:
-	virtual bool SerializeDocumentMetaInfo(iimg::CMultiPageBitmapBase& document, iser::IArchive& archive) const;
-	virtual bool SerializePageMetaInfo(iimg::CMultiPageBitmapBase& document, int pageIndex, iser::IArchive& archive) const;
+	virtual bool SerializeDocumentMetaInfo(const idoc::IMultiPageDocument& document, iser::IArchive& archive) const;
+	virtual bool SerializePageMetaInfo(idoc::IMultiPageDocument& document, int pageIndex, iser::IArchive& archive) const;
 
 private:
-	I_REF(ifile::IFilePersistence, m_bitmapPersistenceCompPtr);
+	I_REF(ifile::IFilePersistence, m_pageObjectPersistenceCompPtr);
 	I_ATTR(int, m_operationModeAttrPtr);
 
 	QString m_defaultSuffix;
 	QString m_defaultPageSuffix;
+
+	static iser::CArchiveTag s_pagesTag;
+	static iser::CArchiveTag s_pageFileTag;
 };
 
 
-} // namespace iimg
+} // namespace idoc
 
 
-#endif // !ifile_CBitmapDocumentFilePersistenceComp_included
+#endif // !idoc_CMultiPageDocumentFilePersistenceComp_included
 
 

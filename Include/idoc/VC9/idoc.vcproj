@@ -167,6 +167,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiPageDocumentFilePersistenceComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectedDocModelBinderComp.cpp"
 				>
 			</File>
@@ -213,6 +217,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiDocumentManagerBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiPageDocumentFilePersistenceComp.h"
 				>
 			</File>
 			<File
