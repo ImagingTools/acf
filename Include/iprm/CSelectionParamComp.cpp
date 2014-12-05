@@ -29,7 +29,15 @@ void CSelectionParamComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	SetSelectionConstraints(m_constraintsCompPtr.GetPtr());
-	m_selectedOptionIndex = *m_defaultIndexAttrPtr;
+
+	bool defaultIndexValid = true;
+	if (m_constraintsCompPtr.IsValid()){
+		defaultIndexValid = (*m_defaultIndexAttrPtr < m_constraintsCompPtr->GetOptionsCount());
+	}
+
+	if (defaultIndexValid){
+		m_selectedOptionIndex = *m_defaultIndexAttrPtr;
+	}
 }
 
 
