@@ -40,6 +40,7 @@ public:
 		I_ASSIGN(m_allowUpDownAttrPtr, "AllowUpDown", "If it is false, 'Up' and 'Down' buttons will be always hidden", true, true);
 		I_ASSIGN(m_supportEnablingAttrPtr, "AllowEnable", "If this option is activated, the single parameter sets can be enabled/disabled in the list", true, false);
 		I_ASSIGN(m_comboBoxViewAttrPtr, "CompactView", "Shows parameters list as a combo box", true, false);
+		I_ASSIGN(m_comboBoxEditableAttrPtr, "CompactViewComboEditable", "Combo box in compact mode is editable", true, true);
 		I_ASSIGN(m_iconProviderCompPtr, "IconProvider", "Icons for drop-down types menu", false, "IconProvider");
 	I_END_COMPONENT;
 
@@ -107,6 +108,7 @@ private:
 	I_ATTR(bool, m_allowUpDownAttrPtr);
 	I_ATTR(bool, m_supportEnablingAttrPtr);
 	I_ATTR(bool, m_comboBoxViewAttrPtr);
+	I_ATTR(bool, m_comboBoxEditableAttrPtr);
 	I_REF(iqt2d::IViewExtender, m_extenderCompPtr);
 
 	typedef QMap<int, QIcon> StateIconsMap;
