@@ -20,24 +20,12 @@ namespace iprm
 {
 
 
-/**
-	Implementation of parameter manager.
-*/
-class CParamsManagerCompBase:
-			public icomp::CComponentBase,
-			virtual public IParamsManager,
-			virtual public IOptionsManager,
-			protected imod::CMultiModelBridgeBase
+class CParamsManagerCompBaseAttr: public icomp::CComponentBase
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_BASE_COMPONENT(CParamsManagerCompBase);
-		I_REGISTER_INTERFACE(ISelectionParam);
-		I_REGISTER_INTERFACE(IParamsManager);
-		I_REGISTER_INTERFACE(iser::ISerializable);
-		I_REGISTER_INTERFACE(IOptionsManager);
-		I_REGISTER_INTERFACE(IOptionsList);
+	I_BEGIN_BASE_COMPONENT(CParamsManagerCompBaseAttr);
 		I_ASSIGN(m_elementIndexParamIdAttrPtr, "ElementIndexParamId", "ID of index of returned parameter set in manager list", false, "Index");
 		I_ASSIGN(m_elementNameParamIdAttrPtr, "ElementNameParamId", "ID of the name of returned parameter set in manager list", false, "Name");
 		I_ASSIGN(m_elementDescriptionParamIdAttrPtr, "ElementDescriptionParamId", "ID of the description of returned parameter set in manager list", false, "Description");
@@ -47,9 +35,47 @@ public:
 		I_ASSIGN_MULTI_0(m_fixedSetIdsAttrPtr, "FixedSetIds", "List of fixed parameter IDs", false);
 		I_ASSIGN(m_defaultSetNameAttrPtr, "DefaultSetName", "Default name of parameter set. Use %1 to insert automatic enumeration", true, "<noname>");
 		I_ASSIGN(m_serializeSelectionAttrPtr, "SerializeSelection", "If enabled, the current parameter set selection will be serialized", true, true);
+		I_ASSIGN(m_defaultSelectedIndexAttrPtr, "DefaultSelection", "If enabled, the given parameter set will be automatically selected", false, -1);
 		I_ASSIGN(m_allowDisabledAttrPtr, "AllowDisabled", "Control if disabled parameters are supported", true, false);
 		I_ASSIGN(m_supportEnablingAttrPtr, "SupportEnabling", "Control if enabling or disabling of parameters is allowed (works only if disabled parameters are supported)", true, true);
 		I_ASSIGN(m_allowEditFixedAttrPtr, "AllowEditFixed", "If enabled, the editing of fixed parameters is enabled", true, true);
+	I_END_COMPONENT;
+
+protected:
+	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
+	I_MULTIATTR(QString, m_fixedSetNamesAttrPtr);
+	I_MULTIATTR(QString, m_fixedSetDescriptionsAttrPtr);
+	I_MULTIATTR(QByteArray, m_fixedSetIdsAttrPtr);
+	I_ATTR(QString, m_defaultSetNameAttrPtr);
+	I_ATTR(bool, m_serializeSelectionAttrPtr);
+	I_ATTR(int, m_defaultSelectedIndexAttrPtr);
+	I_ATTR(bool, m_allowDisabledAttrPtr);
+	I_ATTR(bool, m_supportEnablingAttrPtr);
+	I_ATTR(bool, m_allowEditFixedAttrPtr);
+	I_ATTR(QByteArray, m_elementIndexParamIdAttrPtr);
+	I_ATTR(QByteArray, m_elementNameParamIdAttrPtr);
+	I_ATTR(QByteArray, m_elementDescriptionParamIdAttrPtr);
+};
+
+
+/**
+	Implementation of parameter manager.
+*/
+class CParamsManagerCompBase:
+			public CParamsManagerCompBaseAttr,
+			virtual public IParamsManager,
+			virtual public IOptionsManager,
+			protected imod::CMultiModelBridgeBase
+{
+public:
+	typedef CParamsManagerCompBaseAttr BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(CParamsManagerCompBase);
+		I_REGISTER_INTERFACE(ISelectionParam);
+		I_REGISTER_INTERFACE(IParamsManager);
+		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_REGISTER_INTERFACE(IOptionsManager);
+		I_REGISTER_INTERFACE(IOptionsList);
 	I_END_COMPONENT;
 
 	CParamsManagerCompBase();
@@ -84,6 +110,7 @@ protected:
 	void EnsureParamsSetModelDetached(iprm::IParamsSet* paramsSetPtr) const;
 	QString CalculateNewDefaultName() const;
 	int FindParamSetIndex(const QString& name) const;
+	int FindFixedParamSetIndex(const QString& name) const;
 
 	// abstract methods
 
@@ -104,19 +131,6 @@ protected:
 
 protected:
 	int m_selectedIndex;
-
-	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
-	I_MULTIATTR(QString, m_fixedSetNamesAttrPtr);
-	I_MULTIATTR(QString, m_fixedSetDescriptionsAttrPtr);
-	I_MULTIATTR(QByteArray, m_fixedSetIdsAttrPtr);
-	I_ATTR(QString, m_defaultSetNameAttrPtr);
-	I_ATTR(bool, m_serializeSelectionAttrPtr);
-	I_ATTR(bool, m_allowDisabledAttrPtr);
-	I_ATTR(bool, m_supportEnablingAttrPtr);
-	I_ATTR(bool, m_allowEditFixedAttrPtr);
-	I_ATTR(QByteArray, m_elementIndexParamIdAttrPtr);
-	I_ATTR(QByteArray, m_elementNameParamIdAttrPtr);
-	I_ATTR(QByteArray, m_elementDescriptionParamIdAttrPtr);
 
 	class ParamSet:
 				public CMultiModelBridgeBase,
@@ -152,7 +166,7 @@ protected:
 		QString name;
 		iprm::CNameParam description;
 		bool isEnabled;
-		const CParamsManagerCompBase* parentPtr;
+		CParamsManagerCompBase* parentPtr;
 	};
 	
 	typedef istd::TDelPtr<ParamSet> ParamSetPtr;

@@ -64,9 +64,6 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	int FindParamSetIndex(const QString& name) const;
-
-private:
 	I_FACT(IParamsSet, m_paramSetsFactPtr);
 };
 
