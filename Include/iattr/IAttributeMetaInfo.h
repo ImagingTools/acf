@@ -41,7 +41,11 @@ public:
 		/**
 			Attribute is simple value type.
 		*/
-		AF_VALUE = 1 << 4
+		AF_VALUE = 1 << 4,
+		/**
+			Attribute is simple value type.
+		*/
+		AF_READ_ONLY = 1 << 31
 	};
 
 	/**
