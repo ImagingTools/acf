@@ -196,18 +196,23 @@ void CSerializedUndoManagerComp::AfterUpdate(imod::IModel* modelPtr, const istd:
 		if (objectPtr != NULL){
 			UndoArchivePtr archivePtr(new iser::CMemoryWriteArchive());
 
-			if (objectPtr->Serialize(*archivePtr) && (*archivePtr != *m_beginStateArchivePtr)){
-				istd::CChangeNotifier notifier(this);
-				Q_UNUSED(notifier);
+			if (objectPtr->Serialize(*archivePtr)){
+				if (*archivePtr != *m_beginStateArchivePtr){
+					istd::CChangeNotifier notifier(this);
+					Q_UNUSED(notifier);
 
-				m_undoList.push_back(UndoArchivePtr());
-				m_undoList.back().TakeOver(m_beginStateArchivePtr);
+					m_undoList.push_back(UndoArchivePtr());
+					m_undoList.back().TakeOver(m_beginStateArchivePtr);
 
-				if (m_maxBufferSizeAttrPtr.IsValid() && (GetUsedMemorySize() > *m_maxBufferSizeAttrPtr * (1 << 20))){
-					m_undoList.pop_front();
+					if (m_maxBufferSizeAttrPtr.IsValid() && (GetUsedMemorySize() > *m_maxBufferSizeAttrPtr * (1 << 20))){
+						m_undoList.pop_front();
+					}
+
+					m_redoList.clear();
 				}
-
-				m_redoList.clear();
+			}
+			else{
+				qDebug("Undo Manager: Object serialization failed");
 			}
 		}
 
