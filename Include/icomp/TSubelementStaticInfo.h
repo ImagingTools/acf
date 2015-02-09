@@ -45,23 +45,25 @@ public:
 				IComponent& component,
 				const QByteArray& subId) const;
 
-	template <class InterfaceType>
-	class Registrator
-	{
-	public:
-		typedef InterfaceType* (*ExtractorPtr)(ComponentType& component);
-
-		Registrator(TSubelementStaticInfo& staticInfo,
-					ExtractorPtr extractorPtr)
-		{
-			istd::CClassInfo interfaceInfo = istd::CClassInfo::GetInfo<InterfaceType>();
-			staticInfo.RegisterInterfaceExtractor(interfaceInfo.GetName(), reinterpret_cast<InterfaceExtractorPtr>(extractorPtr));
-		}
-	};
-
 private:
 	typedef QMap<QByteArray, InterfaceExtractorPtr> InterfaceExtractors;
 	InterfaceExtractors m_interfaceExtractors;
+};
+
+
+template <class InterfaceType, class ComponentType>
+class SubElementInterfaceRegistrator
+{
+public:
+	typedef void* (*InterfaceExtractorPtr)(ComponentType& component);
+	typedef InterfaceType* (*ExtractorPtr)(ComponentType& component);
+
+	SubElementInterfaceRegistrator(TSubelementStaticInfo<ComponentType>& staticInfo, ExtractorPtr extractorPtr)
+	{
+		istd::CClassInfo interfaceInfo = istd::CClassInfo::GetInfo<InterfaceType>();
+
+		staticInfo.RegisterInterfaceExtractor(interfaceInfo.GetName(), reinterpret_cast<InterfaceExtractorPtr>(extractorPtr));
+	}
 };
 
 

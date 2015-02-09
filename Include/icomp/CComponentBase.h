@@ -170,7 +170,7 @@ inline bool CComponentBase::IsComponentActive() const
 */
 #define I_REGISTER_SUBELEMENT_INTERFACE(ElementName, InterfaceType, extractorFunction)\
 	{\
-		static icomp::TSubelementStaticInfo<CurrentComponentType>::Registrator<InterfaceType> staticRegistrator(\
+		static icomp::SubElementInterfaceRegistrator<InterfaceType, CurrentComponentType> staticRegistrator(\
 					subelementInfo_##ElementName,\
 					extractorFunction);\
 		Q_UNUSED(staticRegistrator);\
@@ -184,7 +184,7 @@ inline bool CComponentBase::IsComponentActive() const
 */
 #define I_REGISTER_SUBELEMENT_INTERFACE_T(ElementName, InterfaceType, extractorFunction)\
 	{\
-		static icomp::TSubelementStaticInfo<CurrentComponentType>::Registrator<InterfaceType> staticRegistrator(\
+		static icomp::SubElementInterfaceRegistrator<InterfaceType, CurrentComponentType> staticRegistrator(\
 					subelementInfo_##ElementName,\
 					extractorFunction<InterfaceType>);\
 		Q_UNUSED(staticRegistrator);\
