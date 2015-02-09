@@ -29,9 +29,9 @@
 			<Properties>
 				<BooleanProperty
 					Name="IsGenerated"
-					DisplayName="Reources in GeneratedFiles"
+					DisplayName="Resources in GeneratedFiles"
 					Category="Environment"
-					Description="If enabled the &apos;GenaratedFiles&apos; folder will be used as root"
+					Description="If enabled the &apos;GeneratedFiles&apos; folder will be used as root"
 				/>
 			</Properties>
 		</CustomBuildRule>
