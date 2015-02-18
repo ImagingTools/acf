@@ -406,6 +406,7 @@ QSize CExtParamsManagerGuiComp::CElementItemDelegate::sizeHint(const QStyleOptio
 // internal class CElementEditorDialog
 
 CExtParamsManagerGuiComp::CElementEditorDialog::CElementEditorDialog()
+:	m_guiObjectPtr(NULL)
 {
 	m_ui.setupUi(this);
 

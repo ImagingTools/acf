@@ -452,6 +452,15 @@ bool CConsoleGui::IsFullScreenMode() const
 
 void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 {
+	if (!IsFullScreenAllowed()){
+		if (!m_isFullScreenMode){
+			return;
+		}
+
+		// force fullscreen to be off
+		fullScreenMode = false;
+	}
+
 	if (fullScreenMode != m_isFullScreenMode){
 		m_isFullScreenMode = fullScreenMode;
 
@@ -465,7 +474,7 @@ void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 			m_viewWidget->setParent(NULL);
 			m_viewWidget->showFullScreen();
 
-			//center image on screen
+			// center image on the screen
 			m_viewPtr->SetZoom(iview::CViewBase::ZM_FIT);
 			m_viewPtr->Update();
 		}

@@ -345,7 +345,7 @@ CSystem::FileDriveInfo CSystem::GetFileDriveInfo(const QString& fileDrivePath)
 	}
 #else
 	Q_UNUSED(fileDrivePath);
-	// TODO: Add implementation for other plattforms
+	// TODO: Add implementation for other platforms
 #endif
 
 	return fileDriveInfo;
