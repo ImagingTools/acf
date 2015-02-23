@@ -24,9 +24,7 @@ CChangeDelegator::CChangeDelegator(IChangeable* slavePtr)
 void CChangeDelegator::OnBeginChanges()
 {
 	if (m_slavePtr != NULL){
-		static ChangeSet delegateIds(CF_DELEGATED);
-
-		m_slavePtr->BeginChanges(delegateIds);
+		m_slavePtr->BeginChanges(GetDelegatedChanges());
 	}
 }
 
@@ -34,8 +32,7 @@ void CChangeDelegator::OnBeginChanges()
 void CChangeDelegator::OnEndChanges(const ChangeSet& changeSet)
 {
 	if ((m_slavePtr != NULL) && !changeSet.IsEmpty()){
-		static ChangeSet delegateIds(CF_DELEGATED);
-		m_slavePtr->EndChanges(delegateIds);
+		m_slavePtr->EndChanges(GetDelegatedChanges());
 	}
 }
 

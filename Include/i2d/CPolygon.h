@@ -67,6 +67,11 @@ public:
 	*/
 	virtual bool RemoveNode(int index);
 
+	// Following "quiet" methods are intended to directly change data without change notification (for performance reasons)
+	void InsertNodeQuiet(const i2d::CVector2d& node);
+	void InsertNodeQuiet(int index, const i2d::CVector2d& node);
+	void SetNodesCountQuiet(int count);
+
 	/**
 		Get outline length of this polygon.
 	*/
@@ -108,7 +113,8 @@ public:
 	virtual bool IsEqual(const IChangeable& object) const;
 
 private:
-	typedef QVector<i2d::CVector2d> Nodes;
+	// std::vector can be faster than QVector
+	typedef std::vector<i2d::CVector2d> Nodes;
 
 	/**
 		Apply 2D-transformation to the list of nodes.
@@ -161,6 +167,27 @@ inline void CPolygon::SetNode(int index, const i2d::CVector2d& node)
 
 	m_nodes[index] = node;
 }
+
+
+inline void CPolygon::InsertNodeQuiet(const i2d::CVector2d& node)
+{
+	m_nodes.push_back(node);
+}
+
+
+inline void CPolygon::InsertNodeQuiet(int index, const i2d::CVector2d& node)
+{
+	Nodes::iterator iter = m_nodes.begin();
+	iter += index;
+	m_nodes.insert(iter, node);
+}
+
+
+inline void CPolygon::SetNodesCountQuiet(int count)
+{
+	m_nodes.resize(count);
+}
+
 
 
 } // namespace i2d

@@ -25,7 +25,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 			return false;
 		}
 
-		static ChangeSet changeSet(CF_OPTIONS_CHANGED);
+		ChangeSet changeSet(CF_OPTIONS_CHANGED);
 		istd::CChangeNotifier notifier(this, changeSet);
 
 		while (m_paramSets.size() < (count - fixedSetsCount)){
@@ -47,7 +47,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 					return false;
 				}
 
-				static ChangeSet changeSet(CF_OPTIONS_CHANGED);
+				ChangeSet changeSet(CF_OPTIONS_CHANGED);
 				istd::CChangeNotifier notifier(this, changeSet);
 
 				ParamSetPtr paramsSetPtr(new imod::TModelWrap<ParamSet>());
@@ -225,7 +225,7 @@ bool CParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
 	}
 
 	if (m_paramSets[index - fixedSetsCount]->isEnabled != isEnabled){
-		static ChangeSet changeSet(CF_SET_ENABLE_CHANGED);
+		ChangeSet changeSet(CF_SET_ENABLE_CHANGED);
 		istd::CChangeNotifier notifier(this, changeSet);
 
 		m_paramSets[index - fixedSetsCount]->isEnabled = isEnabled;

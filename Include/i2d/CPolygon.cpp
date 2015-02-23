@@ -16,7 +16,7 @@ namespace i2d
 
 void CPolygon::Clear()
 {
-	if (!m_nodes.isEmpty()){
+	if (!m_nodes.empty()){
         BeginChanges(GetAnyChange());
 
 		m_nodes.clear();
@@ -28,7 +28,7 @@ void CPolygon::Clear()
 
 void CPolygon::SetNodesCount(int nodesCount)
 {
-	if (nodesCount != m_nodes.count()){
+	if (nodesCount != (int)m_nodes.size()){
         BeginChanges(GetAnyChange());
 
 		m_nodes.resize(nodesCount);
@@ -106,16 +106,14 @@ void CPolygon::MoveCenterTo(const CVector2d& position)
 {
 	i2d::CVector2d offset = position - GetCenter();
 	if (offset != i2d::CVector2d(0, 0)){
-		static ChangeSet changeSet(CF_OBJECT_POSITION);
-
-		BeginChanges(changeSet);
+		BeginChanges(s_objectPositionChangeSet);
 
 		int nodesCount = GetNodesCount();
 		for (int i = 0; i < nodesCount; i++){
 			SetNode(i, GetNode(i) + offset);
 		}
 
-		EndChanges(changeSet);
+		EndChanges(s_objectPositionChangeSet);
 	}
 }
 
@@ -145,12 +143,10 @@ bool CPolygon::Transform(
 			ITransformation2d::ExactnessMode mode,
 			double* errorFactorPtr)
 {
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-
-	BeginChanges(changeSet);
+	BeginChanges(s_objectPositionAllDataChangeSet);
 
 	if (ApplyTransform(m_nodes, transformation, mode, errorFactorPtr)){
-		EndChanges(changeSet);
+		EndChanges(s_objectPositionAllDataChangeSet);
 
 		return true;
 	}
@@ -166,12 +162,10 @@ bool CPolygon::InvTransform(
 			ITransformation2d::ExactnessMode mode,
 			double* errorFactorPtr)
 {
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-		
-	BeginChanges(changeSet);
+	BeginChanges(s_objectPositionAllDataChangeSet);
 
 	if (ApplyInverseTransform(m_nodes, transformation, mode, errorFactorPtr)){
-		EndChanges(changeSet);
+		EndChanges(s_objectPositionAllDataChangeSet);
 
 		return true;
 	}
@@ -190,14 +184,12 @@ bool CPolygon::GetTransformed(
 {
 	CPolygon* polygonPtr = dynamic_cast<CPolygon*>(&result);
 	if (polygonPtr != NULL){
-		static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-
-		polygonPtr->BeginChanges(changeSet);
+		polygonPtr->BeginChanges(s_objectPositionAllDataChangeSet);
 
 		polygonPtr->m_nodes = m_nodes;
 
 		if (ApplyTransform(polygonPtr->m_nodes, transformation, mode, errorFactorPtr)){
-			polygonPtr->EndChanges(changeSet);
+			polygonPtr->EndChanges(s_objectPositionAllDataChangeSet);
 
 			return true;
 		}
@@ -217,14 +209,12 @@ bool CPolygon::GetInvTransformed(
 {
 	CPolygon* polygonPtr = dynamic_cast<CPolygon*>(&result);
 	if (polygonPtr != NULL){
-		static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-
-		polygonPtr->BeginChanges(changeSet);
+		polygonPtr->BeginChanges(s_objectPositionAllDataChangeSet);
 
 		polygonPtr->m_nodes = m_nodes;
 
 		if (ApplyInverseTransform(polygonPtr->m_nodes, transformation, mode, errorFactorPtr)){
-			polygonPtr->EndChanges(changeSet);
+			polygonPtr->EndChanges(s_objectPositionAllDataChangeSet);
 
 			return true;
 		}
@@ -324,7 +314,7 @@ bool CPolygon::ApplyTransform(Nodes& nodes,
 			ITransformation2d::ExactnessMode mode,
 			double* errorFactorPtr)
 {
-	int nodesCount = nodes.count();
+	int nodesCount = nodes.size();
 	
     Nodes transPoints;
 
@@ -353,7 +343,7 @@ bool CPolygon::ApplyInverseTransform(
 			ITransformation2d::ExactnessMode mode,
 			double* errorFactorPtr)
 {
-	int nodesCount = nodes.count();
+	int nodesCount = nodes.size();
 	
     Nodes transPoints;
 

@@ -142,7 +142,7 @@ bool CSingleDocumentManagerBase::InsertNewDocument(
 			bool beQuiet,
 			bool* ignoredPtr)
 {
-	static ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
+	ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
 	istd::CChangeNotifier changePtr(this, changeSet);
 
 	CloseDocument(-1, beQuiet, ignoredPtr);
@@ -329,7 +329,7 @@ bool CSingleDocumentManagerBase::CloseDocument(int /*documentIndex*/, bool beQui
 			return false;
 		}
 
-		static ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_REMOVED, CF_VIEW_ACTIVATION_CHANGED);
+		ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_REMOVED, CF_VIEW_ACTIVATION_CHANGED);
 		istd::CChangeNotifier notifier(this, changeSet);
 
 		EnsureViewRemoved();
@@ -397,7 +397,7 @@ bool CSingleDocumentManagerBase::OpenSingleDocument(
 		return true;
 	}
 
-	static ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
+	ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
 	istd::CChangeNotifier notifier(this, changeSet);
 	Q_UNUSED(notifier);
 
@@ -414,7 +414,7 @@ bool CSingleDocumentManagerBase::OpenSingleDocument(
 	if (!documentIds.isEmpty()){
 		documentTypeId = documentIds.front();
 
-		static ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
+		ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
 		istd::CChangeNotifier notifier(this, changeSet);
 		Q_UNUSED(notifier);
 

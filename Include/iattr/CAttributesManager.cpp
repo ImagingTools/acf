@@ -36,7 +36,7 @@ void CAttributesManager::SetAttributesFactory(const iser::IObjectFactory* factor
 void CAttributesManager::RemoveAllAttributes()
 {
 	if (!m_attributesMap.isEmpty()){
-		static ChangeSet changeSet(CF_RESET, CF_ATTR_REMOVED);
+		ChangeSet changeSet(CF_RESET, CF_ATTR_REMOVED);
 		istd::CChangeNotifier notifier(this, changeSet);
 		Q_UNUSED(notifier);
 
@@ -60,7 +60,7 @@ bool CAttributesManager::InsertAttribute(
 			iser::IObject* attributePtr,
 			bool releaseFlag)
 {
-	static ChangeSet changeSet(CF_ATTR_ADDED);
+	ChangeSet changeSet(CF_ATTR_ADDED);
 	istd::CChangeNotifier notifier(this, changeSet);
 	Q_UNUSED(notifier);
 
@@ -202,17 +202,13 @@ bool CAttributesManager::Serialize(iser::IArchive& archive)
 
 void CAttributesManager::BeforeUpdate(imod::IModel* /*modelPtr*/)
 {
-	static ChangeSet delegateIds(CF_DELEGATED);
-
-	BeginChanges(delegateIds);
+	BeginChanges(GetDelegatedChanges());
 }
 
 
 void CAttributesManager::AfterUpdate(imod::IModel* /*modelPtr*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
-	static ChangeSet delegateIds(CF_DELEGATED);
-
-	EndChanges(delegateIds);
+	EndChanges(GetDelegatedChanges());
 }
 
 

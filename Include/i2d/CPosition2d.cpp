@@ -30,13 +30,11 @@ CPosition2d::CPosition2d(const CVector2d& position)
 void CPosition2d::SetPosition(const CVector2d& position)
 {
 	if (position != m_position){
-		static ChangeSet changeSet(CF_OBJECT_POSITION);
-
-		BeginChanges(changeSet);
+		BeginChanges(s_objectPositionChangeSet);
 
 		m_position = position;
 
-		EndChanges(changeSet);
+		EndChanges(s_objectPositionChangeSet);
 	}
 }
 
@@ -210,8 +208,7 @@ bool CPosition2d::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag centerTag("Center", "Center position", iser::CArchiveTag::TT_GROUP);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, s_objectPositionChangeSet);
 
 	bool retVal = true;
 

@@ -29,8 +29,7 @@ void CPolypoint::MoveCenterTo(const CVector2d& position)
 {
 	CVector2d diffVector = position - CPolypoint::GetCenter();
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION);
-	BeginChanges(changeSet);
+	BeginChanges(s_objectPositionChangeSet);
 
 	for (		Points::Iterator iter = m_points.begin();
 				iter != m_points.end();
@@ -38,7 +37,7 @@ void CPolypoint::MoveCenterTo(const CVector2d& position)
 		*iter += diffVector;
 	}
 
-	EndChanges(changeSet);
+	EndChanges(s_objectPositionChangeSet);
 }
 
 

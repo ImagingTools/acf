@@ -40,7 +40,7 @@ public:
 	*/
 	void Reset();
 	/**
-		Similiar like method Reset(), but it tries to avoid the update.
+		Similar like method Reset(), but it tries to avoid the update.
 		It should be used only if you are sure, that no changes was done, or result will be ignored.
 	*/
 	void Abort();

@@ -87,7 +87,7 @@ bool CSelectionParam::SetSelectedOptionIndex(int index)
 			}
 		}
 
-		static ChangeSet changeSet(CF_SELECTION_CHANGED);
+		ChangeSet changeSet(CF_SELECTION_CHANGED);
 		istd::CChangeNotifier changeNotifier(this, changeSet);
 
 		m_selectedOptionIndex = index;

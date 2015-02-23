@@ -48,6 +48,11 @@ public:
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
+protected:
+	// static members
+	static ChangeSet s_objectPositionChangeSet;
+	static ChangeSet s_objectPositionAllDataChangeSet;
+
 private:
 	istd::TOptDelPtr<const ICalibration2d> m_calibrationPtr;
 };

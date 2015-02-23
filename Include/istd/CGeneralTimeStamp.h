@@ -44,6 +44,10 @@ private:
 #endif
 
 	double m_timeShift;
+
+protected:
+	// static member
+	static ChangeSet s_startChangeSet;
 };
 
 
