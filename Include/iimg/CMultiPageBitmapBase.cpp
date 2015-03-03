@@ -108,8 +108,12 @@ void CMultiPageBitmapBase::RemoveBitmap(int index)
 
 // reimplemented (istd::IChangeable)
 
-bool CMultiPageBitmapBase::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
+bool CMultiPageBitmapBase::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 {
+	if (BaseClass::CopyFrom(object, mode)){
+		return true;
+	}
+	
 	const IMultiBitmapProvider* sourcePtr = dynamic_cast<const IMultiBitmapProvider*>(&object);
 	if (sourcePtr != NULL){
 		istd::CChangeNotifier changeNotifier(this);
