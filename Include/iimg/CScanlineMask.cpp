@@ -448,14 +448,14 @@ void CScanlineMask::GetUnion(const CScanlineMask& mask, CScanlineMask& result) c
 
 	result.m_scanlines.resize(endLineY - m_firstLinePos);
 
-	for (int resultLineIndex = 0; resultLineIndex < result.m_scanlines.size(); ++resultLineIndex){
+	for (int resultLineIndex = 0; resultLineIndex < int(result.m_scanlines.size()); ++resultLineIndex){
 		int y = resultLineIndex + result.m_firstLinePos;
 
 		const istd::CIntRanges* rangesPtr = NULL;
 		const istd::CIntRanges* maskRangesPtr = NULL;
 
 		int lineIndex = y - m_firstLinePos;
-		if ((lineIndex >= 0) && (lineIndex < m_scanlines.size())){
+		if ((lineIndex >= 0) && (lineIndex < int(m_scanlines.size()))){
 			int containerIndex = m_scanlines[lineIndex];
 			if (containerIndex >= 0){
 				Q_ASSERT(containerIndex < m_rangesContainer.size());
@@ -465,7 +465,7 @@ void CScanlineMask::GetUnion(const CScanlineMask& mask, CScanlineMask& result) c
 		}
 
 		int maskLineIndex = y - mask.m_firstLinePos;
-		if ((maskLineIndex >= 0) && (maskLineIndex < mask.m_scanlines.size())){
+		if ((maskLineIndex >= 0) && (maskLineIndex < int(mask.m_scanlines.size()))){
 			int containerIndex = mask.m_scanlines[lineIndex];
 			if (containerIndex >= 0){
 				Q_ASSERT(containerIndex < mask.m_rangesContainer.size());
@@ -530,15 +530,15 @@ void CScanlineMask::GetIntersection(const CScanlineMask& mask, CScanlineMask& re
 
 	result.m_scanlines.resize(endLineY - m_firstLinePos);
 
-	for (int resultLineIndex = 0; resultLineIndex < result.m_scanlines.size(); ++resultLineIndex){
+	for (int resultLineIndex = 0; resultLineIndex < int(result.m_scanlines.size()); ++resultLineIndex){
 		int y = result.m_firstLinePos + resultLineIndex;
 
 		istd::CIntRanges resultRanges;
 
 		int lineIndex = y - m_firstLinePos;
 		int maskLineIndex = y - mask.m_firstLinePos;
-		if (		(lineIndex >= 0) && (lineIndex < m_scanlines.size()) &&
-					(maskLineIndex >= 0) && (maskLineIndex < mask.m_scanlines.size())){
+		if (		(lineIndex >= 0) && (lineIndex < int(m_scanlines.size())) &&
+					(maskLineIndex >= 0) && (maskLineIndex < int(mask.m_scanlines.size()))){
 			int containerIndex = m_scanlines[lineIndex];
 			int maskContainerIndex = mask.m_scanlines[lineIndex];
 
@@ -629,7 +629,7 @@ i2d::CRectangle CScanlineMask::GetBoundingBox() const
 	if (!m_isBoundingBoxValid){
 		istd::CIntRange rangeX = istd::CIntRange::GetInvalid();
 
-		for (int i = 0; i < m_scanlines.size(); ++i){
+		for (int i = 0; i < int(m_scanlines.size()); ++i){
 			int containerIndex = m_scanlines[i];
 
 			if (containerIndex >= 0){
@@ -706,7 +706,7 @@ int CScanlineMask::GetComponentsCount() const
 icmm::CVarColor CScanlineMask::GetColorAt(const istd::CIndex2d& position) const
 {
 	int scanLine = position.GetY() - m_firstLinePos;
-	if ((scanLine >= 0) && (scanLine < m_scanlines.size())){
+	if ((scanLine >= 0) && (scanLine < int(m_scanlines.size()))){
 		int containerIndex = m_scanlines[scanLine];
 
 		if (containerIndex >= 0){
