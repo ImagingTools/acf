@@ -30,28 +30,8 @@ public:
 		CF_RESET
 	};
 
-	template <class ContainerType>
-	static void Reserve(ContainerType& /*container*/, int /*count*/)
-	{
-	}
-
-	template <class ContainerType>
-	static void Resize(ContainerType& /*container*/, int /*count*/)
-	{
-	}
-
-	template<>
-	static void Reserve(std::vector<ItemClass>& container, int count)
-	{
-		container.reserve(count);
-	}
-
-	template<>
-	static void Reserve(QVector<ItemClass>& container, int count)
-	{
-		container.reserve(count);
-	}
-
+	virtual void Reserve(int count);
+	virtual void Resize(int count);
 
 	const ItemClass& GetAt(int index) const;
 	ItemClass& GetAt(int index);
@@ -78,6 +58,20 @@ protected:
 	
 	Items m_items;
 };
+
+
+// public methods
+
+template <typename ItemClass, typename ContainerType>
+void TContainer<ItemClass, ContainerType>::Reserve(int /*count*/)
+{
+}
+
+
+template <typename ItemClass, typename ContainerType>
+void TContainer<ItemClass, ContainerType>::Resize(int /*count*/)
+{
+}
 
 
 template <typename ItemClass, typename ContainerType>
