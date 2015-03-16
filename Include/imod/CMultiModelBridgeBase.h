@@ -16,16 +16,18 @@ namespace imod
 
 
 /**
-	Allow to connect as observer to multiple models and call \c BeginChanges and \c EndChanges on some its changes.
-	In other words: it reflects the changes of observed objects as its own changes.
+	Reflects the changes of observed objects as changes of some other object, typically delegated to itself.
+	In other words: it allows to connect as observer to multiple models and call \c BeginChanges and \c EndChanges on some its changes.
 	\sa imod::CMultiModelDispatcherBase.
 
 	\ingroup ModelObserver
 
 */
-class CMultiModelBridgeBase: virtual public IObserver, virtual public istd::IChangeable
+class CMultiModelBridgeBase: virtual public IObserver
 {
 public:
+	explicit CMultiModelBridgeBase(istd::IChangeable* changeablePtr);
+
 	virtual ~CMultiModelBridgeBase();
 
 	/**
@@ -52,8 +54,9 @@ public:
 
 private:
 	typedef QVector<imod::IModel*> Models;
-
 	Models m_models;
+
+	istd::IChangeable* m_changeablePtr;
 };
 
 

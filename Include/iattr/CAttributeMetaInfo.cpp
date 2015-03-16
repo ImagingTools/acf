@@ -5,21 +5,22 @@ namespace iattr
 {
 
 
-CAttributeMetaInfo::CAttributeMetaInfo()
-:	m_attributeFlags(0)
+CAttributeMetaInfo::CAttributeMetaInfo(const QByteArray& typeId)
+:	m_attributeTypeId(typeId),
+	m_attributeFlags(0)
 {
-}
-
-
-void CAttributeMetaInfo::SetAttributeDescription(const QString& description)
-{
-	m_description = description;
 }
 
 
 void CAttributeMetaInfo::SetAttributeTypeId(const QByteArray& typeId)
 {
 	m_attributeTypeId = typeId;
+}
+
+
+void CAttributeMetaInfo::SetAttributeDescription(const QString& description)
+{
+	m_description = description;
 }
 
 

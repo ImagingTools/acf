@@ -5,6 +5,12 @@ namespace iattr
 {
 
 
+CNumericAttributeMetaInfo::CNumericAttributeMetaInfo(const QByteArray& typeId)
+:	BaseClass(typeId)
+{
+}
+
+
 bool CNumericAttributeMetaInfo::SetMinAttributeValue(const iser::IObject* valuePtr, bool releaseFlag)
 {
 	m_minAttributePtr.SetPtr(valuePtr, releaseFlag);

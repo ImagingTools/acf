@@ -20,7 +20,8 @@ namespace iattr
 // public methods
 
 CAttributesManager::CAttributesManager(const iser::IObjectFactory* factoryPtr)
-:	m_attributesFactoryPtr(factoryPtr)
+:	m_attributesFactoryPtr(factoryPtr),
+	m_attributesUpdateBridge(this)
 {
 }
 
@@ -36,7 +37,7 @@ void CAttributesManager::SetAttributesFactory(const iser::IObjectFactory* factor
 void CAttributesManager::RemoveAllAttributes()
 {
 	if (!m_attributesMap.isEmpty()){
-		ChangeSet changeSet(CF_RESET, CF_ATTR_REMOVED);
+		static ChangeSet changeSet(CF_RESET, CF_ATTR_REMOVED);
 		istd::CChangeNotifier notifier(this, changeSet);
 		Q_UNUSED(notifier);
 
@@ -45,8 +46,8 @@ void CAttributesManager::RemoveAllAttributes()
 					++iter){
 			AttributePtr& attributePtr = iter.value();
 			imod::IModel* oldAttrModelPtr = dynamic_cast<imod::IModel*>(attributePtr.GetPtr());
-			if ((oldAttrModelPtr != NULL) && IsModelAttached(oldAttrModelPtr)){
-				oldAttrModelPtr->DetachObserver(this);
+			if ((oldAttrModelPtr != NULL) && m_attributesUpdateBridge.IsModelAttached(oldAttrModelPtr)){
+				oldAttrModelPtr->DetachObserver(&m_attributesUpdateBridge);
 			}
 		}
 
@@ -60,21 +61,21 @@ bool CAttributesManager::InsertAttribute(
 			iser::IObject* attributePtr,
 			bool releaseFlag)
 {
-	ChangeSet changeSet(CF_ATTR_ADDED);
+	static ChangeSet changeSet(CF_ATTR_ADDED);
 	istd::CChangeNotifier notifier(this, changeSet);
 	Q_UNUSED(notifier);
 
 	AttributePtr& newAttributePtr = m_attributesMap[attributeId];
 	imod::IModel* oldAttrModelPtr = dynamic_cast<imod::IModel*>(newAttributePtr.GetPtr());
-	if ((oldAttrModelPtr != NULL) && IsModelAttached(oldAttrModelPtr)){
-		oldAttrModelPtr->DetachObserver(this);
+	if ((oldAttrModelPtr != NULL) && m_attributesUpdateBridge.IsModelAttached(oldAttrModelPtr)){
+		oldAttrModelPtr->DetachObserver(&m_attributesUpdateBridge);
 	}
 
 	newAttributePtr.SetPtr(attributePtr, releaseFlag);
 
 	imod::IModel* attrModelPtr = dynamic_cast<imod::IModel*>(attributePtr);
 	if (attrModelPtr != NULL){
-		attrModelPtr->AttachObserver(this);
+		attrModelPtr->AttachObserver(&m_attributesUpdateBridge);
 	}
 
 	return true;
@@ -193,22 +194,6 @@ bool CAttributesManager::Serialize(iser::IArchive& archive)
 	}
 
 	return retVal;
-}
-
-
-// protected methods
-
-// reimplemented (imod::IObserver)
-
-void CAttributesManager::BeforeUpdate(imod::IModel* /*modelPtr*/)
-{
-	BeginChanges(GetDelegatedChanges());
-}
-
-
-void CAttributesManager::AfterUpdate(imod::IModel* /*modelPtr*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
-{
-	EndChanges(GetDelegatedChanges());
 }
 
 

@@ -5,7 +5,11 @@ namespace iimg
 {
 
 
-// public methods
+CComposedBitmapProviderComp::CComposedBitmapProviderComp()
+:	imod::CMultiModelBridgeBase(this)
+{
+}
+
 
 // reimplemented (iimg::IMultiBitmapProvider)
 

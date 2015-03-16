@@ -32,6 +32,8 @@ public:
 		I_ASSIGN_TO(m_calibrationProviderModelCompPtr, m_calibrationProviderCompPtr, true);
 	I_END_COMPONENT;
 
+	CCalibration2dProxyComp();
+
 	// reimplemented (i2d::ICalibration2d)
 	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const;
 	virtual const imath::IUnitInfo* GetResultUnitInfo() const;

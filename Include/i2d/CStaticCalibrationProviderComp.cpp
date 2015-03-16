@@ -5,7 +5,11 @@ namespace i2d
 {
 
 
-// public methods
+CStaticCalibrationProviderComp::CStaticCalibrationProviderComp()
+:	imod::CMultiModelBridgeBase(this)
+{
+}
+
 
 // reimplemented (i2d::ICalibrationProvider)
 

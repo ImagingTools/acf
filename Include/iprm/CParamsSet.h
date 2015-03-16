@@ -37,7 +37,7 @@ public:
 	};
 	typedef istd::TPointerVector<ParameterInfo> ParameterInfos;
 
-	CParamsSet(const IParamsSet* slaveSetPtr = NULL);
+	explicit CParamsSet(const IParamsSet* slaveSetPtr = NULL);
 
 	/**
 		Get slave parameter set.

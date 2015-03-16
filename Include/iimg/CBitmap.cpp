@@ -6,6 +6,7 @@
 
 // Qt includes
 #include <QtCore/QVector>
+#include <QtCore/QMutexLocker>
 #include <QtGui/QColor>
 
 // ACF includes

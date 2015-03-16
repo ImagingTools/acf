@@ -15,7 +15,8 @@ namespace iprm
 
 
 CParamsSet::CParamsSet(const IParamsSet* slaveSetPtr)
-:	m_paramsTypeId("Default"),
+:	imod::CMultiModelBridgeBase(this),
+	m_paramsTypeId("Default"),
 	m_slaveSetPtr(slaveSetPtr)
 {
 }

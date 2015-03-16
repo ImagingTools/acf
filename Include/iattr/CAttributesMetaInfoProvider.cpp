@@ -21,6 +21,12 @@ bool CAttributesMetaInfoProvider::InsertAttributeMetaInfo(
 }
 
 
+bool CAttributesMetaInfoProvider::HasAttributeMetaId(const QByteArray& attributeId) const
+{
+	return m_attributesMetaInfoMap.contains(attributeId);
+}
+
+
 // reimplemented (iattr::IAttributesMetaInfoProvider)
 
 IAttributesProvider::AttributeIds CAttributesMetaInfoProvider::GetAttributeMetaIds() const

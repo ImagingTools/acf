@@ -5,8 +5,9 @@ namespace iattr
 {
 
 
-CEnumAttributeMetaInfo::CEnumAttributeMetaInfo()
-:	m_isAnyValueAllowed(false)
+CEnumAttributeMetaInfo::CEnumAttributeMetaInfo(const QByteArray& typeId)
+:	BaseClass(typeId),
+	m_isAnyValueAllowed(false)
 {
 }
 

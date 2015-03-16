@@ -7,9 +7,15 @@ namespace imod
 
 // public methods
 
+CMultiModelBridgeBase::CMultiModelBridgeBase(istd::IChangeable* changeablePtr)
+:	m_changeablePtr(changeablePtr)
+{
+}
+
+
 CMultiModelBridgeBase::~CMultiModelBridgeBase()
 {
-	CMultiModelBridgeBase::EnsureModelsDetached();
+	EnsureModelsDetached();
 }
 
 
@@ -86,7 +92,7 @@ void CMultiModelBridgeBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr))
 {
 	Q_ASSERT(IsModelAttached(modelPtr));
 
-	BeginChanges(GetDelegatedChanges());
+	m_changeablePtr->BeginChanges(istd::IChangeable::GetDelegatedChanges());
 }
 
 
@@ -94,7 +100,7 @@ void CMultiModelBridgeBase::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), const istd
 {
 	Q_ASSERT(IsModelAttached(modelPtr));
 
-	EndChanges(GetDelegatedChanges());
+	m_changeablePtr->EndChanges(istd::IChangeable::GetDelegatedChanges());
 }
 
 

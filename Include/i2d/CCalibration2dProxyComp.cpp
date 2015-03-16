@@ -11,7 +11,11 @@ namespace i2d
 {
 
 
-// public methods
+CCalibration2dProxyComp::CCalibration2dProxyComp()
+:	imod::CMultiModelBridgeBase(this)
+{
+}
+
 
 // reimplemented (i2d::ICalibration2d)
 

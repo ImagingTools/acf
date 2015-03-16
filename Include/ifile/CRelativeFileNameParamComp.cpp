@@ -14,6 +14,12 @@ namespace ifile
 {
 
 
+CRelativeFileNameParamComp::CRelativeFileNameParamComp()
+:	imod::CMultiModelBridgeBase(this)
+{
+}
+
+
 // reimplemented (ifile::IFileNameParam)
 
 const QString& CRelativeFileNameParamComp::GetPath() const

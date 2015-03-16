@@ -34,6 +34,8 @@ public:
 		I_ASSIGN_MULTI_0(m_bitmapDescriptionsAttrPtr, "BitmapDescriptions", "List of bitmap descriptions", false);
 	I_END_COMPONENT;
 
+	CComposedBitmapProviderComp();
+
 	// reimplemented (iimg::IMultiBitmapProvider)
 	virtual const iprm::IOptionsList* GetBitmapListInfo() const;
 	virtual int GetBitmapsCount() const;

@@ -299,7 +299,8 @@ void CMultiPageGuiCompBase::OnPageChanged(int pageIndex)
 // public methods of the embedded class PageModel
 
 CMultiPageGuiCompBase::PageModel::PageModel()
-:	m_parentPtr(NULL)
+:	imod::CMultiModelBridgeBase(this),
+	m_parentPtr(NULL)
 {
 	m_selectedOptionIndex = 0;
 

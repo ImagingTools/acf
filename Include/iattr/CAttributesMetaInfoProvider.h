@@ -35,6 +35,10 @@ public:
 				const QByteArray& attributeId,
 				IAttributeMetaInfo* attributeMetaInfoPtr,
 				bool releaseFlag);
+	/**
+		Check if this provider has some attribute ID.
+	*/
+	bool HasAttributeMetaId(const QByteArray& attributeId) const;
 
 	// reimplemented (iattr::IAttributesMetaInfoProvider)
 	virtual IAttributesProvider::AttributeIds GetAttributeMetaIds() const;

@@ -163,7 +163,8 @@ bool TGuiObserverWrap<Gui, Observer>::OnModelDetached(imod::IModel* modelPtr)
 	if (Observer::IsModelAttached(modelPtr)){
 		if (Gui::IsGuiCreated()){
 			if (!m_isReadOnly && !IsUpdateBlocked() && !m_updateOnShow){
-				UpdateBlocker blocker(this);
+				UpdateBlocker updateBlocker(this);
+				Q_UNUSED(updateBlocker);
 
 				UpdateModel();
 			}
@@ -205,7 +206,8 @@ template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::OnGuiModelDetached()
 {
 	if (!m_isReadOnly && Observer::IsModelAttached(NULL) && !IsUpdateBlocked() && !m_updateOnShow){
-		UpdateBlocker blocker(this);
+		UpdateBlocker updateBlocker(this);
+		Q_UNUSED(updateBlocker);
 
 		UpdateModel();
 	}
@@ -223,7 +225,8 @@ template <class Gui, class Observer>
 bool TGuiObserverWrap<Gui, Observer>::DoUpdateModel()
 {
 	if (!IsUpdateBlocked() && Observer::IsModelAttached()){
-		UpdateBlocker blockUpdates(this);
+		UpdateBlocker updateBlocker(this);
+		Q_UNUSED(updateBlocker);
 
 		UpdateModel();
 
@@ -300,6 +303,7 @@ template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::OnGuiRetranslate()
 {
 	UpdateBlocker updateBlocker(this);
+	Q_UNUSED(updateBlocker);
 
 	Gui::OnGuiRetranslate();
 }
@@ -379,6 +383,7 @@ void TGuiObserverWrap<Gui, Observer>::DoUpdate(const istd::IChangeable::ChangeSe
 	}
 
 	UpdateBlocker updateBlocker(this);
+	Q_UNUSED(updateBlocker);
 
 	UpdateGui(changeSet);
 }

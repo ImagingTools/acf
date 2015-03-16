@@ -25,7 +25,9 @@ class CEnumAttributeMetaInfo:
 			virtual public IEnumAttributeMetaInfo
 {
 public:
-	CEnumAttributeMetaInfo();
+	typedef CAttributeMetaInfo BaseClass;
+
+	CEnumAttributeMetaInfo(const QByteArray& typeId = "");
 
 	void SetOtherValueAllowed(bool state);
 	/**

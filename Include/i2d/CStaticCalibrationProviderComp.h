@@ -35,6 +35,8 @@ public:
 		I_ASSIGN_TO(m_calibrationModelCompPtr, m_calibrationCompPtr, false);
 	I_END_COMPONENT;
 
+	CStaticCalibrationProviderComp();
+
 	// reimplemented (i2d::ICalibrationProvider)
 	virtual const ICalibration2d* GetCalibration() const;
 

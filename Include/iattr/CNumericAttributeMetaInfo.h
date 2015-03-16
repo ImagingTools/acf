@@ -22,6 +22,10 @@ class CNumericAttributeMetaInfo:
 			virtual public INumericAttributeMetaInfo
 {
 public:
+	typedef CAttributeMetaInfo BaseClass;
+
+	CNumericAttributeMetaInfo(const QByteArray& typeId = "");
+
 	/**
 		Set minimal value of attribute.
 		\param	releaseFlag	if true, the value object will be managed by this object, it means it will be deleted from memory during destruction.
