@@ -327,10 +327,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IObjectSnap.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IProgressManager.h"
 				>
 			</File>

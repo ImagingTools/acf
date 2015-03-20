@@ -7,7 +7,6 @@
 
 // ACF includes
 #include "istd/TOptDelPtr.h"
-#include "ibase/IObjectSnap.h"
 #include "i2d/ICalibrationProvider.h"
 #include "iimg/CBitmapBase.h"
 #include "iimg/IQImageProvider.h"
@@ -22,8 +21,7 @@ namespace iimg
 */
 class CBitmap:
 			public iimg::CBitmapBase,
-			virtual public IQImageProvider,
-			virtual public ibase::IObjectSnap
+			virtual public IQImageProvider
 {
 public:
 	typedef iimg::CBitmapBase BaseClass;
@@ -37,12 +35,6 @@ public:
 	// reimplemented (iimg::IQImageProvider)
 	virtual const QImage& GetQImage() const;
 	virtual bool CopyImageFrom(const QImage& image);
-
-	// reimplemented (ibase::IObjectSnap)
-	virtual bool GetSnap(
-				const istd::IChangeable& data,
-				iimg::IBitmap& objectSnap,
-				const istd::CIndex2d& size) const;
 
 	// reimplemented (iimg::IBitmap)
 	virtual bool IsFormatSupported(PixelFormat pixelFormat) const;

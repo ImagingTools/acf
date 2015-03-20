@@ -55,24 +55,6 @@ bool CBitmap::CopyImageFrom(const QImage& image)
 }
 
 
-// reimplemented (ibase::IObjectSnap)
-
-bool CBitmap::GetSnap(const istd::IChangeable& data, iimg::IBitmap& objectSnap, const istd::CIndex2d& size) const
-{
-	const iimg::CBitmap* bitmapPtr = dynamic_cast<const iimg::CBitmap*>(&data);
-	if (bitmapPtr == NULL){
-		return false;
-	}
-
-	iimg::CBitmap snapBitmap;
-	snapBitmap.CopyImageFrom(bitmapPtr->GetQImage().scaled(size.GetX(), size.GetY(), Qt::KeepAspectRatioByExpanding));
-
-	objectSnap.CopyFrom(snapBitmap, istd::IChangeable::CM_WITH_REFS);
-
-	return true;
-}
-
-
 // reimplemented (iimg::IBitmap)
 
 bool CBitmap::IsFormatSupported(PixelFormat pixelFormat) const

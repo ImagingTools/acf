@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3389
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1087
+          1213
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264197
+          3653
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -45,23 +45,9 @@
       <X>
         575
       </X>
-      <X>
+      <Y>
         250
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePreviewGui
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        75
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -73,9 +59,9 @@
       <X>
         250
       </X>
-      <X>
+      <Y>
         400
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -87,9 +73,23 @@
       <X>
         900
       </X>
-      <X>
+      <Y>
         400
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilePreviewGui
+      </ComponentName>
+      <X>
+        575
       </X>
+      <Y>
+        75
+      </Y>
       <Note>
         
       </Note>
