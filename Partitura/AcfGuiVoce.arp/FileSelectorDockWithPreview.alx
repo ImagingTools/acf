@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          3012
+          3653
         </Number>
         <Description>
           ACF
@@ -18,21 +29,10 @@
           1
         </Id>
         <Number>
-          890
+          1213
         </Number>
         <Description>
           ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264192
-        </Number>
-        <Description>
-          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -40,70 +40,14 @@
   <PositionMap count="6">
     <Element>
       <ComponentName>
-        FileExplorerGui
-      </ComponentName>
-      <X>
-        275
-      </X>
-      <X>
-        325
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        PreviewGui
-      </ComponentName>
-      <X>
-        800
-      </X>
-      <X>
-        325
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SplittedGui
-      </ComponentName>
-      <X>
-        550
-      </X>
-      <X>
-        200
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SettingsPersistence
-      </ComponentName>
-      <X>
-        550
-      </X>
-      <X>
-        550
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         DockWidgetGui
       </ComponentName>
       <X>
         550
       </X>
-      <X>
+      <Y>
         50
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -115,9 +59,65 @@
       <X>
         550
       </X>
-      <X>
+      <Y>
         450
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        PreviewGui
+      </ComponentName>
+      <X>
+        800
       </X>
+      <Y>
+        325
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SplittedGui
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <Y>
+        200
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        FileExplorerGui
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <Y>
+        325
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SettingsPersistence
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <Y>
+        550
+      </Y>
       <Note>
         
       </Note>

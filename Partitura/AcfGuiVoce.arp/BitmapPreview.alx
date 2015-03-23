@@ -15,17 +15,6 @@
       </Version>
       <Version>
         <Id>
-          1
-        </Id>
-        <Number>
-          1213
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
@@ -35,37 +24,20 @@
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1213
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="4">
-    <Element>
-      <ComponentName>
-        BitmapLoader
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <Y>
-        250
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageView
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <Y>
-        400
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         Bitmap
@@ -82,6 +54,20 @@
     </Element>
     <Element>
       <ComponentName>
+        BitmapLoader
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <Y>
+        250
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         FilePreviewGui
       </ComponentName>
       <X>
@@ -89,6 +75,20 @@
       </X>
       <Y>
         75
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ImageView
+      </ComponentName>
+      <X>
+        250
+      </X>
+      <Y>
+        400
       </Y>
       <Note>
         

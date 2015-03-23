@@ -4,6 +4,7 @@
 // Qt includes
 #include <QtCore/QFileInfo>
 #include <QtCore/QTimer>
+#include <QtConcurrent/QtConcurrent>
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
@@ -21,20 +22,22 @@ void CFilePreviewGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	if (		m_objectModelCompPtr.IsValid() &&
-				m_objectObserverCompPtr.IsValid() &&
-				!m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
-		m_objectModelCompPtr->AttachObserver(m_objectObserverCompPtr.GetPtr());
+	if (m_previewObjectPtr.IsValid() && m_objectObserverCompPtr.IsValid()){
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(m_previewObjectPtr.GetPtr());
+		if ((modelPtr != NULL) && !modelPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
+			modelPtr->AttachObserver(m_objectObserverCompPtr.GetPtr());
+		}
 	}
 }
 
 
 void CFilePreviewGuiComp::OnGuiModelDetached()
 {
-	if (		m_objectModelCompPtr.IsValid() &&
-				m_objectObserverCompPtr.IsValid() &&
-				m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
-		m_objectModelCompPtr->DetachObserver(m_objectObserverCompPtr.GetPtr());
+	if (m_previewObjectPtr.IsValid() && m_objectObserverCompPtr.IsValid()){
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(m_previewObjectPtr.GetPtr());
+		if ((modelPtr != NULL) && modelPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
+			modelPtr->DetachObserver(m_objectObserverCompPtr.GetPtr());
+		}
 	}
 
 	BaseClass::OnGuiModelDetached();
@@ -50,8 +53,6 @@ void CFilePreviewGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*change
 	}
 
 	UpdateFilePreview();
-
-
 }
 
 
@@ -66,11 +67,14 @@ void CFilePreviewGuiComp::OnGuiCreated()
 	}
 
 	connect(&m_fileSystemObserver, SIGNAL(fileChanged(const QString&)), this, SLOT(UpdateFilePreview()));
+	connect(&m_previewGenerationWatcher, SIGNAL(finished()), this, SLOT(OnPreviewGenerationFinished()));
 }
 
 
 void CFilePreviewGuiComp::OnGuiDestroyed()
 {
+	m_previewGenerationWatcher.waitForFinished();
+
 	if (m_objectGuiCompPtr.IsValid()){
 		m_objectGuiCompPtr->DestroyGui();	
 	}
@@ -78,6 +82,21 @@ void CFilePreviewGuiComp::OnGuiDestroyed()
 	BaseClass::OnGuiDestroyed();
 }
 
+
+// reimplemented (icomp::CComponentBase)
+
+void CFilePreviewGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_objectFactoryCompPtr.IsValid()){
+		m_previewObjectPtr.SetPtr(m_objectFactoryCompPtr.CreateInstance());
+		m_workingObjectPtr.SetPtr(m_objectFactoryCompPtr.CreateInstance());
+	}
+}
+
+
+// private slots
 
 void CFilePreviewGuiComp::UpdateFilePreview()
 {
@@ -104,14 +123,14 @@ void CFilePreviewGuiComp::UpdateFilePreview()
 
 				m_lastModificationTimeStamp = QDateTime();
 
-				UpdateObjectFromFile();
+				m_previewGenerationWatcher.setFuture(QtConcurrent::run(this, &CFilePreviewGuiComp::UpdateObjectFromFile));
 			}
 		}
 		else{
 			m_lastFilePath = QString();
 
-			if (m_objectCompPtr.IsValid()){
-				m_objectCompPtr->ResetData();
+			if (m_previewObjectPtr.IsValid()){
+				m_previewObjectPtr->ResetData();
 			}
 
 			if (!newFilePath.isEmpty()){
@@ -120,9 +139,21 @@ void CFilePreviewGuiComp::UpdateFilePreview()
 		}
 	}
 	else{
-		if (m_objectCompPtr.IsValid()){
-			m_objectCompPtr->ResetData();
+		if (m_previewObjectPtr.IsValid()){
+			m_previewObjectPtr->ResetData();
 		}
+	}
+}
+
+
+void CFilePreviewGuiComp::OnPreviewGenerationFinished()
+{
+	QMutexLocker lock(&m_mutex);
+
+	istd::CChangeNotifier changePtr(m_previewObjectPtr.GetPtr());
+
+	if (m_previewObjectPtr.IsValid() && m_workingObjectPtr.IsValid()){
+		m_previewObjectPtr->CopyFrom(*m_workingObjectPtr.GetPtr());
 	}
 }
 
@@ -131,14 +162,16 @@ void CFilePreviewGuiComp::UpdateFilePreview()
 
 void CFilePreviewGuiComp::UpdateObjectFromFile()
 {
-	if (!m_objectCompPtr.IsValid()){
+	QMutexLocker lock(&m_mutex);
+
+	if (!m_workingObjectPtr.IsValid()){
 		return;
 	}
 
 	QFileInfo fileInfo(m_lastFilePath);
 
 	if (!fileInfo.exists()){
-		m_objectCompPtr->ResetData();
+		m_workingObjectPtr->ResetData();
 
 		return;
 	}
@@ -146,12 +179,10 @@ void CFilePreviewGuiComp::UpdateObjectFromFile()
 	if (fileInfo.lastModified() != m_lastModificationTimeStamp){
 		m_lastModificationTimeStamp = fileInfo.lastModified();
 
-		istd::CChangeNotifier changePtr(m_objectCompPtr.GetPtr());
-
 		if (m_fileLoaderCompPtr.IsValid()){
-			int retVal = m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr.GetPtr(), m_lastFilePath);
+			int retVal = m_fileLoaderCompPtr->LoadFromFile(*m_workingObjectPtr.GetPtr(), m_lastFilePath);
 			if (retVal != ifile::IFilePersistence::OS_OK){
-				m_objectCompPtr->ResetData();
+				m_workingObjectPtr->ResetData();
 			}
 		}
 	}

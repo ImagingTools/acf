@@ -5,6 +5,7 @@
 // Qt includes
 #include <QtCore/QFileSystemWatcher>
 #include <QtCore/QDateTime>
+#include <QtCore/QFutureWatcher>
 
 // ACF includes
 #include "ifile/IFilePersistence.h"
@@ -34,8 +35,7 @@ public:
 
 	I_BEGIN_COMPONENT(CFilePreviewGuiComp);
 		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "Object loader", true, "FileLoader");
-		I_ASSIGN(m_objectCompPtr, "Object", "Object", true, "Object");
-		I_ASSIGN_TO(m_objectModelCompPtr, m_objectCompPtr, true);
+		I_ASSIGN(m_objectFactoryCompPtr, "ObjectFactory", "Factory for creation of data object to be previewed", true, "ObjectFactory");
 		I_ASSIGN(m_objectObserverCompPtr, "ObjectView", "View component for the object", true, "ObjectView");
 		I_ASSIGN_TO(m_objectGuiCompPtr, m_objectObserverCompPtr, true);
 	I_END_COMPONENT;
@@ -50,14 +50,19 @@ protected:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private Q_SLOTS:
 	void UpdateFilePreview();
+	void OnPreviewGenerationFinished();
+
+private:
 	void UpdateObjectFromFile();
 
 private:
 	I_REF(ifile::IFilePersistence, m_fileLoaderCompPtr);
-	I_REF(istd::IChangeable, m_objectCompPtr);
-	I_REF(imod::IModel, m_objectModelCompPtr);
+	I_FACT(istd::IChangeable, m_objectFactoryCompPtr);
 	I_REF(imod::IObserver, m_objectObserverCompPtr);
 	I_REF(iqtgui::IGuiObject, m_objectGuiCompPtr);
 
@@ -65,6 +70,13 @@ private:
 
 	QDateTime m_lastModificationTimeStamp;
 	QString m_lastFilePath;
+
+	QFutureWatcher<void> m_previewGenerationWatcher;
+
+	istd::TDelPtr<istd::IChangeable> m_previewObjectPtr;
+	istd::TDelPtr<istd::IChangeable> m_workingObjectPtr;
+
+	QMutex m_mutex;
 };
 
 

@@ -15,17 +15,6 @@
       </Version>
       <Version>
         <Id>
-          1
-        </Id>
-        <Number>
-          1213
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
@@ -33,6 +22,17 @@
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1213
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -183,10 +183,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Object
+              ObjectFactory
             </Id>
             <Type>
-              Reference
+              Factory
             </Type>
             <ExportId>
               

@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          3012
+          3653
         </Number>
         <Description>
           ACF
@@ -18,21 +29,10 @@
           1
         </Id>
         <Number>
-          890
+          1213
         </Number>
         <Description>
           ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264192
-        </Number>
-        <Description>
-          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -40,14 +40,28 @@
   <PositionMap count="4">
     <Element>
       <ComponentName>
+        Bitmap
+      </ComponentName>
+      <X>
+        175
+      </X>
+      <Y>
+        350
+      </Y>
+      <Note>
+        Bitmap data model
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         BitmapLoader
       </ComponentName>
       <X>
         975
       </X>
-      <X>
+      <Y>
         350
-      </X>
+      </Y>
       <Note>
         Loader for the bitmap data
       </Note>
@@ -59,9 +73,9 @@
       <X>
         550
       </X>
-      <X>
+      <Y>
         350
-      </X>
+      </Y>
       <Note>
         File selection component with integrated preview for the file contents
       </Note>
@@ -73,25 +87,11 @@
       <X>
         550
       </X>
-      <X>
+      <Y>
         150
-      </X>
+      </Y>
       <Note>
         Bitmap preview
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        175
-      </X>
-      <X>
-        350
-      </X>
-      <Note>
-        Bitmap data model
       </Note>
     </Element>
   </PositionMap>
