@@ -112,7 +112,7 @@ protected:
 	// events
 	virtual bool OnWheelEvent(QWheelEvent* eventPtr);
 	virtual bool OnMouseDoubleClickEvent(QEvent* eventPtr);
-	virtual bool OnKeyReleaseEvent(QKeyEvent* eventPtr);
+	virtual bool OnKeyPressEvent(QKeyEvent* eventPtr);
 
 	// reimplemented (iview::CConsoleBase)
 	virtual void UpdateEditModeButtons();
@@ -124,7 +124,7 @@ protected:
 	virtual void OnBoundingBoxChanged();
 
 	// reimplemented Qt (QWidget)
-	void keyReleaseEvent(QKeyEvent* event);	
+	void keyPressEvent(QKeyEvent* event);	
 	
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);	

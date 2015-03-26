@@ -2,6 +2,7 @@
 
 
 // Qt includes
+#include <QtCore/QDebug>
 #include <QtGui/QWheelEvent>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QFrame>
@@ -98,6 +99,7 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	ConnectSignalSlots();
 
 	m_viewPtr->installEventFilter(this);
+	m_viewWidget->installEventFilter(this);
 
 	//Add widget view wrapper - to persist layout when switching from full screen
 	QVBoxLayout* vLayout = new QVBoxLayout(this);
@@ -471,6 +473,8 @@ void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 			m_savedTransform = m_viewPtr->GetTransform();
 			m_isViewMaximized = isMaximized();
 
+			layout()->removeWidget(m_viewWidget);
+
 			m_viewWidget->setParent(NULL);
 			m_viewWidget->showFullScreen();
 
@@ -540,7 +544,7 @@ bool CConsoleGui::OnMouseDoubleClickEvent(QEvent* /*eventPtr*/)
 }
 
 
-bool CConsoleGui::OnKeyReleaseEvent(QKeyEvent* eventPtr)
+bool CConsoleGui::OnKeyPressEvent(QKeyEvent* eventPtr)
 {
 	switch(eventPtr->key()){
 
@@ -777,10 +781,10 @@ void CConsoleGui::OnBoundingBoxChanged()
 
 // reimplemented (QWidget)
 
-void CConsoleGui::keyReleaseEvent(QKeyEvent* eventPtr)
+void CConsoleGui::keyPressEvent(QKeyEvent* eventPtr)
 {
-	if (!OnKeyReleaseEvent(eventPtr)){
-		BaseClass::keyReleaseEvent(eventPtr);
+	if (!OnKeyPressEvent(eventPtr)){
+		BaseClass::keyPressEvent(eventPtr);
 	}
 }
 
@@ -789,11 +793,13 @@ void CConsoleGui::keyReleaseEvent(QKeyEvent* eventPtr)
 
 bool CConsoleGui::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
-	if (sourcePtr != m_viewPtr){
+	if (sourcePtr != m_viewPtr && (sourcePtr != m_viewWidget)){
 		return BaseClass::eventFilter(sourcePtr, eventPtr);
 	}
 
-	switch(eventPtr->type()){
+	int eventType = eventPtr->type();
+
+	switch(eventType){
 	case QEvent::MouseButtonDblClick:
 		if (OnMouseDoubleClickEvent(eventPtr)){
 			return true;
@@ -805,6 +811,15 @@ bool CConsoleGui::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 			return true;
 		}
 		break;
+
+	case QEvent::KeyPress:
+	{
+		QKeyEvent* keyEventPtr = dynamic_cast<QKeyEvent*>(eventPtr);
+		Q_ASSERT(keyEventPtr != NULL);
+
+		OnKeyPressEvent(keyEventPtr);
+		break;
+	}
 
 	default:
 		break;
