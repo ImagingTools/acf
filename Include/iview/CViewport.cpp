@@ -28,9 +28,6 @@ CViewport::CViewport(CConsoleBase* framePtr, QWidget* parent)
 	m_mousePointerModes[MPM_DRAG] = QCursor(Qt::SizeAllCursor);
 	m_mousePointerModes[MPM_SCREEN_MOVE] = QCursor(Qt::PointingHandCursor);
 
-	setAttribute(Qt::WA_NoBackground);
-	setAttribute(Qt::WA_PaintOnScreen);
-
 	setMouseTracking(true);
 
 	m_blockBBoxEvent = false;
