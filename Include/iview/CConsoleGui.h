@@ -25,7 +25,7 @@ namespace iview
 {
 
 
-class CConsoleGui: 
+class CConsoleGui:
 			public iview::CConsoleBase,
 			public ibase::ICommandsProvider
 {
@@ -122,9 +122,6 @@ protected:
 	virtual bool OnSelectChange(const iview::IShapeView& view, const istd::CIndex2d& position, const iview::IInteractiveShape& shape, bool state);
 	virtual bool OnViewMouseButton(const iview::IShapeView& view, const istd::CIndex2d& position, Qt::MouseButton buttonType, bool state, const iview::IInteractiveShape* shapePtr);
 	virtual void OnBoundingBoxChanged();
-
-	// reimplemented Qt (QWidget)
-	void keyPressEvent(QKeyEvent* event);	
 	
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);	

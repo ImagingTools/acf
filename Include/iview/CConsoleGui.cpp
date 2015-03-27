@@ -447,10 +447,12 @@ void CConsoleGui::UpdateScrollbarsValues()
 	}
 }
 
+
 bool CConsoleGui::IsFullScreenMode() const
 {
 	return m_isFullScreenMode;
 }
+
 
 void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 {
@@ -476,6 +478,8 @@ void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 			layout()->removeWidget(m_viewWidget);
 
 			m_viewWidget->setParent(NULL);
+			Qt::WindowFlags flags = m_viewWidget->windowFlags();
+			m_viewWidget->setWindowFlags(flags | Qt::WindowStaysOnTopHint);
 			m_viewWidget->showFullScreen();
 
 			// center image on the screen
@@ -483,6 +487,9 @@ void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 			m_viewPtr->Update();
 		}
 		else{
+			Qt::WindowFlags flags = m_viewWidget->windowFlags();
+			m_viewWidget->setWindowFlags(flags & ~Qt::WindowStaysOnTopHint);
+
 			m_viewWidget->showNormal();
 
 			m_viewWidget->setParent(this);
@@ -776,16 +783,6 @@ bool CConsoleGui::OnViewMouseButton(
 void CConsoleGui::OnBoundingBoxChanged()
 {
 	UpdateScrollbarsValues();
-}
-
-
-// reimplemented (QWidget)
-
-void CConsoleGui::keyPressEvent(QKeyEvent* eventPtr)
-{
-	if (!OnKeyPressEvent(eventPtr)){
-		BaseClass::keyPressEvent(eventPtr);
-	}
 }
 
 
