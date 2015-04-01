@@ -11,6 +11,7 @@
 #include "ifile/IFilePersistence.h"
 #include "ifile/IFileNameParam.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+
 #include "GeneratedFiles/ifilegui/ui_CFilePreviewGuiComp.h"
 
 

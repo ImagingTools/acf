@@ -4,7 +4,11 @@
 // Qt includes
 #include <QtCore/QFileInfo>
 #include <QtCore/QTimer>
+#if QT_VERSION >= 0x050000
 #include <QtConcurrent/QtConcurrent>
+#else
+#include <QtCore/QtConcurrentRun>
+#endif
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
