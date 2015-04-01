@@ -103,12 +103,19 @@ protected:
 	virtual void SetReadOnly(bool state);
 
 protected:
+	/**
+		Control if GUI should be disaled for read-only editors.
+		By default it is set to \c true.
+	*/
+	void SetDisableUiIfReadOnly(bool state);
+
 	bool m_isReadOnly;
 
 private:
 	void DoUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 private:
+	bool m_disableUiIfReadOnly;
 	int m_ignoreUpdatesCounter;
 
 	/**
@@ -128,6 +135,7 @@ private:
 template <class Gui, class Observer>
 TGuiObserverWrap<Gui, Observer>::TGuiObserverWrap()
 :	m_isReadOnly(false),
+	m_disableUiIfReadOnly(true),
 	m_ignoreUpdatesCounter(0),
 	m_updateOnShow(false)
 {
@@ -222,9 +230,18 @@ bool TGuiObserverWrap<Gui, Observer>::IsUpdateBlocked() const
 
 
 template <class Gui, class Observer>
+void TGuiObserverWrap<Gui, Observer>::SetDisableUiIfReadOnly(bool state)
+{
+	m_disableUiIfReadOnly = state;
+}
+
+
+// provate methods
+
+template <class Gui, class Observer>
 bool TGuiObserverWrap<Gui, Observer>::DoUpdateModel()
 {
-	if (!IsUpdateBlocked() && Observer::IsModelAttached()){
+	if (!m_isReadOnly && !IsUpdateBlocked() && Observer::IsModelAttached()){
 		UpdateBlocker updateBlocker(this);
 		Q_UNUSED(updateBlocker);
 
@@ -314,6 +331,13 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiCreated()
 {
 	Gui::OnGuiCreated();
 
+	if (m_disableUiIfReadOnly){
+		QWidget* widgetPtr = Gui::GetWidget();
+		Q_ASSERT(widgetPtr != NULL);
+
+		widgetPtr->setEnabled(!m_isReadOnly);
+	}
+
 	if (Observer::IsModelAttached(NULL)){
 		OnGuiModelAttached();
 	}
@@ -363,8 +387,7 @@ void TGuiObserverWrap<Gui, Observer>::SetReadOnly(bool state)
 {
 	m_isReadOnly = state;
 
-	if (Gui::IsGuiCreated())
-	{
+	if (m_disableUiIfReadOnly && Gui::IsGuiCreated()){
 		QWidget* widgetPtr = Gui::GetWidget();
 		Q_ASSERT(widgetPtr != NULL);
 
