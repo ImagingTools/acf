@@ -5,11 +5,12 @@
 // Qt includes
 #include <QThread>
 #include <QMutex>
-#include <QVector>
 
 // ACF includes
 #include "ilog/TLoggerCompWrap.h"
 #include "ifile/IFileSystemInfoProvider.h"
+#include "ibase/IRuntimeStatusProvider.h"
+#include "imod/CMultiModelDispatcherBase.h"
 
 
 namespace ifile
@@ -20,16 +21,24 @@ class CFileSystemInfoProviderComp:
 			protected QThread,
 			public ilog::CLoggerComponentBase, 
 			virtual public ifile::IFileSystemInfoProvider,
-			virtual public iprm::IOptionsList
+			virtual public iprm::IOptionsList,
+			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 
+	enum ModelId
+	{
+		MI_RUNTIME_STATUS = 0
+	};
+
 	I_BEGIN_COMPONENT(CFileSystemInfoProviderComp);
 		I_REGISTER_INTERFACE(ifile::IFileSystemInfoProvider);
 		I_REGISTER_INTERFACE(iprm::IOptionsList);
 		I_ASSIGN(m_autoUpdatePeriodAttr, "AutomaticUpdatePeriod", "Automatic updates period, s", false, 10);
+		I_ASSIGN(m_runtimeStatusCompPtr, "RuntimeStatus", "Application's runtime status", false, "RuntimeStatus");
+		I_ASSIGN_TO(m_runtimeStatusModelCompPtr, m_runtimeStatusCompPtr, false);
 	I_END_COMPONENT;
 
 	CFileSystemInfoProviderComp();
@@ -51,6 +60,9 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+	// reimplemented (imod::CMultiModelDispatcherBase)
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
+
 	// reimplemented (QThread)
 	virtual void run();
 
@@ -67,7 +79,7 @@ protected:
 		}
 	};
 
-	typedef QVector<DriveInfo> DriveInfos;
+	typedef std::vector<DriveInfo> DriveInfos;
 
 Q_SIGNALS:
 	void EmitUpdate(const DriveInfos& driveInfos);
@@ -87,6 +99,9 @@ private:
 	mutable QMutex m_lock;
 
 	I_ATTR(int, m_autoUpdatePeriodAttr);
+
+	I_REF(ibase::IRuntimeStatusProvider, m_runtimeStatusCompPtr);
+	I_REF(imod::IModel, m_runtimeStatusModelCompPtr);
 };
 
 

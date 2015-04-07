@@ -116,6 +116,10 @@ void CAutoPersistenceComp::OnComponentCreated()
 		connect(&m_fileWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnFileContentsChanged(const QString&)));
 	}
 
+	if (m_runtimeStatusCompPtr.IsValid() &&	m_runtimeStatusModelCompPtr.IsValid()){
+		BaseClass2::RegisterModel(m_runtimeStatusModelCompPtr.GetPtr(), MI_RUNTIME_STATUS);
+	}
+
 
 	EnsureTimerConnected();
 }
@@ -123,15 +127,17 @@ void CAutoPersistenceComp::OnComponentCreated()
 
 void CAutoPersistenceComp::OnComponentDestroyed()
 {
-	disconnect(&m_storingTimer, SIGNAL(timeout()), this, SLOT(OnTimeout()));
-	disconnect(&m_fileWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnFileContentsChanged(const QString&)));
-
-	m_storingFuture.waitForFinished();
-
 	BaseClass2::UnregisterAllModels();
 
-	if (*m_storeOnEndAttrPtr && m_objectCompPtr.IsValid() && !m_isReloading){
-		StoreObject(*m_objectCompPtr.GetPtr());
+	if (!m_runtimeStatusCompPtr.IsValid()){
+		disconnect(&m_storingTimer, SIGNAL(timeout()), this, SLOT(OnTimeout()));
+		disconnect(&m_fileWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnFileContentsChanged(const QString&)));
+
+		m_storingFuture.waitForFinished();
+
+		if (*m_storeOnEndAttrPtr && m_objectCompPtr.IsValid() && !m_isReloading){
+			StoreObject(*m_objectCompPtr.GetPtr());
+		}
 	}
 
 	BaseClass::OnComponentDestroyed();
@@ -189,6 +195,19 @@ void CAutoPersistenceComp::OnModelChanged(int modelId, const istd::IChangeable::
 			}
 		}
 		break;
+
+		case MI_RUNTIME_STATUS:
+			if (m_runtimeStatusCompPtr->GetRuntimeStatus() == ibase::IRuntimeStatusProvider::RS_SHUTDOWN){
+				disconnect(&m_storingTimer, SIGNAL(timeout()), this, SLOT(OnTimeout()));
+				disconnect(&m_fileWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnFileContentsChanged(const QString&)));
+
+				m_storingFuture.waitForFinished();
+		
+				if (*m_storeOnEndAttrPtr && m_objectCompPtr.IsValid() && !m_isReloading){
+					StoreObject(*m_objectCompPtr.GetPtr());
+				}
+			}			
+			break;
 
 		default:
 			break;

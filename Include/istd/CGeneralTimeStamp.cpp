@@ -19,9 +19,6 @@ namespace istd
 {
 
 
-CGeneralTimeStamp::ChangeSet CGeneralTimeStamp::s_startChangeSet(CF_START_SET);
-
-
 CGeneralTimeStamp::CGeneralTimeStamp()
 {
 	m_timeShift = 0;
@@ -48,7 +45,8 @@ double CGeneralTimeStamp::GetTimeTo(const CGeneralTimeStamp& timeStamp) const
 
 void CGeneralTimeStamp::Start(double elapsedTime)
 {
-	istd::CChangeNotifier notifier(this, s_startChangeSet);
+	ChangeSet startChangeSet(CF_START_SET);
+	istd::CChangeNotifier notifier(this, startChangeSet);
 
 	m_timeShift = elapsedTime;
 

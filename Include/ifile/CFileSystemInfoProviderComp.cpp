@@ -30,7 +30,7 @@ const iprm::IOptionsList& CFileSystemInfoProviderComp::GetDriveList() const
 
 const istd::CSystem::FileDriveInfo* CFileSystemInfoProviderComp::GetFileDriveInfo(int driveIndex) const
 {
-	Q_ASSERT(driveIndex >= 0 && driveIndex < m_driveInfos.count());
+	Q_ASSERT(driveIndex >= 0 && driveIndex < m_driveInfos.size());
 
 	return &m_driveInfos[driveIndex].info;
 }
@@ -46,13 +46,13 @@ int CFileSystemInfoProviderComp::GetOptionsFlags() const
 
 int CFileSystemInfoProviderComp::GetOptionsCount() const
 {
-	return m_driveInfos.count();
+	return m_driveInfos.size();
 }
 
 
 QString CFileSystemInfoProviderComp::GetOptionName(int index) const
 {
-	Q_ASSERT(index >= 0 && index < m_driveInfos.count());
+	Q_ASSERT(index >= 0 && index < m_driveInfos.size());
 
 	return m_driveInfos[index].name;
 }
@@ -60,7 +60,7 @@ QString CFileSystemInfoProviderComp::GetOptionName(int index) const
 
 QString CFileSystemInfoProviderComp::GetOptionDescription(int index) const
 {
-	Q_ASSERT(index >= 0 && index < m_driveInfos.count());
+	Q_ASSERT(index >= 0 && index < m_driveInfos.size());
 
 	return m_driveInfos[index].name;
 }
@@ -68,7 +68,7 @@ QString CFileSystemInfoProviderComp::GetOptionDescription(int index) const
 
 QByteArray CFileSystemInfoProviderComp::GetOptionId(int index) const
 {
-	Q_ASSERT(index >= 0 && index < m_driveInfos.count());
+	Q_ASSERT(index >= 0 && index < m_driveInfos.size());
 
 	return m_driveInfos[index].id;
 }
@@ -88,6 +88,9 @@ void CFileSystemInfoProviderComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	if (m_runtimeStatusCompPtr.IsValid() && m_runtimeStatusModelCompPtr.IsValid()){
+		RegisterModel(m_runtimeStatusModelCompPtr.GetPtr(), MI_RUNTIME_STATUS);
+	}
 
 	if (m_autoUpdatePeriodAttr.IsValid()){
 		m_sleepInterval = *m_autoUpdatePeriodAttr;
@@ -103,15 +106,25 @@ void CFileSystemInfoProviderComp::OnComponentCreated()
 
 void CFileSystemInfoProviderComp::OnComponentDestroyed()
 {
-	if (isRunning()){
-		m_threadTerminationRequested = true;
+	m_threadTerminationRequested = true;
 
-		while (isRunning()){
-			msleep(m_sleepInterval);
-		}
-	}
+	wait();
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CFileSystemInfoProviderComp::OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	if (modelId == MI_RUNTIME_STATUS){
+		if (m_runtimeStatusCompPtr->GetRuntimeStatus() == ibase::IRuntimeStatusProvider::RS_SHUTDOWN){
+			m_threadTerminationRequested = true;
+
+			wait();
+		}
+	}
 }
 
 

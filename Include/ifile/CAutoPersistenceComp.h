@@ -16,6 +16,7 @@
 #include "iser/CMemoryWriteArchive.h"
 #include "ifile/IFilePersistence.h"
 #include "ifile/IFileNameParam.h"
+#include "ibase/IRuntimeStatusProvider.h"
 
 #if QT_VERSION >= 0x050000
 #include <QtCore/QLockFile>
@@ -36,7 +37,7 @@ namespace ifile
 	If this parameter is set, then the object will be stored to the file in the given time interval, but only if the object data was changed.
 	\note If the time interval for the object storing is set, the \c StoreOnChange attribute will be ignored.
 	\note Please note, that this component doesn't provide any public interfaces. The data object will be attached to the internal observer during the initialization phase of the component.
-	To enforce the instatiation of this component, you should activate 'Automatically create instance' flag in the Compositor.
+	To enforce the instantiation of this component, you should activate 'Automatically create instance' flag in the Compositor.
 
 	\ingroup Persistence
 */
@@ -61,7 +62,12 @@ public:
 		/**
 			File path was changed
 		*/
-		MI_FILEPATH
+		MI_FILEPATH,
+
+		/**
+			Runtime status was changed
+		*/
+		MI_RUNTIME_STATUS
 	};
 
 	I_BEGIN_COMPONENT(CAutoPersistenceComp);
@@ -75,6 +81,8 @@ public:
 		I_ASSIGN(m_storeOnChangeAttrPtr, "StoreOnChange", "Flag indicating that object should be stored on each data change", true, false);
 		I_ASSIGN(m_storeIntervalAttrPtr, "StoreInterval", "Time interval in seconds for automatic object storing", false, 10);
 		I_ASSIGN(m_reloadOnFileChangeAttrPtr, "AutoReload", "Update data model if the file was changed", true, false);
+		I_ASSIGN(m_runtimeStatusCompPtr, "RuntimeStatus", "Application's runtime status", false, "RuntimeStatus");
+		I_ASSIGN_TO(m_runtimeStatusModelCompPtr, m_runtimeStatusCompPtr, false);
 	I_END_COMPONENT;
 
 	/**
@@ -110,7 +118,7 @@ private Q_SLOTS:
 
 private:
 	/**
-		Ensure that the peristence timer was connected to the timeout slot.
+		Ensure that the persistence timer was connected to the timeout slot.
 	*/
 	void EnsureTimerConnected();
 
@@ -118,8 +126,11 @@ private:
 	void UnlockFile() const;
 
 private:
+	I_REF(ibase::IRuntimeStatusProvider, m_runtimeStatusCompPtr);
+	I_REF(imod::IModel, m_runtimeStatusModelCompPtr);
+
 	/**
-		Reference to the object to be made persisitent.
+		Reference to the object to be made persistent.
 	*/
 	I_REF(istd::IChangeable, m_objectCompPtr);
 	I_REF(iser::ISerializable, m_serializeableObjectCompPtr);
@@ -169,7 +180,7 @@ private:
 	bool m_isDataWasChanged;
 
 	/**
-		Loading of the object was successfull.
+		Loading of the object was successful.
 	*/
 	bool m_wasLoadingSuceeded;
 

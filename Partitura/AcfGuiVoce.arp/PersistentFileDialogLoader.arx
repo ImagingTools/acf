@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3054
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          982
+          1233
         </Number>
         <Description>
           ACF-Solutions
@@ -29,10 +18,21 @@
           1023
         </Id>
         <Number>
-          264196
+          328449
         </Number>
         <Description>
           Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          3678
+        </Number>
+        <Description>
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -127,7 +127,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -188,6 +188,22 @@
             </Type>
             <ExportId>
               LastPathSettingsKey
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RuntimeStatus
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              RuntimeStatus
             </ExportId>
             <Data>
               <IsEnabled>
