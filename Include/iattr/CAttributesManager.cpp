@@ -5,12 +5,9 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "imod/IModel.h"
-
-// ACF-Solutions includes
+#include "istd/CChangeGroup.h"
 #include "imod/IModel.h"
 #include "iattr/TAttribute.h"
-#include "iattr/TMultiAttribute.h"
 
 
 namespace iattr
@@ -61,21 +58,36 @@ bool CAttributesManager::InsertAttribute(
 			iser::IObject* attributePtr,
 			bool releaseFlag)
 {
-	static ChangeSet changeSet(CF_ATTR_ADDED);
-	istd::CChangeNotifier notifier(this, changeSet);
-	Q_UNUSED(notifier);
+	istd::CChangeGroup changeGroup(this);
+	Q_UNUSED(changeGroup);
 
 	AttributePtr& newAttributePtr = m_attributesMap[attributeId];
-	imod::IModel* oldAttrModelPtr = dynamic_cast<imod::IModel*>(newAttributePtr.GetPtr());
-	if ((oldAttrModelPtr != NULL) && m_attributesUpdateBridge.IsModelAttached(oldAttrModelPtr)){
-		oldAttrModelPtr->DetachObserver(&m_attributesUpdateBridge);
+
+	if (newAttributePtr.IsValid()){
+		static ChangeSet changeSet(CF_ATTR_REMOVED);
+		istd::CChangeNotifier notifier(this, changeSet);
+		Q_UNUSED(notifier);
+
+		imod::IModel* oldAttrModelPtr = dynamic_cast<imod::IModel*>(newAttributePtr.GetPtr());
+		if ((oldAttrModelPtr != NULL) && m_attributesUpdateBridge.IsModelAttached(oldAttrModelPtr)){
+			oldAttrModelPtr->DetachObserver(&m_attributesUpdateBridge);
+		}
 	}
 
-	newAttributePtr.SetPtr(attributePtr, releaseFlag);
+	if (attributePtr != NULL){
+		static ChangeSet changeSet(CF_ATTR_ADDED);
+		istd::CChangeNotifier notifier(this, changeSet);
+		Q_UNUSED(notifier);
 
-	imod::IModel* attrModelPtr = dynamic_cast<imod::IModel*>(attributePtr);
-	if (attrModelPtr != NULL){
-		attrModelPtr->AttachObserver(&m_attributesUpdateBridge);
+		newAttributePtr.SetPtr(attributePtr, releaseFlag);
+
+		imod::IModel* attrModelPtr = dynamic_cast<imod::IModel*>(attributePtr);
+		if (attrModelPtr != NULL){
+			attrModelPtr->AttachObserver(&m_attributesUpdateBridge);
+		}
+	}
+	else{
+		m_attributesMap.remove(attributeId);
 	}
 
 	return true;
