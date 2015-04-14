@@ -5,6 +5,9 @@
 // STL includes
 #include <vector>
 
+// Qt includes
+#include <QtCore/QtGlobal>
+
 // ACF includes
 #include "istd/TIndex.h"
 

@@ -2,8 +2,8 @@
 #define istd_TRange_included
 
 
-// ACF includes
-#include "istd/istd.h"
+// Qt includes
+#include <QtCore/QtGlobal>
 
 
 namespace istd

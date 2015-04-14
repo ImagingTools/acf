@@ -1,12 +1,12 @@
 #include "istd/CRandomNumber.h"
 
 
+// Qt includes
+#include <QtCore/QtGlobal>
+
 // STD includes
 #include <stdlib.h>
 #include <time.h>
-
-// ACF includes
-#include "istd/istd.h"
 
 
 namespace istd

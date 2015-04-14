@@ -5,9 +5,6 @@
 // Qt includes
 #include <QtCore/QByteArray>
 
-// ACF includes
-#include "istd/istd.h"
-
 
 namespace iser
 {

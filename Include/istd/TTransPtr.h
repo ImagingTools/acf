@@ -2,6 +2,9 @@
 #define istd_TRetSmartPtr_included
 
 
+// Qt includes
+#include <QtCore/QtGlobal>
+
 // ACF includes
 #include "istd/TPointerBase.h"
 

@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "istd/istd.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 

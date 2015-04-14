@@ -12,9 +12,6 @@
 	#undef RemoveDirectory
 #endif
 
-// ACF includes
-#include <istd/istd.h>
-
 
 namespace istd
 {

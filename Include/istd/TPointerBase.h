@@ -2,10 +2,6 @@
 #define istd_TPointerBase_included
 
 
-// ACF includes
-#include "istd/istd.h"
-
-
 namespace istd
 {
 

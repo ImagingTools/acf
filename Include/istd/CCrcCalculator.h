@@ -4,12 +4,7 @@
 
 // Qt includes
 #include <QtCore/QVector>
-
-// ACF includes
-#include "istd/istd.h"
-
-
-class QString;
+#include <QtCore/QString>
 
 
 namespace istd

@@ -7,7 +7,6 @@
 #include <QtCore/QSet>
 
 // ACF includes
-#include "istd/istd.h"
 #include "istd/TDelPtr.h"
 #include "iser/ISerializable.h"
 #include "iser/IObject.h"
