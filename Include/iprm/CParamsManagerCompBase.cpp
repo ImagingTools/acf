@@ -1,5 +1,7 @@
 #include "iprm/CParamsManagerCompBase.h"
 
+// Qt includes
+#include <QtCore/QUuid>
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
@@ -41,6 +43,7 @@ int CParamsManagerCompBase::InsertParamsSet(int typeIndex, int index)
 
 	paramsSetPtr->paramSetPtr.SetPtr(newParamsSetPtr);
 	paramsSetPtr->name = CalculateNewDefaultName();
+	paramsSetPtr->uuid = QUuid::createUuid().toByteArray();
 	paramsSetPtr->typeId = newParamsSetPtr->GetFactoryId();
 	paramsSetPtr->parentPtr = this;
 
@@ -315,7 +318,7 @@ ISelectionParam* CParamsManagerCompBase::GetSubselection(int /*index*/) const
 
 int CParamsManagerCompBase::GetOptionsFlags() const
 {
-	return GetIndexOperationFlags(-1);
+	return SCF_SUPPORT_UNIQUE_ID;
 }
 
 
