@@ -25,7 +25,8 @@ namespace ifile
 CAutoPersistenceComp::CAutoPersistenceComp()
 	:m_isDataWasChanged(false),
 	m_wasLoadingSuceeded(false),
-	m_isReloading(false)
+	m_isReloading(false),
+	m_blockLoadingOnFileChanges(false)
 {
 }
 
@@ -72,6 +73,10 @@ void CAutoPersistenceComp::StoreObject(const istd::IChangeable& object) const
 
 		if (LockFile())
 		{
+			if (*m_reloadOnFileChangeAttrPtr){
+				m_blockLoadingOnFileChanges = true;
+			}
+
 			m_fileLoaderCompPtr->SaveToFile(object, filePath);
 
 			UnlockFile();
@@ -92,11 +97,15 @@ void CAutoPersistenceComp::OnComponentCreated()
 	}
 
 	if (*m_restoreOnBeginAttrPtr){
-		if (m_fileLoaderCompPtr.IsValid() && m_objectCompPtr.IsValid()){			
+		if (m_fileLoaderCompPtr.IsValid() && m_objectCompPtr.IsValid()){
+			m_isReloading = true;
+
 			if (m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr, filePath) == ifile::IFilePersistence::OS_OK)
 			{
 				m_wasLoadingSuceeded = true;
 			}
+
+			m_isReloading = false;
 		}
 	}
 
@@ -246,6 +255,13 @@ void CAutoPersistenceComp::OnTimeout()
 void CAutoPersistenceComp::OnFileContentsChanged(const QString& path)
 {
 	if (!m_objectCompPtr.IsValid() || !m_fileLoaderCompPtr.IsValid()){
+		return;
+	}
+
+	// File was updated by own call of StoreObject:
+	if (*m_reloadOnFileChangeAttrPtr && m_blockLoadingOnFileChanges){
+		m_blockLoadingOnFileChanges = false;
+
 		return;
 	}
 

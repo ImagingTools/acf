@@ -196,6 +196,8 @@ private:
 	QFileSystemWatcher m_fileWatcher;
 
 	bool m_isReloading;
+	
+	mutable bool m_blockLoadingOnFileChanges;
 
 
 #if QT_VERSION >= 0x050000
