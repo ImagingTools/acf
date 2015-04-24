@@ -197,7 +197,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag dataTag("Data", "ID used for export", iser::CArchiveTag::TT_GROUP, &attributeInfoTag, true);
 	static iser::CArchiveTag isEnabledTag("IsEnabled", "Is attribute enabled", iser::CArchiveTag::TT_LEAF, &dataTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = true;

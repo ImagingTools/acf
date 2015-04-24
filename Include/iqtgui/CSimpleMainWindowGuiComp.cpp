@@ -455,7 +455,7 @@ void CSimpleMainWindowGuiComp::OnSaveSettings(QSettings& settings) const
 
 void CSimpleMainWindowGuiComp::OnGuiCreated()
 {
-	static istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
+	static const istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
 
 	BaseClass::OnGuiCreated();
 

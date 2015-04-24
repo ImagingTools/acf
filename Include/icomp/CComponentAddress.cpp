@@ -59,7 +59,7 @@ bool CComponentAddress::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag packageIdTag("PackageId", "ID of package", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag componentIdTag("ComponentId", "ID of factory", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = true;

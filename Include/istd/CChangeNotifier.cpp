@@ -18,7 +18,7 @@ bool CChangeNotifier::IsValid() const
 void CChangeNotifier::Reset()
 {
 	if (m_changeablePtr != NULL){
-		m_changeablePtr->EndChanges(m_changeIds);
+		m_changeablePtr->EndChanges(m_changeSet);
 
 		m_changeablePtr = NULL;
 	}
@@ -38,6 +38,7 @@ void CChangeNotifier::Abort()
 // private methods
 
 CChangeNotifier::CChangeNotifier(const CChangeNotifier& /*notifier*/)
+:	m_changeSet(istd::IChangeable::GetNoChanges())
 {
 }
 

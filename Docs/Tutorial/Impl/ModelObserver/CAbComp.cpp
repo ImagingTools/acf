@@ -41,9 +41,9 @@ bool CAbComp::SetA(int a)
 	// If new value of A differs from the old,
 	// set the new value and fire notification about this change:
 	if (m_a != a){
-		static ChangeSet changeSet(CF_A_CHANGED);
-		istd::CChangeNotifier changeNotifier(this, changeSet);
-		Q_UNUSED(changeNotifier);
+		static const ChangeSet changeSet(CF_A_CHANGED, "Change A");
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_a = a;
 	}
@@ -63,9 +63,9 @@ void CAbComp::SetB(const QByteArray& b)
 	// If new value of B differs from the old,
 	// set the new value and fire notification about this change:
 	if (m_b != b){
-		static ChangeSet changeSet(CF_B_CHANGED);
-		istd::CChangeNotifier changeNotifier(this, changeSet);
-		Q_UNUSED(changeNotifier);
+		static const ChangeSet changeSet(CF_B_CHANGED, "Change B");
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_b = b;
 	}
@@ -87,7 +87,7 @@ bool CAbComp::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag aTag("A", "Value of A", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag bTag("B", "Value of B", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	// Copy current A value to a  temporary variable:

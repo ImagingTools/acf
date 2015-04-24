@@ -205,7 +205,7 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiModelAttached()
 	Q_ASSERT(Gui::IsGuiCreated());
 	Q_ASSERT(Observer::IsModelAttached(NULL));
 
-	static istd::IChangeable::ChangeSet initChangeSet(CF_INIT_EDITOR);
+	static const istd::IChangeable::ChangeSet initChangeSet(CF_INIT_EDITOR);
 	UpdateEditor(initChangeSet);
 }
 

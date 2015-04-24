@@ -116,8 +116,9 @@ void CSingleDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewP
 {
 	Q_ASSERT(viewPtr != NULL);
 
-	istd::IChangeable::ChangeSet changeSet(CF_VIEW_ACTIVATION_CHANGED);
-	istd::CChangeNotifier changePtr(this, changeSet);
+	static const istd::IChangeable::ChangeSet changeSet(CF_VIEW_ACTIVATION_CHANGED);
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	iqtgui::IGuiObject* guiObjectPtr = CompCastPtr<iqtgui::IGuiObject>(viewPtr);
 	QWidget* widgetPtr = GetQtWidget();

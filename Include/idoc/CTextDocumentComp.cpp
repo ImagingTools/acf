@@ -36,7 +36,7 @@ bool CTextDocumentComp::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag textTag("Text", "Text", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = archive.BeginTag(textTag);

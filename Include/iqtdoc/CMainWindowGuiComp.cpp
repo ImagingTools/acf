@@ -664,7 +664,7 @@ void CMainWindowGuiComp::OnGuiCreated()
 	if (m_documentManagerCommandsCompPtr.IsValid()){
 		imod::IModel* modelPtr = CompCastPtr<imod::IModel>(m_documentManagerCommandsCompPtr.GetPtr());
 		if (modelPtr != NULL){
-			static istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
+			static const istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
 			m_commandsObserver.RegisterModel(modelPtr, CPI_DOCUMENT_MANAGER, commandsChangeSet);
 		}
 	}
@@ -700,7 +700,7 @@ void CMainWindowGuiComp::OnRetranslate()
 
 void CMainWindowGuiComp::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
 {
-	static istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
+	static const istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
 
 	if (changeSet.Contains(idoc::IDocumentManager::CF_VIEW_ACTIVATION_CHANGED)){
 		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();

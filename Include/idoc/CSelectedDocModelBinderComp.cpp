@@ -8,7 +8,7 @@ namespace idoc
 CSelectedDocModelBinderComp::CSelectedDocModelBinderComp()
 :	m_isActive(false)
 {
-	static istd::IChangeable::ChangeSet changeMask(
+	static const istd::IChangeable::ChangeSet changeMask(
 				IDocumentManager::CF_DOCUMENT_CREATED,
 				IDocumentManager::CF_DOCUMENT_REMOVED,
 				IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);

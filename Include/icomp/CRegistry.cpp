@@ -64,8 +64,9 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 		}
 	}
 
-	ChangeSet changeSet(CF_ELEMENT_ADDED);
-	istd::CChangeNotifier notifier(this, changeSet);
+	static const ChangeSet changeSet(CF_ELEMENT_ADDED, "Add element");
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	ElementInfo& newElement = m_componentsMap[elementId];
 	newElement.address = address;
@@ -77,8 +78,9 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 
 bool CRegistry::RemoveElementInfo(const QByteArray& elementId)
 {
-	ChangeSet changeSet(CF_ELEMENT_REMOVED);
-	istd::CChangeNotifier notifier(this, changeSet);
+	static const ChangeSet changeSet(CF_ELEMENT_REMOVED, "Remove element");
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	// remove interfaces exported by this component:
 	bool isDone = false;
@@ -255,8 +257,9 @@ bool CRegistry::RenameElement(const QByteArray& oldElementId, const QByteArray& 
 		return false;
 	}
 
-	ChangeSet changeSet(CF_ELEMENT_RENAMED);
-	istd::CChangeNotifier notifier(this, changeSet);
+	static const ChangeSet changeSet(CF_ELEMENT_RENAMED, "Rename element");
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	// calculate new component exports:
 	IRegistry::ExportedElementsMap newExportedComponentsMap;
@@ -407,7 +410,8 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 	quint32 frameworkVersion = 0;
 	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

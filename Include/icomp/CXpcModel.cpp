@@ -32,7 +32,7 @@ bool CXpcModel::Serialize(iser::IArchive& archive)
 	int configFilesCount = 0;
 	bool isStoring = archive.IsStoring();
 
-	istd::CChangeNotifier notifier(isStoring? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(isStoring? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	if (!isStoring){

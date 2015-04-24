@@ -41,8 +41,9 @@ bool CPolylineShape::ExecuteAction(IInteractiveShape::ShapeAction action)
 	}
 
 	if (action == ActionReverseLine){
-		static istd::IChangeable::ChangeSet changeSet(IDisplay::CS_CONSOLE, i2d::IObject2d::CF_OBJECT_POSITION);
-		istd::CChangeNotifier notifier(polygonPtr, changeSet);
+		static const istd::IChangeable::ChangeSet changeSet(IDisplay::CS_CONSOLE, i2d::IObject2d::CF_OBJECT_POSITION, "Reverse nodes");
+		istd::CChangeNotifier notifier(polygonPtr, &changeSet);
+		Q_UNUSED(notifier);
 
 		int count = polygonPtr->GetNodesCount();
 

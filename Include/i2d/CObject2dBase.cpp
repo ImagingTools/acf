@@ -6,8 +6,8 @@ namespace i2d
 
 
 // static members
-istd::IChangeable::ChangeSet CObject2dBase::s_objectPositionChangeSet(CF_OBJECT_POSITION);
-istd::IChangeable::ChangeSet CObject2dBase::s_objectPositionAllDataChangeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
+const istd::IChangeable::ChangeSet CObject2dBase::s_objectPositionChangeSet(CF_OBJECT_POSITION, "Move object");
+const istd::IChangeable::ChangeSet CObject2dBase::s_objectPositionAllDataChangeSet(CF_OBJECT_POSITION, CF_ALL_DATA, "Modify object");
 
 
 // public members

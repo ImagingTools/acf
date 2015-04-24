@@ -45,8 +45,9 @@ double CGeneralTimeStamp::GetTimeTo(const CGeneralTimeStamp& timeStamp) const
 
 void CGeneralTimeStamp::Start(double elapsedTime)
 {
-	ChangeSet startChangeSet(CF_START_SET);
-	istd::CChangeNotifier notifier(this, startChangeSet);
+	static const ChangeSet startChangeSet(CF_START_SET);
+	istd::CChangeNotifier notifier(this, &startChangeSet);
+	Q_UNUSED(notifier);
 
 	m_timeShift = elapsedTime;
 

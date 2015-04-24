@@ -208,7 +208,8 @@ bool CPosition2d::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag centerTag("Center", "Center position", iser::CArchiveTag::TT_GROUP);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, s_objectPositionChangeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &s_objectPositionChangeSet);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

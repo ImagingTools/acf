@@ -52,7 +52,7 @@ bool CSingleModelObserverBase::OnModelAttached(imod::IModel* modelPtr, istd::ICh
 
 	changeMask = m_observedIds;
 
-	static istd::IChangeable::ChangeSet changeSet(istd::IChangeable::CF_NO_UNDO);
+	static const istd::IChangeable::ChangeSet changeSet(istd::IChangeable::CF_NO_UNDO);
 	AfterUpdate(m_modelPtr, changeSet);
 
 	return true;

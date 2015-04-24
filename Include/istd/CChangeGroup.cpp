@@ -9,18 +9,6 @@ namespace istd
 {
 
 
-void CChangeGroup::AppendChangeId(int changeId)
-{
-	m_changeIds += changeId;
-}
-
-
-void CChangeGroup::AppendChangeIds(const IChangeable::ChangeSet& changeSet)
-{
-	m_changeIds += changeSet;
-}
-
-
 bool CChangeGroup::IsValid() const
 {
 	return m_changeablePtr != NULL;
@@ -30,7 +18,7 @@ bool CChangeGroup::IsValid() const
 void CChangeGroup::Reset()
 {
 	if (m_changeablePtr != NULL){
-		m_changeablePtr->EndChanges(m_changeIds);
+		m_changeablePtr->EndChanges(m_changeSet);
 
 		m_changeablePtr = NULL;
 	}
@@ -40,6 +28,7 @@ void CChangeGroup::Reset()
 // private methods
 
 CChangeGroup::CChangeGroup(const CChangeGroup& /*group*/)
+:	m_changeSet(istd::IChangeable::GetNoChanges())
 {
 }
 

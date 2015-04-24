@@ -34,8 +34,8 @@ void CAttributesManager::SetAttributesFactory(const iser::IObjectFactory* factor
 void CAttributesManager::RemoveAllAttributes()
 {
 	if (!m_attributesMap.isEmpty()){
-		static ChangeSet changeSet(CF_RESET, CF_ATTR_REMOVED);
-		istd::CChangeNotifier notifier(this, changeSet);
+		static const ChangeSet changeSet(CF_RESET, CF_ATTR_REMOVED, "Remove all attributes");
+		istd::CChangeNotifier notifier(this, &changeSet);
 		Q_UNUSED(notifier);
 
 		for (		AttributesMap::Iterator iter = m_attributesMap.begin();
@@ -58,14 +58,15 @@ bool CAttributesManager::InsertAttribute(
 			iser::IObject* attributePtr,
 			bool releaseFlag)
 {
-	istd::CChangeGroup changeGroup(this);
+	static const ChangeSet groupChangeSet("Insert attribute");
+	istd::CChangeGroup changeGroup(this, &groupChangeSet);
 	Q_UNUSED(changeGroup);
 
 	AttributePtr& newAttributePtr = m_attributesMap[attributeId];
 
 	if (newAttributePtr.IsValid()){
-		static ChangeSet changeSet(CF_ATTR_REMOVED);
-		istd::CChangeNotifier notifier(this, changeSet);
+		static const ChangeSet changeSet(CF_ATTR_REMOVED);
+		istd::CChangeNotifier notifier(this, &changeSet);
 		Q_UNUSED(notifier);
 
 		imod::IModel* oldAttrModelPtr = dynamic_cast<imod::IModel*>(newAttributePtr.GetPtr());
@@ -75,8 +76,8 @@ bool CAttributesManager::InsertAttribute(
 	}
 
 	if (attributePtr != NULL){
-		static ChangeSet changeSet(CF_ATTR_ADDED);
-		istd::CChangeNotifier notifier(this, changeSet);
+		static const ChangeSet changeSet(CF_ATTR_ADDED);
+		istd::CChangeNotifier notifier(this, &changeSet);
 		Q_UNUSED(notifier);
 
 		newAttributePtr.SetPtr(attributePtr, releaseFlag);
@@ -161,7 +162,7 @@ bool CAttributesManager::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.EndTag(attributesTag);
 	}
 	else{
-		istd::CChangeNotifier notifier(this, GetAllChanges());
+		istd::CChangeNotifier notifier(this, &GetAllChanges());
 		Q_UNUSED(notifier);
 
 		if (m_attributesFactoryPtr == NULL){

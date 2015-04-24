@@ -243,7 +243,7 @@ bool CArc::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag startAngleTag("StartAngle", "Start angle", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag endAngleTag("EndAngle", "End angle", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);

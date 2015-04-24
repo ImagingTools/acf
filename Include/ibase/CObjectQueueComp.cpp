@@ -222,7 +222,7 @@ bool CObjectQueueComp::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag queueTag("Queue", "Set of objects in some queue", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag objectTag("Object", "Single queue object", iser::CArchiveTag::TT_GROUP, &queueTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = true;

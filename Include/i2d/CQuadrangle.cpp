@@ -298,7 +298,7 @@ bool CQuadrangle::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag firstDiagonalTag("FirstDiagonal", "FirstDiagonal", iser::CArchiveTag::TT_GROUP);
 	static iser::CArchiveTag secondDiagonalTag("SecondDiagonal", "SecondDiagonal", iser::CArchiveTag::TT_GROUP);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = archive.BeginTag(firstDiagonalTag);

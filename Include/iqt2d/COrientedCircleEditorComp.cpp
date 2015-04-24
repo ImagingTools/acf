@@ -18,6 +18,7 @@ void COrientedCircleEditorComp::UpdateModel() const
 	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
 
 	i2d::CVector2d position(XSpin->value(), YSpin->value());
 

@@ -21,7 +21,7 @@ CParamsManagerGuiCompBase::CParamsManagerGuiCompBase()
 :	m_lastConnectedModelPtr(NULL),
 	m_lastObserverPtr(NULL)
 {
-	static istd::IChangeable::ChangeSet changeMask(
+	static const istd::IChangeable::ChangeSet changeMask(
 				iprm::IOptionsList::CF_OPTIONS_CHANGED,
 				iprm::IParamsManager::CF_SET_INSERTED,
 				iprm::IParamsManager::CF_SET_REMOVED,

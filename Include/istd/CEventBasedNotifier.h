@@ -25,7 +25,7 @@ class CAssyncNotifier;
 class CEventBasedNotifier
 {
 public:
-	explicit CEventBasedNotifier(istd::IChangeable* slavePtr, const IChangeable::ChangeSet& changeSet);
+	explicit CEventBasedNotifier(istd::IChangeable* slavePtr, const IChangeable::ChangeSet* changeSetPtr = &IChangeable::GetAnyChange());
 	virtual ~CEventBasedNotifier();
 
 private:
@@ -65,7 +65,7 @@ private:
 	/**
 		Set of changes.
 	*/
-	const IChangeable::ChangeSet& m_changeIds;
+	IChangeable::ChangeSet m_changeIds;
 
 	/**
 		Inidicates that \c BeginChange was called on slave object.

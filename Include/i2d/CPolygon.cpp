@@ -143,15 +143,14 @@ bool CPolygon::Transform(
 			ITransformation2d::ExactnessMode mode,
 			double* errorFactorPtr)
 {
-	BeginChanges(s_objectPositionAllDataChangeSet);
+	istd::CChangeNotifier notifier(this, &s_objectPositionAllDataChangeSet);
+	Q_UNUSED(notifier);
 
 	if (ApplyTransform(m_nodes, transformation, mode, errorFactorPtr)){
-		EndChanges(s_objectPositionAllDataChangeSet);
-
 		return true;
 	}
 
-	EndChanges(GetNoChanges());
+	notifier.Abort();
 
 	return false;
 }
@@ -233,7 +232,7 @@ bool CPolygon::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag polygonTag("Polygon", "Polygon", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag vectorTag("V", "Vector", iser::CArchiveTag::TT_GROUP, &polygonTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	int nodesCount = m_nodes.size();

@@ -35,7 +35,7 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 
 	bool isStoring = archive.IsStoring();
 
-	istd::CChangeNotifier notifier(isStoring? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(isStoring? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	// Delete all dynamically created parameter sets:
@@ -169,8 +169,9 @@ bool CMultiParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
 	}
 
 	if (m_paramSets[index - fixedSetsCount]->isEnabled != isEnabled){
-		ChangeSet changeSet(CF_SET_ENABLE_CHANGED);
-		istd::CChangeNotifier notifier(this, changeSet);
+		static const ChangeSet changeSet(CF_SET_ENABLE_CHANGED, "Enable");
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_paramSets[index - fixedSetsCount]->isEnabled = isEnabled;
 	}
@@ -232,6 +233,7 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		ParamSet& paramSet = *m_paramSets[paramSetsIndex];
 
 		istd::CChangeGroup changeGroup(this);
+		Q_UNUSED(changeGroup);
 
 		if (typeId != paramSet.typeId){
 			QMap<QByteArray, int>::ConstIterator typeListIter = m_typeInfoList.typeIdToIndexMap.constFind(typeId);
@@ -255,8 +257,9 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 
 			Q_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
 
-			ChangeSet changeSet(CF_OPTIONS_CHANGED);
-			istd::CChangeNotifier notifier(this, changeSet);
+			static const ChangeSet changeSet(CF_OPTIONS_CHANGED);
+			istd::CChangeNotifier notifier(this, &changeSet);
+			Q_UNUSED(notifier);
 
 			paramSet.typeId = typeId;
 
@@ -267,15 +270,17 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		}
 
 		if (name != paramSet.name){
-			ChangeSet changeSet(CF_SET_NAME_CHANGED);
-			istd::CChangeNotifier notifier(this, changeSet);
+			static const ChangeSet changeSet(CF_SET_NAME_CHANGED);
+			istd::CChangeNotifier notifier(this, &changeSet);
+			Q_UNUSED(notifier);
 
 			paramSet.name = name;
 		}
 
 		if (isEnabled != paramSet.isEnabled){
-			ChangeSet changeSet(CF_SET_ENABLE_CHANGED);
-			istd::CChangeNotifier notifier(this, changeSet);
+			static const ChangeSet changeSet(CF_SET_ENABLE_CHANGED);
+			istd::CChangeNotifier notifier(this, &changeSet);
+			Q_UNUSED(notifier);
 
 			paramSet.isEnabled = isEnabled;
 		}
@@ -301,8 +306,9 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		
 		Q_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
 
-		ChangeSet changeSet(CF_OPTIONS_CHANGED);
-		istd::CChangeNotifier notifier(this, changeSet);	
+		static const ChangeSet changeSet(CF_OPTIONS_CHANGED);
+		istd::CChangeNotifier notifier(this, &changeSet);	
+		Q_UNUSED(notifier);
 
 		ParamSetPtr paramsSetPtr(new imod::TModelWrap<ParamSet>());
 

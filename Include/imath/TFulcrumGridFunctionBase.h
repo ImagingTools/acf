@@ -251,8 +251,9 @@ void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SetLayerPosition(int 
 	Q_ASSERT(layerIndex >= 0);
 	Q_ASSERT(layerIndex < int(positions.size()));
 
-	static ChangeSet changeSet(CF_SORT_LAYERS);
-	istd::CChangeNotifier notifier(this, changeSet);
+	static const ChangeSet changeSet(CF_SORT_LAYERS, "Change fulcrum position");
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	positions[layerIndex] = position;
 }

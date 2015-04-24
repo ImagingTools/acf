@@ -219,10 +219,10 @@ IChangeable::ChangeSet& IChangeable::ChangeSet::operator+=(const ChangeSet& chan
 
 // static attributes
 
-IChangeable::ChangeSet IChangeable::s_emptyChanges;
-IChangeable::ChangeSet IChangeable::s_anyChanges(CF_ANY);
-IChangeable::ChangeSet IChangeable::s_allChanges(CF_ALL_DATA);
-IChangeable::ChangeSet IChangeable::s_delegatedChanges(CF_DELEGATED);
+const IChangeable::ChangeSet IChangeable::s_emptyChanges;
+const IChangeable::ChangeSet IChangeable::s_anyChanges(CF_ANY);
+const IChangeable::ChangeSet IChangeable::s_allChanges(CF_ALL_DATA);
+const IChangeable::ChangeSet IChangeable::s_delegatedChanges(CF_DELEGATED);
 
 
 } // namespace istd

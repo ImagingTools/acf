@@ -3,7 +3,6 @@
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
-#include "istd/CChangeGroup.h"
 #include "istd/TDelPtr.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -734,7 +733,7 @@ bool CLine2d::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag beginPointTag("BeginPoint", "First point of line", iser::CArchiveTag::TT_GROUP);
 	static iser::CArchiveTag endPointTag("EndPoint", "Second point of line", iser::CArchiveTag::TT_GROUP);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = archive.BeginTag(beginPointTag);

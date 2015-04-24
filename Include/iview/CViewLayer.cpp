@@ -80,7 +80,7 @@ bool CViewLayer::ConnectShape(IShape* shapePtr)
 {
 	shapePtr->OnConnectDisplay(this);
 
-	static istd::IChangeable::ChangeSet changeSet(istd::IChangeable::CF_ALL_DATA);
+	static const istd::IChangeable::ChangeSet changeSet(istd::IChangeable::CF_ALL_DATA);
 	shapePtr->OnDisplayChange(changeSet);
 
 	i2d::CRect boundingBox = shapePtr->GetBoundingBox();

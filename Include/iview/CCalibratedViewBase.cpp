@@ -38,7 +38,7 @@ void CCalibratedViewBase::SetDisplayCalibration(const i2d::ICalibration2d* calib
 
 		InvalidateBackground();
 
-		static istd::IChangeable::ChangeSet changeSet(IShape::CF_CALIB);
+		static const istd::IChangeable::ChangeSet changeSet(IShape::CF_CALIB);
 		UpdateAllShapes(changeSet);
 	}
 }

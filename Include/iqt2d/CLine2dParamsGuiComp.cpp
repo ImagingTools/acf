@@ -21,6 +21,7 @@ void CLine2dParamsGuiComp::UpdateModel() const
 	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
 
 	i2d::CVector2d point1(Point1XSB->value(), Point1YSB->value());
 	objectPtr->SetPoint1(point1);

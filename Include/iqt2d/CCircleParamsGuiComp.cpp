@@ -21,6 +21,7 @@ void CCircleParamsGuiComp::UpdateModel() const
 	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
 
 	i2d::CVector2d postion(XSpin->value(), YSpin->value());
 	objectPtr->SetPosition(postion);

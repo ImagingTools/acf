@@ -12,10 +12,12 @@ namespace istd
 
 // public methods
 
-CEventBasedNotifier::CEventBasedNotifier(istd::IChangeable* slavePtr,  const IChangeable::ChangeSet& changeSet)
+CEventBasedNotifier::CEventBasedNotifier(istd::IChangeable* slavePtr,  const IChangeable::ChangeSet* changeSetPtr)
 {
+	Q_ASSERT(changeSetPtr != NULL);
+
 	if (slavePtr != NULL){
-		m_assyncNotifierPtr = new CAssyncNotifier(slavePtr, changeSet);
+		m_assyncNotifierPtr = new CAssyncNotifier(slavePtr, *changeSetPtr);
 	}
 	else{
 		m_assyncNotifierPtr = NULL;

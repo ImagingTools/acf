@@ -660,8 +660,9 @@ void CConsoleGui::UpdateComponentsPosition()
 
 void CConsoleGui::UpdateCommands()
 {
-	static istd::IChangeable::ChangeSet commandsChangeSet(IDisplay::CS_CONSOLE, ibase::ICommandsProvider::CF_COMMANDS);
-	istd::CChangeNotifier commandsNotifier(this, commandsChangeSet);
+	static const istd::IChangeable::ChangeSet commandsChangeSet(IDisplay::CS_CONSOLE, ibase::ICommandsProvider::CF_COMMANDS);
+	istd::CChangeNotifier commandsNotifier(this, &commandsChangeSet);
+	Q_UNUSED(commandsNotifier);
 
 	m_rootCommands.ResetChilds();
 	m_commands.ResetChilds();

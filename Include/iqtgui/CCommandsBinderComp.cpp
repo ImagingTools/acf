@@ -36,7 +36,8 @@ void CCommandsBinderComp::OnModelChanged(int /*modelId*/, const istd::IChangeabl
 
 	UnregisterAllModels();
 
-	istd::CChangeNotifier changePtr(this, changeSet);
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	m_commands.ResetChilds();
 
@@ -72,7 +73,7 @@ void CCommandsBinderComp::CreateCommands()
 
 			imod::IModel* commandsProviderModelPtr = dynamic_cast<imod::IModel*>(commandsProviderPtr);
 			if (commandsProviderModelPtr != NULL){
-				static istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
+				static const istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
 				RegisterModel(commandsProviderModelPtr, index, commandsChangeSet);
 			}
 		}

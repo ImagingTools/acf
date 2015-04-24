@@ -40,7 +40,7 @@ void CCommandsMultiplexerComp::BeforeUpdate(imod::IModel* I_IF_DEBUG(modelPtr))
 {
 	Q_ASSERT(IsModelAttached(modelPtr));
 
-	static ChangeSet changeSet(CF_DELEGATED, ibase::ICommandsProvider::CF_COMMANDS);
+	static const ChangeSet changeSet(CF_DELEGATED, ibase::ICommandsProvider::CF_COMMANDS);
 
 	BeginChanges(changeSet);
 }

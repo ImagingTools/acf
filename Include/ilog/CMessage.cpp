@@ -14,7 +14,7 @@ namespace ilog
 
 
 // local variables
-static istd::IChangeable::ChangeSet allDataChangeIds(istd::IChangeable::CF_ALL_DATA);
+static const istd::IChangeable::ChangeSet allDataChangeIds(istd::IChangeable::CF_ALL_DATA);
 
 
 CMessage::CMessage()
@@ -129,7 +129,7 @@ bool CMessage::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag timeStampTag("Timestamp", "Message time stamp", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag idTag("ID", "ID of the message", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool isStoring = archive.IsStoring();

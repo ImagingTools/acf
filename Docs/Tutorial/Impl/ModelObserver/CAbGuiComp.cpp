@@ -17,6 +17,7 @@ void CAbGuiComp::UpdateModel() const
 	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
 
 	objectPtr->SetA(AValueSpinBox->value());
 	objectPtr->SetB(BValueEdit->text().toLocal8Bit());

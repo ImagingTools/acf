@@ -499,8 +499,9 @@ void CMultiDocumentWorkspaceGuiComp::OnRetranslate()
 {
 	BaseClass::OnRetranslate();
 
-	static istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
-	istd::CChangeNotifier commandsNotifier(this, commandsChangeSet);
+	static const istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
+	istd::CChangeNotifier commandsNotifier(this, &commandsChangeSet);
+	Q_UNUSED(commandsNotifier);
 
 	m_windowCommand.SetName(tr("&Window"));
 	// Window commands
@@ -685,8 +686,9 @@ bool CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::SetSelectedOptionInd
 	}
 
 	if (m_selectedDocumentIndex != index){
-		static ChangeSet changeSet(CF_SELECTION_CHANGED);
-		istd::CChangeNotifier changePtr(this, changeSet);
+		static const ChangeSet changeSet(CF_SELECTION_CHANGED);
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_selectedDocumentIndex = index;
 

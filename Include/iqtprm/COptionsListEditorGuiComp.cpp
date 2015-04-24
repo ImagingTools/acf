@@ -116,8 +116,9 @@ void COptionsListEditorGuiComp::on_OptionsList_itemSelectionChanged()
 
 		iprm::ISelectionParam* selectionPtr = dynamic_cast<iprm::ISelectionParam*>(GetObjectPtr());
 		if (selectionPtr != NULL){
-			static istd::IChangeable::ChangeSet changeSet(iprm::ISelectionParam::CF_SELECTION_CHANGED);
-			istd::CChangeNotifier selectionNotifier(selectionPtr, changeSet);
+			static const istd::IChangeable::ChangeSet changeSet(iprm::ISelectionParam::CF_SELECTION_CHANGED);
+			istd::CChangeNotifier selectionNotifier(selectionPtr, &changeSet);
+			Q_UNUSED(selectionNotifier);
 
 			selectionPtr->SetSelectedOptionIndex(m_lastSelectedIndex);
 		}

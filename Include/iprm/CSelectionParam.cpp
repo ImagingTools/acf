@@ -114,8 +114,9 @@ bool CSelectionParam::SetSelectedOptionIndex(int index)
 			}
 		}
 
-		ChangeSet changeSet(CF_SELECTION_CHANGED);
-		istd::CChangeNotifier changeNotifier(this, changeSet);
+		static const ChangeSet changeSet(CF_SELECTION_CHANGED, "Change selection");
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_selectedOptionIndex = index;
 
@@ -217,8 +218,9 @@ void CSelectionParam::ConstraintsObserver::OnUpdate(const istd::IChangeable::Cha
 	int selectedIndexById = m_parent.GetOptionIndexById(m_parent.m_selectedOptionId);
 
 	if (m_parent.m_selectedOptionIndex != selectedIndexById){
-		istd::IChangeable::ChangeSet changeSet(iprm::ISelectionParam::CF_SELECTION_CHANGED);
-		istd::CChangeNotifier changeNotifier(&m_parent, changeSet);
+		static const istd::IChangeable::ChangeSet changeSet(iprm::ISelectionParam::CF_SELECTION_CHANGED);
+		istd::CChangeNotifier notifier(&m_parent, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_parent.m_selectedOptionIndex = selectedIndexById;
 

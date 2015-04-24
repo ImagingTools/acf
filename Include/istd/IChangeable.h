@@ -294,10 +294,10 @@ protected:
 
 private:
 	// static attributes
-	static ChangeSet s_emptyChanges;
-	static ChangeSet s_anyChanges;
-	static ChangeSet s_allChanges;
-	static ChangeSet s_delegatedChanges;
+	static const ChangeSet s_emptyChanges;
+	static const ChangeSet s_anyChanges;
+	static const ChangeSet s_allChanges;
+	static const ChangeSet s_delegatedChanges;
 };
 
 

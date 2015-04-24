@@ -703,7 +703,7 @@ bool CRectangle::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag leftTag("Left", "Rectangle left edge position", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag rightTag("Right", "Rectangle right edge position", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	double& top = m_verticalRange.GetMinValueRef();

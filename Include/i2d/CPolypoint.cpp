@@ -172,7 +172,7 @@ bool CPolypoint::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag polypointTag("Polypoint", "Polypoint", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag vectorTag("V", "Vector", iser::CArchiveTag::TT_GROUP, &polypointTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	int pointsCount = m_points.size();

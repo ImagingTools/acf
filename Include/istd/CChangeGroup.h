@@ -24,20 +24,11 @@ public:
 	/**
 		Constructs the group.
 		\param	changeablePtr	Your object prepared to change. If it is NULL, nothing will be done.
-		\param	changeSet		Set of change flags (its IDs).
+		\param	changeSetPtr	Pointer to set of change flags (its IDs).
+								It cannot be \c NULL.
 	*/
-	explicit CChangeGroup(IChangeable* changeablePtr, const IChangeable::ChangeSet& changeSet = IChangeable::GetNoChanges());
+	explicit CChangeGroup(IChangeable* changeablePtr, const IChangeable::ChangeSet* changeSetPtr = &IChangeable::GetNoChanges());
 	~CChangeGroup();
-
-	/**
-		It allows to append new set of changes to the notification.
-	*/
-	void AppendChangeId(int changeId);
-
-	/**
-		It allows to append new set of changes to the notification.
-	*/
-	void AppendChangeIds(const IChangeable::ChangeSet& changeSet);
 
 	/**
 		Check if this pointer is valid.
@@ -55,16 +46,18 @@ private:
 	CChangeGroup(const CChangeGroup& group);
 
 	IChangeable* m_changeablePtr;
-	IChangeable::ChangeSet m_changeIds;
+	const IChangeable::ChangeSet& m_changeSet;
 };
 
 
-inline CChangeGroup::CChangeGroup(IChangeable* changeablePtr, const IChangeable::ChangeSet& changeSet)
+inline CChangeGroup::CChangeGroup(IChangeable* changeablePtr, const IChangeable::ChangeSet* changeSetPtr)
 :	m_changeablePtr(changeablePtr),
-	m_changeIds(changeSet)
+	m_changeSet(*changeSetPtr)
 {
+	Q_ASSERT(changeSetPtr != NULL);
+
 	if (m_changeablePtr != NULL){
-		m_changeablePtr->BeginChangeGroup(changeSet);
+		m_changeablePtr->BeginChangeGroup(m_changeSet);
 	}
 }
 
@@ -72,7 +65,7 @@ inline CChangeGroup::CChangeGroup(IChangeable* changeablePtr, const IChangeable:
 inline CChangeGroup::~CChangeGroup()
 {
 	if (m_changeablePtr != NULL){
-		m_changeablePtr->EndChangeGroup(m_changeIds);
+		m_changeablePtr->EndChangeGroup(m_changeSet);
 	}
 }
 

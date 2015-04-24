@@ -39,7 +39,7 @@ void CPerspectiveCalibrationShape::Invalidate()
 	}
 
 	if (parentViewPtr != NULL){
-		static istd::IChangeable::ChangeSet calibChangeSet(CF_CALIB);
+		static const istd::IChangeable::ChangeSet calibChangeSet(CF_CALIB);
 		parentViewPtr->UpdateAllShapes(calibChangeSet);
 	}
 }

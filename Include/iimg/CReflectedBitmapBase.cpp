@@ -21,8 +21,9 @@ const QImage& CReflectedBitmapBase::GetQImage() const
 
 bool CReflectedBitmapBase::CopyImageFrom(const QImage& image)
 {
-	ChangeSet changeSet(CF_BLOCK_BITMAP_CONVERSION);
-	istd::CChangeNotifier notifier(this, changeSet);
+	static const ChangeSet changeSet(CF_BLOCK_BITMAP_CONVERSION);
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	if (ConvertFromQImage(image)){
 		m_image = image;

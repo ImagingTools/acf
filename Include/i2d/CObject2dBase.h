@@ -50,8 +50,8 @@ public:
 
 protected:
 	// static members
-	static ChangeSet s_objectPositionChangeSet;
-	static ChangeSet s_objectPositionAllDataChangeSet;
+	static const ChangeSet s_objectPositionChangeSet;
+	static const ChangeSet s_objectPositionAllDataChangeSet;
 
 private:
 	istd::TOptDelPtr<const ICalibration2d> m_calibrationPtr;

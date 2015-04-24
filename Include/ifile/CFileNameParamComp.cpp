@@ -52,7 +52,7 @@ bool CFileNameParamComp::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(pathTag);
 
 	if (!archive.IsStoring() && (filePath != m_path)){
-		istd::CChangeNotifier notifier(this, GetAllChanges());
+		istd::CChangeNotifier notifier(this, &GetAllChanges());
 		Q_UNUSED(notifier);
 
 		m_path = filePath;

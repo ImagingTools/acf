@@ -93,7 +93,7 @@ bool COrientedCircle::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag orientatedOutsideTag("IsOrientedOutside", "Flag if this circle is oriented inside or outside", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);

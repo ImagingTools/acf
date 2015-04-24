@@ -15,7 +15,7 @@ namespace iqtprm
 CSelectableParamsSetGuiComp::CSelectableParamsSetGuiComp()
 	:m_currentParamsSetIndex(-1)
 {
-	static istd::IChangeable::ChangeSet changeMask(iprm::ISelectionParam::CF_SELECTION_CHANGED);
+	static const istd::IChangeable::ChangeSet changeMask(iprm::ISelectionParam::CF_SELECTION_CHANGED);
 	SetObservedIds(changeMask);
 }
 

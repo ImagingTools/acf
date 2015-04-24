@@ -168,7 +168,7 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag itemTag("Item", "Item", iser::CArchiveTag::TT_GROUP, &itemsTag);
 	static iser::CArchiveTag keyTag("ItemKey", "Factory key of the item", iser::CArchiveTag::TT_LEAF, &itemTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	if (!archive.IsStoring()){

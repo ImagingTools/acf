@@ -18,7 +18,7 @@ bool CDataNodePolylineBase::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag nodesDataTag("UserData", "User data stored in the nodes of polyline", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag nodeDataTag("Node", "Data stored in the polyline node", iser::CArchiveTag::TT_GROUP, &nodesDataTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);

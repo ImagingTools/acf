@@ -21,6 +21,7 @@ void CArcParamsGuiComp::UpdateModel() const
 	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
 
 	objectPtr->SetPosition(i2d::CVector2d(XSpin->value(), YSpin->value()));
 	objectPtr->SetRadius(RadiusSpin->value());

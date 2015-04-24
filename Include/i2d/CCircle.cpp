@@ -342,7 +342,7 @@ bool CCircle::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag radiusTag("Radius", "Circle radius", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);

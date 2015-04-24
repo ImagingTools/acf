@@ -23,6 +23,7 @@ void CQuadrangleParamsGuiComp::UpdateModel() const
 	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
 
 	i2d::CVector2d point1(FirstDiagPoint1XSpin->value(), FirstDiagPoint1YSpin->value());
 	i2d::CVector2d point2(FirstDiagPoint2XSpin->value(), FirstDiagPoint2YSpin->value());

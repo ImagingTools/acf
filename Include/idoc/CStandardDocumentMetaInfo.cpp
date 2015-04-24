@@ -17,7 +17,7 @@ namespace idoc
 
 
 // static members
-istd::IChangeable::ChangeSet CStandardDocumentMetaInfo::s_metaInfoChangeSet(CF_METAINFO);
+const istd::IChangeable::ChangeSet CStandardDocumentMetaInfo::s_metaInfoChangeSet(CF_METAINFO, "Change document meta info");
 
 
 // public methods
@@ -45,7 +45,8 @@ QVariant CStandardDocumentMetaInfo::GetMetaInfo(int metaInfoType) const
 bool CStandardDocumentMetaInfo::SetMetaInfo(int metaInfoType, const QVariant& metaInfo)
 {
 	if (m_infosMap[metaInfoType] != metaInfo){
-		istd::CChangeNotifier changePtr(this, s_metaInfoChangeSet);
+		istd::CChangeNotifier notifier(this, &s_metaInfoChangeSet);
+		Q_UNUSED(notifier);
 
 		m_infosMap[metaInfoType] = metaInfo;
 	}
@@ -133,7 +134,7 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag typeTag("Type", "Type of the meta information", iser::CArchiveTag::TT_LEAF, &metaInfoTag);
 	static iser::CArchiveTag valueTag("Value", "Value of the meta information", iser::CArchiveTag::TT_LEAF, &metaInfoTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = true;
@@ -166,8 +167,9 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 		}
 	}
 	else{
-		ChangeSet changeSet(CF_ALL_DATA, CF_METAINFO);
-		istd::CChangeNotifier changePtr(this, changeSet);
+		static const ChangeSet changeSet(CF_ALL_DATA, CF_METAINFO);
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_infosMap.clear();
 

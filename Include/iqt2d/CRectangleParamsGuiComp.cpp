@@ -20,7 +20,8 @@ void CRectangleParamsGuiComp::UpdateModel() const
 	i2d::CRectangle* objectPtr = GetObjectPtr();
 	Q_ASSERT(objectPtr != NULL);
 
-	istd::CChangeGroup notifier(objectPtr);
+	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
 
 	objectPtr->SetLeft(LeftSpin->value());
 	objectPtr->SetRight(RightSpin->value());

@@ -369,7 +369,7 @@ bool TComposedColor<Size>::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag colorComponentsTag("ColorComponents", "List of color components", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag componentTag("Component", "Single component", iser::CArchiveTag::TT_LEAF, &colorComponentsTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = true;

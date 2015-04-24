@@ -165,7 +165,7 @@ void CViewBase::SetZoom(ZoomMode zoom)
 		return;
 	}
 
-	static istd::IChangeable::ChangeSet changeSet(CF_TRANSFORM);
+	static const istd::IChangeable::ChangeSet changeSet(CF_TRANSFORM);
 	UpdateAllShapes(changeSet);
 }
 
@@ -174,7 +174,7 @@ void CViewBase::SetEditMode(int mode)
 {
 	m_editMode = mode;
 
-	static istd::IChangeable::ChangeSet changeSet(CF_EDIT_MODE);
+	static const istd::IChangeable::ChangeSet changeSet(CF_EDIT_MODE);
 	UpdateAllShapes(changeSet);
 }
 
@@ -546,7 +546,7 @@ void CViewBase::SetTransform(const i2d::CAffine2d& transform)
 	if (m_transform != transform){
 		m_transform = transform;
 
-		static istd::IChangeable::ChangeSet changeSet(CF_TRANSFORM);
+		static const istd::IChangeable::ChangeSet changeSet(CF_TRANSFORM);
 		UpdateAllShapes(changeSet);
 	}
 }

@@ -91,8 +91,9 @@ void CCommandBasedSelectionControllerComp::BuildCommands()
 	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 	Q_ASSERT(selectionPtr != NULL);
 
-	static ChangeSet commandsChangeSet(CF_COMMANDS);
-	istd::CChangeNotifier commandsNotifier(this, commandsChangeSet);
+	static const ChangeSet commandsChangeSet(CF_COMMANDS);
+	istd::CChangeNotifier commandsNotifier(this, &commandsChangeSet);
+	Q_UNUSED(commandsNotifier);
 
 	m_commandsList.ResetChilds();
 	m_commandsList.setVisible(false);

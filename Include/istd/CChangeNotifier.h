@@ -23,10 +23,11 @@ class CChangeNotifier
 public:
 	/**
 		Constructs the notifier.
-		\param	changeablePtr	Your object prepared to change. It cannot be \c NULL.
-		\param	changeSet		Set of change flags (its IDs).
+		\param	changeablePtr	Your object prepared to change. If it is \c NULL than this notifier has no function.
+		\param	changeSetPtr	Pointer to set of change flags (its IDs).
+								It cannot be \c NULL.
 	*/
-	explicit CChangeNotifier(IChangeable* changeablePtr, const IChangeable::ChangeSet& changeSet = IChangeable::GetAnyChange());
+	explicit CChangeNotifier(IChangeable* changeablePtr, const IChangeable::ChangeSet* changeSetPtr = &IChangeable::GetAnyChange());
 	~CChangeNotifier();
 
 	/**
@@ -50,16 +51,18 @@ private:
 	CChangeNotifier(const CChangeNotifier& notifier);
 
 	IChangeable* m_changeablePtr;
-	IChangeable::ChangeSet m_changeIds;
+	const IChangeable::ChangeSet& m_changeSet;
 };
 
 
-inline CChangeNotifier::CChangeNotifier(IChangeable* changeablePtr, const IChangeable::ChangeSet& changeSet)
+inline CChangeNotifier::CChangeNotifier(IChangeable* changeablePtr, const IChangeable::ChangeSet* changeSetPtr)
 :	m_changeablePtr(changeablePtr),
-	m_changeIds(changeSet)
+	m_changeSet(*changeSetPtr)
 {
+	Q_ASSERT(changeSetPtr != NULL);
+
 	if (m_changeablePtr != NULL){
-		m_changeablePtr->BeginChanges(changeSet);
+		m_changeablePtr->BeginChanges(m_changeSet);
 	}
 }
 
@@ -67,7 +70,7 @@ inline CChangeNotifier::CChangeNotifier(IChangeable* changeablePtr, const IChang
 inline CChangeNotifier::~CChangeNotifier()
 {
 	if (m_changeablePtr != NULL){
-		m_changeablePtr->EndChanges(m_changeIds);
+		m_changeablePtr->EndChanges(m_changeSet);
 	}
 }
 
