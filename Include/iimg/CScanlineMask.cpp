@@ -19,8 +19,8 @@ namespace iimg
 // public methods
 
 CScanlineMask::CScanlineMask()
-:	m_isBoundingBoxValid(false),
-	m_firstLinePos(0)
+:	m_firstLinePos(0),
+	m_isBoundingBoxValid(false)
 {
 }
 

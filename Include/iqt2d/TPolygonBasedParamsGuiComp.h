@@ -347,11 +347,11 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnToolsBu
 {
 	int actionId = action->data().toInt();
 
-    typename const ShapesMap& shapesMap = BaseClass::GetShapesMap();
-	for (		typename ShapesMap::const_iterator iter = shapesMap.begin();
-		iter != shapesMap.end();
-		++iter){
-			const Shapes& shapes = iter.value();
+	const typename BaseClass::ShapesMap& shapesMap = BaseClass::GetShapesMap();
+	for (		typename BaseClass::ShapesMap::const_iterator iter = shapesMap.begin();
+				iter != shapesMap.end();
+				++iter){
+			const typename BaseClass::Shapes& shapes = iter.value();
 			int shapesCount = shapes.GetCount();
 			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
 				PolygonBasedShape* shapePtr = dynamic_cast<PolygonBasedShape*>(shapes.GetAt(shapeIndex));

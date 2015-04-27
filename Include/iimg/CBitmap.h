@@ -65,8 +65,8 @@ protected:
 	bool SetQImage(const QImage& image);
 
 private:
-	istd::TOptDelPtr<quint8, true> m_externalBuffer;
 	QImage m_image;
+	istd::TOptDelPtr<quint8, true> m_externalBuffer;
 
 	static QVector<QRgb> s_colorTableGray;
 	static QMutex s_colorTableLock;

@@ -17,7 +17,7 @@ namespace ibase
 	Common implementation for an abstract serializable container.
 	Derived class must only reimplement the SerializeItem().
 */
-template <typename ItemClass, class ContainerType = TContainer<ItemClass>::Container>
+template <typename ItemClass, class ContainerType = typename TContainer<ItemClass>::Container>
 class TSerializableContainer: public TContainer<ItemClass, ContainerType>, virtual public iser::ISerializable
 {
 public:
