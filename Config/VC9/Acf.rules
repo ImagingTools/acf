@@ -65,8 +65,8 @@
 		<CustomBuildRule
 			Name="FileConvertCopy"
 			DisplayName="ACF file convertion copy"
-			CommandLine="&quot;..\..\..\Bin\$(ConfigurationName)VC9\Acf.exe&quot; &quot;[$RegistryFile]&quot; -config &quot;[$ConfigFile]&quot; -input &quot;$(InputPath)&quot; -o $(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/$(InputName)"
-			Outputs="&quot;$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/$(InputName)&quot;"
+			CommandLine="&quot;..\..\..\Bin\$(ConfigurationName)VC9\Acf.exe&quot; &quot;[$RegistryFile]&quot; -config &quot;[$ConfigFile]&quot; -input &quot;$(InputPath)&quot; -o [$OutputDir]/$(InputName)"
+			Outputs="&quot;[$OutputDir]/$(InputName)&quot;"
 			AdditionalDependencies="&quot;..\..\..\Bin\$(ConfigurationName)VC9\Acf.exe&quot;;&quot;[$RegistryFile]&quot;;&quot;[$ConfigFile]&quot;"
 			FileExtensions="*.xtracf"
 			ExecutionDescription="Converting File With ACF transformation..."
