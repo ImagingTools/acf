@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "icomp/CComponentBase.h"
-
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CAffineTransformation2d.h"
 
 
@@ -15,11 +15,10 @@ namespace i2d
 /**
 	Attributable component for affine 2D-transformation.
 */
-class CAffineTransformation2dComp: public icomp::CComponentBase, public CAffineTransformation2d
+class CAffineTransformation2dComp: public TObject2dCompWrap<CAffineTransformation2d>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
-	typedef CAffineTransformation2d BaseClass2;
+	typedef TObject2dCompWrap<CAffineTransformation2d> BaseClass;
 
 	I_BEGIN_COMPONENT(CAffineTransformation2dComp);
 		I_REGISTER_INTERFACE(ICalibration2d);

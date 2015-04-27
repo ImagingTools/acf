@@ -5,16 +5,23 @@ namespace iqt2d
 {
 
 
-// protected methods
+// reimplemented (iview::IShapeFactory)
 
-// reimplemented (iqt2d::TShapeParamsGuiCompBase)
-
-iview::CPolylineShape* CPolylineParamsGuiComp::CreateShape() const
+iview::IShape* CPolylineParamsGuiComp::CreateShape(const i2d::IObject2d* objectPtr, bool connectToModel) const
 {
 	iview::CPolylineShape* shapePtr = new iview::CPolylineShape();
 
 	if (*m_showOrientationAttrPtr){
 		shapePtr->SetOrientationVisible(true);
+	}
+
+	if (connectToModel){
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(const_cast<i2d::IObject2d*>(objectPtr));
+		if (modelPtr != NULL){
+			if (modelPtr->AttachObserver(shapePtr)){
+				shapePtr->SetVisible(true);
+			}
+		}
 	}
 
 	return shapePtr;

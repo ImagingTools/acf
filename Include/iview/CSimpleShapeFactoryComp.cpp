@@ -23,9 +23,13 @@ namespace iview
 
 // reimplemented (iview::IShapeFactory)
 
-IShape* CSimpleShapeFactoryComp::CreateShape(const i2d::IObject2d& object, bool connectToModel) const
+IShape* CSimpleShapeFactoryComp::CreateShape(const i2d::IObject2d* objectPtr, bool connectToModel) const
 {
-	istd::TDelPtr<CInteractiveShapeBase> shapePtr(CreateShapeInstance(object));
+	if (objectPtr == NULL){
+		return NULL;
+	}
+
+	istd::TDelPtr<CInteractiveShapeBase> shapePtr(CreateShapeInstance(*objectPtr));
 
 	if (shapePtr.IsValid()){
 		shapePtr->SetEditablePosition(*m_useInteractiveShapesAttrPtr);
@@ -38,7 +42,7 @@ IShape* CSimpleShapeFactoryComp::CreateShape(const i2d::IObject2d& object, bool 
 		}
 
 		if (connectToModel){
-			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(const_cast<i2d::IObject2d*>(&object));
+			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(const_cast<i2d::IObject2d*>(objectPtr));
 			if (modelPtr != NULL){
 				if (!modelPtr->AttachObserver(shapePtr.GetPtr())){
 					return NULL;

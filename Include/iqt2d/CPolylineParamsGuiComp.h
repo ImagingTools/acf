@@ -25,10 +25,10 @@ public:
 	I_ASSIGN(m_showOrientationAttrPtr, "ShowOrientation", "Show orientation on display console", true, false);
 	I_END_COMPONENT;
 
-protected:
-	// reimplemented (iqt2d::TShapeParamsGuiCompBase)
-	virtual iview::CPolylineShape* CreateShape() const;
+	// reimplemented (iview::IShapeFactory)
+	virtual iview::IShape* CreateShape(const i2d::IObject2d* objectPtr, bool connectToModel = false) const;
 
+protected:
 	protected Q_SLOTS:
 	void OnParamsChanged();
 

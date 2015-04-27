@@ -5,6 +5,7 @@
 // ACF includes
 #include "i2d/ICalibration2d.h"
 #include "i2d/CAffine2d.h"
+#include "i2d/CObject2dBase.h"
 
 
 namespace i2d
@@ -14,7 +15,9 @@ namespace i2d
 /**
 	Definition of an affine transformation for 2D-spaces.
 */
-class CAffineTransformation2d: virtual public ICalibration2d
+class CAffineTransformation2d:
+			public CObject2dBase,
+			virtual public ICalibration2d
 {
 public:
 	CAffineTransformation2d();
@@ -96,6 +99,11 @@ public:
 	// reimplemented (imath::TIMathFunction)
 	virtual bool GetValueAt(const CVector2d& argument, CVector2d& result) const;
 	virtual CVector2d GetValueAt(const CVector2d& argument) const;
+
+	// reimplemented (i2d::IObject2d)
+	virtual CVector2d GetCenter() const;
+	virtual void MoveCenterTo(const CVector2d& position);
+	virtual CRectangle GetBoundingBox() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

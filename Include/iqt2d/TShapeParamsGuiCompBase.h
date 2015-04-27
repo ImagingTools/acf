@@ -6,6 +6,7 @@
 #include "i2d/ICalibration2d.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iview/IColorSchema.h"
+#include "iview/IShapeFactory.h"
 #include "iqt2d/TViewExtenderCompBase.h"
 
 
@@ -16,12 +17,14 @@ namespace iqt2d
 template <class Ui, class Shape, class ShapeModel>
 class TShapeParamsGuiCompBase:
 			public iqt2d::TViewExtenderCompBase<
-						iqtgui::TDesignerGuiObserverCompBase<Ui, ShapeModel> >
+						iqtgui::TDesignerGuiObserverCompBase<Ui, ShapeModel> >,
+			virtual public iview::IShapeFactory
 {
 public:
 	typedef iqt2d::TViewExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<Ui, ShapeModel> > BaseClass;
 
 	I_BEGIN_COMPONENT(TShapeParamsGuiCompBase);
+		I_REGISTER_INTERFACE(iview::IShapeFactory);
 		I_ASSIGN(m_defaultUnitInfoAttrPtr, "DefaultUnitInfo", "Provide default information about the logical value units e.g. mm, this will be used if no unit information found in model", false, "DefaultUnitInfo");
 		I_ASSIGN(m_colorSchemaCompPtr, "ShapeColorSchema", "Color schema used by displayed shape", false, "ShapeColorSchema");
 	I_END_COMPONENT;
@@ -30,13 +33,14 @@ public:
 	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
 	virtual bool OnModelDetached(imod::IModel* modelPtr);
 
+	// reimplemented (iview::IShapeFactory)
+	virtual iview::IShape* CreateShape(const i2d::IObject2d* objectPtr, bool connectToModel = false) const;
+
 protected:
 	typedef typename BaseClass::Shapes Shapes;
 	typedef typename BaseClass::ShapesMap ShapesMap;
 
 	QString GetUnitName() const;
-
-	virtual Shape* CreateShape() const;
 
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
@@ -109,6 +113,26 @@ bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnModelDetached(imod::IMode
 }
 
 
+// reimplemented (iview::IShapeFactory)
+
+template <class Ui, class Shape, class ShapeModel>
+iview::IShape* TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShape(const i2d::IObject2d* objectPtr, bool connectToModel) const
+{
+	Shape* shapePtr = new Shape();
+
+	if (connectToModel){
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(const_cast<i2d::IObject2d*>(objectPtr));
+		if (modelPtr != NULL){
+			if (modelPtr->AttachObserver(shapePtr)){
+				shapePtr->SetVisible(true);
+			}
+		}
+	}
+
+	return shapePtr;
+}
+
+
 // protected methods
 
 template <class Ui, class Shape, class ShapeModel>
@@ -135,32 +159,18 @@ QString TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::GetUnitName() const
 }
 
 
-template <class Ui, class Shape, class ShapeModel>
-Shape* TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShape() const
-{
-	return new Shape();
-}
-
-
 // reimplemented (iqt2d::TViewExtenderCompBase)
 
 template <class Ui, class Shape, class ShapeModel>
 void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShapes(int /*sceneId*/, Shapes& result)
 {
-	Shape* shapePtr = CreateShape();
+	iview::IShape* shapePtr = CreateShape(BaseClass::GetObjectPtr(), true);
 	if (shapePtr != NULL){
 		if (m_colorSchemaCompPtr.IsValid()){
 			shapePtr->SetUserColorSchema(m_colorSchemaCompPtr.GetPtr());
 		}
 
 		result.PushBack(shapePtr);
-
-		imod::IModel* modelPtr = BaseClass::GetModelPtr();
-		if (modelPtr != NULL){
-			if (modelPtr->AttachObserver(shapePtr)){
-				shapePtr->SetVisible(true);
-			}
-		}
 	}
 }
 

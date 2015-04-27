@@ -4,6 +4,7 @@
 // ACF includes
 #include "imod/TModelWrap.h"
 #include "istd/CChangeNotifier.h"
+#include "i2d/CRectangle.h"
 
 
 namespace i2d
@@ -206,6 +207,32 @@ bool CAffineTransformation2d::GetValueAt(const CVector2d& argument, CVector2d& r
 CVector2d CAffineTransformation2d::GetValueAt(const CVector2d& argument) const
 {
 	return m_transformation.GetApply(argument);
+}
+
+
+// reimplemented (i2d::IObject2d)
+
+CVector2d CAffineTransformation2d::GetCenter() const
+{
+	return m_transformation.GetTranslation();
+}
+
+
+void CAffineTransformation2d::MoveCenterTo(const CVector2d& position)
+{
+	return m_transformation.SetTranslation(position);
+}
+
+
+CRectangle CAffineTransformation2d::GetBoundingBox() const
+{
+	CRectangle retVal(m_transformation.GetTranslation(), m_transformation.GetTranslation());
+
+	retVal.Unite(m_transformation.GetTranslation() + m_transformation.GetDeformMatrix().GetAxisX());
+	retVal.Unite(m_transformation.GetTranslation() + m_transformation.GetDeformMatrix().GetAxisY());
+	retVal.Unite(m_transformation.GetTranslation() + m_transformation.GetDeformMatrix().GetAxisX() + m_transformation.GetDeformMatrix().GetAxisY());
+
+	return retVal;
 }
 
 
