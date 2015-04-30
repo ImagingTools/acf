@@ -53,8 +53,10 @@ protected:
 	void UpdateCommands();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiCreated();
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
 
 protected Q_SLOTS:
 	void on_AddButton_clicked();
