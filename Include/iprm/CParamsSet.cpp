@@ -30,7 +30,7 @@ bool CParamsSet::SetEditableParameter(const QByteArray& id, iser::ISerializable*
 			m_params.PushBack(new ParameterInfo(id, parameterPtr, releaseFlag));
 
 			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(parameterPtr);
-			if (modelPtr != NULL){
+			if ((modelPtr != NULL) && !modelPtr->IsAttached(this)){
 				modelPtr->AttachObserver(this);
 			}
 
