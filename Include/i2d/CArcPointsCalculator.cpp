@@ -73,7 +73,7 @@ bool CArcPointsCalculator::GetArcPoints(
 	};
 
 	// arc segment is 45 grad
-	int bufferSize = xBuffer.size();
+	int bufferSize = int(xBuffer.size());
 	int bufferLastIndex = bufferSize - 1;
 	float gradStep = float(bufferSize) / 45.0;
 

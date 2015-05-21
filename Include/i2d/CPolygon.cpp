@@ -235,7 +235,7 @@ bool CPolygon::Serialize(iser::IArchive& archive)
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
-	int nodesCount = m_nodes.size();
+	int nodesCount = int(m_nodes.size());
 	bool retVal = true;
 
 	retVal = retVal && archive.BeginMultiTag(polygonTag, vectorTag, nodesCount);
@@ -313,7 +313,7 @@ bool CPolygon::ApplyTransform(Nodes& nodes,
 			ITransformation2d::ExactnessMode mode,
 			double* errorFactorPtr)
 {
-	int nodesCount = nodes.size();
+	int nodesCount = int(nodes.size());
 	
     Nodes transPoints;
 
@@ -342,7 +342,7 @@ bool CPolygon::ApplyInverseTransform(
 			ITransformation2d::ExactnessMode mode,
 			double* errorFactorPtr)
 {
-	int nodesCount = nodes.size();
+	int nodesCount = int(nodes.size());
 	
     Nodes transPoints;
 

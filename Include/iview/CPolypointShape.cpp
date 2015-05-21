@@ -58,7 +58,7 @@ void CPolypointShape::Draw(QPainter& drawContext) const
 
 		const i2d::CPolypoint::Points& points = polypoint.GetPoints();
 
-		int pointsCount = points.size();
+		int pointsCount = int(points.size());
 		for (int pointIndex = 0; pointIndex < pointsCount; ++pointIndex){
 			istd::CIndex2d sp = GetScreenPosition(points[pointIndex]).ToIndex2d();
 			if (clientArea.IsInside(sp)){
@@ -105,7 +105,7 @@ i2d::CRect CPolypointShape::CalcBoundingBox() const
 
 			i2d::CRect boundingBox(sp, sp);
 
-			int pointsCount = points.size();
+			int pointsCount = int(points.size());
 			for (int pointIndex = 1; pointIndex < pointsCount; ++pointIndex){
 				sp = GetScreenPosition(points[pointIndex]).ToIndex2d();
 

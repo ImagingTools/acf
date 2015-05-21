@@ -175,7 +175,7 @@ bool CPolypoint::Serialize(iser::IArchive& archive)
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
-	int pointsCount = m_points.size();
+	int pointsCount = int(m_points.size());
 	bool retVal = true;
 
 	retVal = retVal && archive.BeginMultiTag(polypointTag, vectorTag, pointsCount);

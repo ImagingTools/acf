@@ -30,7 +30,7 @@ void CVarVector::SetElementsFrom(const CVarVector& vector, double expansionValue
 
 bool CVarVector::EnsureElementsCount(int count, double value)
 {
-	int oldSize = m_elements.size();
+	int oldSize = int(m_elements.size());
 	if (count > oldSize){
 		m_elements.resize(count);
 
