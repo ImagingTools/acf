@@ -3,7 +3,6 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="ACF Component Package"
-	OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
 	ConfigurationType="2"
 	InheritedPropertySheets=".\General.vsprops"
 	>
@@ -17,5 +16,9 @@
 		OutputFile="$(OutDir)\$(ProjectName).arp"
 		AdditionalLibraryDirectories=""
 		SubSystem="1"
+	/>
+	<UserMacro
+		Name="PlattformDependentBaseOutputDir"
+		Value="../../../Bin"
 	/>
 </VisualStudioPropertySheet>

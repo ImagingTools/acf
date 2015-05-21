@@ -1,7 +1,7 @@
 TARGET = iattr
 
-include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
-include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
+include(../../../Config/QMake/StaticConfig.pri)
+include(../../../Config/QMake/QtGuiBaseConfig.pri)
 
 UI_DIR = ../../GeneratedFiles/iattr
 

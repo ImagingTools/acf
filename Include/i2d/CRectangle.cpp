@@ -560,24 +560,34 @@ bool CRectangle::Transform(
 			ITransformation2d::ExactnessMode mode,
 			double* errorFactorPtr)
 {
-	i2d::CVector2d leftTop (m_horizontalRange.GetMinValue(), m_verticalRange.GetMinValue());
-	i2d::CVector2d rightBottom (m_horizontalRange.GetMaxValue(), m_verticalRange.GetMaxValue());
+	i2d::CVector2d leftTop(m_horizontalRange.GetMinValue(), m_verticalRange.GetMinValue());
+	i2d::CVector2d rightBottom(m_horizontalRange.GetMaxValue(), m_verticalRange.GetMaxValue());
+	i2d::CVector2d leftBottom(m_horizontalRange.GetMinValue(), m_verticalRange.GetMaxValue());
+	i2d::CVector2d rightTop(m_horizontalRange.GetMaxValue(), m_verticalRange.GetMinValue());
 
-	i2d::CVector2d transLeftTop;
-	i2d::CVector2d transRightBottom;
+	i2d::CVector2d transLeftTop, transLeftBottom;
+	i2d::CVector2d transRightBottom, transRightTop;
 
 	if (		transformation.GetPositionAt(leftTop, transLeftTop, mode) &&
-				transformation.GetPositionAt(rightBottom, transRightBottom, mode)){
+				transformation.GetPositionAt(rightBottom, transRightBottom, mode) &&
+				transformation.GetPositionAt(leftBottom, transLeftBottom, mode) &&
+				transformation.GetPositionAt(rightTop, transRightTop, mode)			){
 		BeginChanges(s_objectPositionAllDataChangeSet);
 		
 		if (errorFactorPtr != NULL){
 			*errorFactorPtr = 0;
 		}
 
-		m_horizontalRange = istd::CRange(transLeftTop.GetX(), transRightBottom.GetX());
+		int xmin = qMin(transLeftTop.GetX(), qMin(transLeftBottom.GetX(), qMin(transRightTop.GetX(), transRightBottom.GetX())));
+		int xmax = qMax(transLeftTop.GetX(), qMax(transLeftBottom.GetX(), qMax(transRightTop.GetX(), transRightBottom.GetX())));
+
+		m_horizontalRange = istd::CRange(xmin, xmax);
 		m_horizontalRange.Validate();
 
-		m_verticalRange = istd::CRange(transLeftTop.GetY(), transRightBottom.GetY());
+		int ymin = qMin(transLeftTop.GetY(), qMin(transLeftBottom.GetY(), qMin(transRightTop.GetY(), transRightBottom.GetY())));
+		int ymax = qMax(transLeftTop.GetY(), qMax(transLeftBottom.GetY(), qMax(transRightTop.GetY(), transRightBottom.GetY())));
+
+		m_verticalRange = istd::CRange(ymin, ymax);
 		m_verticalRange.Validate();
 
 		EndChanges(s_objectPositionAllDataChangeSet);

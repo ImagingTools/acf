@@ -2,18 +2,23 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="ACF Static Library"
-	ConfigurationType="4"
+	Name="ACF Application"
+	ConfigurationType="2"
 	InheritedPropertySheets=".\General.vsprops"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
 		AdditionalIncludeDirectories=""
-		ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
+		ProgramDataBaseFileName="$(OutDir)\$(ProjectName).pdb"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		OutputFile="$(OutDir)\$(ProjectName).exe"
+		AdditionalLibraryDirectories=""
+		SubSystem="1"
 	/>
 	<UserMacro
 		Name="PlattformDependentBaseOutputDir"
-		Value="../../../Lib"
-		PerformEnvironmentSet="true"
+		Value="../../../Bin"
 	/>
 </VisualStudioPropertySheet>

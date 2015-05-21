@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Plattform Win64"
+	IntermediateDirectory="..\..\..\AuxInclude\Qt5\GeneratedFiles\$(ConfigurationName)_64\$(ProjectName)"
+	OutputDirectory="$(PlattformDependentBaseOutputDir)\$(ConfigurationName)VC9_64"
+	>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalLibraryDirectories="$(QTDIR)/lib"
+	/>
+</VisualStudioPropertySheet>

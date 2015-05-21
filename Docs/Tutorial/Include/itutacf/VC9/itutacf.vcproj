@@ -83,6 +83,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="../../../../../Lib/$(ConfigurationName)VC9/Tutorial"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Static.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops"
 			>

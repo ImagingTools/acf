@@ -39,21 +39,25 @@ bool CDockWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 			case 0:
 				area = Qt::LeftDockWidgetArea;
 				orientation = Qt::Vertical;
+				mainWindow.setCorner(Qt::BottomLeftCorner, area);
 				break;
 
 			case 1:
 				area = Qt::RightDockWidgetArea;
 				orientation = Qt::Vertical;
+				mainWindow.setCorner(Qt::BottomRightCorner, area);
 				break;
 
 			case 2:
 				area = Qt::TopDockWidgetArea;
 				orientation = Qt::Horizontal;
+				mainWindow.setCorner(Qt::TopLeftCorner, area);
 				break;
 
 			case 3:
 				area = Qt::BottomDockWidgetArea;
 				orientation = Qt::Horizontal;
+				mainWindow.setCorner(Qt::TopLeftCorner, area);
 				break;
 		}
 	}
