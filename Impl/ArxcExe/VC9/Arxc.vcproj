@@ -36,6 +36,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				CommandLine="rem&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="QT Resources"
@@ -65,7 +66,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5"
+				AdditionalIncludeDirectories=""
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -89,7 +90,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=" "
-				OutputFile="$(OutDir)/$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
 				SubSystem="1"
@@ -114,98 +114,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Debug|Win32"
-			ConfigurationType="1"
-			InheritedPropertySheets="..\..\..\Config\VC9\Application.vsprops;..\..\..\Config\VC9\Debug.vsprops;..\..\..\Config\VC9\Win32.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
-			/>
-			<Tool
-				Name="Qt Linguist"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				PreprocessorDefinitions="_DEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				HeaderFileName=""
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5"
-				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				PrecompiledHeaderFile=""
-				DebugInformationFormat="3"
-				CompileAs="0"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="_DEBUG"
-				Culture="1031"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies=" "
-				OutputFile="$(OutDir)/$(ProjectName).exe"
-				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
-				GenerateDebugInformation="true"
-				SubSystem="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
+				CommandLine="copy $(QTDIR)\bin\*.dll ..\..\..\bin\$(ConfigurationName)VC9"
 			/>
 		</Configuration>
 		<Configuration
@@ -223,6 +132,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				CommandLine="rem&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="QT Resources"
@@ -276,7 +186,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=" "
-				OutputFile="$(OutDir)/$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
 				SubSystem="1"
@@ -302,6 +211,100 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy $(QTDIR)\bin\*.dll ..\..\..\bin\$(ConfigurationName)VC9_64"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			ConfigurationType="1"
+			InheritedPropertySheets="..\..\..\Config\VC9\Application.vsprops;..\..\..\Config\VC9\Debug.vsprops;..\..\..\Config\VC9\Win32.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+				CommandLine="rem&#x0D;&#x0A;"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				PrecompiledHeaderFile=""
+				DebugInformationFormat="3"
+				CompileAs="0"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1031"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies=" "
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				GenerateDebugInformation="true"
+				SubSystem="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy $(QTDIR)\bin\*.dll ..\..\..\bin\$(ConfigurationName)VC9"
 			/>
 		</Configuration>
 		<Configuration
@@ -319,6 +322,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				CommandLine="rem&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="QT Resources"
@@ -368,7 +372,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=" "
-				OutputFile="$(OutDir)/$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="true"
@@ -395,6 +398,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy $(QTDIR)\bin\*.dll ..\..\..\bin\$(ConfigurationName)VC9_64"
 			/>
 		</Configuration>
 	</Configurations>
