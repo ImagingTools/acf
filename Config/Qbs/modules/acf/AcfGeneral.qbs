@@ -13,14 +13,14 @@ AcfModule{
 	Rule{
 		id: arxCompiler
 		inputs: ["arx"]
-		usings: ["application", "dynamiclibrary", "xpc"]
+        inputsFromDependencies: ["application", "dynamiclibrary", "xpc"]
 
 		Artifact{
-			fileName: AcfService.getGeneratedPath(product) + "/C" + input.completeBaseName + ".cpp"
+            filePath: AcfService.getGeneratedPath(product) + "/C" + input.completeBaseName + ".cpp"
 			fileTags: ["cpp"]
 		}
 		Artifact{
-			fileName: AcfService.getGeneratedPath(product) + "/C" + input.completeBaseName + ".h"
+            filePath: AcfService.getGeneratedPath(product) + "/C" + input.completeBaseName + ".h"
 			fileTags: ["hpp", "c++_pch"]
 		}
 
@@ -69,7 +69,7 @@ AcfModule{
 		inputs: ["xtracf"]
 
 		Artifact{
-			fileName: AcfService.getGeneratedPath(product) + "/" + input.completeBaseName
+            filePath: AcfService.getGeneratedPath(product) + "/" + input.completeBaseName
 			fileTags: { return product.moduleProperty("acf", "trOutputType"); }
 		}
 
@@ -131,7 +131,7 @@ AcfModule{
 		explicitlyDependsOn: ["qm"]
 
 		Artifact{
-			fileName: AcfService.getGeneratedPath(product) + "/qrc_" + input.completeBaseName + ".cpp"
+            filePath: AcfService.getGeneratedPath(product) + "/qrc_" + input.completeBaseName + ".cpp"
 			fileTags: ["cpp"]
 		}
 		prepare:{
@@ -169,7 +169,7 @@ AcfModule{
 		inputs: ["cpp", "c", "objcpp", "objc", "xpc_file"]
 
 		Artifact{
-			fileName: "share/qbs/modules/" + product.name + "/" + product.name + ".qbs"
+            filePath: "share/qbs/modules/" + product.name + "/" + product.name + ".qbs"
 			fileTags: ["acf_share"]
 		}
 		prepare:{
@@ -259,7 +259,7 @@ AcfModule{
 		inputs: ["xpc_file"]
 
 		Artifact{
-			fileName: product.destinationDirectory + "/" + product.name + ".xpc"
+            filePath: product.destinationDirectory + "/" + product.name + ".xpc"
 			fileTags: ["xpc"]
 		}
 		prepare:{
@@ -366,5 +366,5 @@ AcfModule{
 			}
 			return cmd;
 		}
-	}
+    }
 }
