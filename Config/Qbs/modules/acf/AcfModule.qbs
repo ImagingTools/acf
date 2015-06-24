@@ -74,7 +74,8 @@ Module{
 		description: "if defined provide installation root of generated include files"
 	}
 
-	property string compilerDir: compileMode + compilerName
+	property bool is64Bit: (qbs.architecture.search(/64/i) >= 0);
+	property string compilerDir: is64Bit? compileMode + compilerName + "_64": compileMode + compilerName;
 	property string compilerAndQtDir: (Qt.core.versionMajor != 5)? compilerDir + "_Qt" + Qt.core.versionMajor: compilerDir
 	property string generatedOutputDir								// Path where stuff will be generated, if undefined "GeneratedPath/" + product.name will be taken
 	property path acfConfigurationFile								// ACF configuration file ARX compiler
@@ -101,5 +102,10 @@ Module{
 	FileTagger{
 		patterns: ["*.xpc"]
 		fileTags: ["xpc_file"]
+	}
+
+	FileTagger{
+		patterns: ["*.ui"]
+		fileTags: ["ui_corr"]
 	}
 }
