@@ -96,7 +96,7 @@ function relativePath(base, rel) {
     var j = i;
     var r = [];
 
-    var useAbsolutePath = (i == 0) && (rell.length > 0) && (rell[0] == "" || (rell[0].search(":") >= 0));
+	var useAbsolutePath = (i == 0) && (rell.length > 0) && (rell[0] === "" || (rell[0].search(":") >= 0));
 
     if (!useAbsolutePath) {
         for (; i < basel.length; i++)
@@ -122,7 +122,7 @@ function joinPaths(base, rel) {
             rell.splice(i, 1);
     }
 
-    var isRelAbsolute = (rell.length > 0) && (rell[0] == "" || (rell[0].search(":") >= 0));
+	var isRelAbsolute = (rell.length > 0) && (rell[0] === "" || (rell[0].search(":") >= 0));
     if (isRelAbsolute){
         return rell.join('/');
     }

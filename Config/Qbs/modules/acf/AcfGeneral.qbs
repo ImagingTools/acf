@@ -158,10 +158,14 @@ AcfModule{
 				if (!product.type.contains("xpc")){
 					var dependencies = product.dependencies;
 					for (var dependencyIndex in dependencies) {
-						var dependencyName = dependencies[dependencyIndex].name.replace("/", ".");
-						if ((dependencyName != "qbs") && (dependencyName.indexOf("_") != 0)){
-							pkginfo.write("	Depends{ name: '" + dependencyName + "' }\n");
+						var dependency = dependencies[dependencyIndex];
+						if ((dependency != null) && (dependency.name != null)){
+							var dependencyName = dependency.name.replace("/", ".");
+							if ((dependencyName != "qbs") && (dependencyName.indexOf("_") != 0)){
+								pkginfo.write("	Depends{ name: '" + dependencyName + "' }\n");
+							}
 						}
+
 					}
 
 					pkginfo.write("\n");
