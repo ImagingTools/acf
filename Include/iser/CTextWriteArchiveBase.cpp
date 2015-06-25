@@ -75,7 +75,7 @@ bool CTextWriteArchiveBase::Process(float& value)
 
 bool CTextWriteArchiveBase::Process(double& value)
 {
-	return ProcessInternal(value);
+	return Process(QString::number(value, 'g', 12));
 }
 
 
