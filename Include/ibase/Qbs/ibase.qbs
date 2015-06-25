@@ -6,10 +6,13 @@ AcfStaticLibrary{
 
 	files: ["../*.h", "../*.cpp"]
 
-	Depends{ name: "icomp" }
+    Depends{ name: "ilog" }
+    Depends{ name: "icomp" }
+    Depends{ name: "iprm" }
 
 	Export{
 		Depends{ name: "ilog" }
 		Depends{ name: "icomp" }
-	}
+        Depends{ name: "iprm" }
+    }
 }

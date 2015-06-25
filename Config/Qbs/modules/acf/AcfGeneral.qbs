@@ -27,29 +27,35 @@ AcfModule{
 		prepare:{
 			// get the ACF binary directory
 			var acfBinDirectory = product.moduleProperty("ArxcExe", "acfBinDirectory");
-			if (acfBinDirectory == null){
-				acfBinDirectory = product.buildDirectory;
-			}
-
-			// get the ACF configuration file
 			var acfConfigurationFile = product.moduleProperty("acf", "acfConfigurationFile");
-			if (acfConfigurationFile == null){
-				var dependencies = product.dependencies;
-				for (var dependencyIndex in dependencies) {
-					var dependency = dependencies[dependencyIndex];
+
+			// check all dependencies
+			var dependencies = product.dependencies;
+			for (var dependencyIndex in dependencies) {
+				var dependency = dependencies[dependencyIndex];
+				if (acfConfigurationFile == null){
 					var dependencyFilePath = product.moduleProperty(dependency.name, "xpcFilePath");
 					if (dependencyFilePath != null){
 						acfConfigurationFile = dependencyFilePath;
 					}
 					else if (dependency.type != null && dependency.type.contains("xpc")){
-						acfConfigurationFile = product.buildDirectory + "/" + dependency.destinationDirectory + "/" + dependency.name + ".xpc";
+						acfConfigurationFile = AcfService.joinPaths(product.buildDirectory, dependency.destinationDirectory) + "/" + dependency.name + ".xpc";
 					}
+				}
+
+				if ((acfBinDirectory == null) && (dependency.name == "ArxcExe")){
+					acfBinDirectory = dependency.buildDirectory;
 				}
 			}
 
 			// if there is no configuration - error
 			if (acfConfigurationFile == null){
 				throw new Error("No ACF configuration specified (using dependency or acf.acfConfigurationFile) in " + product.name);
+			}
+
+			// if there is no ArxcExe directory - error
+			if (acfBinDirectory == null){
+				throw new Error("No ArxcExe dependency specified in " + product.name);
 			}
 
 			var cmd = new Command(acfBinDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), [
@@ -76,25 +82,26 @@ AcfModule{
 		prepare:{
 			// get the ACF binary directory
 			var acfBinDirectory = product.moduleProperty("AcfExe", "acfBinDirectory");
-			if (acfBinDirectory == null){
-				acfBinDirectory = product.buildDirectory;
-			}
-
 			var acfRegistryFile = product.moduleProperty("acf", "trRegFile");
-
-			// get the ACF configuration file
 			var acfConfigurationFile = product.moduleProperty("acf", "trConfigurationFile");
-			if (acfConfigurationFile == null){
-				var dependencies = product.dependencies;
-				for (var dependencyIndex in dependencies) {
-					var dependency = dependencies[dependencyIndex];
+
+			// check all dependencies
+			var dependencies = product.dependencies;
+			for (var dependencyIndex in dependencies) {
+				var dependency = dependencies[dependencyIndex];
+
+				if (acfConfigurationFile == null){
 					var dependencyFilePath = product.moduleProperty(dependency.name, "xpcFilePath");
 					if (dependencyFilePath != null){
 						acfConfigurationFile = dependencyFilePath;
 					}
 					else if (dependency.type != null && dependency.type.contains("xpc")){
-						acfConfigurationFile = product.buildDirectory + "/" + dependency.destinationDirectory + "/" + dependency.name + ".xpc";
+						acfConfigurationFile = AcfService.joinPaths(product.buildDirectory, dependency.destinationDirectory) + "/" + dependency.name + ".xpc";
 					}
+				}
+
+				if ((acfBinDirectory == null) && (dependency.name == "AcfExe")){
+					acfBinDirectory = dependency.buildDirectory;
 				}
 			}
 
@@ -106,6 +113,11 @@ AcfModule{
 			// if there is no configuration - error
 			if (acfConfigurationFile == null){
 				throw new Error("no ACF configuration specified (using dependency or acf.trConfigurationFile) in " + product.name);
+			}
+
+			// if there is no AcfExe directory - error
+			if (acfBinDirectory == null){
+				throw new Error("No ArxcExe dependency specified in " + product.name);
 			}
 
 			var cmd = new Command(acfBinDirectory + '/' + product.moduleProperty("cpp", "executablePrefix") + 'Acf' + product.moduleProperty("cpp", "executableSuffix"), [
