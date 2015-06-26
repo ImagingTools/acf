@@ -400,4 +400,5 @@ AcfModule{
     }
 
 	cpp.includePaths: product.buildDirectory
+	Qt.core.generatedFilesDir : product.buildDirectory + "/GeneratedFiles/" + product.name
 }
