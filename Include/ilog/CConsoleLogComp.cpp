@@ -9,12 +9,20 @@
 
 // Windows includes
 #ifdef Q_OS_WIN
-	#include <windows.h>
-	#define FOREGROUND_BLUE	  0x0001 // text color contains blue.
-	#define FOREGROUND_GREEN	 0x0002 // text color contains green.
-	#define FOREGROUND_RED	   0x0004 // text color contains red.
-	#define FOREGROUND_INTENSITY 0x0008 // text color is intensified.
-	extern WINBASEAPI BOOL WINAPI SetConsoleTextAttribute(HANDLE hConsoleOutput, WORD wAttributes);
+#include <windows.h>
+#ifndef FOREGROUND_BLUE
+#define FOREGROUND_BLUE	  0x0001 // text color contains blue.
+#endif
+#ifndef FOREGROUND_BLUE
+#define FOREGROUND_BLUE	 0x0002 // text color contains green.
+#endif
+#ifndef FOREGROUND_BLUE
+#define FOREGROUND_BLUE	   0x0004 // text color contains red.
+#endif
+#ifndef FOREGROUND_BLUE
+#define FOREGROUND_BLUE 0x0008 // text color is intensified.
+#endif
+extern WINBASEAPI BOOL WINAPI SetConsoleTextAttribute(HANDLE hConsoleOutput, WORD wAttributes);
 #endif
 
 
