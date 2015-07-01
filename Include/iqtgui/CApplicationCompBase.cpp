@@ -5,6 +5,10 @@
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
+#ifdef Q_OS_LINUX
+#include <QtCore/QTimer>
+#include <QtCore/QEventLoop>
+#endif
 #include <QtGui/QIcon>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QApplication>
@@ -106,8 +110,17 @@ bool CApplicationCompBase::TryShowSplashScreen()
 		Q_ASSERT(splashWidgetPtr != NULL);
 
 		splashWidgetPtr->show();
+		splashWidgetPtr->raise();
 
-		m_applicationPtr->processEvents();
+#ifdef Q_OS_LINUX
+		QEventLoop loop;
+		QTimer initSplashTimer;
+		QObject::connect(&initSplashTimer, SIGNAL(timeout()), &loop, SLOT(quit()), Qt::QueuedConnection);
+		Q_EMIT initSplashTimer.start(1000);
+		loop.exec(QEventLoop::ExcludeUserInputEvents);
+#else
+		m_applicationPtr->processEvents(QEventLoop::ExcludeUserInputEvents);
+#endif
 
 		return true;
 	}

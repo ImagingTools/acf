@@ -22,7 +22,10 @@ CSplashScreenGuiComp::CSplashScreenGuiComp()
 void CSplashScreenGuiComp::OnGuiCreated()
 {
 	Q_ASSERT(IsGuiCreated());
-	QPalette palette = GetQtWidget()->palette();
+	QSplashScreen* splashScreenPtr = GetQtWidget();
+	Q_ASSERT(splashScreenPtr != NULL);
+
+	QPalette palette = splashScreenPtr->palette();
 
 	if (m_applicationInfoCompPtr.IsValid()){
 		m_mainVersionId = m_applicationInfoCompPtr->GetMainVersionId();
@@ -83,7 +86,6 @@ void CSplashScreenGuiComp::OnGuiCreated()
 		}
 	}
 
-	QSplashScreen* splashScreenPtr = GetQtWidget();
 	if (m_imagePathAttrPtr.IsValid() && (splashScreenPtr != NULL)){
 		QString imagePath = istd::CSystem::GetEnrolledPath(*m_imagePathAttrPtr);
 
