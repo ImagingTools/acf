@@ -43,7 +43,7 @@ int CSingleDocumentManagerBase::GetDocumentsCount() const
 istd::IChangeable& CSingleDocumentManagerBase::GetDocumentFromIndex(int I_IF_DEBUG(index), DocumentInfo* documentInfoPtr) const
 {
 	Q_ASSERT(index >= 0);
-	Q_ASSERT(index < GetDocumentsCount());
+	I_IF_DEBUG(Q_ASSERT(index < GetDocumentsCount()));
 	Q_ASSERT(m_documentPtr.IsValid());
 
 	if (documentInfoPtr != NULL){
@@ -58,8 +58,8 @@ istd::IChangeable& CSingleDocumentManagerBase::GetDocumentFromIndex(int I_IF_DEB
 
 int CSingleDocumentManagerBase::GetViewsCount(int I_IF_DEBUG(documentIndex)) const
 {
-	Q_ASSERT(documentIndex >= 0);
-	Q_ASSERT(documentIndex < GetDocumentsCount());
+	I_IF_DEBUG(Q_ASSERT(documentIndex >= 0));
+	I_IF_DEBUG(Q_ASSERT(documentIndex < GetDocumentsCount()));
 
 	return m_viewPtr.IsValid()? 1: 0;
 }
@@ -67,9 +67,9 @@ int CSingleDocumentManagerBase::GetViewsCount(int I_IF_DEBUG(documentIndex)) con
 
 istd::IPolymorphic* CSingleDocumentManagerBase::GetViewFromIndex(int I_IF_DEBUG(documentIndex), int I_IF_DEBUG(viewIndex)) const
 {
-	Q_ASSERT(documentIndex >= 0);
-	Q_ASSERT(documentIndex < GetDocumentsCount());
-	Q_ASSERT(viewIndex < GetViewsCount(documentIndex));
+	I_IF_DEBUG(Q_ASSERT(documentIndex >= 0));
+	I_IF_DEBUG(Q_ASSERT(documentIndex < GetDocumentsCount()));
+	I_IF_DEBUG(Q_ASSERT(viewIndex < GetViewsCount(documentIndex)));
 
 	return m_viewPtr.GetPtr();
 }

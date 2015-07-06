@@ -196,7 +196,7 @@ template <class Type, bool DelArray>
 TOptDelPtr<Type, DelArray>& TOptDelPtr<Type, DelArray>::operator=(const TOptDelPtr& I_IF_DEBUG(ptr))
 {
 	if (m_releaseFlag){
-		Q_ASSERT(ptr.GetPtr() == NULL);
+		I_IF_DEBUG(Q_ASSERT(ptr.GetPtr() == NULL));
 	}
 
 	Reset();

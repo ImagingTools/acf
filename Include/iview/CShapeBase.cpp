@@ -165,8 +165,8 @@ void CShapeBase::OnConnectDisplay(IDisplay* displayPtr)
 
 void CShapeBase::OnDisconnectDisplay(IDisplay* I_IF_DEBUG(displayPtr))
 {
-	Q_ASSERT(displayPtr != NULL);
-	Q_ASSERT(displayPtr == m_displayPtr);
+	I_IF_DEBUG(Q_ASSERT(displayPtr != NULL));
+	I_IF_DEBUG(Q_ASSERT(displayPtr == m_displayPtr));
 	m_displayPtr = NULL;
 }
 

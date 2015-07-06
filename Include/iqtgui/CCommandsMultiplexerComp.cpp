@@ -38,7 +38,7 @@ const ibase::IHierarchicalCommand* CCommandsMultiplexerComp::GetCommands() const
 
 void CCommandsMultiplexerComp::BeforeUpdate(imod::IModel* I_IF_DEBUG(modelPtr))
 {
-	Q_ASSERT(IsModelAttached(modelPtr));
+	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
 	static const ChangeSet changeSet(CF_DELEGATED, ibase::ICommandsProvider::CF_COMMANDS);
 
@@ -48,7 +48,7 @@ void CCommandsMultiplexerComp::BeforeUpdate(imod::IModel* I_IF_DEBUG(modelPtr))
 
 void CCommandsMultiplexerComp::AfterUpdate(imod::IModel* I_IF_DEBUG(modelPtr), const istd::IChangeable::ChangeSet& changeSet)
 {
-	Q_ASSERT(IsModelAttached(modelPtr));
+	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
 	ChangeSet composedChangeSet = changeSet;
 

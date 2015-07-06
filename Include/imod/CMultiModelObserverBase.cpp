@@ -96,7 +96,7 @@ bool CMultiModelObserverBase::OnModelDetached(IModel* modelPtr)
 
 void CMultiModelObserverBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr))
 {
-	Q_ASSERT(IsModelAttached(modelPtr));
+	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 }
 
 

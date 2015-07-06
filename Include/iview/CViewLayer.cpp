@@ -57,8 +57,8 @@ void CViewLayer::OnConnectView(IShapeView* viewPtr)
 
 void CViewLayer::OnDisconnectView(IShapeView* I_IF_DEBUG(viewPtr))
 {
-	Q_ASSERT(m_viewPtr == viewPtr);
-	Q_ASSERT(viewPtr != NULL);
+	I_IF_DEBUG(Q_ASSERT(m_viewPtr == viewPtr));
+	I_IF_DEBUG(Q_ASSERT(viewPtr != NULL));
 
 	m_viewPtr = NULL;
 }

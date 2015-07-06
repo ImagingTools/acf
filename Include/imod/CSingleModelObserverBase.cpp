@@ -76,13 +76,13 @@ bool CSingleModelObserverBase::OnModelDetached(imod::IModel* modelPtr)
 
 void CSingleModelObserverBase::BeforeUpdate(imod::IModel* I_IF_DEBUG(modelPtr))
 {
-	Q_ASSERT(m_modelPtr == modelPtr);
+	I_IF_DEBUG(Q_ASSERT(m_modelPtr == modelPtr));
 }
 
 
 void CSingleModelObserverBase::AfterUpdate(imod::IModel* I_IF_DEBUG(modelPtr), const istd::IChangeable::ChangeSet& changeSet)
 {
-	Q_ASSERT(m_modelPtr == modelPtr);
+	I_IF_DEBUG(Q_ASSERT(m_modelPtr == modelPtr));
 
 	if (!changeSet.IsEmpty()){
 		OnUpdate(changeSet);

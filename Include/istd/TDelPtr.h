@@ -118,7 +118,7 @@ template <class Type, class Accessor>
 inline TDelPtr<Type, Accessor>::TDelPtr(const TDelPtr<Type, Accessor>& I_IF_DEBUG(ptr))
 :	BaseClass(NULL)
 {
-	Q_ASSERT(ptr.GetPtr() == NULL);
+	I_IF_DEBUG(Q_ASSERT(ptr.GetPtr() == NULL));
 }
 
 
@@ -167,7 +167,7 @@ void TDelPtr<Type, Accessor>::TakeOver(TDelPtr& sourcePtr)
 template <class Type, class Accessor>
 TDelPtr<Type, Accessor>& TDelPtr<Type, Accessor>::operator=(const TDelPtr& I_IF_DEBUG(ptr))
 {
-	Q_ASSERT(ptr.GetPtr() == NULL);
+	I_IF_DEBUG(Q_ASSERT(ptr.GetPtr() == NULL));
 
 	Reset();
 

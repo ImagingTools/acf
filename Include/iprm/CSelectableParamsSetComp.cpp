@@ -326,7 +326,7 @@ CSelectableParamsSetComp::CurrentParamsSetObserver::CurrentParamsSetObserver(CSe
 
 void CSelectableParamsSetComp::CurrentParamsSetObserver::BeforeUpdate(imod::IModel* I_IF_DEBUG(modelPtr))
 {
-	Q_ASSERT(IsModelAttached(modelPtr));
+	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
 	m_parent.BeginChanges(GetDelegatedChanges());
 }
@@ -334,7 +334,7 @@ void CSelectableParamsSetComp::CurrentParamsSetObserver::BeforeUpdate(imod::IMod
 
 void CSelectableParamsSetComp::CurrentParamsSetObserver::AfterUpdate(imod::IModel* I_IF_DEBUG(modelPtr), const ChangeSet& /*changeSet*/)
 {
-	Q_ASSERT(IsModelAttached(modelPtr));
+	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
 	m_parent.EndChanges(GetDelegatedChanges());
 }
