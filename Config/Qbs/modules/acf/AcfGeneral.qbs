@@ -58,10 +58,15 @@ AcfModule{
 				throw new Error("No ArxcExe dependency specified in " + product.name);
 			}
 
-			var cmd = new Command(acfBinDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), [
+			var parameters = [
 						inputs.arx[0].filePath,
 						'-config', acfConfigurationFile,
-						'-o', outputs.cpp[0].filePath]);
+						'-o', outputs.cpp[0].filePath];
+			if (product.moduleProperty("acf", "acfCompilerToBinary") == false){
+				parameters.push("-no_binary");
+			}
+
+			var cmd = new Command(acfBinDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), parameters);
 			cmd.description = 'arxc ' + FileInfo.fileName(inputs.arx[0].filePath)
 			cmd.highlight = 'codegen';
 			cmd.workingDirectory = product.moduleProperty("Qt.core", "binPath");
