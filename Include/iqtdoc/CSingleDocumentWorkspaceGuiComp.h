@@ -34,6 +34,8 @@ class CSingleDocumentWorkspaceGuiComp:
 						iqtgui::TRestorableGuiWrap<
 									iqtgui::TGuiComponentBase<QWidget> > >
 {
+	Q_OBJECT
+
 public:
 	typedef iqtdoc::TQtDocumentManagerWrap<
 						idoc::CSingleDocumentManagerBase,

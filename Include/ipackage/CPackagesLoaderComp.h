@@ -34,6 +34,8 @@ class CPackagesLoaderComp:
 			public icomp::CEnvironmentManagerBase,
 			virtual public icomp::IRegistryLoader
 {
+	Q_OBJECT
+
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 	typedef icomp::CEnvironmentManagerBase BaseClass2;
