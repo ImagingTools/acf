@@ -66,6 +66,9 @@ int main(int argc, char *argv[])
 
 				return 0;
 			}
+			else if (option == "no_binary"){
+				useBinaryCode = false;
+			}
 			else if (index < argc - 1){
 				if (option == "config"){
 					configFile = argv[++index];
@@ -79,9 +82,6 @@ int main(int argc, char *argv[])
 					if ((modeText == "d") || (modeText == "depends")){
 						workingMode = 1;
 					}
-				}
-				else if (option == "no_binary"){
-					useBinaryCode = false;
 				}
 			}
 		}
