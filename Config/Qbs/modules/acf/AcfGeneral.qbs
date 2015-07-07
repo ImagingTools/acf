@@ -62,7 +62,7 @@ AcfModule{
 						inputs.arx[0].filePath,
 						'-config', acfConfigurationFile,
 						'-o', outputs.cpp[0].filePath];
-			if (product.moduleProperty("acf", "acfCompilerToBinary") == false){
+			if (product.moduleProperty("acf", "arxcToBinary") === false){
 				parameters.push("-no_binary");
 			}
 
