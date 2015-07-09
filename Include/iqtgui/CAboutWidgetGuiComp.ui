@@ -95,7 +95,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Product</string>
+         <string notr="true">Product</string>
         </property>
        </widget>
       </item>
@@ -109,7 +109,7 @@
          </font>
         </property>
         <property name="text">
-         <string>ApplicationName</string>
+         <string notr="true">ApplicationName</string>
         </property>
        </widget>
       </item>
@@ -160,7 +160,7 @@
          </font>
         </property>
         <property name="text">
-         <string>ApplicationType</string>
+         <string notr="true">ApplicationType</string>
         </property>
        </widget>
       </item>

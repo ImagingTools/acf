@@ -182,7 +182,7 @@
       </font>
      </property>
      <property name="text">
-      <string>ProductName</string>
+      <string notr="true">ProductName</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -240,7 +240,7 @@
       </font>
      </property>
      <property name="text">
-      <string>ApplicationName</string>
+      <string notr="true">ApplicationName</string>
      </property>
     </widget>
    </item>
@@ -295,7 +295,7 @@
       </font>
      </property>
      <property name="text">
-      <string>ApplicationType</string>
+      <string notr="true">ApplicationType</string>
      </property>
     </widget>
    </item>
@@ -323,16 +323,7 @@
         <enum>QFrame::Raised</enum>
        </property>
        <layout class="QGridLayout" name="gridLayout">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
+        <property name="margin">
          <number>0</number>
         </property>
         <item row="0" column="0">
@@ -526,7 +517,7 @@
       </palette>
      </property>
      <property name="text">
-      <string>(C) Copyright</string>
+      <string notr="true">(C) Copyright</string>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
