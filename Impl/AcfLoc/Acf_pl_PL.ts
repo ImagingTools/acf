@@ -1493,7 +1493,7 @@
     <message>
         <location line="+1"/>
         <source>Recent Files</source>
-        <translation>Ostatnie pliki</translation>
+        <translation>Ostatnio otwarte</translation>
     </message>
     <message>
         <location line="+72"/>
@@ -1649,17 +1649,17 @@
     <message>
         <location line="+1"/>
         <source>&amp;Open Containing Folder</source>
-        <translation>&amp;Otwórz folder zawierający</translation>
+        <translation>&amp;Otwórz folder dokumentu</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Open Containing Folder</source>
-        <translation>Otwórz folder zawierający</translation>
+        <translation>Otwórz folder dokumentu</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Open folder containing the current document</source>
-        <translation>Otwórz folder zawierający bieżący dokument</translation>
+        <translation>Otwiera folder zawierający bieżący dokument</translation>
     </message>
     <message>
         <location line="+156"/>
