@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+    <_PropertySheetDisplayName>Plattform Win64</_PropertySheetDisplayName>
+    <IntDir>..\..\..\AuxInclude\Qt5\GeneratedFiles\$(Configuration)_64\$(ProjectName)\</IntDir>
+    <OutDir>$(PlattformDependentBaseOutputDir)\$(Configuration)VC12_64\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup />
+  <ItemGroup />
+</Project>

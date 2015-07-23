@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Project="General.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros">
+    <PlattformDependentBaseOutputDir>../../../Lib</PlattformDependentBaseOutputDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+    <_PropertySheetDisplayName>ACF Static Library</_PropertySheetDisplayName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="PlattformDependentBaseOutputDir">
+      <Value>$(PlattformDependentBaseOutputDir)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

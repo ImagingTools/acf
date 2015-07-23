@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup
+    Condition="'$(ArxcBeforeTargets)' == '' and '$(ArxcAfterTargets)' == '' and '$(ConfigurationType)' != 'Makefile'">
+    <ArxcBeforeTargets>Midl</ArxcBeforeTargets>
+    <ArxcAfterTargets>CustomBuild</ArxcAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ArxcDependsOn
+      Condition="'$(ConfigurationType)' != 'Makefile'">_SelectedFiles;$(ArxcDependsOn)</ArxcDependsOn>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Arxc>
+      <Verbose>False</Verbose>
+      <CommandLineTemplate>$(ACFDIR)\Bin\$(Configuration)VC12\Arxc.exe "%(FullPath)" -o "%(RootDir)%(Directory)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C%(Filename).cpp" [AllOptions] [AdditionalOptions]</CommandLineTemplate>
+      <Outputs>"%(RootDir)%(Directory)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C%(Filename).cpp";"%(RootDir)%(Directory)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C%(Filename).h"</Outputs>
+      <ExecutionDescription>Compiling ACF Registry File...</ExecutionDescription>
+      <AdditionalDependencies>"$(ACFDIR)\Bin\$(Configuration)VC12\Arxc.exe"</AdditionalDependencies>
+    </Arxc>
+  </ItemDefinitionGroup>
+  <PropertyGroup
+    Condition="'$(DeployCopyBeforeTargets)' == '' and '$(DeployCopyAfterTargets)' == '' and '$(ConfigurationType)' != 'Makefile'">
+    <DeployCopyBeforeTargets>Midl</DeployCopyBeforeTargets>
+    <DeployCopyAfterTargets>CustomBuild</DeployCopyAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DeployCopyDependsOn
+      Condition="'$(ConfigurationType)' != 'Makefile'">_SelectedFiles;$(DeployCopyDependsOn)</DeployCopyDependsOn>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <DeployCopy>
+      <OutputDir>$(OutputDir)</OutputDir>
+      <InputDir>%(RootDir)%(Directory)</InputDir>
+      <CommandLineTemplate>copy /Y "%(InputDir)\%(Filename)" "%(OutputDir)\"</CommandLineTemplate>
+      <Outputs>"%(OutputDir)\%(Filename)"</Outputs>
+      <ExecutionDescription>Copying file %(Filename)</ExecutionDescription>
+      <AdditionalDependencies>"%(InputDir)\%(Filename)"</AdditionalDependencies>
+    </DeployCopy>
+  </ItemDefinitionGroup>
+  <PropertyGroup
+    Condition="'$(FileConvertCopyBeforeTargets)' == '' and '$(FileConvertCopyAfterTargets)' == '' and '$(ConfigurationType)' != 'Makefile'">
+    <FileConvertCopyBeforeTargets>Midl</FileConvertCopyBeforeTargets>
+    <FileConvertCopyAfterTargets>CustomBuild</FileConvertCopyAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <FileConvertCopyDependsOn
+      Condition="'$(ConfigurationType)' != 'Makefile'">_SelectedFiles;$(FileConvertCopyDependsOn)</FileConvertCopyDependsOn>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <FileConvertCopy>
+      <RegistryFile>$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx</RegistryFile>
+      <ConfigFile>$(ACFDIR)\Config\AcfBaseOnly.xpc</ConfigFile>
+      <OutputDir>$(OutputDir)</OutputDir>
+      <CommandLineTemplate>"$(ACFDIR)\Bin\$(Configuration)VC12\Acf.exe" "%(RegistryFile)" -config "%(ConfigFile)" -input "%(FullPath)" -o %(OutputDir)/%(Filename)</CommandLineTemplate>
+      <Outputs>"%(OutputDir)/%(Filename)"</Outputs>
+      <ExecutionDescription>Converting File With ACF transformation...</ExecutionDescription>
+      <AdditionalDependencies>"$(ACFDIR)\Bin\$(Configuration)VC12\Acf.exe";"%(RegistryFile)";"%(ConfigFile)"</AdditionalDependencies>
+    </FileConvertCopy>
+  </ItemDefinitionGroup>
+</Project>
