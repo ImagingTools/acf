@@ -76,6 +76,11 @@ public:
 
 protected:
 	/**
+		Create the data object from the UI-editor.
+	*/
+	virtual bool GetObjectFromEditor(PolygonBasedModel& object) const;
+
+	/**
 		Get the table with the node data.
 	*/
 	QTableWidget* GetNodeTable();
@@ -139,26 +144,34 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateMod
 	i2d::CPolygon* objectPtr = GetObjectPtr();
 	Q_ASSERT(objectPtr != NULL);
 
-	int count = NodeParamsTable->rowCount();
+	PolygonBasedModel editorObject;
+	if (GetObjectFromEditor(editorObject)){
+		if (!objectPtr->IsEqual(editorObject)){
+			istd::CChangeNotifier changePtr(objectPtr);
 
-	i2d::CPolygon polygon;
-
-	for (int i = 0; i < count; i++){
-		double x = NodeParamsTable->item(i, CI_X)->text().toDouble();
-		double y = NodeParamsTable->item(i, CI_Y)->text().toDouble();
-
-		polygon.InsertNode(i2d::CVector2d(x, y));
-	}
-
-	if (!objectPtr->IsEqual(polygon)){
-		istd::CChangeNotifier changePtr(objectPtr);
-
-		objectPtr->CopyFrom(polygon);
+			objectPtr->CopyFrom(editorObject);
+		}
 	}
 }
 
 
 // protected methods
+template <class PolygonBasedShape, class PolygonBasedModel>
+bool TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::GetObjectFromEditor(PolygonBasedModel& object) const
+{
+	object.Clear();
+
+	int count = NodeParamsTable->rowCount();
+	for (int i = 0; i < count; i++){
+		double x = NodeParamsTable->item(i, CI_X)->text().toDouble();
+		double y = NodeParamsTable->item(i, CI_Y)->text().toDouble();
+
+		object.InsertNode(i2d::CVector2d(x, y));
+	}
+
+	return true;
+}
+
 
 template <class PolygonBasedShape, class PolygonBasedModel>
 QTableWidget* TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::GetNodeTable()
@@ -284,8 +297,8 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateGui
 
 		for (int i = 0; i < count; i++){
 			i2d::CVector2d coord = objectPtr->GetNode(i);
-			NodeParamsTable->setItem(i, 0, new QTableWidgetItem(QString::number(coord.GetX())));
-			NodeParamsTable->setItem(i, 1, new QTableWidgetItem(QString::number(coord.GetY())));
+			NodeParamsTable->setItem(i, 0, new QTableWidgetItem(QString::number(coord.GetX(), 'g', 12)));
+			NodeParamsTable->setItem(i, 1, new QTableWidgetItem(QString::number(coord.GetY(), 'g', 12)));
 		}
 	}
 }
@@ -309,6 +322,7 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiCrea
 	NodeParamsTable->setItemDelegateForColumn(1, columnDelegate);
 
 	BaseClass::CloseLineCheckBox->setHidden(true);
+
 	UpdateToolsMenuButton();
 }
 
@@ -324,8 +338,8 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateToo
 		BaseClass::ToolsButton->setHidden(false);
 		if (BaseClass::ToolsButton->menu() == NULL){
 			BaseClass::ToolsButton->setMenu(new QMenu(BaseClass::ToolsButton));
-			BaseClass::connect(BaseClass::ToolsButton->menu(), SIGNAL(triggered(QAction*)),
-					this, SLOT(OnToolsButtonMenuActionTriggered(QAction*)));
+
+			BaseClass::connect(BaseClass::ToolsButton->menu(), SIGNAL(triggered(QAction*)), this, SLOT(OnToolsButtonMenuActionTriggered(QAction*)));
 		}
 
 		QMenu& menu = *BaseClass::ToolsButton->menu();
@@ -351,14 +365,14 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnToolsBu
 	for (		typename BaseClass::ShapesMap::const_iterator iter = shapesMap.begin();
 				iter != shapesMap.end();
 				++iter){
-			const typename BaseClass::Shapes& shapes = iter.value();
-			int shapesCount = shapes.GetCount();
-			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
-				PolygonBasedShape* shapePtr = dynamic_cast<PolygonBasedShape*>(shapes.GetAt(shapeIndex));
-				if (shapePtr != NULL){
-					shapePtr->ExecuteAction((iview::IInteractiveShape::ShapeAction)actionId);
-				}
+		const typename BaseClass::Shapes& shapes = iter.value();
+		int shapesCount = shapes.GetCount();
+		for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
+			PolygonBasedShape* shapePtr = dynamic_cast<PolygonBasedShape*>(shapes.GetAt(shapeIndex));
+			if (shapePtr != NULL){
+				shapePtr->ExecuteAction((iview::IInteractiveShape::ShapeAction)actionId);
 			}
+		}
 	}
 }
 

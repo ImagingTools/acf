@@ -28,6 +28,18 @@ iview::IShape* CPolylineParamsGuiComp::CreateShape(const istd::IChangeable* obje
 }
 
 
+// protected methods
+
+bool CPolylineParamsGuiComp::GetObjectFromEditor(i2d::CPolyline& object) const
+{
+	bool retVal = BaseClass::GetObjectFromEditor(object);
+
+	object.SetClosed(CloseLineCheckBox->checkState() == Qt::Checked);
+
+	return retVal;
+}
+
+
 // protected slots
 
 void CPolylineParamsGuiComp::OnParamsChanged()

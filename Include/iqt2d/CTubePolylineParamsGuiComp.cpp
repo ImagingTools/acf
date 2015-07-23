@@ -107,8 +107,8 @@ void CTubePolylineParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& c
 		int count = objectPtr->GetNodesCount();
 		for (int i = 0; i < count; i++){
 			const i2d::CTubeNode& node = objectPtr->GetTNodeData(i);
-			NodeParamsTable->setItem(i, 2, new QTableWidgetItem(QString::number(node.GetTubeRange().GetMinValue())));
-			NodeParamsTable->setItem(i, 3, new QTableWidgetItem(QString::number(node.GetTubeRange().GetMaxValue())));
+			NodeParamsTable->setItem(i, 2, new QTableWidgetItem(QString::number(node.GetTubeRange().GetMinValue(), 'g', 12)));
+			NodeParamsTable->setItem(i, 3, new QTableWidgetItem(QString::number(node.GetTubeRange().GetMaxValue(), 'g', 12)));
 		}
 	}
 }

@@ -110,12 +110,6 @@ i2d::CVector2d CPolyline::GetKneeVector(int nodeIndex) const
 
 // reimplemented (istd::IChangeable)
 
-int CPolyline::GetSupportedOperations() const
-{
-	return SO_COPY | SO_CLONE;
-}
-
-
 bool CPolyline::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CPolyline* polylinePtr = dynamic_cast<const CPolyline*>(&object);
@@ -145,6 +139,17 @@ istd::IChangeable* CPolyline::CloneMe(CompatibilityMode mode) const
 	}
 
 	return NULL;
+}
+
+
+bool CPolyline::IsEqual(const IChangeable& object) const
+{
+	const CPolyline* polylinePtr = dynamic_cast<const CPolyline*>(&object);
+	if (polylinePtr != NULL){
+		return (m_isClosed == polylinePtr->m_isClosed) && BaseClass::IsEqual(object);	
+	}
+
+	return false;
 }
 
 

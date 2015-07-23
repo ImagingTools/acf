@@ -17,7 +17,7 @@ namespace i2d
 void CPolygon::Clear()
 {
 	if (!m_nodes.empty()){
-        BeginChanges(GetAnyChange());
+		BeginChanges(GetAnyChange());
 
 		m_nodes.clear();
 
@@ -29,7 +29,7 @@ void CPolygon::Clear()
 void CPolygon::SetNodesCount(int nodesCount)
 {
 	if (nodesCount != (int)m_nodes.size()){
-        BeginChanges(GetAnyChange());
+		BeginChanges(GetAnyChange());
 
 		m_nodes.resize(nodesCount);
 
@@ -259,7 +259,7 @@ bool CPolygon::Serialize(iser::IArchive& archive)
 
 int CPolygon::GetSupportedOperations() const
 {
-	return SO_COPY | SO_CLONE;
+	return SO_COPY | SO_CLONE | SO_COMPARE;
 }
 
 
