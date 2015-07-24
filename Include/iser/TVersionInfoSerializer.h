@@ -94,11 +94,6 @@ bool TVersionInfoSerializer<VersionInfo>::ReadVersion(VersionInfo* versionInfoPt
 template <class VersionInfo>
 bool TVersionInfoSerializer<VersionInfo>::WriteVersion(const VersionInfo* versionInfoPtr, iser::IArchive& archive)
 {
-	Q_ASSERT(versionInfoPtr != NULL);
-	if (versionInfoPtr == NULL){
-		return false;
-	}
-
 	Q_ASSERT(archive.IsStoring());
 	if (!archive.IsStoring()){
 		return false;
@@ -107,7 +102,10 @@ bool TVersionInfoSerializer<VersionInfo>::WriteVersion(const VersionInfo* versio
 	bool retVal = archive.BeginTag(s_headerTag);
 
 	IVersionInfo::VersionIds ids;
-	ids = versionInfoPtr->GetVersionIds();
+
+	if (versionInfoPtr != NULL){
+		ids = versionInfoPtr->GetVersionIds();
+	}
 
 	int versionIdsCount = int(ids.size());
 
@@ -117,6 +115,8 @@ bool TVersionInfoSerializer<VersionInfo>::WriteVersion(const VersionInfo* versio
 				retVal && (iter != ids.end());
 				++iter){
 		retVal = retVal && archive.BeginTag(s_versionInfoTag);
+
+		Q_ASSERT(versionInfoPtr != NULL);
 
 		int id = *iter;
 		I_IF_DEBUG(
