@@ -17,10 +17,10 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC9/Tutorial"
+			OutputDirectory="../../../../../Bin/$(ConfigurationName)$(CompilerCode)/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -61,7 +61,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;..\..\..\..\..\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;..\..\..\..\..\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 			/>
@@ -89,10 +89,10 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC9/Tutorial"
+			OutputDirectory="../../../../../Bin/$(ConfigurationName)$(CompilerCode)/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -136,7 +136,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;..\..\..\..\..\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;..\..\..\..\..\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>
