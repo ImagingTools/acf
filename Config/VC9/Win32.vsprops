@@ -3,12 +3,20 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="Plattform Win32"
-	IntermediateDirectory="..\..\..\AuxInclude\Qt5\GeneratedFiles\$(ConfigurationName)\$(ProjectName)"
 	OutputDirectory="$(PlattformDependentBaseOutputDir)\$(ConfigurationName)VC9"
+	IntermediateDirectory="..\..\..\AuxInclude\Qt5\GeneratedFiles\$(ConfigurationName)\$(ProjectName)"
 	>
 	<UserMacro
 		Name="QTDIR"
 		Value="$(QTDIR_32)"
 		PerformEnvironmentSet="true"
+	/>
+	<UserMacro
+		Name="CompilerName"
+		Value="VC9"
+	/>
+	<UserMacro
+		Name="CompilerCode"
+		Value="VC9"
 	/>
 </VisualStudioPropertySheet>
