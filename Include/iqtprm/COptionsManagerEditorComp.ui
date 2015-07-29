@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>COptionsListEditorGuiComp</class>
- <widget class="QWidget" name="COptionsListEditorGuiComp">
+ <class>COptionsManagerEditorComp</class>
+ <widget class="QWidget" name="COptionsManagerEditorComp">
   <property name="geometry">
    <rect>
     <x>0</x>

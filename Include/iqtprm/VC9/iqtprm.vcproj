@@ -93,75 +93,6 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug|Win32"
-			ConfigurationType="4"
-			InheritedPropertySheets="..\..\..\Config\VC9\Static.vsprops;..\..\..\Config\VC9\Debug.vsprops;..\..\..\Config\VC9\Win32.vsprops"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
-			/>
-			<Tool
-				Name="Qt Linguist"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../../AuxInclude/Qt5"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
-				StringPooling="true"
-				RuntimeLibrary="3"
-				PrecompiledHeaderFile=""
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
 			Name="Release|x64"
 			ConfigurationType="4"
 			InheritedPropertySheets="..\..\..\Config\VC9\Static.vsprops;..\..\..\Config\VC9\Release.vsprops;..\..\..\Config\VC9\Win64.vsprops"
@@ -203,6 +134,75 @@
 				EnableEnhancedInstructionSet="2"
 				PrecompiledHeaderFile=""
 				DebugInformationFormat="0"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			ConfigurationType="4"
+			InheritedPropertySheets="..\..\..\Config\VC9\Static.vsprops;..\..\..\Config\VC9\Debug.vsprops;..\..\..\Config\VC9\Win32.vsprops"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				StringPooling="true"
+				RuntimeLibrary="3"
+				PrecompiledHeaderFile=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -348,7 +348,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\COptionsListEditorGuiComp.cpp"
+				RelativePath="..\COptionsListEditorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\COptionsManagerEditorComp.cpp"
 				>
 			</File>
 			<File
@@ -426,7 +430,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\COptionsListEditorGuiComp.h"
+				RelativePath="..\COptionsListEditorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\COptionsManagerEditorComp.h"
 				>
 			</File>
 			<File
@@ -472,123 +480,127 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CButtonBasedSelectionParamGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CButtonBasedSelectionParamGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CCheckableOptionsEditorComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CCheckableOptionsEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CComposedParamsSetGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CComposedParamsSetGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CEnableableParamGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CEnableableParamGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CExtParamsManagerGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CExtParamsManagerGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CFileNameParamGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CFileNameParamGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CNameParamGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CNameParamGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_COptionsListEditorGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_COptionsListEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_COptionsManagerGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_COptionsManagerEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CParamsManagerGuiCompBase.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_COptionsManagerGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CSelectableGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CParamsManagerGuiCompBase.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CSelectionParamGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CSelectableGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CSelectionParamIndexGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CSelectionParamGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\moc_CVariableParamGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CSelectionParamIndexGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CButtonBasedSelectionParamGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\moc_CVariableParamGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CCheckableOptionsEditorComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CButtonBasedSelectionParamGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CComboParamsManagerGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CCheckableOptionsEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CComposedParamsSetGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CComposedParamsSetGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CElementEditorGui.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CElementEditorGui.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CEnableableParamGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CEnableableParamGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CExtParamsManagerGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CExtParamsManagerGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CFileNameParamGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CFileNameParamGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CNameParamGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CNameParamGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_COptionsListEditorGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_COptionsListEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_COptionsManagerGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_COptionsManagerEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CParamsManagerGuiCompBase.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_COptionsManagerGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CSelectableGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CParamsManagerGuiCompBase.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CSelectionParamGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CSelectableGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CSelectionParamIndexGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CSelectionParamGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtprm\ui_CVariableParamGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CSelectionParamIndexGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtprm\ui_CVariableParamGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -598,272 +610,66 @@
 			<File
 				RelativePath="..\CButtonBasedSelectionParamGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CCheckableOptionsEditorComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CComposedParamsSetGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CElementEditorGui.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CEnableableParamGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CExtParamsManagerGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CFileNameParamGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CNameParamGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\COptionsListEditorGuiComp.ui"
+				RelativePath="..\COptionsListEditorComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\COptionsManagerEditorComp.ui"
+				>
 			</File>
 			<File
 				RelativePath="..\COptionsManagerGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CParamsManagerGuiCompBase.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CSelectableGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CSelectionParamGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CSelectionParamIndexGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CVariableParamGuiComp.ui"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Designer Form"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -872,254 +678,62 @@
 			<File
 				RelativePath="..\CButtonBasedSelectionParamGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CCheckableOptionsEditorComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CComposedParamsSetGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CEnableableParamGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CExtParamsManagerGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CFileNameParamGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CNameParamGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\COptionsListEditorGuiComp.moc"
+				RelativePath="..\COptionsListEditorComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\COptionsManagerEditorComp.moc"
+				>
 			</File>
 			<File
 				RelativePath="..\COptionsManagerGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CParamsManagerGuiCompBase.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CSelectableGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CSelectionParamGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CSelectionParamIndexGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CVariableParamGuiComp.moc"
 				>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="QT Moc Metafile"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 	</Files>

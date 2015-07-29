@@ -1,4 +1,4 @@
-#include "iqtprm/COptionsListEditorGuiComp.h"
+#include "iqtprm/COptionsManagerEditorComp.h"
 
 
 // Qt includes
@@ -20,15 +20,15 @@ namespace iqtprm
 
 // public methods
 
-COptionsListEditorGuiComp::COptionsListEditorGuiComp()
-	:m_lastSelectedIndex(-1)
+COptionsManagerEditorComp::COptionsManagerEditorComp()
+:	m_lastSelectedIndex(-1)
 {
 }
 
 
 // protected slots
 
-void COptionsListEditorGuiComp::on_AddButton_clicked()
+void COptionsManagerEditorComp::on_AddButton_clicked()
 {
 	static QString defaultOptionName= "Option";
 	static QString defaultOptionDescription;
@@ -39,7 +39,7 @@ void COptionsListEditorGuiComp::on_AddButton_clicked()
 	QByteArray defaultOptionId = QUuid::createUuid().toString().toLatin1();
 #endif
 
-	iprm::IOptionsManager* objectPtr = dynamic_cast<iprm::IOptionsManager*>(GetObjectPtr());
+	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		objectPtr->InsertOption(
 					defaultOptionName,
@@ -52,9 +52,9 @@ void COptionsListEditorGuiComp::on_AddButton_clicked()
 }
 
 
-void COptionsListEditorGuiComp::on_RemoveButton_clicked()
+void COptionsManagerEditorComp::on_RemoveButton_clicked()
 {
-	iprm::IOptionsManager* objectPtr = dynamic_cast<iprm::IOptionsManager*>(GetObjectPtr());
+	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		Q_ASSERT(m_lastSelectedIndex < objectPtr->GetOptionsCount());
 
@@ -67,9 +67,9 @@ void COptionsListEditorGuiComp::on_RemoveButton_clicked()
 }
 
 
-void COptionsListEditorGuiComp::on_UpButton_clicked()
+void COptionsManagerEditorComp::on_UpButton_clicked()
 {
-	iprm::IOptionsManager* objectPtr = dynamic_cast<iprm::IOptionsManager*>(GetObjectPtr());
+	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		Q_ASSERT(m_lastSelectedIndex < objectPtr->GetOptionsCount());
 
@@ -87,9 +87,9 @@ void COptionsListEditorGuiComp::on_UpButton_clicked()
 }
 
 
-void COptionsListEditorGuiComp::on_DownButton_clicked()
+void COptionsManagerEditorComp::on_DownButton_clicked()
 {
-	iprm::IOptionsManager* objectPtr = dynamic_cast<iprm::IOptionsManager*>(GetObjectPtr());
+	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		Q_ASSERT(m_lastSelectedIndex < objectPtr->GetOptionsCount());
 
@@ -107,14 +107,14 @@ void COptionsListEditorGuiComp::on_DownButton_clicked()
 }
 
 
-void COptionsListEditorGuiComp::on_OptionsList_itemSelectionChanged()
+void COptionsManagerEditorComp::on_OptionsList_itemSelectionChanged()
 {
 	if (!IsUpdateBlocked()){
 		UpdateBlocker updateBlocker(this);
 
 		m_lastSelectedIndex = GetSelectedIndex();
 
-		iprm::ISelectionParam* selectionPtr = dynamic_cast<iprm::ISelectionParam*>(GetObjectPtr());
+		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 		if (selectionPtr != NULL){
 			static const istd::IChangeable::ChangeSet changeSet(iprm::ISelectionParam::CF_SELECTION_CHANGED);
 			istd::CChangeNotifier selectionNotifier(selectionPtr, &changeSet);
@@ -128,7 +128,7 @@ void COptionsListEditorGuiComp::on_OptionsList_itemSelectionChanged()
 }
 
 
-void COptionsListEditorGuiComp::on_OptionsList_itemChanged(QListWidgetItem* item)
+void COptionsManagerEditorComp::on_OptionsList_itemChanged(QListWidgetItem* item)
 {
 	if (IsUpdateBlocked()){
 		return;
@@ -136,7 +136,7 @@ void COptionsListEditorGuiComp::on_OptionsList_itemChanged(QListWidgetItem* item
 
 	UpdateBlocker updateBlocker(this);
 
-	iprm::IOptionsManager* objectPtr = dynamic_cast<iprm::IOptionsManager*>(GetObjectPtr());
+	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int optionIndex = item->data(Qt::UserRole).toInt();
 
@@ -147,13 +147,13 @@ void COptionsListEditorGuiComp::on_OptionsList_itemChanged(QListWidgetItem* item
 
 // protected methods
 
-void COptionsListEditorGuiComp::UpdateActions()
+void COptionsManagerEditorComp::UpdateActions()
 {
 	Q_ASSERT(IsGuiCreated());
 
 	EnsureSelectedIndexUpdated();
 
-	iprm::IOptionsManager* objectPtr = dynamic_cast<iprm::IOptionsManager*>(GetObjectPtr());
+	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		AddButton->setEnabled(false);
 		RemoveButton->setEnabled(false);
@@ -170,7 +170,7 @@ void COptionsListEditorGuiComp::UpdateActions()
 }
 
 
-void COptionsListEditorGuiComp::UpdateList()
+void COptionsManagerEditorComp::UpdateList()
 {
 	UpdateBlocker updateBlocker(this);
 
@@ -224,7 +224,7 @@ void COptionsListEditorGuiComp::UpdateList()
 }
 
 
-int COptionsListEditorGuiComp::GetSelectedIndex() const
+int COptionsManagerEditorComp::GetSelectedIndex() const
 {
 	Q_ASSERT(IsGuiCreated());
 
@@ -243,9 +243,9 @@ int COptionsListEditorGuiComp::GetSelectedIndex() const
 }
 
 
-void COptionsListEditorGuiComp::EnsureSelectedIndexUpdated() const
+void COptionsManagerEditorComp::EnsureSelectedIndexUpdated() const
 {
-	iprm::ISelectionParam* selectionPtr = dynamic_cast<iprm::ISelectionParam*>(GetObjectPtr());
+	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 	if (selectionPtr != NULL){
 		m_lastSelectedIndex = selectionPtr->GetSelectedOptionIndex();
 	}
@@ -256,14 +256,11 @@ void COptionsListEditorGuiComp::EnsureSelectedIndexUpdated() const
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void COptionsListEditorGuiComp::OnGuiModelAttached()
+void COptionsManagerEditorComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	iprm::IOptionsManager* objectPtr = dynamic_cast<iprm::IOptionsManager*>(GetObjectPtr());
-	if (objectPtr != NULL){
-		m_startVariableMenus.clear();
-	}
+	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 
 	bool addRemoveVisible = (objectPtr != NULL) && *m_allowAddRemoveAttrPtr;
 	bool upDownVisible = (objectPtr != NULL) && *m_allowUpDownAttrPtr;
@@ -277,7 +274,7 @@ void COptionsListEditorGuiComp::OnGuiModelAttached()
 }
 
 
-void COptionsListEditorGuiComp::OnGuiModelDetached()
+void COptionsManagerEditorComp::OnGuiModelDetached()
 {
 	OptionsList->setVisible(false);
 
@@ -287,7 +284,7 @@ void COptionsListEditorGuiComp::OnGuiModelDetached()
 }
 
 
-void COptionsListEditorGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
+void COptionsManagerEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 	
@@ -297,7 +294,7 @@ void COptionsListEditorGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*
 
 // reimplemented (iqtgui::CComponentBase)
 
-void COptionsListEditorGuiComp::OnGuiCreated()
+void COptionsManagerEditorComp::OnGuiCreated()
 {
 	OptionsList->setVisible(false);
 
@@ -314,12 +311,6 @@ void COptionsListEditorGuiComp::OnGuiCreated()
 	}
 
 	UpdateActions();
-}
-
-
-void COptionsListEditorGuiComp::OnAddMenuOptionClicked(QAction* /*action*/)
-{
-	on_AddButton_clicked();
 }
 
 

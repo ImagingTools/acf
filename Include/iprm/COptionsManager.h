@@ -6,8 +6,8 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "iser/ISerializable.h"
 #include "iprm/IOptionsManager.h"
+#include "iprm/CSelectionParam.h"
 
 
 namespace iprm
@@ -21,10 +21,12 @@ class IOptionsList;
 	Implementation of a simple options manager.
 */
 class COptionsManager:
-			virtual public iprm::IOptionsManager,
-			virtual public iser::ISerializable
+			public CSelectionParam,
+			virtual public IOptionsManager
 {
 public:
+	typedef CSelectionParam BaseClass;
+
 	COptionsManager();
 
 	/**
@@ -49,6 +51,15 @@ public:
 		\note If the container contains more options with the same name, the first found option index will be returned.
 	*/
 	int GetOptionIndexByName(const QString& optionName) const;
+
+	/**
+		Check if selection is serialized.
+	*/
+	bool IsSelectionSerialized() const;
+	/**
+		Turn on or off selection serializing.
+	*/
+	void SetSelectionSerialized(bool  state);
 
 	// reimplemented (iprm::IOptionsList)
 	virtual int GetOptionsFlags() const;
@@ -101,6 +112,8 @@ private:
 	Options m_options;
 
 	const iprm::IOptionsList* m_slaveSelectionConstraintsPtr;
+
+	bool m_isSelectionSerialized;
 };
 
 

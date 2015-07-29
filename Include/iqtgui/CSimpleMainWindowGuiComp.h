@@ -200,6 +200,15 @@ private:
 		virtual QByteArray GetOptionId(int index) const;
 		virtual bool IsOptionEnabled(int index) const;
 
+		// reimplemented (iprm::ISelectionParam)
+		virtual const iprm::IOptionsList* GetSelectionConstraints() const;
+		virtual int GetSelectedOptionIndex() const;
+		virtual bool SetSelectedOptionIndex(int index);
+		virtual iprm::ISelectionParam* GetSubselection(int index) const;
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive);
+
 	private:
 		CSimpleMainWindowGuiComp* m_parentPtr;
 	};

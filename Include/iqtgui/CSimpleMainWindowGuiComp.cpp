@@ -830,6 +830,38 @@ bool CSimpleMainWindowGuiComp::VisibleWindowsManager::IsOptionEnabled(int index)
 }
 
 
+const iprm::IOptionsList* CSimpleMainWindowGuiComp::VisibleWindowsManager::GetSelectionConstraints() const
+{
+	return this;
+}
+
+
+int CSimpleMainWindowGuiComp::VisibleWindowsManager::GetSelectedOptionIndex() const
+{
+	return -1;
+}
+
+
+bool CSimpleMainWindowGuiComp::VisibleWindowsManager::SetSelectedOptionIndex(int /*index*/)
+{
+	return false;
+}
+
+
+iprm::ISelectionParam* CSimpleMainWindowGuiComp::VisibleWindowsManager::GetSubselection(int /*index*/) const
+{
+	return NULL;
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CSimpleMainWindowGuiComp::VisibleWindowsManager::Serialize(iser::IArchive& /*archive*/)
+{
+	return false;
+}
+
+
 } // namespace iqtgui
 
 

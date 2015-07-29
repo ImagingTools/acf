@@ -36,7 +36,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="rem&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 			<Tool
 				Name="QT Resources"
@@ -132,7 +132,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="rem&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 			<Tool
 				Name="QT Resources"
@@ -229,7 +229,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="rem&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 			<Tool
 				Name="QT Resources"
@@ -322,7 +322,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="rem&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 			<Tool
 				Name="QT Resources"

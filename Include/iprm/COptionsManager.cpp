@@ -18,8 +18,10 @@ namespace iprm
 // public methods
 
 COptionsManager::COptionsManager()
-	:m_slaveSelectionConstraintsPtr(NULL)
+:	m_slaveSelectionConstraintsPtr(NULL),
+	m_isSelectionSerialized(false)
 {
+	SetSelectionConstraints(this);
 }
 
 
@@ -60,6 +62,18 @@ int COptionsManager::GetOptionIndexByName(const QString& optionName) const
 	}
 
 	return -1;
+}
+
+
+bool COptionsManager::IsSelectionSerialized() const
+{
+	return m_isSelectionSerialized;
+}
+
+
+void COptionsManager::SetSelectionSerialized(bool  state)
+{
+	m_isSelectionSerialized = state;
 }
 
 
@@ -382,6 +396,10 @@ bool COptionsManager::Serialize(iser::IArchive& archive)
 	istd::CChangeNotifier notifier(isStoring? NULL: this);
 
 	bool retVal = true;
+
+	if (m_isSelectionSerialized){
+		retVal = retVal && BaseClass::Serialize(archive);
+	}
 
 	if (!isStoring){
 		m_options.clear();

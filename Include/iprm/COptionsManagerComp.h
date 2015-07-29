@@ -4,7 +4,6 @@
 
 // ACF includes
 #include "icomp/CComponentBase.h"
-
 #include "iprm/COptionsManager.h"
 
 
@@ -27,6 +26,7 @@ public:
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(iprm::IOptionsManager);
 		I_ASSIGN(m_fixedOptionsListCompPtr, "FixedOptionsList", "List of options could not be changed using this manager", false, "FixedOptionsList");
+		I_ASSIGN(m_serializeSelectionAttrPtr, "SerializeSelection", "If enabled, the current parameter set selection will be serialized", true, true);
 	I_END_COMPONENT;
 
 protected:
@@ -36,6 +36,7 @@ protected:
 
 private:
 	I_REF(iprm::IOptionsList, m_fixedOptionsListCompPtr);
+	I_ATTR(bool, m_serializeSelectionAttrPtr);
 };
 
 
