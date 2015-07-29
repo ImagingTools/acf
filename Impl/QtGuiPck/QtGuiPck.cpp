@@ -255,6 +255,11 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			OptionsListEditor,
 			"Editor for a list of options",
+			"Options List Editor");
+
+I_EXPORT_COMPONENT(
+			OptionsManagerEditor,
+			"Editor for option manager",
 			"Options Manager List Editor");
 
 I_EXPORT_COMPONENT(
