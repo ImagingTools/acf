@@ -897,6 +897,10 @@
 				RelativePath="..\CSimpleMainWindowGuiComp.moc"
 				>
 			</File>
+			<File
+				RelativePath="..\CSplashScreenGuiComp.moc"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
