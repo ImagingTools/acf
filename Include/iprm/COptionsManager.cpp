@@ -179,6 +179,9 @@ bool COptionsManager::IsOptionEnabled(int index) const
 
 int COptionsManager::GetOptionOperationFlags(int index) const
 {
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < COptionsManager::GetOptionsCount());
+
 	int retVal = OOF_SUPPORT_INSERT;
 
 	int fixedOptionsCount = 0;
@@ -187,7 +190,7 @@ int COptionsManager::GetOptionOperationFlags(int index) const
 	}
 
 	if (index >= fixedOptionsCount){
-		retVal = retVal | OOF_SUPPORT_DELETE | OOF_SUPPORT_RENAME;
+		retVal = retVal | OOF_SUPPORT_DELETE | OOF_SUPPORT_RENAME | OOF_SUPPORT_SWAP | OOF_DISABLE_ALLOWED | OOF_SUPPORT_ENABLING;
 	}
 	return retVal;
 }

@@ -30,7 +30,6 @@ COptionsManagerEditorComp::COptionsManagerEditorComp()
 
 void COptionsManagerEditorComp::on_AddButton_clicked()
 {
-	static QString defaultOptionName= "Option";
 	static QString defaultOptionDescription;
 
 #if QT_VERSION >= 0x040800
@@ -39,8 +38,11 @@ void COptionsManagerEditorComp::on_AddButton_clicked()
 	QByteArray defaultOptionId = QUuid::createUuid().toString().toLatin1();
 #endif
 
+
 	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
+		QString defaultOptionName= CalculateNewDefaultName();
+
 		objectPtr->InsertOption(
 					defaultOptionName,
 					defaultOptionId,
@@ -153,20 +155,28 @@ void COptionsManagerEditorComp::UpdateActions()
 
 	EnsureSelectedIndexUpdated();
 
-	iprm::IOptionsManager* objectPtr = GetObjectPtr();
-	if (objectPtr == NULL){
-		AddButton->setEnabled(false);
-		RemoveButton->setEnabled(false);
-		UpButton->setEnabled(false);
-		DownButton->setEnabled(false);
+	bool isAddAllowed = false;
+	bool isRemoveAllowed = false;
+	bool isUpAllowed = false;
+	bool isDownAllowed = false;
 
-		return;
+	iprm::IOptionsManager* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		int operationFlags = objectPtr->GetOptionOperationFlags(m_lastSelectedIndex);
+
+		isAddAllowed = ((operationFlags & iprm::IOptionsManager::OOF_SUPPORT_INSERT) != 0);
+		isRemoveAllowed = (m_lastSelectedIndex >= 0) && ((operationFlags & iprm::IOptionsManager::OOF_SUPPORT_DELETE) != 0);
+		isUpAllowed = (m_lastSelectedIndex > 0) && ((objectPtr->GetOptionOperationFlags(m_lastSelectedIndex - 1) & iprm::IOptionsManager::OOF_SUPPORT_SWAP) != 0);
+		isDownAllowed =
+					((m_lastSelectedIndex >= 0) &&
+					(m_lastSelectedIndex < objectPtr->GetOptionsCount() - 1)) &&
+					((objectPtr->GetOptionOperationFlags(m_lastSelectedIndex + 1) & iprm::IOptionsManager::OOF_SUPPORT_SWAP) != 0);
 	}
 
-	AddButton->setEnabled(true);
-	RemoveButton->setEnabled(m_lastSelectedIndex >= 0);
-	UpButton->setEnabled(m_lastSelectedIndex > 0);
-	DownButton->setEnabled((m_lastSelectedIndex >= 0) && (m_lastSelectedIndex < objectPtr->GetOptionsCount() - 1));
+	AddButton->setEnabled(isAddAllowed);
+	RemoveButton->setEnabled(isRemoveAllowed);
+	UpButton->setEnabled(isUpAllowed);
+	DownButton->setEnabled(isDownAllowed);
 }
 
 
@@ -178,20 +188,17 @@ void COptionsManagerEditorComp::UpdateList()
 
 	OptionsList->clear();
 	
-	iprm::IOptionsList* objectPtr = GetObjectPtr();
+	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int optionsCount = objectPtr->GetOptionsCount();
 
 		for (int optionIndex = 0; optionIndex < optionsCount; ++optionIndex){
 
-			Qt::ItemFlags itemFlags = objectPtr->IsOptionEnabled(optionIndex) ? Qt::ItemIsEnabled | Qt::ItemIsSelectable : Qt::NoItemFlags;
+			Qt::ItemFlags itemFlags = objectPtr->IsOptionEnabled(optionIndex)? Qt::ItemIsEnabled | Qt::ItemIsSelectable : Qt::NoItemFlags;
 
-			iprm::IOptionsManager* managerPtr = dynamic_cast<iprm::IOptionsManager*>(objectPtr);
-			if (managerPtr != NULL){
-				int operationFlags = managerPtr->GetOptionOperationFlags(optionIndex);
-				if (objectPtr->IsOptionEnabled(optionIndex) && (operationFlags & iprm::IOptionsManager::OOF_SUPPORT_RENAME)){
-					itemFlags |= Qt::ItemIsEditable;
-				}
+			int operationFlags = objectPtr->GetOptionOperationFlags(optionIndex);
+			if (objectPtr->IsOptionEnabled(optionIndex) && ((operationFlags & iprm::IOptionsManager::OOF_SUPPORT_RENAME) != 0)){
+				itemFlags |= Qt::ItemIsEditable;
 			}
 
 			QString name = objectPtr->GetOptionName(optionIndex);
@@ -253,6 +260,26 @@ void COptionsManagerEditorComp::EnsureSelectedIndexUpdated() const
 
 
 // protected methods
+
+QString COptionsManagerEditorComp::CalculateNewDefaultName() const
+{
+	Q_ASSERT(IsGuiCreated());
+
+	QString defaultSetName = *m_defaultOptionNameAttrPtr;
+	if (defaultSetName.contains("%1")){			
+		for (int suffixIndex = 1; suffixIndex < 1000; ++suffixIndex){
+			QString tmpName = defaultSetName;
+			tmpName.replace(QString("%1"), QString::number(suffixIndex));
+			if (OptionsList->findItems(tmpName, Qt::MatchExactly).isEmpty()){
+				defaultSetName = tmpName;
+				break;
+			}
+		}
+	}
+
+	return defaultSetName;
+}
+
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 

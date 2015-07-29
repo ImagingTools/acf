@@ -36,6 +36,7 @@ public:
 		I_ASSIGN(m_allowAddRemoveAttrPtr, "AllowAddRemove", "If it is false, 'Add' and 'Remove' buttons will be always hidden", true, true);
 		I_ASSIGN(m_allowUpDownAttrPtr, "AllowUpDown", "If it is false, 'Up' and 'Down' buttons will be always hidden", true, true);
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size for page icons", false, 32);
+		I_ASSIGN(m_defaultOptionNameAttrPtr, "DefaultOptionName", "Default name of parameter set. Use %1 to insert automatic enumeration", true, "Option %1");
 	I_END_COMPONENT;
 
 	COptionsManagerEditorComp();
@@ -55,6 +56,8 @@ protected:
 	void EnsureSelectedIndexUpdated() const;
 	QByteArray GetSelectedParamsSetTypeId() const;
 
+	QString CalculateNewDefaultName() const;
+
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
@@ -67,6 +70,7 @@ private:
 	I_ATTR(bool, m_allowAddRemoveAttrPtr);
 	I_ATTR(bool, m_allowUpDownAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
+	I_ATTR(QString, m_defaultOptionNameAttrPtr);
 
 	mutable int m_lastSelectedIndex;
 };
