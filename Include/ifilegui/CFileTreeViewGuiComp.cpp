@@ -159,6 +159,10 @@ void CFileTreeViewGuiComp::UpdateChildItems(QStandardItem* itemPtr)
 
 void CFileTreeViewGuiComp::OnTreeModelUpdated()
 {
+	if (!IsGuiCreated()){
+		return;
+	}
+
 	// update item icons etc.
 	int rows = m_itemModel.rowCount();
 	for (int r = 0; r < rows; r++){
