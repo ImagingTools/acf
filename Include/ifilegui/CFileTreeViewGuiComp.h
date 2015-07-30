@@ -20,9 +20,9 @@
 #include "ifile/IFileNameParam.h"
 #include "ifile/IFileTypeInfo.h"
 #include "ifile/CFileNameParamComp.h"
-#include "ibase/IQtItemModelProvider.h"
 #include "imod/CMultiModelDispatcherBase.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+
 #include "GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h"
 
 
