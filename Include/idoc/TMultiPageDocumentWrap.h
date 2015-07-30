@@ -54,6 +54,7 @@ public:
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool ResetData(CompatibilityMode mode);
 
 protected:
 	struct Page
@@ -231,6 +232,7 @@ bool TMultiPageDocumentWrap<Base>::Serialize(iser::IArchive& archive)
 
 
 // reimplemented (istd::IChangeable)
+
 template <class Base>
 bool TMultiPageDocumentWrap<Base>::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 {
@@ -311,6 +313,15 @@ bool TMultiPageDocumentWrap<Base>::CopyFrom(const istd::IChangeable& object, Com
 	}
 
 	return false;
+}
+
+
+template <class Base>
+bool TMultiPageDocumentWrap<Base>::ResetData(CompatibilityMode /*mode*/)
+{
+	ResetPages();
+
+	return true;
 }
 
 
