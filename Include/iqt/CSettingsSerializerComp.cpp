@@ -44,6 +44,11 @@ int CSettingsSerializerComp::LoadFromFile(
 		iser::ISerializable* serializeblePtr = dynamic_cast<iser::ISerializable*>(&data);
 		if (m_applicationInfoCompPtr.IsValid() && (serializeblePtr != NULL)){
 			QString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME, false);
+			QString applicationSubname = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME, false);
+			if (!applicationSubname.isEmpty()){
+				applicationName = applicationName + "." + applicationSubname;
+			}
+
 			QString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME, false);
 
 			QSettings::Scope scope = m_scopeAttrPtr.IsValid() ? QSettings::Scope(*m_scopeAttrPtr) : QSettings::UserScope;
@@ -79,7 +84,12 @@ int CSettingsSerializerComp::SaveToFile(
 		iser::ISerializable* serializeblePtr = dynamic_cast<iser::ISerializable*>(const_cast<istd::IChangeable*>(&data));
 		if (m_applicationInfoCompPtr.IsValid() && (serializeblePtr != NULL)){
 			QString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME, false);
+
 			QString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME, false);
+			QString applicationSubname = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME, false);
+			if (!applicationSubname.isEmpty()){
+				applicationName = applicationName + "." + applicationSubname;
+			}
 
 			QSettings::Scope scope = m_scopeAttrPtr.IsValid() ? QSettings::Scope(*m_scopeAttrPtr) : QSettings::UserScope;
 

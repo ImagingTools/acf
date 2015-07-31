@@ -32,6 +32,10 @@ void CApplicationSettingsProviderComp::OnComponentCreated()
 	if (m_applicationInfoCompPtr.IsValid()){
 		companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME, false);
 		applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME, false);
+		QString applicationSubname = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME, false);
+		if (!applicationSubname.isEmpty()){
+			applicationName = applicationName + "." + applicationSubname;
+		}
 	}
 
 	m_settingsPtr.SetPtr(new QSettings(QSettings::UserScope, companyName, applicationName));
