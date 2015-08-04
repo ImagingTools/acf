@@ -4,11 +4,13 @@ win32{
 	ARX_COMPILER = Arxc.exe
 	ACF_TOOL = Acf.exe
 	QMAKE_RCC = rcc.exe
+	COPY_FILE = copy
 }
 else{
 	ARX_COMPILER = Arxc
 	ACF_TOOL = Acf
 	QMAKE_RCC = rcc
+	COPY_FILE = cp
 }
 
 
@@ -58,11 +60,20 @@ QMAKE_EXTRA_COMPILERS += updateqm
 
 
 # custom build for Qt resources containing generated files
+greaterThan(QT_MAJOR_VERSION, 4):GENERATE_RESOURCE_COMMANDS = $$COPY_FILE $$system_quote($$system_path($$OUT_PWD/../${QMAKE_FILE_BASE}.qrc)) $$system_quote($$system_path($$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/${QMAKE_FILE_BASE}.qrc)) && $$system_quote($$system_path($$[QT_INSTALL_BINS]/$$QMAKE_RCC)) -name ${QMAKE_FILE_BASE} $$system_quote($$system_path($$AUXINCLUDEPATH/GeneratedFiles/${QMAKE_FILE_BASE}.qrc)) -o $$system_quote($$system_path($${ACF_TRANSLATIONS_OUTDIR}//qrc_${QMAKE_FILE_BASE}.cpp))
+else{	
+	GENERATE_RESOURCE_COMMANDS = $$COPY_FILE $$OUT_PWD/../${QMAKE_FILE_BASE}.qrc $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/${QMAKE_FILE_BASE}.qrc && $$[QT_INSTALL_BINS]/$$QMAKE_RCC -name ${QMAKE_FILE_BASE} $$AUXINCLUDEPATH/GeneratedFiles/${QMAKE_FILE_BASE}.qrc -o $${ACF_TRANSLATIONS_OUTDIR}//qrc_${QMAKE_FILE_BASE}.cpp
+	win32{
+		GENERATE_RESOURCE_COMMANDS ~= s,/,\\,g
+		message($$GENERATE_RESOURCE_COMMANDS)
+	}
+}
+
 
 generatedResources.name = Generated Resources Compiler
 generatedResources.CONFIG += no_link target_predeps
 generatedResources.output = $${ACF_TRANSLATIONS_OUTDIR}/qrc_${QMAKE_FILE_BASE}.cpp
-generatedResources.commands = $$QMAKE_COPY $$system_quote($$system_path($$OUT_PWD/../${QMAKE_FILE_BASE}.qrc)) $$system_quote($$system_path($$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/${QMAKE_FILE_BASE}.qrc)) && $$system_quote($$system_path($$[QT_INSTALL_BINS]/$$QMAKE_RCC)) -name ${QMAKE_FILE_BASE} $$system_quote($$system_path($$AUXINCLUDEPATH/GeneratedFiles/${QMAKE_FILE_BASE}.qrc)) -o $$system_quote($$system_path($${ACF_TRANSLATIONS_OUTDIR}//qrc_${QMAKE_FILE_BASE}.cpp))
+generatedResources.commands = $$GENERATE_RESOURCE_COMMANDS
 
 generatedResources.input = GENERATED_RESOURCES
 generatedResources.variable_out = SOURCES
