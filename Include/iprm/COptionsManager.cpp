@@ -179,7 +179,6 @@ bool COptionsManager::IsOptionEnabled(int index) const
 
 int COptionsManager::GetOptionOperationFlags(int index) const
 {
-	Q_ASSERT(index >= 0);
 	Q_ASSERT(index < COptionsManager::GetOptionsCount());
 
 	int retVal = OOF_SUPPORT_INSERT;
