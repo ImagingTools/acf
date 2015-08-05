@@ -260,10 +260,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              UseSubstitution
+              SubstitutionTagExpr
             </Id>
             <Type>
-              Boolean
+              String
             </Type>
             <ExportId>
               
@@ -273,7 +273,7 @@
                 true
               </IsEnabled>
               <Value>
-                true
+                \$(.+)\$
               </Value>
             </Data>
           </AttributeInfo>
