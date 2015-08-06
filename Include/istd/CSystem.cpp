@@ -72,7 +72,74 @@ QString CSystem::GetNormalizedPath(const QString& path)
 }
 
 
-QString CSystem::GetEnrolledPath(const QString& path, bool osEnv)
+QString CSystem::FindVariableValue(const QString& varName, bool envVars, bool embeddedVars)
+{
+	if (embeddedVars){
+		if (varName == "ConfigurationName"){
+#ifndef QT_NO_DEBUG
+			return "Debug" + FindVariableValue("CompilerName", false, embeddedVars);
+#else // QT_NO_DEBUG
+			return "Release" + FindVariableValue("CompilerName", false, embeddedVars);
+#endif // !QT_NO_DEBUG
+		}
+		if (varName == "ConfigurationDir"){
+			return FindVariableValue("ConfigurationName", false, embeddedVars) + "/";
+		}
+		else if (varName == "CompilerName"){
+#ifdef __clang__
+			return "Clang";
+#elif defined(__MINGW32__)
+			return "MinGW";
+#elif defined(__MINGW64__)
+			return "MinGW_64";
+#elif defined(_MSC_VER)
+#if _MSC_VER >= 1900
+			QString retVal = "VC14";
+#elif _MSC_VER >= 1800
+			QString retVal = "VC12";
+#elif _MSC_VER >= 1700
+			QString retVal = "VC11";
+#elif _MSC_VER >= 1600
+			QString retVal = "VC10";
+#elif _MSC_VER >= 1500
+			QString retVal = "VC9";
+#elif _MSC_VER >= 1400
+			QString retVal = "VC8";
+#elif _MSC_VER >= 1300
+			QString retVal = "VC7";
+#else
+			QString retVal = "VC";
+#endif
+
+			if (sizeof(void*) > 4){
+				return retVal + "_64";
+			}
+			else{
+				return retVal;
+			}
+
+#else
+			return "Unknown";
+#endif
+		}
+		else if (varName == "."){
+			return QDir::currentPath();
+		}
+	}
+	if (envVars){
+		EnvironmentVariables environmentVariables = GetEnvironmentVariables();
+
+		EnvironmentVariables::ConstIterator foundVarIter = environmentVariables.constFind(varName.toUpper());
+		if (foundVarIter != environmentVariables.constEnd()){
+			return foundVarIter.value();
+		}
+	}
+
+	return QString();
+}
+
+
+QString CSystem::GetEnrolledPath(const QString& path, bool envVars, bool embeddedVars)
 {
 	QString retVal = path;
 
@@ -88,78 +155,12 @@ QString CSystem::GetEnrolledPath(const QString& path, bool osEnv)
 
 		QString varName = retVal.mid(beginIndex + 2, endIndex - beginIndex - 2);
 
-		retVal = retVal.left(beginIndex) + FindVariableValue(varName, osEnv) + retVal.mid(endIndex + 1);
+		retVal = retVal.left(beginIndex) + FindVariableValue(varName, envVars, embeddedVars) + retVal.mid(endIndex + 1);
 
 		retVal = QDir::toNativeSeparators(retVal);
 	}
 
 	return retVal;
-}
-
-
-QString CSystem::FindVariableValue(const QString& varName, bool osEnv)
-{
-	if (varName == "ConfigurationName"){
-#ifndef QT_NO_DEBUG
-		return "Debug" + FindVariableValue("CompilerName");
-#else // QT_NO_DEBUG
-		return "Release" + FindVariableValue("CompilerName");
-#endif // !QT_NO_DEBUG
-	}
-	if (varName == "ConfigurationDir"){
-		return FindVariableValue("ConfigurationName") + "/";
-	}
-	else if (varName == "CompilerName"){
-#ifdef __clang__
-	return "Clang";
-#elif defined(__MINGW32__)
-	return "MinGW";
-#elif defined(__MINGW64__)
-	return "MinGW_64";
-#elif defined(_MSC_VER)
-	#if _MSC_VER >= 1900
-	QString retVal = "VC14";
-	#elif _MSC_VER >= 1800
-	QString retVal = "VC12";
-	#elif _MSC_VER >= 1700
-	QString retVal = "VC11";
-	#elif _MSC_VER >= 1600
-	QString retVal = "VC10";
-	#elif _MSC_VER >= 1500
-	QString retVal = "VC9";
-	#elif _MSC_VER >= 1400
-	QString retVal = "VC8";
-	#elif _MSC_VER >= 1300
-	QString retVal = "VC7";
-	#else
-	QString retVal = "VC";
-	#endif
-
-	if (sizeof(void*) > 4){
-		return retVal + "_64";
-	}
-	else{
-		return retVal;
-	}
-
-#else
-	return "Unknown";
-#endif
-	}
-	else if (varName == "."){
-		return QDir::currentPath();
-	}
-
-	if (osEnv){
-		EnvironmentVariables environmentVariables = GetEnvironmentVariables();
-
-		EnvironmentVariables::ConstIterator foundVarIter = environmentVariables.constFind(varName.toUpper());
-		if (foundVarIter != environmentVariables.constEnd()){
-			return foundVarIter.value();
-		}
-	}
-
-	return QString();
 }
 
 

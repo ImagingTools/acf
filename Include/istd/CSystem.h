@@ -63,14 +63,14 @@ public:
 	/**
 		Get value of system variables.
 		\param	varName	name of variable.
-		\param	osEnv	if enabled, the system environment variables will be also considered.
+		\param	envVars	if enabled, the system environment variables will be also considered.
 	*/
-	static QString FindVariableValue(const QString& varName, bool osEnv = true);
+	static QString FindVariableValue(const QString& varName, bool envVars = true, bool embeddedVars = true);
 
 	/**
 		Get path with enrolled system variables.
 	*/
-	static QString GetEnrolledPath(const QString& path, bool osEnv = true);
+	static QString GetEnrolledPath(const QString& path, bool envVars = true, bool embeddedVars = true);
 
 	/**
 		Get list of environment valiables related to the current process.
