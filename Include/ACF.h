@@ -15,8 +15,7 @@ ACF contains a set of libraries with implementations of most usefull design patt
 ACF implements a powerfull component concept and includes many well designed components, which you can directly use in your application.
 The UI-part of the framework is based on Qt library provided by Digia.
 ACF is open source and released under the terms of the GNU Lesser General Public License (LGPL).
-See http://www.ilena.org or write info@imagingtools.de or contact
-by Skype to ACF_infoline for further information about the ACF.
+See http://www.ilena.org or write info@imagingtools.de for further information about the ACF.
 
 More theoretical considerations about the component-based development can be found at the following location:
 http://en.wikipedia.org/wiki/Component-based_software_engineering
