@@ -105,8 +105,7 @@ AUXINCLUDEPATH = ../../../$$AUXINCLUDEDIR
 }
 
 win32-msvc*{
-	# activate debug info
-	QMAKE_CXXFLAGS += /Zi /Fd../../../Bin/$$COMPILER_DIR/"$$TARGET".pdb
+	# activate debug info also for release builds
 	QMAKE_LFLAGS += /DEBUG
 }
 
