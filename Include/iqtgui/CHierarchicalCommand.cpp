@@ -11,7 +11,7 @@ CHierarchicalCommand::CHierarchicalCommand(const QString& name, int priority, in
 	m_staticFlags(0),
 	m_groupId(groupId)
 {
-	BaseClass3::SetName(name);
+	BaseClass3::SetName(QString(name).replace('&', ""));
 	SetStaticFlags(staticFlags);
 
 	connect(this, SIGNAL(triggered()), SLOT(OnTriggered()), Qt::QueuedConnection);
