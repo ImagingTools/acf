@@ -75,11 +75,10 @@ protected:
 		CSelectionParam& m_parent;
 	};
 
-protected:
-	int m_selectedOptionIndex;
-
 private:
 	typedef QMap<int, iprm::ISelectionParam*> SubselectionMap;
+
+	int m_selectedOptionIndex;
 
 	const IOptionsList* m_constraintsPtr;
 

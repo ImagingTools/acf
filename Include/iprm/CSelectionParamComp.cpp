@@ -36,7 +36,7 @@ void CSelectionParamComp::OnComponentCreated()
 	}
 
 	if (defaultIndexValid){
-		m_selectedOptionIndex = *m_defaultIndexAttrPtr;
+		SetSelectedOptionIndex(*m_defaultIndexAttrPtr);
 	}
 }
 

@@ -302,9 +302,8 @@ CMultiPageGuiCompBase::PageModel::PageModel()
 :	imod::CMultiModelBridgeBase(this),
 	m_parentPtr(NULL)
 {
-	m_selectedOptionIndex = 0;
-
 	BaseClass::SetSelectionConstraints(this);
+	BaseClass::SetSelectedOptionIndex(0);
 }
 
 

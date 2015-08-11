@@ -123,6 +123,7 @@ bool CSelectionParam::SetSelectedOptionIndex(int index)
 		if (m_constraintsPtr != NULL){
 			if (index >= 0){
 				m_selectedOptionId = m_constraintsPtr->GetOptionId(index);
+				Q_ASSERT(!m_selectedOptionId.isEmpty());
 			}
 			else{
 				m_selectedOptionId.clear();
