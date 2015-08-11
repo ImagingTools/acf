@@ -189,9 +189,11 @@ QString CTranslationManagerComp::GetOptionDescription(int /*index*/) const
 }
 
 
-QByteArray CTranslationManagerComp::GetOptionId(int /*index*/) const
+QByteArray CTranslationManagerComp::GetOptionId(int index) const
 {
-	return QByteArray();
+	Q_ASSERT(index < m_languagesAttrPtr.GetCount());
+
+	return m_languagesAttrPtr[index];
 }
 
 
