@@ -44,6 +44,11 @@ I_EXPORT_COMPONENT(
 		   "Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
 
 I_EXPORT_COMPONENT(
+		   CompactXmlFileSerializer,
+		   "File loader serializing objects compact XML format",
+		   "Save Serializer Archive Format Compact Attributes" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
+
+I_EXPORT_COMPONENT(
 			ExtendedDocumentTemplate,
 			"Extended serialized document template",
 			"Serialized Template" IM_TAG("Document"));
