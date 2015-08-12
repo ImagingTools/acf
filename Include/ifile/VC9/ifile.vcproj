@@ -522,6 +522,10 @@
 				RelativePath="..\TFileSerializerComp.h"
 				>
 			</File>
+			<File
+				RelativePath="..\TXmlFileSerializerComp.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Moc Files"
