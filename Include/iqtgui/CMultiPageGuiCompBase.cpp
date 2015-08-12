@@ -187,7 +187,7 @@ void CMultiPageGuiCompBase::ResetPages()
 
 	multiPageWidgetPtr->ResetPages();
 
-	m_pageModel.SetSelectedOptionIndex(-1);
+	m_pageModel.SetSelectedOptionIndex(NO_SELECTION);
 }
 
 
@@ -302,8 +302,6 @@ CMultiPageGuiCompBase::PageModel::PageModel()
 :	imod::CMultiModelBridgeBase(this),
 	m_parentPtr(NULL)
 {
-	BaseClass::SetSelectionConstraints(this);
-	BaseClass::SetSelectedOptionIndex(0);
 }
 
 
@@ -326,6 +324,12 @@ void CMultiPageGuiCompBase::PageModel::SetParent(CMultiPageGuiCompBase* parentPt
 		}
 
 		m_parentPtr = parentPtr;
+
+		if (parentPtr != NULL){
+			BaseClass::SetSelectedOptionIndex(0);
+
+			BaseClass::SetSelectionConstraints(this);
+		}
 	}
 }
 
@@ -366,7 +370,7 @@ bool CMultiPageGuiCompBase::PageModel::SetSelectedOptionIndex(int index)
 
 int CMultiPageGuiCompBase::PageModel::GetOptionsFlags() const
 {
-	return SFC_DISABLE_ALLOWED | SCF_SUPPORT_UNIQUE_ID;
+	return SFC_DISABLE_ALLOWED;
 }
 
 

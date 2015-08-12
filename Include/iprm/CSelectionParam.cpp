@@ -3,10 +3,8 @@
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
-
 #include "iprm/IOptionsList.h"
 
 
@@ -15,7 +13,7 @@ namespace iprm
 
 
 CSelectionParam::CSelectionParam()
-:	m_selectedOptionIndex(-1),
+:	m_selectedOptionIndex(NO_SELECTION),
 	m_constraintsPtr(NULL),
 	m_constraintsObserver(*this)
 {
@@ -27,6 +25,14 @@ void CSelectionParam::SetSelectionConstraints(const IOptionsList* constraintsPtr
 	m_constraintsPtr = constraintsPtr;
 	if (m_constraintsPtr != NULL){
 		if (m_constraintsPtr->GetOptionsFlags() & IOptionsList::SCF_SUPPORT_UNIQUE_ID){
+			if (m_selectedOptionIndex >= 0){
+				if (m_selectedOptionIndex < m_constraintsPtr->GetOptionsCount()){
+					m_selectedOptionId = m_constraintsPtr->GetOptionId(m_selectedOptionIndex);
+				}
+				else{
+					CSelectionParam::SetSelectedOptionIndex(NO_SELECTION);
+				}
+			}
 			imod::IModel* constraintsModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(m_constraintsPtr));
 			if (constraintsModelPtr != NULL){
 				constraintsModelPtr->AttachObserver(&m_constraintsObserver);
@@ -65,6 +71,10 @@ bool CSelectionParam::SetSelectedOptionById(const QByteArray& selectedOptionId)
 
 int CSelectionParam::GetOptionIndexById(const QByteArray& optionId) const
 {
+	if (optionId.isEmpty()){
+		return NO_SELECTION;
+	}
+
 	if (m_constraintsPtr != NULL){
 		int optionsCount = m_constraintsPtr->GetOptionsCount();
 
@@ -77,7 +87,7 @@ int CSelectionParam::GetOptionIndexById(const QByteArray& optionId) const
 		}
 	}
 
-	return -1;
+	return NO_SELECTION;
 }
 
 
@@ -123,7 +133,6 @@ bool CSelectionParam::SetSelectedOptionIndex(int index)
 		if (m_constraintsPtr != NULL){
 			if (index >= 0){
 				m_selectedOptionId = m_constraintsPtr->GetOptionId(index);
-				Q_ASSERT(!m_selectedOptionId.isEmpty());
 			}
 			else{
 				m_selectedOptionId.clear();
@@ -180,7 +189,7 @@ bool CSelectionParam::Serialize(iser::IArchive& archive)
 					((m_constraintsPtr->GetOptionsFlags() & iprm::IOptionsList::SCF_SUPPORT_UNIQUE_ID) != 0) &&
 					!selectedOptionId.isEmpty()){
 			if (!SetSelectedOptionById(selectedOptionId)){
-				SetSelectedOptionIndex(-1);
+				SetSelectedOptionIndex(NO_SELECTION);
 			}
 		}
 		else{
@@ -202,8 +211,12 @@ CSelectionParam::ConstraintsObserver::ConstraintsObserver(CSelectionParam& paren
 
 // reimplemented (imod::TSingleModelObserverBase<iprm::IOptionsList>)
 
-void CSelectionParam::ConstraintsObserver::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
+void CSelectionParam::ConstraintsObserver::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
 {
+	if (changeSet.Contains(iprm::ISelectionParam::CF_SELECTION_CHANGED)){
+		return;
+	}
+
 	Q_ASSERT(m_parent.m_constraintsPtr != NULL);
 	Q_ASSERT(m_parent.m_constraintsPtr->GetOptionsFlags() & IOptionsList::SCF_SUPPORT_UNIQUE_ID);
 

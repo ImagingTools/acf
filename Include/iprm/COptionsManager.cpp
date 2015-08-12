@@ -39,6 +39,10 @@ void COptionsManager::ResetOptions()
 
 int COptionsManager::GetOptionIndexById(const QByteArray& optionId) const
 {
+	if (optionId.isEmpty()){
+		return NO_SELECTION;
+	}
+
 	int optionsCount = COptionsManager::GetOptionsCount();
 
 	for (int optionIndex = 0; optionIndex < optionsCount; ++optionIndex){
@@ -47,7 +51,7 @@ int COptionsManager::GetOptionIndexById(const QByteArray& optionId) const
 		}
 	}
 
-	return -1;
+	return NO_SELECTION;
 }
 
 
