@@ -187,7 +187,7 @@ void CMultiPageGuiCompBase::ResetPages()
 
 	multiPageWidgetPtr->ResetPages();
 
-	m_pageModel.SetSelectedOptionIndex(NO_SELECTION);
+	m_pageModel.SetSelectedOptionIndex(iprm::ISelectionParam::NO_SELECTION);
 }
 
 
