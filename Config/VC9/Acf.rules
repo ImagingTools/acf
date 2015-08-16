@@ -33,6 +33,34 @@
 			</Properties>
 		</CustomBuildRule>
 		<CustomBuildRule
+			Name="Carxc"
+			DisplayName="CARX Compiler"
+			CommandLine="&quot;..\..\..\Bin\$(ConfigurationName)VC9\Carxc.exe&quot; &quot;$(InputPath)&quot; -o &quot;$(InputDir)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).cpp&quot; [AllOptions] [AdditionalOptions]"
+			Outputs="&quot;$(InputDir)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).cpp&quot;;&quot;$(InputDir)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).h&quot;"
+			AdditionalDependencies="&quot;..\..\..\Bin\$(ConfigurationName)VC9\Carxc.exe&quot;"
+			FileExtensions="*.carx"
+			ExecutionDescription="Compiling ACF Registry File..."
+			>
+			<Properties>
+				<StringProperty
+					Name="ConfigFile"
+					DisplayName="Packages Configuration File"
+					Category="Environment"
+					Description="ACF Packages Configuration File"
+					Switch="-config &quot;[value]&quot;"
+					Delimited="true"
+					Inheritable="true"
+				/>
+				<BooleanProperty
+					Name="Verbose"
+					DisplayName="Verbose"
+					Category="Debug"
+					Description="Enable verbose mode"
+					Switch="-v"
+				/>
+			</Properties>
+		</CustomBuildRule>
+		<CustomBuildRule
 			Name="DeployCopy"
 			DisplayName="Deploy copy files"
 			CommandLine="copy /Y &quot;[$InputDir]\$(InputName)&quot; &quot;[$OutputDir]\&quot;"

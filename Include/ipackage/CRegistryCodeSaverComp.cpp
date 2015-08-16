@@ -370,7 +370,7 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	stream << "\n";
 
 	NextLine(stream);
-	stream << className << "();";
+	stream << className << "(const icomp::IRegistryElement* userMainElementPtr = NULL);";
 	stream << "\n";
 
 	ChangeIndent(-1);
@@ -642,7 +642,7 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 			QTextStream& stream) const
 {
 	NextLine(stream);
-	stream << className << "::" << className << "()";
+	stream << className << "::" << className << "(const icomp::IRegistryElement* userMainElementPtr)";
 
 	NextLine(stream);
 	stream << "{";
@@ -659,7 +659,7 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 	stream << "static icomp::CCompositeComponentStaticInfo mainComponentStaticInfo(mainRegistry, localEnvironmentManager, NULL);";
 	stream << "\n";
 	NextLine(stream);
-	stream << "m_mainContextPtr.SetPtr(new icomp::CCompositeComponentContext(&mainElement, &mainComponentStaticInfo, &mainRegistry, &localEnvironmentManager, NULL, \"\"));";
+	stream << "m_mainContextPtr.SetPtr(new icomp::CCompositeComponentContext((userMainElementPtr != NULL)? userMainElementPtr: &mainElement, &mainComponentStaticInfo, &mainRegistry, &localEnvironmentManager, NULL, \"\"));";
 	stream << "\n";
 	NextLine(stream);
 	stream << "SetComponentContext(m_mainContextPtr.GetPtr(), NULL, false);";

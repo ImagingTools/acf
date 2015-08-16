@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="3">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          3823
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1359
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="5">
+    <Element>
+      <ComponentName>
+        RegistryCodeSaver
+      </ComponentName>
+      <X>
+        800
+      </X>
+      <Y>
+        475
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        RegistryLoader
+      </ComponentName>
+      <X>
+        800
+      </X>
+      <Y>
+        325
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        VersionInfo
+      </ComponentName>
+      <X>
+        425
+      </X>
+      <Y>
+        400
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        RegistriesManager
+      </ComponentName>
+      <X>
+        250
+      </X>
+      <Y>
+        550
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ConsoleLog
+      </ComponentName>
+      <X>
+        250
+      </X>
+      <Y>
+        250
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+  </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
+</Acf>
