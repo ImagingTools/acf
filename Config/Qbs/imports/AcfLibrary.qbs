@@ -4,7 +4,7 @@ import "../modules/acf/AcfService.js" as AcfService
 // Standard settings for an ACF static library
 
 Library{
-	type: [(project.acfBuildDynamic == true)? "dynamiclibrary": "staticlibrary", "acf_share"]
+	type: [((project.acfBuildDynamic == true) && qbs.targetOS.contains('windows'))? "dynamiclibrary": "staticlibrary", "acf_share"]
 
 	Depends{ name: "acf" }
 	Depends{ name: "cpp" }

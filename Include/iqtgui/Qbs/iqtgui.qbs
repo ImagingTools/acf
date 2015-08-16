@@ -1,6 +1,5 @@
 import qbs.base 1.0
 import AcfLibrary as AcfLibrary
-//import "../../../Config/Qbs/QtRules.qbs" as QtRules
 
 AcfLibrary{
 	name: "iqtgui"

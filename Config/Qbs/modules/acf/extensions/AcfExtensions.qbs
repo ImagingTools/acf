@@ -4,11 +4,13 @@ import qbs.File
 import qbs.FileInfo
 import qbs.PathTools
 import qbs.ModUtils
-import "AcfService.js" as AcfService
+import "../AcfService.js" as AcfService
+import "../AcfModule.qbs" as AcfModule
 
 AcfModule{
     condition: qbs.hostOS.contains('windows') && qbs.targetOS.contains('windows') && qbs.toolchain.contains('msvc')
 
+	Depends{ name: "acf" }
 	Depends{ name: "Qt.core" }
 	Depends{ name: "Qt.gui" }
 

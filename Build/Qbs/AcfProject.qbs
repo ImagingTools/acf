@@ -57,7 +57,8 @@ Project{
 
 		references: [
 			"../../Impl/AcfExe/Qbs/Acf.qbs",
-			"../../Impl/ArxcExe/Qbs/Arxc.qbs"
+			"../../Impl/ArxcExe/Qbs/Arxc.qbs",
+			"../../Impl/CarxcExe/Qbs/Carxc.qbs"
 		]
 	}
 

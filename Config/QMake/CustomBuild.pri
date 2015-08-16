@@ -2,12 +2,14 @@
 
 win32{
 	ARX_COMPILER = Arxc.exe
+	CARX_COMPILER = Carxc.exe
 	ACF_TOOL = Acf.exe
 	QMAKE_RCC = rcc.exe
 	COPY_FILE = copy
 }
 else{
 	ARX_COMPILER = Arxc
+	CARX_COMPILER = Carxc
 	ACF_TOOL = Acf
 	QMAKE_RCC = rcc
 	COPY_FILE = cp
@@ -30,6 +32,25 @@ arxCompiler.variable_out = SOURCES
 arxCompiler.dependency_type = TYPE_C
 arxCompiler.depends += $$PWD/../../Bin/$$COMPILER_DIR/$$ARX_COMPILER
 arxCompiler.depend_command = $$PWD/../../Bin/$$COMPILER_DIR/$$ARX_COMPILER ${QMAKE_FILE_IN} -mode depends -config $${ARXC_CONFIG}
+QMAKE_EXTRA_COMPILERS += arxCompiler
+
+
+# custom build for Compact ACF Registry Compiler (Carxc)
+
+arxCompiler.name = CARX-Compiler
+arxCompiler.CONFIG += no_link target_predeps
+arxCompiler.output = $${ARXC_OUTDIR}/C${QMAKE_FILE_BASE}.cpp $${ARXC_OUTDIR}/C${QMAKE_FILE_BASE}.h
+CONFIG(debug, debug|release){
+	arxCompiler.commands = $$PWD/../../Bin/$$COMPILER_DIR/$$CARX_COMPILER ${QMAKE_FILE_IN} -o $${ARXC_OUTDIR}/C${QMAKE_FILE_BASE}.cpp -config $${ARXC_CONFIG} -v
+}
+CONFIG(release, debug|release){
+	arxCompiler.commands = $$PWD/../../Bin/$$COMPILER_DIR/$$CARX_COMPILER ${QMAKE_FILE_IN} -o $${ARXC_OUTDIR}/C${QMAKE_FILE_BASE}.cpp -config $${ARXC_CONFIG}
+}
+arxCompiler.input = CARXC_FILES
+arxCompiler.variable_out = SOURCES
+arxCompiler.dependency_type = TYPE_C
+arxCompiler.depends += $$PWD/../../Bin/$$COMPILER_DIR/$$CARX_COMPILER
+arxCompiler.depend_command = $$PWD/../../Bin/$$COMPILER_DIR/$$CARX_COMPILER ${QMAKE_FILE_IN} -mode depends -config $${ARXC_CONFIG}
 QMAKE_EXTRA_COMPILERS += arxCompiler
 
 

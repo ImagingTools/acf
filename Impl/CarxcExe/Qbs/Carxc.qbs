@@ -8,20 +8,16 @@ Project{
 
 		destinationDirectory: "GeneratedFiles/Carxc"
 
-		files: ["../*.arx", "../*.qrc"]
+		files: ["../*.arx"]
 
 		Depends{ name: "acf" }
 
 		Depends{ name: "ArxcExe" }
 
-		Depends{ name: "AcfSlnConfig" }
+		Depends{ name: "AcfCoreConfig" }
 
-		Depends{ name: "CarxcPck" }
-		Depends{ name: "QtGuiPck" }
+		Depends{ name: "BasePck" }
 		Depends{ name: "QtPck" }
-		Depends{ name: "FilePck" }
-        Depends{ name: "FileGuiPck" }
-        Depends{ name: "BasePck" }
 		Depends{ name: "PackagePck" }
 
 		acf.generatedOutputDir: "GeneratedFiles/Carxc"
@@ -36,45 +32,21 @@ Project{
 		name: "CarxcExe"
 		targetName: "Carxc"
 
-		consoleApplication: false
+		consoleApplication: true
 
 		files: ["../*.cpp"]
 
 		Depends{ name: "_Carxc" }
 
-		Depends{ name: "AcfSlnConfig" }
-		Depends{ name: "AcfSlnLoc" }
-		Depends{ name: "AcfLoc" }
-
-		Depends{ name: "icmpstr" }
-		Depends{ name: "iqtgui" }
+		Depends{ name: "iattr" }
+		Depends{ name: "ibase" }
+		Depends{ name: "icomp" }
 		Depends{ name: "ifile" }
+		Depends{ name: "ilog" }
+		Depends{ name: "imod" }
 		Depends{ name: "ipackage" }
-
-		Depends{ name: "Qt.widgets" }
-		Depends{ name: "Qt.gui" }
-
-		// Resource file on MAC
-		Group{
-            name: "MAC-Resources"
-            condition: qbs.targetOS.contains("osx")
-
-            cpp.infoPlistFile: "../Mac/Info.plist"
-            cpp.infoPlistFormat: "xml1"
-        }
-
-		// Resource file on Windows
-		Depends{ name: "AcfExe" }
-		acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.arx"
-		acf.trOutputType: "rc"
-		cpp.includePaths: path
-
-		Group{
-			name: "Windows-Resources"
-			condition: qbs.targetOS.contains("windows")
-
-			files: ["../VC/*.rc.xtracf"]
-			fileTags: ["xtracf"]
-		}
+		Depends{ name: "iqt" }
+		Depends{ name: "iser" }
+		Depends{ name: "istd" }
 	}
 }

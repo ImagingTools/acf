@@ -76,6 +76,70 @@ AcfModule{
 	}
 
 	Rule{
+		id: carxCompiler
+		inputs: ["carx"]
+
+		Artifact{
+            filePath: AcfService.getGeneratedPath(product) + "/C" + input.completeBaseName + ".cpp"
+			fileTags: ["cpp"]
+		}
+		Artifact{
+            filePath: AcfService.getGeneratedPath(product) + "/C" + input.completeBaseName + ".h"
+			fileTags: ["hpp", "c++_pch"]
+		}
+
+		prepare:{
+			// get the ACF binary directory
+			var acfBinDirectory = product.moduleProperty("ArxcExe", "acfBinDirectory");
+			var acfConfigurationFile = product.moduleProperty("acf", "acfConfigurationFile");
+
+			// check all dependencies
+			var dependencies = product.dependencies;
+			for (var dependencyIndex in dependencies) {
+				var dependency = dependencies[dependencyIndex];
+				if (acfConfigurationFile == null){
+					var dependencyFilePath = product.moduleProperty(dependency.name, "xpcFilePath");
+					if (dependencyFilePath != null){
+						acfConfigurationFile = dependencyFilePath;
+					}
+					else if (dependency.type != null && dependency.type.contains("xpc")){
+						acfConfigurationFile = AcfService.joinPaths(product.buildDirectory, dependency.destinationDirectory) + "/" + dependency.name + ".xpc";
+					}
+				}
+
+				if ((acfBinDirectory == null) && (dependency.name == "CarxcExe")){
+					acfBinDirectory = dependency.buildDirectory;
+				}
+			}
+
+			// if there is no configuration - error
+			if (acfConfigurationFile == null){
+				throw new Error("No ACF configuration specified (using dependency or acf.acfConfigurationFile) in " + product.name);
+			}
+
+			// if there is no ArxcExe directory - error
+			if (acfBinDirectory == null){
+				throw new Error("No ArxcExe dependency specified in " + product.name);
+			}
+
+			var parameters = [
+						inputs.arx[0].filePath,
+						'-config', acfConfigurationFile,
+						'-o', outputs.cpp[0].filePath];
+			if (product.moduleProperty("acf", "arxcToBinary") === false){
+				parameters.push("-no_binary");
+			}
+
+			var cmd = new Command(acfBinDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), parameters);
+			cmd.description = 'carxc ' + FileInfo.fileName(inputs.arx[0].filePath)
+			cmd.highlight = 'codegen';
+			cmd.workingDirectory = product.moduleProperty("Qt.core", "binPath");
+
+			return cmd;
+		}
+	}
+
+	Rule{
 		id: acftransform
 		inputs: ["xtracf"]
 

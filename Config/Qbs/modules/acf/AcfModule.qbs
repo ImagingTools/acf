@@ -98,6 +98,11 @@ Module{
 	}
 
 	FileTagger{
+		patterns: ["*.carx"]
+		fileTags: ["carx"]
+	}
+
+	FileTagger{
 		patterns: ["*.xtracf"]
 		fileTags: ["xtracf"]
 	}
