@@ -115,6 +115,7 @@ int main(int argc, char *argv[])
 	log.InitComponent();
 
 	icomp::TSimComponentWrap<BasePck::XmlFileSerializer> oldFormatLoaderComp;
+	oldFormatLoaderComp.InsertMultiAttr("FileExtensions", QString("arx"));
 	oldFormatLoaderComp.SetRef("Log", &log);
 	oldFormatLoaderComp.SetRef("VersionInfo", &applicationInfo);
 	oldFormatLoaderComp.SetBoolAttr("EnableVerbose", verboseEnabled);

@@ -132,11 +132,14 @@ QString CPackagesLoaderComp::GetPackagePath(const QByteArray& packageId) const
 
 const icomp::IRegistry* CPackagesLoaderComp::GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr) const
 {
-	CompositePackagesMap::ConstIterator foundCompositeIter = m_compositePackagesMap.constFind(address.GetPackageId());
-	if (foundCompositeIter != m_compositePackagesMap.constEnd()){
-		QString filePath = foundCompositeIter.value().directory.absoluteFilePath(QString(address.GetComponentId()) + ".arx");
+	CompositePackagesMap::ConstIterator foundPackageIter = m_compositePackagesMap.constFind(address.GetPackageId());
+	if (foundPackageIter != m_compositePackagesMap.constEnd()){
+		const CompositePackageInfo& packageInfo = foundPackageIter.value();
 
-		return GetRegistryFromFile(filePath);
+		ComponentIdToRegistryFileMap::ConstIterator foundComponentIter = packageInfo.componentIdToRegistryFileMap.constFind(address.GetComponentId());
+		if (foundComponentIter != packageInfo.componentIdToRegistryFileMap.constEnd()){
+			return GetRegistryFromFile(foundComponentIter.value());
+		}
 	}
 
 	return BaseClass2::GetRegistry(address, contextRegistryPtr);
@@ -242,7 +245,7 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 									.arg(foundIter.value()));
 		}
 	}
-	else if (fileInfo.isDir()){
+	else if (m_registryLoaderCompPtr.IsValid() && fileInfo.isDir()){
 		CompositePackagesMap::ConstIterator foundIter = m_compositePackagesMap.constFind(packageId);
 		if (foundIter == m_compositePackagesMap.constEnd()){
 			CompositePackageInfo& packageInfo = m_compositePackagesMap[packageId];
@@ -254,16 +257,27 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 				return false;
 			}
 
+			QStringList registryExtensions;
+			m_registryLoaderCompPtr->GetFileExtensions(registryExtensions);
+
 			QStringList filters;
-			filters.append("*.arx");
+			for (QStringList::ConstIterator extensionIter = registryExtensions.constBegin(); extensionIter != registryExtensions.constEnd(); ++extensionIter){
+				filters.append("*." + *extensionIter);
+			}
+
 			QDir packageDir(fileInfo.absoluteFilePath());
 			QStringList componentFiles = packageDir.entryList(filters, QDir::Files | QDir::NoDotAndDotDot);
+
 			for (		QStringList::ConstIterator iter = componentFiles.constBegin();
 						iter != componentFiles.constEnd();
 						++iter){
-				QFileInfo componentFileInfo(*iter);
+				QString fullPath = QFileInfo(packageDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(*iter))).canonicalFilePath();
 
-				infoPtr->RegisterEmbeddedComponent(componentFileInfo.baseName().toLocal8Bit());
+				QByteArray componentId = QFileInfo(fullPath).baseName().toLocal8Bit();
+
+				infoPtr->RegisterEmbeddedComponent(componentId);
+
+				packageInfo.componentIdToRegistryFileMap[componentId] = fullPath;
 			}
 
 			packageInfo.staticInfoPtr.SetPtr(infoPtr);

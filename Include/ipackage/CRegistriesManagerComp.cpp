@@ -22,6 +22,10 @@ bool CRegistriesManagerComp::LoadPackages(const QString& configFilePath)
 {
 	bool retVal = true;
 
+	m_registriesMap.clear();
+	m_compositePackagesMap.clear();
+	m_realPackagesMap.clear();
+
 	if (!configFilePath.isEmpty()){
 		SendVerboseMessage(QString("Configure component environment using ") + configFilePath);
 	
@@ -67,7 +71,7 @@ QString CRegistriesManagerComp::GetPackagePath(const QByteArray& packageId) cons
 
 	CompositePackagesMap::ConstIterator foundCompositeIter = m_compositePackagesMap.constFind(packageId);
 	if (foundCompositeIter != m_compositePackagesMap.constEnd()){
-		return foundCompositeIter.value().absolutePath();
+		return foundCompositeIter.value().directory.absolutePath();
 	}
 
 	return QString();
@@ -113,11 +117,14 @@ const icomp::IRegistry* CRegistriesManagerComp::GetRegistry(const icomp::CCompon
 		return contextRegistryPtr->GetEmbeddedRegistry(address.GetComponentId());
 	}
 
-	CompositePackagesMap::ConstIterator foundCompositeIter = m_compositePackagesMap.constFind(address.GetPackageId());
-	if (foundCompositeIter != m_compositePackagesMap.constEnd()){
-		QString filePath = foundCompositeIter.value().absoluteFilePath(QString(address.GetComponentId()) + ".arx");
+	CompositePackagesMap::ConstIterator foundPackageIter = m_compositePackagesMap.constFind(address.GetPackageId());
+	if (foundPackageIter != m_compositePackagesMap.constEnd()){
+		const CompositePackageInfo& packageInfo = foundPackageIter.value();
 
-		return GetRegistryFromFile(filePath);
+		ComponentIdToRegistryFileMap::ConstIterator foundComponentIter = packageInfo.componentIdToRegistryFileMap.constFind(address.GetComponentId());
+		if (foundComponentIter != packageInfo.componentIdToRegistryFileMap.constEnd()){
+			return GetRegistryFromFile(foundComponentIter.value());
+		}
 	}
 
 	return NULL;
@@ -158,9 +165,9 @@ void CRegistriesManagerComp::RegisterPackageFile(const QString& file)
 
 	QByteArray packageId(fileInfo.baseName().toLocal8Bit());
 
-	SendVerboseMessage(QString("Register package file: ") + file);
-
 	if (fileInfo.isFile()){
+		SendVerboseMessage(QString("Register real package %1 from file %2").arg(packageId.constData()).arg(file));
+
 		RealPackagesMap::ConstIterator foundIter = m_realPackagesMap.constFind(packageId);
 		if (foundIter == m_realPackagesMap.constEnd()){
 			m_realPackagesMap[packageId] = fileInfo.canonicalFilePath();
@@ -173,29 +180,45 @@ void CRegistriesManagerComp::RegisterPackageFile(const QString& file)
 									.arg(foundIter.value()));
 		}
 	}
-	else if (fileInfo.isDir()){
+	else if (m_registryLoaderCompPtr.IsValid() && fileInfo.isDir()){
+		SendVerboseMessage(QString("Register composed package %1 from directory %2").arg(packageId.constData()).arg(file));
+
 		CompositePackagesMap::ConstIterator foundIter = m_compositePackagesMap.constFind(packageId);
 		if (foundIter == m_compositePackagesMap.constEnd()){
+			CompositePackageInfo& packageInfo = m_compositePackagesMap[packageId];
+
+			QStringList registryExtensions;
+			m_registryLoaderCompPtr->GetFileExtensions(registryExtensions);
+
 			QStringList filters;
-			filters.append("*.arx");
+			for (QStringList::ConstIterator extensionIter = registryExtensions.constBegin(); extensionIter != registryExtensions.constEnd(); ++extensionIter){
+				filters.append("*." + *extensionIter);
+			}
+
 			QDir packageDir(fileInfo.canonicalFilePath());
 			QStringList componentFiles = packageDir.entryList(filters, QDir::Files | QDir::NoDotAndDotDot);
+
 			for (		QStringList::ConstIterator iter = componentFiles.constBegin();
 						iter != componentFiles.constEnd();
 						++iter){
-				QString correctedPath;
+				QFileInfo componentFileInfo(*iter);
 
+				QByteArray componentId = componentFileInfo.baseName().toLocal8Bit();
+
+				QString correctedPath;
 				CheckAndMarkPath(m_usedRegistryFilesList, packageDir, *iter, correctedPath);
+
+				packageInfo.componentIdToRegistryFileMap[componentId] = correctedPath;
 			}
 
-			m_compositePackagesMap[packageId] = packageDir;
+			packageInfo.directory = packageDir;
 		}
-		else if (foundIter.value() != fileInfo.canonicalFilePath()){
+		else if (foundIter.value().directory.canonicalPath() != fileInfo.canonicalFilePath()){
 			SendWarningMessage(
 						MI_CANNOT_REGISTER,
 						QObject::tr("Second composed package definition was ignored %1 (previous: %2)")
 									.arg(fileInfo.canonicalFilePath())
-									.arg(foundIter.value().canonicalPath()));
+									.arg(foundIter.value().directory.canonicalPath()));
 		}
 	}
 }

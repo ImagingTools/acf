@@ -107,10 +107,13 @@ private:
 	typedef QMap<QString, icomp::GetPackageInfoFunc> LibraryToInfoFuncMap;
 	LibraryToInfoFuncMap m_libraryToInfoFuncMap;
 
+	typedef QMap<QByteArray, QString> ComponentIdToRegistryFileMap;
 	struct CompositePackageInfo
 	{
 		istd::TDelPtr<icomp::CCompositePackageStaticInfo> staticInfoPtr;
+
 		QDir directory;
+		ComponentIdToRegistryFileMap componentIdToRegistryFileMap;
 	};
 	/**
 		Map package ID to package file path.

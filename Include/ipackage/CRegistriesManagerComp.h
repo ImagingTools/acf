@@ -79,10 +79,16 @@ private:
 	typedef QMap<QByteArray, QString> RealPackagesMap;
 	RealPackagesMap m_realPackagesMap;
 
+	typedef QMap<QByteArray, QString> ComponentIdToRegistryFileMap;
+	struct CompositePackageInfo
+	{
+		QDir directory;
+		ComponentIdToRegistryFileMap componentIdToRegistryFileMap;
+	};
 	/**
 		Map package ID to directory.
 	*/
-	typedef QMap<QByteArray, QDir> CompositePackagesMap;
+	typedef QMap<QByteArray, CompositePackageInfo> CompositePackagesMap;
 	CompositePackagesMap m_compositePackagesMap;
 
 	typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;
