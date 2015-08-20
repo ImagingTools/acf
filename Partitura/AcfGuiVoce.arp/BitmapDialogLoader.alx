@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328706
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          3252
+          3831
         </Number>
         <Description>
           ACF
@@ -18,21 +29,10 @@
           1
         </Id>
         <Number>
-          1067
+          1364
         </Number>
         <Description>
           ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264197
-        </Number>
-        <Description>
-          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -40,28 +40,28 @@
   <PositionMap count="2">
     <Element>
       <ComponentName>
-        BitmapLoader
+        FileDialogLoader
       </ComponentName>
       <X>
-        425
+        850
       </X>
-      <X>
+      <Y>
         400
-      </X>
+      </Y>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        FileDialogLoader
+        BitmapLoader
       </ComponentName>
       <X>
-        850
+        425
       </X>
-      <X>
+      <Y>
         400
-      </X>
+      </Y>
       <Note>
         
       </Note>
