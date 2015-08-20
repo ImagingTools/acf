@@ -100,10 +100,12 @@ int CRegistryCodeSaverComp::SaveToFile(
 			return OS_FAILED;
 		}
 	}
-	else if (*m_workingModeAttrPtr == WM_DEPENDENCIES){
+	else if ((*m_workingModeAttrPtr == WM_DEPENDENCIES) || (*m_workingModeAttrPtr == WM_DEEP_DEPENDENCIES)){
+		bool allDependencies = (*m_workingModeAttrPtr == WM_DEEP_DEPENDENCIES);
+
 		if (filePath.isEmpty()){
 			QTextStream depsStream(stdout);
-			if (!WriteDependencies(composedAddresses, realAddresses, depsStream)){
+			if (!WriteDependencies(composedAddresses, realAddresses, allDependencies, depsStream)){
 				return OS_FAILED;
 			}
 		}
@@ -116,7 +118,7 @@ int CRegistryCodeSaverComp::SaveToFile(
 			}
 
 			QTextStream depsStream(&depsFile);
-			if (!WriteDependencies(composedAddresses, realAddresses, depsStream)){
+			if (!WriteDependencies(composedAddresses, realAddresses, allDependencies, depsStream)){
 				depsFile.remove();
 				return OS_FAILED;
 			}
@@ -138,6 +140,7 @@ bool CRegistryCodeSaverComp::GetFileExtensions(QStringList& result, const istd::
 	if ((flags & QF_SAVE) != 0){
 		switch (*m_workingModeAttrPtr){
 		case WM_DEPENDENCIES:
+		case WM_DEEP_DEPENDENCIES:
 			result.push_back("txt");
 			break;
 
@@ -157,6 +160,7 @@ QString CRegistryCodeSaverComp::GetTypeDescription(const QString* extensionPtr) 
 	if (extensionPtr == NULL){
 		switch (*m_workingModeAttrPtr){
 		case WM_DEPENDENCIES:
+		case WM_DEEP_DEPENDENCIES:
 			return QObject::tr("dependency file");
 
 		default:
@@ -940,6 +944,7 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 bool CRegistryCodeSaverComp::WriteDependencies(
 			const Addresses& composedAddresses,
 			const Addresses& realAddresses,
+			bool allDependencies,
 			QTextStream& stream) const
 {
 	if (!m_packagesManagerCompPtr.IsValid()){
@@ -958,22 +963,24 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 			stream << packageDir.absoluteFilePath(address.GetComponentId() + ".arx") << "\n";
 		}
 
-		Ids packageIdsList;
-		for (		Addresses::const_iterator addressIter = realAddresses.begin();
-					addressIter != realAddresses.end();
-					++addressIter){
-			const icomp::CComponentAddress& address = *addressIter;
-			packageIdsList.insert(address.GetPackageId());
-		}
+		if (allDependencies){
+			Ids packageIdsList;
+			for (		Addresses::const_iterator addressIter = realAddresses.begin();
+						addressIter != realAddresses.end();
+						++addressIter){
+				const icomp::CComponentAddress& address = *addressIter;
+				packageIdsList.insert(address.GetPackageId());
+			}
 
-		for (		Ids::const_iterator packageIter = packageIdsList.begin();
-					packageIter != packageIdsList.end();
-					++packageIter){
-			const QByteArray& packageId = *packageIter;
+			for (		Ids::const_iterator packageIter = packageIdsList.begin();
+						packageIter != packageIdsList.end();
+						++packageIter){
+				const QByteArray& packageId = *packageIter;
 
-			QFileInfo packageFilePath(QDir::cleanPath(m_packagesManagerCompPtr->GetPackagePath(packageId)));
+				QFileInfo packageFilePath(QDir::cleanPath(m_packagesManagerCompPtr->GetPackagePath(packageId)));
 
-			stream << packageFilePath.absoluteFilePath() << "\n";
+				stream << packageFilePath.absoluteFilePath() << "\n";
+			}
 		}
 	}
 
