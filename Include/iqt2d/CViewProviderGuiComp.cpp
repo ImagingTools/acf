@@ -71,6 +71,8 @@ void CViewProviderGuiComp::OnGuiCreated()
 		consolePtr->SetZoomToFit(*m_zoomToFitEnabledAttrPtr);
 	}
 
+	consolePtr->SetFullScreenAllowed(*m_fullScreenModeSupportedAttrPtr);
+
 	// shape edit commands
 	bool useShapeEditCommands = false;
 	if (m_useShapeEditCommandsAttrPtr.IsValid()){

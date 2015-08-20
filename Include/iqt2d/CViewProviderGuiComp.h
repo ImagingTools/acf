@@ -72,7 +72,9 @@ public:
 		I_ASSIGN_TO(m_calibrationProviderModelCompPtr, m_calibrationProviderCompPtr, false);
 		I_ASSIGN(m_backgroundModeAttrPtr, "BackgroundMode", "Mode of background drawing:\n 0 - standard window background\n 1 - color used from color scheme \n 2 - checkerboard\n 3 - dot grid\n", true, BM_NORMAL);
 		I_ASSIGN(m_colorSchemaCompPtr, "ColorSchema", "Color schema used for console", false, "ColorSchema");
+		I_ASSIGN(m_fullScreenModeSupportedAttrPtr, "FullScreenModeSupported", "If enabled, the view will be switched into full screen mode on mouse double click", true, true);
 	I_END_COMPONENT;
+
 
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
@@ -107,6 +109,7 @@ protected:
 	I_ATTR(bool, m_zoomToFitEnabledAttrPtr);
 	I_ATTR(int, m_fitModeAttrPtr);
 	I_ATTR(int, m_backgroundModeAttrPtr);
+	I_ATTR(bool, m_fullScreenModeSupportedAttrPtr);
 
 	iview::CAffiniteCalibrationShape m_calibrationShape;
 };
