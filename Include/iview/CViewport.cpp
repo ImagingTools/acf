@@ -111,8 +111,15 @@ void CViewport::SetFitArea(const i2d::CRectangle& area)
 
 	BaseClass::SetFitArea(area);
 
-	if ((prevFitArea != area) && m_framePtr->IsZoomToFit()){
-		UpdateFitTransform();
+	if (prevFitArea != area){
+		if (m_framePtr->IsZoomToFit()){
+			UpdateFitTransform();
+		}
+		else{
+			SetBackgroundBufferValid(false);
+
+			m_framePtr->UpdateButtonsState();
+		}
 	}
 }
 
