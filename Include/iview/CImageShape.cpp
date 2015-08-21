@@ -183,25 +183,44 @@ QString CImageShape::GetShapeDescriptionAt(istd::CIndex2d position) const
 					rgbToHsvTransformation.GetValueAt(rgbColor, hsvColor);
 					hsv = hsvColor;
 
-					pixelValueInfo = QObject::tr("[Red:%1% (%2), Green:%3% (%4), Blue:%5% (%6) Hue: %7, Saturation: %8, Value: %9]")
-								.arg(int(rgb.GetElement(icmm::CRgb::CI_RED)* 100))
-								.arg(int(rgb.GetElement(icmm::CRgb::CI_RED)* 255))
-								.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE)* 100))
-								.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE)* 255))
-								.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN)* 100))
-								.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN)* 255))
+					pixelValueInfo = QObject::tr("[RGB=(%1%,%3%,%5%)=(%2,%4,%6), HSV=(%7,%8,%9)]")
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_RED) * 100))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_RED) * 255))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN) * 100))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN) * 255))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE) * 100))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE) * 255))
 								.arg(int(hsv.GetElement(icmm::CHsv::CI_HUE)))
-								.arg(int(hsv.GetElement(icmm::CHsv::CI_SATURATION)* 255))
-								.arg(int(hsv.GetElement(icmm::CHsv::CI_VALUE)* 255));
+								.arg(int(hsv.GetElement(icmm::CHsv::CI_SATURATION) * 255))
+								.arg(int(hsv.GetElement(icmm::CHsv::CI_VALUE) * 255));
 				}
 				break;
 
 			case iimg::IBitmap::PF_RGBA:
-				pixelValueInfo = QObject::tr("RGBA value %1%, %2%, %3%, %4%")
-							.arg(int(pixelValue[3] * 100))
-							.arg(int(pixelValue[2] * 100))
-							.arg(int(pixelValue[1] * 100))
-							.arg(int(pixelValue[0] * 100));
+				{
+					icmm::CRgbToHsvTranformation rgbToHsvTransformation;
+					icmm::CRgb rgb(pixelValue[3], pixelValue[2], pixelValue[1]);
+					icmm::CHsv hsv;
+					double alpha = pixelValue[0];
+
+					icmm::CVarColor rgbColor(rgb);
+					icmm::CVarColor hsvColor(hsv.GetElementsCount());
+					rgbToHsvTransformation.GetValueAt(rgbColor, hsvColor);
+					hsv = hsvColor;
+
+					pixelValueInfo = QObject::tr("[RGBA=(%1%,%3%,%5%,%7)=(%2,%4,%6,%8), HSV=(%9,%10,%11)]")
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_RED) * 100))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_RED) * 255))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN) * 100))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN) * 255))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE) * 100))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE) * 255))
+								.arg(int(alpha * 100))
+								.arg(int(alpha * 255))
+								.arg(int(hsv.GetElement(icmm::CHsv::CI_HUE)))
+								.arg(int(hsv.GetElement(icmm::CHsv::CI_SATURATION) * 255))
+								.arg(int(hsv.GetElement(icmm::CHsv::CI_VALUE) * 255));
+				}
 				break;
 
 			default:
