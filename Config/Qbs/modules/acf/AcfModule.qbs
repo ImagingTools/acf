@@ -12,7 +12,7 @@ Module{
 	Depends{ name: "cpp" }
 
 	property string compilerName
-	property string compilerMode
+	property string compileMode
 
 	Properties{
 		condition: (qbs.targetOS.contains("linux") || qbs.targetOS.contains("unix")) && !qbs.targetOS.contains("osx")
@@ -49,11 +49,11 @@ Module{
 
 	Properties{
 		condition: qbs.debugInformation == true
-		compilerMode: "Debug"
+		compileMode: "Debug"
 	}
 	Properties{
 		condition: qbs.debugInformation == false
-		compilerMode: "Release"
+		compileMode: "Release"
 	}
 
 	property string targetBinSubdir: ""
@@ -82,7 +82,7 @@ Module{
 
 	property bool is64Bit: (qbs.architecture.search(/64/i) >= 0);
 	property string compilerCode: is64Bit? compilerName + "_64": compilerName;
-	property string compilerDir: compilerMode + compilerCode;
+	property string compilerDir: compileMode + compilerCode;
 	property string compilerAndQtDir: (Qt.core.versionMajor != 5)? compilerDir + "_Qt" + Qt.core.versionMajor: compilerDir
 	property string generatedOutputDir								// Path where stuff will be generated, if undefined "GeneratedPath/" + product.name will be taken
 	property path acfConfigurationFile								// ACF configuration file ARX compiler
