@@ -28,7 +28,10 @@ win32-msvc*{
 	QMAKE_CXXFLAGS_WARN_ON = -W4
 	QMAKE_CXXFLAGS += /MP /openmp- /fp:fast
 
-	win32-msvc2005{
+		# Qt-BUG 31516. Remove it after the fix in Qt!!!
+		QMAKE_CXXFLAGS += /wd4718
+
+		win32-msvc2005{
 		COMPILER_NAME = VC8
 	}
 	win32-msvc2008{
@@ -49,10 +52,12 @@ win32-msvc*{
 	win32-msvc2013{
 		QMAKE_CXXFLAGS += /wd4996 /Qpar /Gy /Gw /FS
 		COMPILER_NAME = VC12
+		CONFIG += c++11
 	}
 	win32-msvc2015{
 		QMAKE_CXXFLAGS += /wd4996 /Qpar /Gy /Gw /FS
 		COMPILER_NAME = VC14
+		CONFIG += c++11
 	}
 
 	contains(QMAKE_HOST.arch, x86_64){
