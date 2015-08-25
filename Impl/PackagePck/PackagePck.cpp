@@ -21,7 +21,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			XpcModel,
 			"Model of ACF configuration (XPC)",
-			"Registry Components Configuration Packages ARP ARX XPC Data Connection" IM_TAG("Model"));
+			"Registry Components Configuration Packages ARP ARX XPC AWC Data Connection" IM_TAG("Model"));
 
 I_EXPORT_COMPONENT(
 			PackagesLoader,

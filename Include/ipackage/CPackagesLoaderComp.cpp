@@ -78,7 +78,7 @@ bool CPackagesLoaderComp::LoadPackages(const QString& configFilePath)
 	if (m_configFilePath.isEmpty()){
 		SendVerboseMessage("Configure component environment using default configuration");
 
-		m_configFilePath = "Default.xpc";
+		m_configFilePath = "Default.awc";
 	}
 
 	BaseClass2::Reset();
@@ -122,6 +122,22 @@ QString CPackagesLoaderComp::GetPackagePath(const QByteArray& packageId) const
 	CompositePackagesMap::ConstIterator foundCompositeIter = m_compositePackagesMap.constFind(packageId);
 	if (foundCompositeIter != m_compositePackagesMap.constEnd()){
 		return foundCompositeIter.value().directory.absolutePath();
+	}
+
+	return QString();
+}
+
+
+QString CPackagesLoaderComp::GetRegistryPath(const icomp::CComponentAddress& address) const
+{
+	CompositePackagesMap::ConstIterator foundPackageIter = m_compositePackagesMap.constFind(address.GetPackageId());
+	if (foundPackageIter != m_compositePackagesMap.constEnd()){
+		const CompositePackageInfo& packageInfo = foundPackageIter.value();
+
+		ComponentIdToRegistryFileMap::ConstIterator foundComponentIter = packageInfo.componentIdToRegistryFileMap.constFind(address.GetComponentId());
+		if (foundComponentIter != packageInfo.componentIdToRegistryFileMap.constEnd()){
+			return foundComponentIter.value();
+		}
 	}
 
 	return QString();

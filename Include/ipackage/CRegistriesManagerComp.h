@@ -52,6 +52,7 @@ public:
 	virtual bool LoadPackages(const QString& configFilePath = QString());
 	virtual int GetPackageType(const QByteArray& packageId) const;
 	virtual QString GetPackagePath(const QByteArray& packageId) const;
+	virtual QString GetRegistryPath(const icomp::CComponentAddress& address) const;
 
 	// reimplemented (icomp::IExtRegistriesManager)
 	virtual PathList GetConfigurationPathList(PathType pathType) const;

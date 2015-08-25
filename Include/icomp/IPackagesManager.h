@@ -8,6 +8,7 @@
 
 // ACF includes
 #include "istd/IChangeable.h"
+#include "icomp/CComponentAddress.h"
 
 
 namespace icomp
@@ -47,6 +48,12 @@ public:
 		\return				package path or empty string if specified package is not registered.
 	*/
 	virtual QString GetPackagePath(const QByteArray& packageId) const = 0;
+	/**
+		Get registry file path, if it is composed registry.
+		\param	address		adress of registry treated as composed component.
+		\return				registry object or NULL if specified composite component is not registered.
+	*/
+	virtual QString GetRegistryPath(const CComponentAddress& address) const = 0;
 };
 
 

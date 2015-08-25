@@ -23,6 +23,7 @@ public:
 	virtual bool LoadPackages(const QString& configFilePath = QString());
 	virtual int GetPackageType(const QByteArray& packageId) const;
 	virtual QString GetPackagePath(const QByteArray& packageId) const;
+	virtual QString GetRegistryPath(const CComponentAddress& address) const;
 
 	// reimplemented (icomp::IRegistriesManager)
 	virtual const IRegistry* GetRegistry(const CComponentAddress& address, const IRegistry* contextRegistryPtr = NULL) const;

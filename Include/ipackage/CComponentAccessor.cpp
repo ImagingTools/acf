@@ -32,7 +32,7 @@ struct Loader
 		oldRegistrySerializerComp.InsertMultiAttr("FileExtensions", QString("arx"));
 		oldRegistrySerializerComp.InitComponent();
 
-		registrySerializerComp.InsertMultiAttr("FileExtensions", QString("xar"));
+		registrySerializerComp.InsertMultiAttr("FileExtensions", QString("acc"));
 		registrySerializerComp.InitComponent();
 
 		composedSerializerComp.InsertMultiRef("SlaveLoaders", &oldRegistrySerializerComp);

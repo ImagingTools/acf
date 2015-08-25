@@ -34,9 +34,9 @@ bool CRegistriesManagerComp::LoadPackages(const QString& configFilePath)
 	else{
 		SendVerboseMessage("Configure component environment using default configuration");
 
-		if (!LoadConfigFile("Default.xpc")){
+		if (!LoadConfigFile("Default.awc")){
 			QDir applicationDir = QCoreApplication::applicationDirPath();
-			if (!LoadConfigFile(applicationDir.absoluteFilePath("Default.xpc"))){
+			if (!LoadConfigFile(applicationDir.absoluteFilePath("Default.awc"))){
 				RegisterPackagesDir(applicationDir.absolutePath());
 			}
 		}
@@ -72,6 +72,22 @@ QString CRegistriesManagerComp::GetPackagePath(const QByteArray& packageId) cons
 	CompositePackagesMap::ConstIterator foundCompositeIter = m_compositePackagesMap.constFind(packageId);
 	if (foundCompositeIter != m_compositePackagesMap.constEnd()){
 		return foundCompositeIter.value().directory.absolutePath();
+	}
+
+	return QString();
+}
+
+
+QString CRegistriesManagerComp::GetRegistryPath(const icomp::CComponentAddress& address) const
+{
+	CompositePackagesMap::ConstIterator foundPackageIter = m_compositePackagesMap.constFind(address.GetPackageId());
+	if (foundPackageIter != m_compositePackagesMap.constEnd()){
+		const CompositePackageInfo& packageInfo = foundPackageIter.value();
+
+		ComponentIdToRegistryFileMap::ConstIterator foundComponentIter = packageInfo.componentIdToRegistryFileMap.constFind(address.GetComponentId());
+		if (foundComponentIter != packageInfo.componentIdToRegistryFileMap.constEnd()){
+			return foundComponentIter.value();
+		}
 	}
 
 	return QString();

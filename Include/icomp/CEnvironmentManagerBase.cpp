@@ -36,6 +36,12 @@ QString CEnvironmentManagerBase::GetPackagePath(const QByteArray& /*packageId*/)
 }
 
 
+QString CEnvironmentManagerBase::GetRegistryPath(const CComponentAddress& /*address*/) const
+{
+	return QString();
+}
+
+
 // reimplemented (icomp::IRegistriesManager)
 
 const IRegistry* CEnvironmentManagerBase::GetRegistry(const CComponentAddress& address, const IRegistry* contextRegistryPtr) const
