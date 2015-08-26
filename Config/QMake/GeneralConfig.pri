@@ -2,7 +2,7 @@
 
 CONFIG += stl
 CONFIG -= exceptions
-CONFIG += silent
+CONFIG -= silent
 CONFIG += rtti
 CONFIG += debug_and_release
 
@@ -122,3 +122,8 @@ OBJECTS_DIR = $$AUXINCLUDEPATH/GeneratedFiles/$$CONFIGURATION_NAME/"$$TARGET"
 INCLUDEPATH += $$PWD/../../Include
 INCLUDEPATH += $$PWD/../../$$AUXINCLUDEDIR
 
+# get build output directory of shadow build and add include path
+ACFDIRBUILD = $$(ACFDIR_BUILD)
+!isEmpty( ACFDIRBUILD ){
+	INCLUDEPATH += $$(ACFDIR_BUILD)/$$AUXINCLUDEDIR
+}

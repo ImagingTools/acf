@@ -5,7 +5,7 @@ TARGET = ContainerGui
 
 DESTDIR = ../../../../../Bin/$$COMPILER_DIR
 
-FORMS += ../*.ui
+FORMS += $$_PRO_FILE_PWD_/../*.ui
 UI_DIR = ../../GeneratedFiles/ContainerGui
 
 LIBS += -lAcfStd -lAcfQt

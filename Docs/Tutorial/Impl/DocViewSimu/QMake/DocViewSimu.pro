@@ -7,7 +7,7 @@ DESTDIR = ../../../../../Bin/$$COMPILER_DIR
 
 LIBS += -lAcfStd -lAcfQt
 
-FORMS += ../*.ui
+FORMS += $$_PRO_FILE_PWD_/../*.ui
 UI_DIR = ../../GeneratedFiles/DocViewSimu
 
 QT += main core gui

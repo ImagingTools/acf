@@ -2,13 +2,14 @@
 
 include (GeneralConfig.pri)
 
-INCLUDEPATH += ../../../Include
+INCLUDEPATH += $$OUT_PWD/../../../Include
+INCLUDEPATH += $$_PRO_FILE_PWD_/../../../Include
 
 TEMPLATE = lib
 
 TARGET_EXT = .arp
 
-DESTDIR = ../../../Bin/$$COMPILER_DIR
+DESTDIR = $$OUT_PWD/../../../Bin/$$COMPILER_DIR
 
 CONFIG += link_prl
 

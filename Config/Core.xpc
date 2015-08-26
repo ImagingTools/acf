@@ -28,10 +28,13 @@
   </AcfHeader>
   <ConfigFiles count="0">
   </ConfigFiles>
-  <PackageDirs count="2">
-    <Dir>
-      ../Bin/$(ConfigurationDir)
-    </Dir>
+  <PackageDirs count="3">
+      <Dir>
+          ../Bin/$(ConfigurationDir)
+      </Dir>
+	  <Dir>
+		  $(ACFDIR_BUILD)/Bin/$(ConfigurationDir)
+	  </Dir>
     <Dir>
       ../Partitura
     </Dir>
