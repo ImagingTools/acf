@@ -22,8 +22,8 @@ else{
 	CONFIG += dll
 }
 
-HEADERS += ../*.h
-SOURCES += ../*.cpp
+HEADERS += $$_PRO_FILE_PWD_/../*.h
+SOURCES += $$_PRO_FILE_PWD_/../*.cpp
 
 isEqual(DEBUG_INFO_ENABLED_FOR_RELEASE, true){
 	include(MsvcEnableDebugInfo.pri)
