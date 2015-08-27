@@ -5,9 +5,9 @@
 // Qt includes
 #include <QtCore/QtGlobal>
 #if QT_VERSION >= 0x050000
-#include <QtWidgets/QDirModel>
+#include <QtWidgets/QFileSystemModel>
 #else
-#include <QtGui/QDirModel>
+#include <QtGui/QFileSystemModel>
 #endif
 
 // ACF includes
@@ -78,7 +78,7 @@ private:
 	I_REF(ifile::IFileTypeInfo, m_fileTypeInfoPtr);
 	I_REF(ifile::IFileNameParam, m_defaultDirPtr);
 
-	QDirModel m_directoryModel;
+	QFileSystemModel m_directoryModel;
 };
 
 
