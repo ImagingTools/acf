@@ -5,6 +5,7 @@
 #include "icomp/IAttributeStaticInfo.h"
 #include "icomp/CReferenceAttribute.h"
 #include "icomp/CFactoryAttribute.h"
+#include "icomp/CMultiFactoryAttribute.h"
 #include "icomp/CMultiReferenceAttribute.h"
 
 
@@ -103,6 +104,44 @@ bool CSimComponentContextBase::SetFactory(const QByteArray& factoryId, const Com
 
 	return false;
 }
+
+
+bool CSimComponentContextBase::InsertMultiFactory(const QByteArray& factoryId, const ComponentsFactory* factoryPtr)
+{
+	Q_ASSERT(IsAttributeTypeCorrect<CMultiFactoryAttribute>(factoryId));
+
+	CMultiReferenceAttribute* multiAttrPtr = NULL;
+
+	const IRegistryElement::AttributeInfo* existingInfoPtr = m_registryElement.GetAttributeInfo(factoryId);
+	if (existingInfoPtr != NULL){
+		multiAttrPtr = dynamic_cast<CMultiFactoryAttribute*>(existingInfoPtr->attributePtr.GetPtr());
+	}
+	else{
+		IRegistryElement::AttributeInfo* newInfoPtr = m_registryElement.InsertAttributeInfo(factoryId, istd::CClassInfo::GetName<CMultiFactoryAttribute>());
+		if (newInfoPtr != NULL){
+			IRegistryElement::AttributePtr& attributePtr = newInfoPtr->attributePtr;
+			if (!attributePtr.IsValid()){
+				attributePtr.SetPtr(new CMultiFactoryAttribute);
+			}
+
+			multiAttrPtr = dynamic_cast<CMultiFactoryAttribute*>(attributePtr.GetPtr());
+		}
+	}
+
+	if (multiAttrPtr != NULL){
+		QString indexString = QString("%1").arg(multiAttrPtr->GetValuesCount());
+		QByteArray attributeId = factoryId + '#' + indexString.toLocal8Bit();
+
+		multiAttrPtr->InsertValue(attributeId);
+
+		m_factoriesMap[factoryId] = factoryPtr;
+
+		return true;
+	}
+
+	return false;
+}
+
 
 
 bool CSimComponentContextBase::SetBoolAttr(const QByteArray& attributeId, bool value)
