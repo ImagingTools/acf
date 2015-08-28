@@ -134,7 +134,7 @@ bool CSimComponentContextBase::InsertMultiFactory(const QByteArray& factoryId, c
 
 		multiAttrPtr->InsertValue(attributeId);
 
-		m_factoriesMap[factoryId] = factoryPtr;
+		m_factoriesMap[attributeId] = factoryPtr;
 
 		return true;
 	}
