@@ -328,10 +328,10 @@ bool COptionsManager::SwapOptions(int index1, int index2)
 		m_options[index2 - fixedOptionsCount] = tempInfo;
 
 		int selectedOptionIndex = BaseClass::GetSelectedOptionIndex();
-		if (selectedOptionIndex = index1){
+		if (selectedOptionIndex == index1){
 			BaseClass::SetSelectedOptionIndex(index2);
 		}
-		else if (selectedOptionIndex = index2){
+		else if (selectedOptionIndex == index2){
 			BaseClass::SetSelectedOptionIndex(index1);
 		}
 	}
