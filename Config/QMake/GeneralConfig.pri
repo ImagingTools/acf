@@ -97,7 +97,9 @@ CONFIG(release, debug|release){
 
 COMPILER_CODE = $$COMPILER_NAME
 contains(QMAKE_HOST.arch, x86_64){
-	COMPILER_CODE = $$COMPILER_NAME"_64"
+	!macx-clang-32{
+		COMPILER_CODE = $$COMPILER_NAME"_64"
+	}
 }
 
 
