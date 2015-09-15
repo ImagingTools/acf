@@ -11,7 +11,7 @@ var solutionExt = "sln";
 var solutionExp = new RegExp(".*\." + solutionExt + "$");
 
 
-function ProcessFolder(shell, fileSystem, folder, vcDirName)
+function ProcessFolder(shell, fileSystem, folder, vcDirName, qtDir)
 {
 	var retVal = new String;
 
@@ -45,6 +45,9 @@ function ProcessFolder(shell, fileSystem, folder, vcDirName)
 
                     var re2 = /IntermediateDirectory=\"debug\\\"/g;
                     text = text.replace(re2, "InheritedPropertySheets=\"..\\..\\..\\Config\\" + vcDirName + "\\General.vsprops;..\\..\\..\\Config\\" + vcDirName + "\\Debug.vsprops\"");
+                    if (qtDir != "") {
+                        text = text.split(qtDir).join("$(QTDIR)");
+                    }
 
                     var outputFile = fileSystem.OpenTextFile(outputPath, 2, true);
                     outputFile.write(text);
@@ -92,7 +95,7 @@ function ProcessFolder(shell, fileSystem, folder, vcDirName)
         	}
 	    }
 	    else{
-		    ProcessFolder(shell, fileSystem, subfolder, vcDirName);
+		    ProcessFolder(shell, fileSystem, subfolder, vcDirName, qtDir);
 		}
 	}
 }
@@ -103,6 +106,7 @@ var shell = WScript.CreateObject("WScript.Shell");
 
 if (WScript.Arguments.length >= 1){
     var vcDirName = WScript.Arguments(0).toString();
+    var qtDir = shell.ExpandEnvironmentStrings("%QTDIR%");
 
-    ProcessFolder(shell, fileSystem, fileSystem.GetFolder("."), vcDirName);
+    ProcessFolder(shell, fileSystem, fileSystem.GetFolder("."), vcDirName, qtDir);
 }
