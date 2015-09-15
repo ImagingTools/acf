@@ -73,6 +73,7 @@ win32-msvc*{
 }
 
 *-clang* | *-llvm*{
+	CONFIG += c++11
 	COMPILER_NAME = Clang
 	QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-variable
 	QMAKE_CXXFLAGS_WARN_ON += -Wno-overloaded-virtual
