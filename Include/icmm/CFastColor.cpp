@@ -12,15 +12,21 @@ namespace icmm
 {
 
 
-uint qHash(const icmm::CFastColor& color)
+uint qHash(const icmm::CFastColor& color, uint seed = 0)
 {
-	quint64 retVal = 0;
+	quint64 retVal = seed;
+
+	union{
+		double value;
+		quint64 raw;
+	} element;
+	element.raw = 0;
 
 	int elementsCount = color.GetElementsCount();
 	for (int i = 0; i < elementsCount; ++i){
-		double element = color[i];
+		element.value = color[i];
 
-		retVal = (retVal >> 1) ^ (*((uint*)&element) + 1);
+		retVal = (retVal >> 1) ^ (element.raw + 1);
 	}
 
 	return uint(retVal);
