@@ -3,7 +3,6 @@ ACFDIRBUILD = $$(ACFDIR_BUILD)
 
 # for non-shadow build use lib directory inside source tree
 isEmpty( ACFDIRBUILD ) {
-	LIBS += -L$$OUT_PWD/../../../Lib/$$COMPILER_DIR
 	LIBS += -L$$PWD/../../Lib/$$COMPILER_DIR
 }
 
