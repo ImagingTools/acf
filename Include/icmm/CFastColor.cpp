@@ -12,7 +12,7 @@ namespace icmm
 {
 
 
-uint qHash(const icmm::CFastColor& color, uint seed = 0)
+uint qHash(const icmm::CFastColor& color, uint seed)
 {
 	quint64 retVal = seed;
 
