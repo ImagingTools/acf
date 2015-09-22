@@ -3,12 +3,11 @@ include(../../../../../Config/QMake/QtGuiBaseConfig.pri)
 
 TARGET = DocViewSimu
 
-DESTDIR = ../../../../../Bin/$$COMPILER_DIR
+DESTDIR = ../../../../../Bin/$$COMPILER_DIR/Tutorial
 
 LIBS += -lAcfStd -lAcfQt
 
 FORMS += $$_PRO_FILE_PWD_/../*.ui
-UI_DIR = ../../GeneratedFiles/DocViewSimu
 
 QT += main core gui
 

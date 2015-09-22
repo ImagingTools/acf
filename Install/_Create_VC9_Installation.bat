@@ -6,11 +6,14 @@ set LICENSE_DIR=Install/LGPL
 set LICENSE_INSTALL_PATH=../LGPL/License.txt
 set ACF_CONFIG_FILE=$(ACFSLNDIR)/Config/Core.xpc
 
-cd %~dp0/..
+cd %~dp0\..
 
 call Install\InternalParts\CreateTempDirs.bat
 
-call Install\InternalParts\Rebuild.bat
+echo Compiling...
+vcbuild /r %~dp0\..\Build\%COMPILER_EXT%\AcfAll.sln $All
+vcbuild /r %~dp0\..\Docs\Tutorial\Build\%COMPILER_EXT%\TutorialAcf.sln $All
+echo Compiling done
 
 call Install\InternalParts\CopyDlls.bat
 

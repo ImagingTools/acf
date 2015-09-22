@@ -4,14 +4,17 @@ set COMPILER_EXT=VC12
 set QMAKESPEC=%QTDIR%\mkspecs\win32-msvc2013
 set path=%path%;%QTDIR%\bin
 
-cd %~dp0\..\..
-
 echo Generating %COMPILER_EXT% projects...
-cd Build\QMake
-%QTDIR%\bin\qmake -recursive -tp vc
-cd %~dp0\..\..
 
+cd %~dp0\..\..\Build\QMake
+%QTDIR%\bin\qmake -recursive -tp vc
+
+cd %~dp0\..\..\Docs\Tutorial\Build\QMake
+%QTDIR%\bin\qmake -recursive -tp vc
+
+cd %~dp0\..\..
 call Config\QMake\CopyVCProjToSubdir.js %COMPILER_EXT%
 
-
 cd %~dp0\
+
+pause

@@ -1,3 +1,3 @@
 echo Creating installation file...
-iscc.exe /Q TempExcl/Install.iss
+iscc.exe /Q Install\TempExcl\Install.iss
 

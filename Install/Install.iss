@@ -21,23 +21,43 @@ UninstallDisplayName=$AcfProductName$ $AcfVersion:0$
 OutputDir=..\Setup
 LicenseFile=$LICENSE_INSTALL_PATH$
 VersionInfoDescription=$AcfProductName$ v. $AcfVersion:0$ ($AcfRawVersion:0$) by $AcfCompanyName$
-AppComments=Compiled using $CompilerName$, see www.imagingtools.de to find out more about ACF
-AppCopyright=Copyright (C) 2007-2014 Witold Gantzke and Kirill Lepskiy
+AppComments=Compiled using $CompilerName$, see www.ilena.org to find out more about ACF
+AppCopyright=Copyright (C) 2007-2015 Witold Gantzke and Kirill Lepskiy
 VersionInfoVersion=$AcfVersion:0$
 ChangesEnvironment=yes
 
 [Files]
-Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: acfComp
-Source: {#EXTLIBDIR}\Microsoft\Redist\Debug$CompilerName$\*; DestDir: {app}\Bin\Debug$CompilerName$; Flags: recursesubdirs; Components: acfComp
-Source: {#EXTLIBDIR}\Microsoft\Redist\Release$CompilerName$\*; DestDir: {app}\Bin\Release$CompilerName$; Flags: recursesubdirs; Components: acfComp
+Source: ..\Temp\Bin\*; DestDir: {app}\Bin; Flags: recursesubdirs; Components: binaryComp
+Source: ..\Temp\Lib\*; DestDir: {app}\Lib; Flags: recursesubdirs; Components: binaryComp
 
-Source: {#QTDIR}\bin\Qt*4.dll; DestDir: {app}\ExtLib\Bin; Components: qtComp
-Source: {#QTDIR}\bin\phonon4.dll; DestDir: {app}\ExtLib\Bin; Components: qtComp
-Source: {#QTDIR}\bin\phonond4.dll; DestDir: {app}\ExtLib\Bin; Components: qtComp
-Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\Bin\Release$CompilerName$\imageformats; Components: acfComp
-Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\Bin\Release$CompilerName$\iconengines; Components: acfComp
-Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: acfComp
-Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\Bin\Debug$CompilerName$\iconengines; Components: acfComp
+Source: ..\Temp\Config\*; DestDir: {app}\Config; Flags: recursesubdirs; Components: standardComp
+Source: ..\Temp\Partitura\*; DestDir: {app}\Partitura; Flags: recursesubdirs; Components: standardComp
+Source: ..\Temp\*; DestDir: {app}; Components: standardComp
+Source: ..\Temp\Docs\*.txt; DestDir: {app}\Docs; Components: standardComp
+Source: ..\Temp\Include\*; Excludes: "*.cpp,*.qrc,*.ui,\Resources\*"; DestDir: {app}\Include\*; Flags: recursesubdirs; Components: standardComp
+Source: ..\Temp\Impl\*; Excludes: "*.cpp"; DestDir: {app}\Impl\*; Flags: recursesubdirs; Components: standardComp
+
+Source: ..\Temp\Docs\*; DestDir: {app}\Docs; Flags: recursesubdirs; Components: docuComp
+
+Source: ..\Temp\Include\*; DestDir: {app}\Include\*; Flags: recursesubdirs; Components: sourceComp
+Source: ..\Temp\Impl\*; DestDir: {app}\Impl\*; Flags: recursesubdirs; Components: sourceComp
+
+Source: {#QTDIR}\bin\icu*.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\icu*.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Core.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Core.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Gui.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Gui.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Widgets.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Widgets.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Xml.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Xml.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Svg.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Svg.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\imageformats\qsvg.dll; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\imageformats\qsvg.dll; DestDir: {app}\Bin\Release$CompilerName$\imageformats; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\iconengines\qsvgicon.dll; DestDir: {app}\Bin\Debug$CompilerName$\iconengines; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\iconengines\qsvgicon.dll; DestDir: {app}\Bin\Release$CompilerName$\iconengines; Components: qtBinaryComp
 
 [Languages]
 Name: en; MessagesFile: compiler:Default.isl
@@ -45,9 +65,9 @@ Name: de; MessagesFile: compiler:Languages\German.isl
 Name: pl; MessagesFile: compiler:Languages\Polish.isl
 
 [CustomMessages]
-en.MinimalType=Minimal installation
-de.MinimalType=Minimale Installation
-pl.MinimalType=Instalacja minimalna
+en.StandardType=Typical installation
+de.StandardType=Standardinstallation
+pl.StandardType=Instalacja standardowa
 
 en.FullType=Full installation
 de.FullType=Komplete Installation
@@ -57,51 +77,40 @@ en.CustomType=Custom installation
 de.CustomType=Ausgewählte Komponenten
 pl.CustomType=Wybrane komponenty
 
+en.Binaries=Compilated binaries
+de.Binaries=Kompilierte binäre Dateien
+pl.Binaries=Skompilowane pliki binarne
+
+en.Documentation=Documentation
+de.Documentation=Dokumentation
+pl.Documentation=Dokumentacja
+
+en.Sources=Source files
+de.Sources=Source-Dateien
+pl.Sources=Pliki zródlowe
+
 en.QtBinaries=Qt binaries
-de.QtBinaries=Qt binäre Datei
+de.QtBinaries=Qt binäre Dateien
 pl.QtBinaries=Pliki binarne Qt
 
-en.AddExtPath=Add external binaries path to the system PATH
-de.AddExtPath=Pfad für externe Bibliotheken zum Systempfad hinzufügen
-pl.AddExtPath=Dodaj ¶cie¿kê zewnetrznych bibliotek do ¶cie¿ki systemowej
-
-en.AddAcfPath=Add ACF tools path to the system PATH
-de.AddAcfPath=Pfad für ACF-Tools zum Systempfad hinzufügen
-pl.AddAcfPath=Dodaj ¶cie¿kê narzêdzi ACF do ¶cie¿ki systemowej
+en.AddExtPath=Set ACFDIR to environmental variables
+de.AddExtPath=Die Umgebungsvariable ACFDIR setzten
+pl.AddExtPath=Ustaw ACFDIR w zmiennych systemowych
 
 [Types]
-Name: minimalType; Description: {cm:MinimalType}
+Name: standardType; Description: {cm:StandardType}
 Name: fullType; Description: {cm:FullType}
 Name: customType; Description: {cm:CustomType}; Flags: iscustom
 
 [Components]
-Name: acfComp; Description: ACF; Types: minimalType fullType customType
-Name: qtComp; Description: {cm:QtBinaries}; Types: fullType customType
-
-[Icons]
-Name: "{group}\Compositor"; Filename: {app}\Bin\Release$CompilerName$\Compositor.exe; WorkingDir: {app}\Bin\Release$CompilerName$; Components: acfComp
-Name: "{group}\AcfStarter"; Filename: {app}\Bin\Release$CompilerName$\AcfStarter.exe; WorkingDir: {app}\Bin\Release$CompilerName$; Components: acfComp
-Name: "{group}\API Documentation"; Filename: {app}\Docs\TechnicalDoc\index.html; Components: acfComp
+Name: standardComp; Description: ACF; Types: standardType fullType customType
+Name: binaryComp; Description: {cm:Binaries}; Types: standardType fullType customType
+Name: docuComp; Description: {cm:Documentation}; Types: standardType fullType customType
+Name: sourceComp; Description: {cm:Sources}; Types: fullType
+Name: qtBinaryComp; Description: {cm:QtBinaries}; Types: standardType fullType customType
 
 [Tasks]
-Name: AddExtPath; Description: {cm:AddExtPath}; Flags: checkedonce; Components: qtComp
-Name: AddAcfPath; Description: {cm:AddAcfPath}; Flags: checkedonce; Components: acfComp
+Name: AddExtPath; Description: {cm:AddExtPath}; Flags: checkedonce; Components: standardComp
 
 [Registry]
-Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "Path"; ValueData: "{olddata};{app}\ExtLib\Bin"; Flags: createvalueifdoesntexist; Tasks: AddExtPath
-Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "Path"; ValueData: "{olddata};{app}\Bin\Release$CompilerName$"; Flags: createvalueifdoesntexist; Tasks: AddAcfPath
-Root: HKCU; Subkey: "Environment"; ValueName: ACFDIR; ValueData: {app}; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
-
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\.arx"; ValueType: string; ValueData: arx_auto_file; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueData: "ACF Registry"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueName: EditFlags; ValueData: 0; ValueType: dword; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueName: BrowserFlags; ValueData: 8; ValueType: dword; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\shell\\open\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\Acf.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\shell\\edit\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\Compositor.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
-
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\.xpc"; ValueType: string; ValueData: xpc_auto_file; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\xpc_auto_file"; ValueData: "ACF Registry"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\xpc_auto_file"; ValueName: EditFlags; ValueData: 0; ValueType: dword; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\xpc_auto_file"; ValueName: BrowserFlags; ValueData: 8; ValueType: dword; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\xpc_auto_file\\shell\\open\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\AcfStarter.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\xpc_auto_file\\shell\\edit\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\Compositor.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
+Root: HKCU; Subkey: "Environment"; ValueName: ACFDIR; ValueData: {app}; ValueType: string; Flags: uninsdeletevalue; Tasks: AddExtPath
