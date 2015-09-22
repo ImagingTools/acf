@@ -24,7 +24,6 @@ CAnnulusShape::CAnnulusShape()
 	m_isCenterVisible(true),
 	m_editMode(EM_NONE)
 {
-
 	m_isEditableRadius2 = true;
 	m_isEditableRadius = true;
 }
@@ -40,7 +39,7 @@ void CAnnulusShape::SetEditableRadiusInner(bool editable)
 {
 	if (m_isEditableRadius != editable){
 		m_isEditableRadius = editable;
-		Invalidate()		;
+		Invalidate();
 	}
 }
 
@@ -55,6 +54,7 @@ void CAnnulusShape::SetEditableRadiusOuter(bool editable)
 {
 	if (m_isEditableRadius2 != editable){
 		m_isEditableRadius2 = editable;
+
 		Invalidate();
 	}
 }
@@ -70,6 +70,7 @@ void CAnnulusShape::SetEditableRadius(bool editable)
 {
 	if (m_isEditableRadius != editable || m_isEditableRadius2 != editable){
 		m_isEditableRadius2 = m_isEditableRadius = editable;
+
 		Invalidate();
 	}
 }

@@ -25,8 +25,9 @@ public:
 
 	I_BEGIN_COMPONENT(TShapeParamsGuiCompBase);
 		I_REGISTER_INTERFACE(iview::IShapeFactory);
-		I_ASSIGN(m_defaultUnitInfoAttrPtr, "DefaultUnitInfo", "Provide default information about the logical value units e.g. mm, this will be used if no unit information found in model", false, "DefaultUnitInfo");
+		I_ASSIGN(m_defaultUnitInfoCompPtr, "DefaultUnitInfo", "Provide default information about the logical value units e.g. mm, this will be used if no unit information found in model", false, "DefaultUnitInfo");
 		I_ASSIGN(m_colorSchemaCompPtr, "ShapeColorSchema", "Color schema used by displayed shape", false, "ShapeColorSchema");
+		I_ASSIGN(m_fixedPositionAttrPtr, "FixedPosition", "If enabled, the shape position will be not editable", true, false);
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IObserver)
@@ -41,6 +42,7 @@ protected:
 	typedef typename BaseClass::ShapesMap ShapesMap;
 
 	QString GetUnitName() const;
+	bool IsPositionFixed() const;
 
 	/**
 		Simple creation of shape instance.
@@ -51,8 +53,9 @@ protected:
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
 private:
-	I_REF(imath::IUnitInfo, m_defaultUnitInfoAttrPtr);
+	I_REF(imath::IUnitInfo, m_defaultUnitInfoCompPtr);
 	I_REF(iview::IColorSchema, m_colorSchemaCompPtr);
+	I_ATTR(bool, m_fixedPositionAttrPtr);
 };
 
 
@@ -124,12 +127,15 @@ template <class Ui, class Shape, class ShapeModel>
 iview::IShape* TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShape(const istd::IChangeable* objectPtr, bool connectToModel) const
 {
 	Shape* shapePtr = CreateShapeInstance();
+	if (shapePtr != NULL){	
+		shapePtr->SetEditablePosition(!IsPositionFixed());
 
-	if (connectToModel){
-		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(const_cast<istd::IChangeable*>(objectPtr));
-		if (modelPtr != NULL){
-			if (modelPtr->AttachObserver(shapePtr)){
-				shapePtr->SetVisible(true);
+		if (connectToModel){
+			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(const_cast<istd::IChangeable*>(objectPtr));
+			if (modelPtr != NULL){
+				if (modelPtr->AttachObserver(shapePtr)){
+					shapePtr->SetVisible(true);
+				}
 			}
 		}
 	}
@@ -141,9 +147,16 @@ iview::IShape* TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShape(const
 // protected methods
 
 template <class Ui, class Shape, class ShapeModel>
+bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::IsPositionFixed() const
+{
+	return *m_fixedPositionAttrPtr;
+}
+
+
+template <class Ui, class Shape, class ShapeModel>
 QString TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::GetUnitName() const
 {
-	const imath::IUnitInfo* unitInfoPtr = m_defaultUnitInfoAttrPtr.GetPtr();
+	const imath::IUnitInfo* unitInfoPtr = m_defaultUnitInfoCompPtr.GetPtr();
 
 	const ShapeModel* objectPtr = BaseClass::GetObservedObject();
 	if (objectPtr != NULL){

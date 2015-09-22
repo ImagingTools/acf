@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3012
+          3885
         </Number>
         <Description>
           ACF
@@ -15,24 +15,24 @@
       </Version>
       <Version>
         <Id>
-          1
+          1023
         </Id>
         <Number>
-          890
+          328449
         </Number>
         <Description>
-          ACF-Solutions
+          Qt Framework
         </Description>
       </Version>
       <Version>
         <Id>
-          1023
+          1
         </Id>
         <Number>
-          264192
+          1400
         </Number>
         <Description>
-          Qt Framework
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -40,28 +40,14 @@
   <PositionMap count="5">
     <Element>
       <ComponentName>
-        ShapeInfoGui
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        225
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         CommandsToolBar
       </ComponentName>
       <X>
         825
       </X>
-      <X>
+      <Y>
         550
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -73,9 +59,23 @@
       <X>
         175
       </X>
-      <X>
+      <Y>
         450
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ShapeInfoGui
+      </ComponentName>
+      <X>
+        575
       </X>
+      <Y>
+        225
+      </Y>
       <Note>
         
       </Note>
@@ -87,9 +87,9 @@
       <X>
         600
       </X>
-      <X>
+      <Y>
         350
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -101,9 +101,9 @@
       <X>
         175
       </X>
-      <X>
+      <Y>
         225
-      </X>
+      </Y>
       <Note>
         
       </Note>

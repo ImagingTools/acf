@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3012
+          3885
         </Number>
         <Description>
           ACF
@@ -15,24 +15,24 @@
       </Version>
       <Version>
         <Id>
-          1
+          1023
         </Id>
         <Number>
-          890
+          328449
         </Number>
         <Description>
-          ACF-Solutions
+          Qt Framework
         </Description>
       </Version>
       <Version>
         <Id>
-          1023
+          1
         </Id>
         <Number>
-          264192
+          1400
         </Number>
         <Description>
-          Qt Framework
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -250,7 +250,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="12">
+        <AttributeInfoMap count="13">
           <AttributeInfo>
             <Id>
               BackgroundMode
@@ -279,6 +279,22 @@
             </Type>
             <ExportId>
               CalibrationProvider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ColorSchema
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              ColorSchema
             </ExportId>
             <Data>
               <IsEnabled>
