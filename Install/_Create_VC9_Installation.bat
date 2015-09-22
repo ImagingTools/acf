@@ -6,7 +6,7 @@ set LICENSE_DIR=Install/LGPL
 set LICENSE_INSTALL_PATH=../LGPL/License.txt
 set ACF_CONFIG_FILE=$(ACFSLNDIR)/Config/Core.xpc
 
-cd ..
+cd %~dp0/..
 
 call Install\InternalParts\CreateTempDirs.bat
 
@@ -24,7 +24,4 @@ call Install\InternalParts\Compile_Setup.bat
 
 echo Installation done
 
-pause
-
 call Install\InternalParts\RemoveTempDirs.bat
-
