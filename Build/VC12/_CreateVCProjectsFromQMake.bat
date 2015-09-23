@@ -16,5 +16,3 @@ cd %~dp0\..\..
 call Config\QMake\CopyVCProjToSubdir.js %COMPILER_EXT%
 
 cd %~dp0\
-
-pause
