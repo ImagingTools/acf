@@ -1,15 +1,14 @@
+TARGET = ContainerGui
+
 include(../../../../../Config/QMake/ApplicationConfig.pri)
 include(../../../../../Config/QMake/QtGuiBaseConfig.pri)
 
-TARGET = ContainerGui
-
-DESTDIR = ../../../../../Bin/$$COMPILER_DIR
+DESTDIR = $$OUT_PWD/../../../../../Bin/$$COMPILER_DIR/Tutorial
 
 FORMS += $$_PRO_FILE_PWD_/../*.ui
 UI_DIR = ../../GeneratedFiles/ContainerGui
 
-LIBS += -lAcfStd -lAcfQt
+QT += core gui 
 
-QT += main core gui 
-
-
+include(../../../../../Config/QMake/AcfQt.pri)
+include(../../../../../Config/QMake/AcfStd.pri)
