@@ -7,7 +7,6 @@ DESTDIR = $$OUT_PWD/../../../../../Bin/$$COMPILER_DIR/Tutorial
 
 QT += core gui xml sql network
 
-FORMS += $$_PRO_FILE_PWD_/../*.ui
 UI_DIR = ../../GeneratedFiles/TutorialPck
 
 INCLUDEPATH += ../.. ../../../Include
