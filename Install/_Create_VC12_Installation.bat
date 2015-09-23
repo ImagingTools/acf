@@ -22,7 +22,7 @@ call Install\InternalParts\CopyDlls.bat
 
 call Install\InternalParts\CreateScripts.bat
 
-rem call Install\InternalParts\Create_TechnicalDoc.bat
+call Install\InternalParts\Create_TechnicalDoc.bat
 
 call Install\InternalParts\CopyTempFiles.bat
 
