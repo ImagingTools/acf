@@ -69,7 +69,6 @@ int CDelegatedProgressManager::BeginProgressSession(
 	Q_UNUSED(notifier);
 
 	int id = m_nextSessionId++;
-	m_progressSum = 0.0;
 
 	ProgressInfo& info = m_progressMap[id];
 	info.progress = 0;
@@ -108,6 +107,10 @@ void CDelegatedProgressManager::EndProgressSession(int sessionId)
 	}
 
 	m_progressMap.erase(iter);
+
+	if (m_progressMap.isEmpty()){
+		m_progressSum = 0;
+	}
 }
 
 
