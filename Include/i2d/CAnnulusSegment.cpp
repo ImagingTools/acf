@@ -78,7 +78,7 @@ bool CAnnulusSegment::Contains(const i2d::CVector2d& point) const
 		return true;
 	}
 
-	if ( qAbs(phi) > I_2PI)
+	if (qAbs(phi) > I_2PI)
 		phi = fmod(phi, I_2PI);
 
 	if (phi < 0)
@@ -104,6 +104,38 @@ bool CAnnulusSegment::Contains(const i2d::CVector2d& point) const
 CRectangle CAnnulusSegment::GetBoundingBox() const
 {
 	return BaseClass::GetBoundingBox();	// TODO: implement more exact bounding box of annulus segment
+}
+
+
+bool CAnnulusSegment::Transform(const ITransformation2d& transformation,
+						 ITransformation2d::ExactnessMode mode,
+						 double* errorFactorPtr)
+{
+	// check for angle translation
+	i2d::CLine2d tempVector(0,0, 1,0);
+	if (tempVector.Transform(transformation, mode, errorFactorPtr)){
+		double angle = tempVector.GetDirectionAngle();
+		SetBeginAngle(GetBeginAngle() + angle);
+		SetEndAngle(GetEndAngle() + angle);
+	}
+
+	return BaseClass::Transform(transformation, mode, errorFactorPtr);
+}
+
+
+bool CAnnulusSegment::InvTransform(const ITransformation2d& transformation,
+								ITransformation2d::ExactnessMode mode,
+								double* errorFactorPtr)
+{
+	// check for angle translation
+	i2d::CLine2d tempVector(0,0, 1,0);
+	if (tempVector.InvTransform(transformation, mode, errorFactorPtr)){
+		double angle = tempVector.GetDirectionAngle();
+		SetBeginAngle(GetBeginAngle() + angle);
+		SetEndAngle(GetEndAngle() + angle);
+	}
+
+	return BaseClass::InvTransform(transformation, mode, errorFactorPtr);
 }
 
 

@@ -38,6 +38,14 @@ public:
 
 	// reimplemented (i2d::IObject2d)
 	virtual CRectangle GetBoundingBox() const;
+	virtual bool Transform(
+		const ITransformation2d& transformation,
+		ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+		double* errorFactorPtr = NULL);
+	virtual bool InvTransform(
+		const ITransformation2d& transformation,
+		ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+		double* errorFactorPtr = NULL);
 
 	// reimplemented (istd::IChangeable)
 	virtual int GetSupportedOperations() const;

@@ -33,6 +33,9 @@ protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
+	// reimplemented (istd::IChangeable)
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+
 private:
 	I_ATTR(double, m_centerXAttrPtr);
 	I_ATTR(double, m_centerYAttrPtr);
