@@ -1,10 +1,7 @@
 # Root of ACF project
 
-include (../../Config/QMake/GeneralConfig.pri)
 
-TEMPLATE = subdirs
-CONFIG += ordered
-
+include (../../Config/QMake/Solution.pri)
 
 #Static
 
