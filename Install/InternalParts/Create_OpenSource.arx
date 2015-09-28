@@ -7,10 +7,21 @@
           0
         </Id>
         <Number>
-          3887
+          3907
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1412
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
       <Version>
@@ -22,17 +33,6 @@
         </Number>
         <Description>
           Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          1400
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -192,7 +192,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -270,6 +270,73 @@
                 </Value>
                 <Value>
                   generated
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionTagExpr
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                \$\((.+)\)
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  ACFDIR
+                </Value>
+                <Value>
+                  ACFCONFIGDIR
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  $RelativeToInputFileOS:$(ACFDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFileOS:$(ACFDIR)/Config
                 </Value>
               </Values>
             </Data>
