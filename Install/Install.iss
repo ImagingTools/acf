@@ -42,17 +42,17 @@ Source: ..\Temp\Docs\*; DestDir: {app}\Docs; Flags: recursesubdirs; Components: 
 Source: ..\Temp\Include\*; DestDir: {app}\Include; Flags: recursesubdirs; Components: sourceComp
 Source: ..\Temp\Impl\*; DestDir: {app}\Impl; Flags: recursesubdirs; Components: sourceComp
 
-Source: {#QTDIR}\bin\icu*.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\icu*.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\icu*.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Core.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Cored.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Core.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Gui.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Guid.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Gui.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Widgets.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Widgetsd.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Widgets.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Xml.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Xmld.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Xml.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Svg.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Svgd.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Svg.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\plugins\imageformats\qsvgd.*; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: qtBinaryComp
 Source: {#QTDIR}\plugins\imageformats\qsvg.dll; DestDir: {app}\Bin\Release$CompilerName$\imageformats; Components: qtBinaryComp
