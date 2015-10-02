@@ -1,3 +1,3 @@
 echo Creating installation scripts...
 
-"%~dp0\..\..\Bin\Debug%COMPILER_EXT%\Acf.exe" Install/InternalParts/CreateScripts.arx -config %ACF_CONFIG_FILE% -input Install -output Install/TempExcl
+"%~dp0\..\..\Bin\Release%COMPILER_EXT%\Acf.exe" Install/InternalParts/CreateScripts.arx -config %ACF_CONFIG_FILE% -input Install -output Install/TempExcl
