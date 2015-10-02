@@ -76,24 +76,35 @@ function ProcessFolder(shell, fileSystem, folder, vcDirName, replaceDirs) {
                     }
 
                     var inputFile = fileSystem.OpenTextFile(file, 1);
+                    var outputFile = fileSystem.OpenTextFile(outputPath, 2, true);
+					
+                    while (!inputFile.AtEndOfStream) {
+                        var text = inputFile.ReadLine();
+                        var re1 = /IntermediateDirectory=\"release\\\"/g;
+                        text = text.replace(re1, "InheritedPropertySheets=\"..\\..\\..\\Config\\" + vcDirName + "\\General.vsprops;..\\..\\..\\Config\\" + vcDirName + "\\Release.vsprops\"");
 
-                    var text = inputFile.readAll();
-                    inputFile.close();
-                    var re1 = /IntermediateDirectory=\"release\\\"/g;
-                    text = text.replace(re1, "InheritedPropertySheets=\"..\\..\\..\\Config\\" + vcDirName + "\\General.vsprops;..\\..\\..\\Config\\" + vcDirName + "\\Release.vsprops\"");
+                        var re2 = /IntermediateDirectory=\"debug\\\"/g;
+                        text = text.replace(re2, "InheritedPropertySheets=\"..\\..\\..\\Config\\" + vcDirName + "\\General.vsprops;..\\..\\..\\Config\\" + vcDirName + "\\Debug.vsprops\"");
 
-                    var re2 = /IntermediateDirectory=\"debug\\\"/g;
-                    text = text.replace(re2, "InheritedPropertySheets=\"..\\..\\..\\Config\\" + vcDirName + "\\General.vsprops;..\\..\\..\\Config\\" + vcDirName + "\\Debug.vsprops\"");
-
-                    for (var replFolderIter = new Enumerator(replaceDirs); !replFolderIter.atEnd() ; replFolderIter.moveNext()) {
-                        var repl = replFolderIter.item();
-                        if (repl.key != "") {
-                            text = text.split(repl.key).join(repl.value);
+                        for (var replFolderIter = new Enumerator(replaceDirs) ; !replFolderIter.atEnd() ; replFolderIter.moveNext()) {
+                            var repl = replFolderIter.item();
+                            if (repl.key != "") {
+                                text = text.split(repl.key).join(repl.value);
+                            }
                         }
+
+						if (text == "</Project>"){
+                          outputFile.WriteLine("  <ProjectExtensions>");
+                          outputFile.WriteLine("    <VisualStudio>");
+						  outputFile.WriteLine("      <UserProperties Qt5Version_x0020_Win32=\"$(DefaultQtVersion)\" />");
+                          outputFile.WriteLine("    </VisualStudio>");
+                          outputFile.WriteLine("  </ProjectExtensions>");
+                        }
+
+                        outputFile.WriteLine(text);
                     }
 
-                    var outputFile = fileSystem.OpenTextFile(outputPath, 2, true);
-                    outputFile.write(text);
+                    inputFile.close();
 
                     fileSystem.DeleteFile(file);
                 }
