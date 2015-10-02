@@ -4,24 +4,24 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1
         </Id>
         <Number>
-          3907
+          1415
         </Number>
         <Description>
-          ACF
+          ACF-Solutions
         </Description>
       </Version>
       <Version>
         <Id>
-          1
+          0
         </Id>
         <Number>
-          1412
+          3909
         </Number>
         <Description>
-          ACF-Solutions
+          ACF
         </Description>
       </Version>
       <Version>
@@ -192,7 +192,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -333,10 +333,10 @@
               </IsEnabled>
               <Values count="2">
                 <Value>
-                  $RelativeToInputFileOS:$(ACFDIR)
+                  $RelativeToInputFile:$(ACFDIR)
                 </Value>
                 <Value>
-                  $RelativeToInputFileOS:$(ACFDIR)/Config
+                  $RelativeToInputFile:$(ACFDIR)/Config
                 </Value>
               </Values>
             </Data>
@@ -361,6 +361,54 @@
                 </Value>
                 <Value>
                   generated
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  ACFDIR
+                </Value>
+                <Value>
+                  ACFCONFIGDIR
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  $RelativeToInputFileWin:$(ACFDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFileWin:$(ACFDIR)/Config
                 </Value>
               </Values>
             </Data>

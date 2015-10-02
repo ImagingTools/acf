@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328706
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1402
+          1415
         </Number>
         <Description>
           ACF-Solutions
@@ -29,10 +18,21 @@
           0
         </Id>
         <Number>
-          3889
+          3909
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328706
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -192,7 +192,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -291,6 +291,54 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  ACFDIR
+                </Value>
+                <Value>
+                  ACFCONFIGDIR
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  $RelativeToInputFile:$(ACFDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFile:$(ACFDIR)/Config
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               SourceExcludeFilters
             </Id>
             <Type>
@@ -324,6 +372,54 @@
                 </Value>
                 <Value>
                   VC12
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  ACFDIR
+                </Value>
+                <Value>
+                  ACFCONFIGDIR
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  $RelativeToInputFileWin:$(ACFDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFileWin:$(ACFDIR)/Config
                 </Value>
               </Values>
             </Data>

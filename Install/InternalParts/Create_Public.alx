@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328706
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1412
+          1415
         </Number>
         <Description>
           ACF-Solutions
@@ -29,29 +18,26 @@
           0
         </Id>
         <Number>
-          3907
+          3909
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328706
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="2">
-    <Element>
-      <ComponentName>
-        Application
-      </ComponentName>
-      <X>
-        375
-      </X>
-      <Y>
-        325
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         CopyPublic
@@ -61,6 +47,20 @@
       </X>
       <Y>
         500
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Application
+      </ComponentName>
+      <X>
+        375
+      </X>
+      <Y>
+        325
       </Y>
       <Note>
         
