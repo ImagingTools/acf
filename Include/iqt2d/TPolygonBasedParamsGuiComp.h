@@ -110,11 +110,13 @@ protected:
 	using BaseClass::GetObservedObject;
 	using BaseClass::GetObservedModel;
 	using BaseClass::DoUpdateModel;
+	using BaseClass::CreateToolsMenu;
 	using BaseClass::NodeParamsTable;
 	using BaseClass::tr;
 	using BaseClass::GetQtWidget;
 	using BaseClass::RemoveButton;
 	using BaseClass::InsertButton;
+    using BaseClass::ToolsButton;
 
 	/**
 		Internal item delegate class for input validation
