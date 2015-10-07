@@ -30,4 +30,6 @@ void CIntParamAction::Init(int minValue, int maxValue, int value)
 }
 
 
-}
+} // namespace iqt2d
+
+

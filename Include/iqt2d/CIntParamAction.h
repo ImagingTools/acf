@@ -1,11 +1,18 @@
-#ifndef iqt2d_CIntParamAction_h
-#define iqt2d_CIntParamAction_h
+#ifndef iqt2d_CIntParamAction_included
+#define iqt2d_CIntParamAction_included
 
 
 // Qt includes
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
 #include <QtWidgets/QAction>
 #include <QtWidgets/QWidgetAction>
 #include <QtWidgets/QSpinBox>
+#else
+#include <QtGui/QAction>
+#include <QtGui/QWidgetAction>
+#include <QtGui/QSpinBox>
+#endif
 
 
 namespace iqt2d
@@ -51,7 +58,9 @@ protected:
 };
 
 
-}
+} // namespace iqt2d
 
 
-#endif //!iqt2d_CIntParamAction_h
+#endif //!iqt2d_CIntParamAction_included
+
+
