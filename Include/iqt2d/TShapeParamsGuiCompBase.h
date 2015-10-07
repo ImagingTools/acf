@@ -390,7 +390,7 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	if (IsGuiShown()){
+	if (BaseClass::IsGuiShown()){
 		OnModelAttachedAndGuiShown(BaseClass::GetObservedModel());
 	}
 }
