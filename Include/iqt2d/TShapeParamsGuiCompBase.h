@@ -270,12 +270,12 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateToolsMenu(QAbstractBu
 
 		QPushButton* pushButtonPtr = dynamic_cast<QPushButton*>(buttonPtr);
 		if (pushButtonPtr != NULL){
-			pushButtonPtr->setMenu(m_menuPtr = new QMenu(buttonPtr));
+			pushButtonPtr->setMenu(m_menuPtr);
 		}
 		else{
 			QToolButton* toolButtonPtr = dynamic_cast<QToolButton*>(buttonPtr);
 			if (toolButtonPtr != NULL){
-				toolButtonPtr->setMenu(m_menuPtr = new QMenu(buttonPtr));
+				toolButtonPtr->setMenu(m_menuPtr);
 			}
 		}
 	}
