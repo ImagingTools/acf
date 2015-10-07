@@ -140,6 +140,9 @@
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>40</width>
@@ -149,7 +152,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QToolButton" name="ToolsButton">
+        <widget class="QPushButton" name="ToolsButton">
          <property name="text">
           <string>Tools</string>
          </property>

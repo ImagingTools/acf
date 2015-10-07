@@ -25,30 +25,11 @@ public:
 	CIntParamAction(const QIcon& icon, const QString& text, int minValue, int maxValue, int value, QObject* parentPtr = NULL);
 	CIntParamAction(const QString& text, int minValue, int maxValue, int value, QObject* parentPtr = NULL);
 
-	int GetValue() const
-	{
-		Q_ASSERT(m_spinEditor);
+	int GetValue() const;
+	void SetValue(int x);
 
-		if (m_spinEditor){
-			return m_spinEditor->value();
-		}
-
-		return 0;
-	}
-
-	QSpinBox* GetEditor() const
-	{
-		Q_ASSERT(m_spinEditor);
-
-		return m_spinEditor;
-	}
-
-	QWidgetAction* GetWidgetAction() const
-	{
-		Q_ASSERT(m_widgetActionPtr);
-
-		return m_widgetActionPtr;
-	}
+	QSpinBox* GetEditor() const;
+	QWidgetAction* GetWidgetAction() const;
 
 protected:
 	void Init(int minValue, int maxValue, int value);
@@ -56,6 +37,44 @@ protected:
 	QWidgetAction* m_widgetActionPtr;
 	QSpinBox* m_spinEditor;
 };
+
+
+inline int CIntParamAction::GetValue() const
+{
+	Q_ASSERT(m_spinEditor);
+
+	if (m_spinEditor){
+		return m_spinEditor->value();
+	}
+
+	return 0;
+}
+
+
+inline void CIntParamAction::SetValue(int x)
+{
+	Q_ASSERT(m_spinEditor);
+
+	if (m_spinEditor){
+		m_spinEditor->setValue(x);
+	}
+}
+
+
+inline QSpinBox* CIntParamAction::GetEditor() const
+{
+	Q_ASSERT(m_spinEditor);
+
+	return m_spinEditor;
+}
+
+
+inline QWidgetAction* CIntParamAction::GetWidgetAction() const
+{
+	Q_ASSERT(m_widgetActionPtr);
+
+	return m_widgetActionPtr;
+}
 
 
 } // namespace iqt2d

@@ -5,6 +5,7 @@
 #include "istd/CChangeNotifier.h"
 #include "i2d/CAffine2d.h"
 #include "i2d/CRectangle.h"
+#include "i2d/CPolyline.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 #include "istd/TDelPtr.h"
@@ -13,6 +14,8 @@
 namespace i2d
 {
 
+
+// public methods
 
 CCircle::CCircle()
 :	m_radius(0)
@@ -64,6 +67,44 @@ bool CCircle::IsIntersectedBy(const CCircle& circle, bool isFilled) const
 	}
 
 	return distance2 < (radiusSum * radiusSum);
+}
+
+
+bool CCircle::ConvertToPolygon(i2d::CPolygon& result, int segmentsCount) const
+{
+	const double endAngle = 2 * I_PI;
+
+	i2d::CVector2d center = GetPosition();
+	double radius = GetRadius();
+
+	const i2d::ICalibration2d* aoiCalibrationPtr = GetCalibration();
+	result.SetCalibration(aoiCalibrationPtr);
+
+	// at least 3 segments
+	int stepsCount = segmentsCount < 3 ? int(radius * I_PI + 1) : segmentsCount;
+	if (stepsCount < 3)
+		return false;
+
+	result.SetNodesCountQuiet(stepsCount);
+
+	i2d::CVector2d directionVector;
+
+	for (int i = 0; i < stepsCount; ++i){
+		double alpha = (i + 0.5) / stepsCount;
+		double angle = alpha * endAngle;
+
+		directionVector.Init(angle);
+
+		result.SetNode(i, center + directionVector * radius);
+	}
+
+	// close if polyline
+	i2d::CPolyline* polylinePtr = dynamic_cast<i2d::CPolyline*>(&result);
+	if (polylinePtr){
+		polylinePtr->SetClosed(true);
+	}
+
+	return true;
 }
 
 

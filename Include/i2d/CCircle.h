@@ -11,6 +11,7 @@ namespace i2d
 
 
 class CRectangle;
+class CPolygon;
 
 
 /**
@@ -30,6 +31,12 @@ public:
 
 	bool operator==(const CCircle& circle) const;
 	bool operator!=(const CCircle& circle) const;
+
+	/**
+		Performs conversion of the \a circle splitting it to \a segmentsCount segments to the polygon \a result.
+		If segmentsCount <= 0 then number of segments will be calculated automatically, otherwise segmentsCount must be equal or greater then 3.
+	*/
+	bool ConvertToPolygon(i2d::CPolygon& result, int segmentsCount = 0) const;
 
 	/**
 		Check if this circle is intersected by another circle (or disk).
