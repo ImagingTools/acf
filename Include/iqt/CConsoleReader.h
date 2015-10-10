@@ -12,12 +12,12 @@ namespace iqt
 /**
 	User-input reader for command line console.
 */
-class CConsoleReader: protected QThread
+class CConsoleReader: public QObject
 {
 	Q_OBJECT
 
 public:
-	typedef QThread BaseClass;
+	typedef QObject BaseClass;
 
 	CConsoleReader(QObject* parentPtr = NULL);
 
@@ -43,11 +43,24 @@ signals:
 	void KeyPressedSignal(char character);
 
 protected:
-	// reimplemented (QThread)
-	virtual void run();
+	class InputObserver: public QThread
+	{
+	public:
+		InputObserver(CConsoleReader& parent);
+
+		void Stop();
+
+	protected:
+		// reimplemented (QThread)
+		virtual void run();
+
+	private:
+		bool m_shouldBeFinished;
+		CConsoleReader& m_parent;
+	};
 
 private:
-	bool m_shouldBeFinished;
+	InputObserver m_inputObserver;
 };
 
 

@@ -12,18 +12,39 @@ namespace iqt
 // public methods
 
 CConsoleReader::CConsoleReader(QObject* parentPtr)
-	:BaseClass(parentPtr)
+	:BaseClass(parentPtr),
+	m_inputObserver(*this)
 {
 }
 
 
 void CConsoleReader::Start()
 {
-	BaseClass::start();
+	m_inputObserver.start();
 }
 
 
 void CConsoleReader::Stop()
+{
+	m_inputObserver.Stop();
+}
+
+
+bool CConsoleReader::IsRunning() const
+{
+	return m_inputObserver.isRunning();
+}
+
+
+// public methods of the embedded class InputObserver
+
+CConsoleReader::InputObserver::InputObserver(CConsoleReader& parent)
+	:m_parent(parent)
+{
+}
+
+
+void CConsoleReader::InputObserver::Stop()
 {
 	m_shouldBeFinished = true;
 
@@ -31,21 +52,17 @@ void CConsoleReader::Stop()
 }
 
 
-bool CConsoleReader::IsRunning() const
-{
-	return BaseClass::isRunning();
-}
+// protected methods of the embedded class InputObserver
 
+// reimplemented (QThread)
 
-// protected methods
-
-void CConsoleReader::run()
+void CConsoleReader::InputObserver::run()
 {
 	while (!m_shouldBeFinished)
 	{
 		char key = getchar();
 
-		emit KeyPressedSignal(key);
+		emit m_parent.KeyPressedSignal(key);
 	}
 }
 
