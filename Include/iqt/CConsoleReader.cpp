@@ -3,7 +3,7 @@
 
 // STD includes
 #include <stdio.h>
-
+#include <conio.h>
 
 namespace iqt
 {
@@ -59,11 +59,10 @@ void CConsoleReader::InputObserver::Stop()
 
 void CConsoleReader::InputObserver::run()
 {
-	while (!m_shouldBeFinished)
-	{
-		char key = getchar();
-
-		emit m_parent.KeyPressedSignal(key);
+	while (!m_shouldBeFinished){
+		if (kbhit() != 0){
+			emit m_parent.KeyPressedSignal(getch());
+		}
 	}
 }
 
