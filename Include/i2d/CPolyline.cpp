@@ -107,6 +107,27 @@ i2d::CVector2d CPolyline::GetKneeVector(int nodeIndex) const
 }
 
 
+// reimplemented (iser::ISerializable)
+
+bool CPolyline::Serialize(iser::IArchive& archive)
+{
+	static iser::CArchiveTag closedTag("Closed", "Closed", iser::CArchiveTag::TT_LEAF);
+
+	if (BaseClass::Serialize(archive)){
+		quint32 version = 0;
+		if (!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version) || (version > 3930)){
+			archive.BeginTag(closedTag);
+			archive.Process(m_isClosed);
+			archive.EndTag(closedTag);
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+
 // reimplemented (istd::IChangeable)
 
 bool CPolyline::CopyFrom(const IChangeable& object, CompatibilityMode mode)
