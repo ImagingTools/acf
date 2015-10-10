@@ -328,6 +328,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CConsoleReader.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CIniSettingsProviderComp.cpp"
 				>
 			</File>
@@ -391,6 +395,10 @@
 			</File>
 			<File
 				RelativePath="..\CCompactXmlFileWriteArchive.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CConsoleReader.h"
 				>
 			</File>
 			<File
