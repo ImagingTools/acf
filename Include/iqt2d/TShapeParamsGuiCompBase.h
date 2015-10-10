@@ -23,6 +23,7 @@
 #include "iview/IShapeFactory.h"
 #include "iqt2d/TViewExtenderCompBase.h"
 #include "iqt2d/CIntParamAction.h"
+#include "iqt2d/CActionAdapter.h"
 
 
 namespace iqt2d
@@ -70,8 +71,7 @@ protected:
 	*/
 	virtual void CreateActions() {}
 	virtual void CreateToolsMenu(QAbstractButton* buttonPtr);
-	virtual bool PopulateActions(QWidget& host, imod::IModel* modelPtr);
-	void ProcessActions(QWidget& host);
+	virtual bool PopulateActions(CActionAdapter& host, imod::IModel* modelPtr);
 	virtual void OnModelAttachedAndGuiShown(imod::IModel* modelPtr);
 	virtual void OnModelDetachedOrGuiHidden(imod::IModel* modelPtr);
 
@@ -287,25 +287,9 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateToolsMenu(QAbstractBu
 
 
 template <class Ui, class Shape, class ShapeModel>
-bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::PopulateActions(QWidget& /*host*/, imod::IModel* /*modelPtr*/)
+bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::PopulateActions(CActionAdapter& /*host*/, imod::IModel* /*modelPtr*/)
 {
 	return true;
-}
-
-
-template <class Ui, class Shape, class ShapeModel>
-void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::ProcessActions(QWidget& host)
-{
-	QList<QAction*> menuActions = host.actions();
-	for (int i = menuActions.count()-1; i >= 0; i--){
-		QAction* actionPtr = menuActions.at(i);
-		CIntParamAction* intActionPtr = dynamic_cast<CIntParamAction*>(actionPtr);
-		if (intActionPtr){
-			host.insertAction(
-				i < menuActions.count()-1 ? menuActions.at(i+1) : NULL, 
-				intActionPtr->GetWidgetAction());
-		}
-	}
 }
 
 
@@ -313,11 +297,10 @@ template <class Ui, class Shape, class ShapeModel>
 void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnModelAttachedAndGuiShown(imod::IModel* modelPtr)
 {
 	if (m_menuPtr){
+		CActionAdapter menuAdapter(*m_menuPtr);
 		m_menuPtr->clear();
 
-		if (PopulateActions(*m_menuPtr, modelPtr)){
-			ProcessActions(*m_menuPtr);
-			
+		if (PopulateActions(menuAdapter, modelPtr)){
 			m_menuButtonPtr->setEnabled(true);
 		}
 		else
@@ -326,11 +309,10 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnModelAttachedAndGuiShown(
 
 	QToolBar* toolBarPtr = GetToolBar();
 	if (toolBarPtr){
+		CActionAdapter toolBarAdapter(*toolBarPtr);
 		toolBarPtr->clear();
 
-		if (PopulateActions(*toolBarPtr, modelPtr)){
-			//ProcessActions(*toolBarPtr);
-
+		if (PopulateActions(toolBarAdapter, modelPtr)){
 			toolBarPtr->setVisible(true);
 
 			QObject::connect(toolBarPtr, SIGNAL(triggered(QAction*)), this, SLOT(OnActionTriggered(QAction*)));

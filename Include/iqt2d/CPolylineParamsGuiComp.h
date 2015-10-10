@@ -23,12 +23,18 @@ public:
 		I_ASSIGN(m_showOrientationAttrPtr, "ShowOrientation", "Show orientation on display console", true, false);
 	I_END_COMPONENT;
 
+	CPolylineParamsGuiComp();
+
 	// reimplemented (iview::IShapeFactory)
 	virtual iview::IShape* CreateShape(const istd::IChangeable* objectPtr, bool connectToModel = false) const;
 
+	// reimplemented (imod::IModelEditor)
+	virtual void UpdateModel() const;
+
 protected:
-	virtual bool GetObjectFromEditor(i2d::CPolyline& object) const;
-	
+	// reimplemented (TPolygonBasedParamsGuiComp)
+	virtual bool PopulateActions(CActionAdapter& host, imod::IModel* modelPtr);
+
 protected Q_SLOTS:
 	void OnParamsChanged();
 
@@ -36,24 +42,14 @@ protected Q_SLOTS:
 	void on_RemoveButton_clicked();
 	void on_CopyButton_clicked();
 	void on_PasteButton_clicked();
-	void on_NodeParamsTable_itemSelectionChanged();
-	void on_CloseLineCheckBox_stateChanged(int state);
 
-	// reimplemented from TPolygonBasedParamsGuiComp<iview::CPolylineShape, i2d::CPolyline>
-	void OnGuiModelAttached();
-	void OnGuiModelDetached();
-	void OnGuiCreated();
+	// reimplemented (TPolygonBasedParamsGuiComp)
 	void OnActionTriggered(QAction* actionPtr);
 
 private:
-	/**
-		Change state of a line close check box: disabled and hidden, according 
-		to the attached model type (only visible for CPolyline) and list selection 
-		(uncheckable if a list element is selected, always checkable).
-	 */
-	void UpdateClosedLineCheckBox(bool forceEnabled, bool forceHidden);
-
 	I_ATTR(bool, m_showOrientationAttrPtr);
+
+	QAction m_openCloseAction;
 };
 
 

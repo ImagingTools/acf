@@ -31,7 +31,7 @@ public:
 
 protected:
 	// reimplemented (iqt2d::TCircleBasedParamsGuiComp)
-	virtual bool PopulateActions(QWidget& host, imod::IModel* modelPtr);
+	virtual bool PopulateActions(CActionAdapter& host, imod::IModel* modelPtr);
 
 protected Q_SLOTS:
 	void OnParamsChanged(double value);

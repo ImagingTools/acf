@@ -157,22 +157,6 @@
       </spacer>
      </item>
      <item>
-      <widget class="QCheckBox" name="CloseLineCheckBox">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Closes the line by connecting its last and first point with a line segment.&lt;/p&gt;&lt;p&gt;Uncloses the line at the selected coordinates in the table (or, if nothing selected, at the latest closing coordinates).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>Closed</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="ToolsButton">
        <property name="text">
         <string>Tools</string>
