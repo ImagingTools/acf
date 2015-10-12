@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-extern "C" int kbhit()
+extern "C" int _kbhit()
 {
 	struct termios oldt, newt;
 	int ch;
@@ -95,7 +95,7 @@ void CConsoleReader::InputObserver::Stop()
 void CConsoleReader::InputObserver::run()
 {
 	while (!m_shouldBeFinished){
-		int hit = kbhit();
+		int hit = _kbhit();
 		if (hit != 0){
 #ifdef Q_OS_WIN
 			emit m_parent.KeyPressedSignal(_getch());
