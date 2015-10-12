@@ -538,10 +538,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TActionAdapter.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TCircleBasedParamsGuiComp.h"
 				>
 			</File>
