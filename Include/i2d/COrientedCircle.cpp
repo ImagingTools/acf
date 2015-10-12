@@ -58,13 +58,24 @@ int COrientedCircle::GetSupportedOperations() const
 bool COrientedCircle::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const COrientedCircle* orientedCirclePtr = dynamic_cast<const COrientedCircle*>(&object);
-
 	if (orientedCirclePtr != NULL){
 		istd::CChangeNotifier notifier(this);
 		
 		SetPosition(orientedCirclePtr->GetPosition());
 		SetRadius(orientedCirclePtr->GetRadius());
 		SetOrientedOutside(orientedCirclePtr->IsOrientedOutside());
+
+		CObject2dBase::CopyFrom(object, mode);
+
+		return true;
+	}
+
+	const CCircle* circlePtr = dynamic_cast<const CCircle*>(&object);
+	if (circlePtr != NULL){
+		istd::CChangeNotifier notifier(this);
+		
+		SetPosition(circlePtr->GetPosition());
+		SetRadius(circlePtr->GetRadius());
 
 		CObject2dBase::CopyFrom(object, mode);
 
