@@ -17,6 +17,14 @@ namespace idoc
 {
 
 
+const istd::IChangeable::ChangeSet s_newDocumentChangeSet(IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_DOCUMENT_CREATED);
+const istd::IChangeable::ChangeSet s_openDocumentChangeSet(IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_DOCUMENT_CREATED);
+const istd::IChangeable::ChangeSet s_closeDocumentChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED);
+const istd::IChangeable::ChangeSet s_closeViewChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
+const istd::IChangeable::ChangeSet s_closeAllChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
+const istd::IChangeable::ChangeSet s_activateViewChangeSet(IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
+
+
 CMultiDocumentManagerBase::CMultiDocumentManagerBase()
 	:m_activeViewPtr(NULL)
 {
@@ -443,12 +451,7 @@ bool CMultiDocumentManagerBase::CloseDocument(int documentIndex, bool beQuiet, b
 		viewIter = infoPtr->views.erase(viewIter);
 	}
 
-	ChangeSet changeSet(CF_DOCUMENT_REMOVED, CF_DOCUMENT_COUNT_CHANGED);
-	if (m_documentInfos.GetCount() == 1){
-		// If last document was closed, force view activation update:
-		changeSet += CF_VIEW_ACTIVATION_CHANGED;
-	}
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, (m_documentInfos.GetCount() == 1)? &s_closeViewChangeSet: &s_closeDocumentChangeSet);
 	Q_UNUSED(notifier);
 
 	SingleDocumentData* removedObjectPtr = m_documentInfos.PopAt(documentIndex);
@@ -509,8 +512,7 @@ bool CMultiDocumentManagerBase::CloseView(istd::IPolymorphic* viewPtr, bool beQu
 void CMultiDocumentManagerBase::SetActiveView(istd::IPolymorphic* viewPtr)
 {
 	if (m_activeViewPtr != viewPtr){
-		ChangeSet changeSet(CF_VIEW_ACTIVATION_CHANGED);
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_activateViewChangeSet);
 		Q_UNUSED(notifier);
 
 		m_activeViewPtr = viewPtr;
@@ -585,8 +587,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenSingleDocument(
 			infoPtr->filePath = filePath;
 			infoPtr->documentTypeId = documentTypeId;
 
-			ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
-			istd::CChangeNotifier notifier(this, &changeSet);
+			istd::CChangeNotifier notifier(this, &s_openDocumentChangeSet);
 			Q_UNUSED(notifier);
 
 			ifile::IFilePersistence* loaderPtr = documentTemplatePtr->GetFileLoader(documentTypeId);
@@ -608,8 +609,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenSingleDocument(
 void CMultiDocumentManagerBase::CloseAllDocuments()
 {
 	if (!m_documentInfos.IsEmpty()){
-		ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_REMOVED);
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_closeAllChangeSet);
 		Q_UNUSED(notifier);
 
 		m_documentInfos.Reset();
@@ -747,8 +747,7 @@ bool CMultiDocumentManagerBase::RegisterDocument(SingleDocumentData* infoPtr)
 {
 	Q_ASSERT(infoPtr != NULL);
 
-	ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_newDocumentChangeSet);
 	Q_UNUSED(notifier);
 
 	m_documentInfos.PushBack(infoPtr);

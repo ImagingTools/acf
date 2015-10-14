@@ -12,6 +12,10 @@ namespace iprm
 {
 
 
+const istd::IChangeable::ChangeSet s_resizeChangeSet(IOptionsList::CF_OPTIONS_CHANGED);
+const istd::IChangeable::ChangeSet s_enableOptionChangeSet(IParamsManager::CF_SET_ENABLE_CHANGED);
+
+
 bool CParamsManagerComp::SetSetsCount(int count)
 {
 	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
@@ -25,8 +29,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 			return false;
 		}
 
-		ChangeSet changeSet(CF_OPTIONS_CHANGED);
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_resizeChangeSet);
 		Q_UNUSED(notifier);
 
 		while (m_paramSets.size() < (count - fixedSetsCount)){
@@ -47,10 +50,6 @@ bool CParamsManagerComp::SetSetsCount(int count)
 				if (newParamsSetPtr == NULL){
 					return false;
 				}
-
-				ChangeSet changeSet(CF_OPTIONS_CHANGED);
-				istd::CChangeNotifier notifier(this, &changeSet);
-				Q_UNUSED(notifier);
 
 				ParamSetPtr paramsSetPtr(new imod::TModelWrap<ParamSet>());
 
@@ -228,8 +227,7 @@ bool CParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
 	}
 
 	if (m_paramSets[index - fixedSetsCount]->isEnabled != isEnabled){
-		ChangeSet changeSet(CF_SET_ENABLE_CHANGED);
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_enableOptionChangeSet);
 		Q_UNUSED(notifier);
 
 		m_paramSets[index - fixedSetsCount]->isEnabled = isEnabled;

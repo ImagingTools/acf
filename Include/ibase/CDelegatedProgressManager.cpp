@@ -9,6 +9,11 @@ namespace ibase
 {
 
 
+const istd::IChangeable::ChangeSet s_startSessionChangeSet(CDelegatedProgressManager::CF_SESSIONS_NUMBER, CDelegatedProgressManager::CF_PROGRESS_CHANGED);
+const istd::IChangeable::ChangeSet s_endSessionChangeSet(CDelegatedProgressManager::CF_SESSIONS_NUMBER, CDelegatedProgressManager::CF_PROGRESS_CHANGED);
+const istd::IChangeable::ChangeSet s_progressChangeSet(CDelegatedProgressManager::CF_PROGRESS_CHANGED);
+
+
 CDelegatedProgressManager::CDelegatedProgressManager()
 :	m_nextSessionId(0),
 	m_progressSum(0.0),
@@ -64,8 +69,7 @@ int CDelegatedProgressManager::BeginProgressSession(
 			const QString& /*description*/,
 			bool isCancelable)
 {
-	ChangeSet changeSet(CF_SESSIONS_NUMBER, CF_PROGRESS_CHANGED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_startSessionChangeSet);
 	Q_UNUSED(notifier);
 
 	int id = m_nextSessionId++;
@@ -88,8 +92,7 @@ int CDelegatedProgressManager::BeginProgressSession(
 
 void CDelegatedProgressManager::EndProgressSession(int sessionId)
 {
-	ChangeSet changeSet(CF_SESSIONS_NUMBER, CF_PROGRESS_CHANGED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_endSessionChangeSet);
 	Q_UNUSED(notifier);
 
 	ProgressMap::iterator iter = m_progressMap.find(sessionId);
@@ -118,8 +121,7 @@ void CDelegatedProgressManager::OnProgress(int sessionId, double currentProgress
 {
 	Q_ASSERT(m_progressMap.contains(sessionId));
 
-	ChangeSet changeSet(CF_PROGRESS_CHANGED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_progressChangeSet);
 	Q_UNUSED(notifier);
 
 	ProgressInfo& value = m_progressMap[sessionId];

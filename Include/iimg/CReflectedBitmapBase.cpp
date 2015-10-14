@@ -9,6 +9,9 @@ namespace iimg
 {
 
 
+const istd::IChangeable::ChangeSet s_blockConvChangeSet(CReflectedBitmapBase::CF_BLOCK_BITMAP_CONVERSION);
+
+
 // reimplemented (iimg::IQImageProvider)
 
 const QImage& CReflectedBitmapBase::GetQImage() const
@@ -21,8 +24,7 @@ const QImage& CReflectedBitmapBase::GetQImage() const
 
 bool CReflectedBitmapBase::CopyImageFrom(const QImage& image)
 {
-	ChangeSet changeSet(CF_BLOCK_BITMAP_CONVERSION);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_blockConvChangeSet);
 	Q_UNUSED(notifier);
 
 	if (ConvertFromQImage(image)){

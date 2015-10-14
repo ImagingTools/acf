@@ -9,6 +9,9 @@ namespace iqtgui
 {
 
 
+const istd::IChangeable::ChangeSet s_commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
+
+
 // public methods
 
 CCommandBasedSelectionControllerComp::CCommandBasedSelectionControllerComp()
@@ -91,8 +94,7 @@ void CCommandBasedSelectionControllerComp::BuildCommands()
 	iprm::ISelectionParam* selectionPtr = GetObservedObject();
 	Q_ASSERT(selectionPtr != NULL);
 
-	ChangeSet commandsChangeSet(CF_COMMANDS);
-	istd::CChangeNotifier commandsNotifier(this, &commandsChangeSet);
+	istd::CChangeNotifier commandsNotifier(this, &s_commandsChangeSet);
 	Q_UNUSED(commandsNotifier);
 
 	m_commandsList.ResetChilds();

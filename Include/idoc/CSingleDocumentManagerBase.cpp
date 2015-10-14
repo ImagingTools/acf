@@ -16,6 +16,11 @@ namespace idoc
 {
 
 
+const istd::IChangeable::ChangeSet s_newDocumentChangeSet(IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_DOCUMENT_CREATED);
+const istd::IChangeable::ChangeSet s_openDocumentChangeSet(IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_DOCUMENT_CREATED);
+const istd::IChangeable::ChangeSet s_closeViewChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
+
+
 CSingleDocumentManagerBase::CSingleDocumentManagerBase()
 : m_isDirty(false)
 {
@@ -142,8 +147,7 @@ bool CSingleDocumentManagerBase::InsertNewDocument(
 			bool beQuiet,
 			bool* ignoredPtr)
 {
-	ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_newDocumentChangeSet);
 	Q_UNUSED(notifier);
 
 	CloseDocument(-1, beQuiet, ignoredPtr);
@@ -330,8 +334,7 @@ bool CSingleDocumentManagerBase::CloseDocument(int /*documentIndex*/, bool beQui
 			return false;
 		}
 
-		ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_REMOVED, CF_VIEW_ACTIVATION_CHANGED);
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_closeViewChangeSet);
 		Q_UNUSED(notifier);
 
 		EnsureViewRemoved();
@@ -404,8 +407,7 @@ bool CSingleDocumentManagerBase::OpenSingleDocument(
 		return true;
 	}
 
-	ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_openDocumentChangeSet);
 	Q_UNUSED(notifier);
 
 	CloseDocument(-1, beQuiet, ignoredPtr);
@@ -420,10 +422,6 @@ bool CSingleDocumentManagerBase::OpenSingleDocument(
 
 	if (!documentIds.isEmpty()){
 		documentTypeId = documentIds.front();
-
-		ChangeSet changeSet(CF_DOCUMENT_COUNT_CHANGED, CF_DOCUMENT_CREATED);
-		istd::CChangeNotifier notifier(this, &changeSet);
-		Q_UNUSED(notifier);
 
 		if (NewDocument(documentTypeId, createView, viewTypeId, false, beQuiet, ignoredPtr)){
 			Q_ASSERT(m_documentPtr.IsValid());
