@@ -11,6 +11,9 @@ namespace iprm
 {
 
 
+const istd::IChangeable::ChangeSet s_enableChangeSet(IParamsManager::CF_SET_ENABLE_CHANGED, "Enable option");
+
+		
 // reimplemented (iprm::IParamsManager)
 
 const IOptionsList* CMultiParamsManagerComp::GetParamsTypeConstraints() const
@@ -169,8 +172,7 @@ bool CMultiParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
 	}
 
 	if (m_paramSets[index - fixedSetsCount]->isEnabled != isEnabled){
-		ChangeSet changeSet(CF_SET_ENABLE_CHANGED, "Enable");
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_enableChangeSet);
 		Q_UNUSED(notifier);
 
 		m_paramSets[index - fixedSetsCount]->isEnabled = isEnabled;

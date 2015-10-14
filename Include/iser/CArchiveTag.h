@@ -62,7 +62,7 @@ public:
 	CArchiveTag(const QByteArray& id,
 				const QByteArray& comment,
 				TagType tagType = TT_UNKNOWN,
-				CArchiveTag* parentPtr = NULL,
+				const CArchiveTag* parentPtr = NULL,
 				bool isTagSkippingUsed = false);
 
 	/**
@@ -89,7 +89,7 @@ public:
 	/**
 		Get tag beeing parent of this.
 	*/
-	CArchiveTag* GetParentTag() const;
+	const CArchiveTag* GetParentTag() const;
 
 	/**
 		Check if it is needed to support tag skipping for this tag.
@@ -103,7 +103,7 @@ private:
 	QByteArray m_comment;
 
 	TagType m_tagType;
-	CArchiveTag* m_parentPtr;
+	const CArchiveTag* m_parentPtr;
 
 	bool m_isTagSkippingUsed;
 };

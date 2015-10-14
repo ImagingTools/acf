@@ -151,7 +151,7 @@ protected:
 	virtual bool CalculateCache(const ChangeSet& changeSet);
 
 protected:
-	static const ChangeSet s_fulcrumPositionChange(CF_SORT_LAYERS, "Change fulcrum position");
+	static const ChangeSet s_fulcrumPositionChange;
 
 private:
 	Fulcrums m_fulcrums;
@@ -550,7 +550,7 @@ bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::CalculateCache(const 
 // protected static members
 
 template <class Argument, class Result, class Fulcrums>
-const istd::IChangeable::ChangeSet TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::s_fulcrumPositionChange(CF_SORT_LAYERS, "Change fulcrum position");
+const istd::IChangeable::ChangeSet TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::s_fulcrumPositionChange(CF_SORT_LAYERS, QObject("Change fulcrum position"));
 
 
 } // namespace imath

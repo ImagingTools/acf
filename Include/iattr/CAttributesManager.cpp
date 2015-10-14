@@ -14,10 +14,10 @@ namespace iattr
 {
 
 
-static const istd::IChangeable::ChangeSet s_removeAllAttributesChange(CAttributesManager::CF_RESET, CAttributesManager::CF_ATTR_REMOVED, "Remove all attributes");
-static const istd::IChangeable::ChangeSet s_removeAttributeChange(CAttributesManager::CF_ATTR_REMOVED);
-static const istd::IChangeable::ChangeSet s_addAttributeChange(CAttributesManager::CF_ATTR_ADDED);
-static const istd::IChangeable::ChangeSet s_insertGroupChange("Insert attribute");
+static const istd::IChangeable::ChangeSet s_removeAllAttributesChange(CAttributesManager::CF_RESET, CAttributesManager::CF_ATTR_REMOVED, QObject::tr("Remove all attributes"));
+static const istd::IChangeable::ChangeSet s_removeAttributeChange(CAttributesManager::CF_ATTR_REMOVED, QObject::tr("Remove attribute"));
+static const istd::IChangeable::ChangeSet s_addAttributeChange(CAttributesManager::CF_ATTR_ADDED, QObject::tr("Add attribute"));
+static const istd::IChangeable::ChangeSet s_insertGroupChange(QObject::tr("Insert attribute"));
 
 
 // public methods

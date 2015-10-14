@@ -13,6 +13,9 @@ namespace iprm
 {
 
 
+const istd::IChangeable::ChangeSet s_selectionChangeSet(ISelectionParam::CF_SELECTION_CHANGED, "Change selection");
+
+
 CSelectionParam::CSelectionParam()
 :	m_selectedOptionIndex(NO_SELECTION),
 	m_constraintsPtr(NULL),
@@ -125,8 +128,7 @@ bool CSelectionParam::SetSelectedOptionIndex(int index)
 			}
 		}
 
-		ChangeSet changeSet(CF_SELECTION_CHANGED, "Change selection");
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_selectionChangeSet);
 		Q_UNUSED(notifier);
 
 		m_selectedOptionIndex = index;
@@ -214,8 +216,7 @@ bool CSelectionParam::CopyFrom(const istd::IChangeable& object, CompatibilityMod
 		case CM_WITHOUT_REFS:
 			if (m_selectedOptionIndex != sourcePtr->m_selectedOptionIndex)
 			{
-				ChangeSet changeSet(CF_SELECTION_CHANGED, "Change selection");
-				istd::CChangeNotifier changeNotifier(this, &changeSet);
+				istd::CChangeNotifier changeNotifier(this, &s_selectionChangeSet);
 
 				m_selectedOptionIndex = sourcePtr->m_selectedOptionIndex;
 

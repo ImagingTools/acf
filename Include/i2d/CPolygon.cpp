@@ -12,13 +12,13 @@ namespace i2d
 {
 
 
-static const istd::IChangeable::ChangeSet s_clearAllNodesChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, "Clear all polygon nodes");
-static const istd::IChangeable::ChangeSet s_createPolygonNodesChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, "Create polygon nodes");
-static const istd::IChangeable::ChangeSet s_insertPolygonNodeChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, "Insert polygon node");
-static const istd::IChangeable::ChangeSet s_removePolygonNodeChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, "Remove polygon node");
-static const istd::IChangeable::ChangeSet s_flipPolygonChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, "Flip polygon");
-static const istd::IChangeable::ChangeSet s_rotatePolygonChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, "Rotate polygon");
-static const istd::IChangeable::ChangeSet s_reversePolygonChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, "Reverse polygon nodes");
+static const istd::IChangeable::ChangeSet s_clearAllNodesChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Clear all nodes"));
+static const istd::IChangeable::ChangeSet s_createPolygonNodesChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Create nodes"));
+static const istd::IChangeable::ChangeSet s_insertPolygonNodeChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Insert node"));
+static const istd::IChangeable::ChangeSet s_removePolygonNodeChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Remove node"));
+static const istd::IChangeable::ChangeSet s_flipPolygonChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Flip"));
+static const istd::IChangeable::ChangeSet s_rotatePolygonChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Rotate"));
+static const istd::IChangeable::ChangeSet s_reversePolygonChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Reverse nodes"));
 
 
 // public methods

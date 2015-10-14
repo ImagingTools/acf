@@ -146,11 +146,7 @@ protected:
 
 protected Q_SLOTS:
 	void OnWindowActivated(QMdiSubWindow* window);
-	void OnTileHorizontally();
-	void OnTile();
-	void OnCascade();
 	void OnCloseAllViews();
-	void OnWorkspaceModeChanged();
 
 private:
 	class DocumentSelectionInfo: virtual public iprm::ISelectionParam, virtual public iprm::IOptionsList
@@ -197,13 +193,7 @@ private:
 	iqtgui::CHierarchicalCommand m_windowCommand;
 
 	// window menu group
-	iqtgui::CHierarchicalCommand m_cascadeCommand;
-	iqtgui::CHierarchicalCommand m_tileHorizontallyCommand;
-	iqtgui::CHierarchicalCommand m_tileVerticallyCommand;
 	iqtgui::CHierarchicalCommand m_closeAllDocumentsCommand;
-	iqtgui::CHierarchicalCommand m_workspaceModeCommand;
-	iqtgui::CHierarchicalCommand m_subWindowCommand;
-	iqtgui::CHierarchicalCommand m_tabbedCommand;
 
 	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
 	I_REF(iprm::IEnableableParam, m_rememberOpenDocumentsParamPtr);

@@ -7,8 +7,8 @@ namespace i2d
 
 // protected static members
 
-const istd::IChangeable::ChangeSet CObject2dBase::s_objectMovedChange(CF_OBJECT_POSITION, "Move object");
-const istd::IChangeable::ChangeSet CObject2dBase::s_objectModifiedChange(CF_OBJECT_POSITION, CF_ALL_DATA, "Modify object");
+const istd::IChangeable::ChangeSet CObject2dBase::s_objectMovedChange(CF_OBJECT_POSITION, QObject::tr("Move object"));
+const istd::IChangeable::ChangeSet CObject2dBase::s_objectModifiedChange(CF_OBJECT_POSITION, CF_ALL_DATA, QObject::tr("Modify object"));
 
 
 // public methods

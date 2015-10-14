@@ -25,37 +25,17 @@ namespace iqtdoc
 // public methods
 
 CMultiDocumentWorkspaceGuiComp::CMultiDocumentWorkspaceGuiComp()
-:	m_workspaceModeCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU),
-	m_subWindowCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF | ibase::ICommand::CF_EXCLUSIVE),
-	m_tabbedCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF | ibase::ICommand::CF_EXCLUSIVE),
-	m_viewsCount(0),
+:	m_viewsCount(0),
 	m_forceQuietClose(false)
 {
 	m_documentSelectionInfo.SetParent(*this);
 
-	m_workspaceModeCommand.InsertChild(&m_subWindowCommand, false);
-	m_workspaceModeCommand.InsertChild(&m_tabbedCommand, false);
 	m_commands.InsertChild(&m_windowCommand, false);
 	m_windowCommand.SetPriority(130);
-	m_cascadeCommand.SetGroupId(GI_WINDOW);
-	m_windowCommand.InsertChild(&m_workspaceModeCommand, false);
-	m_windowCommand.InsertChild(&m_cascadeCommand, false);
-	m_tileHorizontallyCommand.SetGroupId(GI_WINDOW);
-	m_windowCommand.InsertChild(&m_tileHorizontallyCommand, false);
-	m_tileVerticallyCommand.SetGroupId(GI_WINDOW);
-	m_windowCommand.InsertChild(&m_tileVerticallyCommand, false);
 	m_closeAllDocumentsCommand.SetGroupId(GI_DOCUMENT);
 	m_windowCommand.InsertChild(&m_closeAllDocumentsCommand, false);
-	m_workspaceModeCommand.SetGroupId(GI_VIEW);
 
-	connect(&m_cascadeCommand, SIGNAL(triggered()), this, SLOT(OnCascade()));
-	connect(&m_tileHorizontallyCommand, SIGNAL(triggered()), this, SLOT(OnTileHorizontally()));
-	connect(&m_tileVerticallyCommand, SIGNAL(triggered()), this, SLOT(OnTile()));
 	connect(&m_closeAllDocumentsCommand, SIGNAL(triggered()), this, SLOT(OnCloseAllViews()));
-
-	m_subWindowCommand.setChecked(true);
-	connect(&m_subWindowCommand, SIGNAL(triggered()), this, SLOT(OnWorkspaceModeChanged()));
-	connect(&m_tabbedCommand, SIGNAL(triggered()), this, SLOT(OnWorkspaceModeChanged()));
 }
 
 
@@ -198,9 +178,6 @@ void CMultiDocumentWorkspaceGuiComp::CreateConnections()
 
 void CMultiDocumentWorkspaceGuiComp::OnViewsCountChanged()
 {
-	m_cascadeCommand.SetEnabled(m_viewsCount > 1);
-	m_tileHorizontallyCommand.SetEnabled(m_viewsCount > 1);
-	m_tileVerticallyCommand.SetEnabled(m_viewsCount > 1);
 	m_closeAllDocumentsCommand.SetEnabled(m_viewsCount > 0);
 }
 
@@ -302,24 +279,6 @@ void CMultiDocumentWorkspaceGuiComp::OnRestoreSettings(const QSettings& settings
 
 	m_organizationName = settings.organizationName();
 	m_applicationName = settings.applicationName();
-
-	QVariant viewModeEntry = settings.value("MDIWorkspace/ViewMode", valueNotSet);
-	if (viewModeEntry != valueNotSet){
-		QMdiArea* workspacePtr = GetQtWidget();
-
-		#if QT_VERSION >= 0x040400
-			QMdiArea::ViewMode viewMode = QMdiArea::ViewMode(viewModeEntry.toInt());
-			workspacePtr->setViewMode(viewMode);
-			if (viewMode == QMdiArea::SubWindowView){
-				m_subWindowCommand.setChecked(true);
-				m_tabbedCommand.setChecked(false);
-			}
-			else{
-				m_tabbedCommand.setChecked(true);
-				m_subWindowCommand.setChecked(false);
-			}
-		#endif
-	}
 
 	if (m_rememberOpenDocumentsParamPtr.IsValid() && m_rememberOpenDocumentsParamPtr->IsEnabled()){
 		iqt::CSettingsReadArchive archive(
@@ -481,6 +440,7 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 	QMdiArea* mdiAreaPtr = GetQtWidget();
 	Q_ASSERT(mdiAreaPtr != NULL);
 
+	mdiAreaPtr->setViewMode(QMdiArea::TabbedView);
 	mdiAreaPtr->setActivationOrder(QMdiArea::ActivationHistoryOrder);
 
 	OnViewsCountChanged();
@@ -505,13 +465,7 @@ void CMultiDocumentWorkspaceGuiComp::OnRetranslate()
 
 	m_windowCommand.SetName(tr("&Window"));
 	// Window commands
-	m_cascadeCommand.SetVisuals(tr("Casca&de"), tr("Cascade"), tr("Lays out all document windows in cascaded mode"));
-	m_tileHorizontallyCommand.SetVisuals(tr("Tile &Horizontaly"), tr("Horizontal"), tr("Lays out all document windows horizontaly"));
-	m_tileVerticallyCommand.SetVisuals(tr("Tile &Verticaly"), tr("Vertical"), tr("Lays out all document windows verticaly"));
 	m_closeAllDocumentsCommand.SetVisuals(tr("&Close All Documents"), tr("Close All"), tr("&Closes all opened documents"));
-	m_workspaceModeCommand.SetVisuals(tr("&Workspace Mode"), tr("Workspace Mode"), tr("Switch workspace mode"));
-	m_subWindowCommand.SetVisuals(tr("&Multiple Documents"), tr("Multiple Documents"), tr("Show each window in own frame"));
-	m_tabbedCommand.SetVisuals(tr("&Tabbed Documents"), tr("Tabbed Documents"), tr("Show windows in tabbed frame"));
 }
 
 
@@ -576,77 +530,12 @@ void CMultiDocumentWorkspaceGuiComp::OnWindowActivated(QMdiSubWindow* /*window*/
 }
 
 
-void CMultiDocumentWorkspaceGuiComp::OnTileHorizontally()
-{
-	QMdiArea* workspacePtr = GetQtWidget();
-	Q_ASSERT(workspacePtr != NULL);
-	if (workspacePtr == NULL){
-		return;
-	}
-
-	QList<QMdiSubWindow *> widgets = workspacePtr->subWindowList();
-
-	int workspaceHeight = workspacePtr->height();
-	int workspaceWidth = workspacePtr->width();
-	int heightForEach = workspaceHeight / widgets.count();
-
-	for (int viewIndex = 0, y = 0; viewIndex < widgets.count(); viewIndex++){
-		QMdiSubWindow* widgetPtr = widgets.at(viewIndex);
-		widgetPtr->showNormal();
-
-		widgetPtr->setGeometry(0, y, workspaceWidth, heightForEach);
-		y += heightForEach;
-	}
-}
-
-
-void CMultiDocumentWorkspaceGuiComp::OnTile()
-{
-	QMdiArea* workspacePtr = GetQtWidget();
-	Q_ASSERT(workspacePtr != NULL);
-	if (workspacePtr == NULL){
-		return;
-	}
-
-	workspacePtr->tileSubWindows();
-}
-
-
-void CMultiDocumentWorkspaceGuiComp::OnCascade()
-{
-	QMdiArea* workspacePtr = GetQtWidget();
-	Q_ASSERT(workspacePtr != NULL);
-	if (workspacePtr == NULL){
-		return;
-	}
-
-	workspacePtr->cascadeSubWindows();
-}
-
-
 void CMultiDocumentWorkspaceGuiComp::OnCloseAllViews()
 {
 	bool isCanceled = false;
 	if (SaveDirtyDocuments(false, &isCanceled) && !isCanceled){
 		CloseAllDocuments();
 	}
-}
-
-
-void CMultiDocumentWorkspaceGuiComp::OnWorkspaceModeChanged()
-{
-#if QT_VERSION >= 0x040400
-	QMdiArea* mdiAreaPtr = GetQtWidget();
-
-	if (mdiAreaPtr != NULL){
-		if (m_subWindowCommand.isChecked()){
-			mdiAreaPtr->setViewMode(QMdiArea::SubWindowView);
-		}
-		else{
-			mdiAreaPtr->setViewMode(QMdiArea::TabbedView);
-		}
-	}
-#endif
 }
 
 

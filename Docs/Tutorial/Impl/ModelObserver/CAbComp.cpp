@@ -41,7 +41,7 @@ bool CAbComp::SetA(int a)
 	// If new value of A differs from the old,
 	// set the new value and fire notification about this change:
 	if (m_a != a){
-		ChangeSet changeSet(CF_A_CHANGED, "Change A");
+		static ChangeSet changeSet(CF_A_CHANGED, "Change A");
 		istd::CChangeNotifier notifier(this, &changeSet);
 		Q_UNUSED(notifier);
 
@@ -63,7 +63,7 @@ void CAbComp::SetB(const QByteArray& b)
 	// If new value of B differs from the old,
 	// set the new value and fire notification about this change:
 	if (m_b != b){
-		ChangeSet changeSet(CF_B_CHANGED, "Change B");
+		static ChangeSet changeSet(CF_B_CHANGED, "Change B");
 		istd::CChangeNotifier notifier(this, &changeSet);
 		Q_UNUSED(notifier);
 

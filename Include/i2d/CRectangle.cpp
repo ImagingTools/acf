@@ -14,18 +14,18 @@ namespace i2d
 {
 
 
-static istd::IChangeable::ChangeSet s_resetRectangeChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Reset rectangle");
-static istd::IChangeable::ChangeSet s_setLeftSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Set rectangle's left side");
-static istd::IChangeable::ChangeSet s_setTopSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Set rectangle's top side");
-static istd::IChangeable::ChangeSet s_setRightSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Set rectangle's right side");
-static istd::IChangeable::ChangeSet s_setBottomSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Set rectangle's bottom side");
-static istd::IChangeable::ChangeSet s_setTopLeftChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Set rectange's top-left position");
-static istd::IChangeable::ChangeSet s_setTopRightChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Set rectange's top-right position");
-static istd::IChangeable::ChangeSet s_setBottomLeftChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Set rectange's bottom-left position");
-static istd::IChangeable::ChangeSet s_setBottomRightChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Set rectange's bottom-right position");
-static istd::IChangeable::ChangeSet s_uniteChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Unite rectangle which another");
-static istd::IChangeable::ChangeSet s_expandChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Expand rectangle");
-static istd::IChangeable::ChangeSet s_intersectChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, "Intersect with another rectangle");
+static istd::IChangeable::ChangeSet s_resetRectangeChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Reset rectangle"));
+static istd::IChangeable::ChangeSet s_setLeftSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's left side"));
+static istd::IChangeable::ChangeSet s_setTopSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's top side"));
+static istd::IChangeable::ChangeSet s_setRightSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's right side"));
+static istd::IChangeable::ChangeSet s_setBottomSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's bottom side"));
+static istd::IChangeable::ChangeSet s_setTopLeftChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's top-left position"));
+static istd::IChangeable::ChangeSet s_setTopRightChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's top-right position"));
+static istd::IChangeable::ChangeSet s_setBottomLeftChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's bottom-left position"));
+static istd::IChangeable::ChangeSet s_setBottomRightChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's bottom-right position"));
+static istd::IChangeable::ChangeSet s_uniteChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Unite rectangle which another"));
+static istd::IChangeable::ChangeSet s_expandChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Expand rectangle"));
+static istd::IChangeable::ChangeSet s_intersectChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Intersect with another rectangle"));
 
 
 // public methods
