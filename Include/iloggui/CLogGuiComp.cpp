@@ -179,6 +179,9 @@ void CLogGuiComp::OnGuiCreated()
 #else
 	LogView->header()->setSectionResizeMode(CT_ICON, QHeaderView::Fixed);
 #endif
+#if QT_VERSION >= 0x050200
+	FilterText->setClearButtonEnabled(true);
+#endif
 
 	LogView->header()->resizeSection(CT_ICON, itemDelegate->GetItemHeight());
 
