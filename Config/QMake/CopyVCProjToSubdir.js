@@ -17,20 +17,16 @@ function relativePath(base, rel) {
     var rell = rel.split('\\');
 
     for (var i = basel.length; i-- >= 0; ) {
-        if (basel[i] === '.')
+        if ((basel[i] === '.') || (basel[i] === ''))
             basel.splice(i, 1);
-    }
-    for (var i = basel.length; i-- >= 1; ) {
-        if (basel[i] === '')
-            basel.splice(i, 1);
+        if ((basel[i] === '..') && (i > 0))
+            basel.splice(i - 1, 2);
     }
     for (var i = rell.length; i-- >= 0; ) {
-        if (rell[i] === '.')
+        if ((rell[i] === '.') || (rell[i] === ''))
             rell.splice(i, 1);
-    }
-    for (var i = rell.length; i-- >= 1; ) {
-        if (rell[i] === '')
-            rell.splice(i, 1);
+        if ((rell[i] === '..') && (i > 0))
+            rell.splice(i - 1, 2);
     }
 
     i = 0;
