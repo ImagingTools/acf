@@ -190,9 +190,6 @@
           <property name="placeholderText">
            <string>Type filter text here...</string>
           </property>
-          <property name="clearButtonEnabled">
-           <bool>true</bool>
-          </property>
          </widget>
         </item>
        </layout>
