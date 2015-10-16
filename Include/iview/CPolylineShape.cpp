@@ -1,6 +1,5 @@
 #include "iview/CPolylineShape.h"
 
-
 // ACF includes
 #include "istd/CChangeNotifier.h"
 #include "imod/IModel.h"
@@ -133,7 +132,28 @@ bool CPolylineShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton butt
 							if (tickerBox.IsInside(position - sp)){
 								BeginTickerDrag();
 
-								polylinePtr->RemoveNode(i);
+								// check the button
+								if (buttonType == Qt::RightButton){	// right button: open/close
+									if (i > 0){
+										std::vector<i2d::CVector2d> nodesVector(nodesCount);
+										for (int j = 0; j < nodesCount; ++j){
+											nodesVector[j] = polylinePtr->GetNode(j);
+										}
+
+										std::rotate(nodesVector.begin(), nodesVector.begin()+i, nodesVector.end());
+
+										istd::CChangeNotifier changeNotifier(polylinePtr);
+
+										for (int j = 0; j < nodesCount; ++j){
+											polylinePtr->SetNode(j, nodesVector.at(j));
+										}
+									}
+
+									polylinePtr->SetClosed(false);
+								}
+								else{	// default: remove the node
+									polylinePtr->RemoveNode(i);
+								}
 
 								EndTickerDrag();
 
@@ -528,6 +548,20 @@ ITouchable::TouchState CPolylineShape::IsTouched(istd::CIndex2d position) const
 	}
 
 	return TS_NONE;
+}
+
+
+QString CPolylineShape::GetShapeDescriptionAt(istd::CIndex2d position) const
+{
+	QString result = BaseClass::GetShapeDescriptionAt(position);
+
+	if (GetEditMode() == ISelectable::EM_REMOVE){
+		if (IsTouched(position) == TS_TICKER){
+			return QObject::tr("Left click: remove selected node, right click: break at the selected node");
+		}
+	}
+
+	return result;
 }
 
 

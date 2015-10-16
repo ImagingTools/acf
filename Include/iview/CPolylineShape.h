@@ -32,6 +32,7 @@ public:
 
 	// reimplemented (iview::ITouchable)
 	virtual TouchState IsTouched(istd::CIndex2d position) const;
+	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const;
 
 	// static methods
 	/**
