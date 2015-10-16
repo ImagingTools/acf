@@ -116,7 +116,6 @@ protected Q_SLOTS:
 	void OnRemoveMessagesTimer();
 
 	void on_FilterText_textChanged(const QString& filterText);
-	void on_FilterClearButton_clicked();
 
 Q_SIGNALS:
 	void EmitAddMessage(const MessagePtr& messagePtr);

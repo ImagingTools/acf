@@ -438,12 +438,6 @@ void CLogGuiComp::on_FilterText_textChanged(const QString& filterText)
 }
 
 
-void CLogGuiComp::on_FilterClearButton_clicked()
-{
-	FilterText->clear();
-}
-
-
 } // namespace iloggui
 
 
