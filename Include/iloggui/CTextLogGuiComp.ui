@@ -188,7 +188,7 @@
            </sizepolicy>
           </property>
           <property name="placeholderText">
-           <string>Type filter text here...</string>
+           <string>Search</string>
           </property>
          </widget>
         </item>
