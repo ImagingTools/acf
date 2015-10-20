@@ -154,7 +154,7 @@ void CGuiComponentDialog::showEvent(QShowEvent* eventPtr)
 	const QDesktopWidget* desktopPtr = QApplication::desktop();
 	Q_ASSERT(desktopPtr != NULL);
 
-	QRect screenRect = desktopPtr->screenGeometry();
+	QRect screenRect = desktopPtr->screenGeometry((m_guiObjectPtr != NULL)? m_guiObjectPtr->GetWidget(): NULL);
 
 	if (m_screenFactor > 0){
 		double screenFactor = qMin(0.99, m_screenFactor);
