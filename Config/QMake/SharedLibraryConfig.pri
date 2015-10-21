@@ -10,13 +10,10 @@ TEMPLATE = lib
 DESTDIR = $$OUT_PWD/../../../Bin/$$COMPILER_DIR
 
 CONFIG += link_prl
+CONFIG += shared
 
 !win32-msvc*{
-	CONFIG += plugin no_plugin_name_prefix
 	QMAKE_CFLAGS += -fPIC
-}
-else{
-	CONFIG += dll
 }
 
 HEADERS += $$_PRO_FILE_PWD_/../*.h
