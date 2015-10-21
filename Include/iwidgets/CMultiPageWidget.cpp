@@ -35,7 +35,11 @@ namespace iwidgets
 
 // public methods
 
-CMultiPageWidget::CMultiPageWidget(QWidget* parentWidgetPtr, int designMode, int containerGuiFlags, Qt::Orientation orientation)
+CMultiPageWidget::CMultiPageWidget(
+			QWidget* parentWidgetPtr,
+			int designMode,
+			int containerGuiFlags,
+			Qt::Orientation orientation)
 	:BaseClass(parentWidgetPtr),
 	m_designMode(designMode),
 	m_containerGuiFlags(containerGuiFlags),
@@ -67,6 +71,34 @@ void CMultiPageWidget::SetDesignMode(int designMode)
 	else{
 		m_guiContainerPtr.Reset();
 		m_designMode = designMode;
+
+		CreateContainerGui();
+	}
+}
+
+
+void CMultiPageWidget::SetContainerGuiFlags(int containerGuiFlags)
+{
+	if (GetPagesCount() > 0){
+		// TODO: reparent all pages and add to the new container.
+	}
+	else{
+		m_guiContainerPtr.Reset();
+		m_containerGuiFlags = containerGuiFlags;
+
+		CreateContainerGui();
+	}
+}
+
+
+void CMultiPageWidget::SetLayoutOrientation(Qt::Orientation orientation)
+{
+	if (GetPagesCount() > 0){
+		// TODO: reparent all pages and add to the new container.
+	}
+	else{
+		m_guiContainerPtr.Reset();
+		m_orientation = orientation;
 
 		CreateContainerGui();
 	}
