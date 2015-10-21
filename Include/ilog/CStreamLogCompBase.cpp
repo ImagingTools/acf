@@ -19,6 +19,14 @@ CStreamLogCompBase::CStreamLogCompBase()
 	m_lastDotCategory(istd::IInformationProvider::IC_NONE),
 	m_worseCategory(istd::IInformationProvider::IC_NONE)
 {
+	qRegisterMetaType<MessagePtr>("MessagePtr");
+
+	connect(
+				this,
+				SIGNAL(EmitAddMessage(const MessagePtr&)),
+				this,
+				SLOT(OnAddMessage(const MessagePtr&)),
+				Qt::QueuedConnection);
 }
 
 
@@ -41,29 +49,8 @@ bool CStreamLogCompBase::IsMessageSupported(
 
 void CStreamLogCompBase::AddMessage(const MessagePtr& messagePtr)
 {
-	if (messagePtr.IsValid()){
-		istd::IInformationProvider::InformationCategory category = messagePtr->GetInformationCategory();
-		if (category >= *m_minPriorityAttrPtr){
-			if (m_isLastDotShown){
-				WriteText("\n", m_lastDotCategory);
-
-				m_isLastDotShown = false;
-			}
-
-			WriteMessageToStream(*messagePtr);
-		}
-		else if (*m_isDotEnabledAttrPtr){
-			WriteText(".", category);
-
-			m_isLastDotShown = true;
-			m_lastDotCategory = category;
-		}
-
-		if (category > m_worseCategory){
-			m_worseCategory = category;
-		}
-
-		BaseClass::AddMessage(messagePtr);
+	if (messagePtr.IsValid() && IsMessageSupported(messagePtr->GetInformationCategory())){
+		Q_EMIT EmitAddMessage(messagePtr);
 	}
 }
 
@@ -137,6 +124,37 @@ void CStreamLogCompBase::OnComponentDestroyed()
 	}
 
 	m_worseCategory = istd::IInformationProvider::IC_NONE;
+}
+
+
+// private slots
+
+void CStreamLogCompBase::OnAddMessage(const MessagePtr& messagePtr)
+{
+	if (messagePtr.IsValid()){
+		istd::IInformationProvider::InformationCategory category = messagePtr->GetInformationCategory();
+		if (category >= *m_minPriorityAttrPtr){
+			if (m_isLastDotShown){
+				WriteText("\n", m_lastDotCategory);
+
+				m_isLastDotShown = false;
+			}
+
+			WriteMessageToStream(*messagePtr);
+		}
+		else if (*m_isDotEnabledAttrPtr){
+			WriteText(".", category);
+
+			m_isLastDotShown = true;
+			m_lastDotCategory = category;
+		}
+
+		if (category > m_worseCategory){
+			m_worseCategory = category;
+		}
+
+		BaseClass::AddMessage(messagePtr);
+	}
 }
 
 
