@@ -1,6 +1,10 @@
 #include "i2d/CObject2dBase.h"
 
 
+// Qt includes
+#include <QtCore/QObject>
+
+
 namespace i2d
 {
 

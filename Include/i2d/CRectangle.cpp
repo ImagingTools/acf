@@ -1,6 +1,9 @@
 #include "i2d/CRectangle.h"
 
 
+// Qt includes
+#include <QtCore/QObject>
+
 // ACF includes
 #include "istd/TDelPtr.h"
 #include "istd/CChangeNotifier.h"

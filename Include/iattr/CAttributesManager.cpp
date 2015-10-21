@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtCore/QMap>
+#include <QtCore/QObject>
 
 // ACF includes
 #include "istd/CChangeGroup.h"
