@@ -112,12 +112,7 @@ bool CXmlWriteArchiveBase::WriteTextNode(const QByteArray& text)
 	}
 
 	retVal = retVal && MakeIndent();
-
-	QByteArray xmlText;
-
-	EncodeXml(text, xmlText);
-
-	retVal = retVal && WriteString(xmlText) && WriteString("\n");
+	retVal = retVal && WriteString(text) && WriteString("\n");
 
 	return retVal;
 }
