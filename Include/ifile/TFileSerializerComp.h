@@ -54,16 +54,6 @@ public:
 		{
 		}
 
-	protected:
-		// reimplemented (istd::ILogger)
-		virtual bool IsLogConsumed(
-					const istd::IInformationProvider::InformationCategory* /*categoryPtr*/,
-					const int* flagsPtr = NULL) const
-		{
-			static const istd::IInformationProvider::InformationCategory slaveCategory = istd::IInformationProvider::IC_INFO;
-
-			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed(&slaveCategory, flagsPtr);
-		}
 		virtual bool SendLogMessage(istd::IInformationProvider::InformationCategory category, int id, const QString& message, const QString& messageSource, int flags = 0) const
 		{
 			if (m_loggerPtr != NULL){
@@ -76,6 +66,17 @@ public:
 			}
 
 			return false;
+		}
+
+	protected:
+		// reimplemented (istd::ILogger)
+		virtual bool IsLogConsumed(
+					const istd::IInformationProvider::InformationCategory* /*categoryPtr*/,
+					const int* flagsPtr = NULL) const
+		{
+			static const istd::IInformationProvider::InformationCategory slaveCategory = istd::IInformationProvider::IC_INFO;
+
+			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed(&slaveCategory, flagsPtr);
 		}
 
 	private:
@@ -93,16 +94,6 @@ public:
 		{
 		}
 
-	protected:
-		// reimplemented (istd::ILogger)
-		virtual bool IsLogConsumed(
-					const istd::IInformationProvider::InformationCategory* /*categoryPtr*/,
-					const int* flagsPtr = NULL) const
-		{
-			static const istd::IInformationProvider::InformationCategory slaveCategory = istd::IInformationProvider::IC_INFO;
-
-			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed(&slaveCategory, flagsPtr);
-		}
 		virtual bool SendLogMessage(istd::IInformationProvider::InformationCategory category, int id, const QString& message, const QString& messageSource, int flags = 0) const
 		{
 			if (m_loggerPtr != NULL){
@@ -115,6 +106,17 @@ public:
 			}
 
 			return false;
+		}
+
+	protected:
+		// reimplemented (istd::ILogger)
+		virtual bool IsLogConsumed(
+					const istd::IInformationProvider::InformationCategory* /*categoryPtr*/,
+					const int* flagsPtr = NULL) const
+		{
+			static const istd::IInformationProvider::InformationCategory slaveCategory = istd::IInformationProvider::IC_INFO;
+
+			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed(&slaveCategory, flagsPtr);
 		}
 
 	private:
