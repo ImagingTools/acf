@@ -53,7 +53,7 @@ IFactoryInfo::KeyList TSingleFactory<Interface, Implementation>::GetFactoryKeys(
 {
 	typename TIFactory<Interface>::KeyList retVal;
 
-	retVal.push_back(m_keyId);
+	retVal.insert(m_keyId);
 
 	return retVal;
 }

@@ -88,7 +88,7 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 
 			iser::IObject* messageObjectPtr = const_cast<iser::IObject*>(dynamic_cast<const iser::IObject*>(messagePtr.GetPtr()));
 			if (messageObjectPtr != NULL){
-				if (knownMessageTypes.indexOf(messageObjectPtr->GetFactoryId()) >= 0){
+				if (knownMessageTypes.contains(messageObjectPtr->GetFactoryId())){
 					++serializableMessageCount;
 				}
 			}
@@ -114,7 +114,7 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 			iser::IObject* messageObjectPtr = const_cast<iser::IObject*>(dynamic_cast<const iser::IObject*>(messagePtr.GetPtr()));
 			if (messageObjectPtr != NULL){
 				QByteArray messageTypeId = messageObjectPtr->GetFactoryId();
-				if (knownMessageTypes.indexOf(messageTypeId) >= 0){
+				if (knownMessageTypes.contains(messageTypeId)){
 					retVal = retVal && archive.BeginTag(messageTag);
 
 					retVal = retVal && archive.BeginTag(messageTypeIdTag);
@@ -140,7 +140,7 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.EndTag(messageTypeIdTag);
 
 			if (retVal){
-				if (knownMessageTypes.indexOf(messageTypeId) >= 0){
+				if (knownMessageTypes.contains(messageTypeId)){
 					istd::TDelPtr<iser::IObject> objectPtr(GetMessageFactory().CreateInstance(messageTypeId));
 
 					if (objectPtr.IsValid()){

@@ -143,7 +143,10 @@ Interface* TFactoryMember<Interface>::CreateInstance(const QByteArray& /*keyId*/
 template <class Interface>
 istd::IFactoryInfo::KeyList TFactoryMember<Interface>::GetFactoryKeys() const
 {
-	static KeyList defaultList(1, "Component");
+	static KeyList defaultList;
+	if (defaultList.isEmpty()){
+		defaultList << "Component";
+	}
 
 	return defaultList;
 }

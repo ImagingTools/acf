@@ -69,6 +69,7 @@ template <class InterfaceType>
 IFactoryInfo::KeyList TComposedFactory<InterfaceType>::GetFactoryKeys() const
 {
 	IFactoryInfo::KeyList retVal;
+
 	for (		typename FactoryList::const_iterator iter = m_factoryList.begin();
 				iter != m_factoryList.end();
 				++iter){

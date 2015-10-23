@@ -85,16 +85,16 @@ CStandardAttributesFactory::KeyList CStandardAttributesFactory::GetInitialFactor
 {
 	KeyList retVal;
 
-	retVal.append(integerAttrTypeName);
-	retVal.append(realAttrTypeName);
-	retVal.append(booleanAttrTypeName);
-	retVal.append(stringAttrTypeName);
-	retVal.append(idAttrTypeName);
-	retVal.append(integerListAttrTypeName);
-	retVal.append(realListAttrTypeName);
-	retVal.append(boolListAttrTypeName);
-	retVal.append(stringListAttrTypeName);
-	retVal.append(idListAttrTypeName);
+	retVal.insert(integerAttrTypeName);
+	retVal.insert(realAttrTypeName);
+	retVal.insert(booleanAttrTypeName);
+	retVal.insert(stringAttrTypeName);
+	retVal.insert(idAttrTypeName);
+	retVal.insert(integerListAttrTypeName);
+	retVal.insert(realListAttrTypeName);
+	retVal.insert(boolListAttrTypeName);
+	retVal.insert(stringListAttrTypeName);
+	retVal.insert(idListAttrTypeName);
 
 	return retVal;
 }
