@@ -36,6 +36,9 @@ void CBitMemoryWriteArchive::WriteValue(quint32 inputValue, int bitsCount)
 		if (bitOn){
 			bufferValue |= 1 << (8 - globalBitIndex - 1);
 		}
+		else{
+			bufferValue &= ~(1 << (8 - globalBitIndex - 1));
+		}
 	}
 
 	m_bitPosition += bitsCount;
