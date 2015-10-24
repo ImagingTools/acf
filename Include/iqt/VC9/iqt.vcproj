@@ -328,6 +328,22 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCompactXmlMemReadArchive.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CCompactXmlMemWriteArchive.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CCompactXmlReadArchiveBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CCompactXmlWriteArchiveBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CConsoleReader.cpp"
 				>
 			</File>
@@ -395,6 +411,22 @@
 			</File>
 			<File
 				RelativePath="..\CCompactXmlFileWriteArchive.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCompactXmlMemReadArchive.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCompactXmlMemWriteArchive.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCompactXmlReadArchiveBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCompactXmlWriteArchiveBase.h"
 				>
 			</File>
 			<File
@@ -480,10 +512,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\ClassDiagram1.cd"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

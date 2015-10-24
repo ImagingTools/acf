@@ -58,6 +58,8 @@ bool CVector3d::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(s_posZTag);
 	retVal = retVal && archive.Process(operator[](2));
 	retVal = retVal && archive.EndTag(s_posZTag);
+
+	return retVal;
 }
 
 
