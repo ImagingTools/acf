@@ -15,56 +15,12 @@
 #include <QtGui/QGroupBox>
 #endif
 
-// iwidgets includes
-#include "GeneratedFiles/iwidgets/ui_CCollapsibleGroup.h"
+// ACF includes
+#include "iwidgets/CCollapsiblePage.h"
+
 
 namespace iwidgets
 {
-
-
-class CCollapsiblePage: public QWidget
-{
-public:
-	typedef QWidget BaseClass;
-
-	CCollapsiblePage(QWidget* parentPtr = NULL)
-		:BaseClass(parentPtr)
-	{
-		m_ui.setupUi(this);
-
-		m_ui.IconLabel->setHidden(true);
-	}
-
-	void SetPageText(const QString& text)
-	{
-		m_ui.CollapseButton->setText(text);
-	}
-
-	void SetPageWidget(QWidget* pageWidgetPtr)
-	{
-		m_ui.PageFrame->layout()->addWidget(pageWidgetPtr);
-	}
-
-	void SetIconSize(const QSize& size)
-	{
-		m_ui.IconLabel->setMinimumSize(size);
-		m_ui.IconLabel->setMaximumSize(size);
-
-		m_ui.IconLabel->setPixmap(m_icon.pixmap(m_ui.IconLabel->minimumSize()));
-	}
-
-	void SetIcon(const QIcon& icon)
-	{
-		m_icon = icon;
-
-		m_ui.IconLabel->setVisible(!m_icon.isNull());
-
-		m_ui.IconLabel->setPixmap(m_icon.pixmap(m_ui.IconLabel->minimumSize()));
-	}
-
-	Ui::CCollapsibleGroup m_ui;
-	QIcon m_icon;
-};
 
 
 // public methods
@@ -130,8 +86,9 @@ int CCollapsibleGroupWidgetDelegate::InsertPage(
 	Q_ASSERT(containerLayoutPtr != NULL);
 
 	CCollapsiblePage* groupPanelPtr = new CCollapsiblePage(&containerWidget);
-	groupPanelPtr->SetPageText(pageTitle);
-	groupPanelPtr->SetPageWidget(pageWidgetPtr);
+	groupPanelPtr->SetTitle(pageTitle);
+	groupPanelPtr->SetWidget(pageWidgetPtr);
+	groupPanelPtr->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 	containerLayoutPtr->addWidget(groupPanelPtr);
 

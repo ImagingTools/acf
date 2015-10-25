@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CCollapsibleGroup</class>
- <widget class="QWidget" name="CCollapsibleGroup">
+ <class>CCollapsiblePage</class>
+ <widget class="QWidget" name="CCollapsiblePage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -132,22 +132,5 @@
  <resources>
   <include location="../iqtgui/iqtgui.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>CollapseButton</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>PageFrame</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>61</x>
-     <y>11</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>74</x>
-     <y>43</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

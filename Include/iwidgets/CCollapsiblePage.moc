@@ -1,0 +1,38 @@
+#ifndef iwidgets_CCollapsibleGroupWidgetDelegate_included
+#define iwidgets_CCollapsibleGroupWidgetDelegate_included
+
+
+// ACF includes
+#include <iwidgets/IMultiPageWidgetDelegate.h>
+
+
+namespace iwidgets
+{
+
+
+class CCollapsiblePage: public QWidget
+{
+public:
+	typedef QWidget BaseClass;
+
+	CCollapsiblePage(QWidget* parentPtr = NULL);
+
+	void SetTitle(const QString& text);
+	void SetWidget(QWidget* pageWidgetPtr);
+	void SetIconSize(const QSize& size);
+	void SetIcon(const QIcon& icon);
+
+private Q_SLOTS:
+	void SetCollapsed(bool collapsed);
+
+private:
+	Ui::CCollapsibleGroup m_ui;
+	QIcon m_icon;
+};
+
+} // namespace iwidgets
+
+
+#endif // !iwidgets_CCollapsibleGroupWidgetDelegate_included
+
+

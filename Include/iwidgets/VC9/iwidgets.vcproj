@@ -359,6 +359,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCollapsiblePage.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDoubleRangeSpinEdit.cpp"
 				>
 			</File>
@@ -418,6 +422,10 @@
 			</File>
 			<File
 				RelativePath="..\CCollapsibleGroupWidgetDelegate.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCollapsiblePage.h"
 				>
 			</File>
 			<File
@@ -483,27 +491,31 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iwidgets\moc_CCheckableComboBox.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\moc_CCheckableComboBox.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iwidgets\moc_CDoubleRangeSpinEdit.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\moc_CCollapsiblePage.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iwidgets\moc_CExtLineEdit.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\moc_CDoubleRangeSpinEdit.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iwidgets\moc_CMultiPageWidget.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\moc_CExtLineEdit.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\ui_CCollapsibleGroup.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\moc_CMultiPageWidget.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iwidgets\ui_CDoubleRangeSpinEdit.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\ui_CCollapsiblePage.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\ui_CDoubleRangeSpinEdit.h"
 				>
 			</File>
 		</Filter>
@@ -511,7 +523,7 @@
 			Name="Qt Designer Files"
 			>
 			<File
-				RelativePath="..\CCollapsibleGroup.ui"
+				RelativePath="..\CCollapsiblePage.ui"
 				>
 			</File>
 			<File
@@ -524,6 +536,10 @@
 			>
 			<File
 				RelativePath="..\CCheckableComboBox.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CCollapsiblePage.moc"
 				>
 			</File>
 			<File
