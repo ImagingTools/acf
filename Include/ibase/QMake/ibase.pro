@@ -2,6 +2,10 @@ TARGET = ibase
 
 include(../../../Config/QMake/StaticConfig.pri)
 
-mac{
-	LIBS += -framework Carbon
+!macx-ios*{
+	mac{
+		LIBS += -framework Carbon
+	}
 }
+
+

@@ -356,9 +356,8 @@ bool CSingleDocumentManagerBase::CloseView(istd::IPolymorphic* viewPtr, bool beQ
 	if ((viewPtr == NULL) || (viewPtr = m_viewPtr.GetPtr())){
 		return CloseDocument(-1, beQuiet, ignoredPtr);
 	}
-	else{
-		return NULL;
-	}
+
+	return false;
 }
 
 

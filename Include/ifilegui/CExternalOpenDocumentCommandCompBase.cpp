@@ -71,12 +71,14 @@ void CExternalOpenDocumentCommandCompBase::OnOpenDocument()
 				applicationPath += ".exe";
 			}
 #endif
-#ifdef Q_OS_MACX
-			if (!applicationFileInfo.exists() && applicationFileInfo.suffix().isEmpty()){
+#ifdef Q_OS_MAC
+			if (!applicationFileInfo.exists() && applicationFileInfo.suffix().isEmpty() && applicationFileInfo.isBundle()){
 				applicationPath += ".app";
 			}
 #endif
+#ifndef QT_NO_PROCESS
 			QProcess::startDetached(applicationPath, arguments);
+#endif // QT_NO_PROCESS
 		}
 	}
 }

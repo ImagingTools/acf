@@ -13,32 +13,35 @@ else{
 	COPY_FILE = cp
 }
 
-
-# get build output directory of shadow build
+# Get build output directory of shadow build:
 ACFDIRBUILD = $$(ACFDIR_BUILD)
 
-# for non-shadow build use arx compiler inside source tree
-isEmpty( ACFDIRBUILD ){
+# Get path to the ACF tools folder from the external variable:
+ACFTOOLS = $$(ACF_TOOLS_BIN)
+
+# for non-shadow build use ARX compiler inside source tree
+isEmpty(ACFDIRBUILD){
 	ARXCBIN=$$PWD/../../Bin/$$COMPILER_DIR/$$ARX_COMPILER
+	ACFBIN = $$PWD/../../Bin/$$COMPILER_DIR/$$ACF_TOOL
 }
-
-# set arx compiler from shadow build
-!isEmpty( ACFDIRBUILD ) {
+# set ARX compiler from shadow build
+!isEmpty(ACFDIRBUILD){
 	ARXCBIN=$$(ACFDIR_BUILD)/Bin/$$COMPILER_DIR/$$ARX_COMPILER
+	ACFBIN=$$(ACFDIR_BUILD)/Bin/$$COMPILER_DIR/$$ACF_TOOL
 }
 
-# for non-shadow build use acf tool inside source tree
-isEmpty( ACFDIRBUILD ) {
-	ACFTOOLBIN = $$PWD/../../Bin/$$COMPILER_DIR/$$ACF_TOOL
+message(ACF_TOOL_BIN variable was set to $$(ACF_TOOLS_BIN))
+
+!isEmpty(ACFTOOLS){
+	ARXCBIN=$$(ACF_TOOLS_BIN)/$$ARX_COMPILER
+	ACFBIN=$$(ACF_TOOLS_BIN)/$$ACF_TOOL
+
+	message(ARX Compiler path: $$ARXCBIN)
+	message(ACF Tool path: $$ACFBIN)
 }
 
-# set acf tool from shadow build
-!isEmpty( ACFDIRBUILD ){
-	ACFTOOLBIN=$$(ACFDIR_BUILD)/Bin/$$COMPILER_DIR/$$ACF_TOOL
-}
 
 # custom build for ACF Registry Compiler (Arxc)
-
 ARX_COMPILER_OUTPUT = $${ARXC_OUTDIR}/C${QMAKE_FILE_BASE}.cpp $${ARXC_OUTDIR}/C${QMAKE_FILE_BASE}.h
 ARX_COMPILER_COMMAND = $$ARXCBIN ${QMAKE_FILE_IN} -o $${ARXC_OUTDIR}/C${QMAKE_FILE_BASE}.cpp -config $${ARXC_CONFIG} -v
 win32{
@@ -57,10 +60,9 @@ arxCompiler.depends += $$ARXCBIN
 arxCompiler.depend_command = $$ARXCBIN ${QMAKE_FILE_IN} -mode depends -config $${ARXC_CONFIG}
 QMAKE_EXTRA_COMPILERS += arxCompiler
 
-
 # custom build for ACF transformations
 
-ACF_CONVERT_COMMAND = $$ACFTOOLBIN $${ACF_CONVERT_REGISTRY} -config $${ACF_CONVERT_CONFIG} -input ${QMAKE_FILE_IN} -o $${ACF_CONVERT_OUTDIR}/${QMAKE_FILE_BASE}
+ACF_CONVERT_COMMAND = $$ACFBIN $${ACF_CONVERT_REGISTRY} -config $${ACF_CONVERT_CONFIG} -input ${QMAKE_FILE_IN} -o $${ACF_CONVERT_OUTDIR}/${QMAKE_FILE_BASE}
 ACF_CONVERT_OUTPUT = $${ACF_CONVERT_OUTDIR}/${QMAKE_FILE_BASE}
 win32{
 	ACF_CONVERT_COMMAND ~= s,/,\\,g
@@ -72,7 +74,7 @@ acfFileConvertCopy.name = ACF-FileConvertCopy
 acfFileConvertCopy.CONFIG += no_link target_predeps
 acfFileConvertCopy.output = $$ACF_CONVERT_OUTPUT
 acfFileConvertCopy.commands = $$ACF_CONVERT_COMMAND
-acfFileConvertCopy.depends = $$ACFTOOLBIN $$ARXCBIN
+acfFileConvertCopy.depends = $$ACFBIN $$ARXCBIN
 acfFileConvertCopy.depend_command = $$ARXCBIN $${ACF_CONVERT_REGISTRY} -mode depends -config $${ACF_CONVERT_CONFIG}
 acfFileConvertCopy.input = ACF_CONVERT_FILES
 acfFileConvertCopy.variable_out =
@@ -119,4 +121,5 @@ generatedResources.variable_out = SOURCES
 generatedResources.dependency_type = TYPE_C
 generatedResources.depends += $$[QT_INSTALL_BINS]/$$QMAKE_RCC
 QMAKE_EXTRA_COMPILERS += generatedResources
+
 

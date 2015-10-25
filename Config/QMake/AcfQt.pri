@@ -1,16 +1,17 @@
-# get build output directory of shadow build
+# Get build output directory of shadow build:
 ACFDIRBUILD = $$(ACFDIR_BUILD)
 
-# for non-shadow build use lib directory inside source tree
+# For non-shadow build use lib directory inside source tree:
 isEmpty( ACFDIRBUILD ) {
 	LIBS += -L$$OUT_PWD/../../../Lib/$$COMPILER_DIR
 	LIBS += -L$$PWD/../../Lib/$$COMPILER_DIR
 }
 
-# set lib directory for shadow build
-!isEmpty( ACFDIRBUILD ) {
+# Set lib directory for shadow build:
+!isEmpty(ACFDIRBUILD){
 	LIBS += -L$$(ACFDIR_BUILD)/Lib/$$COMPILER_DIR
 }
 
 LIBS += -liqtdoc -liview -liqt2d -liqtprm -liloggui -lifilegui -liqtgui -liwidgets
+
 

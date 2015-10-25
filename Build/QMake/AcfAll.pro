@@ -87,38 +87,39 @@ SUBDIRS += AcfLoc
 AcfLoc.file = ../../Impl/AcfLoc/QMake/AcfLoc.pro
 
 
-#Component
+# Component packages (build only for desktop platforms)
+!macx-ios*{
+	SUBDIRS += BasePck
+	BasePck.file = ../../Impl/BasePck/QMake/BasePck.pro
 
-SUBDIRS += BasePck
-BasePck.file = ../../Impl/BasePck/QMake/BasePck.pro
+	SUBDIRS += BitmapPck
+	BitmapPck.file = ../../Impl/BitmapPck/QMake/BitmapPck.pro
 
-SUBDIRS += BitmapPck
-BitmapPck.file = ../../Impl/BitmapPck/QMake/BitmapPck.pro
+	SUBDIRS += QtPck
+	QtPck.file = ../../Impl/QtPck/QMake/QtPck.pro
 
-SUBDIRS += QtPck
-QtPck.file = ../../Impl/QtPck/QMake/QtPck.pro
+	SUBDIRS += FilePck
+	FilePck.file = ../../Impl/FilePck/QMake/FilePck.pro
 
-SUBDIRS += FilePck
-FilePck.file = ../../Impl/FilePck/QMake/FilePck.pro
+	SUBDIRS += QtGuiPck
+	QtGuiPck.file = ../../Impl/QtGuiPck/QMake/QtGuiPck.pro
 
-SUBDIRS += QtGuiPck
-QtGuiPck.file = ../../Impl/QtGuiPck/QMake/QtGuiPck.pro
+	SUBDIRS += QtViewPck
+	QtViewPck.file = ../../Impl/QtViewPck/QMake/QtViewPck.pro
 
-SUBDIRS += QtViewPck
-QtViewPck.file = ../../Impl/QtViewPck/QMake/QtViewPck.pro
+	SUBDIRS += PackagePck
+	PackagePck.file = ../../Impl/PackagePck/QMake/PackagePck.pro
 
-SUBDIRS += PackagePck
-PackagePck.file = ../../Impl/PackagePck/QMake/PackagePck.pro
+	SUBDIRS += FileGuiPck
+	FileGuiPck.file = ../../Impl/FileGuiPck/QMake/FileGuiPck.pro
+}
 
-SUBDIRS += FileGuiPck
-FileGuiPck.file = ../../Impl/FileGuiPck/QMake/FileGuiPck.pro
+# Tools (build only for desktop platforms)
+!macx-ios*{
+	SUBDIRS += Acf
+	Acf.file = ../../Impl/AcfExe/QMake/Acf.pro
 
-#Tool
-
-SUBDIRS += Acf
-Acf.file = ../../Impl/AcfExe/QMake/Acf.pro
-
-SUBDIRS += Arxc
-Arxc.file = ../../Impl/ArxcExe/QMake/Arxc.pro
-Arxc.depends = Acf
-
+	SUBDIRS += Arxc
+	Arxc.file = ../../Impl/ArxcExe/QMake/Arxc.pro
+	Arxc.depends = Acf
+}

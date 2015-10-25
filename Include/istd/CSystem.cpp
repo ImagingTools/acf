@@ -190,8 +190,10 @@ QString CSystem::GetEnrolledPath(const QString& path, bool envVars, bool embedde
 
 CSystem::EnvironmentVariables CSystem::GetEnvironmentVariables()
 {
-	QStringList processEnvironment = QProcess::systemEnvironment();
 	EnvironmentVariables environmentVariables;
+
+#ifndef QT_NO_PROCESS
+	QStringList processEnvironment = QProcess::systemEnvironment();
 
 	for (int variableIndex = 0; variableIndex < int(processEnvironment.count()); variableIndex++){
 		QString variableEntry = processEnvironment[variableIndex];
@@ -204,7 +206,7 @@ CSystem::EnvironmentVariables CSystem::GetEnvironmentVariables()
 			environmentVariables[variableName.toUpper()] = variableValue;
 		}
 	}
-
+#endif
 	return environmentVariables;
 }
 

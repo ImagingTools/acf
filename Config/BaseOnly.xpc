@@ -30,7 +30,7 @@
   </ConfigFiles>
   <PackageDirs count="0">
   </PackageDirs>
-  <PackageFiles count="5">
+  <PackageFiles count="7">
     <FilePath>
       ../Bin/$(ConfigurationDir)BasePck.arp
     </FilePath>
@@ -38,12 +38,18 @@
       ../Bin/$(ConfigurationDir)QtPck.arp
     </FilePath>
     <FilePath>
-		$(ACFDIR_BUILD)/Bin/$(ConfigurationDir)BasePck.arp
-	</FilePath>
-	  <FilePath>
-		  $(ACFDIR_BUILD)/Bin/$(ConfigurationDir)QtPck.arp
-	  </FilePath>
-	  <FilePath>
+      $(ACFDIR_BUILD)/Bin/$(ConfigurationDir)BasePck.arp
+    </FilePath>
+    <FilePath>
+      $(ACFDIR_BUILD)/Bin/$(ConfigurationDir)QtPck.arp
+    </FilePath>
+    <FilePath>
+      $(ACF_PACKAGES)/BasePck.arp
+    </FilePath>
+    <FilePath>
+      $(ACF_PACKAGES)/QtPck.arp
+    </FilePath>
+    <FilePath>
       ../Partitura/AcfVoce.arp
     </FilePath>
   </PackageFiles>

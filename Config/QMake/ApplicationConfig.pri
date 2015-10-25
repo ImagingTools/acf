@@ -4,8 +4,10 @@ include (GeneralConfig.pri)
 
 TEMPLATE = app
 
-CONFIG += link_prl
-CONFIG += app_bundle
+!macx-ios*{
+	CONFIG += link_prl
+	CONFIG += app_bundle
+}
 
 INCLUDEPATH += $$PWD/../../Impl
 INCLUDEPATH += $$OUT_PWD/../../
@@ -18,3 +20,5 @@ SOURCES += $$_PRO_FILE_PWD_/../*.cpp
 isEqual(DEBUG_INFO_ENABLED_FOR_RELEASE, true){
 	include(MsvcEnableDebugInfo.pri)
 }
+
+
