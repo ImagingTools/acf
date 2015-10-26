@@ -203,9 +203,6 @@ void CApplicationCompBase::InitializeComponentApplication()
 		m_applicationPtr->setOrganizationName(companyNameText);
 	}
 
-	// set up palette
-	m_applicationPtr->setPalette(QApplication::style()->standardPalette());
-
 	// set up current language
 	if (m_translationManagerCompPtr.IsValid() && (m_translationManagerCompPtr->GetCurrentLanguageIndex() < 0)){
 		m_translationManagerCompPtr->SetSystemLanguage();
