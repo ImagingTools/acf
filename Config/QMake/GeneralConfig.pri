@@ -17,7 +17,6 @@ CONFIG(release, debug|release){
 }
 
 COMPILER_NAME = QMake
-PLATFORM_NAME = Unix
 
  CONFIG += depend_includepath
 
@@ -62,11 +61,11 @@ win32-msvc*{
 	}
 
 	contains(QMAKE_HOST.arch, x86_64){
-		PLATFORM_NAME = x64
+		PLATFORM_CODE = x64
 		# SSE2 enabled by default for x86_64
 	}
 	else{
-		PLATFORM_NAME = Win32
+		PLATFORM_CODE = Win32
 		QMAKE_CXXFLAGS += /arch:SSE2
 	}
 }
