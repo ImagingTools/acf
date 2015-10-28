@@ -132,6 +132,7 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag metaInfoTag("MetaInfo", "Single meta information", iser::CArchiveTag::TT_GROUP, &metaInfoMapTag);
 	static iser::CArchiveTag typeTag("Type", "Type of the meta information", iser::CArchiveTag::TT_LEAF, &metaInfoTag);
 	static iser::CArchiveTag valueTag("Value", "Value of the meta information", iser::CArchiveTag::TT_LEAF, &metaInfoTag);
+	static iser::CArchiveTag sizeTag("Size", "Size of the data block", iser::CArchiveTag::TT_LEAF, &metaInfoTag);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
@@ -158,9 +159,23 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 			QVariant value = index.value();
 			variantStream << value;
 
-			retVal = retVal && archive.BeginTag(valueTag);
-			retVal = retVal && archive.Process(variantData);
-			retVal = retVal && archive.EndTag(valueTag);
+			const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();	// TODO: Remove it when backward compatibility to older versions will not be no more important
+			quint32 frameworkVersion = 0;
+			if (versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion) && (frameworkVersion < 4001)){
+				retVal = retVal && archive.BeginTag(valueTag);
+				retVal = retVal && archive.Process(variantData);
+				retVal = retVal && archive.EndTag(valueTag);
+			}
+			else{
+				int dataSize = variantData.size();
+				retVal = retVal && archive.BeginTag(sizeTag);
+				retVal = retVal && archive.Process(dataSize);
+				retVal = retVal && archive.EndTag(sizeTag);
+
+				retVal = retVal && archive.BeginTag(valueTag);
+				retVal = retVal && archive.ProcessData(variantData.data(), dataSize);
+				retVal = retVal && archive.EndTag(valueTag);
+			}
 
 			retVal = retVal && archive.EndTag(metaInfoTag);
 		}
@@ -180,9 +195,25 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.EndTag(typeTag);
 
 			QByteArray variantData;
-			retVal = retVal && archive.BeginTag(valueTag);
-			retVal = retVal && archive.Process(variantData);
-			retVal = retVal && archive.EndTag(valueTag);
+
+			const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();	// TODO: Remove it when backward compatibility to older versions will not be no more important
+			quint32 frameworkVersion = 0;
+			if (versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion) && (frameworkVersion < 4001)){
+				retVal = retVal && archive.BeginTag(valueTag);
+				retVal = retVal && archive.Process(variantData);
+				retVal = retVal && archive.EndTag(valueTag);
+			}
+			else{
+				int dataSize = 0;
+				retVal = retVal && archive.BeginTag(sizeTag);
+				retVal = retVal && archive.Process(dataSize);
+				retVal = retVal && archive.EndTag(sizeTag);
+
+				variantData.resize(dataSize);
+				retVal = retVal && archive.BeginTag(valueTag);
+				retVal = retVal && archive.ProcessData(variantData.data(), dataSize);
+				retVal = retVal && archive.EndTag(valueTag);
+			}
 
 			QVariant variantValue;
 			QDataStream variantStream(variantData);
