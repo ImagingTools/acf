@@ -1,5 +1,5 @@
-#ifndef ifile_CXmlFileWriteArchive_included
-#define ifile_CXmlFileWriteArchive_included
+#ifndef ifile_CSimpleXmlFileWriteArchive_included
+#define ifile_CSimpleXmlFileWriteArchive_included
 
 
 // Qt includes
@@ -18,11 +18,11 @@ namespace ifile
 	Simple implementation of archive for writing in XML format.
 	This implementation doesn't use any external parser.
 	It creates \c counter attribute indicating number of subtags for each mutli tag node.
-	XML file in this format are needed by \c ifile::CXmlFileReadArchive.
+	XML file in this format are needed by \c ifile::CSimpleXmlFileReadArchive.
 
 	\ingroup Persistence
 */
-class CXmlFileWriteArchive:
+class CSimpleXmlFileWriteArchive:
 			public iser::CXmlWriteArchiveBase,
 			public CFileArchiveInfo
 {
@@ -30,12 +30,12 @@ public:
 	typedef iser::CXmlWriteArchiveBase BaseClass;
 	typedef CFileArchiveInfo BaseClass2;
 
-	explicit CXmlFileWriteArchive(
+	explicit CSimpleXmlFileWriteArchive(
 				const QString& filePath,
 				const iser::IVersionInfo* versionInfoPtr = NULL,
 				bool serializeHeader = true,
 				const iser::CArchiveTag& rootTag = s_acfRootTag);
-	virtual ~CXmlFileWriteArchive();
+	virtual ~CSimpleXmlFileWriteArchive();
 
 protected:
 	// reimplemented (iser::CXmlWriteArchiveBase)
@@ -50,6 +50,6 @@ private:
 } // namespace ifile
 
 
-#endif // !ifile_CXmlFileWriteArchive_included
+#endif // !ifile_CSimpleXmlFileWriteArchive_included
 
 

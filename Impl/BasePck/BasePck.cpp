@@ -14,26 +14,6 @@ I_EXPORT_PACKAGE(
 			IM_PROJECT("ACF") IM_TAG("Basic") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			FileTypeInfo,
-			"General file type information provider",
-			"Type Information Format" IM_TAG("File"));
-
-I_EXPORT_COMPONENT(
-			XmlFileSerializer,
-			"File loader serializing objects using simplified XML format",
-			"Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
-
-I_EXPORT_COMPONENT(
-			BinaryFileSerializer,
-			"Simple file loader serializing objects using binary files",
-			"Binary Load Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Loader File"));
-
-I_EXPORT_COMPONENT(
-			ComposedLoader,
-			"Composed loader delegating loading and saving to slave loaders",
-			"Composed File Load Save Slave Delegating" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Composition Loader"));
-
-I_EXPORT_COMPONENT(
 			TextFileLoader,
 			"Simple file serializer for text files",
 			"Text Loader File Serializer Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Text Loader"));

@@ -1,47 +1,36 @@
-#ifndef iqt_CXmlFileWriteArchive_included
-#define iqt_CXmlFileWriteArchive_included
+#ifndef iser_CCompactXmlWriteArchiveBase_included
+#define iser_CCompactXmlWriteArchiveBase_included
 
 
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomNode>
 #include <QtCore/QFile>
 
+// ACF includes
 #include "iser/CTextWriteArchiveBase.h"
-#include "ifile/CFileArchiveInfo.h"
 #include "iser/CXmlDocumentInfoBase.h"
 
-#include "iqt/iqt.h"
+#include "iser/iser.h"
 
 
-namespace iqt
+namespace iser
 {
 
 
 /**
-	Qt-based implementation of archive for writing in XML format.
-	Please note that it doesn't create \c counter attribute needed by \c ifile::CXmlFileReadArchive.
-
-	\ingroup Persistence
+	Base class of compact XML write archive.
 */
-class CXmlFileWriteArchive:
+class CCompactXmlWriteArchiveBase:
 			public iser::CTextWriteArchiveBase,
-			public ifile::CFileArchiveInfo,
 			public iser::CXmlDocumentInfoBase
 {
 public:
 	typedef iser::CTextWriteArchiveBase BaseClass;
-	typedef ifile::CFileArchiveInfo BaseClass2;
 
-	CXmlFileWriteArchive(
-				const QString& filePath = "",
-				const iser::IVersionInfo* versionInfoPtr = NULL,
-				bool serializeHeader = true,
-				const iser::CArchiveTag& rootTag = s_acfRootTag);
-	~CXmlFileWriteArchive();
-
-	bool Flush();
-
-	bool OpenFile(const QString& filePath);
+	/**
+		Close the archive and get the created XML string.
+	*/
+	virtual QByteArray GetString() const;
 
 	// reimplemented (iser::IArchive)
 	virtual bool IsTagSkippingSupported() const;
@@ -52,27 +41,34 @@ public:
 	using BaseClass::Process;
 
 protected:
+	CCompactXmlWriteArchiveBase(
+				const iser::IVersionInfo* versionInfoPtr,
+				bool serializeHeader,
+				const iser::CArchiveTag& rootTag);
+
 	bool WriteStringNode(const QString& text);
 
-	// reimplemented (iser::CTextWriteArchiveBase)
+		// reimplemented (iser::CTextWriteArchiveBase)
 	bool WriteTextNode(const QByteArray& text);
 
-private:
 	QDomDocument m_document;
 	QDomElement m_currentParent;
 
-	QFile m_file;
+private:
+	QByteArray m_currentAttribute;
 
 	bool m_serializeHeader;
 	iser::CArchiveTag m_rootTag;
 
 	bool m_isSeparatorNeeded;
+
+	QList<const iser::CArchiveTag*> m_tagsStack;
 };
 
 
-} // namespace iqt
+} // namespace iser
 
 
-#endif // !iqt_CXmlFileWriteArchive_included
+#endif // !iser_CCompactXmlWriteArchiveBase_included
 
 

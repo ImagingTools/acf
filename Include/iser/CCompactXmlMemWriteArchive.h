@@ -1,5 +1,5 @@
-#ifndef iqt_CCompactXmlMemWriteArchive_included
-#define iqt_CCompactXmlMemWriteArchive_included
+#ifndef iser_CCompactXmlMemWriteArchive_included
+#define iser_CCompactXmlMemWriteArchive_included
 
 
 #include <QtXml/QDomDocument>
@@ -7,16 +7,16 @@
 #include <QtCore/QFile>
 
 // ACF includes
-#include "iqt/CCompactXmlWriteArchiveBase.h"
+#include "iser/CCompactXmlWriteArchiveBase.h"
 
 
-namespace iqt
+namespace iser
 {
 
 
 /**
 	Qt-based implementation of archive for writing in XML format.
-	Please note that it doesn't create \c counter attribute needed by \c ifile::CXmlFileReadArchive.
+	Please note that it doesn't create \c counter attribute needed by \c ifile::CSimpleXmlFileReadArchive.
 
 	\ingroup Persistence
 */
@@ -42,9 +42,9 @@ public:
 };
 
 
-} // namespace iqt
+} // namespace iser
 
 
-#endif // !iqt_CCompactXmlMemWriteArchive_included
+#endif // !iser_CCompactXmlMemWriteArchive_included
 
 

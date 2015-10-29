@@ -1,4 +1,4 @@
-#include "iqt/CCompactXmlMemWriteArchive.h"
+#include "iser/CCompactXmlMemWriteArchive.h"
 
 
 // Qt includes
@@ -6,7 +6,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace iqt
+namespace iser
 {
 
 
@@ -25,6 +25,6 @@ QByteArray CCompactXmlMemWriteArchive::GetString() const
 }
 
 
-} // namespace iqt
+} // namespace iser
 
 

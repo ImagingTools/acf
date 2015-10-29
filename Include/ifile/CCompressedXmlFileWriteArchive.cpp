@@ -1,4 +1,4 @@
-#include "iqt/CCompactXmlFileWriteArchive.h"
+#include "ifile/CCompressedXmlFileWriteArchive.h"
 
 
 // Qt includes
@@ -6,11 +6,11 @@
 #include <QtCore/QTextStream>
 
 
-namespace iqt
+namespace ifile
 {
 
 
-CCompactXmlFileWriteArchive::CCompactXmlFileWriteArchive(
+CCompressedXmlFileWriteArchive::CCompressedXmlFileWriteArchive(
 			const QString& filePath,
 			const iser::IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
@@ -24,35 +24,32 @@ CCompactXmlFileWriteArchive::CCompactXmlFileWriteArchive(
 }
 
 
-CCompactXmlFileWriteArchive::~CCompactXmlFileWriteArchive()
+CCompressedXmlFileWriteArchive::~CCompressedXmlFileWriteArchive()
 {
 	Flush();
 }
 
 
-bool CCompactXmlFileWriteArchive::OpenFile(const QString& filePath)
+bool CCompressedXmlFileWriteArchive::OpenFile(const QString& filePath)
 {
 	m_file.setFileName(filePath);
+
 	return m_file.open(QIODevice::WriteOnly | QIODevice::Text);
 }
 
 
-bool CCompactXmlFileWriteArchive::Flush()
+bool CCompressedXmlFileWriteArchive::Flush()
 {
 	if (m_file.isOpen()){
-		QTextStream stream(&m_file);
+		QByteArray data = qCompress(m_document.toByteArray());
 
-		m_document.save(stream, 4);
-		
-		m_file.close();
-
-		return true;
+		return (m_file.write(data) > 0);
 	}
 
 	return false;
 }
 
 
-} // namespace iqt
+} // namespace ifile
 
 

@@ -1,5 +1,5 @@
-#ifndef iqt_CCompactXmlMemReadArchive_included
-#define iqt_CCompactXmlMemReadArchive_included
+#ifndef iser_CCompactXmlMemReadArchive_included
+#define iser_CCompactXmlMemReadArchive_included
 
 
 // Qt includes
@@ -7,10 +7,10 @@
 #include <QtXml/QDomNode>
 
 // ACF includes
-#include "iqt/CCompactXmlReadArchiveBase.h"
+#include "iser/CCompactXmlReadArchiveBase.h"
 
 
-namespace iqt
+namespace iser
 {
 
 
@@ -43,9 +43,9 @@ protected:
 };
 
 
-} // namespace iqt
+} // namespace iser
 
 
-#endif // !iqt_CCompactXmlMemReadArchive_included
+#endif // !iser_CCompactXmlMemReadArchive_included
 
 

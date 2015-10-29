@@ -7,8 +7,8 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "ifile/CXmlFileReadArchive.h"
-#include "ifile/CXmlFileWriteArchive.h"
+#include "ifile/CSimpleXmlFileReadArchive.h"
+#include "ifile/CSimpleXmlFileWriteArchive.h"
 #include "idoc/CStandardDocumentMetaInfo.h"
 
 
@@ -68,7 +68,7 @@ int CMultiPageDocumentFilePersistenceComp::LoadFromFile(
 
 	QString bundleInfoFilePath = GetInfoFilePath(filePath);
 
-	ifile::CXmlFileReadArchive archive(bundleInfoFilePath);
+	ifile::CSimpleXmlFileReadArchive archive(bundleInfoFilePath);
 	bool retVal = true;
 
 	// Serialize meta info:
@@ -147,7 +147,7 @@ int CMultiPageDocumentFilePersistenceComp::SaveToFile(
 		}
 	}
 
-	ifile::CXmlFileWriteArchive archive(bundleInfoFilePath);
+	ifile::CSimpleXmlFileWriteArchive archive(bundleInfoFilePath);
 
 	bool retVal = true;
 	

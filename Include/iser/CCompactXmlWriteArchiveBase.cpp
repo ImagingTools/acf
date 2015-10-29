@@ -1,4 +1,4 @@
-#include "iqt/CCompactXmlWriteArchiveBase.h"
+#include "iser/CCompactXmlWriteArchiveBase.h"
 
 
 // Qt includes
@@ -6,7 +6,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace iqt
+namespace iser
 {
 
 
@@ -155,6 +155,6 @@ bool CCompactXmlWriteArchiveBase::WriteTextNode(const QByteArray& text)
 }
 
 
-} // namespace iqt
+} // namespace iser
 
 

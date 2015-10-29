@@ -1,11 +1,11 @@
-#include "ifile/CXmlFileReadArchive.h"
+#include "ifile/CSimpleXmlFileReadArchive.h"
 
 
 namespace ifile
 {
 
 
-CXmlFileReadArchive::CXmlFileReadArchive(const QString& filePath, bool serializeHeader, const iser::CArchiveTag& rootTag)
+CSimpleXmlFileReadArchive::CSimpleXmlFileReadArchive(const QString& filePath, bool serializeHeader, const iser::CArchiveTag& rootTag)
 :	BaseClass(rootTag),
 	BaseClass2(filePath),
 	m_file(filePath)
@@ -22,7 +22,7 @@ CXmlFileReadArchive::CXmlFileReadArchive(const QString& filePath, bool serialize
 }
 
 
-CXmlFileReadArchive::~CXmlFileReadArchive()
+CSimpleXmlFileReadArchive::~CSimpleXmlFileReadArchive()
 {
 	if (m_file.isOpen()){
 		ReadXmlFooter();
@@ -38,7 +38,7 @@ CXmlFileReadArchive::~CXmlFileReadArchive()
 
 // reimplemented (istd::ILogger)
 
-void CXmlFileReadArchive::DecorateMessage(
+void CSimpleXmlFileReadArchive::DecorateMessage(
 			istd::IInformationProvider::InformationCategory /*category*/,
 			int /*id*/,
 			int /*flags*/,

@@ -82,7 +82,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtPck" Id="XmlLogSerializer" ComponentId="CompactXmlFileSerializer">
+        <Element PackageId="FilePck" Id="XmlLogSerializer" ComponentId="CompactXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="FileExtensions" ExportId="" Type="String[]">

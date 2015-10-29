@@ -9,7 +9,7 @@
 #include "istd/CSystem.h"
 #include "icomp/CRegistry.h"
 #include "icomp/CXpcModel.h"
-#include "ifile/CXmlFileReadArchive.h"
+#include "ifile/CSimpleXmlFileReadArchive.h"
 
 
 namespace ipackage
@@ -274,7 +274,7 @@ bool CRegistriesManagerComp::LoadConfigFile(const QString& configFile)
 
 	SendVerboseMessage(QObject::tr("Load configuration file: %1").arg(configFilePath));
 
-	ifile::CXmlFileReadArchive archive(configFilePath);
+	ifile::CSimpleXmlFileReadArchive archive(configFilePath);
 
 	icomp::CXpcModel configurationData;
 	if (!configurationData.Serialize(archive)){

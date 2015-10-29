@@ -12,7 +12,19 @@
 #include "ifile/CFileListProviderComp.h"
 #include "ifile/CAutoPersistenceComp.h"
 #include "ifile/CFileSystemInfoProviderComp.h"
+#include "ifile/CComposedFilePersistenceComp.h"
+#include "ifile/CFileTypeInfoComp.h"
 #include "ifile/CComposedFileMetaInfoProviderComp.h"
+#include "ifile/TFileSerializerComp.h"
+#include "ifile/TXmlFileSerializerComp.h"
+#include "ifile/CSimpleXmlFileReadArchive.h"
+#include "ifile/CSimpleXmlFileWriteArchive.h"
+#include "ifile/CFileReadArchive.h"
+#include "ifile/CFileWriteArchive.h"
+#include "ifile/CCompactXmlFileReadArchive.h"
+#include "ifile/CCompactXmlFileWriteArchive.h"
+#include "ifile/CCompressedXmlFileReadArchive.h"
+#include "ifile/CCompressedXmlFileWriteArchive.h"
 
 
 /**
@@ -29,8 +41,14 @@ typedef icomp::TModelCompWrap<ifile::CGeneratedFileNameParamComp> GeneratedFileN
 typedef icomp::TModelCompWrap<ifile::CFileListProviderComp> FileListProvider;
 typedef icomp::TModelCompWrap<ifile::CFileListProviderComp> FileListProvider;
 typedef ifile::CAutoPersistenceComp AutoPersistence;
-typedef  icomp::TModelCompWrap<ifile::CFileSystemInfoProviderComp> FileSystemInfoProvider;
+typedef icomp::TModelCompWrap<ifile::CFileSystemInfoProviderComp> FileSystemInfoProvider;
+typedef ifile::CComposedFilePersistenceComp ComposedFilePersistence;
+typedef ifile::CFileTypeInfoComp FileTypeInfo;
 typedef ifile::CComposedFileMetaInfoProviderComp ComposedFileMetaInfoProvider;
+typedef ifile::TXmlFileSerializerComp<ifile::CSimpleXmlFileReadArchive, ifile::CSimpleXmlFileWriteArchive> SimpleXmlFileSerializer;
+typedef ifile::TFileSerializerComp<ifile::CFileReadArchive, ifile::CFileWriteArchive> BinaryFileSerializer;
+typedef ifile::TXmlFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive> CompactXmlFileSerializer;
+typedef ifile::TXmlFileSerializerComp<ifile::CCompressedXmlFileReadArchive, ifile::CCompressedXmlFileWriteArchive> CompressedXmlFileSerializer;
 
 
 } // namespace FilePck

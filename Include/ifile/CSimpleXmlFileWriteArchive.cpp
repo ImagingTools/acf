@@ -1,11 +1,11 @@
-#include "ifile/CXmlFileWriteArchive.h"
+#include "ifile/CSimpleXmlFileWriteArchive.h"
 
 
 namespace ifile
 {
 
 
-CXmlFileWriteArchive::CXmlFileWriteArchive(
+CSimpleXmlFileWriteArchive::CSimpleXmlFileWriteArchive(
 			const QString& filePath,
 			const iser::IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
@@ -31,7 +31,7 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 }
 
 
-CXmlFileWriteArchive::~CXmlFileWriteArchive()
+CSimpleXmlFileWriteArchive::~CSimpleXmlFileWriteArchive()
 {
 	if (m_file.isOpen()){
 		WriteXmlFooter();
@@ -45,7 +45,7 @@ CXmlFileWriteArchive::~CXmlFileWriteArchive()
 
 // reimplemented (iser::CXmlWriteArchiveBase)
 
-bool CXmlFileWriteArchive::WriteString(const QByteArray& value)
+bool CSimpleXmlFileWriteArchive::WriteString(const QByteArray& value)
 {
 	m_stream << value;
 

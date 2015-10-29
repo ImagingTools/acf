@@ -1,4 +1,4 @@
-#include "iqt/CCompactXmlFileReadArchive.h"
+#include "ifile/CCompactXmlFileReadArchive.h"
 
 
 // include STL
@@ -9,7 +9,7 @@
 #include <QtXml/QDomNodeList>
 
 
-namespace iqt
+namespace ifile
 {
 
 
@@ -78,6 +78,6 @@ void CCompactXmlFileReadArchive::DecorateMessage(
 }
 
 
-} // namespace iqt
+} // namespace ifile
 
 

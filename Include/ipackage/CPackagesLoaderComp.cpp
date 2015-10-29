@@ -11,7 +11,7 @@
 #include "istd/CChangeNotifier.h"
 #include "istd/CSystem.h"
 #include "icomp/CXpcModel.h"
-#include "ifile/CXmlFileReadArchive.h"
+#include "ifile/CSimpleXmlFileReadArchive.h"
 
 
 namespace ipackage
@@ -300,7 +300,7 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 			packageInfo.directory = packageDir;
 
 			QString metaInfoFile(packageDir.absoluteFilePath("General.xml"));
-			ifile::CXmlFileReadArchive archive(metaInfoFile);
+			ifile::CSimpleXmlFileReadArchive archive(metaInfoFile);
 			if (!infoPtr->SerializeMeta(archive)){
 				SendWarningMessage(
 							ifile::IFilePersistence::MI_CANNOT_LOAD,
@@ -362,7 +362,7 @@ bool CPackagesLoaderComp::LoadConfigFile(const QString& configFile)
 
 	SendVerboseMessage(tr("Load configuration file: %1").arg(configFilePath));
 
-	ifile::CXmlFileReadArchive archive(configFilePath);
+	ifile::CSimpleXmlFileReadArchive archive(configFilePath);
 
 	icomp::CXpcModel configurationData;
 	if (!configurationData.Serialize(archive)){

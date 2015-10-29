@@ -8,11 +8,11 @@
 #include "icomp/CCompositeComponentContext.h"
 #include "icomp/CRegistryElement.h"
 #include "ifile/TFileSerializerComp.h"
-#include "ifile/CXmlFileReadArchive.h"
-#include "ifile/CXmlFileWriteArchive.h"
+#include "ifile/CSimpleXmlFileReadArchive.h"
+#include "ifile/CSimpleXmlFileWriteArchive.h"
 #include "ifile/CComposedFilePersistenceComp.h"
-#include "iqt/CCompactXmlFileReadArchive.h"
-#include "iqt/CCompactXmlFileWriteArchive.h"
+#include "ifile/CCompactXmlFileReadArchive.h"
+#include "ifile/CCompactXmlFileWriteArchive.h"
 #include "ipackage/CPackagesLoaderComp.h"
 
 
@@ -22,8 +22,8 @@ namespace
 	
 struct Loader
 {
-	icomp::TSimComponentWrap< ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive> > oldRegistrySerializerComp;
-	icomp::TSimComponentWrap< ifile::TFileSerializerComp<iqt::CCompactXmlFileReadArchive, iqt::CCompactXmlFileWriteArchive> > registrySerializerComp;
+	icomp::TSimComponentWrap< ifile::TFileSerializerComp<ifile::CSimpleXmlFileReadArchive, ifile::CSimpleXmlFileWriteArchive> > oldRegistrySerializerComp;
+	icomp::TSimComponentWrap< ifile::TFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive> > registrySerializerComp;
 	icomp::TSimComponentWrap<ifile::CComposedFilePersistenceComp> composedSerializerComp;
 	icomp::TSimComponentWrap<ipackage::CPackagesLoaderComp> packagesLoaderComp;
 

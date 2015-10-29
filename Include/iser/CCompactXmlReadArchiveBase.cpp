@@ -1,4 +1,4 @@
-#include "iqt/CCompactXmlReadArchiveBase.h"
+#include "iser/CCompactXmlReadArchiveBase.h"
 
 
 // include STL
@@ -9,7 +9,7 @@
 #include <QtXml/QDomNodeList>
 
 
-namespace iqt
+namespace iser
 {
 
 
@@ -221,6 +221,6 @@ void CCompactXmlReadArchiveBase::DecorateMessage(
 }
 
 
-} // namespace iqt
+} // namespace iser
 
 

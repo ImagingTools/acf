@@ -1,5 +1,5 @@
-#ifndef iqt_CCompactXmlFileReadArchive_included
-#define iqt_CCompactXmlFileReadArchive_included
+#ifndef ifile_CCompressedXmlFileReadArchive_included
+#define ifile_CCompressedXmlFileReadArchive_included
 
 
 // Qt includes
@@ -7,10 +7,10 @@
 #include <QtXml/QDomNode>
 
 // ACF includes
-#include "iqt/CCompactXmlReadArchiveBase.h"
+#include "iser/CCompactXmlReadArchiveBase.h"
 
 
-namespace iqt
+namespace ifile
 {
 
 
@@ -19,15 +19,15 @@ namespace iqt
 
 	\ingroup Persistence
 */
-class CCompactXmlFileReadArchive: public CCompactXmlReadArchiveBase
+class CCompressedXmlFileReadArchive: public iser::CCompactXmlReadArchiveBase
 {
 public:
-	typedef CCompactXmlReadArchiveBase BaseClass;
+	typedef iser::CCompactXmlReadArchiveBase BaseClass;
 
 	/**
 		Constructor initializing archive to work with file.
 	*/
-	CCompactXmlFileReadArchive(
+	CCompressedXmlFileReadArchive(
 				const QString& filePath = "",
 				bool serializeHeader = true,
 				const iser::CArchiveTag& rootTag = s_acfRootTag);
@@ -49,9 +49,9 @@ private:
 };
 
 
-} // namespace iqt
+} // namespace ifile
 
 
-#endif // !iqt_CCompactXmlFileReadArchive_included
+#endif // !ifile_CCompressedXmlFileReadArchive_included
 
 

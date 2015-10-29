@@ -76,7 +76,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="DocumentLoader" ComponentId="XmlFileSerializer">
+        <Element PackageId="FilePck" Id="DocumentLoader" ComponentId="SimpleXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="FileExtensions" ExportId="" Type="String[]">

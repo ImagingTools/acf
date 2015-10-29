@@ -40,7 +40,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="XmlFileSerializer" PackageId="QtPck" ComponentId="CompactXmlFileSerializer">
+        <Element PackageId="FilePck" Id="XmlFileSerializer" ComponentId="CompactXmlFileSerializer">
             <Data Flags="0" IsEnabled="true">
                 <AttributeInfoMap>
                     <AttributeInfo Id="AutoCreatePath" ExportId="AutoCreatePath" Type="Boolean">

@@ -1,5 +1,5 @@
-#ifndef iqt_CCompactXmlFileWriteArchive_included
-#define iqt_CCompactXmlFileWriteArchive_included
+#ifndef ifile_CCompressedXmlFileWriteArchive_included
+#define ifile_CCompressedXmlFileWriteArchive_included
 
 
 #include <QtXml/QDomDocument>
@@ -8,10 +8,10 @@
 
 // ACF includes
 #include "ifile/CFileArchiveInfo.h"
-#include "iqt/CCompactXmlWriteArchiveBase.h"
+#include "iser/CCompactXmlWriteArchiveBase.h"
 
 
-namespace iqt
+namespace ifile
 {
 
 
@@ -20,23 +20,23 @@ namespace iqt
 
 	\ingroup Persistence
 */
-class CCompactXmlFileWriteArchive:
-			public CCompactXmlWriteArchiveBase,
+class CCompressedXmlFileWriteArchive:
+			public iser::CCompactXmlWriteArchiveBase,
 			public ifile::CFileArchiveInfo
 {
 public:
-	typedef CCompactXmlWriteArchiveBase BaseClass;
+	typedef iser::CCompactXmlWriteArchiveBase BaseClass;
 	typedef ifile::CFileArchiveInfo BaseClass2;
 
 	/**
 		Constructor initializing archive to open file immediatelly.
 	*/
-	CCompactXmlFileWriteArchive(
+	CCompressedXmlFileWriteArchive(
 				const QString& filePath,
 				const iser::IVersionInfo* versionInfoPtr = NULL,
 				bool serializeHeader = true,
 				const iser::CArchiveTag& rootTag = s_acfRootTag);
-	~CCompactXmlFileWriteArchive();
+	~CCompressedXmlFileWriteArchive();
 
 	bool OpenFile(const QString& filePath);
 
@@ -47,9 +47,9 @@ private:
 };
 
 
-} // namespace iqt
+} // namespace ifile
 
 
-#endif // !iqt_CCompactXmlFileWriteArchive_included
+#endif // !ifile_CCompressedXmlFileWriteArchive_included
 
 

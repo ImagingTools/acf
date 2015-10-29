@@ -9,15 +9,6 @@
 #include "ilog/CLogComp.h"
 #include "ilog/CTextFileLogStreamerComp.h"
 
-#include "ifile/TFileSerializerComp.h"
-#include "ifile/TXmlFileSerializerComp.h"
-#include "ifile/CXmlFileReadArchive.h"
-#include "ifile/CXmlFileWriteArchive.h"
-#include "ifile/CFileReadArchive.h"
-#include "ifile/CFileWriteArchive.h"
-#include "ifile/CComposedFilePersistenceComp.h"
-#include "ifile/CFileTypeInfoComp.h"
-
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
@@ -84,11 +75,6 @@ typedef ilog::CTextFileLogComp TextFileLog;
 typedef ilog::CConsoleLogComp ConsoleLog;
 typedef icomp::TModelCompWrap<ilog::CLogComp> Log;
 typedef ilog::CTextFileLogStreamerComp TextFileLogStreamer;
-
-typedef ifile::TXmlFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive> XmlFileSerializer;
-typedef ifile::TFileSerializerComp<ifile::CFileReadArchive, ifile::CFileWriteArchive> BinaryFileSerializer;
-typedef ifile::CComposedFilePersistenceComp ComposedLoader;
-typedef ifile::CFileTypeInfoComp FileTypeInfo;
 
 typedef ibase::CInstantiatorComp Instantiator;
 typedef ibase::CVersionInfoComp VersionInfo;

@@ -115,21 +115,21 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<BasePck::ConsoleLog> log;
 	log.InitComponent();
 
-	icomp::TSimComponentWrap<BasePck::XmlFileSerializer> oldFormatLoaderComp;
+	icomp::TSimComponentWrap<FilePck::SimpleXmlFileSerializer> oldFormatLoaderComp;
 	oldFormatLoaderComp.InsertMultiAttr("FileExtensions", QString("arx"));
 	oldFormatLoaderComp.SetRef("Log", &log);
 	oldFormatLoaderComp.SetRef("VersionInfo", &applicationInfo);
 	oldFormatLoaderComp.SetBoolAttr("EnableVerbose", verboseEnabled);
 	oldFormatLoaderComp.InitComponent();
 
-	icomp::TSimComponentWrap<QtPck::CompactXmlFileSerializer> newFormatLoaderComp;
+	icomp::TSimComponentWrap<FilePck::CompactXmlFileSerializer> newFormatLoaderComp;
 	newFormatLoaderComp.InsertMultiAttr("FileExtensions", QString("acc"));
 	newFormatLoaderComp.SetRef("Log", &log);
 	newFormatLoaderComp.SetRef("VersionInfo", &applicationInfo);
 	newFormatLoaderComp.SetBoolAttr("EnableVerbose", verboseEnabled);
 	newFormatLoaderComp.InitComponent();
 
-	icomp::TSimComponentWrap<BasePck::ComposedLoader> registryLoaderComp;
+	icomp::TSimComponentWrap<FilePck::ComposedFilePersistence> registryLoaderComp;
 	registryLoaderComp.InsertMultiRef("SlaveLoaders", &oldFormatLoaderComp);
 	registryLoaderComp.InsertMultiRef("SlaveLoaders", &newFormatLoaderComp);
 	registryLoaderComp.SetStringAttr("CommonDescription", "ACF Registry");

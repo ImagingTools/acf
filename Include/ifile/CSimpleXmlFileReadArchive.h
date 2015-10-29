@@ -1,5 +1,5 @@
-#ifndef ifile_CXmlFileReadArchive_included
-#define ifile_CXmlFileReadArchive_included
+#ifndef ifile_CSimpleXmlFileReadArchive_included
+#define ifile_CSimpleXmlFileReadArchive_included
 
 
 // Qt includes
@@ -19,11 +19,11 @@ namespace ifile
 	This implementation doesn't use any external parser.
 	It uses only single pass and is very fast, but it doesn't support of tags skipping and
 	it needs \c counter attribute indicating number of subtags for each mutli tag node.
-	XML file in this format can be created using \c ifile::CXmlFileWriteArchive.
+	XML file in this format can be created using \c ifile::CSimpleXmlFileWriteArchive.
 
 	\ingroup Persistence
 */
-class CXmlFileReadArchive:
+class CSimpleXmlFileReadArchive:
 			public iser::CXmlStreamReadArchiveBase,
 			public CFileArchiveInfo
 {
@@ -31,8 +31,8 @@ public:
 	typedef iser::CXmlStreamReadArchiveBase BaseClass;
 	typedef CFileArchiveInfo BaseClass2;
 
-	explicit CXmlFileReadArchive(const QString& filePath, bool serializeHeader = true, const iser::CArchiveTag& rootTag = s_acfRootTag);
-	virtual ~CXmlFileReadArchive();
+	explicit CSimpleXmlFileReadArchive(const QString& filePath, bool serializeHeader = true, const iser::CArchiveTag& rootTag = s_acfRootTag);
+	virtual ~CSimpleXmlFileReadArchive();
 
 protected:
 	// reimplemented (istd::ILogger)
@@ -51,6 +51,6 @@ private:
 } // namespace ifile
 
 
-#endif // !ifile_CXmlFileReadArchive_included
+#endif // !ifile_CSimpleXmlFileReadArchive_included
 
 

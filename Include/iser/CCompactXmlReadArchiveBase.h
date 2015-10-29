@@ -1,5 +1,5 @@
-#ifndef iqt_CCompactXmlReadArchiveBase_included
-#define iqt_CCompactXmlReadArchiveBase_included
+#ifndef iser_CCompactXmlReadArchiveBase_included
+#define iser_CCompactXmlReadArchiveBase_included
 
 
 // Qt includes
@@ -10,10 +10,10 @@
 #include "iser/CXmlDocumentInfoBase.h"
 #include "iser/CTextReadArchiveBase.h"
 
-#include "iqt/iqt.h"
+#include "iser/iser.h"
 
 
-namespace iqt
+namespace iser
 {
 
 
@@ -62,9 +62,9 @@ private:
 };
 
 
-} // namespace iqt
+} // namespace iser
 
 
-#endif // !iqt_CCompactXmlReadArchiveBase_included
+#endif // !iser_CCompactXmlReadArchiveBase_included
 
 

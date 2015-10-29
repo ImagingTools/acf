@@ -263,8 +263,8 @@ http://ilena.org/redmine/projects/acf/wiki/ModelObserver-Tutorial
 	- Write to a binary file - ifile::CFileWriteArchive
 	- Read from a fast parsed XML document given as a string - iser::CXmlStringReadArchive
 	- Write to a fast parsed XML-string - iser::CXmlStringWriteArchive
-	- Read from a fast parsed XML file - ifile::CXmlFileReadArchive
-	- Write to a fast parsed XML file - ifile::CXmlFileWriteArchive
+	- Read from a fast parsed XML file - ifile::CSimpleXmlFileReadArchive
+	- Write to a fast parsed XML file - ifile::CSimpleXmlFileWriteArchive
 	- Read from a memory block bitwise - iser::CBitMemoryReadArchive
 	- Write to a memory block bitwise - iser::CBitMemoryWriteArchive
 	- Write to a TCP/IP socket - iqt::CNetworkWriteArchive

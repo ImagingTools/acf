@@ -49,9 +49,39 @@ I_EXPORT_COMPONENT(
 			"Free System Info" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("File System"));
 
 I_EXPORT_COMPONENT(
+			FileTypeInfo,
+			"General file type information provider",
+			"Type Information Format" IM_TAG("File"));
+
+I_EXPORT_COMPONENT(
+			ComposedFilePersistence,
+			"Composed loader and saver delegating loading and saving to slave persistence implementations",
+			"Composed File Load Save Slave Delegating" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Composition Loader"));
+
+I_EXPORT_COMPONENT(
 			ComposedFileMetaInfoProvider,
 			"Composed provider of file's meta informations",
 			"File Info Information Provider Composition" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("File"));
+
+I_EXPORT_COMPONENT(
+			BinaryFileSerializer,
+			"Simple file loader serializing objects using binary files",
+			"Binary Load Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Loader File"));
+
+I_EXPORT_COMPONENT(
+			SimpleXmlFileSerializer,
+			"File loader serializing objects using simplified XML format",
+			"Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
+
+I_EXPORT_COMPONENT(
+		   CompactXmlFileSerializer,
+		   "Stores and loads objects to/from files  using compact XML format",
+		   "Save Serializer Archive Format Compact Attributes" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
+
+I_EXPORT_COMPONENT(
+		   CompressedXmlFileSerializer,
+		   "Stores and loads objects to/from files  using compressed compact XML format",
+		   "Compress Uncompress Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
 
 
 } // namespace FilePck
