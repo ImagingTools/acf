@@ -3,7 +3,7 @@ echo off
 set LICENSE_TYPE=OpenSource
 set LICENSE_DIR=Install/LGPL
 set LICENSE_INSTALL_PATH=../LGPL/License.txt
-set ACF_CONFIG_FILE=$(ACFSLNDIR)/Config/Core.xpc
+set ACF_CONFIG_FILE=$(ACFSLNDIR)/Config/AcfSlnConfig.awc
 
 call %~dp0\..\Build\VC10\_CreateVCProjectsFromQMake.bat
 call %~dp0\..\Build\VC12\_CreateVCProjectsFromQMake.bat
