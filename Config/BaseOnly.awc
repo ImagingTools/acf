@@ -1,0 +1,20 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Number="4005" Id="0" Description="ACF"/>
+            <Version Number="328706" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <ConfigFiles/>
+    <PackageDirs/>
+    <PackageFiles>
+        <FilePath>../Bin/$(ConfigurationDir)BasePck.arp</FilePath>
+        <FilePath>../Bin/$(ConfigurationDir)QtPck.arp</FilePath>
+        <FilePath>$(ACFDIR_BUILD)/Bin/$(ConfigurationDir)BasePck.arp</FilePath>
+        <FilePath>$(ACFDIR_BUILD)/Bin/$(ConfigurationDir)QtPck.arp</FilePath>
+        <FilePath>$(ACF_PACKAGES)/BasePck.arp</FilePath>
+        <FilePath>$(ACF_PACKAGES)/QtPck.arp</FilePath>
+        <FilePath>../Partitura/AcfVoce.arp</FilePath>
+    </PackageFiles>
+    <RegistryFiles/>
+</Acf>

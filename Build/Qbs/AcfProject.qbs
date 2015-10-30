@@ -63,9 +63,9 @@ Project{
 
 	Product{
 		name: "AcfCoreConfig"
-		type: ["xpc", "acf_share"]
+		type: ["awc", "acf_share"]
 
-		files: ["../../Config/PartituraOnly.xpc"]
+		files: ["../../Config/PartituraOnly.awc"]
 
 		destinationDirectory: "Config"
 

@@ -38,8 +38,8 @@ AcfModule{
 					if (dependencyFilePath != null){
 						acfConfigurationFile = dependencyFilePath;
 					}
-					else if (dependency.type != null && dependency.type.contains("xpc")){
-						acfConfigurationFile = AcfService.joinPaths(product.buildDirectory, dependency.destinationDirectory) + "/" + dependency.name + ".xpc";
+					else if (dependency.type != null && dependency.type.contains("awc")){
+						acfConfigurationFile = AcfService.joinPaths(product.buildDirectory, dependency.destinationDirectory) + "/" + dependency.name + ".awc";
 					}
 				}
 
@@ -100,8 +100,8 @@ AcfModule{
 					if (dependencyFilePath != null){
 						acfConfigurationFile = dependencyFilePath;
 					}
-					else if (dependency.type != null && dependency.type.contains("xpc")){
-						acfConfigurationFile = AcfService.joinPaths(product.buildDirectory, dependency.destinationDirectory) + "/" + dependency.name + ".xpc";
+					else if (dependency.type != null && dependency.type.contains("awc")){
+						acfConfigurationFile = AcfService.joinPaths(product.buildDirectory, dependency.destinationDirectory) + "/" + dependency.name + ".awc";
 					}
 				}
 
@@ -142,7 +142,7 @@ AcfModule{
 		condition: (project.acfGenerateShare == true) && (product.name.indexOf("_") != 0)	// prefix '_' will be used for temporary products
 		id: acfShareGenerator
 		multiplex: true
-		inputs: ["cpp", "c", "objcpp", "objc", "xpc_file"]
+		inputs: ["cpp", "c", "objcpp", "objc", "awc_file"]
 
 		Artifact{
             filePath: "share/qbs/modules/" + product.name + "/" + product.name + ".qbs"
@@ -160,7 +160,7 @@ AcfModule{
 				pkginfo.write("\n");
 				pkginfo.write("Module{\n");
 
-				if (!product.type.contains("xpc")){
+				if (!product.type.contains("awc")){
 					var dependencies = product.dependencies;
 					for (var dependencyIndex in dependencies) {
 						var dependency = dependencies[dependencyIndex];
@@ -183,14 +183,14 @@ AcfModule{
 				if (product.type.contains("application")){
 					pkginfo.write("	readonly property path acfBinDirectory: path + '/../../../../" + product.destinationDirectory + "'\n");
 				}
-				if (product.type.contains("xpc")){
-					pkginfo.write("	readonly property path xpcFilePath: path + '/../../../../" + product.destinationDirectory + "/" + product.name + ".xpc'\n");
+				if (product.type.contains("awc")){
+					pkginfo.write("	readonly property path xpcFilePath: path + '/../../../../" + product.destinationDirectory + "/" + product.name + ".awc'\n");
 				}
 				if (product.type.contains("acfComponent")){
 					pkginfo.write("	readonly property path componentFilePath: path + '/../../../../" + product.destinationDirectory + "/" + product.name + ".arp'\n");
 				}
 
-				if (!product.type.contains("xpc")){
+				if (!product.type.contains("awc")){
 					pkginfo.write("\n");
 
 					var includePaths = product.moduleProperties("cpp", "includePaths");
@@ -236,11 +236,11 @@ AcfModule{
 	Rule{
 		id: acfXpcGenerator
 		multiplex: true
-		inputs: ["xpc_file"]
+		inputs: ["awc_file"]
 
 		Artifact{
-            filePath: product.destinationDirectory + "/" + product.name + ".xpc"
-			fileTags: ["xpc"]
+            filePath: product.destinationDirectory + "/" + product.name + ".awc"
+			fileTags: ["awc"]
 		}
 		prepare:{
 			var cmd = new JavaScriptCommand();
@@ -251,28 +251,17 @@ AcfModule{
 				var outputDir = FileInfo.path(outputFilePath);
 
 				var pkginfo = new TextFile(outputFilePath, TextFile.WriteOnly);
-				pkginfo.write("<?xml version=\"1.0\"?>\n");
 				pkginfo.write("<Acf>\n");
 				pkginfo.write("	<AcfHeader>\n");
-				pkginfo.write("		<VersionInfos count=\"1\">\n");
-				pkginfo.write("			<Version>\n");
-				pkginfo.write("				<Id>\n");
-				pkginfo.write("					0\n");
-				pkginfo.write("				</Id>\n");
-				pkginfo.write("				<Number>\n");
-				pkginfo.write("					2484\n");
-				pkginfo.write("				</Number>\n");
-				pkginfo.write("				<Description>\n");
-				pkginfo.write("					ACF\n");
-				pkginfo.write("				</Description>\n");
-				pkginfo.write("			</Version>\n");
+				pkginfo.write("		<VersionInfos>\n");
+				pkginfo.write("			<Version Number=\"4005\" Id=\"0\" Description=\"ACF\"/>\n");
 				pkginfo.write("		</VersionInfos>\n");
 				pkginfo.write("	</AcfHeader>\n");
 
 				var configsList = [];
 
-				for (var inputIndex in inputs.xpc_file){
-					var inputProduct = inputs.xpc_file[inputIndex];
+				for (var inputIndex in inputs.awc_file){
+					var inputProduct = inputs.awc_file[inputIndex];
 					configsList.push(AcfService.relativePath(outputDir, inputProduct.filePath));
 				}
 
@@ -283,17 +272,15 @@ AcfModule{
 					if (dependencyFilePath != null){
 						configsList.push(AcfService.relativePath(outputDir, dependencyFilePath));
 					}
-					else if (dependency.type != null && dependency.type.contains("xpc")){
-						configsList.push(AcfService.relativePath(product.destinationDirectory, dependency.destinationDirectory + "/" + dependency.name + ".xpc"));
+					else if (dependency.type != null && dependency.type.contains("awc")){
+						configsList.push(AcfService.relativePath(product.destinationDirectory, dependency.destinationDirectory + "/" + dependency.name + ".awc"));
 					}
 				}
 
-				pkginfo.write("	<ConfigFiles count=\"" + configsList.length + "\">\n");
+				pkginfo.write("	<ConfigFiles>\n");
 				for (var configIndex in configsList){
 					var configFilePath = configsList[configIndex];
-					pkginfo.write("		<FilePath>\n");
-					pkginfo.write("			" + configFilePath + "\n");
-					pkginfo.write("		</FilePath>\n");
+					pkginfo.write("		<FilePath>" + configFilePath + "</FilePath>\n");
 				}
 				pkginfo.write("	</ConfigFiles>\n");
 
@@ -322,23 +309,18 @@ AcfModule{
 				pkginfo.write("	<PackageDirs count=\"0\">\n");
 				for (var packageDirIndex in packageDirsList) {
 					var packageDirPath = AcfService.relativePath(outputDir, packageDirsList[packageDirIndex]);
-					pkginfo.write("		<Dir>\n");
-					pkginfo.write("			" + packageDirPath + "\n");
-					pkginfo.write("		</Dir>\n");
+					pkginfo.write("		<Dir>" + packageDirPath + "</Dir>\n");
 				}
 				pkginfo.write("	</PackageDirs>\n");
 
-				pkginfo.write("	<PackageFiles count=\"" + packagesList.length + "\">\n");
+				pkginfo.write("	<PackageFiles>\n");
 				for (var packageIndex in packagesList) {
 					var packageFilePath = packagesList[packageIndex];
-					pkginfo.write("		<FilePath>\n");
-					pkginfo.write("			" + packageFilePath + "\n");
-					pkginfo.write("		</FilePath>\n");
+					pkginfo.write("		<FilePath>" + packageFilePath + "</FilePath>\n");
 				}
 				pkginfo.write("	</PackageFiles>\n");
 
-				pkginfo.write("	<RegistryFiles count=\"0\">\n");
-				pkginfo.write("	</RegistryFiles>\n");
+				pkginfo.write("	<RegistryFiles/>\n");
 
 				pkginfo.write("</Acf>\n");
 				pkginfo.close();

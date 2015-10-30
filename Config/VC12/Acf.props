@@ -49,7 +49,7 @@
   <ItemDefinitionGroup>
     <FileConvertCopy>
       <RegistryFile>$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.acc</RegistryFile>
-      <ConfigFile>$(ACFDIR)\Config\AcfBaseOnly.xpc</ConfigFile>
+      <ConfigFile>$(ACFDIR)\Config\BaseOnly.awc</ConfigFile>
       <OutputDir>$(OutputDir)</OutputDir>
       <CommandLineTemplate>"$(ACFDIR)\Bin\$(Configuration)VC12\Acf.exe" "%(RegistryFile)" -config "%(ConfigFile)" -input "%(FullPath)" -o %(OutputDir)/%(Filename)</CommandLineTemplate>
       <Outputs>"%(OutputDir)/%(Filename)"</Outputs>

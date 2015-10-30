@@ -108,8 +108,8 @@ Module{
 	}
 
 	FileTagger{
-		patterns: ["*.xpc"]
-		fileTags: ["xpc_file"]
+		patterns: ["*.awc"]
+		fileTags: ["awc_file"]
 	}
 
 	FileTagger{

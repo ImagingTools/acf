@@ -10,6 +10,7 @@
 #include "icomp/CRegistry.h"
 #include "icomp/CXpcModel.h"
 #include "ifile/CSimpleXmlFileReadArchive.h"
+#include "ifile/CCompactXmlFileReadArchive.h"
 
 
 namespace ipackage
@@ -274,13 +275,25 @@ bool CRegistriesManagerComp::LoadConfigFile(const QString& configFile)
 
 	SendVerboseMessage(QObject::tr("Load configuration file: %1").arg(configFilePath));
 
-	ifile::CSimpleXmlFileReadArchive archive(configFilePath);
-
 	icomp::CXpcModel configurationData;
-	if (!configurationData.Serialize(archive)){
-		SendErrorMessage(ifile::IFilePersistence::MI_CANNOT_LOAD, QObject::tr("Cannot open configuration file: %1").arg(configFilePath));
 
-		return false;
+	if (fileInfo.suffix() == "xpc"){
+		ifile::CSimpleXmlFileReadArchive archive(configFilePath);
+
+		if (!configurationData.Serialize(archive)){
+			SendErrorMessage(ifile::IFilePersistence::MI_CANNOT_LOAD, QObject::tr("Cannot open configuration file: %1").arg(configFilePath));
+
+			return false;
+		}
+	}
+	else{
+		ifile::CCompactXmlFileReadArchive archive(configFilePath);
+
+		if (!configurationData.Serialize(archive)){
+			SendErrorMessage(ifile::IFilePersistence::MI_CANNOT_LOAD, QObject::tr("Cannot open configuration file: %1").arg(configFilePath));
+
+			return false;
+		}
 	}
 
 	bool retVal = true;

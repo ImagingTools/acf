@@ -1,0 +1,17 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Number="4005" Id="0" Description="ACF"/>
+            <Version Number="328706" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <ConfigFiles>
+        <FilePath>../../../Config/AcfConfig.awc</FilePath>
+    </ConfigFiles>
+    <PackageDirs>
+        <Dir>../../../Bin/$(ConfigurationDir)Tutorial</Dir>
+        <Dir>../Partitura</Dir>
+    </PackageDirs>
+    <PackageFiles/>
+    <RegistryFiles/>
+</Acf>
