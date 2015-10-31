@@ -8,7 +8,8 @@ namespace iwidgets
 // public methods
 CCollapsiblePage::CCollapsiblePage(QWidget* parentPtr)
 	:BaseClass(parentPtr),
-	m_pageWidgetPtr(NULL)
+	m_pageWidgetPtr(NULL),
+	m_iconSize(32, 32)
 {
 	setupUi(this);
 
@@ -37,7 +38,9 @@ void CCollapsiblePage::SetIconSize(const QSize& size)
 	CollapsiblePageIconLabel->setMinimumSize(size);
 	CollapsiblePageIconLabel->setMaximumSize(size);
 
-	CollapsiblePageIconLabel->setPixmap(m_icon.pixmap(CollapsiblePageIconLabel->minimumSize()));
+	m_iconSize = size;
+
+	CollapsiblePageIconLabel->setPixmap(m_icon.pixmap(size));
 }
 
 
@@ -47,7 +50,7 @@ void CCollapsiblePage::SetIcon(const QIcon& icon)
 
 	CollapsiblePageIconLabel->setVisible(!m_icon.isNull());
 
-	CollapsiblePageIconLabel->setPixmap(m_icon.pixmap(CollapsiblePageIconLabel->minimumSize()));
+	CollapsiblePageIconLabel->setPixmap(m_icon.pixmap(m_iconSize));
 }
 
 

@@ -105,6 +105,7 @@ int CCollapsibleGroupWidgetDelegate::InsertPage(
 	CCollapsiblePage* groupPanelPtr = new CCollapsiblePage(containerWidgetPtr);
 	groupPanelPtr->SetTitle(pageTitle);
 	groupPanelPtr->SetWidget(pageWidgetPtr);
+	groupPanelPtr->SetIconSize(m_iconSize);
 	groupPanelPtr->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 	containerLayoutPtr->addWidget(groupPanelPtr);
