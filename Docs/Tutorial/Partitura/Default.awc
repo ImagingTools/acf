@@ -1,0 +1,19 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Description="Qt Framework" Id="1023" Number="328449"/>
+            <Version Description="ACF" Id="0" Number="3986"/>
+        </VersionInfos>
+    </AcfHeader>
+    <ConfigFiles>
+        <FilePath>../../../Config/Full.awc</FilePath>
+    </ConfigFiles>
+    <PackageDirs/>
+    <PackageFiles/>
+    <RegistryFiles>
+        <FilePath>../Partitura/CompositeTemplate.arx</FilePath>
+        <FilePath>../Partitura/DocView.arx</FilePath>
+        <FilePath>../Partitura/FileExplorerDemo.arx</FilePath>
+        <FilePath>../Partitura/SdiImageViewer.arx</FilePath>
+    </RegistryFiles>
+</Acf>

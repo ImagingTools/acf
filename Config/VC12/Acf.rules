@@ -86,7 +86,7 @@
 					DisplayName="Packages Configuration File"
 					Category="Environment"
 					Description="ACF packages configuration file"
-					DefaultValue="..\..\..\Config\AcfBaseOnly.xpc"
+					DefaultValue="..\..\..\Config\BaseOnly.awc"
 					Delimited="true"
 					Inheritable="true"
 				/>
