@@ -18,9 +18,9 @@ CFocusDecorator::~CFocusDecorator()
 }
 
 
-bool CFocusDecorator::RegisterWidget(QWidget* widgetPtr, QGraphicsEffect* effectPtr)
+bool CFocusDecorator::RegisterWidget(QWidget* widgetPtr, GraphicsEffectFactory* factoryPtr)
 {
-	if ((widgetPtr != NULL) || (effectPtr != NULL)){
+	if (widgetPtr == NULL){
 		return false;
 	}
 
@@ -30,9 +30,7 @@ bool CFocusDecorator::RegisterWidget(QWidget* widgetPtr, QGraphicsEffect* effect
 
 	widgetPtr->installEventFilter(this);
 
-	widgetPtr->setGraphicsEffect(effectPtr);
-
-	m_widgetEffectsMap[widgetPtr] = effectPtr;
+	m_widgetEffectsMap[widgetPtr] = factoryPtr;
 
 	return true;
 }
@@ -77,9 +75,9 @@ bool CFocusDecorator::eventFilter(QObject* objectPtr, QEvent* eventPtr)
 			case QEvent::FocusIn:{
 				QWidget* widgetPtr = dynamic_cast<QWidget*>(objectPtr);
 				if (widgetPtr != NULL){
-					QGraphicsEffect* effectPtr = m_widgetEffectsMap.value(widgetPtr, NULL);
-					if (effectPtr != NULL){
-						widgetPtr->setGraphicsEffect(effectPtr);
+					GraphicsEffectFactory* factoryPtr = m_widgetEffectsMap.value(widgetPtr, NULL);
+					if (factoryPtr != NULL){
+						widgetPtr->setGraphicsEffect(factoryPtr->CreateInstance());
 					}
 				}
 				break;
@@ -88,12 +86,7 @@ bool CFocusDecorator::eventFilter(QObject* objectPtr, QEvent* eventPtr)
 			case QEvent::FocusOut:{
 				QWidget* widgetPtr = dynamic_cast<QWidget*>(objectPtr);
 				if (widgetPtr != NULL){
-					QGraphicsEffect* effectPtr = m_widgetEffectsMap.value(widgetPtr, NULL);
-					if (effectPtr != NULL){
-						effectPtr->setParent(this);
-
-						widgetPtr->setGraphicsEffect(NULL);
-					}
+					widgetPtr->setGraphicsEffect(NULL);
 				}
 				break;
 			}

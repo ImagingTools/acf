@@ -13,6 +13,9 @@
 #include <QtGui/QWidget>
 #endif
 
+// ACF includes
+#include "istd/TIFactory.h"
+
 
 namespace iwidgets
 {
@@ -24,10 +27,12 @@ namespace iwidgets
 class CFocusDecorator: public QObject
 {
 public:
+	typedef istd::TIFactory<QGraphicsEffect> GraphicsEffectFactory;
+
 	CFocusDecorator(QObject* parentPtr = NULL);
 	virtual ~CFocusDecorator();
 
-	bool RegisterWidget(QWidget* widgetPtr, QGraphicsEffect* effectPtr);
+	bool RegisterWidget(QWidget* widgetPtr, GraphicsEffectFactory* effectFactoryPtr);
 	void UnregisterWidget(QWidget* widgetPtr);
 	void UnregisterAllWidgets();
 
@@ -36,7 +41,7 @@ protected:
 	virtual bool eventFilter(QObject* objectPtr, QEvent* eventPtr);
 
 private:
-	typedef QMap<QWidget*, QGraphicsEffect*> WidgetEffectsMap;
+	typedef QMap<QWidget*, GraphicsEffectFactory*> WidgetEffectsMap;
 	WidgetEffectsMap m_widgetEffectsMap;
 };
 
