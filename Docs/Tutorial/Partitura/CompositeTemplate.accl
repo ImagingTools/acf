@@ -1,23 +1,27 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="1000" Y="350" ComponentName="DocumentLoader"/>
-        <Element Note="" X="325" Y="700" ComponentName="Application"/>
-        <Element Note="" X="650" Y="500" ComponentName="ApplicationInfo"/>
-        <Element Note="" X="100" Y="125" ComponentName="BitmapLoader"/>
-        <Element Note="" X="325" Y="125" ComponentName="ImageTemplate"/>
-        <Element Note="" X="325" Y="350" ComponentName="Workspace"/>
-        <Element Note="" X="1000" Y="700" ComponentName="Info"/>
-        <Element Note="" X="325" Y="225" ComponentName="CompositeTemplate"/>
-        <Element Note="" X="600" Y="125" ComponentName="ImageView"/>
-        <Element Note="" X="1000" Y="250" ComponentName="DocumentTemplate"/>
-        <Element Note="" X="325" Y="475" ComponentName="MainWindow"/>
-        <Element Note="" X="775" Y="700" ComponentName="Splash"/>
-        <Element Note="" X="1125" Y="125" ComponentName="ViewFactory"/>
-        <Element Note="" X="325" Y="25" ComponentName="ImageFactory"/>
-        <Element Note="" X="875" Y="125" ComponentName="DocumentFactory"/>
+        <Element X="325" Y="25" Note="" ComponentName="ImageFactory"/>
+        <Element X="325" Y="700" Note="" ComponentName="Application"/>
+        <Element X="100" Y="125" Note="" ComponentName="BitmapLoader"/>
+        <Element X="325" Y="225" Note="" ComponentName="CompositeTemplate"/>
+        <Element X="600" Y="125" Note="" ComponentName="ImageView"/>
+        <Element X="325" Y="125" Note="" ComponentName="ImageTemplate"/>
+        <Element X="325" Y="475" Note="" ComponentName="MainWindow"/>
+        <Element X="875" Y="125" Note="" ComponentName="DocumentFactory"/>
+        <Element X="1000" Y="350" Note="" ComponentName="DocumentLoader"/>
+        <Element X="1000" Y="700" Note="" ComponentName="Info"/>
+        <Element X="1000" Y="250" Note="" ComponentName="DocumentTemplate"/>
+        <Element X="650" Y="500" Note="" ComponentName="ApplicationInfo"/>
+        <Element X="1125" Y="125" Note="" ComponentName="ViewFactory"/>
+        <Element X="325" Y="350" Note="" ComponentName="Workspace"/>
+        <Element X="775" Y="700" Note="" ComponentName="Splash"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

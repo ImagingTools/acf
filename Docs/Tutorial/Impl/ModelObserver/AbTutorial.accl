@@ -1,13 +1,17 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="325" Y="400" ComponentName="XmlFilePersistence"/>
-        <Element Note="" X="550" Y="200" ComponentName="Application"/>
-        <Element Note="" X="550" Y="300" ComponentName="AbGui"/>
-        <Element Note="" X="550" Y="400" ComponentName="AB"/>
-        <Element Note="" X="325" Y="500" ComponentName="ABPersistenceFile"/>
+        <Element X="550" Y="400" Note="" ComponentName="AB"/>
+        <Element X="550" Y="200" Note="" ComponentName="Application"/>
+        <Element X="550" Y="300" Note="" ComponentName="AbGui"/>
+        <Element X="325" Y="500" Note="" ComponentName="ABPersistenceFile"/>
+        <Element X="325" Y="400" Note="" ComponentName="XmlFilePersistence"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

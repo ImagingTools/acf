@@ -1,55 +1,59 @@
-<Acf Keywords="Tutorial Data Model Observer GUI UI" Description="Simple tutorial for definition and binding of a data model to an UI-observer">
+<Acf Description="Simple tutorial for definition and binding of a data model to an UI-observer" Keywords="Tutorial Data Model Observer GUI UI">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="TutorialPck" Id="AB" ComponentId="AB">
+        <Element Id="AB" PackageId="TutorialPck" ComponentId="AB">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultAValue" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="50"/>
+                    <AttributeInfo ExportId="" Id="DefaultAValue" Type="Integer">
+                        <Data Value="50" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="ABPersistenceFile" ComponentId="FileNameParam">
+        <Element Id="ABPersistenceFile" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="AbPersistence.xml"/>
+                    <AttributeInfo ExportId="" Id="DefaultPath" Type="String">
+                        <Data Value="AbPersistence.xml" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
+                        <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="TutorialPck" Id="AbGui" ComponentId="AbGui">
+        <Element Id="AbGui" PackageId="TutorialPck" ComponentId="AbGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultModel" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="AB"/>
+                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
+                        <Data Value="AB" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="Application" ComponentId="GuiApplication">
+        <Element Id="Application" PackageId="QtGuiPck" ComponentId="GuiApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="MainGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="AbGui"/>
+                    <AttributeInfo ExportId="" Id="MainGui" Type="Reference">
+                        <Data Value="AbGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfVoce" Id="XmlFilePersistence" ComponentId="XmlFilePersistence">
+        <Element Id="XmlFilePersistence" PackageId="AcfVoce" ComponentId="XmlFilePersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FilePath" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ABPersistenceFile"/>
+                    <AttributeInfo ExportId="" Id="FilePath" Type="Reference">
+                        <Data Value="ABPersistenceFile" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Object" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="AB"/>
+                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
+                        <Data Value="AB" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

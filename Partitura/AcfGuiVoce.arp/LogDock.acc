@@ -1,105 +1,109 @@
-<Acf Keywords="Log Dock Main Window GUI Float Error Warning Info Message" Description="Log widget used as dock window">
+<Acf Description="Log widget used as dock window" Keywords="Log Dock Main Window GUI Float Error Warning Info Message">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="LogDock" ComponentId="DockWidgetGui">
+        <Element Id="LogDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowedDockAreas" ExportId="AllowedDockAreas" Type="Integer">
-                        <Data IsEnabled="true" Value="12"/>
+                    <AttributeInfo ExportId="AllowedDockAreas" Id="AllowedDockAreas" Type="Integer">
+                        <Data Value="12" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockArea" ExportId="DockArea" Type="Integer">
-                        <Data IsEnabled="true" Value="3"/>
+                    <AttributeInfo ExportId="DockArea" Id="DockArea" Type="Integer">
+                        <Data Value="3" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockTitle" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Log"/>
+                    <AttributeInfo ExportId="" Id="DockTitle" Type="String">
+                        <Data Value="Log" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="LogGui"/>
+                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
+                        <Data Value="LogGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="LogGui" ComponentId="LogGui">
+        <Element Id="LogGui" PackageId="QtGuiPck" ComponentId="LogGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowDiagnosticMessages" ExportId="AllowDiagnosticMessages" Type="Boolean">
+                    <AttributeInfo ExportId="AllowDiagnosticMessages" Id="AllowDiagnosticMessages" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultMode" ExportId="DefaultMode" Type="Integer">
+                    <AttributeInfo ExportId="DefaultMode" Id="DefaultMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultStatusIcon" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value=":/Icons/Info"/>
+                    <AttributeInfo ExportId="" Id="DefaultStatusIcon" Type="String">
+                        <Data Value=":/Icons/Info" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Exporter" ExportId="Exporter" Type="Reference">
-                        <Data IsEnabled="true" Value="PersistentFileDialogLoader"/>
+                    <AttributeInfo ExportId="Exporter" Id="Exporter" Type="Reference">
+                        <Data Value="PersistentFileDialogLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MaxMessageCount" ExportId="MaxMessageCount" Type="Integer">
+                    <AttributeInfo ExportId="MaxMessageCount" Id="MaxMessageCount" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowLogDescription" ExportId="ShowLogDescription" Type="Boolean">
+                    <AttributeInfo ExportId="ShowLogDescription" Id="ShowLogDescription" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowMessageTextFilter" ExportId="ShowMessageTextFilter" Type="Boolean">
+                    <AttributeInfo ExportId="ShowMessageTextFilter" Id="ShowMessageTextFilter" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveMessageConsumer" ExportId="SlaveMessageConsumer" Type="Reference">
+                    <AttributeInfo ExportId="SlaveMessageConsumer" Id="SlaveMessageConsumer" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StyleSheet" ExportId="StyleSheet" Type="String">
+                    <AttributeInfo ExportId="StyleSheet" Id="StyleSheet" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TimeFormat" ExportId="TimeFormat" Type="String">
+                    <AttributeInfo ExportId="TimeFormat" Id="TimeFormat" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="PersistentFileDialogLoader" ComponentId="PersistentFileDialogLoader">
+        <Element Id="PersistentFileDialogLoader" PackageId="AcfGuiVoce" ComponentId="PersistentFileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LastPathSettingsKey" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Log"/>
+                    <AttributeInfo ExportId="" Id="LastPathSettingsKey" Type="Id">
+                        <Data Value="Log" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Loaders" ExportId="LogSerializer" Type="Reference[]">
+                    <AttributeInfo ExportId="LogSerializer" Id="Loaders" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>XmlLogSerializer</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ReferencePath" ExportId="LogPath" Type="Reference">
+                    <AttributeInfo ExportId="LogPath" Id="ReferencePath" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RuntimeStatus" ExportId="RuntimeStatus" Type="Reference">
+                    <AttributeInfo ExportId="RuntimeStatus" Id="RuntimeStatus" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="XmlLogSerializer" ComponentId="CompactXmlFileSerializer">
+        <Element Id="XmlLogSerializer" PackageId="FilePck" ComponentId="CompactXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileExtensions" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="FileExtensions" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>alog</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="TypeDescriptions" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Log XML file</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="VersionInfo" Type="Reference">
+                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

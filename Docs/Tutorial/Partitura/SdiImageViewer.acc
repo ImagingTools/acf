@@ -1,91 +1,95 @@
-<Acf Keywords="Demo Image Viewer SDI Company='ImagingTools' Project='ACF' Category='Tutorial' Tag='Tutorial'" Description="Simple image viewer over single document interface (SDI)">
+<Acf Description="Simple image viewer over single document interface (SDI)" Keywords="Demo Image Viewer SDI Company='ImagingTools' Project='ACF' Category='Tutorial' Tag='Tutorial'">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BitmapPck" Id="Bitmap" ComponentId="Bitmap">
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+        <Element Id="BitmapLoader" PackageId="BitmapPck" ComponentId="BitmapLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="DocumentTemplate" ComponentId="SingleDocumentTemplate">
+        <Element Id="DocumentTemplate" PackageId="BasePck" ComponentId="SingleDocumentTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DocumentFactory" ExportId="" Type="Factory">
-                        <Data IsEnabled="true" Value="Bitmap"/>
+                    <AttributeInfo ExportId="" Id="DocumentFactory" Type="Factory">
+                        <Data Value="Bitmap" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    <AttributeInfo ExportId="" Id="DocumentLoader" Type="Reference">
+                        <Data Value="BitmapLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ViewFactory" ExportId="" Type="Factory">
-                        <Data IsEnabled="true" Value="ImageView"/>
+                    <AttributeInfo ExportId="" Id="ViewFactory" Type="Factory">
+                        <Data Value="ImageView" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtViewPck" Id="ImageView" ComponentId="ImageView">
+        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="ImageViewApp" ComponentId="SingleDocApp">
+        <Element Id="ImageViewApp" PackageId="AcfGuiVoce" ComponentId="SingleDocApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Image Viewer"/>
+                    <AttributeInfo ExportId="" Id="ApplicationName" Type="String">
+                        <Data Value="Image Viewer" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Tutorial"/>
+                    <AttributeInfo ExportId="" Id="ApplicationType" Type="String">
+                        <Data Value="Tutorial" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="ImagingTools"/>
+                    <AttributeInfo ExportId="" Id="CompanyName" Type="String">
+                        <Data Value="ImagingTools" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentTemplates" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="DocumentTemplates" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DocumentTemplate</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsNestingEnabled" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="" Id="IsNestingEnabled" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LegalCopyright" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="See 'licence.txt' for copyright informations"/>
+                    <AttributeInfo ExportId="" Id="LegalCopyright" Type="String">
+                        <Data Value="See 'licence.txt' for copyright informations" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainVersionId" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo ExportId="" Id="MainVersionId" Type="Integer">
+                        <Data Value="0" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="ACF"/>
+                    <AttributeInfo ExportId="" Id="ProductName" Type="String">
+                        <Data Value="ACF" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowSplashProductType" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="ShowSplashProductType" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SplashScreenImage" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="../../../Docs/Images/AcfSplashScreen.png"/>
+                    <AttributeInfo ExportId="" Id="SplashScreenImage" Type="String">
+                        <Data Value="../../../Docs/Images/AcfSplashScreen.png" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StyleSheet" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value=":/Style/Resources/Style/AcfStyle.ass"/>
+                    <AttributeInfo ExportId="" Id="StyleSheet" Type="String">
+                        <Data Value=":/Style/Resources/Style/AcfStyle.ass" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UiStartMode" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="3"/>
+                    <AttributeInfo ExportId="" Id="UiStartMode" Type="Integer">
+                        <Data Value="3" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseIconText" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="UseIconText" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
+                        <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfVoce" Id="VersionInfo" ComponentId="VersionInfo">
+        <Element Id="VersionInfo" PackageId="AcfVoce" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

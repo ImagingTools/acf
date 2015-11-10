@@ -1,21 +1,25 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="850" Y="175" ComponentName="Notepad"/>
-        <Element Note="" X="1075" Y="675" ComponentName="DocumentLoader"/>
-        <Element Note="" X="600" Y="175" ComponentName="Application"/>
-        <Element Note="" X="125" Y="225" ComponentName="ApplicationInfo"/>
-        <Element Note="" X="850" Y="400" ComponentName="Workspace"/>
-        <Element Note="" X="100" Y="450" ComponentName="Info"/>
-        <Element Note="" X="575" Y="550" ComponentName="DocumentTemplate"/>
-        <Element Note="" X="575" Y="300" ComponentName="MainWindow"/>
-        <Element Note="" X="350" Y="50" ComponentName="Splash"/>
-        <Element Note="" X="850" Y="50" ComponentName="TempDocumentPath"/>
-        <Element Note="" X="350" Y="550" ComponentName="ViewFactory"/>
-        <Element Note="" X="400" Y="425" ComponentName="DocumentFactory"/>
-        <Element Note="" X="1075" Y="50" ComponentName="NotepadPath"/>
+        <Element X="600" Y="175" Note="" ComponentName="Application"/>
+        <Element X="850" Y="50" Note="" ComponentName="TempDocumentPath"/>
+        <Element X="1075" Y="50" Note="" ComponentName="NotepadPath"/>
+        <Element X="575" Y="300" Note="" ComponentName="MainWindow"/>
+        <Element X="400" Y="425" Note="" ComponentName="DocumentFactory"/>
+        <Element X="1075" Y="675" Note="" ComponentName="DocumentLoader"/>
+        <Element X="100" Y="450" Note="" ComponentName="Info"/>
+        <Element X="575" Y="550" Note="" ComponentName="DocumentTemplate"/>
+        <Element X="125" Y="225" Note="" ComponentName="ApplicationInfo"/>
+        <Element X="850" Y="175" Note="" ComponentName="Notepad"/>
+        <Element X="350" Y="550" Note="" ComponentName="ViewFactory"/>
+        <Element X="850" Y="400" Note="" ComponentName="Workspace"/>
+        <Element X="350" Y="50" Note="" ComponentName="Splash"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

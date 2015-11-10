@@ -1,12 +1,16 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="400" Y="125" ComponentName="SelectionConstraints"/>
-        <Element Note="" X="400" Y="250" ComponentName="SelectionParam"/>
-        <Element Note="" X="400" Y="425" ComponentName="SelectionParamGui"/>
-        <Element Note="" X="750" Y="325" ComponentName="SelectionGui"/>
+        <Element X="400" Y="250" Note="" ComponentName="SelectionParam"/>
+        <Element X="750" Y="325" Note="" ComponentName="SelectionGui"/>
+        <Element X="400" Y="425" Note="" ComponentName="SelectionParamGui"/>
+        <Element X="400" Y="125" Note="" ComponentName="SelectionConstraints"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

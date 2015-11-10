@@ -1,24 +1,28 @@
-<Acf Keywords="Scene Model Observer Editor Gui Binder Delegator" Description="Binder of model editor and scene extender">
+<Acf Description="Binder of model editor and scene extender" Keywords="Scene Model Observer Editor Gui Binder Delegator">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="ModelEditorGui" ComponentId="ModelEditorGui">
+        <Element Id="ModelEditorGui" PackageId="QtGuiPck" ComponentId="ModelEditorGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Model" ExportId="Model" Type="Reference">
+                    <AttributeInfo ExportId="Model" Id="Model" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveEditorGui" ExportId="Gui" Type="Reference">
+                    <AttributeInfo ExportId="Gui" Id="SlaveEditorGui" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtViewPck" Id="SceneExtenderDelegator" ComponentId="SceneExtenderDelegator">
+        <Element Id="SceneExtenderDelegator" PackageId="QtViewPck" ComponentId="SceneExtenderDelegator">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="SlaveSceneExtender" ExportId="Gui" Type="Reference">
+                    <AttributeInfo ExportId="Gui" Id="SlaveSceneExtender" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

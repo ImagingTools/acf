@@ -1,53 +1,57 @@
-<Acf Keywords="Controller Image Bitmap Display Viewer Observer Qt GUI" Description="Bitmap viewer with integrated bitmap object">
+<Acf Description="Bitmap viewer with integrated bitmap object" Keywords="Controller Image Bitmap Display Viewer Observer Qt GUI">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BitmapPck" Id="Bitmap" ComponentId="Bitmap">
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtViewPck" Id="ImageView" ComponentId="ImageView">
+        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BackgroundMode" ExportId="BackgroundMode" Type="Integer">
+                    <AttributeInfo ExportId="BackgroundMode" Id="BackgroundMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CalibrationProvider" ExportId="CalibrationProvider" Type="Reference">
+                    <AttributeInfo ExportId="CalibrationProvider" Id="CalibrationProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultModel" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Bitmap"/>
+                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
+                        <Data Value="Bitmap" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultStatusIcon" ExportId="DefaultStatusIcon" Type="String">
+                    <AttributeInfo ExportId="DefaultStatusIcon" Id="DefaultStatusIcon" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultStatusText" ExportId="DefaultStatusText" Type="String">
+                    <AttributeInfo ExportId="DefaultStatusText" Id="DefaultStatusText" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FitMode" ExportId="FitMode" Type="Integer">
+                    <AttributeInfo ExportId="FitMode" Id="FitMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShapeStatusInfo" ExportId="ShapeStatusInfo" Type="Reference">
+                    <AttributeInfo ExportId="ShapeStatusInfo" Id="ShapeStatusInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseAntialiasing" ExportId="UseAntialiasing" Type="Boolean">
+                    <AttributeInfo ExportId="UseAntialiasing" Id="UseAntialiasing" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseGridCommands" ExportId="UseGridCommands" Type="Boolean">
+                    <AttributeInfo ExportId="UseGridCommands" Id="UseGridCommands" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseScrollBarCommands" ExportId="UseScrollBarCommands" Type="Boolean">
+                    <AttributeInfo ExportId="UseScrollBarCommands" Id="UseScrollBarCommands" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseShapeEditCommands" ExportId="UseShapeEditCommands" Type="Boolean">
+                    <AttributeInfo ExportId="UseShapeEditCommands" Id="UseShapeEditCommands" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ViewId" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo ExportId="" Id="ViewId" Type="Integer">
+                        <Data Value="0" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ZoomToFitEnabled" ExportId="ZoomToFitEnabled" Type="Boolean">
+                    <AttributeInfo ExportId="ZoomToFitEnabled" Id="ZoomToFitEnabled" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

@@ -1,51 +1,55 @@
-<Acf Keywords="&quot;Composed Composition GUI Collection Set Commands Joiner List&quot; Author='&quot;Witold Gantzke&quot;'" Description="Composed GUI with support of commands">
+<Acf Description="Composed GUI with support of commands" Keywords="&quot;Composed Composition GUI Collection Set Commands Joiner List&quot; Author='&quot;Witold Gantzke&quot;'">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="CommandsBinder" ComponentId="CommandsBinder">
+        <Element Id="CommandsBinder" PackageId="QtGuiPck" ComponentId="CommandsBinder">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CommandProviders" ExportId="CommandProviders" Type="Reference[]">
+                    <AttributeInfo ExportId="CommandProviders" Id="CommandProviders" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="ComposedGui" ComponentId="ComposedGui">
+        <Element Id="ComposedGui" PackageId="QtGuiPck" ComponentId="ComposedGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultStatusIcon" ExportId="DefaultStatusIcon" Type="String">
+                    <AttributeInfo ExportId="DefaultStatusIcon" Id="DefaultStatusIcon" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultStatusText" ExportId="DefaultStatusText" Type="String">
+                    <AttributeInfo ExportId="DefaultStatusText" Id="DefaultStatusText" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DesignType" ExportId="DesignType" Type="Integer">
+                    <AttributeInfo ExportId="DesignType" Id="DesignType" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Guis" ExportId="Guis" Type="Reference[]">
+                    <AttributeInfo ExportId="Guis" Id="Guis" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InsertSpacer" ExportId="InsertSpacer" Type="Boolean">
+                    <AttributeInfo ExportId="InsertSpacer" Id="InsertSpacer" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" ExportId="Names" Type="String[]">
+                    <AttributeInfo ExportId="Names" Id="Names" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsKey" ExportId="SettingsKey" Type="String">
+                    <AttributeInfo ExportId="SettingsKey" Id="SettingsKey" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsProvider" ExportId="SettingsProvider" Type="Reference">
+                    <AttributeInfo ExportId="SettingsProvider" Id="SettingsProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StyleSheet" ExportId="StyleSheet" Type="String">
+                    <AttributeInfo ExportId="StyleSheet" Id="StyleSheet" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TabBarOrientation" ExportId="TabBarOrientation" Type="Integer">
+                    <AttributeInfo ExportId="TabBarOrientation" Id="TabBarOrientation" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseHorizontalLayout" ExportId="UseHorizontalLayout" Type="Boolean">
+                    <AttributeInfo ExportId="UseHorizontalLayout" Id="UseHorizontalLayout" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

@@ -1,253 +1,257 @@
-<Acf Keywords="GUI Application Framework Multi Document MDI MVC" Description="Framework for multi-document applications">
+<Acf Description="Framework for multi-document applications" Keywords="GUI Application Framework Multi Document MDI MVC">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="AcfGuiVoce" Id="AboutDialog" ComponentId="AboutDialog">
+        <Element Id="AboutDialog" PackageId="AcfGuiVoce" ComponentId="AboutDialog">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DialogIconPath" ExportId="AboutDialogIconPath" Type="String">
+                    <AttributeInfo ExportId="AboutDialogIconPath" Id="DialogIconPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DialogTitle" ExportId="AboutDialogTitle" Type="String">
+                    <AttributeInfo ExportId="AboutDialogTitle" Id="DialogTitle" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LogoPath" ExportId="AboutLogoPath" Type="String">
+                    <AttributeInfo ExportId="AboutLogoPath" Id="LogoPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowApplicationName" ExportId="ShowAboutApplicationName" Type="Boolean">
+                    <AttributeInfo ExportId="ShowAboutApplicationName" Id="ShowApplicationName" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowApplicationSubName" ExportId="ShowAboutApplicationSubName" Type="Boolean">
+                    <AttributeInfo ExportId="ShowAboutApplicationSubName" Id="ShowApplicationSubName" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowLegalCopyright" ExportId="ShowAboutLegalCopyright" Type="Boolean">
+                    <AttributeInfo ExportId="ShowAboutLegalCopyright" Id="ShowLegalCopyright" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowProductName" ExportId="ShowAboutProductName" Type="Boolean">
+                    <AttributeInfo ExportId="ShowAboutProductName" Id="ShowProductName" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowProductType" ExportId="ShowAboutProductType" Type="Boolean">
+                    <AttributeInfo ExportId="ShowAboutProductType" Id="ShowProductType" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionIds" ExportId="DisplayVersionIds" Type="Integer[]">
+                    <AttributeInfo ExportId="DisplayVersionIds" Id="VersionIds" Type="Integer[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionNames" ExportId="DisplayVersionNames" Type="String[]">
+                    <AttributeInfo ExportId="DisplayVersionNames" Id="VersionNames" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="App" ComponentId="GuiApplication">
+        <Element Id="App" PackageId="QtGuiPck" ComponentId="GuiApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowClose" ExportId="AllowClose" Type="Reference">
+                    <AttributeInfo ExportId="AllowClose" Id="AllowClose" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IconPath" ExportId="IconPath" Type="String">
+                    <AttributeInfo ExportId="IconPath" Id="IconPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="MainGui"/>
+                    <AttributeInfo ExportId="" Id="MainGui" Type="Reference">
+                        <Data Value="MainGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SplashScreen" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SplashScreen"/>
+                    <AttributeInfo ExportId="" Id="SplashScreen" Type="Reference">
+                        <Data Value="SplashScreen" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SplashTime" ExportId="SplashTime" Type="Real">
+                    <AttributeInfo ExportId="SplashTime" Id="SplashTime" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StyleSheet" ExportId="StyleSheet" Type="String">
+                    <AttributeInfo ExportId="StyleSheet" Id="StyleSheet" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TranslationManager" ExportId="TranslationManager" Type="Reference">
+                    <AttributeInfo ExportId="TranslationManager" Id="TranslationManager" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UiStartMode" ExportId="UiStartMode" Type="Integer">
+                    <AttributeInfo ExportId="UiStartMode" Id="UiStartMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="ApplicationInfo" ComponentId="ApplicationInfo">
+        <Element Id="ApplicationInfo" PackageId="BasePck" ComponentId="ApplicationInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="ApplicationName" Type="String">
+                    <AttributeInfo ExportId="ApplicationName" Id="ApplicationName" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationSubname" ExportId="ApplicationSubname" Type="String">
+                    <AttributeInfo ExportId="ApplicationSubname" Id="ApplicationSubname" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" ExportId="ApplicationType" Type="String">
+                    <AttributeInfo ExportId="ApplicationType" Id="ApplicationType" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" ExportId="CompanyName" Type="String">
+                    <AttributeInfo ExportId="CompanyName" Id="CompanyName" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LegalCopyright" ExportId="LegalCopyright" Type="String">
+                    <AttributeInfo ExportId="LegalCopyright" Id="LegalCopyright" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainVersionId" ExportId="MainVersionId" Type="Integer">
+                    <AttributeInfo ExportId="MainVersionId" Id="MainVersionId" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" ExportId="ProductName" Type="String">
+                    <AttributeInfo ExportId="ProductName" Id="ProductName" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="VersionInfo" Type="Reference">
+                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="DocumentTemplate" ComponentId="CompositeDocumentTemplate">
+        <Element Id="DocumentTemplate" PackageId="BasePck" ComponentId="CompositeDocumentTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="SlaveTemplates" ExportId="DocumentTemplates" Type="Reference[]">
+                    <AttributeInfo ExportId="DocumentTemplates" Id="SlaveTemplates" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="MainGui" ComponentId="MainWindowGui">
+        <Element Id="MainGui" PackageId="QtGuiPck" ComponentId="MainWindowGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AboutDialog" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="AboutDialog"/>
+                    <AttributeInfo ExportId="" Id="AboutDialog" Type="Reference">
+                        <Data Value="AboutDialog" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Application" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="App"/>
+                    <AttributeInfo ExportId="" Id="Application" Type="Reference">
+                        <Data Value="App" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentManager" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Workspace"/>
+                    <AttributeInfo ExportId="" Id="DocumentManager" Type="Reference">
+                        <Data Value="Workspace" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IconSize" ExportId="IconSize" Type="Integer">
+                    <AttributeInfo ExportId="IconSize" Id="IconSize" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsCopyPathVisible" ExportId="IsCopyPathVisible" Type="Boolean">
+                    <AttributeInfo ExportId="IsCopyPathVisible" Id="IsCopyPathVisible" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsMenuVisible" ExportId="IsMenuVisible" Type="Boolean">
+                    <AttributeInfo ExportId="IsMenuVisible" Id="IsMenuVisible" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsNestingEnabled" ExportId="IsNestingEnabled" Type="Boolean">
+                    <AttributeInfo ExportId="IsNestingEnabled" Id="IsNestingEnabled" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsOpenContainingFolderVisible" ExportId="IsOpenContainingFolderVisible" Type="Boolean">
+                    <AttributeInfo ExportId="IsOpenContainingFolderVisible" Id="IsOpenContainingFolderVisible" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsTabbedDockAllowed" ExportId="IsTabbedDockAllowed" Type="Boolean">
+                    <AttributeInfo ExportId="IsTabbedDockAllowed" Id="IsTabbedDockAllowed" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsToolbarVisible" ExportId="IsToolbarVisible" Type="Boolean">
+                    <AttributeInfo ExportId="IsToolbarVisible" Id="IsToolbarVisible" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainWindowCompTypeIds" ExportId="MainWindowCompTypeIds" Type="Id[]">
+                    <AttributeInfo ExportId="MainWindowCompTypeIds" Id="MainWindowCompTypeIds" Type="Id[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainWindowComponents" ExportId="MainWindowComponents" Type="Reference[]">
+                    <AttributeInfo ExportId="MainWindowComponents" Id="MainWindowComponents" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MaxRecentFiles" ExportId="MaxRecentFiles" Type="Integer">
-                        <Data IsEnabled="true" Value="10"/>
+                    <AttributeInfo ExportId="MaxRecentFiles" Id="MaxRecentFiles" Type="Integer">
+                        <Data Value="10" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OpenCommandVisible" ExportId="OpenCommandVisible" Type="Boolean">
+                    <AttributeInfo ExportId="OpenCommandVisible" Id="OpenCommandVisible" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SaveCommandVisible" ExportId="SaveCommandVisible" Type="Boolean">
+                    <AttributeInfo ExportId="SaveCommandVisible" Id="SaveCommandVisible" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsDialog" ExportId="SettingsDialog" Type="Reference">
+                    <AttributeInfo ExportId="SettingsDialog" Id="SettingsDialog" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsProvider" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SettingsProvider"/>
+                    <AttributeInfo ExportId="" Id="SettingsProvider" Type="Reference">
+                        <Data Value="SettingsProvider" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StyleSheet" ExportId="StyleSheet" Type="String">
+                    <AttributeInfo ExportId="StyleSheet" Id="StyleSheet" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ToolBarArea" ExportId="ToolBarArea" Type="Integer">
+                    <AttributeInfo ExportId="ToolBarArea" Id="ToolBarArea" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ToolBarDockFeatures" ExportId="ToolBarDockFeatures" Type="Integer">
+                    <AttributeInfo ExportId="ToolBarDockFeatures" Id="ToolBarDockFeatures" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseIconText" ExportId="UseIconText" Type="Boolean">
+                    <AttributeInfo ExportId="UseIconText" Id="UseIconText" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Workspace" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Workspace"/>
+                    <AttributeInfo ExportId="" Id="Workspace" Type="Reference">
+                        <Data Value="Workspace" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtPck" Id="SettingsProvider" ComponentId="ApplicationSettingsProvider">
+        <Element Id="SettingsProvider" PackageId="QtPck" ComponentId="ApplicationSettingsProvider">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="SplashScreen" ComponentId="SplashScreen">
+        <Element Id="SplashScreen" PackageId="QtGuiPck" ComponentId="SplashScreen">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ImagePath" ExportId="SplashScreenImage" Type="String">
+                    <AttributeInfo ExportId="SplashScreenImage" Id="ImagePath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowApplicationName" ExportId="ShowSplashApplicationName" Type="Boolean">
+                    <AttributeInfo ExportId="ShowSplashApplicationName" Id="ShowApplicationName" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowApplicationSubName" ExportId="ShowSplashApplicationSubName" Type="Boolean">
+                    <AttributeInfo ExportId="ShowSplashApplicationSubName" Id="ShowApplicationSubName" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowLegalCopyright" ExportId="ShowSplashLegalCopyright" Type="Boolean">
+                    <AttributeInfo ExportId="ShowSplashLegalCopyright" Id="ShowLegalCopyright" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowProductName" ExportId="ShowSplashProductName" Type="Boolean">
+                    <AttributeInfo ExportId="ShowSplashProductName" Id="ShowProductName" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowProductType" ExportId="ShowSplashProductType" Type="Boolean">
+                    <AttributeInfo ExportId="ShowSplashProductType" Id="ShowProductType" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionIds" ExportId="DisplayVersionIds" Type="Integer[]">
+                    <AttributeInfo ExportId="DisplayVersionIds" Id="VersionIds" Type="Integer[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionNames" ExportId="DisplayVersionNames" Type="String[]">
+                    <AttributeInfo ExportId="DisplayVersionNames" Id="VersionNames" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="Workspace" ComponentId="MultiDocWorkspaceGui">
+        <Element Id="Workspace" PackageId="QtGuiPck" ComponentId="MultiDocWorkspaceGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowViewRepeating" ExportId="AllowViewRepeating" Type="Boolean">
+                    <AttributeInfo ExportId="AllowViewRepeating" Id="AllowViewRepeating" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentTemplate" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="DocumentTemplate"/>
+                    <AttributeInfo ExportId="" Id="DocumentTemplate" Type="Reference">
+                        <Data Value="DocumentTemplate" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RememberOpenDocumentsOnExit" ExportId="RememberOpenDocumentsOnExit" Type="Reference">
+                    <AttributeInfo ExportId="RememberOpenDocumentsOnExit" Id="RememberOpenDocumentsOnExit" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsProvider" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SettingsProvider"/>
+                    <AttributeInfo ExportId="" Id="SettingsProvider" Type="Reference">
+                        <Data Value="SettingsProvider" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowViewMaximized" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="ShowViewMaximized" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

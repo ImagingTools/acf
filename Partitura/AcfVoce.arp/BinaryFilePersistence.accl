@@ -1,10 +1,14 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="600" Y="425" ComponentName="BinaryFileSerializer"/>
-        <Element Note="" X="600" Y="300" ComponentName="AutoPersistence"/>
+        <Element X="600" Y="425" Note="" ComponentName="BinaryFileSerializer"/>
+        <Element X="600" Y="300" Note="" ComponentName="AutoPersistence"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

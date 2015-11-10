@@ -1,60 +1,64 @@
-<Acf Keywords="Directory File" Description="Persistent directory selector">
+<Acf Description="Persistent directory selector" Keywords="Directory File">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FilePck" Id="AutoPersistence" ComponentId="AutoPersistence">
+        <Element Id="AutoPersistence" PackageId="FilePck" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="XmlFileSerializer"/>
+                    <AttributeInfo ExportId="" Id="FileLoader" Type="Reference">
+                        <Data Value="XmlFileSerializer" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilePath" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="File"/>
+                    <AttributeInfo ExportId="" Id="FilePath" Type="Reference">
+                        <Data Value="File" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Object" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="DirectorySelector"/>
+                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
+                        <Data Value="DirectorySelector" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RestoreOnBegin" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="RestoreOnBegin" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StoreOnEnd" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element PackageId="AcfGuiVoce" Id="DirectorySelector" ComponentId="DirectorySelector">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" ExportId="DefaultPath" Type="String">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="PathType" Type="Integer">
-                        <Data IsEnabled="false"/>
+                    <AttributeInfo ExportId="" Id="StoreOnEnd" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="File" ComponentId="FileNameParam">
+        <Element Id="DirectorySelector" PackageId="AcfGuiVoce" ComponentId="DirectorySelector">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" ExportId="BackupFile" Type="String">
-                        <Data IsEnabled="true" Value="."/>
+                    <AttributeInfo ExportId="DefaultPath" Id="DefaultPath" Type="String">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo ExportId="PathType" Id="PathType" Type="Integer">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="XmlFileSerializer" ComponentId="SimpleXmlFileSerializer">
+        <Element Id="File" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="BackupFile" Id="DefaultPath" Type="String">
+                        <Data Value="." IsEnabled="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
+                        <Data Value="1" IsEnabled="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="XmlFileSerializer" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="VersionInfo" Type="Reference">
+                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

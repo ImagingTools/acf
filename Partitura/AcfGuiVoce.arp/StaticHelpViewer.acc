@@ -1,43 +1,47 @@
-<Acf Keywords="&quot;Help File Static&quot;" Description="Help file provider based on fixed html pages">
+<Acf Description="Help file provider based on fixed html pages" Keywords="&quot;Help File Static&quot;">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FilePck" Id="FileNameParam" ComponentId="FileNameParam">
+        <Element Id="FileNameParam" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" ExportId="DefaultHelpFileDir" Type="String">
+                    <AttributeInfo ExportId="DefaultHelpFileDir" Id="DefaultPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="HtmlHelpViewer" ComponentId="HtmlHelpViewer">
+        <Element Id="HtmlHelpViewer" PackageId="QtGuiPck" ComponentId="HtmlHelpViewer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="HelpFileProvider" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="StaticHelpFileProvider"/>
+                    <AttributeInfo ExportId="" Id="HelpFileProvider" Type="Reference">
+                        <Data Value="StaticHelpFileProvider" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="StaticHelpFileProvider" ComponentId="StaticHelpFileProvider">
+        <Element Id="StaticHelpFileProvider" PackageId="QtGuiPck" ComponentId="StaticHelpFileProvider">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ContextPrefix" ExportId="ContextPrefix" Type="String">
+                    <AttributeInfo ExportId="ContextPrefix" Id="ContextPrefix" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ContextSuffix" ExportId="ContextSuffix" Type="String">
+                    <AttributeInfo ExportId="ContextSuffix" Id="ContextSuffix" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultHelpFileName" ExportId="DefaultHelpFileName" Type="String">
+                    <AttributeInfo ExportId="DefaultHelpFileName" Id="DefaultHelpFileName" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="HelpFileDir" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="FileNameParam"/>
+                    <AttributeInfo ExportId="" Id="HelpFileDir" Type="Reference">
+                        <Data Value="FileNameParam" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

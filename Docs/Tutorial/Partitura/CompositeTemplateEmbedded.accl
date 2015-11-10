@@ -1,40 +1,44 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="575" Y="450" ComponentName="Application"/>
-        <Element Note="" X="850" Y="275" ComponentName="ImageTemplate"/>
-        <Element Note="" X="300" Y="625" ComponentName="Info"/>
-        <Element Note="" X="300" Y="275" ComponentName="DocumentTemplate"/>
+        <Element X="575" Y="450" Note="" ComponentName="Application"/>
+        <Element X="850" Y="275" Note="" ComponentName="ImageTemplate"/>
+        <Element X="300" Y="625" Note="" ComponentName="Info"/>
+        <Element X="300" Y="275" Note="" ComponentName="DocumentTemplate"/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="Application">
             <PositionMap>
-                <Element Note="" X="325" Y="700" ComponentName="Application"/>
-                <Element Note="" X="650" Y="500" ComponentName="ApplicationInfo"/>
-                <Element Note="" X="325" Y="350" ComponentName="Workspace"/>
-                <Element Note="" X="325" Y="225" ComponentName="CompositeTemplate"/>
-                <Element Note="" X="325" Y="475" ComponentName="MainWindow"/>
-                <Element Note="" X="775" Y="700" ComponentName="Splash"/>
+                <Element X="325" Y="700" Note="" ComponentName="Application"/>
+                <Element X="325" Y="225" Note="" ComponentName="CompositeTemplate"/>
+                <Element X="325" Y="475" Note="" ComponentName="MainWindow"/>
+                <Element X="650" Y="500" Note="" ComponentName="ApplicationInfo"/>
+                <Element X="325" Y="350" Note="" ComponentName="Workspace"/>
+                <Element X="775" Y="700" Note="" ComponentName="Splash"/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
         <EmbededRegistry Id="ImageTemplate">
             <PositionMap>
-                <Element Note="" X="300" Y="475" ComponentName="BitmapLoader"/>
-                <Element Note="" X="625" Y="475" ComponentName="ImageTemplate"/>
-                <Element Note="" X="950" Y="475" ComponentName="ImageView"/>
-                <Element Note="" X="625" Y="350" ComponentName="ImageFactory"/>
+                <Element X="625" Y="350" Note="" ComponentName="ImageFactory"/>
+                <Element X="300" Y="475" Note="" ComponentName="BitmapLoader"/>
+                <Element X="950" Y="475" Note="" ComponentName="ImageView"/>
+                <Element X="625" Y="475" Note="" ComponentName="ImageTemplate"/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
         <EmbededRegistry Id="DocumentTemplate">
             <PositionMap>
-                <Element Note="" X="675" Y="425" ComponentName="DocumentLoader"/>
-                <Element Note="" X="675" Y="275" ComponentName="DocumentTemplate"/>
-                <Element Note="" X="925" Y="125" ComponentName="ViewFactory"/>
-                <Element Note="" X="400" Y="125" ComponentName="DocumentFactory"/>
+                <Element X="400" Y="125" Note="" ComponentName="DocumentFactory"/>
+                <Element X="675" Y="425" Note="" ComponentName="DocumentLoader"/>
+                <Element X="675" Y="275" Note="" ComponentName="DocumentTemplate"/>
+                <Element X="925" Y="125" Note="" ComponentName="ViewFactory"/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

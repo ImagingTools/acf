@@ -1,39 +1,43 @@
-<Acf Keywords="Explorer Demo Preview Company='ImagingTools' Project='ACF' Author='&quot;Witold Gantzke&quot; &quot;Kirill Lepskiy&quot;' Category='Tutorial' Tag='Qt File Gui'" Description="Tutorial: File system exploring with bitmap preview">
+<Acf Description="Tutorial: File system exploring with bitmap preview" Keywords="Explorer Demo Preview Company='ImagingTools' Project='ACF' Author='&quot;Witold Gantzke&quot; &quot;Kirill Lepskiy&quot;' Category='Tutorial' Tag='Qt File Gui'">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="AcfGuiVoce" Id="BitmapFileExplorer" ComponentId="BitmapFileSelectorDock">
+        <Element Id="BitmapFileExplorer" PackageId="AcfGuiVoce" ComponentId="BitmapFileSelectorDock">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowOpenFile" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="AllowOpenFile" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="StandaloneApp/ApplicationInfo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="StandaloneApp/ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileExplorerSettingsKey" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="FileExplorer"/>
+                    <AttributeInfo ExportId="" Id="FileExplorerSettingsKey" Type="String">
+                        <Data Value="FileExplorer" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathPersistenceSettingsKey" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="RecentFileSelectorPath"/>
+                    <AttributeInfo ExportId="" Id="PathPersistenceSettingsKey" Type="Id">
+                        <Data Value="RecentFileSelectorPath" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsProvider" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="StandaloneApp/SettingsProvider"/>
+                    <AttributeInfo ExportId="" Id="SettingsProvider" Type="Reference">
+                        <Data Value="StandaloneApp/SettingsProvider" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseHorizontalLayout" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="UseHorizontalLayout" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="ComposedGui" ComponentId="ComposedGui">
+        <Element Id="ComposedGui" PackageId="QtGuiPck" ComponentId="ComposedGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DesignType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="3"/>
+                    <AttributeInfo ExportId="" Id="DesignType" Type="Integer">
+                        <Data Value="3" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Guis" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Guis" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileNameParamGui</Value>
@@ -41,64 +45,64 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsKey" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="FileExplorerDemoMainLayout"/>
+                    <AttributeInfo ExportId="" Id="SettingsKey" Type="String">
+                        <Data Value="FileExplorerDemoMainLayout" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsProvider" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="StandaloneApp/SettingsProvider"/>
+                    <AttributeInfo ExportId="" Id="SettingsProvider" Type="Reference">
+                        <Data Value="StandaloneApp/SettingsProvider" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseHorizontalLayout" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="" Id="UseHorizontalLayout" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="FileNameParamGui" ComponentId="FileNameParamGui">
+        <Element Id="FileNameParamGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultModel" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapFileExplorer/BitmapFilePath"/>
+                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
+                        <Data Value="BitmapFileExplorer/BitmapFilePath" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathLabel" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="File Path"/>
+                    <AttributeInfo ExportId="" Id="PathLabel" Type="String">
+                        <Data Value="File Path" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="StandaloneApp" ComponentId="StandaloneApp">
+        <Element Id="StandaloneApp" PackageId="AcfGuiVoce" ComponentId="StandaloneApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Image Explorer"/>
+                    <AttributeInfo ExportId="" Id="ApplicationName" Type="String">
+                        <Data Value="Image Explorer" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationSubname" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Demo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationSubname" Type="String">
+                        <Data Value="Demo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Tutorial"/>
+                    <AttributeInfo ExportId="" Id="ApplicationType" Type="String">
+                        <Data Value="Tutorial" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="ImagingTools"/>
+                    <AttributeInfo ExportId="" Id="CompanyName" Type="String">
+                        <Data Value="ImagingTools" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LegalCopyright" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="© 2013 Witold Gantzke &amp; Kirill Lepskiy&#xa;All rights reserved&#xa;&#xa;This tool is a part of ACF project&#xa;See 'License.txt' for license information"/>
+                    <AttributeInfo ExportId="" Id="LegalCopyright" Type="String">
+                        <Data Value="© 2013 Witold Gantzke &amp; Kirill Lepskiy&#xa;All rights reserved&#xa;&#xa;This tool is a part of ACF project&#xa;See 'License.txt' for license information" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainVersionId" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo ExportId="" Id="MainVersionId" Type="Integer">
+                        <Data Value="0" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainView" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ComposedGui"/>
+                    <AttributeInfo ExportId="" Id="MainView" Type="Reference">
+                        <Data Value="ComposedGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="ACF"/>
+                    <AttributeInfo ExportId="" Id="ProductName" Type="String">
+                        <Data Value="ACF" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
+                        <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfVoce" Id="VersionInfo" ComponentId="VersionInfo">
+        <Element Id="VersionInfo" PackageId="AcfVoce" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

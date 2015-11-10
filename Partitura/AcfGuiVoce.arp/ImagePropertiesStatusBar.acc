@@ -1,26 +1,30 @@
-<Acf Keywords="Image Properties &quot;Status bar&quot; Category='GUI'" Description="Image properties status bar">
+<Acf Description="Image properties status bar" Keywords="Image Properties &quot;Status bar&quot; Category='GUI'">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="ImagePropertiesFrame" ComponentId="ImagePropertiesFrame">
+        <Element Id="ImagePropertiesFrame" PackageId="QtGuiPck" ComponentId="ImagePropertiesFrame">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtViewPck" Id="ShapeInfoGui" ComponentId="ShapeInfoGui">
+        <Element Id="ShapeInfoGui" PackageId="QtViewPck" ComponentId="ShapeInfoGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultModel" ExportId="ShapeStatusInfo" Type="Reference">
+                    <AttributeInfo ExportId="ShapeStatusInfo" Id="DefaultModel" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="StatusBarWidget" ComponentId="StatusBarWidget">
+        <Element Id="StatusBarWidget" PackageId="QtGuiPck" ComponentId="StatusBarWidget">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="StatusBarWidgets" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="StatusBarWidgets" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ShapeInfoGui</Value>

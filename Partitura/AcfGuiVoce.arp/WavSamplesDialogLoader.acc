@@ -1,25 +1,29 @@
-<Acf Keywords="Samples Sequence Loader Qt Dialog WAV Selection Persistence Files" Description="WAV Samples loader using selection dialog">
+<Acf Description="WAV Samples loader using selection dialog" Keywords="Samples Sequence Loader Qt Dialog WAV Selection Persistence Files">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FileGuiPck" Id="FileDialogLoader" ComponentId="FileDialogLoader">
+        <Element Id="FileDialogLoader" PackageId="FileGuiPck" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Loaders" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Loaders" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>WavSamplesLoader</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="MeasPck" Id="WavSamplesLoader" ComponentId="WavSamplesLoader">
+        <Element Id="WavSamplesLoader" PackageId="MeasPck" ComponentId="WavSamplesLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

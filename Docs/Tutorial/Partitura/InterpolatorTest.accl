@@ -1,18 +1,22 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="275" Y="75" ComponentName="VersionInfo"/>
-        <Element Note="" X="600" Y="400" ComponentName="SourcePolygonEditor"/>
-        <Element Note="" X="275" Y="600" ComponentName="Console"/>
-        <Element Note="" X="975" Y="400" ComponentName="SourceObject"/>
-        <Element Note="" X="275" Y="250" ComponentName="StandaloneApp"/>
-        <Element Note="" X="625" Y="75" ComponentName="ColorSchema"/>
-        <Element Note="" X="975" Y="200" ComponentName="InterpolatedObject"/>
-        <Element Note="" X="975" Y="300" ComponentName="InterpolationTest"/>
-        <Element Note="" X="275" Y="400" ComponentName="SceneConnector"/>
-        <Element Note="" X="625" Y="200" ComponentName="InterpolatedPolylgonGui"/>
+        <Element X="275" Y="400" Note="" ComponentName="SceneConnector"/>
+        <Element X="275" Y="75" Note="" ComponentName="VersionInfo"/>
+        <Element X="625" Y="200" Note="" ComponentName="InterpolatedPolylgonGui"/>
+        <Element X="975" Y="400" Note="" ComponentName="SourceObject"/>
+        <Element X="600" Y="400" Note="" ComponentName="SourcePolygonEditor"/>
+        <Element X="625" Y="75" Note="" ComponentName="ColorSchema"/>
+        <Element X="275" Y="600" Note="" ComponentName="Console"/>
+        <Element X="975" Y="200" Note="" ComponentName="InterpolatedObject"/>
+        <Element X="975" Y="300" Note="" ComponentName="InterpolationTest"/>
+        <Element X="275" Y="250" Note="" ComponentName="StandaloneApp"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

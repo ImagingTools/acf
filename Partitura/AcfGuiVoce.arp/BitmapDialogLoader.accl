@@ -1,10 +1,14 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="425" Y="400" ComponentName="BitmapLoader"/>
-        <Element Note="" X="850" Y="400" ComponentName="FileDialogLoader"/>
+        <Element X="850" Y="400" Note="" ComponentName="FileDialogLoader"/>
+        <Element X="425" Y="400" Note="" ComponentName="BitmapLoader"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

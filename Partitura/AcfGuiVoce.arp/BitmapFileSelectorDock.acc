@@ -1,84 +1,88 @@
-<Acf Keywords="File Name Preview Explorer Selector Choice Author='&quot;Witold Gantzke&quot;' Category='GUI'" Description="Bitmap file selector with preview">
+<Acf Description="Bitmap file selector with preview" Keywords="File Name Preview Explorer Selector Choice Author='&quot;Witold Gantzke&quot;' Category='GUI'">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BitmapPck" Id="Bitmap" ComponentId="Bitmap">
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+        <Element Id="BitmapLoader" PackageId="BitmapPck" ComponentId="BitmapLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="FileSelectorDockWithPreview" ComponentId="FileSelectorDockWithPreview">
+        <Element Id="FileSelectorDockWithPreview" PackageId="AcfGuiVoce" ComponentId="FileSelectorDockWithPreview">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowOpenFile" ExportId="AllowOpenFile" Type="Boolean">
+                    <AttributeInfo ExportId="AllowOpenFile" Id="AllowOpenFile" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="AllowedDockAreas" ExportId="AllowedDockAreas" Type="Integer">
+                    <AttributeInfo ExportId="AllowedDockAreas" Id="AllowedDockAreas" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultPath" ExportId="DefaultPath" Type="String">
+                    <AttributeInfo ExportId="DefaultPath" Id="DefaultPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockArea" ExportId="DockArea" Type="Integer">
+                    <AttributeInfo ExportId="DockArea" Id="DockArea" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockFeatures" ExportId="DockFeatures" Type="Integer">
+                    <AttributeInfo ExportId="DockFeatures" Id="DockFeatures" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileExplorerSettingsKey" ExportId="FileExplorerSettingsKey" Type="String">
+                    <AttributeInfo ExportId="FileExplorerSettingsKey" Id="FileExplorerSettingsKey" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    <AttributeInfo ExportId="" Id="FileInfo" Type="Reference">
+                        <Data Value="BitmapLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ObjectFactory" ExportId="" Type="Factory">
-                        <Data IsEnabled="true" Value="Bitmap"/>
+                    <AttributeInfo ExportId="" Id="ObjectFactory" Type="Factory">
+                        <Data Value="Bitmap" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathPersistenceSettingsKey" ExportId="PathPersistenceSettingsKey" Type="Id">
+                    <AttributeInfo ExportId="PathPersistenceSettingsKey" Id="PathPersistenceSettingsKey" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="PathType" Type="Integer">
+                    <AttributeInfo ExportId="PathType" Id="PathType" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PreviewObjectLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    <AttributeInfo ExportId="" Id="PreviewObjectLoader" Type="Reference">
+                        <Data Value="BitmapLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PreviewObjectView" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ImageView"/>
+                    <AttributeInfo ExportId="" Id="PreviewObjectView" Type="Reference">
+                        <Data Value="ImageView" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsProvider" ExportId="SettingsProvider" Type="Reference">
+                    <AttributeInfo ExportId="SettingsProvider" Id="SettingsProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseHorizontalLayout" ExportId="UseHorizontalLayout" Type="Boolean">
+                    <AttributeInfo ExportId="UseHorizontalLayout" Id="UseHorizontalLayout" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtViewPck" Id="ImageView" ComponentId="ImageView">
+        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FitMode" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo ExportId="" Id="FitMode" Type="Integer">
+                        <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ZoomToFitEnabled" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="ZoomToFitEnabled" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

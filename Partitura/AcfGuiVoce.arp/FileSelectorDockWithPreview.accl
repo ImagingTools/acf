@@ -1,14 +1,18 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="550" Y="550" ComponentName="SettingsPersistence"/>
-        <Element Note="" X="550" Y="200" ComponentName="SplittedGui"/>
-        <Element Note="" X="550" Y="450" ComponentName="FilePath"/>
-        <Element Note="" X="800" Y="325" ComponentName="PreviewGui"/>
-        <Element Note="" X="550" Y="50" ComponentName="DockWidgetGui"/>
-        <Element Note="" X="275" Y="325" ComponentName="FileExplorerGui"/>
+        <Element X="275" Y="325" Note="" ComponentName="FileExplorerGui"/>
+        <Element X="550" Y="200" Note="" ComponentName="SplittedGui"/>
+        <Element X="550" Y="450" Note="" ComponentName="FilePath"/>
+        <Element X="800" Y="325" Note="" ComponentName="PreviewGui"/>
+        <Element X="550" Y="550" Note="" ComponentName="SettingsPersistence"/>
+        <Element X="550" Y="50" Note="" ComponentName="DockWidgetGui"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

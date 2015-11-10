@@ -1,33 +1,37 @@
-<Acf Keywords="Directory File" Description="Directory selector">
+<Acf Description="Directory selector" Keywords="Directory File">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FilePck" Id="Directory" ComponentId="FileNameParam">
+        <Element Id="Directory" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" ExportId="DefaultPath" Type="String">
+                    <AttributeInfo ExportId="DefaultPath" Id="DefaultPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="PathType" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="PathType" Id="PathType" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="DirectoryGui" ComponentId="FileNameParamGui">
+        <Element Id="DirectoryGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultModel" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Directory"/>
+                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
+                        <Data Value="Directory" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileTypeInfo" ExportId="FileTypeInfo" Type="Reference">
+                    <AttributeInfo ExportId="FileTypeInfo" Id="FileTypeInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathLabel" ExportId="PathLabel" Type="String">
+                    <AttributeInfo ExportId="PathLabel" Id="PathLabel" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StartHint" ExportId="StartHint" Type="String">
+                    <AttributeInfo ExportId="StartHint" Id="StartHint" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

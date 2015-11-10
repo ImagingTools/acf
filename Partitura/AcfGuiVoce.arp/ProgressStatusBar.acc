@@ -1,27 +1,31 @@
-<Acf Keywords="Progress Status Main Window GUI" Description="Progress manager GUI integrated in status bar">
+<Acf Description="Progress manager GUI integrated in status bar" Keywords="Progress Status Main Window GUI">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="ProgressManagerGui" ComponentId="ProgressManagerGui">
+        <Element Id="ProgressManagerGui" PackageId="QtGuiPck" ComponentId="ProgressManagerGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AutomaticHide" ExportId="AutomaticHide" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="AutomaticHide" Id="AutomaticHide" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Description" ExportId="Description" Type="String">
-                        <Data IsEnabled="true" Value="Progress"/>
+                    <AttributeInfo ExportId="Description" Id="Description" Type="String">
+                        <Data Value="Progress" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowCancel" ExportId="ShowCancel" Type="Boolean">
+                    <AttributeInfo ExportId="ShowCancel" Id="ShowCancel" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="ProgressStatus" ComponentId="StatusBarWidget">
+        <Element Id="ProgressStatus" PackageId="QtGuiPck" ComponentId="StatusBarWidget">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="StatusBarWidgets" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="StatusBarWidgets" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ProgressManagerGui</Value>

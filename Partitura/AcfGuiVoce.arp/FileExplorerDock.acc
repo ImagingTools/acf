@@ -1,45 +1,49 @@
-<Acf Keywords="Explorer Dock Main Window" Description="File explorer dock widget">
+<Acf Description="File explorer dock widget" Keywords="Explorer Dock Main Window">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="ExplorerDock" ComponentId="DockWidgetGui">
+        <Element Id="ExplorerDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowedDockAreas" ExportId="DockAreas" Type="Integer">
-                        <Data IsEnabled="true" Value="3"/>
+                    <AttributeInfo ExportId="DockAreas" Id="AllowedDockAreas" Type="Integer">
+                        <Data Value="3" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockArea" ExportId="DockArea" Type="Integer">
+                    <AttributeInfo ExportId="DockArea" Id="DockArea" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockFeatures" ExportId="DockFeatures" Type="Integer">
+                    <AttributeInfo ExportId="DockFeatures" Id="DockFeatures" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockTitle" ExportId="DockTitle" Type="String">
-                        <Data IsEnabled="true" Value="Files"/>
+                    <AttributeInfo ExportId="DockTitle" Id="DockTitle" Type="String">
+                        <Data Value="Files" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="FileSystemExplorerGui"/>
+                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
+                        <Data Value="FileSystemExplorerGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FileGuiPck" Id="FileSystemExplorerGui" ComponentId="FileSystemExplorerGui">
+        <Element Id="FileSystemExplorerGui" PackageId="FileGuiPck" ComponentId="FileSystemExplorerGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowOpenFile" ExportId="AllowOpenFile" Type="Boolean">
+                    <AttributeInfo ExportId="AllowOpenFile" Id="AllowOpenFile" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterInfo" ExportId="FilterInfo" Type="Reference">
+                    <AttributeInfo ExportId="FilterInfo" Id="FilterInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowFileType" ExportId="ShowFileType" Type="Boolean">
+                    <AttributeInfo ExportId="ShowFileType" Id="ShowFileType" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowUserFilter" ExportId="ShowUserFilter" Type="Boolean">
+                    <AttributeInfo ExportId="ShowUserFilter" Id="ShowUserFilter" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseSystemDecoratedIcons" ExportId="UseSystemDecoratedIcons" Type="Boolean">
+                    <AttributeInfo ExportId="UseSystemDecoratedIcons" Id="UseSystemDecoratedIcons" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

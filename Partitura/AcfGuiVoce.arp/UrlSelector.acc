@@ -1,15 +1,19 @@
-<Acf Keywords="Directory File" Description="Persistent directory selector">
+<Acf Description="Persistent directory selector" Keywords="Directory File">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
+            <Version Description="ACF" Number="4020" Id="0"/>
+            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BasePck" Id="ModelBinder" ComponentId="ModelBinder">
+        <Element Id="ModelBinder" PackageId="BasePck" ComponentId="ModelBinder">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Model" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="UrlParam"/>
+                    <AttributeInfo ExportId="" Id="Model" Type="Reference">
+                        <Data Value="UrlParam" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Observers" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Observers" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>UrlParamGui</Value>
@@ -19,34 +23,34 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="SettingsPersistence" ComponentId="SettingsPersistence">
+        <Element Id="SettingsPersistence" PackageId="AcfGuiVoce" ComponentId="SettingsPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Object" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="UrlParam"/>
+                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
+                        <Data Value="UrlParam" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="UrlParam" ComponentId="FileNameParam">
+        <Element Id="UrlParam" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" ExportId="DefaultUrl" Type="String">
+                    <AttributeInfo ExportId="DefaultUrl" Id="DefaultPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="3"/>
+                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
+                        <Data Value="3" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="UrlParamGui" ComponentId="FileNameParamGui">
+        <Element Id="UrlParamGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
