@@ -1,5 +1,5 @@
-#ifndef iser_CReaderVersionInfo_included
-#define iser_CReaderVersionInfo_included
+#ifndef iser_CArchiveHeaderInfo_included
+#define iser_CArchiveHeaderInfo_included
 
 
 // Qt includes
@@ -13,13 +13,16 @@ namespace iser
 {
 
 
+class IArchive;
+
+
 /**
-	Implementation of version designed to be automaticaly created during reading of ACF header.
+	Represents functions related to ACF header.
 	\sa iser::CReadArchiveBase.
 
 	\ingroup Persistence
 */
-class CReaderVersionInfo: virtual public IVersionInfo
+class CArchiveHeaderInfo: virtual public IVersionInfo
 {
 public:
 	enum ChangeFlags
@@ -44,6 +47,9 @@ public:
 		\param	versionId	ID of version info.
 	*/
 	bool RemoveVersionId(int versionId);
+
+	bool SerializeArchiveHeader(iser::IArchive& archive);
+	static bool WriteArchiveHeader(iser::IArchive& archive, const const IVersionInfo* versionInfoPtr);
 
 	// reimplemented (iser::IVersionInfo)
 	virtual VersionIds GetVersionIds() const;
@@ -71,6 +77,6 @@ private:
 } // namespace iser
 
 
-#endif // !iser_CReaderVersionInfo_included
+#endif // !iser_CArchiveHeaderInfo_included
 
 

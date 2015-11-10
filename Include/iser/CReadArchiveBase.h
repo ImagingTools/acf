@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "iser/CArchiveBase.h"
-#include "iser/CReaderVersionInfo.h"
+#include "iser/CArchiveHeaderInfo.h"
 
 
 namespace iser
@@ -30,7 +30,7 @@ protected:
 	virtual bool SerializeAcfHeader();
 
 private:
-	CReaderVersionInfo m_versionInfo;
+	CArchiveHeaderInfo m_versionInfo;
 };
 
 

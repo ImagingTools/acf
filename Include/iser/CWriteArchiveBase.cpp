@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "iser/TVersionInfoSerializer.h"
+#include "iser/CArchiveHeaderInfo.h"
 
 
 namespace iser
@@ -52,7 +52,7 @@ CWriteArchiveBase::CWriteArchiveBase(const IVersionInfo* versionInfoPtr)
 
 bool CWriteArchiveBase::SerializeAcfHeader()
 {	
-	return TVersionInfoSerializer<IVersionInfo>::WriteVersion(m_versionInfoPtr, *this);
+	return CArchiveHeaderInfo::WriteArchiveHeader(*this, m_versionInfoPtr);
 }
 
 
