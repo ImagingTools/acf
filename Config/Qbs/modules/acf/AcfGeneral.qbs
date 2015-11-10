@@ -13,7 +13,7 @@ AcfModule{
 
 	Rule{
 		id: arxCompiler
-		inputs: ["arx"]
+		inputs: ["acc"]
 
 		Artifact{
             filePath: AcfService.getGeneratedPath(product) + "/C" + input.completeBaseName + ".cpp"
@@ -59,7 +59,7 @@ AcfModule{
 			}
 
 			var parameters = [
-						inputs.arx[0].filePath,
+						inputs.acc[0].filePath,
 						'-config', acfConfigurationFile,
 						'-o', outputs.cpp[0].filePath];
 			if (product.moduleProperty("acf", "arxcToBinary") === false){
@@ -67,7 +67,7 @@ AcfModule{
 			}
 
 			var cmd = new Command(acfBinDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), parameters);
-			cmd.description = 'arxc ' + FileInfo.fileName(inputs.arx[0].filePath)
+			cmd.description = 'arxc ' + FileInfo.fileName(inputs.acc[0].filePath)
 			cmd.highlight = 'codegen';
 			cmd.workingDirectory = product.moduleProperty("Qt.core", "binPath");
 
