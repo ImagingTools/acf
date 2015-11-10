@@ -202,18 +202,24 @@ istd::IChangeable* CPosition2d::CloneMe(CompatibilityMode mode) const
 
 bool CPosition2d::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag centerTag("Center", "Center position", iser::CArchiveTag::TT_GROUP);
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();	// TODO: Remove it when backward compatibility to older versions will not be no more important
+	quint32 frameworkVersion = 0;
+	if (versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion) && (frameworkVersion < 4019)){
+		static iser::CArchiveTag centerTag("Center", "Center position", iser::CArchiveTag::TT_GROUP);
 
-	istd::CChangeNotifier changeNotifier(archive.IsStoring()? NULL: this, &GetAllChanges());
-	Q_UNUSED(changeNotifier);
+		istd::CChangeNotifier changeNotifier(archive.IsStoring()? NULL: this, &GetAllChanges());
+		Q_UNUSED(changeNotifier);
 
-	bool retVal = true;
+		bool retVal = true;
 
-	retVal = retVal && archive.BeginTag(centerTag);
-	retVal = retVal && m_position.Serialize(archive);
-	retVal = retVal && archive.EndTag(centerTag);
+		retVal = retVal && archive.BeginTag(centerTag);
+		retVal = retVal && m_position.Serialize(archive);
+		retVal = retVal && archive.EndTag(centerTag);
 
-	return retVal;
+		return retVal;
+	}
+
+	return m_position.Serialize(archive);
 }
 
 
