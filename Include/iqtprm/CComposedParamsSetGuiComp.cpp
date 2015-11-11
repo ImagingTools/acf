@@ -530,7 +530,6 @@ void CComposedParamsSetGuiComp::OnGuiModelDetached()
 
 // protected slots
 
-
 void CComposedParamsSetGuiComp::OnEditorChanged(int index)
 {
 	if (index != m_currentGuiIndex){
