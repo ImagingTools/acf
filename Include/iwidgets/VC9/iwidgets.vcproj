@@ -515,6 +515,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\moc_CFocusDecorator.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iwidgets\moc_CMultiPageWidget.cpp"
 				>
 			</File>
@@ -556,6 +560,10 @@
 			</File>
 			<File
 				RelativePath="..\CExtLineEdit.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CFocusDecorator.moc"
 				>
 			</File>
 			<File
