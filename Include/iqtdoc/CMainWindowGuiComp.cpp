@@ -868,6 +868,46 @@ void CMainWindowGuiComp::OnSave()
 	if (m_documentManagerCompPtr.IsValid()){
 		idoc::IDocumentManager::FileToTypeMap fileMap;
 
+		istd::IPolymorphic* activeViewPtr = m_documentManagerCompPtr->GetActiveView();
+		Q_ASSERT(activeViewPtr != NULL);
+
+		idoc::IDocumentManager::DocumentInfo activeDocumentInfo;
+		m_documentManagerCompPtr->GetDocumentFromView(*activeViewPtr, &activeDocumentInfo);
+
+		QFileInfo fileInfo(activeDocumentInfo.filePath);
+		bool isFileWriteable = fileInfo.exists() && fileInfo.permission(QFileDevice::WriteUser);
+		if (!isFileWriteable){
+			int retVal = QMessageBox::warning(
+						GetWidget(),
+						tr("Save file"),
+						QString(tr("The file %1 cannot be saved because it is write-protected")).arg(fileInfo.fileName()),
+						tr("Save As"),
+						tr("Overwrite"),
+						tr("Cancel"),
+						2);
+			switch (retVal){
+				case 0:
+					OnSaveAs();
+					return;
+
+				case 1:{
+					QFile file(activeDocumentInfo.filePath);
+					if (!file.setPermissions(QFileDevice::WriteUser)){
+						QMessageBox::critical(
+									GetWidget(),
+									tr("Save file"),
+									QString(tr("The file %1 cannot be overwritten. Possible you have not enough permissions")).arg(fileInfo.fileName()));
+						return;	
+					}
+				}
+				break;
+
+				case 2:
+					return;
+
+			}
+		}
+
 		bool ignoredFlag = false;
 		if (m_documentManagerCompPtr->SaveDocument(-1, false, &fileMap, false, &ignoredFlag)){
 			UpdateRecentFileList(fileMap);

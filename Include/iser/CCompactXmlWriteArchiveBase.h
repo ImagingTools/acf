@@ -48,8 +48,8 @@ protected:
 
 	bool WriteStringNode(const QString& text);
 
-		// reimplemented (iser::CTextWriteArchiveBase)
-	bool WriteTextNode(const QByteArray& text);
+	// reimplemented (iser::CTextWriteArchiveBase)
+	virtual bool WriteTextNode(const QByteArray& text);
 
 	QDomDocument m_document;
 	QDomElement m_currentParent;

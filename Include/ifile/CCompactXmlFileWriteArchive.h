@@ -42,6 +42,10 @@ public:
 
 	bool Flush();
 
+protected:
+	// reimplemented (iser::CTextWriteArchiveBase)
+	virtual bool WriteTextNode(const QByteArray& text);
+
 private:
 	QFile m_file;
 };
