@@ -16,7 +16,7 @@ namespace iprm
 
 const istd::IChangeable::ChangeSet s_insertChangeSet(IParamsManager::CF_SET_INSERTED, IOptionsList::CF_OPTIONS_CHANGED, ISelectionParam::CF_SELECTION_CHANGED, QObject::tr("Insert parameter"));
 const istd::IChangeable::ChangeSet s_removeChangeSet(IParamsManager::CF_SET_REMOVED, IOptionsList::CF_OPTIONS_CHANGED, ISelectionParam::CF_SELECTION_CHANGED, QObject::tr("Remove parameter"));
-const istd::IChangeable::ChangeSet s_moveChangeSet(IParamsManager::CF_SET_ENABLE_CHANGED, IParamsManager::CF_SET_REMOVED, ISelectionParam::CF_SELECTION_CHANGED, QObject::tr("Move parameter"));
+const istd::IChangeable::ChangeSet s_moveChangeSet(IParamsManager::CF_SET_ENABLE_CHANGED, IOptionsList::CF_OPTIONS_CHANGED, IParamsManager::CF_SET_REMOVED, ISelectionParam::CF_SELECTION_CHANGED, QObject::tr("Move parameter"));
 const istd::IChangeable::ChangeSet s_renameChangeSet(IParamsManager::CF_SET_NAME_CHANGED, IOptionsList::CF_OPTION_RENAMED, QObject::tr("Rename"));
 const istd::IChangeable::ChangeSet s_selectChangeSet(IOptionsList::CF_OPTIONS_CHANGED, ISelectionParam::CF_SELECTION_CHANGED, QObject::tr("Change selection"));
 const istd::IChangeable::ChangeSet s_setDescriptionChangeSet(IOptionsList::CF_OPTIONS_CHANGED, QObject::tr("Change description"));
