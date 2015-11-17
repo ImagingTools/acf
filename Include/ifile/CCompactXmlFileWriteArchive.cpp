@@ -20,11 +20,8 @@ CCompactXmlFileWriteArchive::CCompactXmlFileWriteArchive(
 :	BaseClass(versionInfoPtr, serializeHeader, rootTag),
 	BaseClass2(filePath)
 {
-	QFile file(filePath);
-	if (file.setPermissions(QFileDevice::WriteUser)){
-		if (!filePath.isEmpty()){
-			OpenFile(filePath);
-		}
+	if (!filePath.isEmpty()){
+		OpenFile(filePath);
 	}
 }
 

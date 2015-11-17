@@ -874,38 +874,45 @@ void CMainWindowGuiComp::OnSave()
 		idoc::IDocumentManager::DocumentInfo activeDocumentInfo;
 		m_documentManagerCompPtr->GetDocumentFromView(*activeViewPtr, &activeDocumentInfo);
 
-		QFileInfo fileInfo(activeDocumentInfo.filePath);
-		bool isFileWriteable = fileInfo.exists() && fileInfo.permission(QFileDevice::WriteUser);
-		if (!isFileWriteable){
-			int retVal = QMessageBox::warning(
-						GetWidget(),
-						tr("Save file"),
-						QString(tr("The file %1 cannot be saved because it is write-protected")).arg(fileInfo.fileName()),
-						tr("Save As"),
-						tr("Overwrite"),
-						tr("Cancel"),
-						2);
-			switch (retVal){
-				case 0:
-					OnSaveAs();
-					return;
+		int saveMode = -1;
 
-				case 1:{
-					QFile file(activeDocumentInfo.filePath);
-					if (!file.setPermissions(QFileDevice::WriteUser)){
-						QMessageBox::critical(
-									GetWidget(),
-									tr("Save file"),
-									QString(tr("The file %1 cannot be overwritten. Possible you have not enough permissions")).arg(fileInfo.fileName()));
-						return;	
-					}
-				}
-				break;
-
-				case 2:
-					return;
-
+		if (activeDocumentInfo.filePath.isEmpty()){
+			saveMode = 0;
+		}
+		else{
+			QFileInfo fileInfo(activeDocumentInfo.filePath);
+			if (fileInfo.exists() && !fileInfo.permission(QFileDevice::WriteUser)){
+				saveMode = QMessageBox::warning(
+							GetWidget(),
+							tr("Save file"),
+							QString(tr("The file %1 cannot be saved because it is write-protected")).arg(fileInfo.fileName()),
+							tr("Save As"),
+							tr("Overwrite"),
+							tr("Cancel"),
+							2);
 			}
+		}
+
+		switch (saveMode){
+		case 0:
+			OnSaveAs();
+			return;
+
+		case 1:
+			{
+				QFile file(activeDocumentInfo.filePath);
+				if (!file.setPermissions(QFileDevice::WriteUser)){
+					QMessageBox::critical(
+								GetWidget(),
+								tr("Save file"),
+								QString(tr("The file %1 cannot be overwritten. Possible you have not enough permissions")).arg(activeDocumentInfo.filePath));
+					return;	
+				}
+			}
+			break;
+
+		case 2:
+			return;
 		}
 
 		bool ignoredFlag = false;
