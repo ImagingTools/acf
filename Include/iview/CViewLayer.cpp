@@ -133,13 +133,7 @@ void CViewLayer::DrawShapes(QPainter& drawContext)
 }
 
 
-inline bool CViewLayer::IsVisible() const
-{
-	return m_isVisible;
-}
-
-
-inline void CViewLayer::SetVisible(bool state)
+void CViewLayer::SetVisible(bool state)
 {
 	if (m_isVisible != state){
 		m_isBoundingBoxValid = false;

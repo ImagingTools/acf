@@ -96,6 +96,14 @@ private:
 };
 
 
+// inline methods
+
+inline bool CViewLayer::IsVisible() const
+{
+	return m_isVisible;
+}
+
+
 } // namespace iview
 
 
