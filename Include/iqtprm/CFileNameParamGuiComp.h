@@ -43,6 +43,7 @@ public:
 		I_ASSIGN(m_filesComboAttrPtr, "FilesComboBox", "Show combobox with files", true, true);
 		I_ASSIGN(m_labelWidthAttrPtr, "LabelWidth", "Fixed label width (in pixels)", false, 100);
 		I_ASSIGN(m_defaultDirPtr, "DefaultPath", "Default path to search", false, "C:/");
+		I_ASSIGN(m_showBrowseButtonAttrPtr, "ShowBrowseButton", "If enabled, the browse button will be shown", true, true);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
@@ -75,6 +76,7 @@ private:
 	I_ATTR(bool, m_readOnlyAttrPtr);
 	I_ATTR(bool, m_filesComboAttrPtr);
 	I_ATTR(int, m_labelWidthAttrPtr);
+	I_ATTR(bool,m_showBrowseButtonAttrPtr);
 	I_REF(ifile::IFileTypeInfo, m_fileTypeInfoPtr);
 	I_REF(ifile::IFileNameParam, m_defaultDirPtr);
 

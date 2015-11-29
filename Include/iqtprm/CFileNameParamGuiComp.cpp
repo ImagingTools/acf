@@ -80,7 +80,9 @@ void CFileNameParamGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 			UrlLabel->setVisible(pathType == ifile::IFileNameParam::PT_URL);
 		}
 
-		BrowseButton->setVisible((pathType == ifile::IFileNameParam::PT_DIRECTORY) || (pathType == ifile::IFileNameParam::PT_FILE));
+		BrowseButton->setVisible(
+			*m_showBrowseButtonAttrPtr && 
+			((pathType == ifile::IFileNameParam::PT_DIRECTORY) || (pathType == ifile::IFileNameParam::PT_FILE)));
 
 		if (*m_readOnlyAttrPtr){
 			BrowseButton->setVisible(false);
@@ -102,7 +104,7 @@ void CFileNameParamGuiComp::OnGuiCreated()
 	DirectoryLabel->setVisible(false);
 	PathLabel->setVisible(false);
 	UrlLabel->setVisible(false);
-	BrowseButton->setVisible(false);
+	BrowseButton->setVisible(*m_showBrowseButtonAttrPtr);
 
 	QString startHint = tr("<Enter path>");
 	if (m_startHintAttrPtr.IsValid()){
@@ -121,7 +123,7 @@ void CFileNameParamGuiComp::OnGuiCreated()
 	iwidgets::CExtLineEdit* lineEdit = new iwidgets::CExtLineEdit(startHint, 2, DirEdit);
 
 	// add "cd up" button:
-	if (!*m_readOnlyAttrPtr){
+	if (!*m_readOnlyAttrPtr && *m_showBrowseButtonAttrPtr){
 		QToolButton* cdUpButton = new QToolButton(lineEdit);
 		cdUpButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 		cdUpButton->setIcon(QIcon(":/Icons/UpDir"));
