@@ -30,7 +30,24 @@ public:
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(imod::IModel);
 	I_END_COMPONENT;
+
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentDestroyed();
 };
+
+
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+template <class Base>
+void TModelCompWrap<Base>::OnComponentDestroyed()
+{
+	imod::CModelBase::DetachAllObservers();
+
+	BaseClass::OnComponentDestroyed();
+}
 
 
 } // namespace icomp
