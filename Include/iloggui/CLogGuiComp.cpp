@@ -84,12 +84,17 @@ QTreeWidgetItem* CLogGuiComp::CreateGuiItem(const istd::IInformationProvider& me
 
 QIcon CLogGuiComp::GetCategoryIcon(int category) const
 {
-	static QIcon logIcon(":/Icons/Log");
+	static QIcon emptyIcon;
+
+	static QIcon diagnosticsIcon(":/Icons/Diagnostics");
 	static QIcon infoIcon(":/Icons/Info");
 	static QIcon warningIcon(":/Icons/Warning");
 	static QIcon errorIcon(":/Icons/Error");
 
 	switch (category){
+	case istd::IInformationProvider::IC_NONE:
+		return diagnosticsIcon;
+
 	case istd::IInformationProvider::IC_INFO:
 		return infoIcon;
 
@@ -101,7 +106,26 @@ QIcon CLogGuiComp::GetCategoryIcon(int category) const
 		return errorIcon;
 
 	default:
-		return logIcon;
+		return emptyIcon;
+	}
+}
+
+QIcon CLogGuiComp::GetActionIcon(int functionType) const
+{
+	static QIcon emptyIcon;
+	static QIcon clearIcon(":/Icons/Clear");
+	static QIcon exportIcon(":/Icons/Info");
+	static QIcon diagnosticsIcon(":/Icons/Warning");
+	
+	switch (functionType){
+	case AT_CLEAR:
+		return clearIcon;
+	case AT_EXPORT:
+		return exportIcon;
+	case AT_DIAGNOSTICS:
+		return diagnosticsIcon;
+	default:
+		return emptyIcon;
 	}
 }
 
@@ -193,7 +217,7 @@ void CLogGuiComp::OnGuiCreated()
 	QActionGroup* actionGroup = new QActionGroup(this);
 	actionGroup->setExclusive(true);
 
-	static QIcon infoIcon(":/Icons/Info");
+	QIcon infoIcon = GetCategoryIcon(istd::IInformationProvider::IC_INFO);
 	m_infoActionPtr = new QAction(infoIcon, tr("Info"), ToolBarFrame);
 	m_infoActionPtr->setCheckable(true);
 	m_infoActionPtr->setData(MM_INFO);
@@ -203,7 +227,7 @@ void CLogGuiComp::OnGuiCreated()
 		m_infoActionPtr->setChecked(true);
 	}
 
-	static QIcon warningIcon(":/Icons/Warning");
+	QIcon warningIcon = GetCategoryIcon(istd::IInformationProvider::IC_WARNING);
 	m_warningActionPtr = new QAction(warningIcon, tr("Warning"), ToolBarFrame);
 	m_warningActionPtr->setCheckable(true);
 	m_warningActionPtr->setData(MM_WARNING);
@@ -213,7 +237,7 @@ void CLogGuiComp::OnGuiCreated()
 		m_warningActionPtr->setChecked(true);
 	}
 
-	static QIcon errorIcon(":/Icons/Error");
+	QIcon errorIcon = GetCategoryIcon(istd::IInformationProvider::IC_ERROR);
 	m_errorActionPtr = new QAction(errorIcon, tr("Error"), ToolBarFrame);
 	m_errorActionPtr->setCheckable(true);
 	m_errorActionPtr->setData(MM_ERROR);
@@ -223,7 +247,7 @@ void CLogGuiComp::OnGuiCreated()
 		m_errorActionPtr->setChecked(true);
 	}
 
-	static QIcon clearIcon(":/Icons/Clear");
+	QIcon clearIcon = GetActionIcon(AT_CLEAR);
 	m_clearActionPtr = new QAction(clearIcon, tr("Clear"), ToolBarFrame);
 	connect(m_clearActionPtr, SIGNAL(triggered()), this, SLOT(OnClearAction()), Qt::QueuedConnection);
 
@@ -236,7 +260,7 @@ void CLogGuiComp::OnGuiCreated()
 	toolBar->insertSeparator(m_clearActionPtr);
 
 	if (m_fileLoaderCompPtr.IsValid()){
-		static QIcon exportIcon(":/Icons/DocumentExport");
+		QIcon exportIcon = GetActionIcon(AT_EXPORT);
 
 		m_exportActionPtr = new QAction(exportIcon, tr("Export..."), ToolBarFrame);
 		connect(m_exportActionPtr, SIGNAL(triggered()), this, SLOT(OnExportAction()), Qt::QueuedConnection);
@@ -245,7 +269,7 @@ void CLogGuiComp::OnGuiCreated()
 	}
 
 	if (*m_allowDiagnosticMessagesAttrPtr){
-		static QIcon diagnosticModeIcon(":/Icons/Diagnostics");
+		QIcon diagnosticModeIcon = GetActionIcon(AT_DIAGNOSTICS);
 
 		m_diagnosticModeActionPtr = new QAction(diagnosticModeIcon, tr("Diagnostic Mode"), ToolBarFrame);
 		m_diagnosticModeActionPtr->setCheckable(true);
