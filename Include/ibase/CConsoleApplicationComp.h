@@ -7,10 +7,12 @@
 
 // ACF includes
 #include <istd/TOptDelPtr.h>
+#include <imod/TModelWrap.h>
 #include <ilog/TLoggerCompWrap.h>
 #include <iqt/CConsoleReader.h>
 #include <ibase/IApplication.h>
 #include <ibase/IApplicationInfo.h>
+#include <ibase/IRuntimeStatusProvider.h>
 
 
 namespace ibase
@@ -32,6 +34,10 @@ public:
 
 	I_BEGIN_COMPONENT(CConsoleApplicationComp);
 		I_REGISTER_INTERFACE(ibase::IApplication);
+		I_REGISTER_SUBELEMENT(RuntimeStatus);
+		I_REGISTER_SUBELEMENT_INTERFACE(RuntimeStatus, ibase::IRuntimeStatusProvider, ExtractRuntimeStatus);
+		I_REGISTER_SUBELEMENT_INTERFACE(RuntimeStatus, imod::IModel, ExtractRuntimeStatus);
+		I_REGISTER_SUBELEMENT_INTERFACE(RuntimeStatus, istd::IChangeable, ExtractRuntimeStatus);
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Info about the worker application", true, "ApplicationInfo");
 		I_ASSIGN_MULTI_0(m_componentsToInitializeCompPtr, "ComponentsToInitialize", "List of components to be initialized after creation of the application instance (QCoreApplication)", false);
 	I_END_COMPONENT;
@@ -48,6 +54,30 @@ protected:
 
 private slots:
 	void OnKeyPressed(char ch);
+
+private:
+	class RuntimeStatus: public ibase::IRuntimeStatusProvider
+	{
+	public:
+		RuntimeStatus();
+
+		void SetRuntimeStatus(IRuntimeStatusProvider::RuntimeStatus runtimeStatus);
+
+		// reimplemented (ibase::IRuntimeStatusProvider)
+		virtual IRuntimeStatusProvider::RuntimeStatus GetRuntimeStatus() const;
+
+	private:
+		IRuntimeStatusProvider::RuntimeStatus m_status;
+	};
+
+	imod::TModelWrap<RuntimeStatus> m_runtimeStatus;
+
+	// static template methods for sub element access
+	template <class InterfaceType>
+	static InterfaceType* ExtractRuntimeStatus(CConsoleApplicationComp& component)
+	{
+		return &component.m_runtimeStatus;
+	}
 
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);

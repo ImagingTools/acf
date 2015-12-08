@@ -73,12 +73,21 @@ bool CConsoleApplicationComp::InitializeApplication(int argc, char** argv)
 
 int CConsoleApplicationComp::Execute(int argc, char** argv)
 {
-	if (!InitializeApplication(argc, argv))
-	{
+	m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_STARTING);
+
+	if (!InitializeApplication(argc, argv)){
+		m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_SHUTDOWN);
+
 		return -1;
 	}
 
-	return m_applicationPtr->exec();
+	m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_RUNNING);
+
+	int retVal = m_applicationPtr->exec();
+
+	m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_SHUTDOWN);
+
+	return retVal;
 }
 
 
@@ -114,6 +123,33 @@ void CConsoleApplicationComp::OnKeyPressed(char ch)
 	{
 		QCoreApplication::exit();
 	}
+}
+
+
+
+// public methods of the embedded class RuntimeStatus
+
+CConsoleApplicationComp::RuntimeStatus::RuntimeStatus()
+	:m_status(RS_NONE)
+{
+}
+
+
+void CConsoleApplicationComp::RuntimeStatus::SetRuntimeStatus(IRuntimeStatusProvider::RuntimeStatus runtimeStatus)
+{
+	if (m_status != runtimeStatus){
+		istd::CChangeNotifier changePtr(this);
+
+		m_status = runtimeStatus;
+	}
+}
+
+
+// reimplemented (ibase::IRuntimeStatusProvider)
+
+ibase::IRuntimeStatusProvider::RuntimeStatus CConsoleApplicationComp::RuntimeStatus::GetRuntimeStatus() const
+{
+	return m_status;
 }
 
 
