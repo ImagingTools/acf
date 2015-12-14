@@ -3,6 +3,7 @@
 
 
 // Qt includes
+#include <QtCore/QBuffer>
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomNode>
 
@@ -40,6 +41,9 @@ protected:
 				int flags,
 				QString& message,
 				QString& messageSource) const;
+
+private:
+	QBuffer m_buffer;
 };
 
 

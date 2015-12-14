@@ -5,6 +5,7 @@
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomNode>
 #include <QtCore/QFile>
+#include <QtCore/QBuffer>
 
 // ACF includes
 #include "ifile/CFileArchiveInfo.h"
@@ -43,6 +44,7 @@ public:
 	bool Flush();
 
 private:
+	QBuffer m_buffer;
 	QFile m_file;
 };
 

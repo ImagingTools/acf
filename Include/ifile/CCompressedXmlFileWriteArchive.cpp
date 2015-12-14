@@ -34,14 +34,20 @@ bool CCompressedXmlFileWriteArchive::OpenFile(const QString& filePath)
 {
 	m_file.setFileName(filePath);
 
-	return m_file.open(QIODevice::WriteOnly | QIODevice::Text);
+	if (m_file.open(QIODevice::WriteOnly | QIODevice::Text)){
+		return InitArchive(&m_buffer);
+	}
+
+	return false;
 }
 
 
 bool CCompressedXmlFileWriteArchive::Flush()
 {
+	BaseClass::Flush();
+
 	if (m_file.isOpen()){
-		QByteArray data = qCompress(m_document.toByteArray());
+		QByteArray data = qCompress(m_buffer.buffer());
 
 		return (m_file.write(data) > 0);
 	}

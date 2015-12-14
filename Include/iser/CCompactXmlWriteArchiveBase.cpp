@@ -10,9 +10,9 @@ namespace iser
 {
 
 
-QByteArray CCompactXmlWriteArchiveBase::GetString() const
+CCompactXmlWriteArchiveBase::~CCompactXmlWriteArchiveBase()
 {
-	return m_document.toByteArray(4);
+	Flush();
 }
 
 
@@ -33,7 +33,7 @@ bool CCompactXmlWriteArchiveBase::BeginTag(const iser::CArchiveTag& tag)
 
 	if (m_tagsStack.isEmpty() || (m_tagsStack.back() == NULL) || (m_tagsStack.back()->GetTagType() != iser::CArchiveTag::TT_MULTIPLE)){
 		int tagType = tag.GetTagType();
-		if (tagType == iser::CArchiveTag::TT_LEAF){
+		if (m_allowAttribute && (tagType == iser::CArchiveTag::TT_LEAF)){
 			m_currentAttribute = tag.GetId();
 
 			m_tagsStack.push_back(NULL);
@@ -47,13 +47,11 @@ bool CCompactXmlWriteArchiveBase::BeginTag(const iser::CArchiveTag& tag)
 		}
 	}
 
-	QDomElement newElement = m_document.createElement(tag.GetId());
-
-	m_currentParent.appendChild(newElement);
-
-	m_currentParent = newElement;
+	m_xmlWriter.writeStartElement(tag.GetId());
 
 	m_tagsStack.push_back(&tag);
+
+	m_allowAttribute = true;
 
 	return true;
 }
@@ -61,13 +59,11 @@ bool CCompactXmlWriteArchiveBase::BeginTag(const iser::CArchiveTag& tag)
 
 bool CCompactXmlWriteArchiveBase::BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& /*subTag*/, int& /*count*/)
 {
-	QDomElement newElement = m_document.createElement(tag.GetId());
-
-	m_currentParent.appendChild(newElement);
-
-	m_currentParent = newElement;
+	m_xmlWriter.writeStartElement(tag.GetId());
 
 	m_tagsStack.push_back(&tag);
+
+	m_allowAttribute = true;
 
 	m_isSeparatorNeeded = false;
 
@@ -90,9 +86,11 @@ bool CCompactXmlWriteArchiveBase::EndTag(const iser::CArchiveTag& /*tag*/)
 		return true;
 	}
 
-	m_currentParent = m_currentParent.parentNode().toElement();
+	m_allowAttribute = false;
 
-	return !m_currentParent.isNull();
+	m_xmlWriter.writeEndElement();
+
+	return true;
 }
 
 
@@ -111,17 +109,48 @@ CCompactXmlWriteArchiveBase::CCompactXmlWriteArchiveBase(
 :	BaseClass(versionInfoPtr),
 	m_serializeHeader(serializeHeader),
 	m_rootTag(rootTag),
-	m_isSeparatorNeeded(false)
+	m_isSeparatorNeeded(false),
+	m_allowAttribute(false)
 {
-	m_document.clear();
+	m_xmlWriter.setAutoFormatting(true);
+}
 
-	m_currentParent = m_document.createElement(m_rootTag.GetId());
 
-	m_document.appendChild(m_currentParent);
+bool CCompactXmlWriteArchiveBase::InitArchive(QIODevice* devicePtr)
+{
+	if (devicePtr != NULL){
+		m_xmlWriter.setDevice(devicePtr);
 
-	if (m_serializeHeader){
-		SerializeAcfHeader();
+		m_xmlWriter.writeStartDocument();
+		m_xmlWriter.writeStartElement(m_rootTag.GetId());
+
+		m_allowAttribute = true;
+
+		if (m_serializeHeader){
+			SerializeAcfHeader();
+		}
+
+		return true;
 	}
+
+	return false;
+}
+
+
+bool CCompactXmlWriteArchiveBase::Flush()
+{
+	if (m_xmlWriter.device() != NULL){
+		m_xmlWriter.writeEndElement();
+		m_xmlWriter.writeEndDocument();
+
+		m_allowAttribute = false;
+
+		m_xmlWriter.setDevice(NULL);
+
+		return true;
+	}
+
+	return false;
 }
 
 
@@ -129,16 +158,13 @@ bool CCompactXmlWriteArchiveBase::WriteStringNode(const QString& text)
 {
 	if (m_currentAttribute.isEmpty()){
 		if (m_isSeparatorNeeded){
-			QDomElement separator = m_document.createElement(GetElementSeparator());
-
-			m_currentParent.appendChild(separator);
+			m_xmlWriter.writeEmptyElement(GetElementSeparator());
 		}
 
-		QDomText newNode = m_document.createTextNode(text);
-		m_currentParent.appendChild(newNode);
+		m_xmlWriter.writeCharacters(text);
 	}
 	else{
-		m_currentParent.setAttribute(m_currentAttribute, text);
+		m_xmlWriter.writeAttribute(m_currentAttribute, text);
 	}
 
 	m_isSeparatorNeeded = true;

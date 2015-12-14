@@ -17,8 +17,7 @@ CCompressedXmlFileReadArchive::CCompressedXmlFileReadArchive(
 			const QString& filePath,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
-:	BaseClass(rootTag),
-	m_serializeHeader(serializeHeader)
+:	BaseClass(serializeHeader, rootTag)
 {
 	if (!filePath.isEmpty()){
 		OpenFile(filePath);
@@ -37,21 +36,15 @@ bool CCompressedXmlFileReadArchive::OpenFile(const QString& filePath)
 
 	m_openFileName = filePath;
 
-	if (!m_document.setContent(qUncompress(file.readAll()))){
+	m_buffer.setData(qUncompress(file.readAll()));
+
+	if (!BaseClass::SetContent(&m_buffer)){
 		file.close();
 
 		return false;
 	}
 
-	m_currentParent = m_document.documentElement();
-
-	bool retVal = !m_currentParent.isNull();
-
-	if (m_serializeHeader){
-		retVal = retVal && SerializeAcfHeader();
-	}
-
-	return retVal;
+	return true;
 }
 
 

@@ -2,9 +2,11 @@
 #define iser_CCompactXmlMemWriteArchive_included
 
 
+// Qt includes
+#include <QtCore/QFile>
+#include <QtCore/QBuffer>
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomNode>
-#include <QtCore/QFile>
 
 // ACF includes
 #include "iser/CCompactXmlWriteArchiveBase.h"
@@ -38,7 +40,10 @@ public:
 	/**
 		Close the archive and get the created XML string.
 	*/
-	virtual QByteArray GetString() const;
+	const QByteArray& GetString() const;
+
+private:
+	QBuffer m_textBuffer;
 };
 
 

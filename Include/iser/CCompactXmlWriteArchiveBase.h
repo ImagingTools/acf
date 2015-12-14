@@ -2,8 +2,10 @@
 #define iser_CCompactXmlWriteArchiveBase_included
 
 
+// Qt includes
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomNode>
+#include <QtCore/QXmlStreamWriter>
 #include <QtCore/QFile>
 
 // ACF includes
@@ -27,10 +29,7 @@ class CCompactXmlWriteArchiveBase:
 public:
 	typedef iser::CTextWriteArchiveBase BaseClass;
 
-	/**
-		Close the archive and get the created XML string.
-	*/
-	virtual QByteArray GetString() const;
+	virtual ~CCompactXmlWriteArchiveBase();
 
 	// reimplemented (iser::IArchive)
 	virtual bool IsTagSkippingSupported() const;
@@ -45,14 +44,15 @@ protected:
 				const iser::IVersionInfo* versionInfoPtr,
 				bool serializeHeader,
 				const iser::CArchiveTag& rootTag);
+	bool InitArchive(QIODevice* devicePtr);
+	bool Flush();
 
 	bool WriteStringNode(const QString& text);
 
 	// reimplemented (iser::CTextWriteArchiveBase)
 	virtual bool WriteTextNode(const QByteArray& text);
 
-	QDomDocument m_document;
-	QDomElement m_currentParent;
+	QXmlStreamWriter m_xmlWriter;
 
 private:
 	QByteArray m_currentAttribute;
@@ -60,7 +60,8 @@ private:
 	bool m_serializeHeader;
 	iser::CArchiveTag m_rootTag;
 
-	bool m_isSeparatorNeeded;
+	bool m_isSeparatorNeeded;	// idicate that separator must be added before something is outputted
+	bool m_allowAttribute;		// indicate if attribute outputting is allowed now
 
 	QList<const iser::CArchiveTag*> m_tagsStack;
 };

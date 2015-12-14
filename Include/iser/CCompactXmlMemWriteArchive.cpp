@@ -16,12 +16,15 @@ CCompactXmlMemWriteArchive::CCompactXmlMemWriteArchive(
 			const iser::CArchiveTag& rootTag)
 :	BaseClass(versionInfoPtr, serializeHeader, rootTag)
 {
+	InitArchive(&m_textBuffer);
 }
 
 
-QByteArray CCompactXmlMemWriteArchive::GetString() const
+const QByteArray& CCompactXmlMemWriteArchive::GetString() const
 {
-	return m_document.toByteArray(4);
+	const_cast<CCompactXmlMemWriteArchive*>(this)->Flush();
+
+	return m_textBuffer.buffer();
 }
 
 

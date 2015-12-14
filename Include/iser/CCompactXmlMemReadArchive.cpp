@@ -17,16 +17,12 @@ CCompactXmlMemReadArchive::CCompactXmlMemReadArchive(
 			const QByteArray& inputString,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
-:	BaseClass(rootTag)
+:	BaseClass(serializeHeader, rootTag)
 {
-	if (!m_document.setContent(inputString)){
+	m_buffer.setData(inputString);
+
+	if (!BaseClass::SetContent(&m_buffer)){
 		return;
-	}
-
-	m_currentParent = m_document.documentElement();
-
-	if (!m_currentParent.isNull() && serializeHeader){
-		SerializeAcfHeader();
 	}
 }
 

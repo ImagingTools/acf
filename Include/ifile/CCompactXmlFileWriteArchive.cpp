@@ -35,17 +35,20 @@ CCompactXmlFileWriteArchive::~CCompactXmlFileWriteArchive()
 bool CCompactXmlFileWriteArchive::OpenFile(const QString& filePath)
 {
 	m_file.setFileName(filePath);
-	return m_file.open(QIODevice::WriteOnly | QIODevice::Text);
+
+	if (m_file.open(QIODevice::WriteOnly | QIODevice::Text)){
+		return InitArchive(&m_file);
+	}
+
+	return false;
 }
 
 
 bool CCompactXmlFileWriteArchive::Flush()
 {
-	if (m_file.isOpen()){
-		QTextStream stream(&m_file);
+	BaseClass::Flush();
 
-		m_document.save(stream, 4);
-		
+	if (m_file.isOpen()){
 		m_file.close();
 
 		return true;

@@ -17,9 +17,8 @@ CCompactXmlFileReadArchive::CCompactXmlFileReadArchive(
 			const QString& filePath,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
-:	BaseClass(rootTag),
-	BaseClass2(filePath),
-	m_serializeHeader(serializeHeader)
+:	BaseClass(serializeHeader, rootTag),
+	BaseClass2(filePath)
 {
 	if (!filePath.isEmpty()){
 		OpenFile(filePath);
@@ -38,21 +37,13 @@ bool CCompactXmlFileReadArchive::OpenFile(const QString& filePath)
 
 	m_openFileName = filePath;
 
-	if (!m_document.setContent(&file)){
+	if (!BaseClass::SetContent(&file)){
 		file.close();
 
 		return false;
 	}
 
-	m_currentParent = m_document.documentElement();
-
-	bool retVal = !m_currentParent.isNull();
-
-	if (m_serializeHeader){
-		retVal = retVal && SerializeAcfHeader();
-	}
-
-	return retVal;
+	return true;
 }
 
 
