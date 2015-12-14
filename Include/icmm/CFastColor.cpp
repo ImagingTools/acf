@@ -12,6 +12,11 @@ namespace icmm
 {
 
 
+// static constants
+static const iser::CArchiveTag s_colorComponentsTag("ColorComponents", "List of color components", iser::CArchiveTag::TT_MULTIPLE);
+static const iser::CArchiveTag s_componentTag("Component", "Single component", iser::CArchiveTag::TT_LEAF, &s_colorComponentsTag);
+
+
 uint qHash(const icmm::CFastColor& color, uint seed)
 {
 	quint64 retVal = seed;
@@ -122,12 +127,9 @@ bool CFastColor::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag colorComponentsTag("ColorComponents", "List of color components", iser::CArchiveTag::TT_MULTIPLE);
-	static iser::CArchiveTag componentTag("Component", "Single component", iser::CArchiveTag::TT_LEAF, &colorComponentsTag);
-
 	int elementsCount = GetElementsCount();
 
-	retVal = retVal && archive.BeginMultiTag(colorComponentsTag, componentTag, elementsCount);
+	retVal = retVal && archive.BeginMultiTag(s_colorComponentsTag, s_componentTag, elementsCount);
 
 	if (!retVal){
 		return false;
@@ -140,12 +142,12 @@ bool CFastColor::Serialize(iser::IArchive& archive)
 	}
 
 	for (int i = 0; i < elementsCount; ++i){
-		retVal = retVal && archive.BeginTag(componentTag);
+		retVal = retVal && archive.BeginTag(s_componentTag);
 		retVal = retVal && archive.Process(m_elements[i]);
-		retVal = retVal && archive.EndTag(componentTag);
+		retVal = retVal && archive.EndTag(s_componentTag);
 	}
 
-	retVal = retVal && archive.EndTag(colorComponentsTag);
+	retVal = retVal && archive.EndTag(s_colorComponentsTag);
 
 	return retVal;
 }

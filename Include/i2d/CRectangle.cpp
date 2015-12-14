@@ -17,18 +17,24 @@ namespace i2d
 {
 
 
-static istd::IChangeable::ChangeSet s_resetRectangeChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Reset rectangle"));
-static istd::IChangeable::ChangeSet s_setLeftSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's left side"));
-static istd::IChangeable::ChangeSet s_setTopSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's top side"));
-static istd::IChangeable::ChangeSet s_setRightSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's right side"));
-static istd::IChangeable::ChangeSet s_setBottomSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's bottom side"));
-static istd::IChangeable::ChangeSet s_setTopLeftChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's top-left position"));
-static istd::IChangeable::ChangeSet s_setTopRightChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's top-right position"));
-static istd::IChangeable::ChangeSet s_setBottomLeftChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's bottom-left position"));
-static istd::IChangeable::ChangeSet s_setBottomRightChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's bottom-right position"));
-static istd::IChangeable::ChangeSet s_uniteChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Unite rectangle which another"));
-static istd::IChangeable::ChangeSet s_expandChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Expand rectangle"));
-static istd::IChangeable::ChangeSet s_intersectChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Intersect with another rectangle"));
+// static constants
+static const istd::IChangeable::ChangeSet s_resetRectangeChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Reset rectangle"));
+static const istd::IChangeable::ChangeSet s_setLeftSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's left side"));
+static const istd::IChangeable::ChangeSet s_setTopSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's top side"));
+static const istd::IChangeable::ChangeSet s_setRightSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's right side"));
+static const istd::IChangeable::ChangeSet s_setBottomSideChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectangle's bottom side"));
+static const istd::IChangeable::ChangeSet s_setTopLeftChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's top-left position"));
+static const istd::IChangeable::ChangeSet s_setTopRightChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's top-right position"));
+static const istd::IChangeable::ChangeSet s_setBottomLeftChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's bottom-left position"));
+static const istd::IChangeable::ChangeSet s_setBottomRightChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Set rectange's bottom-right position"));
+static const istd::IChangeable::ChangeSet s_uniteChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Unite rectangle which another"));
+static const istd::IChangeable::ChangeSet s_expandChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Expand rectangle"));
+static const istd::IChangeable::ChangeSet s_intersectChange(CRectangle::CF_OBJECT_POSITION, CRectangle::CF_ALL_DATA, QObject::tr("Intersect with another rectangle"));
+static const iser::CArchiveTag s_topTag("Top", "Rectangle top edge position", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_bottomTag("Bottom", "Rectangle bottom edge position", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_leftTag("Left", "Rectangle left edge position", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_rightTag("Right", "Rectangle right edge position", iser::CArchiveTag::TT_LEAF);
+
 
 
 // public methods
@@ -714,41 +720,34 @@ istd::IChangeable* CRectangle::CloneMe(CompatibilityMode mode) const
 
 bool CRectangle::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag topTag("Top", "Rectangle top edge position", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag bottomTag("Bottom", "Rectangle bottom edge position", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag leftTag("Left", "Rectangle left edge position", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag rightTag("Right", "Rectangle right edge position", iser::CArchiveTag::TT_LEAF);
-
 	istd::CChangeNotifier changeNotifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(changeNotifier);
 
 	double& top = m_verticalRange.GetMinValueRef();
-	double& bottom = m_verticalRange.GetMaxValueRef();
-	double& left = m_horizontalRange.GetMinValueRef();
-	double& right = m_horizontalRange.GetMaxValueRef();
-
-	bool retVal = archive.BeginTag(topTag);
+	bool retVal = archive.BeginTag(s_topTag);
 	retVal = retVal && archive.Process(top);
-	retVal = retVal && archive.EndTag(topTag);
+	retVal = retVal && archive.EndTag(s_topTag);
 
-	retVal = retVal && archive.BeginTag(bottomTag);
+	double& bottom = m_verticalRange.GetMaxValueRef();
+	retVal = retVal && archive.BeginTag(s_bottomTag);
 	retVal = retVal && archive.Process(bottom);
-	retVal = retVal && archive.EndTag(bottomTag);
+	retVal = retVal && archive.EndTag(s_bottomTag);
 
-	retVal = retVal && archive.BeginTag(leftTag);
+	double& left = m_horizontalRange.GetMinValueRef();
+	retVal = retVal && archive.BeginTag(s_leftTag);
 	retVal = retVal && archive.Process(left);
-	retVal = retVal && archive.EndTag(leftTag);
+	retVal = retVal && archive.EndTag(s_leftTag);
 
-	retVal = retVal && archive.BeginTag(rightTag);
+	double& right = m_horizontalRange.GetMaxValueRef();
+	retVal = retVal && archive.BeginTag(s_rightTag);
 	retVal = retVal && archive.Process(right);
-	retVal = retVal && archive.EndTag(rightTag);
+	retVal = retVal && archive.EndTag(s_rightTag);
 	
 	return retVal;
 }
 
 
 // static attributes
-
 CRectangle CRectangle::s_empty(0, 0, 0, 0);
 
 

@@ -8,27 +8,29 @@ namespace icmm
 {
 
 
+// static constants
+static const iser::CArchiveTag s_cyanTag("Red", "Red component", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_magentaTag("Green", "Green component", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_yellowTag("Blue", "Blue component", iser::CArchiveTag::TT_LEAF);
+
+
 // public methods
 
 bool CRgb::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag cyanTag("Red", "Red component", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag magentaTag("Green", "Green component", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag yellowTag("Blue", "Blue component", iser::CArchiveTag::TT_LEAF);
-
 	bool retVal = true;
 
-	retVal = retVal && archive.BeginTag(cyanTag);
+	retVal = retVal && archive.BeginTag(s_cyanTag);
 	retVal = retVal && archive.Process(GetElementRef(CI_RED));
-	retVal = retVal && archive.EndTag(cyanTag);
+	retVal = retVal && archive.EndTag(s_cyanTag);
 
-	retVal = retVal && archive.BeginTag(magentaTag);
+	retVal = retVal && archive.BeginTag(s_magentaTag);
 	retVal = retVal && archive.Process(GetElementRef(CI_GREEN));
-	retVal = retVal && archive.EndTag(magentaTag);
+	retVal = retVal && archive.EndTag(s_magentaTag);
 
-	retVal = retVal && archive.BeginTag(yellowTag);
+	retVal = retVal && archive.BeginTag(s_yellowTag);
 	retVal = retVal && archive.Process(GetElementRef(CI_BLUE));
-	retVal = retVal && archive.EndTag(yellowTag);
+	retVal = retVal && archive.EndTag(s_yellowTag);
 
 	return retVal;
 }

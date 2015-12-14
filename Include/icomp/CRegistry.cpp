@@ -21,12 +21,25 @@ namespace icomp
 {
 
 
-static istd::IChangeable::ChangeSet s_renameElementChangeSet(icomp::IRegistry::CF_ELEMENT_RENAMED, QObject::tr("Rename element"));
-static istd::IChangeable::ChangeSet s_addElementChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, QObject::tr("Add element"));
-static istd::IChangeable::ChangeSet s_removeElementChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, QObject::tr("Remove element"));
+// static constants
+static const istd::IChangeable::ChangeSet s_renameElementChangeSet(icomp::IRegistry::CF_ELEMENT_RENAMED, QObject::tr("Rename element"));
+static const istd::IChangeable::ChangeSet s_addElementChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, QObject::tr("Add element"));
+static const istd::IChangeable::ChangeSet s_removeElementChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, QObject::tr("Remove element"));
+static const iser::CArchiveTag s_descriptionTag("Description", "Human readable description", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_keywordsTag("Keywords", "Human readable keywords", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_elementsListTag("ElementsList", "List of registry elements", iser::CArchiveTag::TT_MULTIPLE);
+static const iser::CArchiveTag s_elementTag("Element", "Description of single element", iser::CArchiveTag::TT_GROUP, &s_elementsListTag);
+static const iser::CArchiveTag s_elementIdTag("Id", "ID of element in registry", iser::CArchiveTag::TT_LEAF, &s_elementTag);
+static const iser::CArchiveTag s_dataTag("Data", "Data of single element", iser::CArchiveTag::TT_GROUP, &s_elementTag, true);
+static const iser::CArchiveTag s_isEnabledTag("IsEnabled", "It is true if this element is valid", iser::CArchiveTag::TT_LEAF, &s_dataTag);
+static const iser::CArchiveTag s_exportedInterfacesTag("ExportedInterfaces", "List of exported interfaces", iser::CArchiveTag::TT_MULTIPLE);
+static const iser::CArchiveTag s_interfaceTag("Interface", "Single exported interface", iser::CArchiveTag::TT_GROUP, &s_exportedInterfacesTag);
+static const iser::CArchiveTag s_interfaceIdTag("InterfaceId", "ID of exported interface", iser::CArchiveTag::TT_LEAF, &s_interfaceTag);
+static const iser::CArchiveTag s_componentIdTag("ComponentId", "ID of component in registry implementing exported interface", iser::CArchiveTag::TT_LEAF, &s_interfaceTag);
+
 
 	
-	// public methods
+// public methods
 
 // reimplemented (icomp::IRegistry)
 
@@ -408,11 +421,8 @@ void CRegistry::SetKeywords(const QString& keywords)
 
 bool CRegistry::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag descriptionTag("Description", "Human readable description", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag keywordsTag("Keywords", "Human readable keywords", iser::CArchiveTag::TT_LEAF);
-
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
-	quint32 frameworkVersion = 0;
+	quint32 frameworkVersion = quint32(-1);
 	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
@@ -420,32 +430,29 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 
 	bool retVal = true;
 
+	if (frameworkVersion >= 4051){
+		retVal = retVal && archive.BeginTag(s_descriptionTag);
+		retVal = retVal && archive.Process(m_description);
+		retVal = retVal && archive.EndTag(s_descriptionTag);
+
+		retVal = retVal && archive.BeginTag(s_keywordsTag);
+		retVal = retVal && archive.Process(m_keywords);
+		retVal = retVal && archive.EndTag(s_keywordsTag);
+	}
+
 	retVal = retVal && SerializeComponents(archive);
 	retVal = retVal && SerializeEmbeddedRegistries(archive);
 	retVal = retVal && SerializeExportedInterfaces(archive);
 	retVal = retVal && SerializeExportedComponents(archive);
 
-	if (frameworkVersion >= 807){
-		retVal = retVal && archive.BeginTag(descriptionTag);
+	if (frameworkVersion < 4051){
+		retVal = retVal && archive.BeginTag(s_descriptionTag);
 		retVal = retVal && archive.Process(m_description);
-		retVal = retVal && archive.EndTag(descriptionTag);
+		retVal = retVal && archive.EndTag(s_descriptionTag);
 
-		retVal = retVal && archive.BeginTag(keywordsTag);
+		retVal = retVal && archive.BeginTag(s_keywordsTag);
 		retVal = retVal && archive.Process(m_keywords);
-		retVal = retVal && archive.EndTag(keywordsTag);
-
-		// TODO: remove it when back compatibility to specified versions range will be no more important
-		if (frameworkVersion >= 1422 && frameworkVersion < 1431){
-			static iser::CArchiveTag categoryTag("Category", "Logical category of the registry", iser::CArchiveTag::TT_LEAF);
-			retVal = retVal && archive.BeginTag(categoryTag);
-			int dummy;
-			retVal = retVal && archive.Process(dummy);
-			retVal = retVal && archive.EndTag(categoryTag);	
-		}
-	}
-	else if (!archive.IsStoring()){
-		m_description.clear();
-		m_keywords.clear();
+		retVal = retVal && archive.EndTag(s_keywordsTag);
 	}
 
 	return retVal;
@@ -487,19 +494,13 @@ IRegistryElement* CRegistry::CreateRegistryElement(
 
 bool CRegistry::SerializeComponents(iser::IArchive& archive)
 {
-	static iser::CArchiveTag elementsListTag("ElementsList", "List of registry elements", iser::CArchiveTag::TT_MULTIPLE);
-	static iser::CArchiveTag elementTag("Element", "Description of single element", iser::CArchiveTag::TT_GROUP, &elementsListTag);
-	static iser::CArchiveTag elementIdTag("Id", "ID of element in registry", iser::CArchiveTag::TT_LEAF, &elementTag);
-	static iser::CArchiveTag dataTag("Data", "Data of single element", iser::CArchiveTag::TT_GROUP, &elementTag, true);
-	static iser::CArchiveTag isEnabledTag("IsEnabled", "It is true if this element is valid", iser::CArchiveTag::TT_LEAF, &dataTag);
-
 	bool isStoring = archive.IsStoring();
 
 	bool retVal = true;
 
 	int count = int(m_componentsMap.size());
 
-	retVal = retVal && archive.BeginMultiTag(elementsListTag, elementTag, count);
+	retVal = retVal && archive.BeginMultiTag(s_elementsListTag, s_elementTag, count);
 
 	if (isStoring){
 		for (		ComponentsMap::iterator iter = m_componentsMap.begin();
@@ -507,54 +508,54 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 					++iter){
 			ElementInfo& element = iter.value();
 
-			retVal = retVal && archive.BeginTag(elementTag);
+			retVal = retVal && archive.BeginTag(s_elementTag);
 
-			retVal = retVal && archive.BeginTag(elementIdTag);
+			retVal = retVal && archive.BeginTag(s_elementIdTag);
 			retVal = retVal && archive.Process(const_cast< QByteArray&>(iter.key()));
-			retVal = retVal && archive.EndTag(elementIdTag);
+			retVal = retVal && archive.EndTag(s_elementIdTag);
 
 			retVal = retVal && element.address.Serialize(archive);
 
-			retVal = retVal && archive.BeginTag(dataTag);
+			retVal = retVal && archive.BeginTag(s_dataTag);
 
 			bool isEnabled = element.elementPtr.IsValid();
-			retVal = retVal && archive.BeginTag(isEnabledTag);
+			retVal = retVal && archive.BeginTag(s_isEnabledTag);
 			retVal = retVal && archive.Process(isEnabled);
-			retVal = retVal && archive.EndTag(isEnabledTag);
+			retVal = retVal && archive.EndTag(s_isEnabledTag);
 
 			if (isEnabled){
 				retVal = retVal && element.elementPtr->Serialize(archive);
 			}
 
-			retVal = retVal && archive.EndTag(dataTag);
+			retVal = retVal && archive.EndTag(s_dataTag);
 
-			retVal = retVal && archive.EndTag(elementTag);
+			retVal = retVal && archive.EndTag(s_elementTag);
 		}
 	}
 	else{
 		m_componentsMap.clear();
 
 		for (int i = 0; i < count; ++i){
-			retVal = retVal && archive.BeginTag(elementTag);
+			retVal = retVal && archive.BeginTag(s_elementTag);
 
 			QByteArray elementId;
-			retVal = retVal && archive.BeginTag(elementIdTag);
+			retVal = retVal && archive.BeginTag(s_elementIdTag);
 			retVal = retVal && archive.Process(elementId);
-			retVal = retVal && archive.EndTag(elementIdTag);
+			retVal = retVal && archive.EndTag(s_elementIdTag);
 
 			CComponentAddress address;
 			retVal = retVal && address.Serialize(archive);
 
-			retVal = retVal && archive.BeginTag(dataTag);
+			retVal = retVal && archive.BeginTag(s_dataTag);
 
 			if (!retVal){
 				return false;
 			}
 
 			bool isEnabled = false;
-			retVal = retVal && archive.BeginTag(isEnabledTag);
+			retVal = retVal && archive.BeginTag(s_isEnabledTag);
 			retVal = retVal && archive.Process(isEnabled);
-			retVal = retVal && archive.EndTag(isEnabledTag);
+			retVal = retVal && archive.EndTag(s_isEnabledTag);
 
 			ElementInfo* newInfoPtr = InsertElementInfo(elementId, address, isEnabled);
 			if (newInfoPtr == NULL){
@@ -573,13 +574,13 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 				}
 			}
 
-			retVal = retVal && archive.EndTag(dataTag);
+			retVal = retVal && archive.EndTag(s_dataTag);
 
-			retVal = retVal && archive.EndTag(elementTag);
+			retVal = retVal && archive.EndTag(s_elementTag);
 		}
 	}
 
-	retVal = retVal && archive.EndTag(elementsListTag);
+	retVal = retVal && archive.EndTag(s_elementsListTag);
 
 	return retVal;
 }
@@ -590,7 +591,7 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 	static iser::CArchiveTag registriesListTag("EmbeddedRegistriesList", "List of embedded registries", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag registryTag("EmbeddedRegistry", "Description of single embedded registry", iser::CArchiveTag::TT_GROUP, &registriesListTag);
 	static iser::CArchiveTag registryIdTag("Id", "ID of embedded registry", iser::CArchiveTag::TT_LEAF, &registryTag);
-	static iser::CArchiveTag dataTag("Data", "Data of single embedded registry", iser::CArchiveTag::TT_GROUP, &registryTag);
+	static iser::CArchiveTag s_dataTag("Data", "Data of single embedded registry", iser::CArchiveTag::TT_GROUP, &registryTag);
 
 	bool isStoring = archive.IsStoring();
 
@@ -624,9 +625,9 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 			retVal = retVal && archive.Process(const_cast<QByteArray&>(iter.key()));
 			retVal = retVal && archive.EndTag(registryIdTag);
 
-			retVal = retVal && archive.BeginTag(dataTag);
+			retVal = retVal && archive.BeginTag(s_dataTag);
 			retVal = retVal && registryPtr->Serialize(archive);
-			retVal = retVal && archive.EndTag(dataTag);
+			retVal = retVal && archive.EndTag(s_dataTag);
 
 			retVal = retVal && archive.EndTag(registryTag);
 		}
@@ -642,14 +643,14 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 			retVal = retVal && archive.Process(elementId);
 			retVal = retVal && archive.EndTag(registryIdTag);
 
-			retVal = retVal && archive.BeginTag(dataTag);
+			retVal = retVal && archive.BeginTag(s_dataTag);
 
 			IRegistry* registryPtr = InsertEmbeddedRegistry(elementId);
 			if (registryPtr == NULL){
 				return false;
 			}
 			retVal = retVal && registryPtr->Serialize(archive);
-			retVal = retVal && archive.EndTag(dataTag);
+			retVal = retVal && archive.EndTag(s_dataTag);
 
 			retVal = retVal && archive.EndTag(registryTag);
 		}
@@ -663,60 +664,55 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 
 bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 {
-	static iser::CArchiveTag exportedInterfacesTag("ExportedInterfaces", "List of exported interfaces", iser::CArchiveTag::TT_MULTIPLE);
-	static iser::CArchiveTag interfaceTag("Interface", "Single exported interface", iser::CArchiveTag::TT_GROUP, &exportedInterfacesTag);
-	static iser::CArchiveTag interfaceIdTag("InterfaceId", "ID of exported interface", iser::CArchiveTag::TT_LEAF, &interfaceTag);
-	static iser::CArchiveTag componentIdTag("ComponentId", "ID of component in registry implementing exported interface", iser::CArchiveTag::TT_LEAF, &interfaceTag);
-
 	bool isStoring = archive.IsStoring();
 
 	bool retVal = true;
 
 	int count = int(m_exportedInterfacesMap.size());
 
-	retVal = retVal && archive.BeginMultiTag(exportedInterfacesTag, interfaceTag, count);
+	retVal = retVal && archive.BeginMultiTag(s_exportedInterfacesTag, s_interfaceTag, count);
 
 	if (isStoring){
 		for (		ExportedInterfacesMap::iterator iter = m_exportedInterfacesMap.begin();
 					iter != m_exportedInterfacesMap.end();
 					++iter){
-			retVal = retVal && archive.BeginTag(interfaceTag);
+			retVal = retVal && archive.BeginTag(s_interfaceTag);
 
-			retVal = retVal && archive.BeginTag(interfaceIdTag);
+			retVal = retVal && archive.BeginTag(s_interfaceIdTag);
 			QByteArray interfaceName = iter.key();
 			retVal = retVal && archive.Process(interfaceName);
-			retVal = retVal && archive.EndTag(interfaceIdTag);
+			retVal = retVal && archive.EndTag(s_interfaceIdTag);
 
-			retVal = retVal && archive.BeginTag(componentIdTag);
+			retVal = retVal && archive.BeginTag(s_componentIdTag);
 			retVal = retVal && archive.Process(iter.value());
-			retVal = retVal && archive.EndTag(componentIdTag);
+			retVal = retVal && archive.EndTag(s_componentIdTag);
 
-			retVal = retVal && archive.EndTag(interfaceTag);
+			retVal = retVal && archive.EndTag(s_interfaceTag);
 		}
 	}
 	else{
 		m_exportedInterfacesMap.clear();
 
 		for (int i = 0; i < count; ++i){
-			retVal = retVal && archive.BeginTag(interfaceTag);
+			retVal = retVal && archive.BeginTag(s_interfaceTag);
 
 			QByteArray interfaceName;
-			retVal = retVal && archive.BeginTag(interfaceIdTag);
+			retVal = retVal && archive.BeginTag(s_interfaceIdTag);
 			retVal = retVal && archive.Process(interfaceName);
-			retVal = retVal && archive.EndTag(interfaceIdTag);
+			retVal = retVal && archive.EndTag(s_interfaceIdTag);
 
 			QByteArray componentId;
-			retVal = retVal && archive.BeginTag(componentIdTag);
+			retVal = retVal && archive.BeginTag(s_componentIdTag);
 			retVal = retVal && archive.Process(componentId);
-			retVal = retVal && archive.EndTag(componentIdTag);
+			retVal = retVal && archive.EndTag(s_componentIdTag);
 
 			m_exportedInterfacesMap[interfaceName] = componentId;
 
-			retVal = retVal && archive.EndTag(interfaceTag);
+			retVal = retVal && archive.EndTag(s_interfaceTag);
 		}
 	}
 
-	retVal = retVal && archive.EndTag(exportedInterfacesTag);
+	retVal = retVal && archive.EndTag(s_exportedInterfacesTag);
 
 	return retVal;
 }
@@ -727,7 +723,7 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 	static iser::CArchiveTag exportedComponentsTag("ExportedComponents", "List of exported components", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag componentTag("Component", "Exported component info", iser::CArchiveTag::TT_GROUP, &exportedComponentsTag);
 	static iser::CArchiveTag exportedIdTag("ExportedId", "Exported component ID", iser::CArchiveTag::TT_LEAF, &componentTag);
-	static iser::CArchiveTag componentIdTag("ComponentId", "ID of component in registry", iser::CArchiveTag::TT_LEAF, &componentTag);
+	static iser::CArchiveTag s_componentIdTag("ComponentId", "ID of component in registry", iser::CArchiveTag::TT_LEAF, &componentTag);
 
 	bool isStoring = archive.IsStoring();
 
@@ -747,9 +743,9 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 			retVal = retVal && archive.Process(const_cast< QByteArray&>(iter.key()));
 			retVal = retVal && archive.EndTag(exportedIdTag);
 
-			retVal = retVal && archive.BeginTag(componentIdTag);
+			retVal = retVal && archive.BeginTag(s_componentIdTag);
 			retVal = retVal && archive.Process(iter.value());
-			retVal = retVal && archive.EndTag(componentIdTag);
+			retVal = retVal && archive.EndTag(s_componentIdTag);
 
 			retVal = retVal && archive.EndTag(componentTag);
 		}
@@ -766,9 +762,9 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 			retVal = retVal && archive.EndTag(exportedIdTag);
 
 			QByteArray componentId;
-			retVal = retVal && archive.BeginTag(componentIdTag);
+			retVal = retVal && archive.BeginTag(s_componentIdTag);
 			retVal = retVal && archive.Process(componentId);
-			retVal = retVal && archive.EndTag(componentIdTag);
+			retVal = retVal && archive.EndTag(s_componentIdTag);
 
 			m_exportedComponentsMap[exportedId] = componentId;
 

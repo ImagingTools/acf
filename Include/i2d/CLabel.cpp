@@ -11,6 +11,10 @@ namespace i2d
 {
 
 
+// static constants
+static const iser::CArchiveTag s_textTag("Text", "Text of label", iser::CArchiveTag::TT_LEAF);
+
+
 // public methods
 
 CLabel::CLabel(const i2d::CVector2d& position, const QString& labelText)
@@ -30,16 +34,14 @@ void CLabel::SetText(const QString& labelText)
 
 bool CLabel::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag textTag("Text", "Text of label", iser::CArchiveTag::TT_LEAF);
-
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);
 
-	retVal = retVal && archive.BeginTag(textTag);
+	retVal = retVal && archive.BeginTag(s_textTag);
 	retVal = retVal && archive.Process(m_text);
-	retVal = retVal && archive.EndTag(textTag);
+	retVal = retVal && archive.EndTag(s_textTag);
 
 	return retVal;
 }

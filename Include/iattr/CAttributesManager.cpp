@@ -15,10 +15,17 @@ namespace iattr
 {
 
 
+// static constants
 static const istd::IChangeable::ChangeSet s_removeAllAttributesChange(CAttributesManager::CF_RESET, CAttributesManager::CF_ATTR_REMOVED, QObject::tr("Remove all attributes"));
 static const istd::IChangeable::ChangeSet s_removeAttributeChange(CAttributesManager::CF_ATTR_REMOVED, QObject::tr("Remove attribute"));
 static const istd::IChangeable::ChangeSet s_addAttributeChange(CAttributesManager::CF_ATTR_ADDED, QObject::tr("Add attribute"));
 static const istd::IChangeable::ChangeSet s_insertGroupChange(QObject::tr("Insert attribute"));
+static const iser::CArchiveTag s_attributesTag("Properties", "List of object properties", iser::CArchiveTag::TT_MULTIPLE);
+static const iser::CArchiveTag s_attributeTag("Property", "Object property", iser::CArchiveTag::TT_GROUP, &s_attributesTag);
+static const iser::CArchiveTag s_typeIdTag("PropertyTypeId", "ID of the property object", iser::CArchiveTag::TT_LEAF, &s_attributeTag);
+static const iser::CArchiveTag s_idTag("PropertyId", "Name of the property object", iser::CArchiveTag::TT_LEAF, &s_attributeTag);
+static const iser::CArchiveTag s_objectTag("PropertyObject", "Property object", iser::CArchiveTag::TT_GROUP, &s_attributeTag);
+
 
 
 // public methods
@@ -121,18 +128,12 @@ iser::IObject* CAttributesManager::GetAttribute(const QByteArray& attributeId) c
 
 bool CAttributesManager::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag attributesTag("Properties", "List of object properties", iser::CArchiveTag::TT_MULTIPLE);
-	static iser::CArchiveTag attributeTag("Property", "Object property", iser::CArchiveTag::TT_GROUP, &attributesTag);
-	static iser::CArchiveTag typeIdTag("PropertyTypeId", "ID of the property object", iser::CArchiveTag::TT_LEAF, &attributeTag);
-	static iser::CArchiveTag idTag("PropertyId", "Name of the property object", iser::CArchiveTag::TT_LEAF, &attributeTag);
-	static iser::CArchiveTag objectTag("PropertyObject", "Property object", iser::CArchiveTag::TT_GROUP, &attributeTag);
-
 	bool retVal = true;
 
 	bool isStoring = archive.IsStoring();
 
 	int attributesCount = m_attributesMap.count();
-	retVal = retVal && archive.BeginMultiTag(attributesTag, attributeTag, attributesCount);
+	retVal = retVal && archive.BeginMultiTag(s_attributesTag, s_attributeTag, attributesCount);
 
 	if (isStoring){
 		for (		AttributesMap::ConstIterator iter = m_attributesMap.constBegin();
@@ -144,25 +145,25 @@ bool CAttributesManager::Serialize(iser::IArchive& archive)
 			if (attributePtr.IsValid()){
 				QByteArray attributeTypeId = attributePtr->GetFactoryId();
 
-				retVal = retVal && archive.BeginTag(attributeTag);
+				retVal = retVal && archive.BeginTag(s_attributeTag);
 
-				retVal = retVal && archive.BeginTag(typeIdTag);
+				retVal = retVal && archive.BeginTag(s_typeIdTag);
 				retVal = retVal && archive.Process(attributeTypeId);
-				retVal = retVal && archive.EndTag(typeIdTag);
+				retVal = retVal && archive.EndTag(s_typeIdTag);
 
-				retVal = retVal && archive.BeginTag(idTag);
+				retVal = retVal && archive.BeginTag(s_idTag);
 				retVal = retVal && archive.Process(attributeId);
-				retVal = retVal && archive.EndTag(idTag);
+				retVal = retVal && archive.EndTag(s_idTag);
 
-				retVal = retVal && archive.BeginTag(objectTag);
+				retVal = retVal && archive.BeginTag(s_objectTag);
 				retVal = retVal && attributePtr->Serialize(archive);
-				retVal = retVal && archive.EndTag(objectTag);
+				retVal = retVal && archive.EndTag(s_objectTag);
 
-				retVal = retVal && archive.EndTag(attributeTag);
+				retVal = retVal && archive.EndTag(s_attributeTag);
 			}
 		}
 
-		retVal = retVal && archive.EndTag(attributesTag);
+		retVal = retVal && archive.EndTag(s_attributesTag);
 	}
 	else{
 		istd::CChangeNotifier notifier(this, &GetAllChanges());
@@ -175,18 +176,18 @@ bool CAttributesManager::Serialize(iser::IArchive& archive)
 		m_attributesMap.clear();
 
 		for (int propertyIndex = 0; propertyIndex < attributesCount; ++propertyIndex){
-			retVal = retVal && archive.BeginTag(attributeTag);
+			retVal = retVal && archive.BeginTag(s_attributeTag);
 
 			QByteArray attributeId;
 			QByteArray attributeTypeId;
 
-			retVal = retVal && archive.BeginTag(typeIdTag);
+			retVal = retVal && archive.BeginTag(s_typeIdTag);
 			retVal = retVal && archive.Process(attributeTypeId);
-			retVal = retVal && archive.EndTag(typeIdTag);
+			retVal = retVal && archive.EndTag(s_typeIdTag);
 
-			retVal = retVal && archive.BeginTag(idTag);
+			retVal = retVal && archive.BeginTag(s_idTag);
 			retVal = retVal && archive.Process(attributeId);
-			retVal = retVal && archive.EndTag(idTag);
+			retVal = retVal && archive.EndTag(s_idTag);
 
 			if (!retVal){
 				return false;
@@ -203,10 +204,10 @@ bool CAttributesManager::Serialize(iser::IArchive& archive)
 
 			retVal = retVal && attributePtr->Serialize(archive);
 
-			retVal = retVal && archive.EndTag(attributeTag);
+			retVal = retVal && archive.EndTag(s_attributeTag);
 		}
 
-		retVal = retVal && archive.EndTag(attributesTag);
+		retVal = retVal && archive.EndTag(s_attributesTag);
 	}
 
 	return retVal;

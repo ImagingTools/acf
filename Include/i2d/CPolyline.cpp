@@ -10,6 +10,10 @@ namespace i2d
 {
 
 
+// static constants
+static const iser::CArchiveTag s_closedTag("Closed", "Closed", iser::CArchiveTag::TT_LEAF);
+
+
 void CPolyline::SetClosed(bool state)
 {
 	if (m_isClosed != state){
@@ -111,20 +115,25 @@ i2d::CVector2d CPolyline::GetKneeVector(int nodeIndex) const
 
 bool CPolyline::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag closedTag("Closed", "Closed", iser::CArchiveTag::TT_LEAF);
+	quint32 version = quint32(-1);
+	archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version);
 
-	if (BaseClass::Serialize(archive)){
-		quint32 version = 0;
-		if (!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version) || (version > 3930)){
-			archive.BeginTag(closedTag);
-			archive.Process(m_isClosed);
-			archive.EndTag(closedTag);
-		}
-
-		return true;
+	bool retVal = true;
+	if (version >= 4051){
+		retVal = retVal && archive.BeginTag(s_closedTag);
+		retVal = retVal && archive.Process(m_isClosed);
+		retVal = retVal && archive.EndTag(s_closedTag);
 	}
 
-	return false;
+	retVal = retVal && BaseClass::Serialize(archive);
+
+	if ((version > 3930) && (version < 4051)){
+		retVal = retVal && archive.BeginTag(s_closedTag);
+		retVal = retVal && archive.Process(m_isClosed);
+		retVal = retVal && archive.EndTag(s_closedTag);
+	}
+
+	return retVal;
 }
 
 

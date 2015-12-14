@@ -11,9 +11,10 @@ namespace i3d
 {
 
 
-const iser::CArchiveTag s_posXTag("X", "X coordinate", iser::CArchiveTag::TT_LEAF);
-const iser::CArchiveTag s_posYTag("Y", "Y coordinate", iser::CArchiveTag::TT_LEAF);
-const iser::CArchiveTag s_posZTag("Z", "Z coordinate", iser::CArchiveTag::TT_LEAF);
+// static constants
+static const iser::CArchiveTag s_posXTag("X", "X coordinate", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_posYTag("Y", "Y coordinate", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_posZTag("Z", "Z coordinate", iser::CArchiveTag::TT_LEAF);
 
 
 CVector3d CVector3d::GetCrossProduct(const imath::TVector<3>& vector) const

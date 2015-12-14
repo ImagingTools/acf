@@ -13,6 +13,11 @@ namespace icomp
 {
 
 
+// static constants
+static const iser::CArchiveTag s_packageIdTag("PackageId", "ID of package", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_componentIdTag("ComponentId", "ID of factory", iser::CArchiveTag::TT_LEAF);
+
+
 CComponentAddress::CComponentAddress()
 {
 }
@@ -56,21 +61,18 @@ bool CComponentAddress::FromString(const QString& address)
 
 bool CComponentAddress::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag packageIdTag("PackageId", "ID of package", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag componentIdTag("ComponentId", "ID of factory", iser::CArchiveTag::TT_LEAF);
-
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = true;
 
-	retVal = retVal && archive.BeginTag(packageIdTag);
+	retVal = retVal && archive.BeginTag(s_packageIdTag);
 	retVal = retVal && archive.Process(m_packageId);
-	retVal = retVal && archive.EndTag(packageIdTag);
+	retVal = retVal && archive.EndTag(s_packageIdTag);
 
-	retVal = retVal && archive.BeginTag(componentIdTag);
+	retVal = retVal && archive.BeginTag(s_componentIdTag);
 	retVal = retVal && archive.Process(m_componentId);
-	retVal = retVal && archive.EndTag(componentIdTag);
+	retVal = retVal && archive.EndTag(s_componentIdTag);
 
 	return retVal;
 }

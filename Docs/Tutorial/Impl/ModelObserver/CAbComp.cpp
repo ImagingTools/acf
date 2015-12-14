@@ -8,8 +8,10 @@
 
 
 // static constants
-const static istd::IChangeable::ChangeSet s_changeAChangeSet(IAb::CF_A_CHANGED, QObject::tr("Change A"));
-const static istd::IChangeable::ChangeSet s_changeBChangeSet(IAb::CF_B_CHANGED, QObject::tr("Change B"));
+static const istd::IChangeable::ChangeSet s_changeAChangeSet(IAb::CF_A_CHANGED, QObject::tr("Change A"));
+static const istd::IChangeable::ChangeSet s_changeBChangeSet(IAb::CF_B_CHANGED, QObject::tr("Change B"));
+static const iser::CArchiveTag s_aTag("A", "Value of A", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_bTag("B", "Value of B", iser::CArchiveTag::TT_LEAF);
 
 
 // public methods
@@ -86,9 +88,6 @@ const istd::CRange& CAbComp::GetARange() const
 
 bool CAbComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag aTag("A", "Value of A", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag bTag("B", "Value of B", iser::CArchiveTag::TT_LEAF);
-
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
@@ -96,14 +95,14 @@ bool CAbComp::Serialize(iser::IArchive& archive)
 	int a = m_a;
 
 	// Process value copy of A
-	bool retVal = archive.BeginTag(aTag);
+	bool retVal = archive.BeginTag(s_aTag);
 	retVal = retVal && archive.Process(a);
-	retVal = retVal && archive.EndTag(aTag);
+	retVal = retVal && archive.EndTag(s_aTag);
 
 	// Process value of B
-	retVal = retVal && archive.BeginTag(bTag);
+	retVal = retVal && archive.BeginTag(s_bTag);
 	retVal = retVal && archive.Process(m_b);
-	retVal = retVal && archive.EndTag(bTag);
+	retVal = retVal && archive.EndTag(s_bTag);
 
 	// If archive is loading, we set A via the method SetA() to guarantee, that the contraints of A were perceived:
 	if (retVal && !archive.IsStoring()){

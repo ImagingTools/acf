@@ -15,6 +15,10 @@ namespace i2d
 {
 
 
+// static constants
+static const iser::CArchiveTag s_radiusTag("Radius", "Circle radius", iser::CArchiveTag::TT_LEAF);
+
+
 // public methods
 
 CCircle::CCircle()
@@ -371,16 +375,14 @@ istd::IChangeable* CCircle::CloneMe(CompatibilityMode mode) const
 
 bool CCircle::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag radiusTag("Radius", "Circle radius", iser::CArchiveTag::TT_LEAF);
-
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);
 
-	retVal = retVal && archive.BeginTag(radiusTag);
+	retVal = retVal && archive.BeginTag(s_radiusTag);
 	retVal = retVal && archive.Process(m_radius);
-	retVal = retVal && archive.EndTag(radiusTag);
+	retVal = retVal && archive.EndTag(s_radiusTag);
 
 	return retVal;
 }

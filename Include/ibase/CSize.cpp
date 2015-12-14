@@ -8,6 +8,11 @@ namespace ibase
 {		
 
 
+// static constants
+static const iser::CArchiveTag s_widthTag("Width", "Width", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_heightTag("Height", "Height", iser::CArchiveTag::TT_LEAF);
+
+
 CSize::CSize()
 {
 }
@@ -85,19 +90,16 @@ bool CSize::IsNull() const
 
 bool CSize::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag widthTag("Width", "Width", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag heightTag("Height", "Height", iser::CArchiveTag::TT_LEAF);
-
 	int width = GetX();
 	int height = GetY();
 
-	bool retVal = archive.BeginTag(widthTag);
+	bool retVal = archive.BeginTag(s_widthTag);
 	retVal = retVal && archive.Process(width);
-	retVal = retVal && archive.EndTag(widthTag);
+	retVal = retVal && archive.EndTag(s_widthTag);
 
-	retVal = retVal && archive.BeginTag(heightTag);
+	retVal = retVal && archive.BeginTag(s_heightTag);
 	retVal = retVal && archive.Process(height);
-	retVal = retVal && archive.EndTag(heightTag);
+	retVal = retVal && archive.EndTag(s_heightTag);
 
 	if (!archive.IsStoring()){
 		SetX(width);

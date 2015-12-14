@@ -9,6 +9,11 @@ namespace icomp
 {
 
 
+// static constants
+static const iser::CArchiveTag s_descriptionTag("Description", "Human readable description", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_keywordsTag("Keywords", "Human readable keywords", iser::CArchiveTag::TT_LEAF);
+
+
 CPackageStaticInfo::CPackageStaticInfo()
 {
 }
@@ -31,18 +36,15 @@ void CPackageStaticInfo::Reset()
 
 bool CPackageStaticInfo::SerializeMeta(iser::IArchive& archive)
 {
-	static iser::CArchiveTag descriptionTag("Description", "Human readable description", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag keywordsTag("Keywords", "Human readable keywords", iser::CArchiveTag::TT_LEAF);
-
 	bool retVal = true;
 
-	retVal = retVal && archive.BeginTag(descriptionTag);
+	retVal = retVal && archive.BeginTag(s_descriptionTag);
 	retVal = retVal && archive.Process(m_description);
-	retVal = retVal && archive.EndTag(descriptionTag);
+	retVal = retVal && archive.EndTag(s_descriptionTag);
 
-	retVal = retVal && archive.BeginTag(keywordsTag);
+	retVal = retVal && archive.BeginTag(s_keywordsTag);
 	retVal = retVal && archive.Process(m_keywords);
-	retVal = retVal && archive.EndTag(keywordsTag);
+	retVal = retVal && archive.EndTag(s_keywordsTag);
 
 	return retVal;
 }

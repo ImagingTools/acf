@@ -19,6 +19,17 @@ namespace icomp
 {
 
 
+// static constants
+static const iser::CArchiveTag s_flagsTag("Flags", "Flags of registry element", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_attributeInfosTag("AttributeInfoMap", "List of attribute infos", iser::CArchiveTag::TT_MULTIPLE);
+static const iser::CArchiveTag s_attributeInfoTag("AttributeInfo", "Attribute info", iser::CArchiveTag::TT_GROUP, &s_attributeInfosTag, true);
+static const iser::CArchiveTag s_attributeIdTag("Id", "Attribute ID", iser::CArchiveTag::TT_LEAF, &s_attributeInfoTag);
+static const iser::CArchiveTag s_attributeTypeTag("Type", "Type of attribute", iser::CArchiveTag::TT_LEAF, &s_attributeInfoTag);
+static const iser::CArchiveTag s_exportIdTag("ExportId", "ID used for export", iser::CArchiveTag::TT_LEAF, &s_attributeInfoTag);
+static const iser::CArchiveTag s_dataTag("Data", "ID used for export", iser::CArchiveTag::TT_GROUP, &s_attributeInfoTag, true);
+static const iser::CArchiveTag s_isEnabledTag("IsEnabled", "Is attribute enabled", iser::CArchiveTag::TT_LEAF, &s_dataTag);
+
+
 CRegistryElement::CRegistryElement()
 :	m_elementFlags(0)
 {
@@ -188,15 +199,6 @@ iser::IObject* CRegistryElement::GetAttribute(const QByteArray& attributeId) con
 
 bool CRegistryElement::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag flagsTag("Flags", "Flags of registry element", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag attributeInfosTag("AttributeInfoMap", "List of attribute infos", iser::CArchiveTag::TT_MULTIPLE);
-	static iser::CArchiveTag attributeInfoTag("AttributeInfo", "Attribute info", iser::CArchiveTag::TT_GROUP, &attributeInfosTag, true);
-	static iser::CArchiveTag attributeIdTag("Id", "Attribute ID", iser::CArchiveTag::TT_LEAF, &attributeInfoTag);
-	static iser::CArchiveTag attributeTypeTag("Type", "Type of attribute", iser::CArchiveTag::TT_LEAF, &attributeInfoTag);
-	static iser::CArchiveTag exportIdTag("ExportId", "ID used for export", iser::CArchiveTag::TT_LEAF, &attributeInfoTag);
-	static iser::CArchiveTag dataTag("Data", "ID used for export", iser::CArchiveTag::TT_GROUP, &attributeInfoTag, true);
-	static iser::CArchiveTag isEnabledTag("IsEnabled", "Is attribute enabled", iser::CArchiveTag::TT_LEAF, &dataTag);
-
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
@@ -209,9 +211,9 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, versionNumber);
 
 	if (versionNumber >= 1052){
-		retVal = retVal && archive.BeginTag(flagsTag);
+		retVal = retVal && archive.BeginTag(s_flagsTag);
 		retVal = retVal && archive.Process(m_elementFlags);
-		retVal = retVal && archive.EndTag(flagsTag);
+		retVal = retVal && archive.EndTag(s_flagsTag);
 	}
 	else if (!isStoring){
 		m_elementFlags = 0;
@@ -231,7 +233,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 			++attributesCount;
 		}
 
-		retVal = retVal && archive.BeginMultiTag(attributeInfosTag, attributeInfoTag, attributesCount);
+		retVal = retVal && archive.BeginMultiTag(s_attributeInfosTag, s_attributeInfoTag, attributesCount);
 
 		for (		AttributeInfoMap::iterator iter = m_attributeInfos.begin();
 					iter != m_attributeInfos.end();
@@ -242,77 +244,77 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 				continue;
 			}
 
-			retVal = retVal && archive.BeginTag(attributeInfoTag);
+			retVal = retVal && archive.BeginTag(s_attributeInfoTag);
 
-			retVal = retVal && archive.BeginTag(attributeIdTag);
+			retVal = retVal && archive.BeginTag(s_attributeIdTag);
 			QByteArray attributeId = iter.key();
 			retVal = retVal && archive.Process(attributeId);
-			retVal = retVal && archive.EndTag(attributeIdTag);
+			retVal = retVal && archive.EndTag(s_attributeIdTag);
 
 			bool isEnabled = info.attributePtr.IsValid();
 			QByteArray attributeType = isEnabled? info.attributePtr->GetFactoryId(): info.attributeTypeName;
 
-			retVal = retVal && archive.BeginTag(attributeTypeTag);
+			retVal = retVal && archive.BeginTag(s_attributeTypeTag);
 			retVal = retVal && archive.Process(attributeType);
-			retVal = retVal && archive.EndTag(attributeTypeTag);
+			retVal = retVal && archive.EndTag(s_attributeTypeTag);
 
-			retVal = retVal && archive.BeginTag(exportIdTag);
+			retVal = retVal && archive.BeginTag(s_exportIdTag);
 			retVal = retVal && archive.Process(info.exportId);
-			retVal = retVal && archive.EndTag(exportIdTag);
+			retVal = retVal && archive.EndTag(s_exportIdTag);
 
-			retVal = retVal && archive.BeginTag(dataTag);
+			retVal = retVal && archive.BeginTag(s_dataTag);
 
-			retVal = retVal && archive.BeginTag(isEnabledTag);
+			retVal = retVal && archive.BeginTag(s_isEnabledTag);
 			retVal = retVal && archive.Process(isEnabled);
-			retVal = retVal && archive.EndTag(isEnabledTag);
+			retVal = retVal && archive.EndTag(s_isEnabledTag);
 
 			if (isEnabled){
 				retVal = retVal && info.attributePtr->Serialize(archive);
 			}
 
-			retVal = retVal && archive.EndTag(dataTag);
+			retVal = retVal && archive.EndTag(s_dataTag);
 
-			retVal = retVal && archive.EndTag(attributeInfoTag);
+			retVal = retVal && archive.EndTag(s_attributeInfoTag);
 		}
 
-		retVal = retVal && archive.EndTag(attributeInfosTag);
+		retVal = retVal && archive.EndTag(s_attributeInfosTag);
 	}
 	else{
 		int attributesCount = 0;
-		retVal = retVal && archive.BeginMultiTag(attributeInfosTag, attributeInfoTag, attributesCount);
+		retVal = retVal && archive.BeginMultiTag(s_attributeInfosTag, s_attributeInfoTag, attributesCount);
 
 		if (!retVal){
 			return false;
 		}
 
 		for (int i = 0; i < attributesCount; ++i){
-			retVal = retVal && archive.BeginTag(attributeInfoTag);
+			retVal = retVal && archive.BeginTag(s_attributeInfoTag);
 
-			retVal = retVal && archive.BeginTag(attributeIdTag);
+			retVal = retVal && archive.BeginTag(s_attributeIdTag);
 			QByteArray attributeId;
 			retVal = retVal && archive.Process(attributeId);
-			retVal = retVal && archive.EndTag(attributeIdTag);
+			retVal = retVal && archive.EndTag(s_attributeIdTag);
 
 			if (!retVal){
 				return false;
 			}
 
 			QByteArray attributeType;
-			retVal = retVal && archive.BeginTag(attributeTypeTag);
+			retVal = retVal && archive.BeginTag(s_attributeTypeTag);
 			retVal = retVal && archive.Process(attributeType);
-			retVal = retVal && archive.EndTag(attributeTypeTag);
+			retVal = retVal && archive.EndTag(s_attributeTypeTag);
 
-			retVal = retVal && archive.BeginTag(exportIdTag);
+			retVal = retVal && archive.BeginTag(s_exportIdTag);
 			QByteArray exportId;
 			retVal = retVal && archive.Process(exportId);
-			retVal = retVal && archive.EndTag(exportIdTag);
+			retVal = retVal && archive.EndTag(s_exportIdTag);
 
-			retVal = retVal && archive.BeginTag(dataTag);
+			retVal = retVal && archive.BeginTag(s_dataTag);
 
-			retVal = retVal && archive.BeginTag(isEnabledTag);
+			retVal = retVal && archive.BeginTag(s_isEnabledTag);
 			bool isEnabled = true;
 			retVal = retVal && archive.Process(isEnabled);
-			retVal = retVal && archive.EndTag(isEnabledTag);
+			retVal = retVal && archive.EndTag(s_isEnabledTag);
 
 			if (!retVal){
 				return false;
@@ -339,12 +341,12 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 				return false;
 			}
 
-			retVal = retVal && archive.EndTag(dataTag);
+			retVal = retVal && archive.EndTag(s_dataTag);
 
-			retVal = retVal && archive.EndTag(attributeInfoTag);
+			retVal = retVal && archive.EndTag(s_attributeInfoTag);
 		}
 
-		retVal = retVal && archive.EndTag(attributeInfosTag);
+		retVal = retVal && archive.EndTag(s_attributeInfosTag);
 	}
 
 	return retVal;

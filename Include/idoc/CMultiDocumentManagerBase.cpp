@@ -17,12 +17,21 @@ namespace idoc
 {
 
 
-const istd::IChangeable::ChangeSet s_newDocumentChangeSet(IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_DOCUMENT_CREATED);
-const istd::IChangeable::ChangeSet s_openDocumentChangeSet(IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_DOCUMENT_CREATED);
-const istd::IChangeable::ChangeSet s_closeDocumentChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED);
-const istd::IChangeable::ChangeSet s_closeViewChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
-const istd::IChangeable::ChangeSet s_closeAllChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
-const istd::IChangeable::ChangeSet s_activateViewChangeSet(IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
+// static constants
+static const istd::IChangeable::ChangeSet s_newDocumentChangeSet(IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_DOCUMENT_CREATED);
+static const istd::IChangeable::ChangeSet s_openDocumentChangeSet(IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_DOCUMENT_CREATED);
+static const istd::IChangeable::ChangeSet s_closeDocumentChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED);
+static const istd::IChangeable::ChangeSet s_closeViewChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
+static const istd::IChangeable::ChangeSet s_closeAllChangeSet(IDocumentManager::CF_DOCUMENT_REMOVED, IDocumentManager::CF_DOCUMENT_COUNT_CHANGED, IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
+static const istd::IChangeable::ChangeSet s_activateViewChangeSet(IDocumentManager::CF_VIEW_ACTIVATION_CHANGED);
+static const iser::CArchiveTag s_openDocumentsListTag("OpenDocumentsList", "List of open documents", iser::CArchiveTag::TT_MULTIPLE);
+static const iser::CArchiveTag s_openDocumentTag("OpenDocument", "Single document properties", iser::CArchiveTag::TT_GROUP, &s_openDocumentsListTag);
+static const iser::CArchiveTag s_filePathTag("FilePath", "File path", iser::CArchiveTag::TT_LEAF, &s_openDocumentTag);
+static const iser::CArchiveTag s_documentTypeIdTag("DocumentTypeId", "Document Type ID", iser::CArchiveTag::TT_LEAF, &s_openDocumentTag);
+static const iser::CArchiveTag s_viewListTag("ViewList", "View list", iser::CArchiveTag::TT_MULTIPLE, &s_openDocumentTag);
+static const iser::CArchiveTag s_viewTag("View", "View", iser::CArchiveTag::TT_GROUP, &s_viewListTag);
+static const iser::CArchiveTag s_viewTypeIdTag("ViewTypeId", "View type ID", iser::CArchiveTag::TT_LEAF, &s_viewTag);
+static const iser::CArchiveTag s_viewIsActiveTag("ViewIsActive", "Active view", iser::CArchiveTag::TT_LEAF, &s_viewTag);
 
 
 CMultiDocumentManagerBase::CMultiDocumentManagerBase()
@@ -781,77 +790,68 @@ bool CMultiDocumentManagerBase::RegisterDocument(SingleDocumentData* infoPtr)
 	return true;
 }
 
+
 bool CMultiDocumentManagerBase::SerializeOpenDocumentList(iser::IArchive& archive)
 {
-	static iser::CArchiveTag openDocumentsListTag("OpenDocumentsList", "List of open documents", iser::CArchiveTag::TT_MULTIPLE);
-	static iser::CArchiveTag openDocumentTag("OpenDocument", "Single document properties", iser::CArchiveTag::TT_GROUP, &openDocumentsListTag);
-	static iser::CArchiveTag filePathTag("FilePath", "File path", iser::CArchiveTag::TT_LEAF, &openDocumentTag);
-	static iser::CArchiveTag documentTypeIdTag("DocumentTypeId", "Document Type ID", iser::CArchiveTag::TT_LEAF, &openDocumentTag);
-
-	static iser::CArchiveTag viewListTag("ViewList", "View list", iser::CArchiveTag::TT_MULTIPLE, &openDocumentTag);
-	static iser::CArchiveTag viewTag("View", "View", iser::CArchiveTag::TT_GROUP, &viewListTag);
-	static iser::CArchiveTag viewTypeIdTag("ViewTypeId", "View type ID", iser::CArchiveTag::TT_LEAF, &viewTag);
-	static iser::CArchiveTag viewIsActiveTag("ViewIsActive", "Active view", iser::CArchiveTag::TT_LEAF, &viewTag);
-
 	int documentsCount = GetDocumentsCount();
 
-	bool retVal = archive.BeginMultiTag(openDocumentsListTag, openDocumentTag, documentsCount);
+	bool retVal = archive.BeginMultiTag(s_openDocumentsListTag, s_openDocumentTag, documentsCount);
 
 	if (archive.IsStoring()){
 		for (int documentIndex = 0; documentIndex < documentsCount; ++documentIndex){
 			SingleDocumentData& info = GetSingleDocumentData(documentIndex);
 
-			retVal = retVal && archive.BeginTag(openDocumentTag);
+			retVal = retVal && archive.BeginTag(s_openDocumentTag);
 
-			retVal = retVal && archive.BeginTag(filePathTag);
+			retVal = retVal && archive.BeginTag(s_filePathTag);
 			retVal = retVal && archive.Process(info.filePath);
-			retVal = retVal && archive.EndTag(filePathTag);
+			retVal = retVal && archive.EndTag(s_filePathTag);
 
-			retVal = retVal && archive.BeginTag(documentTypeIdTag);
+			retVal = retVal && archive.BeginTag(s_documentTypeIdTag);
 			retVal = retVal && archive.Process(info.documentTypeId);
-			retVal = retVal && archive.EndTag(documentTypeIdTag);
+			retVal = retVal && archive.EndTag(s_documentTypeIdTag);
 
 			int viewCount = info.views.count();
-			retVal = archive.BeginMultiTag(viewListTag, viewTag, viewCount);
+			retVal = archive.BeginMultiTag(s_viewListTag, s_viewTag, viewCount);
 
 			for (int viewIndex = 0; viewIndex < viewCount; ++viewIndex){
 				ViewInfo& viewInfo = info.views[viewIndex];
 
-				retVal = retVal && archive.BeginTag(viewTag);
+				retVal = retVal && archive.BeginTag(s_viewTag);
 
-				retVal = retVal && archive.BeginTag(viewTypeIdTag);
+				retVal = retVal && archive.BeginTag(s_viewTypeIdTag);
 				retVal = retVal && archive.Process(viewInfo.viewTypeId);
-				retVal = retVal && archive.EndTag(viewTypeIdTag);
+				retVal = retVal && archive.EndTag(s_viewTypeIdTag);
 
 				bool isActive = (viewInfo.viewPtr == m_activeViewPtr);
-				retVal = retVal && archive.BeginTag(viewIsActiveTag);
+				retVal = retVal && archive.BeginTag(s_viewIsActiveTag);
 				retVal = retVal && archive.Process(isActive);
-				retVal = retVal && archive.EndTag(viewIsActiveTag);
+				retVal = retVal && archive.EndTag(s_viewIsActiveTag);
 
-				retVal = retVal && archive.EndTag(viewTag);
+				retVal = retVal && archive.EndTag(s_viewTag);
 			}
 
-			retVal = retVal && archive.EndTag(viewListTag);
+			retVal = retVal && archive.EndTag(s_viewListTag);
 
-			retVal = retVal && archive.EndTag(openDocumentTag);
+			retVal = retVal && archive.EndTag(s_openDocumentTag);
 		}
 	}
 	else {
 		istd::IPolymorphic* activeView = NULL;
 
 		for (int documentIndex = 0; documentIndex < documentsCount; ++documentIndex){
-			retVal = retVal && archive.BeginTag(openDocumentTag);
+			retVal = retVal && archive.BeginTag(s_openDocumentTag);
 
 			// Loading document info:
 			QString filePath;
-			retVal = retVal && archive.BeginTag(filePathTag);
+			retVal = retVal && archive.BeginTag(s_filePathTag);
 			retVal = retVal && archive.Process(filePath);
-			retVal = retVal && archive.EndTag(filePathTag);
+			retVal = retVal && archive.EndTag(s_filePathTag);
 
 			QByteArray documentTypeId;
-			retVal = retVal && archive.BeginTag(documentTypeIdTag);
+			retVal = retVal && archive.BeginTag(s_documentTypeIdTag);
 			retVal = retVal && archive.Process(documentTypeId);
-			retVal = retVal && archive.EndTag(documentTypeIdTag);
+			retVal = retVal && archive.EndTag(s_documentTypeIdTag);
 
 			istd::IChangeable* openDocumentPtr = OpenSingleDocument(filePath, false, "", documentTypeId, true, NULL);
 			if (openDocumentPtr == NULL){
@@ -860,22 +860,22 @@ bool CMultiDocumentManagerBase::SerializeOpenDocumentList(iser::IArchive& archiv
 
 			// Loading document's view info:
 			int viewCount = 0;
-			retVal = archive.BeginMultiTag(viewListTag, viewTag, viewCount);
+			retVal = archive.BeginMultiTag(s_viewListTag, s_viewTag, viewCount);
 
 			for (int viewIndex = 0; viewIndex < viewCount; ++viewIndex){
-				retVal = retVal && archive.BeginTag(viewTag);
+				retVal = retVal && archive.BeginTag(s_viewTag);
 
 				QByteArray viewTypeId;
-				retVal = retVal && archive.BeginTag(viewTypeIdTag);
+				retVal = retVal && archive.BeginTag(s_viewTypeIdTag);
 				retVal = retVal && archive.Process(viewTypeId);
-				retVal = retVal && archive.EndTag(viewTypeIdTag);
+				retVal = retVal && archive.EndTag(s_viewTypeIdTag);
 
 				bool isActive = false;
-				retVal = retVal && archive.BeginTag(viewIsActiveTag);
+				retVal = retVal && archive.BeginTag(s_viewIsActiveTag);
 				retVal = retVal && archive.Process(isActive);
-				retVal = retVal && archive.EndTag(viewIsActiveTag);
+				retVal = retVal && archive.EndTag(s_viewIsActiveTag);
 
-				retVal = retVal && archive.EndTag(viewTag);
+				retVal = retVal && archive.EndTag(s_viewTag);
 
 				if (!retVal){
 					return false;
@@ -889,9 +889,9 @@ bool CMultiDocumentManagerBase::SerializeOpenDocumentList(iser::IArchive& archiv
 				}
 			}
 
-			retVal = retVal && archive.EndTag(viewListTag);
+			retVal = retVal && archive.EndTag(s_viewListTag);
 
-			retVal = retVal && archive.EndTag(openDocumentTag);
+			retVal = retVal && archive.EndTag(s_openDocumentTag);
 		}
 
 		//all documents have been loaded, set previously active view
@@ -900,7 +900,7 @@ bool CMultiDocumentManagerBase::SerializeOpenDocumentList(iser::IArchive& archiv
 		}
 	}
 
-	retVal = retVal && archive.EndTag(openDocumentsListTag);
+	retVal = retVal && archive.EndTag(s_openDocumentsListTag);
 
 	return retVal;
 }

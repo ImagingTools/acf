@@ -14,6 +14,10 @@ namespace i2d
 {
 
 
+// static constants
+static iser::CArchiveTag s_startAngleTag("StartAngle", "Start angle", iser::CArchiveTag::TT_LEAF);
+static iser::CArchiveTag s_endAngleTag("EndAngle", "End angle", iser::CArchiveTag::TT_LEAF);
+
 // public methods
 
 CArc::CArc()
@@ -240,21 +244,18 @@ istd::IChangeable* CArc::CloneMe(CompatibilityMode mode) const
 
 bool CArc::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag startAngleTag("StartAngle", "Start angle", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag endAngleTag("EndAngle", "End angle", iser::CArchiveTag::TT_LEAF);
-
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);
 
-	retVal = retVal && archive.BeginTag(startAngleTag);
+	retVal = retVal && archive.BeginTag(s_startAngleTag);
 	retVal = retVal && archive.Process(m_startAngle);
-	retVal = retVal && archive.EndTag(startAngleTag);
+	retVal = retVal && archive.EndTag(s_startAngleTag);
 
-	retVal = retVal && archive.BeginTag(endAngleTag);
+	retVal = retVal && archive.BeginTag(s_endAngleTag);
 	retVal = retVal && archive.Process(m_endAngle);
-	retVal = retVal && archive.EndTag(endAngleTag);
+	retVal = retVal && archive.EndTag(s_endAngleTag);
 
 	return retVal;
 }

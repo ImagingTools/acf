@@ -15,6 +15,12 @@
 namespace i2d
 {
 
+	
+// static constants
+static const iser::CArchiveTag s_innerRadiusTag("InnerRadius", "Inner radius", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_outerRadiusTag("OuterRadius", "Outer radius", iser::CArchiveTag::TT_LEAF);
+
+
 
 CAnnulus::CAnnulus()
 {
@@ -315,21 +321,18 @@ istd::IChangeable* CAnnulus::CloneMe(CompatibilityMode mode) const
 
 bool CAnnulus::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag innerRadiusTag("InnerRadius", "Inner radius", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag outerRadiusTag("OuterRadius", "Outer radius", iser::CArchiveTag::TT_LEAF);
-
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);
 
-	retVal = retVal && archive.BeginTag(innerRadiusTag);
+	retVal = retVal && archive.BeginTag(s_innerRadiusTag);
 	retVal = retVal && archive.Process(m_radiusRange.GetMinValueRef());
-	retVal = retVal && archive.EndTag(innerRadiusTag);
+	retVal = retVal && archive.EndTag(s_innerRadiusTag);
 
-	retVal = retVal && archive.BeginTag(outerRadiusTag);
+	retVal = retVal && archive.BeginTag(s_outerRadiusTag);
 	retVal = retVal && archive.Process(m_radiusRange.GetMaxValueRef());
-	retVal = retVal && archive.EndTag(outerRadiusTag);
+	retVal = retVal && archive.EndTag(s_outerRadiusTag);
 
 	return retVal;
 }
