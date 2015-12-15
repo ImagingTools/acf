@@ -119,7 +119,7 @@ bool CPolyline::Serialize(iser::IArchive& archive)
 	archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version);
 
 	bool retVal = true;
-	if (version >= 4051){
+	if (version >= 4052){
 		retVal = retVal && archive.BeginTag(s_closedTag);
 		retVal = retVal && archive.Process(m_isClosed);
 		retVal = retVal && archive.EndTag(s_closedTag);
@@ -127,7 +127,7 @@ bool CPolyline::Serialize(iser::IArchive& archive)
 
 	retVal = retVal && BaseClass::Serialize(archive);
 
-	if ((version > 3930) && (version < 4051)){
+	if ((version > 3930) && (version < 4052)){
 		retVal = retVal && archive.BeginTag(s_closedTag);
 		retVal = retVal && archive.Process(m_isClosed);
 		retVal = retVal && archive.EndTag(s_closedTag);

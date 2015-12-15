@@ -208,7 +208,7 @@ bool CCompactXmlReadArchiveBase::SetContent(QIODevice* devicePtr)
 		quint32 frameworkVersion = quint32(-1);
 		GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
 
-		m_isNewFormat = (frameworkVersion >= 4051);
+		m_isNewFormat = (frameworkVersion >= 4052);
 	}
 
 	return retVal;
