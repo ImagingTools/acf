@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="900" Y="400" Note="" ComponentName="Bitmap"/>
-        <Element X="575" Y="250" Note="" ComponentName="BitmapLoader"/>
-        <Element X="250" Y="400" Note="" ComponentName="ImageView"/>
-        <Element X="575" Y="75" Note="" ComponentName="FilePreviewGui"/>
+        <Element ComponentName="BitmapLoader" X="575" Y="250" Note=""/>
+        <Element ComponentName="ImageView" X="250" Y="400" Note=""/>
+        <Element ComponentName="Bitmap" X="900" Y="400" Note=""/>
+        <Element ComponentName="FilePreviewGui" X="575" Y="75" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

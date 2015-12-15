@@ -1,29 +1,32 @@
-<Acf Description="File explorer dock widget" Keywords="Explorer Dock Main Window">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>File explorer dock widget</Description>
+    <Keywords>Explorer Dock Main Window</Keywords>
     <ElementsList>
         <Element Id="ExplorerDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="DockAreas" Id="AllowedDockAreas" Type="Integer">
-                        <Data Value="3" IsEnabled="true"/>
+                    <AttributeInfo Id="AllowedDockAreas" Type="Integer" ExportId="DockAreas">
+                        <Data IsEnabled="true" Value="3"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DockArea" Id="DockArea" Type="Integer">
+                    <AttributeInfo Id="DockArea" Type="Integer" ExportId="DockArea">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DockFeatures" Id="DockFeatures" Type="Integer">
+                    <AttributeInfo Id="DockFeatures" Type="Integer" ExportId="DockFeatures">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DockTitle" Id="DockTitle" Type="String">
-                        <Data Value="Files" IsEnabled="true"/>
+                    <AttributeInfo Id="DockTitle" Type="String" ExportId="DockTitle">
+                        <Data IsEnabled="true" Value="Files"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
-                        <Data Value="FileSystemExplorerGui" IsEnabled="true"/>
+                    <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileSystemExplorerGui"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -31,19 +34,19 @@
         <Element Id="FileSystemExplorerGui" PackageId="FileGuiPck" ComponentId="FileSystemExplorerGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AllowOpenFile" Id="AllowOpenFile" Type="Boolean">
+                    <AttributeInfo Id="AllowOpenFile" Type="Boolean" ExportId="AllowOpenFile">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FilterInfo" Id="FilterInfo" Type="Reference">
+                    <AttributeInfo Id="FilterInfo" Type="Reference" ExportId="FilterInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowFileType" Id="ShowFileType" Type="Boolean">
+                    <AttributeInfo Id="ShowFileType" Type="Boolean" ExportId="ShowFileType">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowUserFilter" Id="ShowUserFilter" Type="Boolean">
+                    <AttributeInfo Id="ShowUserFilter" Type="Boolean" ExportId="ShowUserFilter">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="UseSystemDecoratedIcons" Id="UseSystemDecoratedIcons" Type="Boolean">
+                    <AttributeInfo Id="UseSystemDecoratedIcons" Type="Boolean" ExportId="UseSystemDecoratedIcons">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

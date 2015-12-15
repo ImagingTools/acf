@@ -1,23 +1,26 @@
-<Acf Description="File dialog with memory of the last open directory path" Keywords="&quot;File Loader Persistency&quot;">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>File dialog with memory of the last open directory path</Description>
+    <Keywords>&quot;File Loader Persistency&quot;</Keywords>
     <ElementsList>
         <Element Id="FileDialogLoader" PackageId="FileGuiPck" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Loaders" Id="Loaders" Type="Reference[]">
+                    <AttributeInfo Id="Loaders" Type="Reference[]" ExportId="Loaders">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="StartupDirectory" Type="Reference">
-                        <Data Value="StartupDirectory" IsEnabled="true"/>
+                    <AttributeInfo Id="StartupDirectory" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="StartupDirectory"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -25,19 +28,19 @@
         <Element Id="SettingsPersistence" PackageId="AcfGuiVoce" ComponentId="SettingsPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="StartupDirectory" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="StartupDirectory"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="LastPathSettingsKey" Id="RootKey" Type="Id">
+                    <AttributeInfo Id="RootKey" Type="Id" ExportId="LastPathSettingsKey">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="RuntimeStatus" Id="RuntimeStatus" Type="Reference">
+                    <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -46,13 +49,13 @@
         <Element Id="StartupDirectory" PackageId="FilePck" ComponentId="RelativeFileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="StartupDirectory" Id="DefaultPath" Type="String">
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="StartupDirectory">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="2" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ReferencePath" Id="ReferencePath" Type="Reference">
+                    <AttributeInfo Id="ReferencePath" Type="Reference" ExportId="ReferencePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

@@ -1,41 +1,44 @@
-<Acf Description="XML-based persistence for automatic object serialization at begining and finalization of the application" Keywords="Persistence XML">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>XML-based persistence for automatic object serialization at begining and finalization of the application</Description>
+    <Keywords>Persistence XML</Keywords>
     <ElementsList>
         <Element Id="AutoPersistence" PackageId="FilePck" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AutoReload" Id="AutoReload" Type="Boolean">
+                    <AttributeInfo Id="AutoReload" Type="Boolean" ExportId="AutoReload">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="FileLoader" Type="Reference">
-                        <Data Value="XmlFileSerializer" IsEnabled="true"/>
+                    <AttributeInfo Id="FileLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="XmlFileSerializer"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FilePath" Id="FilePath" Type="Reference">
+                    <AttributeInfo Id="FilePath" Type="Reference" ExportId="FilePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Object" Id="Object" Type="Reference">
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="Object">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="RestoreOnBegin" Id="RestoreOnBegin" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="RestoreOnBegin" Type="Boolean" ExportId="RestoreOnBegin">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="RuntimeStatus" Id="RuntimeStatus" Type="Reference">
+                    <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="StoreInterval" Id="StoreInterval" Type="Real">
+                    <AttributeInfo Id="StoreInterval" Type="Real" ExportId="StoreInterval">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="StoreOnChange" Id="StoreOnChange" Type="Boolean">
+                    <AttributeInfo Id="StoreOnChange" Type="Boolean" ExportId="StoreOnChange">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="StoreOnEnd" Id="StoreOnEnd" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="StoreOnEnd" Type="Boolean" ExportId="StoreOnEnd">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -43,19 +46,19 @@
         <Element Id="XmlFileSerializer" PackageId="FilePck" ComponentId="CompactXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AutoCreatePath" Id="AutoCreatePath" Type="Boolean">
+                    <AttributeInfo Id="AutoCreatePath" Type="Boolean" ExportId="AutoCreatePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FileExtensions" Id="FileExtensions" Type="String[]">
+                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="FileExtensions">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

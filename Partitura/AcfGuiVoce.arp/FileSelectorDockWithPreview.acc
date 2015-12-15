@@ -1,29 +1,32 @@
-<Acf Description="General file selector with external preview" Keywords="File Name Selector Preview Explorer Choice Category='GUI'">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>General file selector with external preview</Description>
+    <Keywords>File Name Selector Preview Explorer Choice Category='GUI'</Keywords>
     <ElementsList>
         <Element Id="DockWidgetGui" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AllowedDockAreas" Id="AllowedDockAreas" Type="Integer">
+                    <AttributeInfo Id="AllowedDockAreas" Type="Integer" ExportId="AllowedDockAreas">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DockArea" Id="DockArea" Type="Integer">
+                    <AttributeInfo Id="DockArea" Type="Integer" ExportId="DockArea">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DockFeatures" Id="DockFeatures" Type="Integer">
+                    <AttributeInfo Id="DockFeatures" Type="Integer" ExportId="DockFeatures">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DockTitle" Type="String">
-                        <Data Value="File Selector" IsEnabled="true"/>
+                    <AttributeInfo Id="DockTitle" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="File Selector"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
-                        <Data Value="SplittedGui" IsEnabled="true"/>
+                    <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SplittedGui"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -31,13 +34,13 @@
         <Element Id="FileExplorerGui" PackageId="FileGuiPck" ComponentId="FileSystemExplorerGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AllowOpenFile" Id="AllowOpenFile" Type="Boolean">
+                    <AttributeInfo Id="AllowOpenFile" Type="Boolean" ExportId="AllowOpenFile">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
-                        <Data Value="FilePath" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FilePath"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FileInfo" Id="FilterInfo" Type="Reference">
+                    <AttributeInfo Id="FilterInfo" Type="Reference" ExportId="FileInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -46,11 +49,11 @@
         <Element Id="FilePath" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="DefaultPath" Id="DefaultPath" Type="String">
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="DefaultPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="PathType" Id="PathType" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="PathType">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -58,16 +61,16 @@
         <Element Id="PreviewGui" PackageId="FileGuiPck" ComponentId="FilePreviewGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
-                        <Data Value="FilePath" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FilePath"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="PreviewObjectLoader" Id="FileLoader" Type="Reference">
+                    <AttributeInfo Id="FileLoader" Type="Reference" ExportId="PreviewObjectLoader">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ObjectFactory" Id="ObjectFactory" Type="Factory">
+                    <AttributeInfo Id="ObjectFactory" Type="Factory" ExportId="ObjectFactory">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="PreviewObjectView" Id="ObjectView" Type="Reference">
+                    <AttributeInfo Id="ObjectView" Type="Reference" ExportId="PreviewObjectView">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -76,17 +79,17 @@
         <Element Id="SettingsPersistence" PackageId="AcfGuiVoce" ComponentId="SettingsPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="FilePath" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FilePath"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="PathPersistenceSettingsKey" Id="RootKey" Type="Id">
-                        <Data Value="RecentFileSelectorPath" IsEnabled="true"/>
+                    <AttributeInfo Id="RootKey" Type="Id" ExportId="PathPersistenceSettingsKey">
+                        <Data IsEnabled="true" Value="RecentFileSelectorPath"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -94,10 +97,10 @@
         <Element Id="SplittedGui" PackageId="QtGuiPck" ComponentId="ComposedGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DesignType" Type="Integer">
-                        <Data Value="3" IsEnabled="true"/>
+                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="3"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Guis" Type="Reference[]">
+                    <AttributeInfo Id="Guis" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileExplorerGui</Value>
@@ -105,14 +108,14 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FileExplorerSettingsKey" Id="SettingsKey" Type="String">
-                        <Data Value="FileExplorer" IsEnabled="true"/>
+                    <AttributeInfo Id="SettingsKey" Type="String" ExportId="FileExplorerSettingsKey">
+                        <Data IsEnabled="true" Value="FileExplorer"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SettingsProvider" Id="SettingsProvider" Type="Reference">
+                    <AttributeInfo Id="SettingsProvider" Type="Reference" ExportId="SettingsProvider">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="UseHorizontalLayout" Id="UseHorizontalLayout" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="UseHorizontalLayout" Type="Boolean" ExportId="UseHorizontalLayout">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

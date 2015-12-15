@@ -1,22 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="275" Y="400" Note="" ComponentName="SceneConnector"/>
-        <Element X="275" Y="75" Note="" ComponentName="VersionInfo"/>
-        <Element X="625" Y="200" Note="" ComponentName="InterpolatedPolylgonGui"/>
-        <Element X="975" Y="400" Note="" ComponentName="SourceObject"/>
-        <Element X="600" Y="400" Note="" ComponentName="SourcePolygonEditor"/>
-        <Element X="625" Y="75" Note="" ComponentName="ColorSchema"/>
-        <Element X="275" Y="600" Note="" ComponentName="Console"/>
-        <Element X="975" Y="200" Note="" ComponentName="InterpolatedObject"/>
-        <Element X="975" Y="300" Note="" ComponentName="InterpolationTest"/>
-        <Element X="275" Y="250" Note="" ComponentName="StandaloneApp"/>
+        <Element ComponentName="InterpolatedObject" X="975" Y="200" Note=""/>
+        <Element ComponentName="InterpolatedPolylgonGui" X="625" Y="200" Note=""/>
+        <Element ComponentName="InterpolationTest" X="975" Y="300" Note=""/>
+        <Element ComponentName="SourcePolygonEditor" X="600" Y="400" Note=""/>
+        <Element ComponentName="VersionInfo" X="275" Y="75" Note=""/>
+        <Element ComponentName="SceneConnector" X="275" Y="400" Note=""/>
+        <Element ComponentName="ColorSchema" X="625" Y="75" Note=""/>
+        <Element ComponentName="StandaloneApp" X="275" Y="250" Note=""/>
+        <Element ComponentName="Console" X="275" Y="600" Note=""/>
+        <Element ComponentName="SourceObject" X="975" Y="400" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

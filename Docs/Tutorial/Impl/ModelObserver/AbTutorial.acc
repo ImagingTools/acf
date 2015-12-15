@@ -1,17 +1,20 @@
-<Acf Description="Simple tutorial for definition and binding of a data model to an UI-observer" Keywords="Tutorial Data Model Observer GUI UI">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Simple tutorial for definition and binding of a data model to an UI-observer</Description>
+    <Keywords>Tutorial Data Model Observer GUI UI</Keywords>
     <ElementsList>
         <Element Id="AB" PackageId="TutorialPck" ComponentId="AB">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultAValue" Type="Integer">
-                        <Data Value="50" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultAValue" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="50"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -19,11 +22,11 @@
         <Element Id="ABPersistenceFile" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultPath" Type="String">
-                        <Data Value="AbPersistence.xml" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="AbPersistence.xml"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -31,8 +34,8 @@
         <Element Id="AbGui" PackageId="TutorialPck" ComponentId="AbGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
-                        <Data Value="AB" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="AB"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -40,8 +43,8 @@
         <Element Id="Application" PackageId="QtGuiPck" ComponentId="GuiApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="MainGui" Type="Reference">
-                        <Data Value="AbGui" IsEnabled="true"/>
+                    <AttributeInfo Id="MainGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="AbGui"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -49,11 +52,11 @@
         <Element Id="XmlFilePersistence" PackageId="AcfVoce" ComponentId="XmlFilePersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FilePath" Type="Reference">
-                        <Data Value="ABPersistenceFile" IsEnabled="true"/>
+                    <AttributeInfo Id="FilePath" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ABPersistenceFile"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="AB" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="AB"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

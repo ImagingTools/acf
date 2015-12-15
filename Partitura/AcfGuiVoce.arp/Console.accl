@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="825" Y="550" Note="" ComponentName="CommandsToolBar"/>
-        <Element X="175" Y="225" Note="" ComponentName="ShapeStatusInfo"/>
-        <Element X="575" Y="225" Note="" ComponentName="ShapeInfoGui"/>
-        <Element X="175" Y="450" Note="" ComponentName="ViewProvider"/>
-        <Element X="600" Y="350" Note="" ComponentName="ExtendedConsoleGui"/>
+        <Element ComponentName="ShapeInfoGui" X="575" Y="225" Note=""/>
+        <Element ComponentName="ViewProvider" X="175" Y="450" Note=""/>
+        <Element ComponentName="CommandsToolBar" X="825" Y="550" Note=""/>
+        <Element ComponentName="ExtendedConsoleGui" X="600" Y="350" Note=""/>
+        <Element ComponentName="ShapeStatusInfo" X="175" Y="225" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

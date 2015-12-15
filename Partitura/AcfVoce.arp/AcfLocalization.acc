@@ -1,16 +1,19 @@
-<Acf Description="ACF strings localization" Keywords="Translation Tag='Localization'">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>ACF strings localization</Description>
+    <Keywords>Translation Tag='Localization'</Keywords>
     <ElementsList>
         <Element Id="AcfLocalization" PackageId="QtPck" ComponentId="TranslationManager">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="LanguageIds" Id="LanguageIds" Type="Id[]">
+                    <AttributeInfo Id="LanguageIds" Type="Id[]" ExportId="LanguageIds">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>en_US</Value>
@@ -20,20 +23,20 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="LanguageSelection" Id="LanguageSelection" Type="Reference">
+                    <AttributeInfo Id="LanguageSelection" Type="Reference" ExportId="LanguageSelection">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SlaveTranslationManager" Type="Reference">
-                        <Data Value="QtLocalization" IsEnabled="true"/>
+                    <AttributeInfo Id="SlaveTranslationManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="QtLocalization"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TranslationFilePath" Type="String">
-                        <Data Value=":/Translations" IsEnabled="true"/>
+                    <AttributeInfo Id="TranslationFilePath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value=":/Translations"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TranslationFilePrefix" Type="Id">
-                        <Data Value="Acf" IsEnabled="true"/>
+                    <AttributeInfo Id="TranslationFilePrefix" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="Acf"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -41,7 +44,7 @@
         <Element Id="QtLocalization" PackageId="QtPck" ComponentId="TranslationManager">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="LanguageIds" Id="LanguageIds" Type="Id[]">
+                    <AttributeInfo Id="LanguageIds" Type="Id[]" ExportId="LanguageIds">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>en_US</Value>
@@ -51,20 +54,20 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="LanguageSelection" Id="LanguageSelection" Type="Reference">
+                    <AttributeInfo Id="LanguageSelection" Type="Reference" ExportId="LanguageSelection">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SlaveTranslationManager" Id="SlaveTranslationManager" Type="Reference">
+                    <AttributeInfo Id="SlaveTranslationManager" Type="Reference" ExportId="SlaveTranslationManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TranslationFilePath" Type="String">
-                        <Data Value=":/Translations" IsEnabled="true"/>
+                    <AttributeInfo Id="TranslationFilePath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value=":/Translations"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TranslationFilePrefix" Type="Id">
-                        <Data Value="qt" IsEnabled="true"/>
+                    <AttributeInfo Id="TranslationFilePrefix" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="qt"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

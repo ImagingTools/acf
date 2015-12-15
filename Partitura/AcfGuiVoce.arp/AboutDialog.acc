@@ -1,40 +1,43 @@
-<Acf Description="Dialog window displaying 'About' information" Keywords="&quot;About Help Information Dialog&quot; Category='GUI'">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Description="ACF-Solutions" Number="1483" Id="1"/>
-            <Version Description="ACF" Number="4020" Id="0"/>
-            <Version Description="Qt Framework" Number="328961" Id="1023"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Dialog window displaying 'About' information</Description>
+    <Keywords>&quot;About Help Information Dialog&quot; Category='GUI'</Keywords>
     <ElementsList>
         <Element Id="AboutGui" PackageId="QtGuiPck" ComponentId="AboutGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="LogoPath" Id="LogoPath" Type="String">
+                    <AttributeInfo Id="LogoPath" Type="String" ExportId="LogoPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowApplicationName" Id="ShowApplicationName" Type="Boolean">
+                    <AttributeInfo Id="ShowApplicationName" Type="Boolean" ExportId="ShowApplicationName">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowApplicationSubName" Id="ShowApplicationSubName" Type="Boolean">
+                    <AttributeInfo Id="ShowApplicationSubName" Type="Boolean" ExportId="ShowApplicationSubName">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowLegalCopyright" Id="ShowLegalCopyright" Type="Boolean">
+                    <AttributeInfo Id="ShowLegalCopyright" Type="Boolean" ExportId="ShowLegalCopyright">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowProductName" Id="ShowProductName" Type="Boolean">
+                    <AttributeInfo Id="ShowProductName" Type="Boolean" ExportId="ShowProductName">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowProductType" Id="ShowProductType" Type="Boolean">
+                    <AttributeInfo Id="ShowProductType" Type="Boolean" ExportId="ShowProductType">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="VersionIds" Id="VersionIds" Type="Integer[]">
+                    <AttributeInfo Id="VersionIds" Type="Integer[]" ExportId="VersionIds">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="VersionNames" Id="VersionNames" Type="String[]">
+                    <AttributeInfo Id="VersionNames" Type="String[]" ExportId="VersionNames">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -43,14 +46,14 @@
         <Element Id="DialogGui" PackageId="QtGuiPck" ComponentId="DialogGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="DialogIconPath" Id="DialogIconPath" Type="String">
+                    <AttributeInfo Id="DialogIconPath" Type="String" ExportId="DialogIconPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DialogTitle" Id="DialogTitle" Type="String">
-                        <Data Value="About" IsEnabled="true"/>
+                    <AttributeInfo Id="DialogTitle" Type="String" ExportId="DialogTitle">
+                        <Data IsEnabled="true" Value="About"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Gui" Type="Reference">
-                        <Data Value="AboutGui" IsEnabled="true"/>
+                    <AttributeInfo Id="Gui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="AboutGui"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
