@@ -83,6 +83,11 @@ I_EXPORT_COMPONENT(
 		   "Stores and loads objects to/from files  using compressed compact XML format",
 		   "Compress Uncompress Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
 
+I_EXPORT_COMPONENT(
+			TimeStampFileNameParam, 
+			"Timestamp-based file name generation", 
+			"Time File Name")
+
 
 } // namespace FilePck
 

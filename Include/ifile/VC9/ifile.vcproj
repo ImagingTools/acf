@@ -429,6 +429,10 @@
 				RelativePath="..\CSystemLocationComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CTimeStampFileNameParamComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -512,6 +516,10 @@
 			</File>
 			<File
 				RelativePath="..\CSystemLocationComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTimeStampFileNameParamComp.h"
 				>
 			</File>
 			<File
