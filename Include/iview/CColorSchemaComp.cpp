@@ -133,4 +133,3 @@ void CColorSchemaComp::OnComponentCreated()
 } // namespace iview
 
 
-
