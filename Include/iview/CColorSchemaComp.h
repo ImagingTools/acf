@@ -26,7 +26,9 @@ public:
 		I_ASSIGN(m_selectedPenColorAttrPtr, "SelectedPenColor", "Selected pen color", false, "yellow");
 		I_ASSIGN(m_selectedPenWidthAttrPtr, "SelectedPenWidth", "Selected pen width", false, 1.5);
 		I_ASSIGN(m_selectedTickerPenColorAttrPtr, "SelectedTickerPenColor", "Selected ticker pen color", false, "purple");
+		I_ASSIGN(m_selectedTickerPenWidthAttrPtr, "SelectedTickerPenWidth", "Selected ticker pen width", false, 1);
 		I_ASSIGN(m_tickerPenColorAttrPtr, "TickerPenColor", "Ticker pen color", false, "deepskyblue");
+		I_ASSIGN(m_tickerPenWidthAttrPtr, "TickerPenWidth", "Ticker pen width", false, 1);
 		I_ASSIGN(m_importantPenColorAttrPtr, "ImportantPenColor", "Important pen color", false, "fuchsia");
 		I_ASSIGN(m_importantPenWidthAttrPtr, "ImportantPenWidth", "Important pen width", false, 1.5);
 		I_ASSIGN(m_orientDarkPenColorAttrPtr, "OrientDarkPenColor", "OrientDark pen color", false, "black");
@@ -39,7 +41,9 @@ protected:
 	I_ATTR(QByteArray, m_selectedPenColorAttrPtr);
 	I_ATTR(double, m_selectedPenWidthAttrPtr);
 	I_ATTR(QByteArray, m_selectedTickerPenColorAttrPtr);
+	I_ATTR(double, m_selectedTickerPenWidthAttrPtr);
 	I_ATTR(QByteArray, m_tickerPenColorAttrPtr);
+	I_ATTR(double, m_tickerPenWidthAttrPtr);
 	I_ATTR(QByteArray, m_importantPenColorAttrPtr);
 	I_ATTR(double, m_importantPenWidthAttrPtr);
 	I_ATTR(QByteArray, m_orientDarkPenColorAttrPtr);
