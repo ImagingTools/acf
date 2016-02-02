@@ -417,7 +417,7 @@ CSystem::FileDriveInfo CSystem::GetFileDriveInfo(const QString& fileDrivePath)
 {
 	FileDriveInfo fileDriveInfo;
 
-#if defined(Q_OS_WIN32)
+#if defined(Q_OS_WIN)
 	ULARGE_INTEGER lpFreeBytesAvailable, lpTotalNumberOfBytes, lpTotalNumberOfFreeBytes;
 	bool isOk = GetDiskFreeSpaceExA(fileDrivePath.toLatin1().data(), &lpFreeBytesAvailable, &lpTotalNumberOfBytes, &lpTotalNumberOfFreeBytes);
 	if (isOk){
