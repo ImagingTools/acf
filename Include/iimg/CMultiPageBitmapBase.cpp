@@ -61,12 +61,6 @@ const iimg::IBitmap* CMultiPageBitmapBase::GetBitmap(int bitmapIndex) const
 
 // reimplemented (iimg::IMultiPageBitmapController)
 
-void CMultiPageBitmapBase::Reset()
-{
-	ResetPages();
-}
-
-
 iimg::IBitmap* CMultiPageBitmapBase::InsertBitmap(
 			iimg::IBitmap::PixelFormat pixelFormat, 
 			const istd::CIndex2d& size)
@@ -118,7 +112,7 @@ bool CMultiPageBitmapBase::CopyFrom(const istd::IChangeable& object, Compatibili
 	if (sourcePtr != NULL){
 		istd::CChangeNotifier changeNotifier(this);
 
-		Reset();
+		ResetPages();
 
 		Q_ASSERT(m_documentPages.isEmpty());
 
@@ -140,7 +134,7 @@ bool CMultiPageBitmapBase::CopyFrom(const istd::IChangeable& object, Compatibili
 					retVal  = retVal && m_documentPages[bitmapIndex].pagePtr->CopyFrom(*sourcePtr->GetBitmap(bitmapIndex));
 				}
 				else{
-					Reset();
+					ResetPages();
 
 					return false;
 				}
@@ -151,6 +145,14 @@ bool CMultiPageBitmapBase::CopyFrom(const istd::IChangeable& object, Compatibili
 	}
 
 	return false;
+}
+
+
+bool CMultiPageBitmapBase::ResetData(CompatibilityMode /*mode*/)
+{
+	ResetPages();
+
+	return true;
 }
 
 

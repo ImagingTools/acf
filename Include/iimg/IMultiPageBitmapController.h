@@ -17,12 +17,6 @@ class IMultiPageBitmapController: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Remove all bitmap pages.
-	*/
-	virtual void Reset() = 0;
-
-
-	/**
 		Inserts a new bitmap.
 		\param	pixelFormat	The pixel format.
 		\param	size	Size of the page bitmap.

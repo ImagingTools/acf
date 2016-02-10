@@ -37,7 +37,6 @@ public:
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 
 	// reimplemented (iimg::IMultiPageBitmapController)
-	virtual void Reset();
 	virtual iimg::IBitmap* InsertBitmap(
 				iimg::IBitmap::PixelFormat pixelFormat,
 				const istd::CIndex2d& size);
@@ -51,6 +50,7 @@ public:
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
 
 protected:
 	// abstract methods
