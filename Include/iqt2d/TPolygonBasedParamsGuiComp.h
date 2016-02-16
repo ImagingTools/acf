@@ -101,6 +101,7 @@ protected:
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiRetranslate();
 
 	// reimplemented (iqt2d::TShapeParamsGuiCompBase)
 	virtual bool PopulateActions(CActionAdapter& host, imod::IModel* modelPtr);
@@ -152,11 +153,11 @@ protected:
 
 template <class PolygonBasedShape, class PolygonBasedModel>
 TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TPolygonBasedParamsGuiComp()
-:	m_flipHorizontalAction(QIcon(":/Icons/FlipHorizontal"), QCoreApplication::translate("iqt2d", "Flip horizontally"), this),
-	m_flipVerticalAction(QIcon(":/Icons/FlipVertical"), QCoreApplication::translate("iqt2d", "Flip vertically"), this),
-	m_rotateCwAction(QIcon(":/Icons/RotateRight"), QCoreApplication::translate("iqt2d", "Rotate clockwise"), this),
-	m_rotateCcwAction(QIcon(":/Icons/RotateLeft"), QCoreApplication::translate("iqt2d", "Rotate counterclockwise"), this),
-	m_reversePolarityAction(QIcon(":/Icons/Reverse"), QCoreApplication::translate("iqt2d", "Reverse line"), this)
+:	m_flipHorizontalAction(QIcon(":/Icons/FlipHorizontal"), "", this),
+	m_flipVerticalAction(QIcon(":/Icons/FlipVertical"), "", this),
+	m_rotateCwAction(QIcon(":/Icons/RotateRight"), "", this),
+	m_rotateCcwAction(QIcon(":/Icons/RotateLeft"), "", this),
+	m_reversePolarityAction(QIcon(":/Icons/Reverse"), "", this)
 {
 }
 
@@ -335,8 +336,8 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateGui
 
 		for (int i = 0; i < count; i++){
 			i2d::CVector2d coord = objectPtr->GetNode(i);
-			NodeParamsTable->setItem(i, 0, new QTableWidgetItem(QString::number(coord.GetX(), 'g', 12)));
-			NodeParamsTable->setItem(i, 1, new QTableWidgetItem(QString::number(coord.GetY(), 'g', 12)));
+			NodeParamsTable->setItem(i, 0, new QTableWidgetItem(QString::number(coord.GetX(), 'f', 12)));
+			NodeParamsTable->setItem(i, 1, new QTableWidgetItem(QString::number(coord.GetY(), 'f', 12)));
 		}
 	}
 }
@@ -378,6 +379,19 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiCrea
 
 	// tools actions
 	CreateToolsMenu(ToolsButton);
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	m_flipHorizontalAction.setText(QCoreApplication::translate("iqt2d", "Flip horizontally"));
+	m_flipVerticalAction.setText(QCoreApplication::translate("iqt2d", "Flip vertically"));
+	m_rotateCwAction.setText(QCoreApplication::translate("iqt2d", "Rotate clockwise"));
+	m_rotateCcwAction.setText(QCoreApplication::translate("iqt2d", "Rotate counterclockwise"));
+	m_reversePolarityAction.setText(QCoreApplication::translate("iqt2d", "Reverse line"));
 }
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>Attribute</name>
     <message>
@@ -99,14 +99,12 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CAbGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
+        <location filename="../../../Docs/Tutorial/Impl/ModelObserver/CAbGuiComp.ui" line="+28"/>
         <source>A</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+20"/>
         <source>B</source>
         <translation></translation>
     </message>
@@ -114,22 +112,26 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CAboutWidgetGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtgui/CAboutWidgetGuiComp.ui" line="+14"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+199"/>
         <source>About...</source>
         <translation>О продукте...</translation>
     </message>
     <message>
         <source>Product</source>
-        <translation>Продукт</translation>
+        <translation type="vanished">Продукт</translation>
     </message>
     <message>
         <source>ApplicationName</source>
-        <translation>Название приложения</translation>
+        <translation type="vanished">Название приложения</translation>
     </message>
     <message>
         <source>ApplicationType</source>
-        <translation>Тип приложения</translation>
+        <translation type="vanished">Тип приложения</translation>
     </message>
     <message>
+        <location line="+169"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+1"/>
         <source>Version</source>
         <translation>Версия</translation>
     </message>
@@ -137,26 +139,32 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CAffineTransformationParamsGui</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
+        <location filename="../../../Include/iqt2d/CAffineTransformationParamsGui.ui" line="+17"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+92"/>
         <source>Translation</source>
         <translation>Смещение</translation>
     </message>
     <message>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
         <source>X</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+20"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
         <source>Y</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+23"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
         <source>Set to no transformation (zero translation and rotation angle and 1:1 scale)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -165,13 +173,17 @@ See &apos;License.txt&apos; for license information</source>
     <name>CAnnulusParamsGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Параметеры диска</translation>
+        <translation type="obsolete">Параметеры диска</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqt2d/CAnnulusParamsGuiComp.ui" line="+26"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+121"/>
         <source>Position</source>
         <translation type="unfinished">Позиция</translation>
     </message>
     <message>
+        <location line="+58"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+2"/>
         <source>Radii</source>
         <translation type="unfinished">Радиусы</translation>
     </message>
@@ -180,21 +192,64 @@ See &apos;License.txt&apos; for license information</source>
     <name>CAnnulusSegmentParamsGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Параметеры сегмента диска</translation>
+        <translation type="obsolete">Параметеры сегмента диска</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqt2d/CAnnulusSegmentParamsGuiComp.ui" line="+26"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+159"/>
         <source>Position</source>
         <translation type="unfinished">Позиция</translation>
     </message>
     <message>
+        <location line="+58"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
         <source>Radii</source>
         <translation type="unfinished">Радиусы</translation>
     </message>
     <message>
+        <location line="+58"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
         <source>Angles</source>
         <translation type="unfinished">Углы</translation>
     </message>
-    <message utf8="both">
+    <message>
+        <location line="+45"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+1"/>
+        <source>°</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CArcParamsGuiComp</name>
+    <message>
+        <location filename="../../../Include/iqt2d/CArcParamsGuiComp.ui" line="+26"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+141"/>
+        <source>Position</source>
+        <translation type="unfinished">Позиция</translation>
+    </message>
+    <message>
+        <location line="+58"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
+        <source>Radius</source>
+        <translation type="unfinished">Радиус</translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
+        <source>Start Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
+        <source>End Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+13"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
+        <location line="+1"/>
         <source>°</source>
         <translation type="unfinished"></translation>
     </message>
@@ -279,32 +334,45 @@ See &apos;License.txt&apos; for license information</source>
     </message>
 </context>
 <context>
-    <name>CButtonBasedSelectionParamGuiComp</name>
-    <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
-    <name>CCheckableOptionsEditorComp</name>
-    <message>
-        <source>CCheckableOptionsEditorComp</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
     <name>CCircleParamsGuiComp</name>
     <message>
         <source>Form</source>
-        <translation>Редактор параметеров окружности</translation>
+        <translation type="vanished">Редактор параметеров окружности</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqt2d/CCircleParamsGuiComp.ui" line="+66"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+156"/>
         <source>Position</source>
         <translation>Позиция</translation>
     </message>
     <message>
+        <location line="+51"/>
+        <location line="+17"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+1"/>
+        <location line="+1"/>
+        <source>mm</source>
+        <translation type="unfinished">мм</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+1"/>
+        <source>Tools</source>
+        <translation type="unfinished">Инструменты</translation>
+    </message>
+    <message>
+        <location line="-104"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="-4"/>
         <source>Radius</source>
         <translation>Радиус</translation>
+    </message>
+</context>
+<context>
+    <name>CCollapsiblePage</name>
+    <message>
+        <location filename="../../../Include/iwidgets/CCollapsiblePage.ui" line="+90"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iwidgets/ui_CCollapsiblePage.h" line="+103"/>
+        <source>Page</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -318,13 +386,17 @@ See &apos;License.txt&apos; for license information</source>
     <name>CComposedParamsSetGuiComp</name>
     <message>
         <source>Form</source>
-        <translation>Редактор набора параметров</translation>
+        <translation type="vanished">Редактор набора параметров</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqtprm/CComposedParamsSetGuiComp.ui" line="+61"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="+97"/>
         <source>Save...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
+        <location line="-17"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="-1"/>
         <source>Load...</source>
         <translation>Загрузить из...</translation>
     </message>
@@ -393,31 +465,129 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CDoubleRangeSpinEdit</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
+        <location filename="../../../Include/iwidgets/CDoubleRangeSpinEdit.ui" line="+26"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+102"/>
         <source>from</source>
         <translation>от</translation>
     </message>
     <message>
+        <location line="+26"/>
+        <location line="+39"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+1"/>
+        <location line="+2"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
     <message>
+        <location line="-26"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="-1"/>
         <source>to</source>
         <translation>до</translation>
     </message>
 </context>
 <context>
-    <name>CEnableableParamGuiComp</name>
+    <name>CElementEditorGui</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
+        <location filename="../../../Include/iqtprm/CElementEditorGui.ui" line="+14"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+117"/>
+        <source>Element Properties</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+9"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
+        <source>Element name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
+        <source>Element description</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CEnableableParamGuiComp</name>
+    <message>
+        <location filename="../../../Include/iqtprm/CEnableableParamGuiComp.ui" line="+26"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CEnableableParamGuiComp.h" line="+56"/>
         <source>Enabled</source>
         <translation>Активировано</translation>
+    </message>
+</context>
+<context>
+    <name>CExtParamsManagerGuiComp</name>
+    <message>
+        <location filename="../../../Include/iqtprm/CExtParamsManagerGuiComp.ui" line="+95"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+145"/>
+        <source>Add</source>
+        <translation type="unfinished">Добавить</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Ins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Add new element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Return</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Change properties of the selected element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Clone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Ctrl+Ins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Duplicate selected element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Remove</source>
+        <translation type="unfinished">Удалить</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
+        <source>Delete selected element</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -426,22 +596,16 @@ See &apos;License.txt&apos; for license information</source>
         <source>View</source>
         <translation type="obsolete">Вид</translation>
     </message>
-    <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
 </context>
 <context>
     <name>CFileListProviderGuiComp</name>
     <message>
         <source>Display navigation bar</source>
-        <translation>Показать навигацию</translation>
+        <translation type="vanished">Показать навигацию</translation>
     </message>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
+        <location filename="../../../Include/ifilegui/CFileListProviderGuiComp.ui" line="+33"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileListProviderGuiComp.h" line="+52"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
@@ -450,21 +614,29 @@ See &apos;License.txt&apos; for license information</source>
     <name>CFileNameParamGuiComp</name>
     <message>
         <source>Form</source>
-        <translation>Редактор пути к файлу или папке</translation>
+        <translation type="vanished">Редактор пути к файлу или папке</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqtprm/CFileNameParamGuiComp.ui" line="+29"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+94"/>
         <source>Directory</source>
         <translation>Папка</translation>
     </message>
     <message>
+        <location line="+7"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
         <source>Path</source>
         <translation>Файл</translation>
     </message>
     <message>
+        <location line="+7"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
         <source>URL</source>
         <translation>Линк</translation>
     </message>
     <message>
+        <location line="+20"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -472,75 +644,91 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CFilePersistenceGuiComp</name>
     <message>
+        <location filename="../../../Include/ifilegui/CFilePersistenceGuiComp.ui" line="+20"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+56"/>
         <source>Load</source>
         <translation>Загрузить</translation>
     </message>
     <message>
+        <location line="+7"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+1"/>
         <source>Save</source>
         <translation>Сохранить</translation>
-    </message>
-    <message>
-        <source>Form</source>
-        <translation></translation>
     </message>
 </context>
 <context>
     <name>CFilePreviewGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Display navigation bar</source>
-        <translation>Показать навигацию</translation>
+        <translation type="vanished">Показать навигацию</translation>
     </message>
 </context>
 <context>
     <name>CFileSystemExplorerGuiComp</name>
     <message>
         <source>Form</source>
-        <translation>Обзор файловой системы</translation>
+        <translation type="vanished">Обзор файловой системы</translation>
     </message>
 </context>
 <context>
     <name>CFileTreeViewGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
+        <location filename="../../../Include/ifilegui/CFileTreeViewGuiComp.ui" line="+68"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+202"/>
         <source>Wildcards * and ? are allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <source>Type filter text here...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введите текст для поиска</translation>
     </message>
     <message>
+        <location line="+7"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <source>Reset filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location line="+36"/>
+        <location line="+14"/>
+        <location line="+56"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
+        <location line="+4"/>
+        <location line="+4"/>
+        <location line="+5"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="-73"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="-11"/>
         <source>Expand all items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+14"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+4"/>
         <source>Collapse all items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+42"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+3"/>
         <source>Update in progress...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+14"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <source>Refresh view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+10"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+3"/>
         <source>F5</source>
         <translation type="unfinished"></translation>
     </message>
@@ -549,28 +737,34 @@ See &apos;License.txt&apos; for license information</source>
     <name>CImagePropertiesFrameComp</name>
     <message>
         <source>Form</source>
-        <translation>Свойства изображения</translation>
+        <translation type="vanished">Свойства изображения</translation>
     </message>
     <message>
         <source>Display navigation bar</source>
-        <translation>Показать навигацию</translation>
+        <translation type="vanished">Показать навигацию</translation>
     </message>
 </context>
 <context>
     <name>CImagePropertyGuiComp</name>
     <message>
         <source>Form</source>
-        <translation>Свойства изображения</translation>
+        <translation type="vanished">Свойства изображения</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqtgui/CImagePropertyGuiComp.ui" line="+20"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+53"/>
         <source>Display navigation bar</source>
         <translation>Показать навигацию</translation>
     </message>
     <message>
+        <location line="+13"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+4"/>
         <source>Property</source>
         <translation>Свойство</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="-1"/>
         <source>Value</source>
         <translation>Значение</translation>
     </message>
@@ -579,13 +773,17 @@ See &apos;License.txt&apos; for license information</source>
     <name>CLine2dParamsGuiComp</name>
     <message>
         <source>Form</source>
-        <translation>Редактор линии</translation>
+        <translation type="vanished">Редактор линии</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqt2d/CLine2dParamsGuiComp.ui" line="+26"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+123"/>
         <source>First point</source>
         <translation>Начальная точка</translation>
     </message>
     <message>
+        <location line="+58"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+2"/>
         <source>Second point</source>
         <translation>Конечная точка</translation>
     </message>
@@ -593,24 +791,34 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CLogGuiComp</name>
     <message>
+        <location filename="../../../Include/iloggui/CLogGuiComp.ui" line="+105"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+112"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+5"/>
         <source>State</source>
         <translation>Состояние</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
         <source>Time</source>
         <translation>Время</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
         <source>Source</source>
         <translation>Источник</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
         <source>Message</source>
         <translation>Сообщение</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -633,13 +841,6 @@ See &apos;License.txt&apos; for license information</source>
     </message>
 </context>
 <context>
-    <name>CNameParamGuiComp</name>
-    <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
     <name>CObjectPreviewGuiComp</name>
     <message>
         <source>Display navigation bar</source>
@@ -649,36 +850,28 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>COptionsListEditorGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Insert new item</source>
-        <translation>Добавить новый элемент</translation>
+        <translation type="vanished">Добавить новый элемент</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Добавить</translation>
+        <translation type="vanished">Добавить</translation>
     </message>
     <message>
         <source>Remove selected item</source>
-        <translation>Удалить выбранный элемент</translation>
+        <translation type="vanished">Удалить выбранный элемент</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Удалить</translation>
+        <translation type="vanished">Удалить</translation>
     </message>
     <message>
         <source>Move selected item up</source>
-        <translation>Переместить выбранный элемент наверх</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation></translation>
+        <translation type="vanished">Переместить выбранный элемент наверх</translation>
     </message>
     <message>
         <source>Move selected item down</source>
-        <translation>Переместить выбранный элемент вниз</translation>
+        <translation type="vanished">Переместить выбранный элемент вниз</translation>
     </message>
 </context>
 <context>
@@ -689,41 +882,69 @@ See &apos;License.txt&apos; for license information</source>
     </message>
 </context>
 <context>
-    <name>COptionsManagerGuiComp</name>
+    <name>COptionsManagerEditorComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
+        <location filename="../../../Include/iqtprm/COptionsManagerEditorComp.ui" line="+48"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+133"/>
+        <source>Insert new item</source>
+        <translation type="unfinished">Добавить новый элемент</translation>
     </message>
     <message>
-        <source>InfoLabel</source>
-        <translation></translation>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
+        <source>Add</source>
+        <translation type="unfinished">Добавить</translation>
     </message>
     <message>
-        <source>OptionDescriptionLabel</source>
-        <translation></translation>
+        <location line="+11"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
+        <source>Remove selected item</source>
+        <translation type="unfinished">Удалить выбранный элемент</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
+        <source>Remove</source>
+        <translation type="unfinished">Удалить</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
+        <source>Move selected item up</source>
+        <translation type="unfinished">Переместить выбранный элемент наверх</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+14"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
+        <location line="+4"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="-2"/>
+        <source>Move selected item down</source>
+        <translation type="unfinished">Переместить выбранный элемент вниз</translation>
     </message>
 </context>
 <context>
     <name>COrientedCircleEditorComp</name>
     <message>
         <source>Position</source>
-        <translation>Позиция</translation>
+        <translation type="vanished">Позиция</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Радиус</translation>
-    </message>
-    <message>
-        <source>Form</source>
-        <translation></translation>
+        <translation type="vanished">Радиус</translation>
     </message>
     <message>
         <source>Axis orientation</source>
-        <translation>Ориентация осей</translation>
+        <translation type="vanished">Ориентация осей</translation>
     </message>
     <message>
         <source>Outside</source>
-        <translation>Извне</translation>
+        <translation type="vanished">Извне</translation>
     </message>
 </context>
 <context>
@@ -799,38 +1020,52 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CParamsManagerGuiCompBase</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
+        <location filename="../../../Include/iqtprm/CParamsManagerGuiCompBase.ui" line="+36"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+177"/>
         <source>List</source>
         <translation>Список</translation>
     </message>
     <message>
+        <location line="+50"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Insert new item</source>
         <translation>Добавить новый элемент</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Add</source>
         <translation>Добавить</translation>
     </message>
     <message>
+        <location line="+17"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Remove selected item</source>
         <translation>Удалить выбранный элемент</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
+        <location line="+39"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Move selected item up</source>
         <translation>Переместить выбранный элемент наверх</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location line="+14"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
+        <location line="+4"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
+        <location line="-3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="-2"/>
         <source>Move selected item down</source>
         <translation>Переместить выбранный элемент вниз</translation>
     </message>
@@ -838,18 +1073,26 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CPolygonParamsGuiComp</name>
     <message>
+        <location filename="../../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="+81"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+137"/>
         <source>Add new point</source>
         <translation>Добавить новую точку</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Append</source>
         <translation>Добавить</translation>
     </message>
     <message>
+        <location line="+34"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+10"/>
         <source>Copy</source>
         <translation>Скопировать</translation>
     </message>
     <message>
+        <location line="+17"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+5"/>
         <source>Paste</source>
         <translation>Вставить</translation>
     </message>
@@ -858,58 +1101,72 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="obsolete">Вставить</translation>
     </message>
     <message>
+        <location line="-37"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="-12"/>
         <source>Remove current point</source>
         <translation>Удалить выбранную точку</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
+        <location line="-35"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="-11"/>
         <source>X</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Y</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+20"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+5"/>
         <source>Ctrl+Ins</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+17"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+5"/>
         <source>Shift+Del</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+7"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Copy parameters to clipboard</source>
         <translation>Копирует параметры в буффер обмена</translation>
     </message>
     <message>
+        <location line="+10"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
         <source>Ctrl+C</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+7"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Paste parameters from clipboard</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+10"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
         <source>Ctrl+V</source>
         <translation></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close the line by connecting its last and first point with a line segment.&lt;/p&gt;&lt;p&gt;To uncheck, select a pair of coordinates in the table: the polyline will be opened at that point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Closed</source>
-        <translation>Замкнуть</translation>
+        <translation type="vanished">Замкнуть</translation>
     </message>
     <message>
+        <location line="+20"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+1"/>
         <source>Tools</source>
         <translation>Инструменты</translation>
     </message>
@@ -952,37 +1209,49 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CProgressManagerGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtgui/CProgressManagerGuiComp.ui" line="+20"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+68"/>
         <source>Progress</source>
         <translation>Выполнено</translation>
     </message>
     <message>
+        <location line="+23"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+1"/>
         <source>Cancel</source>
         <translation>Отменить</translation>
-    </message>
-    <message>
-        <source>Form</source>
-        <translation></translation>
     </message>
 </context>
 <context>
     <name>CQuadrangleParamsGuiComp</name>
     <message>
         <source>Form</source>
-        <translation>Редактор четырёхугольника</translation>
+        <translation type="vanished">Редактор четырёхугольника</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqt2d/CQuadrangleParamsGuiComp.ui" line="+20"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+215"/>
         <source>First Diagonal</source>
         <translation>Первая диагональ</translation>
     </message>
     <message>
+        <location line="+12"/>
+        <location line="+125"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+1"/>
+        <location line="+5"/>
         <source>First point</source>
         <translation>Начальная точка</translation>
     </message>
     <message>
+        <location line="-67"/>
+        <location line="+125"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
+        <location line="+5"/>
         <source>Second point</source>
         <translation>Конечная точка</translation>
     </message>
     <message>
+        <location line="-70"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
         <source>Second Diagonal</source>
         <translation>Вторая диагональ</translation>
     </message>
@@ -1014,21 +1283,29 @@ See &apos;License.txt&apos; for license information</source>
     <name>CRectangleParamsGuiComp</name>
     <message>
         <source>Form</source>
-        <translation>Редактор прямоугольника</translation>
+        <translation type="vanished">Редактор прямоугольника</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqt2d/CRectangleParamsGuiComp.ui" line="+26"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+129"/>
         <source>Left</source>
         <translation>Левая граница</translation>
     </message>
     <message>
+        <location line="+29"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+1"/>
         <source>Right</source>
         <translation>Правая граница</translation>
     </message>
     <message>
+        <location line="+29"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+1"/>
         <source>Top</source>
         <translation>Верхняя граница</translation>
     </message>
     <message>
+        <location line="+29"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+1"/>
         <source>Bottom</source>
         <translation>Нижняя граница</translation>
     </message>
@@ -1096,13 +1373,6 @@ See &apos;License.txt&apos; for license information</source>
     </message>
 </context>
 <context>
-    <name>CSceneConnectorGuiComp</name>
-    <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
     <name>CSceneControllerGuiComp</name>
     <message>
         <source>Display navigation bar</source>
@@ -1113,9 +1383,11 @@ See &apos;License.txt&apos; for license information</source>
     <name>CSelectableGuiComp</name>
     <message>
         <source>Form</source>
-        <translation>Отбражение выбора</translation>
+        <translation type="vanished">Отбражение выбора</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqtprm/CSelectableGuiComp.ui" line="+49"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CSelectableGuiComp.h" line="+94"/>
         <source>No selection</source>
         <translation>Ничего не выбрано</translation>
     </message>
@@ -1127,14 +1399,14 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="obsolete">Ввод</translation>
     </message>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
+        <location filename="../../../Include/iqtprm/CSelectionParamGuiComp.ui" line="+83"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CSelectionParamGuiComp.h" line="+114"/>
         <source>InfoLabel</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+28"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CSelectionParamGuiComp.h" line="+1"/>
         <source>OptionDescriptionLabel</source>
         <translation></translation>
     </message>
@@ -1142,12 +1414,10 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CSelectionParamIndexGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtprm/CSelectionParamIndexGuiComp.ui" line="+19"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtprm/ui_CSelectionParamIndexGuiComp.h" line="+73"/>
         <source>Iterations</source>
         <translation>Циклы</translation>
-    </message>
-    <message>
-        <source>Form</source>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -1161,61 +1431,94 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="obsolete">Пиксели [
 </translation>
     </message>
+</context>
+<context>
+    <name>CSimpleFilePathParamGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
+        <location filename="../../../Include/ifilegui/CSimpleFilePathParamGuiComp.ui" line="+38"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+85"/>
+        <source>Directory</source>
+        <translation type="unfinished">Папка</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
+        <source>Path</source>
+        <translation type="unfinished">Файл</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
+        <source>URL</source>
+        <translation type="unfinished">Линк</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CSplashScreenGuiComp</name>
     <message>
         <source>ProductName</source>
-        <translation>Название продукта</translation>
+        <translation type="vanished">Название продукта</translation>
     </message>
     <message>
         <source>ApplicationName</source>
-        <translation>Имя приложения</translation>
+        <translation type="vanished">Имя приложения</translation>
     </message>
     <message>
         <source>ApplicationType</source>
-        <translation>Тип приложения</translation>
+        <translation type="vanished">Тип приложения</translation>
     </message>
     <message>
+        <location filename="../../../Include/iqtgui/CSplashScreenGuiComp.ui" line="+384"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+223"/>
         <source>Version</source>
         <translation>Версия</translation>
     </message>
     <message>
-        <source>(C) Copyright</source>
-        <translation>Все права защищены</translation>
+        <location line="+222"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+2"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>FormTip</source>
-        <translation></translation>
+        <source>(C) Copyright</source>
+        <translation type="vanished">Все права защищены</translation>
     </message>
 </context>
 <context>
     <name>CTextEditorComp</name>
     <message>
+        <location filename="../../../Docs/Tutorial/Impl/DocView/CTextEditorComp.cpp" line="+141"/>
         <source>To &amp;Lowercase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Lowercase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Convert selected block to lowercase characters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>To &amp;Uppercase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Uppercase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Convert selected block to uppercase characters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1223,56 +1526,63 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CTextLogGuiComp</name>
     <message>
+        <location filename="../../../Include/iloggui/CTextLogGuiComp.ui" line="+72"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+154"/>
         <source>Severity</source>
         <translation>Уровень</translation>
     </message>
     <message>
+        <location line="+14"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+3"/>
         <source>Any</source>
         <translation>Любой</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
         <source>Source</source>
         <translation>Источник</translation>
     </message>
     <message>
+        <location line="+82"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Type filter text here...</source>
-        <translation>Введите текст для поиска</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
-    <name>CVariableParamGuiComp</name>
-    <message>
-        <source>Form</source>
-        <translation></translation>
+        <translation type="vanished">Введите текст для поиска</translation>
     </message>
 </context>
 <context>
     <name>CVersionInfoGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtgui/CVersionInfoGuiComp.ui" line="+41"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="+56"/>
         <source>Version</source>
         <translation>Версия</translation>
     </message>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
+        <location line="-5"/>
+        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="+1"/>
         <source>Module</source>
         <translation>Модуль</translation>
     </message>
@@ -1287,6 +1597,7 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>Gui</name>
     <message>
+        <location filename="../../../Include/iqtdoc/TQtDocumentManagerWrap.h" line="+96"/>
         <source>Save...</source>
         <translation>Сохранить как...</translation>
     </message>
@@ -1296,10 +1607,12 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="obsolete">Все известные типы документов (%1)</translation>
     </message>
     <message>
+        <location line="+62"/>
         <source>Open Files...</source>
         <translation>Открыть файлы...</translation>
     </message>
     <message>
+        <location line="-21"/>
         <source>All known documents (%1)</source>
         <translation>Все известные типы документов (%1)</translation>
     </message>
@@ -1307,6 +1620,7 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>QObject</name>
     <message>
+        <location filename="../../../Include/ipackage/CRegistriesManagerComp.cpp" line="+276"/>
         <source>Load configuration file: %1</source>
         <translation>Загружаю конфигурационный файл: %1</translation>
     </message>
@@ -1414,22 +1728,30 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="obsolete">Пакеты</translation>
     </message>
     <message>
+        <location filename="../../../Include/ifile/CFileSerializerCompBase.cpp" line="+27"/>
         <source>Object is not serializable</source>
         <translation>Обьект не поддерживает сериализацию</translation>
     </message>
     <message>
+        <location line="+37"/>
         <source>File extension is not supported</source>
         <translation>Формат файла не поддерживается</translation>
     </message>
     <message>
+        <location filename="../../../Include/ifile/TFileSerializerComp.h" line="+201"/>
+        <location filename="../../../Include/ifile/TXmlFileSerializerComp.h" line="+215"/>
         <source>Archive version is not supported, possible lost of data</source>
         <translation>Версия архива не поддеживается, возможна потеря данных</translation>
     </message>
     <message>
+        <location line="+7"/>
+        <location filename="../../../Include/ifile/TXmlFileSerializerComp.h" line="+7"/>
         <source>Cannot serialize object to file</source>
         <translation>При записи обьекта в файл произошла ошибка</translation>
     </message>
     <message>
+        <location line="+13"/>
+        <location filename="../../../Include/ifile/TXmlFileSerializerComp.h" line="+13"/>
         <source>Cannot load object from file </source>
         <translation>При чтении обьекта из файла произошла ошибка</translation>
     </message>
@@ -1439,154 +1761,481 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <source>RGBA value %1%, %2%, %3%, %4%</source>
-        <translation>RGBA (%1%, %2%, %3%, %4%)</translation>
+        <translation type="vanished">RGBA (%1%, %2%, %3%, %4%)</translation>
     </message>
     <message>
+        <location filename="../../../Include/ipackage/CPackagesLoaderComp.cpp" line="+459"/>
         <source>Cannot create %1 (%2)</source>
         <translation>Невозможно создать %1 (%2)</translation>
     </message>
     <message>
+        <location filename="../../../Include/ibase/CQtVersionInfoComp.cpp" line="+63"/>
         <source>The runtime version of Qt framework doesn&apos;t match the version used by creation of ACF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/idoc/CStandardDocumentMetaInfo.cpp" line="+19"/>
+        <source>Change document information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+44"/>
         <source>Title</source>
         <translation>Название</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Author</source>
         <translation>Автор</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Creator</source>
         <translation>Создатель</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Creation Time</source>
         <translation>Время создания</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Modification Time</source>
         <translation>Время изменения</translation>
     </message>
     <message>
+        <location line="+14"/>
         <source>Title of the document</source>
         <translation>Название документа</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Author of the document</source>
         <translation>Автор документа</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Creator of the document</source>
         <translation>Создатель документа</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Document description</source>
         <translation>Описание документа</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Time of document&apos;s creation</source>
         <translation>Время создания документа</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>Time of last document&apos;s modification</source>
         <translation>Время последнего изменения документа</translation>
     </message>
     <message>
+        <location filename="../../../Include/ifile/CGeneratedFileNameParamComp.cpp" line="+56"/>
         <source>Directory %1 could not be created</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/ifile/TFileSerializerComp.h" line="-38"/>
+        <location filename="../../../Include/ifile/TXmlFileSerializerComp.h" line="-40"/>
         <source>Cannot create path to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/ipackage/CPackagesLoaderComp.cpp" line="-199"/>
+        <location filename="../../../Include/ipackage/CRegistriesManagerComp.cpp" line="-81"/>
         <source>Second real package definition was ignored %1 (previous: %2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+48"/>
         <source>Cannot load meta description for registry %1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+12"/>
+        <location filename="../../../Include/ipackage/CRegistriesManagerComp.cpp" line="+41"/>
         <source>Second composed package definition was ignored %1 (previous: %2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+109"/>
         <source>Cannot register package %1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/ipackage/CRegistriesManagerComp.cpp" line="+12"/>
         <source>Register package directory: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+36"/>
+        <location line="+9"/>
         <source>Cannot open configuration file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/ipackage/CRegistryCodeSaverComp.cpp" line="+182"/>
         <source>dependency file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+3"/>
+        <location line="+6"/>
         <source>C++ source file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>qmake dependency file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Composite component &apos;%1&apos; is undefined</source>
+        <location line="+57"/>
+        <source>%1: Composite component &apos;%1&apos; is undefined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Package &apos;%1&apos; is undefined</source>
+        <location line="+10"/>
+        <source>%1: Package &apos;%2&apos; is undefined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+15"/>
+        <source>%1: Composite component &apos;%2&apos; is undefined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+998"/>
         <source>Unknown attribute type: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>unnamed%1</source>
+        <location filename="../../../Include/iprm/CParamsManagerCompBase.cpp" line="+18"/>
+        <source>Remove parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Move parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rename</source>
+        <translation type="unfinished">Переименовать компонент</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Change selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+253"/>
         <source>%1_%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/iqtgui/CApplicationCompBase.cpp" line="+183"/>
         <source>ACF application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/iser/CBinaryReadArchiveBase.cpp" line="+31"/>
+        <location line="+26"/>
         <source>Bad tag begin code, is %1, should be %2 (tag &apos;%3&apos;)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/iser/CXmlReadArchiveBase.cpp" line="+344"/>
         <source>Cannot find root tag &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/iview/CImageShape.cpp" line="+166"/>
         <source>[%1, %2] px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+6"/>
         <source>Gray value %1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>[Red:%1% (%2), Green:%3% (%4), Blue:%5% (%6) Hue: %7, Saturation: %8, Value: %9]</source>
+        <location line="+14"/>
+        <source>[RGB=(%1%,%3%,%5%)=(%2,%4,%6), HSV=(%7,%8,%9)]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+25"/>
+        <source>[RGBA=(%1%,%3%,%5%,%7)=(%2,%4,%6,%8), HSV=(%9,%10,%11)]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
         <source>, </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Docs/Tutorial/Impl/ModelObserver/CAbComp.cpp" line="+11"/>
+        <source>Change A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Change B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/i2d/CObject2dBase.cpp" line="+14"/>
+        <location filename="../../../Include/iview/CInteractiveShapeBase.cpp" line="+20"/>
+        <source>Move object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Modify object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/i2d/CPolygon.cpp" line="+18"/>
+        <source>Clear all nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Create nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Insert node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Remove node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Flip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rotate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Reverse nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/i2d/CQuadrangle.cpp" line="+19"/>
+        <source>Set diagnal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/i2d/CRectangle.cpp" line="+21"/>
+        <source>Reset rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set rectangle&apos;s left side</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set rectangle&apos;s top side</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set rectangle&apos;s right side</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set rectangle&apos;s bottom side</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set rectange&apos;s top-left position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set rectange&apos;s top-right position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set rectange&apos;s bottom-left position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set rectange&apos;s bottom-right position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Unite rectangle which another</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Expand rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Intersect with another rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iattr/CAttributesManager.cpp" line="+19"/>
+        <source>Remove all attributes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Remove attribute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add attribute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Insert attribute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icomp/CRegistry.cpp" line="+25"/>
+        <source>Rename element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Remove element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/ifile/CCompactXmlFileReadArchive.cpp" line="+65"/>
+        <source>%2(%3) : %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../../../Include/ifile/CCompressedXmlFileReadArchive.cpp" line="+64"/>
+        <source>%2 : %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iprm/CMultiParamsManagerComp.cpp" line="+17"/>
+        <source>Enable/disable option</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Change parameter type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Change parameter name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location filename="../../../Include/iprm/CParamsManagerCompBase.cpp" line="-257"/>
+        <source>Insert parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iprm/CNameParam.cpp" line="+19"/>
+        <source>Change name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iprm/COptionsManager.cpp" line="+19"/>
+        <source>Enable option</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Insert option</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Remove option</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Move option</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rename option</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location filename="../../../Include/iprm/CParamsManagerCompBase.cpp" line="+5"/>
+        <source>Change description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtgui/CSimpleMainWindowGuiComp.cpp" line="+462"/>
+        <source>Initializing User Interface...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iser/CCompactXmlMemReadArchive.cpp" line="+45"/>
+        <source>%1 (Line: %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iser/CCompactXmlReadArchiveBase.cpp" line="+258"/>
+        <source>%1 (node: %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iview/CPolygonShape.cpp" line="+21"/>
+        <source>Move node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iview/CPolylineShape.cpp" line="+560"/>
+        <source>Left click: remove selected node, right click: break at the selected node</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2004,10 +2653,12 @@ Interfaces:</source>
 <context>
     <name>ifile::CFileListProviderComp</name>
     <message>
+        <location filename="../../../Include/ifile/CFileListProviderComp.cpp" line="+96"/>
         <source>Specified path &apos;%1&apos; is not a directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+69"/>
         <source>Specified path &apos;%1&apos; is not exist</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2015,18 +2666,22 @@ Interfaces:</source>
 <context>
     <name>ifilegui::CFileDialogLoaderComp</name>
     <message>
+        <location filename="../../../Include/ifilegui/CFileDialogLoaderComp.cpp" line="+157"/>
         <source>%1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+57"/>
         <source>All known file types (%1)</source>
         <translation type="unfinished">Все известные типы файлов (%1)</translation>
     </message>
     <message>
+        <location line="+13"/>
         <source>Enter file name</source>
         <translation type="unfinished">Введите имя файла</translation>
     </message>
     <message>
+        <location line="+26"/>
         <source>Select a file to open</source>
         <translation type="unfinished">Выберите файл</translation>
     </message>
@@ -2034,6 +2689,7 @@ Interfaces:</source>
 <context>
     <name>ifilegui::CFileSystemExplorerGuiComp</name>
     <message>
+        <location filename="../../../Include/ifilegui/CFileSystemExplorerGuiComp.cpp" line="+119"/>
         <source>Enter text to filter file items</source>
         <translation type="unfinished">Введите текст для фильтрации файловых элементов</translation>
     </message>
@@ -2041,41 +2697,139 @@ Interfaces:</source>
 <context>
     <name>ifilegui::CFileTreeViewGuiComp</name>
     <message>
+        <location filename="../../../Include/ifilegui/CFileTreeViewGuiComp.cpp" line="+248"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл</translation>
+    </message>
+</context>
+<context>
+    <name>ifilegui::CSimpleFilePathParamGuiComp</name>
+    <message>
+        <location filename="../../../Include/ifilegui/CSimpleFilePathParamGuiComp.cpp" line="+141"/>
+        <source>Select directory</source>
+        <translation type="unfinished">Выбор папки</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>All supported files (%1)</source>
+        <translation type="unfinished">Все файлы (%1)</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Select file</source>
+        <translation type="unfinished">Выбор файла</translation>
     </message>
 </context>
 <context>
     <name>iimg::CBitmapLoaderComp</name>
     <message>
+        <location filename="../../../Include/iimg/CBitmapLoaderComp.cpp" line="+32"/>
         <source>Object is not Qt image</source>
         <translation type="unfinished">Обьект не является потомком QImage</translation>
     </message>
     <message>
+        <location line="+15"/>
         <source>Bad image file extension %1</source>
         <translation type="unfinished">Неподдерживаемое расширение (%1) для формата изображения</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Image file %1 not exist</source>
         <translation type="unfinished">Файл изображения (%1) не существует</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Bad image format</source>
         <translation type="unfinished">Неподдерживаемый формат изображения</translation>
     </message>
     <message>
+        <location line="+44"/>
         <source>Cannot load file %1</source>
         <translation type="unfinished">Не удалось загрузить файл (%1)</translation>
     </message>
     <message>
+        <location line="+33"/>
         <source>Cannot save file %1</source>
         <translation type="unfinished">Не удалось сохранить файл %1</translation>
     </message>
     <message>
+        <location line="+53"/>
+        <source>Joint Photographic Experts Group Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Tagged Image File Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Windows Bitmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Graphic Interchange Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Portable Network Graphics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Portable Bitmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Portable Graymap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Portable Pixmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>X11 Bitmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>X11 Pixmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Scalable Vector Graphics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Compressed Scalable Vector Graphics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Windows Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>MAC Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Bitmap</source>
         <translation type="unfinished">Изображение</translation>
     </message>
     <message>
+        <location line="-147"/>
+        <location line="+24"/>
         <source>Object is not supported image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2083,42 +2837,52 @@ Interfaces:</source>
 <context>
     <name>iloggui::CLogGuiComp</name>
     <message>
+        <location filename="../../../Include/iloggui/CLogGuiComp.cpp" line="+137"/>
         <source>New informations available</source>
         <translation>Есть новые сообщения</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>There are warnings</source>
         <translation>Имеются предупреждения</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>There are errors</source>
         <translation>Имеются сообщения об ошибках</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>There are critical errors!</source>
         <translation>Имеются сообщения о критических ошибках!</translation>
     </message>
     <message>
+        <location line="+83"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
+        <location line="+10"/>
         <source>Clear</source>
         <translation>Стереть</translation>
     </message>
     <message>
+        <location line="+14"/>
         <source>Export...</source>
         <translation>Экспортировать...</translation>
     </message>
     <message>
+        <location line="+9"/>
         <source>Diagnostic Mode</source>
         <translation>Диагностика</translation>
     </message>
@@ -2126,6 +2890,7 @@ Interfaces:</source>
 <context>
     <name>iloggui::CTextLogGuiComp</name>
     <message>
+        <location filename="../../../Include/iloggui/CTextLogGuiComp.cpp" line="+88"/>
         <source>Any</source>
         <translation>Любой</translation>
     </message>
@@ -2133,10 +2898,13 @@ Interfaces:</source>
 <context>
     <name>ipackage::CPackagesLoaderComp</name>
     <message>
+        <location filename="../../../Include/ipackage/CPackagesLoaderComp.cpp" line="-65"/>
         <source>Load configuration file: %1</source>
         <translation>Загружаю конфигурационный файл: %1</translation>
     </message>
     <message>
+        <location line="+8"/>
+        <location line="+9"/>
         <source>Cannot open configuration file: %1</source>
         <translation></translation>
     </message>
@@ -2144,23 +2912,38 @@ Interfaces:</source>
 <context>
     <name>iqt2d</name>
     <message>
+        <location filename="../../../Include/iqt2d/TPolygonBasedParamsGuiComp.h" line="+390"/>
         <source>Flip horizontally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Flip vertically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Rotate clockwise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Rotate counterclockwise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Reverse line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqt2d/COrientedCircleEditorComp.cpp" line="+40"/>
+        <source>Reverse orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqt2d/CPolylineParamsGuiComp.cpp" line="+114"/>
+        <source>Open/close line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2206,10 +2989,12 @@ Interfaces:</source>
 <context>
     <name>iqt2d::CTubePolylineParamsGuiComp</name>
     <message>
+        <location filename="../../../Include/iqt2d/CTubePolylineParamsGuiComp.cpp" line="+134"/>
         <source>Left</source>
         <translation type="unfinished">Левая граница</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Right</source>
         <translation type="unfinished">Правая граница</translation>
     </message>
@@ -2262,86 +3047,119 @@ Interfaces:</source>
 <context>
     <name>iqtdoc::CMainWindowGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="+119"/>
         <source>Recent %1 Files</source>
         <translation>Последние %1</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Recent Files</source>
         <translation>Последние</translation>
     </message>
     <message>
+        <location line="+72"/>
+        <location line="+767"/>
         <source>Document could not be opened</source>
         <translation>Невозможно открыть документ</translation>
     </message>
     <message>
+        <location line="-652"/>
         <source>Creates new document %1</source>
         <translation>Создать новый документ %1</translation>
     </message>
     <message>
+        <location line="+41"/>
+        <source>Undo: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Redo: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
         <source>Document could not be created</source>
         <translation>Невозможно создать документ</translation>
     </message>
     <message>
+        <location line="+132"/>
         <source>Clear List</source>
         <translation>Очистить</translation>
     </message>
     <message>
+        <location line="+197"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Edit</source>
         <translation>&amp;Редактировать</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>&amp;New</source>
         <translation>&amp;Создать</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>New</source>
         <translation>Создать</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Creates new document</source>
         <translation>Создать новый документ</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Open...</source>
         <translation>&amp;Открыть...</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Opens document from file</source>
         <translation>Открыть документ из файла</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Save</source>
         <translation>&amp;Сохранить</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Saves document to actual working file</source>
         <translation>Сохранить документ в рабочий файл</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Save As...</source>
         <translation>&amp;Сохранить как...</translation>
     </message>
     <message>
+        <location line="+0"/>
+        <location line="+176"/>
         <source>Save As</source>
         <translation>Сохранить как</translation>
     </message>
     <message>
+        <location line="-176"/>
         <source>Saves document into selected file</source>
         <translation>Сохранить документ в выбранный файл</translation>
     </message>
     <message>
+        <location line="+6"/>
         <source>Copy current document path to system clipboard</source>
         <translation>Скопировать путь к файлу в буффер обмена</translation>
     </message>
@@ -2358,38 +3176,47 @@ Interfaces:</source>
         <translation type="obsolete">Распечатать документ</translation>
     </message>
     <message>
+        <location line="-5"/>
         <source>&amp;Quit</source>
         <translation>&amp;Выйти</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Quit</source>
         <translation>Выйти</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Quits this application</source>
         <translation>Завершить приложение</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Undo</source>
         <translation>&amp;Отменить</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Undo last document changes</source>
         <translation>Отменить последние изменения в документе</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторить</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Redo</source>
         <translation>Повторить</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Redo last document changes</source>
         <translation>Повторить последние изменения</translation>
     </message>
@@ -2406,10 +3233,12 @@ Interfaces:</source>
         <translation type="obsolete">Завершить полноэкранный режим</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>&amp;Copy Document Path</source>
         <translation>&amp;Скопировать путь к файлу</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Copy Path</source>
         <translation>Скопировать путь к файлу</translation>
     </message>
@@ -2418,18 +3247,49 @@ Interfaces:</source>
         <translation type="obsolete">Скопировать путь к файлу в буффер обмена</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Open Containing Folder</source>
         <translation>&amp;Открыть папку файла</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Open Containing Folder</source>
         <translation>Открыть папку файла содержащую данный документ</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Open folder containing the current document</source>
         <translation>Открыть папку файла содержащую данный документ</translation>
     </message>
     <message>
+        <location line="+167"/>
+        <location line="+20"/>
+        <source>Save file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-19"/>
+        <source>The file %1 cannot be saved because it is write-protected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отменить</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>The file %1 cannot be overwritten. Possible you have not enough permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <location line="+18"/>
         <source>File could not be saved!</source>
         <translation>Невозможно сохранить файл!</translation>
     </message>
@@ -2437,108 +3297,117 @@ Interfaces:</source>
 <context>
     <name>iqtdoc::CMultiDocumentWorkspaceGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtdoc/CMultiDocumentWorkspaceGuiComp.cpp" line="+89"/>
+        <location line="+539"/>
         <source>&lt;no name&gt;</source>
         <translation>&lt;без названия&gt;</translation>
     </message>
     <message>
+        <location line="-225"/>
         <source>Do you want to save your changes made in document
 %1</source>
         <translation>Вы хотите сохранить сделанные изменения?
 %1</translation>
     </message>
     <message>
+        <location line="+63"/>
         <source>&amp;Window</source>
         <translation>&amp;Окно</translation>
     </message>
     <message>
         <source>Casca&amp;de</source>
-        <translation>&amp;Каскадировать</translation>
+        <translation type="vanished">&amp;Каскадировать</translation>
     </message>
     <message>
         <source>Cascade</source>
-        <translation>Каскадировать</translation>
+        <translation type="vanished">Каскадировать</translation>
     </message>
     <message>
         <source>Lays out all document windows in cascaded mode</source>
-        <translation>Каскадировать окна документов</translation>
+        <translation type="vanished">Каскадировать окна документов</translation>
     </message>
     <message>
         <source>Tile &amp;Horizontaly</source>
-        <translation>Располагать по &amp;горизонтали</translation>
+        <translation type="vanished">Располагать по &amp;горизонтали</translation>
     </message>
     <message>
         <source>Horizontal</source>
-        <translation>Располагать по горизонтали</translation>
+        <translation type="vanished">Располагать по горизонтали</translation>
     </message>
     <message>
         <source>Lays out all document windows horizontaly</source>
-        <translation>Располагать окна документов по горизонтали</translation>
+        <translation type="vanished">Располагать окна документов по горизонтали</translation>
     </message>
     <message>
         <source>Tile &amp;Verticaly</source>
-        <translation>Располагать &amp;вертикали</translation>
+        <translation type="vanished">Располагать &amp;вертикали</translation>
     </message>
     <message>
         <source>Vertical</source>
-        <translation>Располагать по вертикали</translation>
+        <translation type="vanished">Располагать по вертикали</translation>
     </message>
     <message>
         <source>Lays out all document windows verticaly</source>
-        <translation>Располагать окна документов по вертикали</translation>
+        <translation type="vanished">Располагать окна документов по вертикали</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>&amp;Close All Documents</source>
         <translation>&amp;Закрыть все документы</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Close All</source>
         <translation>Закрыть все документы</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>&amp;Closes all opened documents</source>
         <translation>&amp;Закрыть все документы</translation>
     </message>
     <message>
         <source>&amp;Workspace Mode</source>
-        <translation>&amp;Режим оконной среды</translation>
+        <translation type="vanished">&amp;Режим оконной среды</translation>
     </message>
     <message>
         <source>Workspace Mode</source>
-        <translation>Режим оконной среды</translation>
+        <translation type="vanished">Режим оконной среды</translation>
     </message>
     <message>
         <source>Switch workspace mode</source>
-        <translation>Сменить режим оконной среды</translation>
+        <translation type="vanished">Сменить режим оконной среды</translation>
     </message>
     <message>
         <source>&amp;Multiple Documents</source>
-        <translation>&amp;Отдельные окна</translation>
+        <translation type="vanished">&amp;Отдельные окна</translation>
     </message>
     <message>
         <source>Multiple Documents</source>
-        <translation>Отдельные окна</translation>
+        <translation type="vanished">Отдельные окна</translation>
     </message>
     <message>
         <source>Show each window in own frame</source>
-        <translation>Показывать каждый документ в отдельном окне</translation>
+        <translation type="vanished">Показывать каждый документ в отдельном окне</translation>
     </message>
     <message>
         <source>&amp;Tabbed Documents</source>
-        <translation>&amp;Использовать вкладки</translation>
+        <translation type="vanished">&amp;Использовать вкладки</translation>
     </message>
     <message>
         <source>Tabbed Documents</source>
-        <translation>Использовать вкладки</translation>
+        <translation type="vanished">Использовать вкладки</translation>
     </message>
     <message>
         <source>Show windows in tabbed frame</source>
-        <translation>Показывать документ во вкладке</translation>
+        <translation type="vanished">Показывать документ во вкладке</translation>
     </message>
     <message>
+        <location line="-371"/>
         <source>%1 &lt;%2&gt;</source>
         <translation></translation>
     </message>
     <message>
+        <location line="+305"/>
         <source>Close document</source>
         <translation>Закрыть документ</translation>
     </message>
@@ -2546,14 +3415,17 @@ Interfaces:</source>
 <context>
     <name>iqtdoc::CSingleDocumentWorkspaceGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="+69"/>
         <source>&lt;no name&gt;</source>
         <translation>&lt;без названия&gt;</translation>
     </message>
     <message>
+        <location line="+100"/>
         <source>Close document</source>
         <translation>Закрыть документ</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>Do you want to save your changes made in document
 %1</source>
         <translation>Вы хотите сохранить изменения сделанные в документе
@@ -2564,7 +3436,7 @@ Interfaces:</source>
     <name>iqtgui::CCheckableComboBox</name>
     <message>
         <source>None</source>
-        <translation>Ничего</translation>
+        <translation type="vanished">Ничего</translation>
     </message>
 </context>
 <context>
@@ -2592,6 +3464,7 @@ Interfaces:</source>
 <context>
     <name>iqtgui::CImagePropertiesFrameComp</name>
     <message>
+        <location filename="../../../Include/iqtgui/CImagePropertiesFrameComp.cpp" line="+38"/>
         <source>%1 px/mm</source>
         <translation></translation>
     </message>
@@ -2599,14 +3472,17 @@ Interfaces:</source>
 <context>
     <name>iqtgui::CImagePropertyGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtgui/CImagePropertyGuiComp.cpp" line="+21"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Height</source>
         <translation>Высота</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Depth</source>
         <translation>Глубина цвета</translation>
     </message>
@@ -2664,30 +3540,37 @@ Interfaces:</source>
 <context>
     <name>iqtgui::CSimpleMainWindowGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtgui/CSimpleMainWindowGuiComp.cpp" line="-236"/>
         <source>Standard</source>
         <translation>Стандартные</translation>
     </message>
     <message>
+        <location line="+326"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Tools</source>
         <translation>&amp;Инструменты</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>&amp;Help</source>
         <translation>&amp;Помощь</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>&amp;Show Toolbars</source>
         <translation>&amp;Показать панель инструментов</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Show Toolbars</source>
         <translation>Показать панель инструментов</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Show and hide toolbars</source>
         <translation>Показать /спрятать панель инструментов</translation>
     </message>
@@ -2704,67 +3587,144 @@ Interfaces:</source>
         <translation type="obsolete">Показать общие настройки приложния</translation>
     </message>
     <message>
+        <location line="+12"/>
         <source>&amp;About...</source>
         <translation>&amp;О продукте...</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>About</source>
         <translation>О продукте</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Shows information about this application</source>
         <translation>Показать информацию об этом приложении</translation>
     </message>
     <message>
+        <location line="-10"/>
         <source>&amp;Full Screen</source>
         <translation>&amp;Весь экран</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Full Screen</source>
         <translation>Весь экран</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Turn full screen mode on/off</source>
         <translation>Завершить полноэкранный режим</translation>
     </message>
     <message>
+        <location line="+2"/>
         <source>Other Windows</source>
         <translation>Другие окна</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Show additional windows</source>
         <translation>Показать другие окна</translation>
     </message>
     <message>
+        <location line="+3"/>
         <source>&amp;Preferences</source>
         <translation>&amp;Настройки</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Preferences</source>
         <translation>Настройки</translation>
     </message>
     <message>
+        <location line="+0"/>
         <source>Show global application preferences</source>
         <translation>Показать настройки приложения</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>&amp;Help...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Shows application manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtprm::CExtParamsManagerGuiComp</name>
+    <message>
+        <location filename="../../../Include/iqtprm/CExtParamsManagerGuiComp.cpp" line="+278"/>
+        <source>Edit Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Rename error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Parameter set &apos;%1&apos; can not be renamed to &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Parameter error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Parameter set &apos;%1&apos;can not be changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Remove parameter set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Are you sure to remove the parameter set &apos;%1&apos;?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtprm::CFileNameParamGuiComp</name>
     <message>
+        <location filename="../../../Include/iqtprm/CFileNameParamGuiComp.cpp" line="+109"/>
         <source>&lt;Enter path&gt;</source>
         <translation>&lt;Введите путь к файлу&gt;</translation>
     </message>
     <message>
+        <location line="+69"/>
         <source>Select directory</source>
         <translation>Выбор папки</translation>
     </message>
     <message>
+        <location line="+19"/>
         <source>All supported files (%1)</source>
         <translation>Все файлы (%1)</translation>
     </message>
     <message>
+        <location line="+14"/>
         <source>Select file</source>
         <translation>Выбор файла</translation>
+    </message>
+</context>
+<context>
+    <name>iqtprm::CSelectionParamGuiComp</name>
+    <message>
+        <location filename="../../../Include/iqtprm/CSelectionParamGuiComp.cpp" line="+278"/>
+        <location line="+83"/>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2800,86 +3760,89 @@ Interfaces:</source>
 <context>
     <name>iview::CConsoleGui</name>
     <message>
+        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+596"/>
         <source>Zoom In</source>
         <translation>Увеличить</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Zoom Out</source>
         <translation>Уменьшить</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Reset Zoom</source>
         <translation>Сбросить скалирование</translation>
     </message>
     <message>
+        <location line="+6"/>
         <source>Zoom to Fit</source>
         <translation>Автоматическое скалирование</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Objects Selection Mode</source>
         <translation>Режим выбора обьектов</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Objects Modification Mode</source>
         <translation>Режим модификации обьектов</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Points Adding Mode</source>
         <translation>Режим добавления точек</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>Points Removing Mode</source>
         <translation>Режим удаления точек</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Show/Hide Grid</source>
         <translation>Показывать/Скрывать сетку</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Show/Hide Ruler</source>
         <translation>Показывать/Скрывать линейку</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Show/Hide Millimeters</source>
         <translation>Показывать/Скрывать сетку в миллиметрах</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Show/Hide Scrollbars</source>
         <translation>Показывать/Скрывать элементы прокрутки</translation>
-    </message>
-    <message>
-        <source>Flip current shape in its bounding box horizontally</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flip current shape in its bounding box vertically</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotate current shape counterclockwise around its center</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotate current shape clockwise around its center</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reverse current shape orientation</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iview::CViewport</name>
     <message>
+        <location filename="../../../Include/iview/CViewport.cpp" line="+171"/>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">мм</translation>
     </message>
     <message>
+        <location line="+1"/>
         <source>[%1, %2] %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+8"/>
         <source>, </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iwidgets::CCheckableComboBox</name>
+    <message>
+        <location filename="../../../Include/iwidgets/CCheckableComboBox.cpp" line="+90"/>
+        <source>None</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

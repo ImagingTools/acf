@@ -6,7 +6,7 @@ namespace iqt2d
 
 
 CPolylineParamsGuiComp::CPolylineParamsGuiComp()
-:	m_openCloseAction(QIcon(":/Icons/OpenCloseLine"), QCoreApplication::translate("iqt2d", "Open/close line"), this)
+:	m_openCloseAction(QIcon(":/Icons/OpenCloseLine"), "", this)
 {
 }
 
@@ -102,6 +102,16 @@ bool CPolylineParamsGuiComp::PopulateActions(CActionAdapter& host, imod::IModel*
 	}
 
 	return false;
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CPolylineParamsGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	m_openCloseAction.setText(QCoreApplication::translate("iqt2d", "Open/close line"));
 }
 
 

@@ -6,7 +6,7 @@ namespace iqt2d
 
 
 COrientedCircleEditorComp::COrientedCircleEditorComp()
-:	m_reversePolarityAction(QIcon(":/Icons/Reverse"), QCoreApplication::translate("iqt2d", "Reverse orientation"), this)
+:	m_reversePolarityAction(QIcon(":/Icons/Reverse"), "", this)
 {
 
 }
@@ -28,6 +28,16 @@ bool COrientedCircleEditorComp::PopulateActions(CActionAdapter& host, imod::IMod
 	}
 
 	return true;
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void COrientedCircleEditorComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	m_reversePolarityAction.setText(QCoreApplication::translate("iqt2d", "Reverse orientation"));
 }
 
 

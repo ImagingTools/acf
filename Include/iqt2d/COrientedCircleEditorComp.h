@@ -33,6 +33,9 @@ protected:
 	// reimplemented (iqt2d::TCircleBasedParamsGuiComp)
 	virtual bool PopulateActions(CActionAdapter& host, imod::IModel* modelPtr);
 
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiRetranslate();
+
 protected Q_SLOTS:
 	void OnParamsChanged(double value);
 	void OnActionTriggered(QAction* actionPtr);

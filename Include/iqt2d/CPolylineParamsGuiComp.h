@@ -35,6 +35,9 @@ protected:
 	// reimplemented (TPolygonBasedParamsGuiComp)
 	virtual bool PopulateActions(CActionAdapter& host, imod::IModel* modelPtr);
 
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiRetranslate();
+
 protected Q_SLOTS:
 	void OnParamsChanged();
 
