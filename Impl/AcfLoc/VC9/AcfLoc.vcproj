@@ -395,6 +395,22 @@
 			Name="Resources"
 			>
 			<File
+				RelativePath="..\Translations\Acf_de_DE.ts"
+				>
+			</File>
+			<File
+				RelativePath="..\Translations\Acf_en_US.ts"
+				>
+			</File>
+			<File
+				RelativePath="..\Translations\Acf_pl_PL.ts"
+				>
+			</File>
+			<File
+				RelativePath="..\Translations\Acf_ru_RU.ts"
+				>
+			</File>
+			<File
 				RelativePath="..\AcfLoc.qrc"
 				>
 				<FileConfiguration
