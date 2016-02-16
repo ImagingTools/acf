@@ -8,7 +8,7 @@
 
 // Windows includes
 #ifdef Q_OS_WIN32
-    #include <Windows.h>
+	#include <windows.h>
 	#undef RemoveDirectory
 #endif
 
@@ -106,12 +106,12 @@ QString CSystem::FindVariableValue(const QString& varName, bool envVars, bool em
 			else{
 				return retVal;
 			}
-#elif defined(__GNUC__)
-            return "GCC";
 #elif defined(__MINGW32__)
 			return "MinGW";
 #elif defined(__MINGW64__)
 			return "MinGW_64";
+#elif defined(__GNUC__)
+			return "GCC";
 #elif defined(_MSC_VER)
 #if _MSC_VER >= 1900
 			QString retVal = "VC14";

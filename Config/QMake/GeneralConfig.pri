@@ -18,7 +18,7 @@ CONFIG(release, debug|release){
 
 COMPILER_NAME = QMake
 
- CONFIG += depend_includepath
+CONFIG += depend_includepath
 
 win32-msvc*{
 	COMPILER_NAME = VC
@@ -83,13 +83,13 @@ win32-msvc*{
 	QMAKE_CXXFLAGS_WARN_ON += -wformat-security
 	QMAKE_CXXFLAGS += /openmp
 	LIBS += -lgomp
-        COMPILER_NAME = GCC
+	COMPILER_NAME = GCC
 }
 
 
 *-g++*{
-        QMAKE_CXXFLAGS += -fpermissive
-        COMPILER_NAME = GCC
+	QMAKE_CXXFLAGS += -fpermissive
+	COMPILER_NAME = GCC
 }
 
 

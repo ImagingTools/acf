@@ -299,7 +299,7 @@ inline bool CComponentBase::IsComponentActive() const
 	Used to assign value for single parameter (attribute, reference or factory).
 */
 #define I_ASSIGN_BASE(member, id, description, isObligatory)\
-    static icomp::TAttributeStaticInfo<member##_AttrType> member##_Info(staticInfo, id, description, &member##_Default, isObligatory? member##_AttrType::DAF_OBLIGATORY: member##_AttrType::DAF_OPTIONAL, istd::CClassInfo::GetInfo<typename member##_Type::InterfaceType>());\
+	static icomp::TAttributeStaticInfo<member##_AttrType> member##_Info(staticInfo, id, description, &member##_Default, isObligatory? member##_AttrType::DAF_OBLIGATORY: member##_AttrType::DAF_OPTIONAL, istd::CClassInfo::GetInfo<typename member##_Type::InterfaceType>());\
 	if (componentPtr != NULL){\
 		componentPtr->member.Init(componentPtr, member##_Info);\
 	}
@@ -311,7 +311,7 @@ inline bool CComponentBase::IsComponentActive() const
 	\ingroup ComponentConcept
 */
 #define I_ASSIGN(member, id, description, isObligatory, defaultValue)\
-    static member##_AttrType member##_Default(defaultValue);\
+	static member##_AttrType member##_Default(defaultValue);\
 	I_ASSIGN_BASE(member, id, description, isObligatory)
 
 /**
