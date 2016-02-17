@@ -563,7 +563,7 @@
     <message>
         <location line="+50"/>
         <source>Insert new item</source>
-        <translation>Neuen Eintrag hinzufügen</translation>
+        <translation>Neues Element hinzufügen</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -573,7 +573,7 @@
     <message>
         <location line="+17"/>
         <source>Remove selected item</source>
-        <translation>Ausgewählten Eintrag  entfernen</translation>
+        <translation>Ausgewähltes Element entfernen</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -583,7 +583,7 @@
     <message>
         <location line="+39"/>
         <source>Move selected item up</source>
-        <translation>Ausgewählten Eintrag  nach oben bewegen</translation>
+        <translation>Ausgewähltes Element nach oben bewegen</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -594,7 +594,7 @@
     <message>
         <location line="-3"/>
         <source>Move selected item down</source>
-        <translation>Ausgewählten Eintrag  nach unten  bewegen</translation>
+        <translation>Ausgewähltes Element nach unten bewegen</translation>
     </message>
 </context>
 <context>
