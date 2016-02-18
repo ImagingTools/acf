@@ -35,7 +35,7 @@ CCircle::CCircle(double radius, const CVector2d& center)
 
 void CCircle::SetRadius(double radius)
 {
-	if (radius != m_radius){
+	if (qAbs(m_radius - radius) > I_BIG_EPSILON){
 		istd::CChangeNotifier changeNotifier(this);
 		Q_UNUSED(changeNotifier);
 
@@ -46,7 +46,7 @@ void CCircle::SetRadius(double radius)
 
 bool CCircle::operator==(const CCircle& ref) const
 {
-	return (ref.GetRadius() == GetRadius() && ref.GetPosition() == GetPosition());
+	return ((qAbs(ref.GetRadius() - GetRadius()) > I_BIG_EPSILON) && ref.GetPosition() == GetPosition());
 }
 
 
