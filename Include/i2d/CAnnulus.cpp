@@ -75,6 +75,18 @@ void CAnnulus::SetOuterRadius(double outerRadius)
 }
 
 
+void CAnnulus::SetInnerOuterRadius(double innerRadius, double outerRadius)
+{
+	if (innerRadius <= outerRadius){
+		istd::CChangeNotifier changeNotifier(this);
+		Q_UNUSED(changeNotifier);
+
+		m_radiusRange.SetMinValue(innerRadius);
+		m_radiusRange.SetMaxValue(outerRadius);
+	}
+}
+
+
 CCircle CAnnulus::GetInnerCircle() const
 {
 	return CCircle(m_radiusRange.GetMinValue(), m_position);
