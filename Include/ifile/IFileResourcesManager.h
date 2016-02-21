@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtCore/QByteArray>
+#include <QtCore/QList>
 
 // ACF includes
 #include <istd/TSmartPtr.h>
@@ -24,6 +25,12 @@ class IFileResourcesManager: virtual public istd::IChangeable
 {
 public:
 	typedef istd::TSmartPtr<istd::IChangeable> DataObjectPtr;
+	typedef QList<QByteArray> Ids;
+
+	/**
+		Get list of file/resource IDs in the repository.
+	*/
+	virtual Ids GetFileIds() const = 0;
 
 	/**
 		Get type contraints describing each supported type of resource.
@@ -37,11 +44,6 @@ public:
 		\return Type ID of the resource or an empty string, if the resource was not found or the type is unknown.
 	*/
 	virtual QByteArray GetResourceTypeId(const QByteArray& resourceId) const = 0;
-
-	/**
-		Get the list of files managed by this object.
-	*/
-	virtual const iprm::IOptionsList& GetFileListInfo() const = 0;
 
 	/**
 		Create new file resource.
@@ -76,11 +78,23 @@ public:
 	virtual const idoc::IDocumentMetaInfo* GetFileMetaInfo(const QByteArray& resourceId) const = 0;
 
 	/**
+		Get the name of the file resource in the storage.
+		\param resourceId	ID of the file in the storage.
+	*/
+	virtual QString GetResourceName(const QByteArray& resourceId)  const = 0;
+
+	/**
 		Set the name of the file resource in the storage.
 		\param resourceId	ID of the file in the storage.
 		\param name			Name of the file resource.
 	*/
 	virtual bool SetResourceName(const QByteArray& resourceId, const QString& name) = 0;
+
+	/**
+		Get the description of the file resource in the storage.
+		\param resourceId	ID of the file in the storage.
+	*/
+	virtual QString GetResourceDescription(const QByteArray& resourceId)  const = 0;
 
 	/**
 		Set the description of the file resource in the storage.
