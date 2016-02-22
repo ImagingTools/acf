@@ -23,20 +23,6 @@ void CVector2d::Init(double angle, double length)
 }
 
 
-bool CVector2d::operator==(const CVector2d& vector) const
-{
-	if (qAbs(m_elements[0] - vector.m_elements[0]) > I_BIG_EPSILON){
-		return false;
-	}
-
-	if (qAbs(m_elements[1] - vector.m_elements[1]) > I_BIG_EPSILON){
-		return false;
-	}
-
-	return true;
-}
-
-
 CVector2d CVector2d::GetOrthogonal() const
 {
 	return CVector2d(GetY(), -GetX());

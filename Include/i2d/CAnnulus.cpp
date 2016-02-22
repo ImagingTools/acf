@@ -75,15 +75,13 @@ void CAnnulus::SetOuterRadius(double outerRadius)
 }
 
 
-void CAnnulus::SetInnerOuterRadius(double innerRadius, double outerRadius)
+void CAnnulus::SetInnerOuterRadius(double radius1, double radius2)
 {
-	if (innerRadius <= outerRadius){
-		istd::CChangeNotifier changeNotifier(this);
-		Q_UNUSED(changeNotifier);
+	istd::CChangeNotifier changeNotifier(this);
+	Q_UNUSED(changeNotifier);
 
-		m_radiusRange.SetMinValue(innerRadius);
-		m_radiusRange.SetMaxValue(outerRadius);
-	}
+	m_radiusRange.SetMinValue(qMin(radius1, radius2));
+	m_radiusRange.SetMaxValue(qMax(radius1, radius2));
 }
 
 

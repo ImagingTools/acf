@@ -112,11 +112,6 @@ public:
 		Serialize this vector to specified archive.
 	*/
 	bool Serialize(iser::IArchive& archive);
-	
-	/**
-		Specialized with fuzzy compare.
-	*/
-	bool operator==(const CVector2d& vector) const;
 
 	CVector2d operator-() const;
 
