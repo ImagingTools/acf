@@ -13,6 +13,11 @@ namespace i2d
 {
 
 
+// static constants
+static const iser::CArchiveTag s_beginPointTag("BeginPoint", "First point of line", iser::CArchiveTag::TT_GROUP);
+static const iser::CArchiveTag s_endPointTag("EndPoint", "Second point of line", iser::CArchiveTag::TT_GROUP);
+
+
 // public members
 
 CLine2d::CLine2d()
@@ -715,19 +720,16 @@ istd::IChangeable* CLine2d::CloneMe(CompatibilityMode mode) const
 
 bool CLine2d::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag beginPointTag("BeginPoint", "First point of line", iser::CArchiveTag::TT_GROUP);
-	static iser::CArchiveTag endPointTag("EndPoint", "Second point of line", iser::CArchiveTag::TT_GROUP);
-
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
-	bool retVal = archive.BeginTag(beginPointTag);
+	bool retVal = archive.BeginTag(s_beginPointTag);
 	retVal = retVal && m_point1.Serialize(archive);
-	retVal = retVal && archive.EndTag(beginPointTag);
+	retVal = retVal && archive.EndTag(s_beginPointTag);
 
-	retVal = retVal && archive.BeginTag(endPointTag);
+	retVal = retVal && archive.BeginTag(s_endPointTag);
 	retVal = retVal && m_point2.Serialize(archive);
-	retVal = retVal && archive.EndTag(endPointTag);
+	retVal = retVal && archive.EndTag(s_endPointTag);
 
 	return retVal;
 }

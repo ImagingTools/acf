@@ -9,6 +9,11 @@ namespace iprm
 {
 
 
+// static constants
+static const iser::CArchiveTag s_paramTypeIdTag("TypeId", "Paramter type ID used to create specified type object", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_parameterTag("Parameter", "Paramter object depending on type ID", iser::CArchiveTag::TT_GROUP);
+
+
 // reimplemented (iprm::IVariableParam)
 
 IVariableParam::TypeIds CVariableParamComp::GetKnownTypeIds() const
@@ -74,9 +79,6 @@ bool CVariableParamComp::AssignTypeId(const QByteArray& typeId)
 
 bool CVariableParamComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag paramTypeIdTag("TypeId", "Paramter type ID used to create specified type object", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag parameterTag("Parameter", "Paramter object depending on type ID", iser::CArchiveTag::TT_GROUP);
-
 	bool isStoring = archive.IsStoring();
 
 	istd::CChangeNotifier notifier(isStoring? NULL: this);
@@ -84,9 +86,9 @@ bool CVariableParamComp::Serialize(iser::IArchive& archive)
 	bool retVal = true;
 
 	QByteArray paramTypeId = m_paramTypeId;
-	retVal = retVal && archive.BeginTag(paramTypeIdTag);
+	retVal = retVal && archive.BeginTag(s_paramTypeIdTag);
 	retVal = retVal && archive.Process(paramTypeId);
-	retVal = retVal && archive.EndTag(paramTypeIdTag);
+	retVal = retVal && archive.EndTag(s_paramTypeIdTag);
 
 	if (!retVal){
 		return false;
@@ -97,9 +99,9 @@ bool CVariableParamComp::Serialize(iser::IArchive& archive)
 	}
 
 	if (m_paramPtr.IsValid()){
-		retVal = retVal && archive.BeginTag(parameterTag);
+		retVal = retVal && archive.BeginTag(s_parameterTag);
 		retVal = retVal && m_paramPtr->Serialize(archive);
-		retVal = retVal && archive.EndTag(parameterTag);
+		retVal = retVal && archive.EndTag(s_parameterTag);
 	}
 
 	return retVal;
