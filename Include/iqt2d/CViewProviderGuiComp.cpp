@@ -95,7 +95,12 @@ void CViewProviderGuiComp::OnGuiCreated()
 	}
 	consolePtr->SetScrollbarsButtonVisible(useScrollBarCommands);
 
-	view.ConnectCalibrationShape(&m_calibrationShape);
+	if (m_calibrationShapeCompPtr.IsValid()){
+		view.ConnectCalibrationShape(m_calibrationShapeCompPtr.GetPtr());
+	}
+	else{
+		view.ConnectCalibrationShape(&m_calibrationShape);
+	}
 
 	if (m_backgroundModeAttrPtr.IsValid()){
 		switch (*m_backgroundModeAttrPtr){
@@ -122,8 +127,13 @@ void CViewProviderGuiComp::OnGuiDestroyed()
 {
 	// Quit full screen mode on exit:
 	iview::CConsoleGui* consolePtr = GetQtWidget();
-	if ((consolePtr != NULL) && consolePtr->IsFullScreenMode()){
-		consolePtr->SetFullScreenMode(false);	
+	if (consolePtr != NULL){
+		iview::CViewport& view = consolePtr->GetViewRef();
+		const_cast<iview::IViewLayer&>(view.GetCalibrationLayer()).DisconnectAllShapes();
+
+		if (consolePtr->IsFullScreenMode()){
+			consolePtr->SetFullScreenMode(false);
+		}
 	}
 
 	BaseClass::OnGuiDestroyed();
