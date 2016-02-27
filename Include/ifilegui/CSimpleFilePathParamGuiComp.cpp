@@ -213,13 +213,23 @@ void CSimpleFilePathParamGuiComp::SetPathToEditor(const QString& path) const
 		normalizedPath = QDir::fromNativeSeparators(path);
 	}
 
+	QString separator = QDir::fromNativeSeparators("/");
+
+	bool addSeparator = false;
+	if (normalizedPath.endsWith(separator)){
+		addSeparator = true;
+	}
+
 	ifile::IRelativeFilePath* relativeFilePathPtr = dynamic_cast<ifile::IRelativeFilePath*>(objectPtr);
 	if (relativeFilePathPtr != NULL){
 		QString basePath = relativeFilePathPtr->GetBasePath();
 
 		QDir baseDir(basePath);
 
-		normalizedPath = baseDir.relativeFilePath(normalizedPath);	
+		normalizedPath = baseDir.relativeFilePath(normalizedPath);
+		if (addSeparator){
+			normalizedPath += separator;
+		}
 	}
 
 	PathEdit->setText(normalizedPath);
