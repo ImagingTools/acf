@@ -3,10 +3,10 @@
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
-
+#include "istd/TDelPtr.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
-#include "istd/TDelPtr.h"
+#include "i2d/CPolyline.h"
 
 
 namespace i2d
@@ -48,6 +48,22 @@ bool COrientedCircle::operator==(const COrientedCircle& ref) const
 bool COrientedCircle::operator!=(const COrientedCircle& ref) const
 {
 	return BaseClass::operator!=(ref) || (ref.m_orientedOutside != m_orientedOutside);
+}
+
+
+// reimplemented (i2d::CCircle)
+
+bool COrientedCircle::ConvertToPolygon(i2d::CPolygon& result, int segmentsCount) const
+{
+	if (BaseClass::ConvertToPolygon(result, segmentsCount)){
+		if (IsOrientedOutside()){
+			result.ReverseNodes();
+		}
+		
+		return true;
+	}
+	
+	return false;
 }
 
 

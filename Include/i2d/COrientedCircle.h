@@ -12,7 +12,7 @@ namespace i2d
 /**
 	Definition of an oriented graphical circle object.
 	The circle can be oriented outside or inside.
-	Interpretation what it means 'outside oriented' is user dependend.
+	Interpretation what it means 'outside oriented' is user dependent.
 */
 class COrientedCircle: public CCircle
 {
@@ -21,20 +21,23 @@ public:
 
 	COrientedCircle();
 	COrientedCircle(double radius, const CVector2d& center, bool orientedOutside);
-
+	
 	/**
 		Check if this circle is oriented outside.
-		Interpretation what it means 'outside oriented' is user dependend.
+		Interpretation what it means 'outside oriented' is user dependent.
 	*/
 	bool IsOrientedOutside() const;
 	/**
 		Set this circle oriented outside or inside.
-		Interpretation what it means 'outside oriented' is user dependend.
+		Interpretation what it means 'outside oriented' is user dependent.
 	*/
 	void SetOrientedOutside(bool orientedOutside);
 
 	bool operator==(const COrientedCircle& circle) const;
 	bool operator!=(const COrientedCircle& circle) const;
+
+	// reimplemented (i2d::CCircle)
+	virtual bool ConvertToPolygon(i2d::CPolygon& result, int segmentsCount = 0) const;
 
 	// reimplemented (istd::IChangeable)
 	virtual int GetSupportedOperations() const;

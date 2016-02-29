@@ -35,7 +35,7 @@ CCircle::CCircle(double radius, const CVector2d& center)
 
 void CCircle::SetRadius(double radius)
 {
-	if (radius != m_radius){
+	if (qAbs(m_radius - radius) > I_BIG_EPSILON){
 		istd::CChangeNotifier changeNotifier(this);
 		Q_UNUSED(changeNotifier);
 
@@ -46,7 +46,7 @@ void CCircle::SetRadius(double radius)
 
 bool CCircle::operator==(const CCircle& ref) const
 {
-	return (ref.GetRadius() == GetRadius() && ref.GetPosition() == GetPosition());
+	return ((qAbs(ref.GetRadius() - GetRadius()) > I_BIG_EPSILON) && ref.GetPosition() == GetPosition());
 }
 
 
@@ -85,7 +85,7 @@ bool CCircle::ConvertToPolygon(i2d::CPolygon& result, int segmentsCount) const
 	result.SetCalibration(aoiCalibrationPtr);
 
 	// at least 3 segments
-	int stepsCount = segmentsCount < 3 ? int(radius * I_PI + 1) : segmentsCount;
+	int stepsCount = segmentsCount < 3 ? int(radius * I_PI + 1) * 2 : segmentsCount;
 	if (stepsCount < 3)
 		return false;
 
