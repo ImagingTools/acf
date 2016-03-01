@@ -27,6 +27,7 @@ public:
 
 	I_BEGIN_COMPONENT(CCalibration2dProxyComp);
 		I_REGISTER_INTERFACE(ICalibration2d);
+		I_REGISTER_INTERFACE(ITransformation2d);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationProvider", "Provider of a 2D calibration", true, "CalibrationProvider");
 		I_ASSIGN_TO(m_calibrationProviderModelCompPtr, m_calibrationProviderCompPtr, true);
@@ -63,11 +64,11 @@ public:
 				CAffine2d& result,
 				ExactnessMode mode = EM_NONE) const;
 
-	// reimplemented (imath::TISurjectFunction)
+	// reimplemented (imath::TISurjectFunction<i2d::CVector2d, i2d::CVector2d>)
 	virtual bool GetInvValueAt(const CVector2d& argument, CVector2d& result) const;
 	virtual CVector2d GetInvValueAt(const CVector2d& argument) const;
 
-	// reimplemented (imath::TIMathFunction)
+	// reimplemented (imath::TIMathFunction<i2d::CVector2d, i2d::CVector2d>)
 	virtual bool GetValueAt(const CVector2d& argument, CVector2d& result) const;
 	virtual CVector2d GetValueAt(const CVector2d& argument) const;
 
