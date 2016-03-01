@@ -370,7 +370,7 @@ void CAnnulusSegmentShape::DrawArea(
 			i2d::CVector2d realCenter,
 			i2d::CVector2d center,
 			double realMinRadius,
-			double /*realMaxRadius*/,
+			double realMaxRadius,
 			int minRadius,
 			int maxRadius,
 			double startAngle,
@@ -389,18 +389,21 @@ void CAnnulusSegmentShape::DrawArea(
 
 	i2d::CVector2d deltaStartAngle;
 	deltaStartAngle.Init(startAngle, realMinRadius);
-
 	QPointF startScreenPos = GetScreenPosition(realCenter + deltaStartAngle);
-	double startAngleDeg = GetDegreeAndleOfPoint(center, startScreenPos);
+	
+	i2d::CVector2d temp;
+	temp.Init(startAngle);
+	double startAngleDeg = GetDegreeAndleOfPoint(center, GetScreenPosition(realCenter + temp));
 
 	i2d::CVector2d deltaEndAngle;
-	deltaEndAngle.Init(stopAngle, realMinRadius);
-	
+	deltaEndAngle.Init(stopAngle, realMaxRadius);
 	QPointF stopScreenPos = GetScreenPosition(realCenter + deltaEndAngle);
-	double stopAngleDeg = GetDegreeAndleOfPoint(center, stopScreenPos);
+	
+	temp.Init(stopAngle);
+	double stopAngleDeg = GetDegreeAndleOfPoint(center, GetScreenPosition(realCenter + temp));
 
 	qreal sweepLength = startAngleDeg - stopAngleDeg;
-	if (sweepLength < 0)
+	if (sweepLength <= 0)
 		sweepLength += 360;
 
 	// debug only
@@ -425,7 +428,7 @@ double CAnnulusSegmentShape::GetDegreeAndleOfPoint(const i2d::CVector2d& center,
 		QPointF fallPos(point.x(), center.GetY());
 		double oppositeLength = fallPos.y() - point.y();
 		double adjancedLength = center.GetX() - fallPos.x();
-		double tangent = oppositeLength / adjancedLength;
+		double tangent = adjancedLength ? oppositeLength / adjancedLength : 0;
 		double arcTan = atan(tangent);
 		return 180 - arcTan / I_PI * 180;
 	}
@@ -434,7 +437,7 @@ double CAnnulusSegmentShape::GetDegreeAndleOfPoint(const i2d::CVector2d& center,
 		QPointF fallPos(point.x(), center.GetY());
 		double oppositeLength = point.y() - fallPos.y();
 		double adjancedLength = center.GetX() - fallPos.x();
-		double tangent = oppositeLength / adjancedLength;
+		double tangent = adjancedLength ? oppositeLength / adjancedLength : 0;
 		double arcTan = atan(tangent);
 		return 180 + arcTan / I_PI * 180;	
 	}
@@ -443,7 +446,7 @@ double CAnnulusSegmentShape::GetDegreeAndleOfPoint(const i2d::CVector2d& center,
 	QPointF fallPos(point.x(), center.GetY());
 	double oppositeLength = fallPos.y() - point.y();
 	double adjancedLength = fallPos.x() - center.GetX();
-	double tangent = oppositeLength / adjancedLength;
+	double tangent = adjancedLength ? oppositeLength / adjancedLength : 0;
 	double arcTan = atan(tangent);
 	return arcTan / I_PI * 180;
 }

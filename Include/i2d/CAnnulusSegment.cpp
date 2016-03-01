@@ -172,10 +172,8 @@ bool CAnnulusSegment::CopyFrom(const IChangeable& object, CompatibilityMode mode
 		istd::CChangeNotifier notifier(this);
 
 		m_position = annulusPtr->GetPosition();
-		m_radiusRange.SetMinValue(annulusPtr->GetInnerRadius());
-		m_radiusRange.SetMaxValue(annulusPtr->GetOuterRadius());
-		m_angleRange.SetMinValue(0);
-		m_angleRange.SetMaxValue(I_2PI-0.0001);
+		m_radiusRange = istd::CRange(annulusPtr->GetInnerRadius(), annulusPtr->GetOuterRadius());
+		m_angleRange = istd::CRange(0, I_2PI-0.0001);
 
 		CObject2dBase::CopyFrom(object, mode);
 
