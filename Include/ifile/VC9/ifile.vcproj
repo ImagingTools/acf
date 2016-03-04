@@ -350,6 +350,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CApplicationInfoBasedFileNameComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CAutoPersistenceComp.cpp"
 				>
 			</File>
@@ -438,6 +442,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CApplicationInfoBasedFileNameComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CAutoPersistenceComp.h"
 				>

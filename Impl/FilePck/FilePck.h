@@ -26,6 +26,7 @@
 #include "ifile/CCompressedXmlFileReadArchive.h"
 #include "ifile/CCompressedXmlFileWriteArchive.h"
 #include "ifile/CTimeStampFileNameParamComp.h"
+#include "ifile/CApplicationInfoBasedFileNameComp.h"
 
 
 /**
@@ -51,6 +52,7 @@ typedef ifile::TFileSerializerComp<ifile::CFileReadArchive, ifile::CFileWriteArc
 typedef ifile::TXmlFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive> CompactXmlFileSerializer;
 typedef ifile::TXmlFileSerializerComp<ifile::CCompressedXmlFileReadArchive, ifile::CCompressedXmlFileWriteArchive> CompressedXmlFileSerializer;
 typedef icomp::TModelCompWrap<ifile::CTimeStampFileNameParamComp> TimeStampFileNameParam;
+typedef icomp::TModelCompWrap<ifile::CApplicationInfoBasedFileNameComp> ApplicationInfoBasedFileName;
 
 
 } // namespace FilePck

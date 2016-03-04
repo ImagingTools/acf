@@ -74,19 +74,24 @@ I_EXPORT_COMPONENT(
 			"Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
 
 I_EXPORT_COMPONENT(
-		   CompactXmlFileSerializer,
-		   "Stores and loads objects to/from files  using compact XML format",
-		   "Save Serializer Archive Format Compact Attributes" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
+			CompactXmlFileSerializer,
+			"Stores and loads objects to/from files  using compact XML format",
+			"Save Serializer Archive Format Compact Attributes" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
 
 I_EXPORT_COMPONENT(
-		   CompressedXmlFileSerializer,
-		   "Stores and loads objects to/from files  using compressed compact XML format",
-		   "Compress Uncompress Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
+			CompressedXmlFileSerializer,
+			"Stores and loads objects to/from files  using compressed compact XML format",
+			"Compress Uncompress Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
 
 I_EXPORT_COMPONENT(
 			TimeStampFileNameParam, 
 			"Timestamp-based file name generation", 
 			"Time File Name")
+
+I_EXPORT_COMPONENT(
+			ApplicationInfoBasedFileName, 
+			"File name based on application attributes", 
+			"Application Info Process File Name")
 
 
 } // namespace FilePck
