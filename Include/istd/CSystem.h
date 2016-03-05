@@ -135,6 +135,11 @@ public:
 	*/
 	static void SetUserVariables(const QString& compilerMode, const QString& compilerName, const QString& platformCode);
 
+	/**
+		Convert a local path to UNC representation.
+	*/
+	static QString ConvertLocalPathToUnc(const QString& localPath);
+
 private:
 	static QString s_compilerMode;
 	static QString s_compilerName;

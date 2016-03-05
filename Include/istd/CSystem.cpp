@@ -7,8 +7,10 @@
 #include <QtCore/QProcess>
 
 // Windows includes
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	#include <windows.h>
+	#include <Winnetwk.h>	// for WNetGetUniversalName
+
 	#undef RemoveDirectory
 #endif
 
@@ -365,6 +367,9 @@ QString CSystem::GetCurrentUserName()
 
 CSystem::FileDriveInfo CSystem::GetFileDriveInfo(const QString& fileDrivePath)
 {
+	// TODO: Remove this code after switching to Qt 5.5,
+	// use QStorageInfo instead of this implementation!
+
 	FileDriveInfo fileDriveInfo;
 
 #if defined(Q_OS_WIN)
@@ -461,6 +466,37 @@ void CSystem::SetUserVariables(const QString& compilerMode, const QString& compi
 	s_compilerMode = compilerMode;
 	s_compilerName = compilerName;
 	s_platformCode = platformCode;
+}
+
+
+QString CSystem::ConvertLocalPathToUnc(const QString& localPath)
+{
+	QString uncPath = localPath;
+
+#ifdef Q_OS_WIN
+	// TODO: Remove this code after complete switching to Qt 5.5,
+	// use QStorageInfo instead of this implementation!
+
+	QString nativeLocalPath = QDir::toNativeSeparators(localPath);
+
+	DWORD pathBufferSize = 0;
+	char dummyBuffer[2] = {0};
+
+	std::wstring localPathString = std::wstring((const wchar_t *)nativeLocalPath.utf16());
+
+	if (::WNetGetUniversalNameW(localPathString.data(), UNIVERSAL_NAME_INFO_LEVEL, dummyBuffer, &pathBufferSize) == ERROR_MORE_DATA){
+		wchar_t* buf = new wchar_t[pathBufferSize];
+		UNIVERSAL_NAME_INFOW* puni = (UNIVERSAL_NAME_INFOW*) buf;
+
+		if (::WNetGetUniversalNameW(localPathString.data(), UNIVERSAL_NAME_INFO_LEVEL, buf, &pathBufferSize) == NO_ERROR){
+			uncPath = QString::fromUtf16((const unsigned short*)puni->lpUniversalName);
+		}
+
+		delete [] buf;
+	}
+#endif // Q_OS_WIN
+
+	return uncPath;
 }
 
 

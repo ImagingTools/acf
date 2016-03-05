@@ -19,7 +19,7 @@
 	/>
 	<Tool
 		Name="VCLinkerTool"
-		AdditionalDependencies="qtmain.lib Qt5Core.lib Qt5Gui.lib Qt5Widgets.lib Qt5Svg.lib Qt5Network.lib Qt5Xml.lib"
+		AdditionalDependencies="qtmain.lib Qt5Core.lib Qt5Gui.lib Qt5Widgets.lib Qt5Svg.lib Qt5Network.lib Qt5Xml.lib Mpr.lib"
 		AdditionalLibraryDirectories="$(QTDIR)/lib"
 	/>
 </VisualStudioPropertySheet>
