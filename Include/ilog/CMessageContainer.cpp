@@ -314,6 +314,12 @@ IHierarchicalMessageContainer* CMessageContainer::GetChild(int index) const
 
 // reimplemented (istd::IChangeable)
 
+int CMessageContainer::GetSupportedOperations() const
+{
+	return SO_COPY | SO_COMPARE | SO_CLONE;
+}
+
+
 bool CMessageContainer::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 {
 	istd::CChangeNotifier notifier(this, &s_resetChange);
@@ -370,6 +376,70 @@ bool CMessageContainer::CopyFrom(const istd::IChangeable& object, CompatibilityM
 			}
 		}
 		break;
+	}
+
+	return false;
+}
+
+
+bool CMessageContainer::IsEqual(const istd::IChangeable& object) const
+{
+	const CMessageContainer* otherObjectPtr = dynamic_cast<const CMessageContainer*>(&object);
+	if (otherObjectPtr != NULL){
+		MessageList otherMessages = otherObjectPtr->GetMessages();
+		if (m_messages.count() != otherMessages.count()){
+			return false;
+		}
+
+		for (int i = 0; i < m_messages.count(); ++i){
+			IMessageConsumer::MessagePtr messagePtr = m_messages.at(i);
+			IMessageConsumer::MessagePtr otherMessagePtr = otherMessages.at(i);
+
+			if (messagePtr->GetSupportedOperations() & SO_COMPARE){
+				if (messagePtr->IsEqual(*otherMessagePtr)){
+					return false;
+				}
+			}
+			else{
+				int id = messagePtr->GetInformationId();
+				int otherId = otherMessagePtr->GetInformationId();
+				if (id != otherId){
+					return false;
+				}
+
+				istd::IInformationProvider::InformationCategory category = messagePtr->GetInformationCategory();
+				istd::IInformationProvider::InformationCategory otherCategory = otherMessagePtr->GetInformationCategory();
+				if (category != otherCategory){
+					return false;
+				}
+
+				QString description = messagePtr->GetInformationDescription();
+				QString otherDescription = otherMessagePtr->GetInformationDescription();
+				if (description != otherDescription){
+					return false;
+				}
+
+				int flags = messagePtr->GetInformationFlags();
+				int otherFlags = otherMessagePtr->GetInformationFlags();
+				if (flags != otherFlags){
+					return false;
+				}
+
+				QString source = messagePtr->GetInformationSource();
+				QString otherSource = otherMessagePtr->GetInformationSource();
+				if (source != otherSource){
+					return false;
+				}
+
+				QDateTime timeStamp = messagePtr->GetInformationTimeStamp();
+				QDateTime otherTimeStamp = otherMessagePtr->GetInformationTimeStamp();
+				if (timeStamp != otherTimeStamp){
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	return false;
