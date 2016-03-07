@@ -14,7 +14,9 @@ namespace iprm
 
 
 // static constants
-const static istd::IChangeable::ChangeSet s_selectionChangeSet(ISelectionParam::CF_SELECTION_CHANGED, "Change selection");
+static const istd::IChangeable::ChangeSet s_selectionChangeSet(ISelectionParam::CF_SELECTION_CHANGED, "Change selection");
+static const iser::CArchiveTag s_selectedOptionIndexTag("Index", "Selected option index", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_selectedOptionIdTag("OptionId", "Selected option identifier", iser::CArchiveTag::TT_LEAF);
 
 
 CSelectionParam::CSelectionParam()
@@ -67,7 +69,7 @@ bool CSelectionParam::SetSelectedOptionById(const QByteArray& selectedOptionId)
 		for (int optionIndex = 0; optionIndex < optionsCount; optionIndex++){
 			QByteArray optionId = m_constraintsPtr->GetOptionId(optionIndex);
 
-			if (optionId == selectedOptionId && m_constraintsPtr->IsOptionEnabled(optionIndex)){
+			if ((optionId == selectedOptionId) && m_constraintsPtr->IsOptionEnabled(optionIndex)){
 				return SetSelectedOptionIndex(optionIndex);
 			}
 		}
@@ -165,9 +167,6 @@ ISelectionParam* CSelectionParam::GetSubselection(int index) const
 
 bool CSelectionParam::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag selectedOptionIndexTag("Index", "Selected option index", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag selectedOptionIdTag("OptionId", "Selected option identifier", iser::CArchiveTag::TT_LEAF);
-
 	bool isStoring = archive.IsStoring();
 
 	istd::CChangeNotifier notifier(isStoring? NULL: this);
@@ -175,9 +174,9 @@ bool CSelectionParam::Serialize(iser::IArchive& archive)
 	int selectionOptionIndex = m_selectedOptionIndex;
 	QByteArray selectedOptionId;
 
-	bool retVal = archive.BeginTag(selectedOptionIndexTag);
+	bool retVal = archive.BeginTag(s_selectedOptionIndexTag);
 	retVal = retVal && archive.Process(selectionOptionIndex);
-	retVal = retVal && archive.EndTag(selectedOptionIndexTag);
+	retVal = retVal && archive.EndTag(s_selectedOptionIndexTag);
 
 	if (m_constraintsPtr != NULL){
 		int optionsCount = m_constraintsPtr->GetOptionsCount();
@@ -187,9 +186,9 @@ bool CSelectionParam::Serialize(iser::IArchive& archive)
 		}
 	}
 
-	retVal = retVal && archive.BeginTag(selectedOptionIdTag);
+	retVal = retVal && archive.BeginTag(s_selectedOptionIdTag);
 	retVal = retVal && archive.Process(selectedOptionId);
-	retVal = retVal && archive.EndTag(selectedOptionIdTag);
+	retVal = retVal && archive.EndTag(s_selectedOptionIdTag);
 
 	if (retVal && !isStoring){
 		if (		(m_constraintsPtr != NULL) &&

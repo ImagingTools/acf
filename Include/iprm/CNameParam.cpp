@@ -16,7 +16,7 @@ namespace iprm
 
 
 // static constants
-const static istd::IChangeable::ChangeSet s_renameChangeSet(iprm::INameParam::CF_RENAME, QObject::tr("Change name"));
+static const istd::IChangeable::ChangeSet s_renameChangeSet(iprm::INameParam::CF_RENAME, QObject::tr("Change name"));
 
 
 // reimplemented (iprm::INameParam)

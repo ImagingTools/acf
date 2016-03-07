@@ -13,6 +13,11 @@ namespace iser
 {
 
 
+// static constants
+static const QString s_timeFormat("yyyy-MM-dd hh-mm-ss zzz");
+static const QString s_dateFormat("yyyy-MM-dd");
+
+
 // public static methods
 
 bool CPrimitiveTypesSerializer::SerializeRange(iser::IArchive& archive, istd::CRange& range)
@@ -197,10 +202,8 @@ bool CPrimitiveTypesSerializer::SerializeIntRanges(iser::IArchive& archive, istd
 
 bool CPrimitiveTypesSerializer::SerializeDateTime(iser::IArchive& archive, QDateTime& dateTime)
 {
-	const static QString timeFormat("yyyy-MM-dd hh-mm-ss zzz");
-
 	if (archive.IsStoring()){
-		QString dateTimeString = dateTime.toString(timeFormat);
+		QString dateTimeString = dateTime.toString(s_timeFormat);
 
 		return archive.Process(dateTimeString);
 	}
@@ -208,7 +211,7 @@ bool CPrimitiveTypesSerializer::SerializeDateTime(iser::IArchive& archive, QDate
 		QString dateTimeString;
 
 		if (archive.Process(dateTimeString)){
-			dateTime = QDateTime::fromString(dateTimeString, timeFormat);
+			dateTime = QDateTime::fromString(dateTimeString, s_timeFormat);
 
 			return true;
 		}
@@ -220,10 +223,8 @@ bool CPrimitiveTypesSerializer::SerializeDateTime(iser::IArchive& archive, QDate
 
 bool CPrimitiveTypesSerializer::SerializeDate(iser::IArchive& archive, QDate& date)
 {
-	const static QString dateFormat("yyyy-MM-dd");
-
 	if (archive.IsStoring()){
-		QString dateString = date.toString(dateFormat);
+		QString dateString = date.toString(s_dateFormat);
 
 		return archive.Process(dateString);
 	}
@@ -231,7 +232,7 @@ bool CPrimitiveTypesSerializer::SerializeDate(iser::IArchive& archive, QDate& da
 		QString dateString;
 
 		if (archive.Process(dateString)){
-			date = QDate::fromString(dateString, dateFormat);
+			date = QDate::fromString(dateString, s_dateFormat);
 
 			return true;
 		}

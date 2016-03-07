@@ -11,7 +11,10 @@ namespace iprm
 {
 
 
-const istd::IChangeable::ChangeSet s_selectionChangeSet(ISelectionParam::CF_SELECTION_CHANGED);
+// static constants
+static const istd::IChangeable::ChangeSet s_selectionChangeSet(ISelectionParam::CF_SELECTION_CHANGED);
+static const iser::CArchiveTag s_selectedIndexTag("Selected", "Selected index", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_paramsManagerTag("Parameters", "All parameters", iser::CArchiveTag::TT_GROUP);
 
 
 CSelectableParamsSetComp::CSelectableParamsSetComp()
@@ -153,31 +156,29 @@ void CSelectableParamsSetComp::AfterUpdate(imod::IModel* modelPtr, const istd::I
 
 bool CSelectableParamsSetComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag selectedIndexTag("Selected", "Selected index", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag paramsManagerTag("Parameters", "All parameters", iser::CArchiveTag::TT_GROUP);
-
 	bool isStoring = archive.IsStoring();
 
-	istd::CChangeNotifier notifier(isStoring? NULL: this);
+	istd::CChangeNotifier notifier(isStoring? NULL: this, &GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 
 	int selectedIndex = m_selectedIndex;
 
-	retVal = retVal && archive.BeginTag(selectedIndexTag);
+	retVal = retVal && archive.BeginTag(s_selectedIndexTag);
 	retVal = retVal && archive.Process(selectedIndex);
-	retVal = retVal && archive.EndTag(selectedIndexTag);
-
-	if (!isStoring && selectedIndex != m_selectedIndex){
-		retVal = retVal && SetSelectedOptionIndex(selectedIndex);
-	}
+	retVal = retVal && archive.EndTag(s_selectedIndexTag);
 
 	if (m_serializeParamsManagerAttrPtr.IsValid() && *m_serializeParamsManagerAttrPtr){
 		if (m_paramsManagerCompPtr.IsValid()){
-			retVal = retVal && archive.BeginTag(paramsManagerTag);
+			retVal = retVal && archive.BeginTag(s_paramsManagerTag);
 			retVal = retVal && m_paramsManagerCompPtr->Serialize(archive);
-			retVal = retVal && archive.EndTag(paramsManagerTag);
+			retVal = retVal && archive.EndTag(s_paramsManagerTag);
 		}
+	}
+
+	if (!isStoring && (selectedIndex != m_selectedIndex)){
+		SetSelectedOptionIndex(selectedIndex);
 	}
 
 	return retVal;

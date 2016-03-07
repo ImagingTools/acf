@@ -16,7 +16,7 @@ namespace iser
 
 	\ingroup Persistence
 */
-class IObject: virtual public iser::ISerializable
+class IObject: virtual public ISerializable
 {
 public:
 	virtual QByteArray GetFactoryId() const;
