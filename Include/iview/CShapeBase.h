@@ -13,6 +13,9 @@ namespace iview
 {
 
 
+class IColorSchema;
+
+
 class CShapeBase:
 			public imod::CSingleModelObserverBase,
 			virtual public IShape
@@ -101,6 +104,10 @@ protected:
 		Get logical position based on screen position.
 	*/
 	i2d::CVector2d GetLogPosition(const i2d::CVector2d& screenPosition) const;
+	/**
+		Get line with (in logical coordinates) for single screen position.
+	*/
+	double GetLocalLineWidth(const i2d::CVector2d& screenPosition) const;
 
 	/**
 		Get display changes mask.

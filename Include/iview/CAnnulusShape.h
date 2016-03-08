@@ -42,8 +42,6 @@ public:
 	virtual TouchState IsTouched(istd::CIndex2d position) const;
 
 protected:
-	virtual void DrawAnnulus(QPainter& painter, istd::CIndex2d center, int minRadius1, int maxRadius1, bool fillFlag = true) const;
-
 	// reimplemented (iview::CShapeBase)
 	virtual i2d::CRect CalcBoundingBox() const;
 

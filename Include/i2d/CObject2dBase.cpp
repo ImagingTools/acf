@@ -99,7 +99,10 @@ bool CObject2dBase::CopyFrom(const istd::IChangeable& object, CompatibilityMode 
 
 		case CM_WITH_REFS:
 			if (!object2dPtr->m_calibrationPtr.IsValid() || !object2dPtr->m_calibrationPtr.IsToRelase()){
-				m_calibrationPtr = object2dPtr->m_calibrationPtr;
+				m_calibrationPtr.SetPtr(object2dPtr->m_calibrationPtr.GetPtr());
+			}
+			else{
+				m_calibrationPtr.SetCastedOrRemove(object2dPtr->m_calibrationPtr->CloneMe(CM_WITH_REFS));
 			}
 			break;
 

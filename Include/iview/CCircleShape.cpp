@@ -71,27 +71,28 @@ bool CCircleShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton button
 			i2d::CVector2d center = circlePtr->GetPosition();
 			double radius = circlePtr->GetRadius();
 
-			i2d::CVector2d ticker1 = GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()));
-			i2d::CVector2d ticker2 = GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()));
-			i2d::CVector2d ticker3 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius));
-			i2d::CVector2d ticker4 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius));
-
 			const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 
-			if (			tickerBox.IsInside(position - ticker1.ToIndex2d()) ||
-							tickerBox.IsInside(position - ticker2.ToIndex2d()) ||
-							tickerBox.IsInside(position - ticker3.ToIndex2d()) ||
-							tickerBox.IsInside(position - ticker4.ToIndex2d())){
-				m_editMode = EM_RADIUS;
+				i2d::CVector2d tickers[4] = {
+							GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY())),
+							GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius)),
+							GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY())),
+							GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius))
+				};
+				for (int i = 0; i < 4; ++i){
+					if (tickerBox.IsInside(position - tickers[i].ToIndex2d())){
+						m_editMode = EM_RADIUS;
 
-				BeginTickerDrag();
+						BeginTickerDrag();
 
-				return true;
-			}
+						return true;
+					}
+				}
 		}
+
 		m_editMode = EM_NONE;
 
-		if (m_isCenterVisible){
+		if (IsCenterVisible()){
 			return BaseClass::OnMouseButton(position, buttonType, downFlag);
 		}
 		else{
@@ -104,27 +105,26 @@ bool CCircleShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton button
 
 bool CCircleShape::OnMouseMove(istd::CIndex2d position)
 {
-	if (m_editMode == EM_RADIUS){
-		imod::IModel* modelPtr = GetObservedModel();
-		i2d::CCircle& circle = *dynamic_cast<i2d::CCircle*>(modelPtr);
-		Q_ASSERT(&circle != NULL);
-
-		i2d::CVector2d cp = GetLogPosition(position);
-		const i2d::CVector2d& center = circle.GetPosition();
+	i2d::CCircle* circlePtr = dynamic_cast<i2d::CCircle*>(GetObservedModel());
+	if (circlePtr != NULL){
+		if (m_editMode == EM_RADIUS){
+			i2d::CVector2d cp = GetLogPosition(position);
+			const i2d::CVector2d& center = circlePtr->GetPosition();
 		
-		double newRadius = center.GetDistance(cp);
+			double newRadius = center.GetDistance(cp);
 		
-		if (circle.GetRadius() != newRadius){
-			circle.SetRadius(newRadius);
+			if (circlePtr->GetRadius() != newRadius){
+				circlePtr->SetRadius(newRadius);
 
-			UpdateModelChanges();
+				UpdateModelChanges();
+			}
+		
+			return true;
 		}
-		
-		return true;
-	}
 
-	if (m_isCenterVisible){
-		return BaseClass::OnMouseMove(position);
+		if (IsCenterVisible()){
+			return BaseClass::OnMouseMove(position);
+		}
 	}
 
 	return false;
@@ -141,46 +141,59 @@ void CCircleShape::Draw(QPainter& drawContext) const
 		BaseClass::Draw(drawContext);
 	}
 
-	const imod::IModel* modelPtr = GetObservedModel();
-	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(modelPtr);
-	Q_ASSERT(circlePtr != NULL);
+	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(GetObservedModel());
+	if (circlePtr != NULL){
+		const i2d::CVector2d& center = circlePtr->GetPosition();
+		double radius = circlePtr->GetRadius();
 
-	const i2d::CVector2d& center = circlePtr->GetPosition();
-	double radius = circlePtr->GetRadius();
+		i2d::CVector2d tickers[4] = {
+					GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY())),
+					GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY())),
+					GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius))
+		};
 
-	i2d::CVector2d screenCenter = GetScreenPosition(center);
-	i2d::CVector2d ticker1 = GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()));
-	i2d::CVector2d ticker2 = GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()));
-	i2d::CVector2d ticker3 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius));
-	i2d::CVector2d ticker4 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius));
+		double ctrlShift = radius * 0.5523;
+		i2d::CVector2d ctrls1[4] = {
+					GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY() - ctrlShift)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() + ctrlShift, center.GetY() + radius)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY() + ctrlShift)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() - ctrlShift, center.GetY() - radius))
+		};
+		i2d::CVector2d ctrls2[4] = {
+					GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY() + ctrlShift)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() - ctrlShift, center.GetY() + radius)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY() - ctrlShift)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() + ctrlShift, center.GetY() - radius))
+		};
 
-	double screenRadius = (
-				screenCenter.GetDistance(ticker1) +
-				screenCenter.GetDistance(ticker2) +
-				screenCenter.GetDistance(ticker3) +
-				screenCenter.GetDistance(ticker4)) * 0.25;
+		const IColorSchema& colorSchema = GetColorSchema();
+		if (IsSelected()){
+			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_SELECTED));
+		}
+		else{
+			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_NORMAL));
+		}
 
-	const IColorSchema& colorSchema = GetColorSchema();
+		QBrush emptyBrush(QColor(0, 0, 0), Qt::NoBrush);
+		drawContext.setBrush(emptyBrush);
 
-	if (IsSelected()){
-		drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_SELECTED));
-	}
-	else{
-		drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_NORMAL));
-	}
+		QPainterPath painterPatch;
 
-	QBrush emptyBrush(QColor(0, 0, 0), Qt::NoBrush);
-	drawContext.setBrush(emptyBrush);
+		painterPatch.moveTo(tickers[0]);
+		painterPatch.cubicTo(ctrls2[0], ctrls1[1], tickers[1]);
+		painterPatch.cubicTo(ctrls2[1], ctrls1[2], tickers[2]);
+		painterPatch.cubicTo(ctrls2[2], ctrls1[3], tickers[3]);
+		painterPatch.cubicTo(ctrls2[3], ctrls1[0], tickers[0]);
+		painterPatch.closeSubpath();
 
-	drawContext.drawEllipse(QRect(
-				QPoint(int(screenCenter.GetX() - screenRadius), int(screenCenter.GetY() - screenRadius)),
-				QPoint(int(screenCenter.GetX() + screenRadius), int(screenCenter.GetY() + screenRadius))));
+		drawContext.drawPath(painterPatch);
 
-	if (IsEditableRadius() && IsSelected()){
-		colorSchema.DrawTicker(drawContext, ticker1.ToIndex2d(), IColorSchema::TT_NORMAL);
-		colorSchema.DrawTicker(drawContext, ticker2.ToIndex2d(), IColorSchema::TT_NORMAL);
-		colorSchema.DrawTicker(drawContext, ticker3.ToIndex2d(), IColorSchema::TT_NORMAL);
-		colorSchema.DrawTicker(drawContext, ticker4.ToIndex2d(), IColorSchema::TT_NORMAL);
+		if (IsEditableRadius() && IsSelected()){
+			for (int i = 0; i < 4; ++i){
+				colorSchema.DrawTicker(drawContext, tickers[i].ToIndex2d(), IColorSchema::TT_NORMAL);
+			}
+		}
 	}
 }
 
@@ -199,8 +212,10 @@ bool CCircleShape::OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::Ch
 
 ITouchable::TouchState CCircleShape::IsTouched(istd::CIndex2d position) const
 {
+	Q_ASSERT(IsDisplayConnected());
+
 	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(GetObservedModel());
-	if (IsDisplayConnected() && (circlePtr != NULL)){
+	if (circlePtr != NULL){
 		const IColorSchema& colorSchema = GetColorSchema();
 
 		i2d::CVector2d center = circlePtr->GetPosition();
@@ -212,34 +227,34 @@ ITouchable::TouchState CCircleShape::IsTouched(istd::CIndex2d position) const
 		i2d::CVector2d ticker3 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius));
 		i2d::CVector2d ticker4 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius));
 
-		double screenRadius = (
-					screenCenter.GetDistance(ticker1) +
-					screenCenter.GetDistance(ticker2) +
-					screenCenter.GetDistance(ticker3) +
-					screenCenter.GetDistance(ticker4)) * 0.25;
-
-		if (m_isEditableRadius && IsSelected()){
+		if (IsEditableRadius() && IsSelected()){
 			const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 
-			if (			tickerBox.IsInside(position - ticker1.ToIndex2d()) ||
-							tickerBox.IsInside(position - ticker2.ToIndex2d()) ||
-							tickerBox.IsInside(position - ticker3.ToIndex2d()) ||
-							tickerBox.IsInside(position - ticker4.ToIndex2d())){
-				return TS_TICKER;
+			i2d::CVector2d tickers[4] = {
+						GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY())),
+						GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius)),
+						GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY())),
+						GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius))
+			};
+			for (int i = 0; i < 4; ++i){
+				if (tickerBox.IsInside(position - tickers[i].ToIndex2d())){
+					return IInteractiveShape::TS_TICKER;
+				}
 			}
 		}
 
-		double screenDistance = screenCenter.GetDistance(i2d::CVector2d(position));
-		double logicalLineWidth = colorSchema.GetLogicalLineWidth();
+		double localLineWidth = GetLocalLineWidth(position);
 
-		if (qAbs(screenRadius - screenDistance) < logicalLineWidth){
+		i2d::CVector2d cp = GetLogPosition(position);
+		double distanceToCenter = center.GetDistance(cp);
+
+		if (qAbs(distanceToCenter - radius) < localLineWidth){
 			bool isEditablePosition = IsEditablePosition();
 			return isEditablePosition? TS_DRAGGABLE: TS_INACTIVE;
 		}
-		else{
-			if (m_isCenterVisible){
-				return BaseClass::IsTouched(position);
-			}
+
+		if (IsCenterVisible()){
+			return BaseClass::IsTouched(position);
 		}
 	}
 
@@ -259,31 +274,44 @@ i2d::CRect CCircleShape::CalcBoundingBox() const
 	if (circlePtr != NULL){
 		const IColorSchema& colorSchema = GetColorSchema();
 
-		const i2d::CVector2d& center = circlePtr->GetPosition();
+		i2d::CVector2d center = circlePtr->GetPosition();
 		double radius = circlePtr->GetRadius();
 
-		i2d::CVector2d screenCenter = GetScreenPosition(center);
-		i2d::CVector2d ticker1 = GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()));
-		i2d::CVector2d ticker2 = GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()));
-		i2d::CVector2d ticker3 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius));
-		i2d::CVector2d ticker4 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius));
+		double ctrlShift = radius * 0.5523;
+		i2d::CVector2d ctrls1[4] = {
+					GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY() - ctrlShift)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() + ctrlShift, center.GetY() + radius)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY() + ctrlShift)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() - ctrlShift, center.GetY() - radius))
+		};
+		i2d::CVector2d ctrls2[4] = {
+					GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY() + ctrlShift)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() - ctrlShift, center.GetY() + radius)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY() - ctrlShift)),
+					GetScreenPosition(i2d::CVector2d(center.GetX() + ctrlShift, center.GetY() - radius))
+		};
 
-		double screenRadius = (
-					screenCenter.GetDistance(ticker1) +
-					screenCenter.GetDistance(ticker2) +
-					screenCenter.GetDistance(ticker3) +
-					screenCenter.GetDistance(ticker4)) * 0.25;
+		i2d::CRect boundingBox = BaseClass::CalcBoundingBox();
 
-		i2d::CRect boundingBox(
-					int(screenCenter.GetX() - screenRadius - 1), int(screenCenter.GetY() - screenRadius - 1),
-					int(screenCenter.GetX() + screenRadius + 1), int(screenCenter.GetY() + screenRadius + 1));
+		for (int i = 0; i < 4; ++i){
+			boundingBox.Union(ctrls1[i].ToIndex2d());
+			boundingBox.Union(ctrls2[i].ToIndex2d());
+		}
 
-		const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
+		if (IsSelected()){
+			i2d::CVector2d tickers[4] = {
+						GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY())),
+						GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius)),
+						GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY())),
+						GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius))
+			};
 
-		boundingBox.Union(tickerBox.GetTranslated(ticker1.ToIndex2d()));
-		boundingBox.Union(tickerBox.GetTranslated(ticker2.ToIndex2d()));
-		boundingBox.Union(tickerBox.GetTranslated(ticker3.ToIndex2d()));
-		boundingBox.Union(tickerBox.GetTranslated(ticker4.ToIndex2d()));
+			const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
+
+			for (int i = 0; i < 4; ++i){
+				boundingBox.Union(tickerBox.GetTranslated(tickers[i].ToIndex2d()));
+			}
+		}
 
 		return boundingBox;
 	}

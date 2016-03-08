@@ -4,6 +4,7 @@
 // ACF includes
 #include "istd/IInformationProvider.h"
 #include "iview/IViewLayer.h"
+#include "iview/IColorSchema.h"
 
 
 namespace iview
@@ -303,6 +304,38 @@ i2d::CVector2d CShapeBase::GetLogPosition(const i2d::CVector2d& screenPosition) 
 	}
 
 	return logPosition;
+}
+
+
+double CShapeBase::GetLocalLineWidth(const i2d::CVector2d& screenPosition) const
+{
+	const iview::CScreenTransform& transform = GetViewToScreenTransform();
+
+	const IColorSchema& schema = GetColorSchema();
+	double logWidth = schema.GetLogicalLineWidth() / transform.GetDeformMatrix().GetApproxScale();
+
+	switch (m_shapeTransformMode){
+	case STM_SHAPE:
+		{
+			const i2d::ITransformation2d* calibrationPtr = m_calibrationObserver.GetObservedObject();
+
+			if (calibrationPtr != NULL){
+				i2d::CAffine2d transform;
+				if (calibrationPtr->GetLocalInvTransform(screenPosition, transform)){
+					logWidth *= transform.GetDeformMatrix().GetApproxScale();
+				}
+				else{
+					return 0;
+				}
+			}
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	return logWidth;
 }
 
 
