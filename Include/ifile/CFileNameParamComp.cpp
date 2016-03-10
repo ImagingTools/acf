@@ -1,9 +1,14 @@
 #include "ifile/CFileNameParamComp.h"
 
 
+#if QT_VERSION >= 0x050000
+#include <QtCore/QStandardPaths>
+#else
+#include <QtGui/QDesktopServices>
+#endif
+
 // ACF includes
 #include "istd/CChangeNotifier.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -73,7 +78,37 @@ void CFileNameParamComp::OnComponentCreated()
 	if (m_defaultDirAttrPtr.IsValid()){
 		m_path = *m_defaultDirAttrPtr;
 	}
+
+	if (m_path.contains(s_tempPathVariable)){
+		QString tempPath;
+
+#if QT_VERSION < 0x050000
+		tempPath = QDesktopServices::storageLocation(QDesktopServices::TempLocation);
+#else
+		tempPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+#endif
+		m_path.replace(s_tempPathVariable, tempPath);
+	}
+
+	if (m_path.contains(s_appNameVariable)){
+		QString applicationName = QCoreApplication::applicationName();
+	
+		m_path.replace(s_appNameVariable, applicationName);
+	}
+
+	if (m_path.contains(s_companyNameVariable)){
+		QString organizationName = QCoreApplication::organizationName();
+	
+		m_path.replace(s_companyNameVariable, organizationName);
+	}
 }
+
+
+// private static members
+
+QString CFileNameParamComp::s_tempPathVariable = "$(TempPath)";
+QString CFileNameParamComp::s_appNameVariable = "$(AppName)";
+QString CFileNameParamComp::s_companyNameVariable = "$(CompanyName)";
 
 
 } // namespace ifile
