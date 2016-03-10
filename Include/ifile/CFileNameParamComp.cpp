@@ -101,6 +101,16 @@ void CFileNameParamComp::OnComponentCreated()
 	
 		m_path.replace(s_companyNameVariable, organizationName);
 	}
+
+	if (m_path.contains(s_publicSharedPathVariable)){
+#ifdef Q_OS_WIN
+		QString publicSharedFolder("C:/Users/Public");
+#else
+		QString publicSharedFolder("/Users/Shared");
+#endif
+
+		m_path.replace(s_publicSharedPathVariable, publicSharedFolder);
+	}
 }
 
 
@@ -109,6 +119,7 @@ void CFileNameParamComp::OnComponentCreated()
 QString CFileNameParamComp::s_tempPathVariable = "$(TempPath)";
 QString CFileNameParamComp::s_appNameVariable = "$(AppName)";
 QString CFileNameParamComp::s_companyNameVariable = "$(CompanyName)";
+QString CFileNameParamComp::s_publicSharedPathVariable = "$(PublicSharedPath)";
 
 
 } // namespace ifile
