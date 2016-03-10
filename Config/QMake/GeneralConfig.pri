@@ -86,10 +86,21 @@ win32-msvc*{
 	COMPILER_NAME = GCC
 }
 
-
 *-g++*{
 	QMAKE_CXXFLAGS += -fpermissive
 	COMPILER_NAME = GCC
+}
+
+# MinGW compiler used under Windows instead of GCC
+win32{
+	*-gcc* | *-g++*{
+		contains(QMAKE_HOST.arch, x86_64){
+			COMPILER_NAME = MinGW_64
+		}
+		else{
+			COMPILER_NAME = MinGW
+		}
+	}
 }
 
 
