@@ -9,7 +9,7 @@ isEmpty(ACFDIRBUILD){
 	LIBS += -L$$ACFDIRBUILD/Lib/$$COMPILER_DIR
 }
 
-LIBS += -liqt -lipackage -lidoc -lifile -liimg -licmm -li2d -li3d -liprm -lilog -licomp -liattr -liser -limod -limath -libase -listd
+LIBS += -liqt -lipackage -lidoc -lifile -liimg -licmm -li2d -li3d -liprm -lilog -libase -licomp -liattr -liser -limod -limath -listd
 
 # Used in istd::CSystem::ConvertLocalPathToUnc. Remove it after complete switching to Qt 5.5 and using of QStorageInfo!
 win32{

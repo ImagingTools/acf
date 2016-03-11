@@ -88,6 +88,7 @@ win32-msvc*{
 
 *-g++*{
 	QMAKE_CXXFLAGS += -fpermissive
+	QMAKE_CFLAGS_RELEASE = -Ofast
 	COMPILER_NAME = GCC
 }
 
