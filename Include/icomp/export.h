@@ -14,7 +14,7 @@ namespace icomp
 {
 
 
-#if defined _MSC_VER
+#if defined _MSC_VER || defined __MINGW32__ || defined __MINGW64__
 	#define I_FUNCTION_EXPORT __declspec(dllexport) // Note: actually gcc seems also to supports this syntax.
 #elif defined __GNUC__
 	#define I_FUNCTION_EXPORT __attribute__ ((visibility("default")))
