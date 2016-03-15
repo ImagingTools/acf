@@ -64,6 +64,15 @@ public:
 
 protected:
 	/**
+		Calculate optimal index based on current selected index and ID.
+	*/
+	int CalcIndexFromCurrentId() const;
+	/**
+		Synchronize current index to optimal one.
+	*/
+	bool SyncIndexWithId();
+
+	/**
 		\internal
 		Observes changes of contraints to reflect is in object state.
 	*/
@@ -80,16 +89,13 @@ protected:
 	};
 
 private:
-	typedef QMap<int, iprm::ISelectionParam*> SubselectionMap;
-
 	int m_selectedOptionIndex;
-
-	const IOptionsList* m_constraintsPtr;
-
-	SubselectionMap m_subselectionMap;
-
 	QByteArray m_selectedOptionId;
 
+	typedef QMap<int, iprm::ISelectionParam*> SubselectionMap;
+	SubselectionMap m_subselectionMap;
+
+	const IOptionsList* m_constraintsPtr;
 	ConstraintsObserver m_constraintsObserver;
 };
 
