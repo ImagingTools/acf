@@ -19,6 +19,7 @@ namespace iprm
 const istd::IChangeable::ChangeSet s_enableChangeSet(IOptionsList::CF_OPTIONS_CHANGED, QObject::tr("Enable option"));
 const istd::IChangeable::ChangeSet s_insertOptionChangeSet(IOptionsList::CF_OPTIONS_CHANGED, IOptionsManager::CF_OPTION_ADDED, QObject::tr("Insert option"));
 const istd::IChangeable::ChangeSet s_removeOptionChangeSet(IOptionsList::CF_OPTIONS_CHANGED, IOptionsManager::CF_OPTION_REMOVED, QObject::tr("Remove option"));
+const istd::IChangeable::ChangeSet s_removeAllOptionsChangeSet(IOptionsList::CF_OPTIONS_CHANGED, IOptionsManager::CF_OPTION_REMOVED, QObject::tr("Remove all options"));
 const istd::IChangeable::ChangeSet s_moveOptionChangeSet(IOptionsList::CF_OPTIONS_CHANGED, QObject::tr("Move option"));
 const istd::IChangeable::ChangeSet s_renameOptionChangeSet(IOptionsList::CF_OPTION_RENAMED, QObject::tr("Rename option"));
 const istd::IChangeable::ChangeSet s_setDescriptionChangeSet(IOptionsList::CF_OPTIONS_CHANGED, QObject::tr("Change description"));
@@ -42,7 +43,12 @@ void COptionsManager::SetFixedOptionsList(const iprm::IOptionsList* slaveSelecti
 
 void COptionsManager::ResetOptions()
 {
-	m_options.clear();
+	if (!m_options.isEmpty()){
+		istd::CChangeNotifier notifier(this, &s_removeAllOptionsChangeSet);
+		Q_UNUSED(notifier);
+
+		m_options.clear();
+	}
 }
 
 
