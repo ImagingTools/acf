@@ -40,6 +40,9 @@ protected:
 	virtual void OnGuiModelDetached();
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiRetranslate();
+
 protected Q_SLOTS:
 	void OnParamsChanged(double value);
 };

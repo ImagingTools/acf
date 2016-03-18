@@ -72,6 +72,27 @@ void CRectangleParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*ch
 }
 
 
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CRectangleParamsGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	QString unitName = GetUnitName();
+
+	if (!unitName.isEmpty()){
+		PositionUnitLabel->setText(unitName);
+		PositionUnit2Label->setText(unitName);
+		PositionUnitLabel->setVisible(true);
+		PositionUnit2Label->setVisible(true);
+	}
+	else{
+		PositionUnitLabel->setVisible(false);
+		PositionUnit2Label->setVisible(false);
+	}
+}
+
+
 // protected slots
 
 void CRectangleParamsGuiComp::OnParamsChanged(double /*value*/)
