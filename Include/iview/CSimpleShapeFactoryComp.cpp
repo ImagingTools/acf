@@ -29,10 +29,14 @@ IShape* CSimpleShapeFactoryComp::CreateShape(const istd::IChangeable* objectPtr,
 		return NULL;
 	}
 
-	istd::TDelPtr<CInteractiveShapeBase> shapePtr(CreateShapeInstance(*objectPtr));
+	istd::TDelPtr<CShapeBase> shapePtr(CreateShapeInstance(*objectPtr));
 
 	if (shapePtr.IsValid()){
-		shapePtr->SetEditablePosition(*m_useInteractiveShapesAttrPtr);
+		CInteractiveShapeBase* interactiveShapePtr = dynamic_cast<CInteractiveShapeBase*>(shapePtr.GetPtr());
+		if (interactiveShapePtr != NULL){
+			interactiveShapePtr->SetEditablePosition(*m_useInteractiveShapesAttrPtr);
+		}
+
 		if (!*m_useInteractiveShapesAttrPtr){
 			shapePtr->AssignToLayer(IViewLayer::LT_INACTIVE);
 		}
@@ -57,7 +61,7 @@ IShape* CSimpleShapeFactoryComp::CreateShape(const istd::IChangeable* objectPtr,
 
 // protected methods
 
-CInteractiveShapeBase* CSimpleShapeFactoryComp::CreateShapeInstance(const istd::IChangeable& object) const
+CShapeBase* CSimpleShapeFactoryComp::CreateShapeInstance(const istd::IChangeable& object) const
 {
 	const i2d::CAnnulusSegment* annulusSegmentPtr = dynamic_cast<const i2d::CAnnulusSegment*>(&object);
 	if (annulusSegmentPtr != NULL){

@@ -33,7 +33,7 @@ public:
 	virtual IShape* CreateShape(const istd::IChangeable* objectPtr, bool connectToModel = false) const;
 
 protected:
-	virtual CInteractiveShapeBase* CreateShapeInstance(const istd::IChangeable& object) const;
+	virtual CShapeBase* CreateShapeInstance(const istd::IChangeable& object) const;
 
 protected:
 	I_ATTR(bool, m_useInteractiveShapesAttrPtr);
