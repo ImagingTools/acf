@@ -219,7 +219,7 @@ int TXmlFileSerializerComp<ReadArchive, WriteArchive>::SaveToFile(
 			return OS_OK;
 		}
 		else{
-			SendInfoMessage(MI_CANNOT_SAVE, QObject::tr("Cannot serialize object to file"));
+			SendInfoMessage(MI_CANNOT_SAVE, QObject::tr("Cannot serialize object to file: '%1'").arg(filePath));
 		}
 	}
 
