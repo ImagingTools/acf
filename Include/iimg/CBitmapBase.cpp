@@ -43,33 +43,30 @@ i2d::CRectangle CBitmapBase::GetBoundingBox() const
 
 // reimplemented (iimg::IBitmap)
 
-bool CBitmapBase::CopyBitmapRegion(const iimg::IBitmap& sourceBitmap, const i2d::CRectangle& area)
+bool CBitmapBase::CreateImageFromRegion(const iimg::IBitmap& sourceBitmap, const i2d::CRect& region)
 {
 	istd::CIndex2d sourceImageSize = sourceBitmap.GetImageSize();
-	i2d::CRectangle bitmapAoi;
 
-	bitmapAoi.SetLeft(qFloor(area.GetLeft()));
-	bitmapAoi.SetRight(qCeil(area.GetRight()));
-	bitmapAoi.SetTop(qFloor(area.GetTop()));
-	bitmapAoi.SetBottom(qCeil(area.GetBottom()));
-
-	bitmapAoi = bitmapAoi.GetIntersection(i2d::CRectangle(sourceImageSize));
-	if (bitmapAoi.IsEmpty()){
+	i2d::CRect usedRegion = region;
+	usedRegion.Intersection(i2d::CRect(sourceImageSize));
+	if (usedRegion.IsEmpty()){
 		return false;
 	}
 
-	if (!CreateBitmap(sourceBitmap.GetPixelFormat(), ibase::CSize((int)bitmapAoi.GetWidth(), (int)bitmapAoi.GetHeight()))){
+	if (!CreateBitmap(sourceBitmap.GetPixelFormat(), usedRegion.GetSize())){
 		return false;
 	}
 
-	int top  = (int)bitmapAoi.GetTop();
-	int left = (int)bitmapAoi.GetLeft();
+	int top  = usedRegion.GetTop();
+	int left = usedRegion.GetLeft();
+
+	int bytesPerPixel = ((GetPixelBitsCount() + 7) / 8);
 
 	istd::CIndex2d size = GetImageSize();
 	int lineBytesCount = GetLineBytesCount();
 	for (int y = 0; y < size.GetY(); ++y){
 		quint8* destLinePtr = (quint8*)GetLinePtr(y);
-		quint8* sourceLinePtr = ((quint8*)sourceBitmap.GetLinePtr(y + top)) + left;
+		quint8* sourceLinePtr = ((quint8*)sourceBitmap.GetLinePtr(y + top)) + left * bytesPerPixel;
 
 		std::memcpy(destLinePtr, sourceLinePtr, lineBytesCount);
 	}

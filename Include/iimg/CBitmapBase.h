@@ -27,7 +27,7 @@ public:
 	virtual i2d::CRectangle GetBoundingBox() const;
 
 	// reimplemented (iimg::IBitmap)
-	virtual bool CopyBitmapRegion(const iimg::IBitmap& sourceBitmap, const i2d::CRectangle& area);
+	virtual bool CreateImageFromRegion(const iimg::IBitmap& sourceBitmap, const i2d::CRect& region);
 	virtual int GetLineBytesCount() const;
 	virtual int GetComponentBitsCount(int componentIndex = 0) const;
 
