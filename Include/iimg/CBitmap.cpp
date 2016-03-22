@@ -226,6 +226,10 @@ int CBitmap::GetComponentsCount() const
 	case QImage::Format_Indexed8:
 	case QImage::Format_Mono:
 	case QImage::Format_MonoLSB:
+#if QT_VERSION >= 0x050500
+	case QImage::Format_Grayscale8:
+	case QImage::Format_Alpha8:
+#endif
 		return 1;
 
 	case QImage::Format_RGB16:
@@ -342,7 +346,11 @@ QImage::Format CBitmap::CalcQtFormat(PixelFormat pixelFormat) const
 			return QImage::Format_ARGB32;
 
 		case PF_GRAY:
+#if QT_VERSION >= 0x050500
+			return QImage::Format_Grayscale8;
+#else
 			return QImage::Format_Indexed8;
+#endif
 
 		case PF_MONO:
 			return QImage::Format_Mono;
@@ -371,6 +379,10 @@ iimg::IBitmap::PixelFormat CBitmap::CalcFromQtFormat(QImage::Format imageFormat)
 		return PF_RGBA;
 
 	case QImage::Format_Indexed8:
+#if QT_VERSION >= 0x050500
+	case QImage::Format_Grayscale8:
+	case QImage::Format_Alpha8:
+#endif
 		return PF_GRAY;
 
 	case QImage::Format_Mono:
