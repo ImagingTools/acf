@@ -49,6 +49,12 @@ public:
 	virtual QStringList GetApplicationArguments() const;
 
 protected:
+	/**
+		Callback for the application's shutdown.
+		Default implementation does nothing.
+	*/
+	virtual void OnApplicationShutdown();
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentDestroyed();
 
