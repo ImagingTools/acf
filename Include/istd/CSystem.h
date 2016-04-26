@@ -65,7 +65,7 @@ public:
 		\param	varName	name of variable.
 		\param	envVars	if enabled, the system environment variables will be also considered.
 	*/
-	static QString FindVariableValue(const QString& varName, bool envVars = true, bool embeddedVars = true);
+	static QString GetVariableValue(const QString& varName, bool envVars = true, bool embeddedVars = true);
 
 	/**
 		Get path with enrolled system variables.
@@ -124,6 +124,8 @@ public:
 
 	/**
 		Get compiler specific variable.
+		Please note, that this variable depends only on compiler time state and cannot be set by application.
+		To use 'logical value' of variable you should use \c GetVariableValue.
 	*/
 	static QString GetCompilerVariable(const QString& varName);
 

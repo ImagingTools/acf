@@ -5,6 +5,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QThread>
 #include <QtCore/QProcess>
+#include <QtCore/QCoreApplication>
 
 // Windows includes
 #ifdef Q_OS_WIN
@@ -74,7 +75,7 @@ QString CSystem::GetNormalizedPath(const QString& path)
 }
 
 
-QString CSystem::FindVariableValue(const QString& varName, bool envVars, bool embeddedVars)
+QString CSystem::GetVariableValue(const QString& varName, bool envVars, bool embeddedVars)
 {
 	if (embeddedVars){
 		if (varName == "PlatformCode"){
@@ -91,6 +92,9 @@ QString CSystem::FindVariableValue(const QString& varName, bool envVars, bool em
 		}
 		else if (varName == "ConfigurationDir"){
 			return s_compilerMode + s_compilerName + "/";
+		}
+		else if (varName == "ApplicationDir"){
+			return QCoreApplication::applicationDirPath();
 		}
 		else if (varName == "."){
 			return QDir::currentPath();
@@ -127,7 +131,7 @@ QString CSystem::GetEnrolledPath(const QString& path, bool envVars, bool embedde
 		QString varName = retVal.mid(beginIndex + 2, endIndex - beginIndex - 2);
 
 		QString left = retVal.left(beginIndex);
-		QString variableValue = FindVariableValue(varName, envVars, embeddedVars);
+		QString variableValue = GetVariableValue(varName, envVars, embeddedVars);
 
 		retVal = left + variableValue + retVal.mid(endIndex + 1);
 
@@ -407,9 +411,6 @@ QString CSystem::GetCompilerVariable(const QString& varName)
 	}
 	else if (varName == "ConfigurationName"){
 		return GetCompilerVariable("CompileMode") + GetCompilerVariable("CompilerName");
-	}
-	else if (varName == "ConfigurationDir"){
-		return GetCompilerVariable("ConfigurationName") + "/";
 	}
 	else if (varName == "CompilerName"){
 #ifdef __clang__
