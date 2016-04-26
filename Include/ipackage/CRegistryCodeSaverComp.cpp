@@ -256,10 +256,13 @@ bool CRegistryCodeSaverComp::AppendAddresses(
 				break;
 
 			default:
-				SendErrorMessage(
-							MI_UNDEFINED_PACKAGE,
-							QObject::tr("%1: Package '%2' is undefined").arg(componentPath.join("/")).arg(QString(packageId)));
-				return false;
+				if (*m_workingModeAttrPtr != WM_DEPENDENCIES){
+					SendErrorMessage(
+								MI_UNDEFINED_PACKAGE,
+								QObject::tr("%1: Package '%2' is undefined").arg(componentPath.join("/")).arg(QString(packageId)));
+					return false;
+				}
+				break;
 			}
 		}
 		else{
@@ -974,8 +977,11 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 	}
 
 	if (!composedAddresses.isEmpty() && !realAddresses.isEmpty()){
-		for (		Addresses::const_iterator addressIter = composedAddresses.begin();
-					addressIter != composedAddresses.end();
+		QList<icomp::CComponentAddress> sortedComponentAdresses = composedAddresses.toList();
+		qSort(sortedComponentAdresses);
+
+		for (		QList<icomp::CComponentAddress>::const_iterator addressIter = sortedComponentAdresses.constBegin();
+					addressIter != sortedComponentAdresses.constEnd();
 					++addressIter){
 			const icomp::CComponentAddress& address = *addressIter;
 			const QByteArray& packageId = address.GetPackageId();
@@ -987,15 +993,18 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 
 		if (allDependencies){
 			Ids packageIdsList;
-			for (		Addresses::const_iterator addressIter = realAddresses.begin();
-						addressIter != realAddresses.end();
+			for (		Addresses::const_iterator addressIter = realAddresses.constBegin();
+						addressIter != realAddresses.constEnd();
 						++addressIter){
 				const icomp::CComponentAddress& address = *addressIter;
 				packageIdsList.insert(address.GetPackageId());
 			}
 
-			for (		Ids::const_iterator packageIter = packageIdsList.begin();
-						packageIter != packageIdsList.end();
+			QList<QByteArray> sortedPackageIdsList = packageIdsList.toList();
+			qSort(sortedPackageIdsList);
+
+			for (		QList<QByteArray>::const_iterator packageIter = sortedPackageIdsList.begin();
+						packageIter != sortedPackageIdsList.end();
 						++packageIter){
 				const QByteArray& packageId = *packageIter;
 
@@ -1008,8 +1017,12 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 
 	if (m_extPackagesManagerCompPtr.IsValid()){
 		icomp::IExtPackagesManager::PathList configFilesList = m_extPackagesManagerCompPtr->GetConfigurationPathList(icomp::IExtPackagesManager::PT_CONFIG);
-		for (		icomp::IExtPackagesManager::PathList::const_iterator pathIter = configFilesList.begin();
-					pathIter != configFilesList.end();
+
+		QStringList sortedConfigFilesList = configFilesList.toList();
+		qSort(sortedConfigFilesList);
+
+		for (		QStringList::const_iterator pathIter = sortedConfigFilesList.constBegin();
+					pathIter != sortedConfigFilesList.constEnd();
 					++pathIter){
 			QFileInfo configFilePath(*pathIter);
 

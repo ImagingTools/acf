@@ -105,14 +105,10 @@ win32{
 }
 
 
-CONFIGURATION_NAME = Unknown
+CONFIGURATION_NAME = Release
 
 CONFIG(debug, debug|release){
 	CONFIGURATION_NAME = Debug
-}
-
-CONFIG(release, debug|release){
-	CONFIGURATION_NAME = Release
 }
 
 COMPILER_CODE = $$COMPILER_NAME
