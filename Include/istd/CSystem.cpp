@@ -88,10 +88,20 @@ QString CSystem::GetVariableValue(const QString& varName, bool envVars, bool emb
 			return s_compilerName;
 		}
 		else if (varName == "ConfigurationName"){
-			return s_compilerMode + s_compilerName;
+			QString retVal = s_compilerMode + s_compilerName;
+			if (s_platformCode == "x64"){
+				retVal += "_64";
+			}
+
+			return retVal;
 		}
 		else if (varName == "ConfigurationDir"){
-			return s_compilerMode + s_compilerName + "/";
+			QString retVal = s_compilerMode + s_compilerName;
+			if (s_platformCode == "x64"){
+				retVal += "_64";
+			}
+
+			return retVal + "/";
 		}
 		else if (varName == "ApplicationDir"){
 			return QCoreApplication::applicationDirPath();

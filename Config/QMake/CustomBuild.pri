@@ -35,8 +35,8 @@ isEmpty(ACFTOOLS){
 else{
 	# for cross compiling use external tools
 
-	ARXCBIN=$$ACFTOOLS/$$ARX_COMPILER
-	ACFBIN=$$ACFTOOLS/$$ACF_TOOL
+	ARXCBIN=$$ACFTOOLS/$${QMAKE_HOST.os}/$$ARX_COMPILER
+	ACFBIN=$$ACFTOOLS/$${QMAKE_HOST.os}/$$ACF_TOOL
 }
 
 # Correct ACF paths for windows
