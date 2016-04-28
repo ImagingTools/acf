@@ -102,6 +102,9 @@ protected:
 
 	icomp::GetPackageInfoFunc GetPackageFunction(const QFileInfo& fileInfo);
 
+	/**
+		Check if path was already visited and return enrolled value.
+	*/
 	bool CheckAndMarkPath(const QDir& directory, const QString& path, QString& resultPath) const;
 
 private:

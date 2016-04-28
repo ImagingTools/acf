@@ -240,6 +240,16 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 	QByteArray packageId(fileInfo.baseName().toLocal8Bit());
 
 	if (fileInfo.isFile()){
+		if (m_compositePackagesMap.contains(packageId)){
+			SendErrorMessage(
+						MI_CANNOT_REGISTER,
+						QObject::tr("Packages conflict: %1 - %2")
+									.arg(fileInfo.canonicalFilePath())
+									.arg(m_compositePackagesMap[packageId].directory.canonicalPath()));
+
+			return false;
+		}
+
 		RealPackagesMap::ConstIterator foundIter = m_realPackagesMap.constFind(packageId);
 		if (foundIter == m_realPackagesMap.constEnd()){
 			icomp::GetPackageInfoFunc getInfoPtr = GetPackageFunction(fileInfo);
@@ -263,6 +273,16 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 		}
 	}
 	else if (m_registryLoaderCompPtr.IsValid() && fileInfo.isDir()){
+		if (m_realPackagesMap.contains(packageId)){
+			SendErrorMessage(
+						MI_CANNOT_REGISTER,
+						QObject::tr("Packages conflict: %1 - %2")
+									.arg(fileInfo.canonicalFilePath())
+									.arg(m_realPackagesMap[packageId]));
+
+			return false;
+		}
+
 		CompositePackagesMap::ConstIterator foundIter = m_compositePackagesMap.constFind(packageId);
 		if (foundIter == m_compositePackagesMap.constEnd()){
 			CompositePackageInfo& packageInfo = m_compositePackagesMap[packageId];
@@ -400,9 +420,6 @@ bool CPackagesLoaderComp::LoadConfigFile(const QString& configFile)
 
 			RegisterPackagesDir(correctedPath);
 		}
-		else{
-			SendErrorMessage(0, tr("Package directory check failed: %1").arg(configurationData.GetPackageDir(i)));
-		}
 	}
 
 	int packagesCount = configurationData.GetPackagesCount();
@@ -412,9 +429,6 @@ bool CPackagesLoaderComp::LoadConfigFile(const QString& configFile)
 			SendVerboseMessage(tr("Register package: %1").arg(correctedPath));
 
 			RegisterPackageFile(correctedPath);
-		}
-		else{
-			SendErrorMessage(0, tr("Package file check failed: %1").arg(configurationData.GetPackage(i)));
 		}
 	}
 
