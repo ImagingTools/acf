@@ -455,13 +455,7 @@ QString CSystem::GetCompilerVariable(const QString& varName)
 #else
 		QString retVal = "VC";
 #endif
-
-		if (sizeof(void*) > 4){
-			return retVal + "_64";
-		}
-		else{
-			return retVal;
-		}
+		return retVal;
 
 #else
 		return "Unknown";
