@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
 	bool showApplicationInfo = false;
 	QByteArray componentId;
 	bool waitOnEnd = false;
+	bool isVerboseEnabled = false;
 
 	QTextStream out(stdout);
 
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
 				out << "\t-config configFile       - load config file" << endl;
 				out << "\t-info                    - application parameter info" << endl;
 				out << "\t-wait                    - wait on application end" << endl;
+				out << "\t-v						- enable verbose messages" << endl;
 
 				return 0;
 			}
@@ -50,6 +52,9 @@ int main(int argc, char *argv[])
 			}
 			else if (option == "wait"){
 				waitOnEnd = true;
+			}
+			else if (option == "v"){
+				isVerboseEnabled = true;
 			}
 			else if (index < argc - 1){
 				if (option == "id"){
@@ -67,7 +72,7 @@ int main(int argc, char *argv[])
 
 	int retVal = 0;
 
-	ipackage::CComponentAccessor componentAccessor(registryFilePath, configFilePath);
+	ipackage::CComponentAccessor componentAccessor(registryFilePath, configFilePath, isVerboseEnabled);
 
 	ibase::IApplication* applicationPtr = componentAccessor.GetComponentInterface<ibase::IApplication>(componentId);
 	if (applicationPtr == NULL){

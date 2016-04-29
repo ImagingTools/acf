@@ -27,7 +27,8 @@ public:
 	*/
 	explicit CComponentAccessor(
 				const QString& registryFile, 
-				const QString& configFile = QString());
+				const QString& configFile = QString(),
+				bool isDiagnosticEnabled = false);
 
 	/**
 		Gets component interface.
