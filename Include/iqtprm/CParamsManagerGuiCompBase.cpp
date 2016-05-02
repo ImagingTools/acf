@@ -74,9 +74,9 @@ void CParamsManagerGuiCompBase::on_AddButton_clicked()
 			selectedIndex = -1;
 		}
 
-		// auto select newly created element
-		int newIndex = objectPtr->InsertParamsSet(-1, selectedIndex);
+		int newIndex = objectPtr->InsertParamsSet(-1, selectedIndex + 1);
 		if (newIndex >= 0){
+			// select newly created element
 			objectPtr->SetSelectedOptionIndex(newIndex);
 		}
 	}
@@ -279,7 +279,11 @@ void CParamsManagerGuiCompBase::OnAddMenuOptionClicked(QAction* action)
 		int selectedIndex = GetSelectedIndex();
 		Q_ASSERT(selectedIndex < objectPtr->GetParamsSetsCount());
 
-		objectPtr->InsertParamsSet(typeIndex, selectedIndex);
+		int newIndex = objectPtr->InsertParamsSet(typeIndex, selectedIndex + 1);
+		if (newIndex >= 0){
+			// select newly created element
+			objectPtr->SetSelectedOptionIndex(newIndex);
+		}
 	}
 }
 
