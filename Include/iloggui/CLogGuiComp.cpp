@@ -33,7 +33,8 @@ CLogGuiComp::CLogGuiComp()
 	m_exportActionPtr(NULL),
 	m_diagnosticModeActionPtr(NULL),
 	m_currentMessageMode(MM_ALL),
-	m_statusCategory(istd::IInformationProvider::IC_NONE)
+	m_statusCategory(istd::IInformationProvider::IC_NONE),
+	m_isDiagnosticActive(false)
 {
 	qRegisterMetaType<MessagePtr>("MessagePtr");
 
@@ -160,7 +161,7 @@ bool CLogGuiComp::IsMessageSupported(
 {
 	switch (messageCategory){
 	case istd::IInformationProvider::IC_NONE:
-		return *m_allowDiagnosticMessagesAttrPtr && (m_diagnosticModeActionPtr != NULL) && m_diagnosticModeActionPtr->isChecked();
+		return m_isDiagnosticActive;
 
 	default:
 		return true;
@@ -283,6 +284,8 @@ void CLogGuiComp::OnGuiCreated()
 		m_diagnosticModeActionPtr->setCheckable(true);
 		toolBar->addAction(m_diagnosticModeActionPtr);
 		toolBar->insertSeparator(m_diagnosticModeActionPtr);
+
+		connect(m_diagnosticModeActionPtr, SIGNAL(toggled(bool)), this, SLOT(EnableDiagnosticMessages(bool)));
 	}
 
 	connect(&m_removeMessagesTimer, SIGNAL(timeout()), this, SLOT(OnRemoveMessagesTimer()));
@@ -300,6 +303,8 @@ void CLogGuiComp::OnGuiCreated()
 void CLogGuiComp::OnGuiDestroyed()
 {
 	m_removeMessagesTimer.stop();
+
+	m_isDiagnosticActive = false;
 
 	BaseClass::OnGuiDestroyed();
 }
@@ -456,6 +461,12 @@ void CLogGuiComp::OnRemoveMessagesTimer()
 			LogView->model()->removeRows(*m_maxMessagesCountAttrPtr - 1, itemsToRemove);
 		}
 	}
+}
+
+
+void CLogGuiComp::EnableDiagnosticMessages(bool state)
+{
+	m_isDiagnosticActive = state;
 }
 
 

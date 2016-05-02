@@ -130,6 +130,7 @@ protected Q_SLOTS:
 	virtual void OnExportAction();
 
 	void OnRemoveMessagesTimer();
+	void EnableDiagnosticMessages(bool state);
 
 	void on_FilterText_textChanged(const QString& filterText);
 
@@ -160,6 +161,7 @@ private:
 	int m_statusCategory;
 
 	QTimer m_removeMessagesTimer;
+	bool m_isDiagnosticActive;
 };
 
 
