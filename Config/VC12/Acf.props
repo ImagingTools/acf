@@ -51,7 +51,7 @@
       <RegistryFile>$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.acc</RegistryFile>
       <ConfigFile>$(ACFDIR)\Config\BaseOnly.awc</ConfigFile>
       <OutputDir>$(OutputDir)</OutputDir>
-      <CommandLineTemplate>"$(ACFDIR)\Bin\$(Configuration)VC12\Acf.exe" "%(RegistryFile)" -config "%(ConfigFile)" -input "%(FullPath)" -o %(OutputDir)/%(Filename)</CommandLineTemplate>
+      <CommandLineTemplate>"$(ACFDIR)\Bin\$(Configuration)VC12\Acf.exe" "%(RegistryFile)" -console -config "%(ConfigFile)" -input "%(FullPath)" -o %(OutputDir)/%(Filename)</CommandLineTemplate>
       <Outputs>"%(OutputDir)/%(Filename)"</Outputs>
       <ExecutionDescription>Converting File With ACF transformation...</ExecutionDescription>
       <AdditionalDependencies>"$(ACFDIR)\Bin\$(Configuration)VC12\Acf.exe";"%(RegistryFile)";"%(ConfigFile)"</AdditionalDependencies>

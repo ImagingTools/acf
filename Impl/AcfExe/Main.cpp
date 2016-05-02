@@ -16,8 +16,6 @@
 
 int main(int argc, char *argv[])
 {
-	QCoreApplication coreApp(argc, argv);
-
 	QString configFilePath;
 
 	QString registryFilePath = "default.acc";
@@ -25,6 +23,7 @@ int main(int argc, char *argv[])
 	QByteArray componentId;
 	bool waitOnEnd = false;
 	bool isVerboseEnabled = false;
+	bool isConsoleMode = false;
 
 	QTextStream out(stdout);
 
@@ -41,7 +40,8 @@ int main(int argc, char *argv[])
 				out << "\t-config configFile       - load config file" << endl;
 				out << "\t-info                    - application parameter info" << endl;
 				out << "\t-wait                    - wait on application end" << endl;
-				out << "\t-v						- enable verbose messages" << endl;
+				out << "\t-v                       - enable verbose messages" << endl;
+				out << "\t-console                 - optimize the application for console mode" << endl;
 
 				return 0;
 			}
@@ -55,6 +55,9 @@ int main(int argc, char *argv[])
 			}
 			else if (option == "v"){
 				isVerboseEnabled = true;
+			}
+			else if (option == "console"){
+				isConsoleMode = true;
 			}
 			else if (index < argc - 1){
 				if (option == "id"){
@@ -71,6 +74,12 @@ int main(int argc, char *argv[])
 	}
 
 	int retVal = 0;
+
+	istd::TDelPtr<QCoreApplication> coreAppPtr;
+
+	if (isConsoleMode){
+		coreAppPtr.SetPtr(new QCoreApplication(argc, argv));
+	}
 
 	ipackage::CComponentAccessor componentAccessor(registryFilePath, configFilePath, isVerboseEnabled);
 

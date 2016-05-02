@@ -149,6 +149,7 @@ AcfModule{
 
 			var cmd = new Command(acfBinDirectory + '/' + product.moduleProperty("cpp", "executablePrefix") + 'Acf' + product.moduleProperty("cpp", "executableSuffix"), [
 						acfRegistryFile,
+						'-console',
 						'-config', acfConfigurationFile,
 						'-input', input.filePath,
 						'-o', output.filePath]);
