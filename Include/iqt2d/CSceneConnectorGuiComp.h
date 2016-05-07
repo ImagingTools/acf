@@ -29,7 +29,7 @@ public:
 		I_ASSIGN(m_sceneGuiCompPtr, "SceneGui", "Gui providing scene information", true, "SceneGui");
 		I_ASSIGN_TO(m_sceneCommandsCompPtr, m_sceneGuiCompPtr, false);
 		I_ASSIGN_TO(m_sceneProviderCompPtr, m_sceneGuiCompPtr, true);
-		I_ASSIGN(m_extenderGuiCompPtr, "ExtenderGui", "Gui providing parameters displayed on scene", true, "ExtenderGui");
+		I_ASSIGN(m_extenderGuiCompPtr, "ExtenderGui", "Gui providing parameters displayed on scene", false, "ExtenderGui");
 		I_ASSIGN_TO(m_extenderCommandsCompPtr, m_extenderGuiCompPtr, false);
 		I_ASSIGN_TO(m_extenderCompPtr, m_extenderGuiCompPtr, true);
 	I_END_COMPONENT;
