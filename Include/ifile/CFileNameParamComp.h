@@ -33,6 +33,7 @@ public:
 		I_REGISTER_INTERFACE(IFileNameParam);
 		I_ASSIGN(m_defaultDirAttrPtr, "DefaultPath", "Default path of file or directory", false, ".");
 		I_ASSIGN(m_pathTypeAttrPtr, "PathType", "Type of path: 0 - unknown, 1 - PT_FILE, 2 - PT_DIRECTORY, 3 - PT_URL", true, PT_UNKNOWN);
+		I_ASSIGN(m_initialPathCompPtr, "InitialPath", "If set, the current path will be initialized using specified file name component", false, "InitalPath");
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFileNameParam)
@@ -52,6 +53,7 @@ private:
 
 	I_ATTR(QString, m_defaultDirAttrPtr);
 	I_ATTR(int, m_pathTypeAttrPtr);
+	I_REF(ifile::IFileNameParam, m_initialPathCompPtr);
 
 	static QString s_tempPathVariable;
 	static QString s_appNameVariable;

@@ -122,6 +122,12 @@ void CFileNameParamComp::OnComponentCreated()
 #endif
 		m_path.replace(s_userHomePathVariable, userHomePath);
 	}
+
+	if (m_initialPathCompPtr.IsValid()){
+		if (GetPathType() == m_initialPathCompPtr->GetPathType()){
+			m_path = m_initialPathCompPtr->GetPath();
+		}
+	}
 }
 
 
