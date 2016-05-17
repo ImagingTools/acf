@@ -11,6 +11,10 @@ namespace idoc
 {
 
 
+// static attributes
+static const istd::IChangeable::ChangeSet s_undoChangeSet(istd::IChangeable::CF_NO_UNDO, "UNDO");
+
+
 CSerializedUndoManagerComp::CSerializedUndoManagerComp()
 :	m_hasStoredDocumentState(false),
 	m_isBlocked(false),
@@ -122,6 +126,9 @@ bool CSerializedUndoManagerComp::DoListShift(int steps, UndoList& fromList, Undo
 		iser::ISerializable* objectPtr = GetObservedObject();
 
 		if (objectPtr != NULL){
+			istd::CChangeNotifier objectNotifier(objectPtr, &s_undoChangeSet);
+			Q_UNUSED(objectNotifier);
+
 			Q_ASSERT(!m_isBlocked);
 			m_isBlocked = true;
 
