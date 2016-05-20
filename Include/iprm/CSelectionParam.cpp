@@ -66,18 +66,22 @@ void CSelectionParam::SetSubselection(int selectionIndex, ISelectionParam* selec
 
 bool CSelectionParam::SetSelectedOptionById(const QByteArray& selectedOptionId)
 {
-	if (selectedOptionId != m_selectedOptionId){
+	if (selectedOptionId == m_selectedOptionId){
+		return true;
+	}
+
+	int index = CalcIndexFromId(selectedOptionId, NO_SELECTION);
+	if (index != NO_SELECTION){
 		istd::CChangeNotifier notifier(this, &s_selectionChangeSet);
 		Q_UNUSED(notifier);
 
 		m_selectedOptionId = selectedOptionId;
+		m_selectedOptionIndex = index;
 
-		m_selectedOptionIndex = CalcIndexFromCurrentId();
-
-		return m_selectedOptionId.isEmpty() || (m_selectedOptionIndex >= 0);
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 
@@ -171,11 +175,10 @@ bool CSelectionParam::Serialize(iser::IArchive& archive)
 {
 	bool isStoring = archive.IsStoring();
 
-	istd::CChangeNotifier notifier(isStoring? NULL: this, &GetAllChanges());
-
+	QByteArray optionId = m_selectedOptionId;
 	int index = NO_SELECTION;
-	if (isStoring && ((m_constraintsPtr == NULL) || ((m_constraintsPtr->GetOptionsFlags() & iprm::IOptionsList::SCF_SUPPORT_UNIQUE_ID) == 0))){
-		index = CalcIndexFromCurrentId();
+	if (isStoring){
+		index = CalcIndexFromId(m_selectedOptionId, m_selectedOptionIndex);
 	}
 
 	bool retVal = archive.BeginTag(s_selectedOptionIndexTag);
@@ -183,17 +186,24 @@ bool CSelectionParam::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(s_selectedOptionIndexTag);
 
 	retVal = retVal && archive.BeginTag(s_selectedOptionIdTag);
-	retVal = retVal && archive.Process(m_selectedOptionId);
+	retVal = retVal && archive.Process(optionId);
 	retVal = retVal && archive.EndTag(s_selectedOptionIdTag);
 
 	if (!isStoring){
 		if (retVal){
-			m_selectedOptionIndex = index;
-			m_selectedOptionIndex = CalcIndexFromCurrentId();
+			index = CalcIndexFromId(optionId, index);
 		}
 		else{
-			m_selectedOptionIndex = NO_SELECTION;
-			m_selectedOptionId.clear();
+			index = NO_SELECTION;
+			optionId.clear();
+		}
+
+		if ((index != m_selectedOptionIndex) || (optionId != m_selectedOptionId)){
+			istd::CChangeNotifier notifier(this, &GetAllChanges());
+			Q_UNUSED(notifier);
+
+			m_selectedOptionId = optionId;
+			m_selectedOptionIndex = index;
 		}
 	}
 
@@ -308,21 +318,21 @@ istd::IChangeable* CSelectionParam::CloneMe(CompatibilityMode mode) const
 
 // protected methods
 
-int CSelectionParam::CalcIndexFromCurrentId() const
+int CSelectionParam::CalcIndexFromId(const QByteArray& optionId, int suggestedIndex) const
 {
 	if (m_constraintsPtr != NULL){
-		if (		(m_selectedOptionIndex >= 0) &&
-					(m_selectedOptionIndex < m_constraintsPtr->GetOptionsCount()) &&
-					(m_selectedOptionId == m_constraintsPtr->GetOptionId(m_selectedOptionIndex)) &&
-					m_constraintsPtr->IsOptionEnabled(m_selectedOptionIndex)){
-			return m_selectedOptionIndex;
+		if (		(suggestedIndex >= 0) &&
+					(suggestedIndex < m_constraintsPtr->GetOptionsCount()) &&
+					(optionId == m_constraintsPtr->GetOptionId(suggestedIndex)) &&
+					m_constraintsPtr->IsOptionEnabled(suggestedIndex)){
+			return suggestedIndex;
 		}
 
 		int optionsCount = m_constraintsPtr->GetOptionsCount();
 		for (int optionIndex = 0; optionIndex < optionsCount; optionIndex++){
 			QByteArray optionId = m_constraintsPtr->GetOptionId(optionIndex);
 
-			if ((optionId == m_selectedOptionId) && m_constraintsPtr->IsOptionEnabled(optionIndex)){
+			if ((optionId == optionId) && m_constraintsPtr->IsOptionEnabled(optionIndex)){
 				return optionIndex;
 			}
 		}
@@ -330,13 +340,13 @@ int CSelectionParam::CalcIndexFromCurrentId() const
 		return NO_SELECTION;
 	}
 
-	return m_selectedOptionIndex;
+	return suggestedIndex;
 }
 
 
 bool CSelectionParam::SyncIndexWithId()
 {
-	int index = CalcIndexFromCurrentId();
+	int index = CalcIndexFromId(m_selectedOptionId, m_selectedOptionIndex);
 
 	if (index != m_selectedOptionIndex){
 		istd::CChangeNotifier notifier(this, &s_selectionCorrectionChangeSet);

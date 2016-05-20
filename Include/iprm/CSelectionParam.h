@@ -66,7 +66,7 @@ protected:
 	/**
 		Calculate optimal index based on current selected index and ID.
 	*/
-	int CalcIndexFromCurrentId() const;
+	int CalcIndexFromId(const QByteArray& optionId, int suggestedIndex = NO_SELECTION) const;
 	/**
 		Synchronize current index to optimal one.
 	*/
