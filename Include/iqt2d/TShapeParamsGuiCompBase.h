@@ -21,6 +21,7 @@
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iview/IColorSchema.h"
 #include "iview/IShapeFactory.h"
+#include "iview/CInteractiveShapeBase.h"
 #include "iqt2d/TViewExtenderCompBase.h"
 #include "iqt2d/CIntParamAction.h"
 #include "iqt2d/CActionAdapter.h"
