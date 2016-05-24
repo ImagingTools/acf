@@ -330,9 +330,9 @@ int CSelectionParam::CalcIndexFromId(const QByteArray& optionId, int suggestedIn
 
 		int optionsCount = m_constraintsPtr->GetOptionsCount();
 		for (int optionIndex = 0; optionIndex < optionsCount; optionIndex++){
-			QByteArray optionId = m_constraintsPtr->GetOptionId(optionIndex);
+			QByteArray id = m_constraintsPtr->GetOptionId(optionIndex);
 
-			if ((optionId == optionId) && m_constraintsPtr->IsOptionEnabled(optionIndex)){
+			if ((optionId == id) && m_constraintsPtr->IsOptionEnabled(optionIndex)){
 				return optionIndex;
 			}
 		}
