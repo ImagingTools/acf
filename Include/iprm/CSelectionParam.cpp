@@ -70,33 +70,21 @@ bool CSelectionParam::SetSelectedOptionById(const QByteArray& selectedOptionId)
 		return true;
 	}
 
-	if (selectedOptionId.isEmpty()){
-		if (m_selectedOptionIndex != NO_SELECTION){
-			istd::CChangeNotifier notifier(this, &s_selectionChangeSet);
-			Q_UNUSED(notifier);
-
-			m_selectedOptionIndex = NO_SELECTION;
-			m_selectedOptionId.clear();
-		}
-
-		Q_ASSERT(m_selectedOptionId.isEmpty());
-
-		return true;
-	}
-	else{
-		int index = CalcIndexFromId(selectedOptionId, NO_SELECTION);
-		if (index != NO_SELECTION){
-			istd::CChangeNotifier notifier(this, &s_selectionChangeSet);
-			Q_UNUSED(notifier);
-
-			m_selectedOptionId = selectedOptionId;
-			m_selectedOptionIndex = index;
-
-			return true;
+	int index = NO_SELECTION;
+	if (!selectedOptionId.isEmpty()){
+		index = CalcIndexFromId(selectedOptionId, NO_SELECTION);
+		if (index == NO_SELECTION){
+			return false;
 		}
 	}
 
-	return false;
+	istd::CChangeNotifier notifier(this, &s_selectionChangeSet);
+	Q_UNUSED(notifier);
+
+	m_selectedOptionId = selectedOptionId;
+	m_selectedOptionIndex = index;
+
+	return true;
 }
 
 
