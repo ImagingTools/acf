@@ -23,9 +23,8 @@ namespace ifile
 // public methods
 
 CAutoPersistenceComp::CAutoPersistenceComp()
-	:m_isDataWasChanged(false),
-	m_wasLoadingSuceeded(false),
-	m_isReloading(false),
+:	m_isObjectChanged(false),
+	m_isLoadedFromFile(false),
 	m_blockLoadingOnFileChanges(false)
 {
 }
@@ -35,8 +34,6 @@ CAutoPersistenceComp::CAutoPersistenceComp()
 
 void CAutoPersistenceComp::SaveObjectSnapshot()
 {
-	bool skipStoring = false;
-
 	if (!m_objectShadowPtr.IsValid()){
 		return;
 	}
@@ -48,40 +45,68 @@ void CAutoPersistenceComp::SaveObjectSnapshot()
 		iser::CMemoryWriteArchive currentState;
 
 		if (serializablePtr->Serialize(currentState)){
-			if (currentState != m_lastStoredObjectState){
-				m_lastStoredObjectState = currentState;
+			if (currentState == m_lastStoredObjectState){
+				return;
 			}
-			else{
-				skipStoring = true;
-			}
+
+			m_lastStoredObjectState = currentState;
 		}
 	}
 
-	if (!skipStoring){
-		StoreObject(*m_objectShadowPtr.GetPtr());
-	}
+	StoreObject(*m_objectShadowPtr.GetPtr());
 }
 
 
-void CAutoPersistenceComp::StoreObject(const istd::IChangeable& object) const
+bool CAutoPersistenceComp::LoadObject(const QString& filePath)
 {
+	if (		m_fileLoaderCompPtr.IsValid() &&
+				m_objectCompPtr.IsValid() &&
+				m_loadSaveMutex.tryLock()){
+		int operationState = m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr, filePath);
+
+		m_loadSaveMutex.unlock();
+			
+		if (operationState == ifile::IFilePersistence::OS_OK){
+			m_isLoadedFromFile = true;
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+bool CAutoPersistenceComp::StoreObject(const istd::IChangeable& object)
+{
+	bool retVal = false;
+
 	if (m_fileLoaderCompPtr.IsValid()){
 		QString filePath;
 		if (m_filePathCompPtr.IsValid()){
 			filePath = m_filePathCompPtr->GetPath();
 		}
 
-		if (LockFile())
-		{
+		if (LockFile(filePath) && m_loadSaveMutex.tryLock()){
 			if (*m_reloadOnFileChangeAttrPtr){
 				m_blockLoadingOnFileChanges = true;
 			}
 
-			m_fileLoaderCompPtr->SaveToFile(object, filePath);
+			int operationState = m_fileLoaderCompPtr->SaveToFile(object, filePath);
+
+			m_loadSaveMutex.unlock();
+
+			if (operationState == ifile::IFilePersistence::OS_OK){
+				retVal = true;
+
+				m_isLoadedFromFile = true;
+			}
 
 			UnlockFile();
 		}
 	}
+
+	return retVal;
 }
 
 
@@ -98,26 +123,16 @@ void CAutoPersistenceComp::OnComponentCreated()
 
 	if (*m_restoreOnBeginAttrPtr){
 		if (m_fileLoaderCompPtr.IsValid() && m_objectCompPtr.IsValid()){
-			m_isReloading = true;
-
-			if (m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr, filePath) == ifile::IFilePersistence::OS_OK)
-			{
-				m_wasLoadingSuceeded = true;
-			}
-
-			m_isReloading = false;
+			LoadObject(filePath);
 		}
 	}
 
-	if (m_objectModelCompPtr.IsValid())
-	{
+	if (m_objectModelCompPtr.IsValid()){
 		BaseClass2::RegisterModel(m_objectModelCompPtr.GetPtr(), MI_OBJECT);
 	}
 
-	imod::IModel* filePathModelPtr = dynamic_cast<imod::IModel*>(m_filePathCompPtr.GetPtr());
-	if (filePathModelPtr != NULL)
-	{
-		BaseClass2::RegisterModel(filePathModelPtr, MI_FILEPATH);
+	if (m_filePathModelCompPtr.IsValid()){
+		BaseClass2::RegisterModel(m_filePathModelCompPtr.GetPtr(), MI_FILEPATH);
 	}
 
 	if (*m_reloadOnFileChangeAttrPtr){
@@ -130,8 +145,9 @@ void CAutoPersistenceComp::OnComponentCreated()
 		BaseClass2::RegisterModel(m_runtimeStatusModelCompPtr.GetPtr(), MI_RUNTIME_STATUS);
 	}
 
+	connect(&m_storingTimer, SIGNAL(timeout()), this, SLOT(OnTimeout()));
 
-	EnsureTimerConnected();
+	TryStartIntervalStore();
 }
 
 
@@ -139,13 +155,14 @@ void CAutoPersistenceComp::OnComponentDestroyed()
 {
 	BaseClass2::UnregisterAllModels();
 
-	if (!m_runtimeStatusCompPtr.IsValid()){
+	if (!m_runtimeStatusCompPtr.IsValid() || !m_runtimeStatusModelCompPtr.IsValid()){
 		disconnect(&m_storingTimer, SIGNAL(timeout()), this, SLOT(OnTimeout()));
 		disconnect(&m_fileWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnFileContentsChanged(const QString&)));
 
 		m_storingFuture.waitForFinished();
 
-		if (*m_storeOnEndAttrPtr && m_objectCompPtr.IsValid() && !m_isReloading){
+		bool storeOnEnd = *m_storeOnEndAttrPtr || (!m_isLoadedFromFile && *m_storeOnChangeAttrPtr);
+		if (storeOnEnd && m_objectCompPtr.IsValid()){
 			StoreObject(*m_objectCompPtr.GetPtr());
 		}
 	}
@@ -166,17 +183,13 @@ void CAutoPersistenceComp::OnModelChanged(int modelId, const istd::IChangeable::
 				return;
 			}
 
-			bool storeByTimer = m_storeIntervalAttrPtr.IsValid() ? *m_storeIntervalAttrPtr : false;
-			if (storeByTimer){
-				EnsureTimerConnected();
-			}
-			else{
-				if (*m_storeOnChangeAttrPtr && m_objectCompPtr.IsValid() && !m_isReloading){
+			m_isObjectChanged = true;
+
+			if (!TryStartIntervalStore()){
+				if (*m_storeOnChangeAttrPtr && m_objectCompPtr.IsValid()){
 					StoreObject(*m_objectCompPtr.GetPtr());
 				}
 			}
-
-			m_isDataWasChanged = true;
 		}
 		break;
 
@@ -186,24 +199,20 @@ void CAutoPersistenceComp::OnModelChanged(int modelId, const istd::IChangeable::
 				m_fileWatcher.removePaths(m_fileWatcher.files());
 			}
 
-			if (*m_restoreOnBeginAttrPtr && !m_wasLoadingSuceeded){
+			if (*m_restoreOnBeginAttrPtr && !m_isLoadedFromFile){
 				QString filePath;
 				if (m_filePathCompPtr.IsValid()){
 					filePath = m_filePathCompPtr->GetPath();
 				}
 
 				QFileInfo fileInfo(filePath);
-				if(fileInfo.exists()){
+				if (fileInfo.exists()){
 					filePath = fileInfo.absoluteFilePath();
+
+					LoadObject(filePath);
 
 					if (*m_reloadOnFileChangeAttrPtr){
 						m_fileWatcher.addPath(filePath);
-					}
-
-					if (m_fileLoaderCompPtr.IsValid() && m_objectCompPtr.IsValid()){
-						if(m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr, filePath) == ifile::IFilePersistence::OS_OK){
-							m_wasLoadingSuceeded = true;
-						}
 					}
 				}
 			}
@@ -216,8 +225,9 @@ void CAutoPersistenceComp::OnModelChanged(int modelId, const istd::IChangeable::
 				disconnect(&m_fileWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnFileContentsChanged(const QString&)));
 
 				m_storingFuture.waitForFinished();
-		
-				if (*m_storeOnEndAttrPtr && m_objectCompPtr.IsValid() && !m_isReloading){
+
+				bool storeOnEnd = *m_storeOnEndAttrPtr || (!m_isLoadedFromFile && *m_storeOnChangeAttrPtr);
+				if (storeOnEnd && m_objectCompPtr.IsValid()){
 					StoreObject(*m_objectCompPtr.GetPtr());
 				}
 			}			
@@ -233,7 +243,7 @@ void CAutoPersistenceComp::OnModelChanged(int modelId, const istd::IChangeable::
 
 void CAutoPersistenceComp::OnTimeout()
 {
-	if (!m_isDataWasChanged){
+	if (!m_isObjectChanged){
 		return;
 	}
 
@@ -252,7 +262,7 @@ void CAutoPersistenceComp::OnTimeout()
 
 	m_storingFuture = QtConcurrent::run(this, &CAutoPersistenceComp::SaveObjectSnapshot);
 
-	m_isDataWasChanged = false;
+	m_isObjectChanged = false;
 }
 
 
@@ -279,26 +289,14 @@ void CAutoPersistenceComp::OnFileContentsChanged(const QString& path)
 
 	QString tempFileName = tempPath + "/" + QUuid::createUuid().toString() + "_" + QFileInfo(path).fileName();
 
-	if (LockFile()){
+	if (LockFile(path)){
 		if (QFile::copy(path, tempFileName)){
 			UnlockFile();
 
-			m_wasLoadingSuceeded = false;
-
-			m_isReloading = true;
-
-			if (m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr, tempFileName) == ifile::IFilePersistence::OS_OK){
-				m_wasLoadingSuceeded = true;
-			}
-			else{
-				qDebug("File could not be loaded");
-			}
+			LoadObject(tempFileName);
 
 			QFile::remove(tempFileName);
 
-			m_isReloading = false;
-
-			
 			m_fileWatcher.removePaths(m_fileWatcher.files());
 			m_fileWatcher.addPath(path);
 		}
@@ -311,35 +309,30 @@ void CAutoPersistenceComp::OnFileContentsChanged(const QString& path)
 
 // private methods
 
-void CAutoPersistenceComp::EnsureTimerConnected()
+bool CAutoPersistenceComp::TryStartIntervalStore()
 {
-	if (m_storeIntervalAttrPtr.IsValid() && !QCoreApplication::startingUp()){
-		if (!m_storingTimer.isActive()){
-			connect(&m_storingTimer, SIGNAL(timeout()), this, SLOT(OnTimeout()));
-
-			m_storingTimer.start(*m_storeIntervalAttrPtr * 1000);
-		}
+	if (		m_storeIntervalAttrPtr.IsValid() &&
+				!QCoreApplication::startingUp() &&
+				!m_storingTimer.isActive()){
+		m_storingTimer.start(qMax(1, int(*m_storeIntervalAttrPtr * 1000)));
 	}
+
+	return m_storingTimer.isActive();
 }
 
 
-bool CAutoPersistenceComp::LockFile() const
+bool CAutoPersistenceComp::LockFile(const QString& filePath) const
 {
-	QString filePath;
-	if (m_filePathCompPtr.IsValid()){
-		filePath = m_filePathCompPtr->GetPath();
-	}
-
 	QFileInfo fileInfo(filePath);
 	if (fileInfo.exists()){
-		filePath += ".lock";
+		QString lockFilePath = filePath + ".lock";
 
 		// Try to remove "dead" lock file, if exists:
-		QFile::remove(filePath);
+		QFile::remove(lockFilePath);
 
 #if QT_VERSION >= 0x050000
 		if (!m_lockFilePtr.IsValid()){
-			m_lockFilePtr = new QLockFile(filePath);
+			m_lockFilePtr.SetPtr(new QLockFile(lockFilePath));
 		}
 
 		Q_ASSERT(m_lockFilePtr.IsValid());
@@ -357,6 +350,8 @@ void CAutoPersistenceComp::UnlockFile() const
 #if QT_VERSION >= 0x050000
 	if (m_lockFilePtr.IsValid()){
 		m_lockFilePtr->unlock();
+
+		m_lockFilePtr.Reset();
 	}
 #endif
 }

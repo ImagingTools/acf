@@ -76,6 +76,7 @@ public:
 		I_ASSIGN_TO(m_serializeableObjectCompPtr, m_objectCompPtr, false);
 		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "File loader used to store and restore object", true, "FileLoader");
 		I_ASSIGN(m_filePathCompPtr, "FilePath", "File path where object data will be stored if non anonymous loader is used", false, "FilePath");
+		I_ASSIGN_TO(m_filePathModelCompPtr, m_filePathCompPtr, false);
 		I_ASSIGN(m_restoreOnBeginAttrPtr, "RestoreOnBegin", "Flag indicating that object should be restored on begin", true, true);
 		I_ASSIGN(m_storeOnEndAttrPtr, "StoreOnEnd", "Flag indicating that object should be stored on end", true, true);
 		I_ASSIGN(m_storeOnChangeAttrPtr, "StoreOnChange", "Flag indicating that object should be stored on each data change", true, false);
@@ -97,9 +98,13 @@ protected:
 	void SaveObjectSnapshot();
 
 	/**
-		Store data object using pre-configured persistence component and file path.
+		Load working object data from some file.
 	*/
-	virtual void StoreObject(const istd::IChangeable& object) const;
+	virtual bool LoadObject(const QString& filePath);
+	/**
+		Store some object data to working file.
+	*/
+	virtual bool StoreObject(const istd::IChangeable& object);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -120,9 +125,9 @@ private:
 	/**
 		Ensure that the persistence timer was connected to the timeout slot.
 	*/
-	void EnsureTimerConnected();
+	bool TryStartIntervalStore();
 
-	bool LockFile() const;
+	bool LockFile(const QString& filePath) const;
 	void UnlockFile() const;
 
 private:
@@ -145,6 +150,7 @@ private:
 		Reference to the file path component used for data object saving/loading.
 	*/
 	I_REF(ifile::IFileNameParam, m_filePathCompPtr);
+	I_REF(imod::IModel, m_filePathModelCompPtr);
 
 	/**
 		Attribute for enabling the reading of the data object during component initialization (eg. on application's start)
@@ -175,14 +181,14 @@ private:
 	iser::CMemoryWriteArchive m_lastStoredObjectState;
 
 	/**
-		Data has beem changed.
+		Flag indicating that object has been changed.
 	*/
-	bool m_isDataWasChanged;
+	bool m_isObjectChanged;
 
 	/**
-		Loading of the object was successful.
+		Object state is synchronized with the file state.
 	*/
-	bool m_wasLoadingSuceeded;
+	bool m_isLoadedFromFile;
 
 	QTimer m_storingTimer;
 
@@ -195,10 +201,9 @@ private:
 
 	QFileSystemWatcher m_fileWatcher;
 
-	bool m_isReloading;
+	QMutex m_loadSaveMutex;
 	
 	mutable bool m_blockLoadingOnFileChanges;
-
 
 #if QT_VERSION >= 0x050000
 	mutable istd::TDelPtr<QLockFile> m_lockFilePtr;
