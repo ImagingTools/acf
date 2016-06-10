@@ -237,7 +237,9 @@ void CMultiPageDocumentFilePersistenceComp::OnComponentCreated()
 	if (m_pageObjectPersistenceCompPtr.IsValid()){
 		QStringList bitmapSuffixes;
 		if (m_pageObjectPersistenceCompPtr->GetFileExtensions(bitmapSuffixes, NULL, ifile::IFileTypeInfo::QF_FILE)){
-			m_defaultPageSuffix = bitmapSuffixes.first();
+			if (!bitmapSuffixes.isEmpty()){
+				m_defaultPageSuffix = bitmapSuffixes.first();
+			}
 		}
 	}
 }

@@ -390,6 +390,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileNameParam.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileNameParamComp.cpp"
 				>
 			</File>
@@ -480,6 +484,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileListProviderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileNameParam.h"
 				>
 			</File>
 			<File

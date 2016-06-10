@@ -3,9 +3,8 @@
 
 
 // ACF includes
-#include "iser/ISerializable.h"
 #include "icomp/CComponentBase.h"
-#include "ifile/IFileNameParam.h"
+#include "ifile/CFileNameParam.h"
 
 
 namespace ifile
@@ -23,10 +22,11 @@ namespace ifile
 */
 class CFileNameParamComp:
 			public icomp::CComponentBase,
-			virtual public IFileNameParam
+			public CFileNameParam
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+	typedef CFileNameParam BaseClass2;
 
 	I_BEGIN_COMPONENT(CFileNameParamComp);
 		I_REGISTER_INTERFACE(iser::ISerializable);
@@ -38,19 +38,12 @@ public:
 
 	// reimplemented (ifile::IFileNameParam)
 	virtual int GetPathType() const;
-	virtual const QString& GetPath() const;
-	virtual void SetPath(const QString& path);
-
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
 private:
-	QString m_path;
-
 	I_ATTR(QString, m_defaultDirAttrPtr);
 	I_ATTR(int, m_pathTypeAttrPtr);
 	I_REF(ifile::IFileNameParam, m_initialPathCompPtr);
