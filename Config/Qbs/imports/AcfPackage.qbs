@@ -6,10 +6,10 @@ import "../modules/acf/AcfService.js" as AcfService
 DynamicLibrary{
 	type: ["dynamiclibrary", "acf_share", "acfComponent"]
 
-	Depends{ name: "ipackage" }
-	Depends{ name: "acf" }
-	Depends{ name: "Qt.core" }
 	Depends{ name: "cpp" }
+	Depends{ name: "Qt.core" }
+	Depends{ name: "acf" }
+	Depends{ name: "ipackage" }
 
 	Properties{
 		condition: qbs.toolchain.contains("gcc") || qbs.toolchain.contains("clang")
@@ -22,11 +22,6 @@ DynamicLibrary{
 	cpp.dynamicLibrarySuffix: ".arp"
 
 	Export{
-		Depends{ name: "Qt.core" }
-		Depends{ name: "ipackage" }
-		Depends{ name: "cpp" }
-
-		cpp.defines: ['I_QBS']
 		cpp.includePaths: ["../.."]
 	}
 

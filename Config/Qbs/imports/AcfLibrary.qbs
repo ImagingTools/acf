@@ -6,9 +6,9 @@ import "../modules/acf/AcfService.js" as AcfService
 Library{
 	type: [((project.acfBuildDynamic == true) && qbs.targetOS.contains('windows'))? "dynamiclibrary": "staticlibrary", "acf_share"]
 
-	Depends{ name: "acf" }
 	Depends{ name: "cpp" }
 	Depends{ name: "Qt.core" }
+	Depends{ name: "acf" }
 
 	Properties{
 		condition: qbs.toolchain.contains("gcc") || qbs.toolchain.contains("clang")
@@ -19,8 +19,9 @@ Library{
 	cpp.includePaths: ["../..", product.buildDirectory]
 
 	Export{
-		Depends{ name: "Qt.core" }
 		Depends{ name: "cpp" }
+		Depends{ name: "Qt.core" }
+		Depends{ name: "acf" }
 
 		cpp.defines: ['I_QBS']
 		cpp.includePaths: ["../..", product.buildDirectory]
