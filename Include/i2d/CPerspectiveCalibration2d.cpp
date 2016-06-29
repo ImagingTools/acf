@@ -242,7 +242,7 @@ bool CPerspectiveCalibration2d::GetLocalInvTransform(
 
 	double det = perspMatrix.GetDet();
 
-	if (det > I_BIG_EPSILON){
+	if (qAbs(det) > I_BIG_EPSILON){
 		i2d::CMatrix2d deformMatrx = perspMatrix.GetInverted();
 		result.SetDeformMatrix(deformMatrx);
 		result.SetTranslation(deformMatrx.GetMultiplied(transfPosition) - m_affinePart.GetTranslation());	// TODO: not sure if it is correct (CPerspectiveCalibration2d::GetLocalTransform)
