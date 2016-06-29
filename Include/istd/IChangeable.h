@@ -156,22 +156,27 @@ public:
 		/**
 			Observing of this object via observer-observable pattern.
 		*/
-		SO_OBSERVE = 1,
+		SO_OBSERVE = 1 << 0,
 		
 		/**
 			Copying from other object.
 		*/
-		SO_COPY = 2,
+		SO_COPY = 1 << 1,
 		
 		/**
 			Creating of copy of this object.
 		*/
-		SO_CLONE = 4,
+		SO_CLONE = 1 << 2,
 
 		/**
 			Comparsion with another object.
 		*/
-		SO_COMPARE = 8
+		SO_COMPARE = 1 << 3,
+
+		/**
+			Resetting of object state.
+		*/
+		SO_RESET = 1 << 4
 	};
 
 	/**
