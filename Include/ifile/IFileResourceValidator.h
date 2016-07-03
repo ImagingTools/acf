@@ -28,6 +28,6 @@ public:
 };
 
 
-}} // namespace ifile
+} // namespace ifile
 
 
