@@ -7,8 +7,8 @@
 		<CustomBuildRule
 			Name="QT Designer Form"
 			DisplayName="QT Form"
-			CommandLine="&quot;$(QTDIR)/bin/uic.exe&quot; -o &quot;$(InputDir)/../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/ui_$(InputName).h&quot; &quot;$(InputPath)&quot;"
-			Outputs="&quot;$(InputDir)/../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/ui_$(InputName).h&quot;"
+			CommandLine="&quot;$(QTDIR)/bin/uic.exe&quot; -o &quot;$(ProjectDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/ui_$(InputName).h&quot; &quot;$(InputPath)&quot;"
+			Outputs="&quot;$(ProjectDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/ui_$(InputName).h&quot;"
 			AdditionalDependencies="$(QTDIR)/bin/uic.exe"
 			FileExtensions="*.ui"
 			ExecutionDescription="Uic&apos;ing $(InputFileName)..."
@@ -19,8 +19,8 @@
 		<CustomBuildRule
 			Name="QT Resources"
 			DisplayName="QT Resources"
-			CommandLine="if &quot;[$IsGenerated]&quot;==&quot;true&quot; (copy /Y &quot;$(InputPath)&quot; &quot;$(InputDir)/../../AuxInclude/Qt5/GeneratedFiles&quot; &amp; &quot;$(QTDIR)/bin/rcc.exe&quot; -name &quot;$(InputName)&quot; &quot;$(InputDir)/../../AuxInclude/Qt5/GeneratedFiles/$(InputFileName)&quot; -no-compress -o &quot;$(InputDir)/../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/qrc_$(InputName).cpp&quot;) ELSE (&quot;$(QTDIR)/bin/rcc.exe&quot; -name &quot;$(InputName)&quot; &quot;$(InputPath)&quot; -no-compress -o &quot;$(InputDir)/../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/qrc_$(InputName).cpp&quot;)"
-			Outputs="&quot;$(InputDir)/../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/qrc_$(InputName).cpp&quot;"
+			CommandLine="if &quot;[$IsGenerated]&quot;==&quot;true&quot; (copy /Y &quot;$(InputPath)&quot; &quot;$(ProjectDir)/../../../AuxInclude/Qt5/GeneratedFiles&quot; &amp; &quot;$(QTDIR)/bin/rcc.exe&quot; -name &quot;$(InputName)&quot; &quot;$(ProjectDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(InputFileName)&quot; -no-compress -o &quot;$(ProjectDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/qrc_$(InputName).cpp&quot;) ELSE (&quot;$(QTDIR)/bin/rcc.exe&quot; -name &quot;$(InputName)&quot; &quot;$(InputPath)&quot; -no-compress -o &quot;$(ProjectDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/qrc_$(InputName).cpp&quot;)"
+			Outputs="&quot;$(ProjectDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/qrc_$(InputName).cpp&quot;"
 			AdditionalDependencies="$(QTDIR)/bin/rcc.exe"
 			FileExtensions="*.qrc"
 			ExecutionDescription="Rcc&apos;ing $(InputFileName)..."
@@ -38,8 +38,8 @@
 		<CustomBuildRule
 			Name="QT Moc Metafile"
 			DisplayName="QT Moc"
-			CommandLine="&quot;$(QTDIR)/bin/moc.exe&quot; &quot;$(InputDir)/$(InputName).h&quot; -o &quot;$(InputDir)/../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/moc_$(InputName).cpp&quot; -D_WIN32"
-			Outputs="&quot;$(InputDir)/../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/moc_$(InputName).cpp&quot;"
+			CommandLine="&quot;$(QTDIR)/bin/moc.exe&quot; &quot;$(InputDir)/$(InputName).h&quot; -o &quot;$(ProjectDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/moc_$(InputName).cpp&quot; -D_WIN32"
+			Outputs="&quot;$(ProjectDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)/moc_$(InputName).cpp&quot;"
 			AdditionalDependencies="$(QTDIR)/bin/moc.exe;&quot;$(InputDir)/$(InputName).h&quot;"
 			FileExtensions="*.moc"
 			ExecutionDescription="Moc&apos;ing $(InputFileName)..."

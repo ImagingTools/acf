@@ -7,8 +7,8 @@
 		<CustomBuildRule
 			Name="Arxc"
 			DisplayName="ARX Compiler"
-			CommandLine="&quot;..\..\..\Bin\$(ConfigurationName)$(CompilerCode)\Arxc.exe&quot; &quot;$(InputPath)&quot; -o &quot;$(InputDir)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).cpp&quot; [AllOptions] [AdditionalOptions]"
-			Outputs="&quot;$(InputDir)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).cpp&quot;;&quot;$(InputDir)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).h&quot;"
+			CommandLine="&quot;..\..\..\Bin\$(ConfigurationName)$(CompilerCode)\Arxc.exe&quot; &quot;$(InputPath)&quot; -o &quot;$(ProjectDir)/../../../AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).cpp&quot; [AllOptions] [AdditionalOptions]"
+			Outputs="&quot;$(ProjectDir)/../../../AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).cpp&quot;;&quot;$(ProjectDir)/../../../AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).h&quot;"
 			AdditionalDependencies="&quot;..\..\..\Bin\$(ConfigurationName)$(CompilerCode)\Arxc.exe&quot;"
 			FileExtensions="*.acc;*.arx"
 			ExecutionDescription="Compiling ACF Registry File..."
