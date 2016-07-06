@@ -46,14 +46,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../AuxInclude/Qt5"
+				AdditionalIncludeDirectories=""
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
-				StringPooling="true"
-				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
-				EnableEnhancedInstructionSet="2"
-				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=""
 				SuppressStartupBanner="true"
 			/>
 			<Tool
@@ -115,14 +109,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../AuxInclude/Qt5"
+				AdditionalIncludeDirectories=""
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
-				StringPooling="true"
-				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
-				EnableEnhancedInstructionSet="2"
-				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=""
 				SuppressStartupBanner="true"
 			/>
 			<Tool
@@ -184,14 +172,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../../AuxInclude/Qt5"
+				AdditionalIncludeDirectories=""
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
-				StringPooling="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				PrecompiledHeaderFile=""
-				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -252,14 +234,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../../AuxInclude/Qt5"
+				AdditionalIncludeDirectories=""
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
-				StringPooling="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				PrecompiledHeaderFile=""
-				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -301,6 +277,10 @@
 			>
 			<File
 				RelativePath="..\CArchiveBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CArchiveHeaderInfo.cpp"
 				>
 			</File>
 			<File
@@ -360,10 +340,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CArchiveHeaderInfo.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CTextReadArchiveBase.cpp"
 				>
 			</File>
@@ -410,6 +386,10 @@
 			>
 			<File
 				RelativePath="..\CArchiveBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CArchiveHeaderInfo.h"
 				>
 			</File>
 			<File
@@ -466,10 +446,6 @@
 			</File>
 			<File
 				RelativePath="..\CReadArchiveBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CArchiveHeaderInfo.h"
 				>
 			</File>
 			<File

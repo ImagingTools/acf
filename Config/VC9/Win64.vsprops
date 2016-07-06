@@ -6,6 +6,10 @@
 	OutputDirectory="$(PlattformDependentBaseOutputDir)\$(ConfigurationName)$(CompilerCode)"
 	IntermediateDirectory="..\..\..\AuxInclude\Qt5\GeneratedFiles\$(ConfigurationName)$(CompilerCode)\$(ProjectName)"
 	>
+	<Tool
+		Name="VCCLCompilerTool"
+		EnableEnhancedInstructionSet="0"
+	/>
 	<UserMacro
 		Name="QTDIR"
 		Value="$(QTDIR_64)"
