@@ -68,6 +68,30 @@ const istd::CIntRanges* CScanlineMask::GetPixelRanges(int lineIndex) const
 }
 
 
+void CScanlineMask::CreateFilled(const i2d::CRect& clipArea)
+{
+	m_firstLinePos = clipArea.GetTop();
+	int endLinePos = clipArea.GetBottom();
+	int linesCount = qMax(endLinePos - m_firstLinePos, 0);
+	Q_ASSERT(linesCount >= 0);
+
+	m_rangesContainer.clear();
+	m_rangesContainer.push_back(istd::CIntRanges());
+	istd::CIntRanges& rangeList = m_rangesContainer.back();
+	rangeList.InsertSwitchPoint(clipArea.GetLeft());
+	rangeList.InsertSwitchPoint(clipArea.GetRight());
+
+	m_scanlines.resize(linesCount);
+	for (int i = 0; i < linesCount; ++i){
+		m_scanlines[i] = 0;	// set all lines to the same range
+	}
+
+	m_boundingBox = clipArea;
+
+	m_isBoundingBoxValid = true;
+}
+
+
 bool CScanlineMask::CreateFromGeometry(const i2d::IObject2d& geometry, const i2d::CRect* clipAreaPtr)
 {
 	const i2d::CTubePolyline* polylinePtr = dynamic_cast<const i2d::CTubePolyline*>(&geometry);

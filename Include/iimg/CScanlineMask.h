@@ -52,46 +52,51 @@ public:
 	const istd::CIntRanges* GetPixelRanges(int lineIndex) const;
 
 	/**
+		Create filled 2D-region clipped to rectangle area.
+		\param	clipArea	clipping area.
+	*/
+	void CreateFilled(const i2d::CRect& clipArea);
+	/**
 		Create 2D-region from some geometrical object.
 		\param	geometry	some geometrical object.
 		\param	clipAreaPtr	optional clipping area.
 	*/
-	bool CreateFromGeometry(const i2d::IObject2d& geometry, const i2d::CRect* clipAreaPtr);
+	bool CreateFromGeometry(const i2d::IObject2d& geometry, const i2d::CRect* clipAreaPtr = NULL);
 
 	/**
 		Create 2D-region from circle.
 		\param	circle		circle object.
 		\param	clipAreaPtr	optional clipping area.
 	*/
-	void CreateFromCircle(const i2d::CCircle& circle, const i2d::CRect* clipAreaPtr);
+	void CreateFromCircle(const i2d::CCircle& circle, const i2d::CRect* clipAreaPtr = NULL);
 
 	/**
 		Create 2D-region from rectangle.
 		\param	rect		rectangle object.
 		\param	clipAreaPtr	optional clipping area.
 	*/
-	void CreateFromRectangle(const i2d::CRectangle& rect, const i2d::CRect* clipAreaPtr);
+	void CreateFromRectangle(const i2d::CRectangle& rect, const i2d::CRect* clipAreaPtr = NULL);
 
 	/**
 		Create 2D-region from annulus.
 		\param	annulus		annulus object.
 		\param	clipAreaPtr	optional clipping area.
 	*/
-	void CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::CRect* clipAreaPtr);
+	void CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::CRect* clipAreaPtr = NULL);
 
 	/**
 		Create 2D-region from polygon.
 		\param	polygon		polygon object.
 		\param	clipAreaPtr	optional clipping area.
 	*/
-	void CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::CRect* clipAreaPtr);
+	void CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::CRect* clipAreaPtr = NULL);
 
 	/**
 		Create 2D-region from tube.
 		\param	tube		tube object.
 		\param	clipAreaPtr	optional clipping area.
 	*/
-	void CreateFromTube(const i2d::CTubePolyline& tube, const i2d::CRect* clipAreaPtr);
+	void CreateFromTube(const i2d::CTubePolyline& tube, const i2d::CRect* clipAreaPtr = NULL);
 
 	/**
 		Get union of two masks.
