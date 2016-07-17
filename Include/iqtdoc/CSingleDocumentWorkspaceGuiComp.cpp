@@ -138,7 +138,8 @@ void CSingleDocumentWorkspaceGuiComp::OnViewRemoved(istd::IPolymorphic* viewPtr)
 {
 	Q_ASSERT(viewPtr != NULL);
 
-	if (m_lastViewPtr == viewPtr){
+	iqtgui::IGuiObject* guiObjectPtr = CompCastPtr<iqtgui::IGuiObject>(viewPtr);
+	if (m_lastViewPtr == guiObjectPtr){
 		m_lastViewPtr->DestroyGui();
 
 		m_lastViewPtr = NULL;
