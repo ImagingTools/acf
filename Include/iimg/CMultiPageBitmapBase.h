@@ -6,7 +6,6 @@
 #include "imod/TModelWrap.h"
 #include "idoc/TMultiPageDocumentWrap.h"
 #include "idoc/CStandardDocumentMetaInfo.h"
-#include "iimg/IMultiBitmapProvider.h"
 #include "iimg/IMultiPageBitmapController.h"
 
 
@@ -19,7 +18,6 @@ namespace iimg
 */
 class CMultiPageBitmapBase:
 			public idoc::CMultiPageDocumentBase,
-			virtual public IMultiBitmapProvider,
 			virtual public IMultiPageBitmapController
 {
 public:

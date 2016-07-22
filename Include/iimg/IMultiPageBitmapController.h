@@ -4,6 +4,7 @@
 
 // ACF includes
 #include "iimg/IBitmap.h"
+#include "iimg/IMultiBitmapProvider.h"
 
 
 namespace iimg
@@ -13,7 +14,7 @@ namespace iimg
 /**
 	Interface of a controller for handling multi-page bitmaps.
 */
-class IMultiPageBitmapController: virtual public istd::IPolymorphic
+class IMultiPageBitmapController: virtual public IMultiBitmapProvider
 {
 public:
 	/**
