@@ -28,6 +28,14 @@ public:
 	typedef iqtgui::CGuiComponentBase BaseClass;
 	typedef imod::CMultiModelDispatcherBase BaseClass2;
 
+	enum ModelId
+	{
+		/**
+			Minimal number which should be used for user-specific data models.
+		*/
+		MI_USER = 1000
+	};
+
 	I_BEGIN_BASE_COMPONENT(CMultiPageGuiCompBase);
 		I_REGISTER_SUBELEMENT(PageModel);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(PageModel, iprm::ISelectionParam, ExtractPageModel);
