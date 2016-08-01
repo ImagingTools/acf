@@ -14,7 +14,16 @@
    <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -32,7 +41,16 @@
        </property>
        <widget class="QWidget" name="page">
         <layout class="QVBoxLayout" name="verticalLayout_2">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -142,7 +160,16 @@
        </widget>
        <widget class="QWidget" name="page_2">
         <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -234,6 +261,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>FilterText</tabstop>
+  <tabstop>FilterClearButton</tabstop>
+  <tabstop>ExpandAll</tabstop>
+  <tabstop>CollapseAll</tabstop>
+  <tabstop>Refresh</tabstop>
+  <tabstop>FileList</tabstop>
+ </tabstops>
  <resources>
   <include location="../iqtgui/iqtgui.qrc"/>
  </resources>

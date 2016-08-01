@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>210</width>
+    <width>218</width>
     <height>100</height>
    </rect>
   </property>
@@ -72,6 +72,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>TranslationSpinX</tabstop>
+  <tabstop>TranslationSpinY</tabstop>
+  <tabstop>ResetButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

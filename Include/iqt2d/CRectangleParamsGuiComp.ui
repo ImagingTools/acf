@@ -143,6 +143,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>LeftSpin</tabstop>
+  <tabstop>RightSpin</tabstop>
+  <tabstop>TopSpin</tabstop>
+  <tabstop>BottomSpin</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

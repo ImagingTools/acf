@@ -70,6 +70,7 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>PathEdit</tabstop>
   <tabstop>BrowseButton</tabstop>
  </tabstops>
  <resources>

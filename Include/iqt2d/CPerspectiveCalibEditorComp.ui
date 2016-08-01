@@ -181,6 +181,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>Rotation11Spin</tabstop>
+  <tabstop>Rotation12Spin</tabstop>
+  <tabstop>TranslationXSpin</tabstop>
+  <tabstop>Rotation21Spin</tabstop>
+  <tabstop>Rotation22Spin</tabstop>
+  <tabstop>TranslationYSpin</tabstop>
+  <tabstop>PerspectiveXSpin</tabstop>
+  <tabstop>PerspectiveYSpin</tabstop>
+  <tabstop>CalibrateButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -217,9 +217,12 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>AddButton</tabstop>
-  <tabstop>CloneButton</tabstop>
   <tabstop>ElementList</tabstop>
+  <tabstop>ParameterTypeSelector</tabstop>
+  <tabstop>AddButton</tabstop>
+  <tabstop>EditButton</tabstop>
+  <tabstop>CloneButton</tabstop>
+  <tabstop>RemoveButton</tabstop>
  </tabstops>
  <resources>
   <include location="../iqtgui/iqtgui.qrc"/>

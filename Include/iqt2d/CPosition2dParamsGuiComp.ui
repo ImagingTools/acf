@@ -71,6 +71,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>XSpin</tabstop>
+  <tabstop>YSpin</tabstop>
+ </tabstops>
  <resources>
   <include location="../iqtgui/iqtgui.qrc"/>
  </resources>
