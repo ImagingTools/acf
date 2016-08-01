@@ -308,6 +308,14 @@ inline const CVector2d& CVector2d::GetZero()
 } // namespace i2d
 
 
+// related global functions
+
+inline uint qHash(const i2d::CVector2d& key, uint seed = 0)
+{
+	return qHash(key.GetX(), seed) ^ qHash(key.GetY(), seed);
+}
+
+
 #endif // !i2d_CVector2d_included
 
 
