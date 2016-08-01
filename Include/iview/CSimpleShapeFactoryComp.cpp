@@ -4,6 +4,7 @@
 // ACF includes
 #include "i2d/CAnnulusSegment.h"
 #include "i2d/CTubePolyline.h"
+#include "i2d/CPolypoint.h"
 #include "i2d/CArc.h"
 #include "iimg/IBitmap.h"
 #include "iview/IViewLayer.h"
@@ -14,6 +15,7 @@
 #include "iview/CTubePolylineShape.h"
 #include "iview/CLabelShape.h"
 #include "iview/CArcShape.h"
+#include "iview/CPolypointShape.h"
 #include "iview/CImageShape.h"
 
 
@@ -127,6 +129,13 @@ CShapeBase* CSimpleShapeFactoryComp::CreateShapeInstance(const istd::IChangeable
 		objectShapePtr->SetEditableRotation(*m_useInteractiveShapesAttrPtr);
 		objectShapePtr->SetEditableHeight(*m_useInteractiveShapesAttrPtr);
 		objectShapePtr->SetEditableWidth(*m_useInteractiveShapesAttrPtr);
+
+		return objectShapePtr;
+	}
+
+	const i2d::CPolypoint* polypointPtr = dynamic_cast<const i2d::CPolypoint*>(&object);
+	if (polypointPtr != NULL){
+		iview::CPolypointShape* objectShapePtr = new iview::CPolypointShape();
 
 		return objectShapePtr;
 	}
