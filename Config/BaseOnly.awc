@@ -2,16 +2,16 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4148" Description="ACF"/>
-            <Version Id="1023" Number="328960" Description="Qt Framework"/>
+            <Version Id="0" Number="4243" Description="ACF"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <ConfigFiles/>
-    <PackageDirs>
-    </PackageDirs>
+    <PackageDirs/>
     <PackageFiles>
-        <FilePath>$(ApplicationDir)/BasePck.arp</FilePath>
         <FilePath>../Partitura/AcfVoce.arp</FilePath>
+        <FilePath>../Bin/$(ConfigurationDir)BasePck.arp</FilePath>
+        <FilePath>$(ApplicationDir)/BasePck.arp</FilePath>
     </PackageFiles>
     <RegistryFiles/>
 </Acf>
