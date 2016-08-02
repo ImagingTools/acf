@@ -118,14 +118,6 @@ void CMultiBitmapViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chang
 }
 
 
-void CMultiBitmapViewComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	EnsureViewsCreated();
-}
-
-
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CMultiBitmapViewComp::OnGuiCreated()
