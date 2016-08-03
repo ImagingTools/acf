@@ -312,11 +312,9 @@ inline const CVector2d& CVector2d::GetZero()
 
 inline uint qHash(const i2d::CVector2d& key, uint seed = 0)
 {
-#if QT_VERSION >= 0x050000
-	return qHash(key.GetX(), seed) ^ qHash(key.GetY(), seed);
-#else
-	return qHash(key.GetX()) ^ qHash(key.GetY());
-#endif
+	Q_UNUSED(seed);
+
+	return int(key.GetX()) ^ int(key.GetY());
 }
 
 
