@@ -15,12 +15,6 @@ namespace i2d
 {
 
 
-static const istd::IChangeable::ChangeSet s_clearAllNodesChange(CPolypoint::CF_OBJECT_POSITION, CPolypoint::CF_ALL_DATA, QObject::tr("Clear all nodes"));
-static const istd::IChangeable::ChangeSet s_createPolygonNodesChange(CPolypoint::CF_OBJECT_POSITION, CPolypoint::CF_ALL_DATA, QObject::tr("Create nodes"));
-static const istd::IChangeable::ChangeSet s_insertPolygonNodeChange(CPolypoint::CF_OBJECT_POSITION, CPolypoint::CF_ALL_DATA, QObject::tr("Insert node"));
-static const istd::IChangeable::ChangeSet s_removePolygonNodeChange(CPolypoint::CF_OBJECT_POSITION, CPolypoint::CF_ALL_DATA, QObject::tr("Remove node"));
-
-
 // public methods
 
 void CPolypoint::Clear()
@@ -347,6 +341,14 @@ bool CPolypoint::ApplyInverseTransform(
 
 	return true;
 }
+
+
+// static protected attributes
+
+const istd::IChangeable::ChangeSet CPolypoint::s_clearAllNodesChange(CPolypoint::CF_OBJECT_POSITION, CPolypoint::CF_ALL_DATA, QObject::tr("Clear all nodes"));
+const istd::IChangeable::ChangeSet CPolypoint::s_createPolygonNodesChange(CPolypoint::CF_OBJECT_POSITION, CPolypoint::CF_ALL_DATA, QObject::tr("Create nodes"));
+const istd::IChangeable::ChangeSet CPolypoint::s_insertPolygonNodeChange(CPolypoint::CF_OBJECT_POSITION, CPolypoint::CF_ALL_DATA, QObject::tr("Insert node"));
+const istd::IChangeable::ChangeSet CPolypoint::s_removePolygonNodeChange(CPolypoint::CF_OBJECT_POSITION, CPolypoint::CF_ALL_DATA, QObject::tr("Remove node"));
 
 
 } // namespace i2d

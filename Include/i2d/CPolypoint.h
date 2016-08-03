@@ -104,6 +104,12 @@ public:
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 	virtual bool IsEqual(const IChangeable& object) const;
 
+protected:
+	static const istd::IChangeable::ChangeSet s_clearAllNodesChange;
+	static const istd::IChangeable::ChangeSet s_createPolygonNodesChange;
+	static const istd::IChangeable::ChangeSet s_insertPolygonNodeChange;
+	static const istd::IChangeable::ChangeSet s_removePolygonNodeChange;
+
 private:
 	// std::vector can be faster than QVector
 	typedef std::vector<i2d::CVector2d> Nodes;
@@ -125,7 +131,6 @@ private:
 				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
 				double* errorFactorPtr = NULL);
 
-private:
 	Nodes m_positions;
 };
 

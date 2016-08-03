@@ -38,18 +38,15 @@ public:
 	virtual const iser::ISerializable& GetNodeData(int nodeIndex) const;
 	virtual iser::ISerializable& GetNodeDataRef(int nodeIndex);
 
-	// reimplemented (i2d::CPolygon)
+	// reimplemented (i2d::CPolypoint)
 	virtual void Clear();
-	virtual bool InsertNode(const i2d::CVector2d& node);
-	virtual bool InsertNode(int index, const i2d::CVector2d& node);
+	virtual void SetNodesCount(int nodesCount);
+	virtual bool InsertNode(const i2d::CVector2d& position);
+	virtual bool InsertNode(int index, const i2d::CVector2d& position);
 	virtual bool RemoveNode(int index);
 
 	// reimplemented istd::IChangeable
 	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-
-protected:
-	// reimplemented (i2d::CPolygon)
-	virtual void SetNodesCount(int count);
 
 private:
 	typedef std::vector<NodeData> NodesData;
@@ -99,40 +96,66 @@ inline iser::ISerializable& TDataNodePolyline<NodeData>::GetNodeDataRef(int node
 }
 
 
-// reimplemented (i2d::CPolygon)
+// reimplemented (i2d::CPolypoint)
 
 template<class NodeData>
 inline void TDataNodePolyline<NodeData>::Clear()
 {
-	m_nodesData.clear();
+	if (!m_nodesData.empty()){
+		istd::CChangeNotifier changeNotifier(this, &s_clearAllNodesChange);
+		Q_UNUSED(changeNotifier);
 
-	BaseClass::Clear();
+		m_nodesData.clear();
+
+		BaseClass::Clear();
+	}
 }
 
 
 template<class NodeData>
-inline bool TDataNodePolyline<NodeData>::InsertNode(const i2d::CVector2d& node)
+void TDataNodePolyline<NodeData>::SetNodesCount(int nodesCount)
 {
+	istd::CChangeNotifier changeNotifier(this, &s_createPolygonNodesChange);
+	Q_UNUSED(changeNotifier);
+
+	m_nodesData.resize(nodesCount);
+
+	BaseClass::SetNodesCount(nodesCount);
+}
+
+
+template<class NodeData>
+inline bool TDataNodePolyline<NodeData>::InsertNode(const i2d::CVector2d& position)
+{
+	istd::CChangeNotifier changeNotifier(this, &s_insertPolygonNodeChange);
+	Q_UNUSED(changeNotifier);
+
 	m_nodesData.insert(m_nodesData.end(), NodeData());
 
-	return BaseClass::InsertNode(node);
+	return BaseClass::InsertNode(position);
 }
 
 
 template<class NodeData>
-inline bool TDataNodePolyline<NodeData>::InsertNode(int index, const i2d::CVector2d& node)
+inline bool TDataNodePolyline<NodeData>::InsertNode(int index, const i2d::CVector2d& position)
 {
+	istd::CChangeNotifier changeNotifier(this, &s_insertPolygonNodeChange);
+	Q_UNUSED(changeNotifier);
+
 	typename NodesData::iterator iter = m_nodesData.begin();
 	iter += index;
 	m_nodesData.insert(iter, NodeData());
 
-	return BaseClass::InsertNode(index, node);
+	return BaseClass::InsertNode(index, position);
 }
 
 
 template<class NodeData>
 bool TDataNodePolyline<NodeData>::RemoveNode(int index)
 {
+	istd::CChangeNotifier changeNotifier(this, &s_removePolygonNodeChange);
+	Q_UNUSED(changeNotifier);
+
 	typename NodesData::iterator iter = m_nodesData.begin();
 	iter += index;
 	m_nodesData.erase(iter);
@@ -166,19 +189,6 @@ bool TDataNodePolyline<NodeData>::CopyFrom(const IChangeable& object, Compatibil
 	}
 
 	return false;
-}
-
-
-// protected methods
-
-// reimplemented (i2d::CPolygon)
-
-template<class NodeData>
-void TDataNodePolyline<NodeData>::SetNodesCount(int count)
-{
-	m_nodesData.resize(count);
-
-	BaseClass::SetNodesCount(count);
 }
 
 
