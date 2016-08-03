@@ -37,7 +37,7 @@ function relativePath(base, rel) {
     var j = i;
     var r = [];
 
-	var useAbsolutePath = (i == 0) && (rell.length > 0) && (rell[0] == "" || (rell[0].search(":") >= 0));
+    var useAbsolutePath = (i == 0) && (rell.length > 0) && (rell[0] == "" || (rell[0].search(":") >= 0));
 
     if (!useAbsolutePath) {
         for (; i < basel.length; i++)
@@ -74,7 +74,7 @@ function ProcessFolder(shell, fileSystem, folder, vcDirName, replaceDirs, qtVers
 
                     var inputFile = fileSystem.OpenTextFile(file, 1);
                     var outputFile = fileSystem.OpenTextFile(outputPath, 2, true);
-					
+
                     while (!inputFile.AtEndOfStream) {
                         var text = inputFile.ReadLine();
                         var re1 = /IntermediateDirectory=\"release\\\"/g;
@@ -104,19 +104,31 @@ function ProcessFolder(shell, fileSystem, folder, vcDirName, replaceDirs, qtVers
                             }
                         }
 
-						if ((qtVersions != null) && (text == "</Project>")){
-                          outputFile.WriteLine("  <ProjectExtensions>");
-                          outputFile.WriteLine("    <VisualStudio>");
-                          outputFile.Write("      <UserProperties");
+                        if (qtVersions != null){
+                            if (text === "	</Globals>"){
+                                for (var versionIter = new Enumerator(qtVersions) ; !versionIter.atEnd() ; versionIter.moveNext()) {
+                                    var versionInfo = versionIter.item();
+                                    outputFile.WriteLine("		<Global");
+                                    outputFile.WriteLine("			Name=\"Qt5Version " + versionInfo.configuration + "\"");
+                                    outputFile.WriteLine("			Value=\"" + versionInfo.version + "\"");
+                                    outputFile.WriteLine("		/>");
+                                }
+                            }
 
-                          for (var versionIter = new Enumerator(qtVersions) ; !versionIter.atEnd() ; versionIter.moveNext()) {
-                              var versionInfo = versionIter.item();
-                              outputFile.Write(" Qt5Version_x0020_" + versionInfo.configuration + "=\"" + versionInfo.version + "\"");
-                          }
+                            if (text === "</Project>"){
+                                outputFile.WriteLine("  <ProjectExtensions>");
+                                outputFile.WriteLine("    <VisualStudio>");
+                                outputFile.Write("      <UserProperties");
 
-                          outputFile.WriteLine(" />");
-                          outputFile.WriteLine("    </VisualStudio>");
-                          outputFile.WriteLine("  </ProjectExtensions>");
+                                for (var versionIter = new Enumerator(qtVersions) ; !versionIter.atEnd() ; versionIter.moveNext()) {
+                                    var versionInfo = versionIter.item();
+                                    outputFile.Write(" Qt5Version_x0020_" + versionInfo.configuration + "=\"" + versionInfo.version + "\"");
+                                }
+
+                                outputFile.WriteLine(" />");
+                                outputFile.WriteLine("    </VisualStudio>");
+                                outputFile.WriteLine("  </ProjectExtensions>");
+                            }
                         }
 
                         outputFile.WriteLine(text);
@@ -136,27 +148,27 @@ function ProcessFolder(shell, fileSystem, folder, vcDirName, replaceDirs, qtVers
 
                     var inputFile = fileSystem.OpenTextFile(file, 1);
                     var outputFile = fileSystem.OpenTextFile(outputPath, 2, true);
-					
-					while (!inputFile.AtEndOfStream){
-						var text = inputFile.ReadLine();
-						var re1 = /QMake/g;
-						text = text.replace(re1, vcDirName);
-						
-						if (projectTagExp.exec(text)){
-							var textParts = text.split('", "');
-							
-							textParts[1] = relativePath(destDir, textParts[1].split("/").join("\\"));
 
-							text = textParts.join("\", \"");
-						}
+                    while (!inputFile.AtEndOfStream){
+                        var text = inputFile.ReadLine();
+                        var re1 = /QMake/g;
+                        text = text.replace(re1, vcDirName);
 
-						outputFile.WriteLine(text);
-					}
+                        if (projectTagExp.exec(text)){
+                            var textParts = text.split('", "');
 
-					inputFile.close();
+                            textParts[1] = relativePath(destDir, textParts[1].split("/").join("\\"));
+
+                            text = textParts.join("\", \"");
+                        }
+
+                        outputFile.WriteLine(text);
+                    }
+
+                    inputFile.close();
 
                     fileSystem.DeleteFile(file);
-				}
+                }
             }
 
             // Copy directories for Qt generated files
