@@ -409,15 +409,15 @@ inline void CLine2d::SetPoint2Quiet(const CVector2d& point)
 }
 
 
-} // namespace i2d
-
-
 // related global functions
 
 inline uint qHash(const i2d::CLine2d& key, uint seed = 0)
 {
-	return qHash(key.GetPoint1(), seed) ^ qHash(key.GetPoint2(), seed);
+	return ::qHash(key.GetPoint1(), seed) ^ ::qHash(key.GetPoint2(), seed);
 }
+
+
+} // namespace i2d
 
 
 #endif // !i2d_CLine2d_included
