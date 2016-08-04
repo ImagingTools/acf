@@ -46,7 +46,7 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-	friend uint qHash(const CComponentAddress& address);
+	friend uint qHash(const CComponentAddress& address, uint seed);
 
 private:
 	QByteArray m_packageId;
@@ -104,8 +104,10 @@ inline bool CComponentAddress::operator<(const CComponentAddress& address) const
 
 // related functions
 
-inline uint qHash(const icomp::CComponentAddress& address)
+inline uint qHash(const icomp::CComponentAddress& address, uint seed = 0)
 {
+	Q_ASSERT(seed);
+
 	return qHash(address.m_packageId) + qHash(address.m_packageId);
 }
 

@@ -205,7 +205,7 @@ CVarIndex& CVarIndex::operator-=(const CVarIndex& index)
 
 // related methods
 
-uint qHash(const istd::CVarIndex& index)
+uint qHash(const istd::CVarIndex& index, uint /*seed*/)
 {
 	int retVal = index.m_elements.size();
 
