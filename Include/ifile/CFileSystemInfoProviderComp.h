@@ -3,8 +3,8 @@
 
 
 // Qt includes
-#include <QThread>
-#include <QMutex>
+#include <QtCore/QThread>
+#include <QtCore/QMutex>
 
 // ACF includes
 #include "ilog/TLoggerCompWrap.h"
