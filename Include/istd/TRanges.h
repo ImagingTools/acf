@@ -138,14 +138,14 @@ public:
 		Erosion shortens the ends of each range with some value.
 		Result is stored in this object.
 	*/
-	void Erode(ValueType leftValue, ValueType rightValue = leftValue);
+	void Erode(ValueType leftValue, ValueType rightValue);
 
 	/**
 		Calculate dilatation of this range list.
 		Dilatation prolongs the ends of each range with some value for left and right side.
 		Result is stored in this object.
 	*/
-	void Dilate(ValueType leftValue, ValueType rightValue = leftValue);
+	void Dilate(ValueType leftValue, ValueType rightValue);
 	/**
 		Remove gaps with some length.
 		\param	gapState	state interpreted as a gape.
@@ -728,12 +728,12 @@ template <typename ValueType>
 void TRanges<ValueType>::RemoveGaps(ValueType value, bool gapState)
 {
 	if (gapState){
-		Dilate(value);
-		Erode(value);
+		Dilate(value, value);
+		Erode(value, value);
 	}
 	else{
-		Erode(value);
-		Dilate(value);
+		Erode(value, value);
+		Dilate(value, value);
 	}
 }
 
