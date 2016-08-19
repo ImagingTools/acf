@@ -34,6 +34,11 @@ public:
 	TRanges();
 
 	/**
+		Convert from simple range.
+	*/
+	explicit TRanges(const istd::TRange<ValueType>& range);
+
+	/**
 		Set this set to be empty.
 	*/
 	void Reset();
@@ -86,6 +91,11 @@ public:
 		Check if some other set belongs to this set.
 	*/
 	bool IsInside(const TRanges<ValueType>& rangesList) const;
+
+	/**
+		Get inverted range.
+	*/
+	void GetInverted(TRanges<ValueType>& result, const TRange<ValueType>* clipRangePtr) const;
 
 	/**
 		Get union of two range list.
@@ -166,6 +176,9 @@ public:
 	*/
 	void GetAsList(const TRange<ValueType>& range, RangeList& result) const;
 
+	bool operator==(const TRanges<ValueType>& ranges);
+	bool operator!=(const TRanges<ValueType>& ranges);
+
 private:
 	SwitchPoints m_switchPoints;
 
@@ -177,6 +190,17 @@ template <typename ValueType>
 TRanges<ValueType>::TRanges()
 :	m_beginState(false)
 {
+}
+
+
+template <typename ValueType>
+TRanges<ValueType>::TRanges(const istd::TRange<ValueType>& range)
+:	m_beginState(false)
+{
+	if (!range.IsEmpty()){
+		m_switchPoints.insert(range.GetMinValue());
+		m_switchPoints.insert(range.GetMaxValue());
+	}
 }
 
 
@@ -316,6 +340,47 @@ bool TRanges<ValueType>::IsInside(const TRanges<ValueType>& rangesList) const
 			// if no more segments in this list, check if no more switch is inside
 			return listIter == rangesList.m_switchPoints.end();
 		}
+	}
+}
+
+
+template <typename ValueType>
+void TRanges<ValueType>::GetInverted(TRanges<ValueType>& result, const TRange<ValueType>* clipRangePtr) const
+{
+	if (clipRangePtr != NULL){
+		result.Reset();
+		result.m_beginState = false;
+
+		int prevPosition = clipRangePtr->GetMinValue();
+
+		bool state = m_beginState;
+
+		for (		typename SwitchPoints::const_iterator iter = m_switchPoints.begin();
+					iter != m_switchPoints.end();
+					++iter){
+			ValueType position = *iter;
+			if (position >= clipRangePtr->GetMaxValue()){
+				break;
+			}
+
+			if (position > prevPosition){
+				result.m_switchPoints.insert(prevPosition);
+				result.m_switchPoints.insert(position);
+
+				prevPosition = position;
+			}
+
+			state = !state;
+		}
+
+		if (state){
+			result.m_switchPoints.insert(prevPosition);
+			result.m_switchPoints.insert(clipRangePtr->GetMaxValue());
+		}
+	}
+	else{
+		result.m_switchPoints = m_switchPoints;
+		result.m_beginState = !m_beginState;
 	}
 }
 
@@ -702,7 +767,7 @@ void TRanges<ValueType>::Dilate(ValueType leftValue, ValueType rightValue)
 			typename SwitchPoints::iterator nextIter = iter;
 			++nextIter;
 
-			if (nextIter != m_switchPoints.begin()){
+			if (nextIter != m_switchPoints.end()){
 				if (*nextIter < point + absoluteSum){
 					// following range should be removed - is smaller than the erosion kernel
 					iter = m_switchPoints.erase(iter);
@@ -781,6 +846,20 @@ void TRanges<ValueType>::GetAsList(const TRange<ValueType>& range, RangeList& re
 	if (state){
 		result.push_back(TRange<ValueType>(prevPosition, range.GetMaxValue()));
 	}
+}
+
+
+template <typename ValueType>
+bool TRanges<ValueType>::operator==(const TRanges<ValueType>& ranges)
+{
+	return (m_beginState == ranges.m_beginState) && (m_switchPoints == ranges.m_switchPoints);
+}
+
+
+template <typename ValueType>
+bool TRanges<ValueType>::operator!=(const TRanges<ValueType>& ranges)
+{
+	return (m_beginState != ranges.m_beginState) || (m_switchPoints != ranges.m_switchPoints);
 }
 
 
