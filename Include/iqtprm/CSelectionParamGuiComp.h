@@ -5,6 +5,7 @@
 // Qt includes
 #include <QtCore/QtGlobal>
 #include <QtGui/QStandardItemModel>
+#include <QtCore/QSortFilterProxyModel>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QComboBox>
@@ -136,6 +137,7 @@ private:
 	void SetupInfoLabelIcon(QLabel& label);
 	QPixmap GetInfoIcon() const;
 	void UpdateCompletionModel();
+	void ApplyFilterToProxyModel(const QString& filter) const;
 
 private:
 	I_ATTR(QString, m_optionsLabelAttrPtr);

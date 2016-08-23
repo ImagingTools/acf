@@ -247,11 +247,17 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 			if (*m_useCompleterAttrPtr){
 				switchBoxPtr->setEditable(true);
 
+				// Create filtered element model (based on completion model provided by caller of this method) used in the combo box:
+				QSortFilterProxyModel* proxyModel = new QSortFilterProxyModel(switchBoxPtr);
+				proxyModel->setSourceModel(&m_completionModel);
+
 				QCompleter* completer = new QCompleter(switchBoxPtr);
-				completer->setModel(&m_completionModel);
-				completer->setCompletionMode(QCompleter::PopupCompletion);
-				completer->setCaseSensitivity(Qt::CaseInsensitive);
+				completer->setModel(proxyModel);
+				completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+
 				switchBoxPtr->lineEdit()->setCompleter(completer);
+
+				BaseClass::connect(switchBoxPtr->lineEdit(), &QLineEdit::textEdited, this, &CSelectionParamGuiComp::ApplyFilterToProxyModel);
 			}
 
 			m_comboBoxes.PushBack(switchBoxPtr);
@@ -635,6 +641,24 @@ QRadioButton* CSelectionParamGuiComp::RadioButtonWidget::GetRadioButton() const
 	return m_radioButtonPtr;
 }
 
+void CSelectionParamGuiComp::ApplyFilterToProxyModel(const QString& /*filter*/) const
+{
+	QLineEdit* signalSenderPtr = dynamic_cast<QLineEdit*>(BaseClass::sender());
+	if (signalSenderPtr != NULL){
+		QComboBox* comboBoxPtr = dynamic_cast<QComboBox*>(signalSenderPtr->parentWidget());
+		if (comboBoxPtr != NULL){
+			QSortFilterProxyModel* modelPtr = dynamic_cast<QSortFilterProxyModel*>(comboBoxPtr->lineEdit()->completer()->model());
+			if (modelPtr != NULL) {
+				QString stringFilter = comboBoxPtr->lineEdit()->text();
+				// some recover special symbols in string, may be should add another translate for special symbols
+				stringFilter.replace("*", ".*");
+				modelPtr->blockSignals(true);
+				modelPtr->setFilterRegExp(QRegExp(stringFilter, Qt::CaseInsensitive));
+				modelPtr->blockSignals(false);
+			}
+		}
+	}
+}
 
 } // namespace iqtprm
 
