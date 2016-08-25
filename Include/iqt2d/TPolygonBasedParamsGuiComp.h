@@ -5,6 +5,7 @@
 // Qt includes
 #include <QtCore/QMimeData>
 #include <QtCore/QByteArray>
+#include <QtCore/QAbstractTableModel>
 #include <QtGui/QDoubleValidator>
 #include <QtGui/QClipboard>
 #if QT_VERSION >= 0x050000
@@ -39,7 +40,6 @@ class TPolygonBasedParamsGuiComp:
 						PolygonBasedModel>
 {
 public:
-
 	/**
 		Cell index
 	*/
@@ -76,27 +76,41 @@ public:
 	virtual void UpdateModel() const;
 
 protected:
-	/**
-		Create the data object from the UI-editor.
-	*/
-	virtual bool GetObjectFromEditor(PolygonBasedModel& object) const;
+	class TableModel: public QAbstractTableModel
+	{
+	public:
+		typedef QAbstractTableModel BaseClass;
+
+		TableModel(TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>* parentPtr);
+
+		// reimplemented (QAbstractTableModel)
+		virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
+		virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
+		virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+		virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+		virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+		virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+
+	private:
+		TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>* m_parentPtr;
+	};
 
 	/**
 		Get the table with the node data.
 	*/
-	QTableWidget* GetNodeTable();
+	QTableView* GetNodeTable();
 
 	virtual void OnInsertNode();
 	virtual void OnRemoveNode();
 	virtual void OnCopyData();
 	virtual void OnPasteData();
 
-	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
-	virtual void OnGuiShown();
-	virtual void OnGuiHidden();
+	// delegated from QAbstractTableModel
+	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
+	virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
+	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+	virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+	virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -105,6 +119,9 @@ protected:
 	// reimplemented (iqt2d::TShapeParamsGuiCompBase)
 	virtual bool PopulateActions(CActionAdapter& host, imod::IModel* modelPtr);
 	virtual void OnActionTriggered(QAction* actionPtr);
+
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 protected:
 	using BaseClass::GetObservedObject;
@@ -121,7 +138,7 @@ protected:
 	/**
 		Internal item delegate class for input validation
 	*/
-	class CPolygonParamsGuiItemDelegate: public QItemDelegate
+/*	class CPolygonParamsGuiItemDelegate: public QItemDelegate
 	{
 	public:
 		CPolygonParamsGuiItemDelegate(QObject* parent): QItemDelegate(parent)
@@ -135,7 +152,7 @@ protected:
 			return editorPtr;
 		}
 	}; // CPolygonParamsGuiItemDelegate
-
+*/
 protected:
 	I_ATTR(int, m_nodeListSizeAttrPtr);
 
@@ -145,6 +162,9 @@ protected:
 	QAction m_rotateCwAction;
 	QAction m_rotateCcwAction;
 	QAction m_reversePolarityAction;
+
+private:
+	TableModel m_tableModel;
 };
 
 
@@ -156,7 +176,8 @@ TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TPolygonBasedP
 	m_flipVerticalAction(QIcon(":/Icons/FlipVertical"), "", this),
 	m_rotateCwAction(QIcon(":/Icons/RotateRight"), "", this),
 	m_rotateCcwAction(QIcon(":/Icons/RotateLeft"), "", this),
-	m_reversePolarityAction(QIcon(":/Icons/Reverse"), "", this)
+	m_reversePolarityAction(QIcon(":/Icons/Reverse"), "", this),
+	m_tableModel(this)
 {
 }
 
@@ -167,42 +188,13 @@ template <class PolygonBasedShape, class PolygonBasedModel>
 void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateModel() const
 {
 	Q_ASSERT(BaseClass::IsGuiCreated());
-
-	i2d::CPolygon* objectPtr = GetObservedObject();
-	Q_ASSERT(objectPtr != NULL);
-
-	PolygonBasedModel editorObject;
-	if (GetObjectFromEditor(editorObject)){
-		if (!objectPtr->IsEqual(editorObject)){
-			istd::CChangeNotifier changePtr(objectPtr);
-
-			objectPtr->CopyFrom(editorObject);
-		}
-	}
 }
 
 
 // protected methods
 
 template <class PolygonBasedShape, class PolygonBasedModel>
-bool TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::GetObjectFromEditor(PolygonBasedModel& object) const
-{
-	object.Clear();
-
-	int count = NodeParamsTable->rowCount();
-	for (int i = 0; i < count; i++){
-		double x = NodeParamsTable->item(i, CI_X)->text().toDouble();
-		double y = NodeParamsTable->item(i, CI_Y)->text().toDouble();
-
-		object.InsertNode(i2d::CVector2d(x, y));
-	}
-
-	return true;
-}
-
-
-template <class PolygonBasedShape, class PolygonBasedModel>
-QTableWidget* TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::GetNodeTable()
+QTableView* TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::GetNodeTable()
 {
 	return NodeParamsTable;
 }
@@ -211,30 +203,26 @@ QTableWidget* TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::
 template <class PolygonBasedShape, class PolygonBasedModel>
 void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnInsertNode()
 {
-	iqt::CSignalBlocker block(NodeParamsTable);
+	i2d::CPolygon* objectPtr = GetObservedObject();
+	if (objectPtr != NULL){
+		QItemSelectionModel *select = NodeParamsTable->selectionModel();
+		QModelIndexList selected = select->selectedRows();
 
-	int row = NodeParamsTable->currentRow();
-	if (row < 0){
-		row = NodeParamsTable->rowCount();
-
-		NodeParamsTable->setRowCount(row + 1);
+		int row = selected.isEmpty()? -1: selected.front().row();
+		if (row >= 0){
+			objectPtr->InsertNode(row, i2d::CVector2d::GetZero());
+		}
+		else{
+			objectPtr->InsertNode(i2d::CVector2d::GetZero());
+		}
 	}
-	else{
-		NodeParamsTable->insertRow(row);
-	}
-
-	NodeParamsTable->setItem(row, CI_X, new QTableWidgetItem(QString::number(0)));
-	NodeParamsTable->setItem(row, CI_Y, new QTableWidgetItem(QString::number(0)));
-	NodeParamsTable->setCurrentCell(row, 0);
-
-	DoUpdateModel();
 }
 
 
 template <class PolygonBasedShape, class PolygonBasedModel>
 void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnCopyData()
 {
-	PolygonBasedModel* objectPtr = dynamic_cast<PolygonBasedModel*>(GetObservedObject());
+	PolygonBasedModel* objectPtr = GetObservedObject();
 	if (objectPtr == NULL){
 		return;
 	}
@@ -255,7 +243,7 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnCopyDat
 template <class PolygonBasedShape, class PolygonBasedModel>
 void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnPasteData()
 {
-	PolygonBasedModel* objectPtr = dynamic_cast<PolygonBasedModel*>(GetObservedObject());
+	PolygonBasedModel* objectPtr = GetObservedObject();
 	if (objectPtr == NULL){
 		return;
 	}
@@ -276,69 +264,95 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnPasteDa
 template <class PolygonBasedShape, class PolygonBasedModel>
 void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnRemoveNode()
 {
-	int row = NodeParamsTable->currentRow();
-	if (row >= 0){
-		iqt::CSignalBlocker block(NodeParamsTable);
-
-		NodeParamsTable->removeRow(row);
-
-		DoUpdateModel();
-	}
-}
-
-
-// reimplemented (iqtgui::TGuiObserverWrap)
-
-template <class PolygonBasedShape, class PolygonBasedModel>
-void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	QObject::connect(NodeParamsTable, SIGNAL(cellChanged(int, int)), this, SLOT(OnParamsChanged()));
-}
-
-
-template <class PolygonBasedShape, class PolygonBasedModel>
-void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiModelDetached()
-{
-	NodeParamsTable->disconnect();
-
-	BaseClass::OnGuiModelDetached();
-}
-
-
-template <class PolygonBasedShape, class PolygonBasedModel>
-void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiShown()
-{
-	BaseClass::OnGuiShown();
-}
-
-
-template <class PolygonBasedShape, class PolygonBasedModel>
-void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiHidden()
-{
-	BaseClass::OnGuiHidden();
-}
-
-
-template <class PolygonBasedShape, class PolygonBasedModel>
-void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
-{
-	Q_ASSERT(BaseClass::IsGuiCreated());
-
 	i2d::CPolygon* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
-		NodeParamsTable->clearContents();
 
-		int count = objectPtr->GetNodesCount();
-		NodeParamsTable->setRowCount(count);
+		QItemSelectionModel *select = NodeParamsTable->selectionModel();
+		QModelIndexList selected = select->selectedRows();
 
-		for (int i = 0; i < count; i++){
-			const i2d::CVector2d& coord = objectPtr->GetNodePos(i);
-			NodeParamsTable->setItem(i, 0, new QTableWidgetItem(QString::number(coord.GetX(), 'f', 12)));
-			NodeParamsTable->setItem(i, 1, new QTableWidgetItem(QString::number(coord.GetY(), 'f', 12)));
+		int row = selected.isEmpty()? -1: selected.front().row();
+		if (row >= 0){
+			objectPtr->RemoveNode(row);
 		}
 	}
+}
+
+
+// delegated from QAbstractTableModel
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+int TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::rowCount(const QModelIndex& /*parent*/) const
+{
+	int retVal = 0;
+	i2d::CPolygon* objectPtr = GetObservedObject();
+	if (objectPtr != NULL){
+		retVal = objectPtr->GetNodesCount();
+	}
+
+	return retVal;
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+int TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::columnCount(const QModelIndex& /*parent*/) const
+{
+	return 2;
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+QVariant TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::data(const QModelIndex& index, int role) const
+{
+	if ((role == Qt::DisplayRole) || (role == Qt::EditRole)){
+		i2d::CVector2d retVal(0, 0);
+		i2d::CPolygon* objectPtr = GetObservedObject();
+		if ((objectPtr != NULL) && (index.column() <= 1) && (index.column() >= 0)){
+			retVal = objectPtr->GetNodePos(index.row());
+			return retVal[index.column()];
+		}		
+	}
+
+	return QVariant();
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+bool TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::setData(const QModelIndex& index, const QVariant& value, int role)
+{
+	if (role == Qt::EditRole){
+		i2d::CPolygon* objectPtr = GetObservedObject();
+		if ((objectPtr != NULL) && (index.column() <= 1) && (index.column() >= 0)){
+			i2d::CVector2d pos = objectPtr->GetNodePos(index.row());
+			bool isOk = false;
+			pos[index.column()] = value.toDouble(&isOk);
+			if (isOk){
+				objectPtr->SetNodePos(index.row(), pos);
+
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+QVariant TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::headerData(int section, Qt::Orientation orientation, int role) const
+{
+	if (orientation == Qt::Horizontal){
+		if (role == Qt::DisplayRole){
+			switch (section){
+			case 0:
+				return "X";
+
+			case 1:
+				return "Y";
+			}
+		}
+	}
+
+	return QVariant();
 }
 
 
@@ -348,6 +362,8 @@ template <class PolygonBasedShape, class PolygonBasedModel>
 void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
+
+	NodeParamsTable->setModel(&m_tableModel);
 
 	bool isNodeTable = true;
 	if (m_nodeListSizeAttrPtr.IsValid()){
@@ -371,9 +387,9 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiCrea
 		NodeParamsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 #endif
 
-		CPolygonParamsGuiItemDelegate* columnDelegate = new CPolygonParamsGuiItemDelegate(NodeParamsTable);
-		NodeParamsTable->setItemDelegateForColumn(0, columnDelegate);
-		NodeParamsTable->setItemDelegateForColumn(1, columnDelegate);
+//		CPolygonParamsGuiItemDelegate* columnDelegate = new CPolygonParamsGuiItemDelegate(NodeParamsTable);
+//		NodeParamsTable->setItemDelegateForColumn(0, columnDelegate);
+//		NodeParamsTable->setItemDelegateForColumn(1, columnDelegate);
 	}
 
 	// tools actions
@@ -449,6 +465,94 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnActionT
 	else if (actionPtr == &m_reversePolarityAction){
 		modelPtr->ReverseNodes();
 	}
+}
+
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
+{
+	QModelIndex leftTop = m_tableModel.index(0, 0);
+	QModelIndex rightBottom = m_tableModel.index(rowCount() - 1, columnCount() - 1);
+
+	Q_EMIT m_tableModel.dataChanged(leftTop, rightBottom);
+	Q_EMIT m_tableModel.layoutChanged();
+
+	BaseClass::UpdateGui(changeSet);
+}
+
+
+// public methods of embedded class TableModel
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TableModel::TableModel(TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>* parentPtr)
+:	m_parentPtr(parentPtr)
+{
+}
+
+
+// reimplemented (QAbstractTableModel)
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+int TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TableModel::rowCount(const QModelIndex& parent) const
+{
+	if (m_parentPtr != NULL){
+		return m_parentPtr->rowCount(parent);
+	}
+
+	return 0;
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+int TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TableModel::columnCount(const QModelIndex& parent) const
+{
+	if (m_parentPtr != NULL){
+		return m_parentPtr->columnCount(parent);
+	}
+
+	return 0;
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+QVariant TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TableModel::data(const QModelIndex& index, int role) const
+{
+	if (m_parentPtr != NULL){
+		return m_parentPtr->data(index, role);
+	}
+
+	return QVariant();
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+bool TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TableModel::setData(const QModelIndex& index, const QVariant& value, int role)
+{
+	if (m_parentPtr != NULL){
+		return m_parentPtr->setData(index, value, role);
+	}
+
+	return false;
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+QVariant TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TableModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+	if (m_parentPtr != NULL){
+		return m_parentPtr->headerData(section, orientation, role);
+	}
+
+	return QVariant();
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+Qt::ItemFlags TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TableModel::flags(const QModelIndex& /*index*/) const
+{
+	return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled;
 }
 
 

@@ -16,23 +16,6 @@ CPolylineParamsGuiComp::CPolylineParamsGuiComp()
 void CPolylineParamsGuiComp::UpdateModel() const
 {
 	Q_ASSERT(BaseClass::IsGuiCreated());
-
-	i2d::CPolyline* objectPtr = GetObservedObject();
-	Q_ASSERT(objectPtr != NULL);
-
-	bool isClosed = objectPtr->IsClosed();
-
-	i2d::CPolyline editorObject;
-	if (GetObjectFromEditor(editorObject)){
-	
-		editorObject.SetClosed(isClosed);
-
-		if (!objectPtr->IsEqual(editorObject)){
-			istd::CChangeNotifier changePtr(objectPtr);
-
-			objectPtr->CopyFrom(editorObject);
-		}
-	}
 }
 
 

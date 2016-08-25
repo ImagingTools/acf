@@ -5,37 +5,7 @@ namespace iqt2d
 {
 	
 
-// public methods
-
-// reimplemented (imod::IModelEditor)
-
-void CTubePolylineParamsGuiComp::UpdateModel() const
-{
-	i2d::CTubePolyline* objectPtr = dynamic_cast<i2d::CTubePolyline*>(GetObservedObject());
-	
-	istd::CChangeNotifier changePtr(objectPtr);
-
-	BaseClass::UpdateModel();
-
-	if (objectPtr != NULL){
-		int count = objectPtr->GetNodesCount();
-		for (int i = 0; i < count; i++){
-			istd::CRange tubeRange(
-						NodeParamsTable->item(i, 2)->text().toDouble(),
-						NodeParamsTable->item(i, 3)->text().toDouble());
-
-			objectPtr->GetTNodeDataRef(i).SetTubeRange(tubeRange);
-		}
-	}
-}
-
-
 // protected slots
-
-void CTubePolylineParamsGuiComp::OnParamsChanged()
-{
-	DoUpdateModel();
-}
 
 
 void CTubePolylineParamsGuiComp::OnActionTriggered(QAction* actionPtr)
@@ -70,72 +40,78 @@ void CTubePolylineParamsGuiComp::on_PasteButton_clicked()
 
 // protected methods
 
-// reimplemented (iqt2d::TPolygonBasedParamsGuiComp)
+// reimplemented (iqt2d::TPolygonBasedParamsGuiComp<iview::CTubePolylineShape, i2d::CTubePolyline>)
 
-void CTubePolylineParamsGuiComp::OnInsertNode()
+int CTubePolylineParamsGuiComp::columnCount(const QModelIndex& /*parent*/) const
 {
-	{
-		iqt::CSignalBlocker block(NodeParamsTable);
-
-		UpdateBlocker updateBlocker(this);
-
-		BaseClass::OnInsertNode();
-
-		int row = NodeParamsTable->currentRow();
-		if (row < 0){
-			row = NodeParamsTable->rowCount();
-		}
-
-		NodeParamsTable->setItem(row, 2, new QTableWidgetItem(QString::number(-10)));
-		NodeParamsTable->setItem(row, 3, new QTableWidgetItem(QString::number(10)));
-	}
-
-	DoUpdateModel();
+	return 4;
 }
 
 
-// reimplemented (iqtgui::TGuiObserverWrap)
-
-void CTubePolylineParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
+QVariant CTubePolylineParamsGuiComp::data(const QModelIndex& index, int role) const
 {
-	BaseClass::UpdateGui(changeSet);
-
-	Q_ASSERT(IsGuiCreated());
-
-	i2d::CTubePolyline* objectPtr = dynamic_cast<i2d::CTubePolyline*>(GetObservedObject());
-	if (objectPtr != NULL){
-		int count = objectPtr->GetNodesCount();
-		for (int i = 0; i < count; i++){
-			const i2d::CTubeNode& node = objectPtr->GetTNodeData(i);
-			NodeParamsTable->setItem(i, 2, new QTableWidgetItem(QString::number(node.GetTubeRange().GetMinValue(), 'g', 12)));
-			NodeParamsTable->setItem(i, 3, new QTableWidgetItem(QString::number(node.GetTubeRange().GetMaxValue(), 'g', 12)));
+	if (role == Qt::DisplayRole || role == Qt::EditRole){
+		i2d::CTubePolyline* objectPtr = GetObservedObject();
+		if (objectPtr != NULL){
+			switch (index.column()){
+			case 2:
+				return objectPtr->GetTNodeData(index.row()).GetTubeRange().GetMinValue();
+			case 3:
+				return objectPtr->GetTNodeData(index.row()).GetTubeRange().GetMaxValue();	
+			default:
+				break;
+			}
 		}
 	}
+
+	return BaseClass::data(index, role);
 }
 
 
-// reimplemented (iqtgui::CGuiComponentBase)
-
-void CTubePolylineParamsGuiComp::OnGuiRetranslate()
+bool CTubePolylineParamsGuiComp::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-	BaseClass::OnGuiRetranslate();
+	if (role == Qt::EditRole){
+		i2d::CTubePolyline* objectPtr = GetObservedObject();
+		if (objectPtr != NULL){
+			istd::CChangeNotifier notifier(objectPtr);
+			Q_UNUSED(notifier);
 
-	QStringList currentHeaderLabels;
-
-	int columnCount = NodeParamsTable->columnCount();
-
-	for (int columnIndex = 0; columnIndex < columnCount; columnIndex++){
-		currentHeaderLabels << NodeParamsTable->horizontalHeaderItem(columnIndex)->text();
+			istd::CRange range = objectPtr->GetTNodeDataRef(index.row()).GetTubeRange();
+			switch (index.column()){
+			case 2:
+				range.SetMinValue(value.toDouble());
+				objectPtr->GetTNodeDataRef(index.row()).SetTubeRange(range);
+				return true;
+			case 3:
+				range.SetMaxValue(value.toDouble());
+				objectPtr->GetTNodeDataRef(index.row()).SetTubeRange(range);
+				return true;
+			default:
+				break;
+			}
+		}
 	}
 
-	if (NodeParamsTable->columnCount() < 4){
-		NodeParamsTable->setColumnCount(4);
+	return BaseClass::setData(index, value, role);
+}
 
-		currentHeaderLabels << tr("Left");
-		currentHeaderLabels << tr("Right");
 
-		NodeParamsTable->setHorizontalHeaderLabels(currentHeaderLabels);
+QVariant CTubePolylineParamsGuiComp::headerData(int section, Qt::Orientation orientation, int role) const
+{
+	if (role == Qt::DisplayRole){
+		if (orientation == Qt::Horizontal){
+			switch (section){
+			case 2:
+				return tr("Left");
+			case 3:
+				return tr("Right");
+			default:
+				break;
+			}
+		}
 	}
+
+	return BaseClass::headerData(section, orientation, role);
 }
 
 

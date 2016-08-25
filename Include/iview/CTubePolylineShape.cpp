@@ -308,44 +308,21 @@ bool CTubePolylineShape::OnMouseMove(istd::CIndex2d position)
 
 					i2d::CVector2d currentPosition = GetLogPosition(position);
 
-					i2d::CVector2d rightPos = nodePosition - kneeVector * range.GetMaxValue();
-					i2d::CVector2d leftPos = nodePosition - kneeVector * range.GetMinValue();
+					double newWidth = qFabs(kneeVector.GetDotProduct(currentPosition - nodePosition) / kneeVector.GetLength2());
 
-					int keysState = GetKeysState();
-					bool isSynchronized = ((keysState & Qt::ControlModifier) != 0);
-
-					if (m_editMode == EM_LEFT){
-						i2d::CVector2d newPoint = i2d::CLine2d(leftPos, nodePosition).GetExtendedNearestPoint(currentPosition);
-						double newWidth = qMax(0.1, newPoint.GetDistance(nodePosition));
-
-						// check if in the range
-						double widthRightNew = rightPos.GetDistance(newPoint);
-						double widthRightCenter = rightPos.GetDistance(nodePosition);
-						if (widthRightNew + 0.1 < widthRightCenter + newWidth){
-							newWidth = 0.1;
-						}
-
+					bool isSynchronized = ((GetKeysState() & Qt::ControlModifier) != 0);
+					if (isSynchronized){
 						range.SetMinValue(-newWidth);
-						if (isSynchronized){
-							range.SetMaxValue(newWidth);
-						}
+						range.SetMaxValue(newWidth);
+					}
+					else if (m_editMode == EM_LEFT){
+						range.SetMinValue(-newWidth);
 					}
 					else{
-						i2d::CVector2d newPoint = i2d::CLine2d(rightPos, nodePosition).GetExtendedNearestPoint(currentPosition);
-						double newWidth = qMax(0.1, newPoint.GetDistance(nodePosition));
-
-						// check if in the range
-						double widthLeftNew = leftPos.GetDistance(newPoint);
-						double widthLeftCenter = leftPos.GetDistance(nodePosition);
-						if (widthLeftNew + 0.1 < widthLeftCenter + newWidth){
-							newWidth = 0.1;
-						}
-
 						range.SetMaxValue(newWidth);
-						if (isSynchronized){
-							range.SetMinValue(-newWidth);
-						}
 					}
+
+					istd::CChangeNotifier changePtr(polylinePtr);
 
 					nodeData.SetTubeRange(range);
 

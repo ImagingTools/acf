@@ -24,11 +24,8 @@ public:
 	I_BEGIN_COMPONENT(CTubePolylineParamsGuiComp);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
 protected Q_SLOTS:
-	void OnParamsChanged();
+
 	void OnActionTriggered(QAction* actionPtr);
 
 	void on_InsertButton_clicked();
@@ -37,14 +34,12 @@ protected Q_SLOTS:
 	void on_PasteButton_clicked();
 
 protected:
-	// reimplemented (iqt2d::TPolygonBasedParamsGuiComp)
-	virtual void OnInsertNode();
 
-	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
-
-	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiRetranslate();
+	// reimplemented (iqt2d::TPolygonBasedParamsGuiComp<iview::CTubePolylineShape, i2d::CTubePolyline>)
+	virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
+	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+	virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+	virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 };
 
 
