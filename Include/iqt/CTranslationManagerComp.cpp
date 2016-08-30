@@ -172,11 +172,21 @@ QString CTranslationManagerComp::GetOptionName(int index) const
 	Q_ASSERT(index < GetOptionsCount());
 
 	if (index >= 0 && m_languagesAttrPtr.IsValid()){
-		QString languageId = m_languagesAttrPtr[index];
+		if (m_languageNamesAttrPtr.IsValid()){
+			if (index < m_languageNamesAttrPtr.GetCount()){
+				return m_languageNamesAttrPtr[index];
+			}
+			else{
+				qDebug("Number of lange names mismatched");
+			}
+		}
+		else{
+			QString languageId = m_languagesAttrPtr[index];
 
-		QLocale locale(languageId);
+			QLocale locale(languageId);
 
-		return QLocale::languageToString(locale.language());
+			return QLocale::languageToString(locale.language());
+		}
 	}
 
 	return QString();

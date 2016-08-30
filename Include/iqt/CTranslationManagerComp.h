@@ -40,6 +40,7 @@ public:
 		I_ASSIGN(m_translationFilePathAttrPtr, "TranslationFilePath", "Base file path got translations", true, "");
 		I_ASSIGN(m_translationFilePrefixAttrPtr, "TranslationFilePrefix", "Prefix of the translation file", true, "");
 		I_ASSIGN_MULTI_0(m_languagesAttrPtr, "LanguageIds", "List of language IDs in ISO-format", true);
+		I_ASSIGN_MULTI_0(m_languageNamesAttrPtr, "LanguageNames", "List of language names according to 'LanguageIds' attribute", false);
 		I_ASSIGN(m_slaveTranslationManagerCompPtr, "SlaveTranslationManager", "Slave translation manager", false, "SlaveTranslationManager");
 		I_ASSIGN(m_languageSelectionCompPtr, "LanguageSelection", "Language selection provider", false, "LanguageSelection");
 		I_ASSIGN_TO(m_languageSelectionModelCompPtr, m_languageSelectionCompPtr, false);
@@ -92,6 +93,7 @@ private:
 	I_ATTR(QString, m_translationFilePathAttrPtr);
 	I_ATTR(QByteArray, m_translationFilePrefixAttrPtr);
 	I_MULTIATTR(QByteArray, m_languagesAttrPtr);
+	I_MULTIATTR(QString, m_languageNamesAttrPtr);
 	I_REF(iqt::ITranslationManager, m_slaveTranslationManagerCompPtr);
 	I_REF(iprm::ISelectionParam, m_languageSelectionCompPtr);
 	I_REF(imod::IModel, m_languageSelectionModelCompPtr);
