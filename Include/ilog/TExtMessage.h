@@ -86,7 +86,22 @@ QByteArray TExtMessage<Element>::GetFactoryId() const
 template<class Element>
 bool TExtMessage<Element>::Serialize(iser::IArchive& archive)
 {
-	return BaseClass::Serialize(archive) && BaseClass2::Serialize(archive);
+	static const iser::CArchiveTag elementTag("Element", "Element part", iser::CArchiveTag::TT_GROUP);
+
+	quint32 versionNumber = 0;
+	bool isOldFormat = archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, versionNumber) && (versionNumber < 4279);
+
+	bool retVal = BaseClass::Serialize(archive);
+
+	if (!isOldFormat){
+		retVal = retVal && archive.BeginTag(elementTag);
+	}
+	retVal = retVal && BaseClass2::Serialize(archive);
+	if (!isOldFormat){
+		retVal = retVal && archive.EndTag(elementTag);
+	}
+
+	return retVal;
 }
 
 
