@@ -105,7 +105,7 @@ protected:
 	virtual void OnCopyData();
 	virtual void OnPasteData();
 
-	// pseudo-reimplemented (QAbstractTableModel)
+	// delegated from QAbstractTableModel
 	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
 	virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
 	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
@@ -259,7 +259,7 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnRemoveN
 }
 
 
-// psuedo-reimplemented (QAbstractTableModel)
+// delegated from QAbstractTableModel
 
 template <class PolygonBasedShape, class PolygonBasedModel>
 int TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::rowCount(const QModelIndex& /*parent*/) const
