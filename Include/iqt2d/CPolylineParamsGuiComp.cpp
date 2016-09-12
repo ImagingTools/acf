@@ -51,7 +51,7 @@ void CPolylineParamsGuiComp::on_PasteButton_clicked()
 }
 
 
-// reimplemented from TPolygonBasedParamsGuiComp
+// reimplemented (iqt2d::TShapeParamsGuiCompBase)
 
 bool CPolylineParamsGuiComp::PopulateActions(CActionAdapter& host, imod::IModel* modelPtr)
 {
@@ -65,7 +65,20 @@ bool CPolylineParamsGuiComp::PopulateActions(CActionAdapter& host, imod::IModel*
 }
 
 
-// reimplemented (iqt2d::TShapeParamsGuiCompBase)
+void CPolylineParamsGuiComp::OnActionTriggered(QAction* actionPtr)
+{
+	if (actionPtr == &m_openCloseAction){
+		i2d::CPolyline* polylinePtr = GetObjectPtr();
+		if (polylinePtr){
+			polylinePtr->SetClosed(!polylinePtr->IsClosed());
+		}
+
+		return;
+	}
+
+	BaseClass::OnActionTriggered(actionPtr);
+}
+
 
 iview::CInteractiveShapeBase* CPolylineParamsGuiComp::CreateShapeInstance() const
 {
@@ -85,24 +98,7 @@ void CPolylineParamsGuiComp::OnGuiRetranslate()
 {
 	BaseClass::OnGuiRetranslate();
 
-	m_openCloseAction.setText(QCoreApplication::translate("iqt2d", "Open/close line"));
-}
-
-
-// pseudo slots
-
-void CPolylineParamsGuiComp::OnActionTriggered(QAction* actionPtr)
-{
-	if (actionPtr == &m_openCloseAction){
-		i2d::CPolyline* polylinePtr = GetObjectPtr();
-		if (polylinePtr){
-			polylinePtr->SetClosed(!polylinePtr->IsClosed());
-		}
-
-		return;
-	}
-
-	BaseClass::OnActionTriggered(actionPtr);
+	m_openCloseAction.setText(tr("Open/close line"));
 }
 
 
