@@ -121,6 +121,15 @@ void CSimpleGuiContainerDelegate::RemovePage(QWidget& containerWidget, int pageI
 }
 
 
+void CSimpleGuiContainerDelegate::ResetPages(QWidget& containerWidget)
+{
+	QLayout* containerLayoutPtr = containerWidget.layout();
+	Q_ASSERT(containerLayoutPtr != NULL);
+
+	ClearLayout(containerLayoutPtr);
+}
+
+
 int CSimpleGuiContainerDelegate::GetPagesCount(const QWidget& containerWidget) const
 {
 	QLayout* containerLayoutPtr = containerWidget.layout();

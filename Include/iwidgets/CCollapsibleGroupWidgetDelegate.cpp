@@ -144,6 +144,22 @@ void CCollapsibleGroupWidgetDelegate::RemovePage(QWidget& containerWidget, int p
 }
 
 
+void CCollapsibleGroupWidgetDelegate::ResetPages(QWidget& containerWidget)
+{
+	QScrollArea* scrollAreaPtr = dynamic_cast<QScrollArea*>(&containerWidget);
+	Q_ASSERT(scrollAreaPtr != NULL);
+
+	QWidget* containerWidgetPtr = scrollAreaPtr->widget();
+	Q_ASSERT(containerWidgetPtr != NULL);
+
+	QLayout* containerLayoutPtr = containerWidgetPtr->layout();
+	Q_ASSERT(containerLayoutPtr != NULL);
+
+	ClearLayout(containerLayoutPtr);
+}
+
+
+
 int CCollapsibleGroupWidgetDelegate::GetPagesCount(const QWidget& containerWidget) const
 {
 	const QScrollArea* scrollAreaPtr = dynamic_cast<const QScrollArea*>(&containerWidget);

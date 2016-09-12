@@ -87,6 +87,21 @@ void CToolBoxDelegate::RemovePage(QWidget& containerWidget, int pageIndex)
 }
 
 
+void CToolBoxDelegate::ResetPages(QWidget& containerWidget)
+{
+	QToolBox* toolBoxPtr = dynamic_cast<QToolBox*>(&containerWidget);
+	if (toolBoxPtr != NULL){
+		while (toolBoxPtr->count()){
+			QWidget* widgetPtr = toolBoxPtr->widget(0);
+
+			toolBoxPtr->removeItem(0);
+
+			widgetPtr->deleteLater();
+		}
+	}
+}
+
+
 int CToolBoxDelegate::GetPagesCount(const QWidget& containerWidget) const
 {
 	const QToolBox* toolBoxPtr = dynamic_cast<const QToolBox*>(&containerWidget);

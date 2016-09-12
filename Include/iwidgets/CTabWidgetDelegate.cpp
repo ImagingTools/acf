@@ -139,6 +139,15 @@ void CTabWidgetDelegate::RemovePage(QWidget& containerWidget, int pageIndex)
 }
 
 
+void CTabWidgetDelegate::ResetPages(QWidget& containerWidget)
+{
+	QTabWidget* tabWidgetPtr = dynamic_cast<QTabWidget*>(&containerWidget);
+	if (tabWidgetPtr != NULL){
+		tabWidgetPtr->clear();
+	}
+}
+
+
 int CTabWidgetDelegate::GetPagesCount(const QWidget& containerWidget) const
 {
 	const QTabWidget* tabWidgetPtr = dynamic_cast<const QTabWidget*>(&containerWidget);

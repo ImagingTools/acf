@@ -13,6 +13,7 @@
 
 // ACF includes
 #include <istd/IPolymorphic.h>
+#include <iwidgets/iwidgets.h>
 
 
 namespace iwidgets
@@ -118,6 +119,11 @@ public:
 		Remove the page from the container. The page widget will be destroyed.
 	*/
 	virtual void RemovePage(QWidget& containerWidget, int pageIndex) = 0;
+
+	/**
+		Remove all pages from the container. All page widgets will be destroyed.
+	*/
+	virtual void ResetPages(QWidget& containerWidget) = 0;
 
 	/**
 		Get the number of the pages in the container.

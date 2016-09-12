@@ -94,6 +94,20 @@ void CSplitterDelegate::RemovePage(QWidget& containerWidget, int pageIndex)
 }
 
 
+void CSplitterDelegate::ResetPages(QWidget& containerWidget)
+{
+	QSplitter* splitterPtr = dynamic_cast<QSplitter*>(&containerWidget);
+	if (splitterPtr != NULL){
+		while (splitterPtr->count() > 0){
+			QWidget* pageWidgetPtr = splitterPtr->widget(0);
+			if (pageWidgetPtr != NULL){
+				delete pageWidgetPtr;
+			}
+		}	
+	}
+}
+
+
 int CSplitterDelegate::GetPagesCount(const QWidget& containerWidget) const
 {
 	const QSplitter* splitterPtr = dynamic_cast<const QSplitter*>(&containerWidget);

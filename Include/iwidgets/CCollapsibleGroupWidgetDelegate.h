@@ -34,6 +34,7 @@ public:
 		const QString& pageTitle,
 		int pageIndex = -1);
 	virtual void RemovePage(QWidget& containerWidget, int pageIndex);
+	virtual void ResetPages(QWidget& containerWidget);
 	virtual int GetPagesCount(const QWidget& containerWidget) const; 
 	virtual QWidget* GetPageWidgetPtr(const QWidget& containerWidget, int pageIndex) const; 
 	virtual int GetCurrentPage(const QWidget& containerWidget) const;

@@ -107,8 +107,9 @@ void CMultiPageWidget::SetLayoutOrientation(Qt::Orientation orientation)
 
 void CMultiPageWidget::ResetPages()
 {
-	while (GetPagesCount() > 0){
-		RemovePage(0);
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		delegatePtr->ResetPages(*m_guiContainerPtr);
 	}
 }
 

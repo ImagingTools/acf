@@ -87,6 +87,21 @@ void CStackWidgetDelegate::RemovePage(QWidget& containerWidget, int pageIndex)
 }
 
 
+void CStackWidgetDelegate::ResetPages(QWidget& containerWidget)
+{
+	QStackedWidget* stackedWidgetPtr = dynamic_cast<QStackedWidget*>(&containerWidget);
+	if (stackedWidgetPtr != NULL){
+		while (stackedWidgetPtr->count()){
+			QWidget* widgetPtr = stackedWidgetPtr->widget(0);
+
+			stackedWidgetPtr->removeWidget(widgetPtr);
+
+			widgetPtr->deleteLater();
+		}
+	}
+}
+
+
 int CStackWidgetDelegate::GetPagesCount(const QWidget& containerWidget) const
 {
 	const QStackedWidget* stackedWidgetPtr = dynamic_cast<const QStackedWidget*>(&containerWidget);
