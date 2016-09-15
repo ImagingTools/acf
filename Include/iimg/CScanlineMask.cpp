@@ -452,12 +452,19 @@ void CScanlineMask::CreateFromTube(const i2d::CTubePolyline& tube, const i2d::CR
 	polygon.SetCalibration(tube.GetCalibration());
 
 	int nodesCount = tube.GetNodesCount();
-	if (nodesCount >= 1){
-		polygon.SetNodesCount(nodesCount * 2);
-		int leftIndex = 0;
-		int rightIndex = nodesCount * 2 - 1;
+	if (nodesCount >= 2){
+		int segmentsCount = tube.GetSegmentsCount();
+		Q_ASSERT(segmentsCount >= 1);
 
-		for (int nodeIndex = 0; nodeIndex < nodesCount; ++nodeIndex){
+		int polygonNodesCount = (segmentsCount + 1) * 2;
+
+		polygon.SetNodesCount(polygonNodesCount);
+		int leftIndex = 0;
+		int rightIndex = polygonNodesCount - 1;
+
+		for (int segmentIndex = 0; segmentIndex <= segmentsCount; ++segmentIndex){
+			int nodeIndex = segmentIndex % nodesCount;
+
 			i2d::CVector2d kneeVector = tube.GetKneeVector(nodeIndex);
 			const i2d::CVector2d& nodePosition = tube.GetNodePos(nodeIndex);
 			const i2d::CTubeNode& tubeNode = tube.GetTNodeData(nodeIndex);
