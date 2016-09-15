@@ -552,10 +552,13 @@ TIndex<Dimensions> TIndex<Dimensions>::s_invalidInstance(-1);
 template <int Dimensions>
 inline uint qHash(const TIndex<Dimensions>& key, uint seed = 0)
 {
-	uint retVal;
+	uint retVal = seed;
 
 	for (int i = 0; i < Dimensions; ++i){
-		retVal ^= ::qHash(key[i], seed);
+		uint value = uint(key[i]);
+
+		retVal *= 16187;	// some big enough prime number
+		retVal ^= value;
 	}
 
 	return retVal;
