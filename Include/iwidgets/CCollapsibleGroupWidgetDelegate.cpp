@@ -103,7 +103,12 @@ int CCollapsibleGroupWidgetDelegate::InsertPage(
 	QLayout* containerLayoutPtr = containerWidgetPtr->layout();
 	Q_ASSERT(containerLayoutPtr != NULL);
 
-	bool even = ((containerLayoutPtr->count()) % 2) == 0;
+	int widgetCount = containerLayoutPtr->count();
+	if (widgetCount > 0){
+		--widgetCount; // spacer not included
+	}
+
+	bool even = (widgetCount % 2) == 0;
 
 	CCollapsiblePage* groupPanelPtr = new CCollapsiblePage(containerWidgetPtr);
 	groupPanelPtr->setProperty("IsAlternating", QVariant(even));
