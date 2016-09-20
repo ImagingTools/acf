@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iprm/INameParam.h"
+#include <iprm/INameParam.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/iqtprm/ui_CNameParamGuiComp.h"
+#include <GeneratedFiles/iqtprm/ui_CNameParamGuiComp.h>
 
 
 namespace iqtprm

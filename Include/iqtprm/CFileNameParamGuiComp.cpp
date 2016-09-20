@@ -1,4 +1,4 @@
-#include "iqtprm/CFileNameParamGuiComp.h"
+#include <iqtprm/CFileNameParamGuiComp.h>
 
 
 // Qt includes
@@ -13,11 +13,11 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/CSystem.h"
-#include "iqt/CSignalBlocker.h"
-#include "iwidgets/CExtLineEdit.h"
-#include "ifilegui/CFileDialogLoaderComp.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/CSystem.h>
+#include <iqt/CSignalBlocker.h>
+#include <iwidgets/CExtLineEdit.h>
+#include <ifilegui/CFileDialogLoaderComp.h>
 
 
 namespace iqtprm

@@ -1,8 +1,8 @@
-#include "iqt2d/CLine2dParamsGuiComp.h"
+#include <iqt2d/CLine2dParamsGuiComp.h>
 
 
 // ACF includes
-#include "istd/CChangeGroup.h"
+#include <istd/CChangeGroup.h>
 
 
 namespace iqt2d

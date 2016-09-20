@@ -1,4 +1,4 @@
-#include "iqtdoc/CSingleDocumentWorkspaceGuiComp.h"
+#include <iqtdoc/CSingleDocumentWorkspaceGuiComp.h>
 
 
 // Qt includes
@@ -16,12 +16,12 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "idoc/IDocumentTemplate.h"
+#include <idoc/IDocumentTemplate.h>
 
-#include "iqt/CSettingsWriteArchive.h"
-#include "iqt/CSettingsReadArchive.h"
+#include <iqt/CSettingsWriteArchive.h>
+#include <iqt/CSettingsReadArchive.h>
 
 
 namespace iqtdoc

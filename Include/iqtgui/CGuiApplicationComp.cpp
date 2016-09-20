@@ -1,4 +1,4 @@
-#include "iqtgui/CGuiApplicationComp.h"
+#include <iqtgui/CGuiApplicationComp.h>
 
 
 // Qt includes

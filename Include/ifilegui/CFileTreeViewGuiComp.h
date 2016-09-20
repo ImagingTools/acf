@@ -17,13 +17,13 @@
 
 
 // ACF includes
-#include "ifile/IFileNameParam.h"
-#include "ifile/IFileTypeInfo.h"
-#include "ifile/CFileNameParamComp.h"
-#include "imod/CMultiModelDispatcherBase.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <ifile/IFileNameParam.h>
+#include <ifile/IFileTypeInfo.h>
+#include <ifile/CFileNameParamComp.h>
+#include <imod/CMultiModelDispatcherBase.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h"
+#include <GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h>
 
 
 namespace ifilegui

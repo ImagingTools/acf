@@ -2,16 +2,16 @@
 #define BitmapPck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "iimg/CBitmap.h"
-#include "iimg/CBitmapSurface.h"
-#include "iimg/CBitmapLoaderComp.h"
-#include "iimg/CGeneralBitmap.h"
-#include "iimg/CMultiPageBitmapComp.h"
-#include "iimg/CComposedBitmapProviderComp.h"
-#include "iimg/CMultiPageBitmapSequenceComp.h"
+#include <iimg/CBitmap.h>
+#include <iimg/CBitmapSurface.h>
+#include <iimg/CBitmapLoaderComp.h>
+#include <iimg/CGeneralBitmap.h>
+#include <iimg/CMultiPageBitmapComp.h>
+#include <iimg/CComposedBitmapProviderComp.h>
+#include <iimg/CMultiPageBitmapSequenceComp.h>
 
 
 /**

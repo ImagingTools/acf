@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "imod/CMultiModelDispatcherBase.h"
+#include <imod/CMultiModelDispatcherBase.h>
 
-#include "ibase/ICommandsProvider.h"
+#include <ibase/ICommandsProvider.h>
 
-#include "iqtgui/CHierarchicalCommand.h"
+#include <iqtgui/CHierarchicalCommand.h>
 
 
 namespace iqtgui

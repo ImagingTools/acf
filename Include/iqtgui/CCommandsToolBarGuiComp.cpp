@@ -1,4 +1,4 @@
-#include "iqtgui/CCommandsToolBarGuiComp.h"
+#include <iqtgui/CCommandsToolBarGuiComp.h>
 
 
 // Qt includes
@@ -10,7 +10,7 @@
 #endif
 
 // ACF includes
-#include "iqtgui/CCommandTools.h"
+#include <iqtgui/CCommandTools.h>
 
 
 namespace iqtgui

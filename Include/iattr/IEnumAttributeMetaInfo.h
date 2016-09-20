@@ -2,7 +2,7 @@
 #define iattr_IEnumAttributeMetaInfo_included
 
 
-#include "iattr/IAttributeMetaInfo.h"
+#include <iattr/IAttributeMetaInfo.h>
 
 
 namespace iattr

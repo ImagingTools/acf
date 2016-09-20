@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
-#include "icomp/CComponentBase.h"
-#include "ibase/ICommandsProvider.h"
-#include "iprm/ISelectionParam.h"
-#include "iqtgui/IIconProvider.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <imod/TSingleModelObserverBase.h>
+#include <icomp/CComponentBase.h>
+#include <ibase/ICommandsProvider.h>
+#include <iprm/ISelectionParam.h>
+#include <iqtgui/IIconProvider.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
 
 namespace iqtgui

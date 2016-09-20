@@ -1,4 +1,4 @@
-#include "iimg/CComposedBitmapProviderComp.h"
+#include <iimg/CComposedBitmapProviderComp.h>
 
 
 namespace iimg

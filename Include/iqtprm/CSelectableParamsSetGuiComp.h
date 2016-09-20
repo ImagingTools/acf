@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iqtprm/CSelectableGuiComp.h"
+#include <iqtprm/CSelectableGuiComp.h>
 
 
 namespace iqtprm

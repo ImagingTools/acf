@@ -13,10 +13,10 @@
 #endif
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "icomp/CComponentBase.h"
-#include "idoc/IHelpViewer.h"
-#include "idoc/IHelpFileProvider.h"
+#include <istd/TDelPtr.h>
+#include <icomp/CComponentBase.h>
+#include <idoc/IHelpViewer.h>
+#include <idoc/IHelpFileProvider.h>
 
 
 namespace iqtdoc

@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "icomp/IComponentStaticInfo.h"
-#include "icomp/IComponentContext.h"
-#include "icomp/CCompositeComponent.h"
+#include <istd/TDelPtr.h>
+#include <icomp/IComponentStaticInfo.h>
+#include <icomp/IComponentContext.h>
+#include <icomp/CCompositeComponent.h>
 
 
 namespace ipackage

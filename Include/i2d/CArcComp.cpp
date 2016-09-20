@@ -1,4 +1,4 @@
-#include "i2d/CArcComp.h"
+#include <i2d/CArcComp.h>
 
 
 namespace i2d

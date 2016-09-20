@@ -1,4 +1,4 @@
-#include "icomp/CMultiFactoryAttribute.h"
+#include <icomp/CMultiFactoryAttribute.h>
 
 
 namespace icomp

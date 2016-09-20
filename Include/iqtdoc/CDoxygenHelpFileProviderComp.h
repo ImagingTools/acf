@@ -2,11 +2,11 @@
 #define iqtdoc_CDoxygenHelpFileProviderComp_included
 
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "idoc/IHelpFileProvider.h"
+#include <idoc/IHelpFileProvider.h>
 
-#include "iqtdoc/iqtdoc.h"
+#include <iqtdoc/iqtdoc.h>
 
 
 namespace iqtdoc

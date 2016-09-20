@@ -17,13 +17,13 @@
 #endif
 
 // ACF includes
-#include "ifile/IFileTypeInfo.h"
-#include "ifile/IFileNameParam.h"
+#include <ifile/IFileTypeInfo.h>
+#include <ifile/IFileNameParam.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iwidgets/CExtLineEdit.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iwidgets/CExtLineEdit.h>
 
-#include "GeneratedFiles/ifilegui/ui_CFileSystemExplorerGuiComp.h"
+#include <GeneratedFiles/ifilegui/ui_CFileSystemExplorerGuiComp.h>
 
 
 namespace ifilegui

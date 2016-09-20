@@ -2,7 +2,7 @@
 #define iview_IShapeObserver_included
 
 
-#include "istd/IPolymorphic.h"
+#include <istd/IPolymorphic.h>
 
 
 namespace iview

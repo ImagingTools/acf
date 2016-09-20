@@ -6,8 +6,8 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "i2d/CPolyline.h"
-#include "i2d/CSplineSegment.h"
+#include <i2d/CPolyline.h>
+#include <i2d/CSplineSegment.h>
 
 
 // forward declarations

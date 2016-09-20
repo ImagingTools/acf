@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "iview/CPolygonShape.h"
+#include <iview/CPolygonShape.h>
 
-#include "iqt2d/TPolygonBasedParamsGuiComp.h"
+#include <iqt2d/TPolygonBasedParamsGuiComp.h>
 
 
 namespace iqt2d

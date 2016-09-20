@@ -6,7 +6,7 @@
 #include <QtCore/QByteArray>
 
 // ACF includes
-#include "istd/TIFactory.h"
+#include <istd/TIFactory.h>
 
 
 namespace istd

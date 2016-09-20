@@ -1,4 +1,4 @@
-#include "ibase/CMultiObserverBinderComp.h"
+#include <ibase/CMultiObserverBinderComp.h>
 
 
 namespace ibase

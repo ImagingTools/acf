@@ -10,9 +10,9 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "idoc/IUndoManager.h"
-#include "idoc/IDocumentTypesInfo.h"
+#include <istd/IChangeable.h>
+#include <idoc/IUndoManager.h>
+#include <idoc/IDocumentTypesInfo.h>
 
 
 namespace idoc

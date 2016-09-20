@@ -1,4 +1,4 @@
-#include "i2d/COrientedCircleComp.h"
+#include <i2d/COrientedCircleComp.h>
 
 
 namespace i2d

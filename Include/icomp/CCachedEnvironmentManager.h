@@ -6,11 +6,11 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "iser/ISerializable.h"
-#include "iser/TCopySerializedWrap.h"
-#include "icomp/CRegistry.h"
-#include "icomp/CCompositePackageStaticInfo.h"
-#include "icomp/CEnvironmentManagerBase.h"
+#include <iser/ISerializable.h>
+#include <iser/TCopySerializedWrap.h>
+#include <icomp/CRegistry.h>
+#include <icomp/CCompositePackageStaticInfo.h>
+#include <icomp/CEnvironmentManagerBase.h>
 
 
 namespace icomp

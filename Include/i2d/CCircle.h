@@ -2,8 +2,8 @@
 #define i2d_CCircle_included
 
 
-#include "i2d/CPosition2d.h"
-#include "i2d/CLine2d.h"
+#include <i2d/CPosition2d.h>
+#include <i2d/CLine2d.h>
 
 
 namespace i2d

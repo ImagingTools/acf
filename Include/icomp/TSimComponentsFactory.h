@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "istd/TIFactory.h"
-#include "istd/CClassInfo.h"
+#include <istd/TIFactory.h>
+#include <istd/CClassInfo.h>
 
-#include "icomp/IComponent.h"
-#include "icomp/TComponentWrap.h"
-#include "icomp/TSimComponentWrap.h"
+#include <icomp/IComponent.h>
+#include <icomp/TComponentWrap.h>
+#include <icomp/TSimComponentWrap.h>
 
 
 namespace icomp

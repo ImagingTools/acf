@@ -2,14 +2,14 @@
 #define iprm_CManagerParamsSetShadowerComp_included
 
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "imod/CSingleModelObserverBase.h"
+#include <imod/CSingleModelObserverBase.h>
 
-#include "iprm/IOptionsList.h"
-#include "iprm/IParamsSet.h"
-#include "iprm/ISelectionParam.h"
-#include "iprm/IParamsManager.h"
+#include <iprm/IOptionsList.h>
+#include <iprm/IParamsSet.h>
+#include <iprm/ISelectionParam.h>
+#include <iprm/IParamsManager.h>
 
 
 namespace iprm

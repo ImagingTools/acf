@@ -1,4 +1,4 @@
-#include "idoc/CMultiPageDocumentFilePersistenceComp.h"
+#include <idoc/CMultiPageDocumentFilePersistenceComp.h>
 
 
 // Qt includes
@@ -7,9 +7,9 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "ifile/CSimpleXmlFileReadArchive.h"
-#include "ifile/CSimpleXmlFileWriteArchive.h"
-#include "idoc/CStandardDocumentMetaInfo.h"
+#include <ifile/CSimpleXmlFileReadArchive.h>
+#include <ifile/CSimpleXmlFileWriteArchive.h>
+#include <idoc/CStandardDocumentMetaInfo.h>
 
 
 namespace idoc

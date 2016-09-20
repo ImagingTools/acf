@@ -1,4 +1,4 @@
-#include "iqtgui/CApplicationCompBase.h"
+#include <iqtgui/CApplicationCompBase.h>
 
 
 // Qt includes
@@ -21,7 +21,7 @@
 #endif
 
 // ACF includes
-#include "icomp/CCompositeComponent.h"
+#include <icomp/CCompositeComponent.h>
 
 
 namespace iqtgui

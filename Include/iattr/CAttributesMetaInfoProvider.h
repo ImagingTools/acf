@@ -6,8 +6,8 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/TOptDelPtr.h"
-#include "iattr/IAttributesMetaInfoProvider.h"
+#include <istd/TOptDelPtr.h>
+#include <iattr/IAttributesMetaInfoProvider.h>
 
 
 namespace iattr

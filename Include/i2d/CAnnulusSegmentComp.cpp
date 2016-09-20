@@ -1,4 +1,4 @@
-#include "i2d/CAnnulusSegmentComp.h"
+#include <i2d/CAnnulusSegmentComp.h>
 
 
 namespace i2d

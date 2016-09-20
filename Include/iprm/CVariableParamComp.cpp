@@ -1,8 +1,8 @@
-#include "iprm/CVariableParamComp.h"
+#include <iprm/CVariableParamComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iprm

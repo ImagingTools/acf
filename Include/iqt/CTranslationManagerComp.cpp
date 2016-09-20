@@ -1,4 +1,4 @@
-#include "iqt/CTranslationManagerComp.h"
+#include <iqt/CTranslationManagerComp.h>
 
 
 // Qt includes
@@ -12,9 +12,9 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
 
 namespace iqt

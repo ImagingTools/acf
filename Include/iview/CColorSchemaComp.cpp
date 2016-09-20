@@ -1,4 +1,4 @@
-#include "iview/CColorSchemaComp.h"
+#include <iview/CColorSchemaComp.h>
 
 
 // STL includes

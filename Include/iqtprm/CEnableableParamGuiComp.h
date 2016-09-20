@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "iprm/IEnableableParam.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iprm/IEnableableParam.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/iqtprm/ui_CEnableableParamGuiComp.h"
+#include <GeneratedFiles/iqtprm/ui_CEnableableParamGuiComp.h>
 
 
 namespace iqtprm

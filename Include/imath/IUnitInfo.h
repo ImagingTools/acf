@@ -6,9 +6,9 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "istd/IPolymorphic.h"
-#include "istd/TRange.h"
-#include "imath/IDoubleManip.h"
+#include <istd/IPolymorphic.h>
+#include <istd/TRange.h>
+#include <imath/IDoubleManip.h>
 
 
 namespace imath

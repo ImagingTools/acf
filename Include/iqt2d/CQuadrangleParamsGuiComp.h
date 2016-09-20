@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "i2d/CQuadrangle.h"
+#include <i2d/CQuadrangle.h>
 
-#include "iview/CParallelogramShape.h"
+#include <iview/CParallelogramShape.h>
 
-#include "iqt2d/TShapeParamsGuiCompBase.h"
-#include "GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h"
+#include <iqt2d/TShapeParamsGuiCompBase.h>
+#include <GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h>
 
 
 namespace iqt2d

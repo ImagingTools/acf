@@ -1,8 +1,8 @@
-#include "iqt2d/CRectangleParamsGuiComp.h"
+#include <iqt2d/CRectangleParamsGuiComp.h>
 
 
 // ACF includes
-#include "istd/CChangeGroup.h"
+#include <istd/CChangeGroup.h>
 
 
 namespace iqt2d

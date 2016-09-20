@@ -6,8 +6,8 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "iser/ISerializable.h"
-#include "idoc/IDocumentMetaInfo.h"
+#include <iser/ISerializable.h>
+#include <idoc/IDocumentMetaInfo.h>
 
 
 namespace idoc

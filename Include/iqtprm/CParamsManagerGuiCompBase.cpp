@@ -1,14 +1,14 @@
-#include "iqtprm/CParamsManagerGuiCompBase.h"
+#include <iqtprm/CParamsManagerGuiCompBase.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iprm/IParamsSet.h"
-#include "iprm/IOptionsManager.h"
-#include "iwidgets/CItemDelegate.h"
-#include "iwidgets/CWidgetUpdateBlocker.h"
-#include "iview/IShapeView.h"
-#include "iqt2d/IViewProvider.h"
+#include <istd/CChangeNotifier.h>
+#include <iprm/IParamsSet.h>
+#include <iprm/IOptionsManager.h>
+#include <iwidgets/CItemDelegate.h>
+#include <iwidgets/CWidgetUpdateBlocker.h>
+#include <iview/IShapeView.h>
+#include <iqt2d/IViewProvider.h>
 
 
 namespace iqtprm

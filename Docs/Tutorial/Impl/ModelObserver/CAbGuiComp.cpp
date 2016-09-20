@@ -1,12 +1,12 @@
-#include "CAbGuiComp.h"
+#include <CAbGuiComp.h>
 
 
 // ACF includes
-#include "istd/CChangeGroup.h"
+#include <istd/CChangeGroup.h>
 
 
 // Tutorial includes
-#include "IAconstraints.h"
+#include <IAconstraints.h>
 
 
 // reimplemented (imod::IModelEditor)

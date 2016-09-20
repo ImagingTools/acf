@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iqt2d/IViewProvider.h"
-#include "iqt2d/IViewExtender.h"
+#include <iqt2d/IViewProvider.h>
+#include <iqt2d/IViewExtender.h>
 
 
 namespace iqt2d

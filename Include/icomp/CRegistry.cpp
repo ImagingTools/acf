@@ -1,20 +1,20 @@
-#include "icomp/CRegistry.h"
+#include <icomp/CRegistry.h>
 
 
 // Qt includes
 #include <QtCore/QObject>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
-#include "iser/CMemoryReadArchive.h"
-#include "icomp/IComponentStaticInfo.h"
-#include "icomp/CReferenceAttribute.h"
-#include "icomp/CFactoryAttribute.h"
-#include "icomp/CInterfaceManipBase.h"
-#include "icomp/CMultiReferenceAttribute.h"
-#include "icomp/CMultiFactoryAttribute.h"
+#include <istd/CChangeNotifier.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
+#include <iser/CMemoryReadArchive.h>
+#include <icomp/IComponentStaticInfo.h>
+#include <icomp/CReferenceAttribute.h>
+#include <icomp/CFactoryAttribute.h>
+#include <icomp/CInterfaceManipBase.h>
+#include <icomp/CMultiReferenceAttribute.h>
+#include <icomp/CMultiFactoryAttribute.h>
 
 
 namespace icomp

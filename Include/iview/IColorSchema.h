@@ -9,9 +9,9 @@
 #include <QtGui/QFont>
 
 // ACF includes
-#include "istd/IPolymorphic.h"
-#include "istd/CIndex2d.h"
-#include "i2d/CRect.h"
+#include <istd/IPolymorphic.h>
+#include <istd/CIndex2d.h>
+#include <i2d/CRect.h>
 
 
 class QPainter;

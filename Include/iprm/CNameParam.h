@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iprm/INameParam.h"
+#include <iprm/INameParam.h>
 
 
 namespace iprm

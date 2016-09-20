@@ -2,7 +2,7 @@
 #define i3d_included
 
 
-#include "imath/imath.h"
+#include <imath/imath.h>
 
 
 /**

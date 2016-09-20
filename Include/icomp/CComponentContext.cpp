@@ -1,9 +1,9 @@
-#include "icomp/CComponentContext.h"
+#include <icomp/CComponentContext.h>
 
 
-#include "icomp/IRegistryElement.h"
-#include "icomp/IComponentStaticInfo.h"
-#include "icomp/IAttributeStaticInfo.h"
+#include <icomp/IRegistryElement.h>
+#include <icomp/IComponentStaticInfo.h>
+#include <icomp/IAttributeStaticInfo.h>
 
 
 namespace icomp

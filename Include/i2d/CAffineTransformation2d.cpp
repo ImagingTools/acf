@@ -1,9 +1,9 @@
-#include "i2d/CAffineTransformation2d.h"
+#include <i2d/CAffineTransformation2d.h>
 
 
 // ACF includes
-#include "imod/TModelWrap.h"
-#include "istd/CChangeNotifier.h"
+#include <imod/TModelWrap.h>
+#include <istd/CChangeNotifier.h>
 
 
 namespace i2d

@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "ibase/ICommandsProvider.h"
-#include "imod/TModelWrap.h"
-#include "iqtgui/IDialog.h"
-#include "iqtgui/CGuiComponentDialog.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <ibase/ICommandsProvider.h>
+#include <imod/TModelWrap.h>
+#include <iqtgui/IDialog.h>
+#include <iqtgui/CGuiComponentDialog.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
 
 namespace iqtgui

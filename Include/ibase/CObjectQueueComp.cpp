@@ -1,11 +1,11 @@
-#include "ibase/CObjectQueueComp.h"
+#include <ibase/CObjectQueueComp.h>
 
 
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "ibase/IObjectQueue.h"
+#include <ibase/IObjectQueue.h>
 
 
 namespace ibase

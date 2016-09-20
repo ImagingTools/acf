@@ -2,31 +2,31 @@
 #define FilePck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "ifile/CFileNameParamComp.h"
-#include "ifile/CRelativeFileNameParamComp.h"
-#include "ifile/CSystemLocationComp.h"
-#include "ifile/CGeneratedFileNameParamComp.h"
-#include "ifile/CFileListProviderComp.h"
-#include "ifile/CAutoPersistenceComp.h"
-#include "ifile/CFileSystemInfoProviderComp.h"
-#include "ifile/CComposedFilePersistenceComp.h"
-#include "ifile/CFileTypeInfoComp.h"
-#include "ifile/CComposedFileMetaInfoProviderComp.h"
-#include "ifile/TFileSerializerComp.h"
-#include "ifile/TXmlFileSerializerComp.h"
-#include "ifile/CSimpleXmlFileReadArchive.h"
-#include "ifile/CSimpleXmlFileWriteArchive.h"
-#include "ifile/CFileReadArchive.h"
-#include "ifile/CFileWriteArchive.h"
-#include "ifile/CCompactXmlFileReadArchive.h"
-#include "ifile/CCompactXmlFileWriteArchive.h"
-#include "ifile/CCompressedXmlFileReadArchive.h"
-#include "ifile/CCompressedXmlFileWriteArchive.h"
-#include "ifile/CTimeStampFileNameParamComp.h"
-#include "ifile/CApplicationInfoBasedFileNameComp.h"
+#include <ifile/CFileNameParamComp.h>
+#include <ifile/CRelativeFileNameParamComp.h>
+#include <ifile/CSystemLocationComp.h>
+#include <ifile/CGeneratedFileNameParamComp.h>
+#include <ifile/CFileListProviderComp.h>
+#include <ifile/CAutoPersistenceComp.h>
+#include <ifile/CFileSystemInfoProviderComp.h>
+#include <ifile/CComposedFilePersistenceComp.h>
+#include <ifile/CFileTypeInfoComp.h>
+#include <ifile/CComposedFileMetaInfoProviderComp.h>
+#include <ifile/TFileSerializerComp.h>
+#include <ifile/TXmlFileSerializerComp.h>
+#include <ifile/CSimpleXmlFileReadArchive.h>
+#include <ifile/CSimpleXmlFileWriteArchive.h>
+#include <ifile/CFileReadArchive.h>
+#include <ifile/CFileWriteArchive.h>
+#include <ifile/CCompactXmlFileReadArchive.h>
+#include <ifile/CCompactXmlFileWriteArchive.h>
+#include <ifile/CCompressedXmlFileReadArchive.h>
+#include <ifile/CCompressedXmlFileWriteArchive.h>
+#include <ifile/CTimeStampFileNameParamComp.h>
+#include <ifile/CApplicationInfoBasedFileNameComp.h>
 
 
 /**

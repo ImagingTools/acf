@@ -1,4 +1,4 @@
-#include "iloggui/CMessageBoxComp.h"
+#include <iloggui/CMessageBoxComp.h>
 
 
 // Qt includes

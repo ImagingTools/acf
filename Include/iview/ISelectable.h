@@ -6,9 +6,9 @@
 #include <QtCore/QSet>
 
 // ACF includes
-#include "istd/CIndex2d.h"
+#include <istd/CIndex2d.h>
 
-#include "iview/ITouchable.h"
+#include <iview/ITouchable.h>
 
 
 namespace iview

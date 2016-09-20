@@ -8,13 +8,13 @@
 #include <QtCore/QTranslator>
 
 // ACF includes
-#include "istd/TPointerVector.h"
-#include "icomp/CComponentBase.h"
-#include "imod/TSingleModelObserverBase.h"
-#include "iprm/ISelectionParam.h"
-#include "iprm/IOptionsList.h"
-#include "iqt/ITranslationManager.h"
-#include "ilog/TLoggerCompWrap.h"
+#include <istd/TPointerVector.h>
+#include <icomp/CComponentBase.h>
+#include <imod/TSingleModelObserverBase.h>
+#include <iprm/ISelectionParam.h>
+#include <iprm/IOptionsList.h>
+#include <iqt/ITranslationManager.h>
+#include <ilog/TLoggerCompWrap.h>
 
 
 namespace iqt

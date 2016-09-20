@@ -3,8 +3,8 @@
 
 
 // ACF includes
-#include "imod/IModel.h"
-#include "idoc/IDocumentTemplate.h"
+#include <imod/IModel.h>
+#include <idoc/IDocumentTemplate.h>
 
 
 namespace idoc

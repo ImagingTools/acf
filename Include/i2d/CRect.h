@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "istd/CIndex2d.h"
-#include "istd/TRange.h"
+#include <istd/CIndex2d.h>
+#include <istd/TRange.h>
 
-#include "i2d/CRectangle.h"
+#include <i2d/CRectangle.h>
 
-#include "ibase/CSize.h"
+#include <ibase/CSize.h>
 
 
 namespace i2d

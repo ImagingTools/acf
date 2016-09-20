@@ -3,38 +3,38 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
-#include "iview/CShapeStatusInfoComp.h"
-#include "iview/CShapeInfoGuiComp.h"
-#include "iview/CSimpleShapeFactoryComp.h"
-#include "iview/CColorSchemaComp.h"
-#include "iview/CNoneCalibrationShape.h"
-#include "iview/CAffiniteCalibrationShape.h"
-#include "iview/CPerspectiveCalibrationShape.h"
-#include "iqt2d/TViewExtenderDelegatorCompWrap.h"
-#include "iqt2d/TMultiViewExtenderDelegatorCompWrap.h"
-#include "iqt2d/CSceneConnectorGuiComp.h"
-#include "iqt2d/CImageViewComp.h"
-#include "iqt2d/CPosition2dParamsGuiComp.h"
-#include "iqt2d/CLine2dParamsGuiComp.h"
-#include "iqt2d/CRectangleParamsGuiComp.h"
-#include "iqt2d/CCircleParamsGuiComp.h"
-#include "iqt2d/COrientedCircleEditorComp.h"
-#include "iqt2d/CAnnulusParamsGuiComp.h"
-#include "iqt2d/CAnnulusSegmentParamsGuiComp.h"
-#include "iqt2d/CQuadrangleParamsGuiComp.h"
-#include "iqt2d/CPolygonParamsGuiComp.h"
-#include "iqt2d/CSceneBinderComp.h"
-#include "iqt2d/CSelectableSceneExtenderComp.h"
-#include "iqt2d/CViewProviderGuiComp.h"
-#include "iqt2d/CExtendedConsoleGuiComp.h"
-#include "iqt2d/CPolylineParamsGuiComp.h"
-#include "iqt2d/CTubePolylineParamsGuiComp.h"
-#include "iqt2d/CAffineTransformationParamsGuiComp.h"
-#include "iqt2d/CMultiBitmapViewComp.h"
-#include "iqt2d/CArcParamsGuiComp.h"
-#include "iqt2d/CPerspectiveCalibEditorComp.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
+#include <iview/CShapeStatusInfoComp.h>
+#include <iview/CShapeInfoGuiComp.h>
+#include <iview/CSimpleShapeFactoryComp.h>
+#include <iview/CColorSchemaComp.h>
+#include <iview/CNoneCalibrationShape.h>
+#include <iview/CAffiniteCalibrationShape.h>
+#include <iview/CPerspectiveCalibrationShape.h>
+#include <iqt2d/TViewExtenderDelegatorCompWrap.h>
+#include <iqt2d/TMultiViewExtenderDelegatorCompWrap.h>
+#include <iqt2d/CSceneConnectorGuiComp.h>
+#include <iqt2d/CImageViewComp.h>
+#include <iqt2d/CPosition2dParamsGuiComp.h>
+#include <iqt2d/CLine2dParamsGuiComp.h>
+#include <iqt2d/CRectangleParamsGuiComp.h>
+#include <iqt2d/CCircleParamsGuiComp.h>
+#include <iqt2d/COrientedCircleEditorComp.h>
+#include <iqt2d/CAnnulusParamsGuiComp.h>
+#include <iqt2d/CAnnulusSegmentParamsGuiComp.h>
+#include <iqt2d/CQuadrangleParamsGuiComp.h>
+#include <iqt2d/CPolygonParamsGuiComp.h>
+#include <iqt2d/CSceneBinderComp.h>
+#include <iqt2d/CSelectableSceneExtenderComp.h>
+#include <iqt2d/CViewProviderGuiComp.h>
+#include <iqt2d/CExtendedConsoleGuiComp.h>
+#include <iqt2d/CPolylineParamsGuiComp.h>
+#include <iqt2d/CTubePolylineParamsGuiComp.h>
+#include <iqt2d/CAffineTransformationParamsGuiComp.h>
+#include <iqt2d/CMultiBitmapViewComp.h>
+#include <iqt2d/CArcParamsGuiComp.h>
+#include <iqt2d/CPerspectiveCalibEditorComp.h>
 
 
 /**

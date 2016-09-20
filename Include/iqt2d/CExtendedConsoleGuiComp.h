@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "ibase/ICommandsProvider.h"
+#include <ibase/ICommandsProvider.h>
 
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <iqtgui/TDesignerGuiCompBase.h>
 
-#include "GeneratedFiles/iqt2d/ui_CExtendedConsoleGuiComp.h"
+#include <GeneratedFiles/iqt2d/ui_CExtendedConsoleGuiComp.h>
 
 
 namespace iqt2d

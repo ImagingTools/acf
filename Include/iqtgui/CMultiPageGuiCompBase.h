@@ -6,14 +6,14 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "imod/CMultiModelDispatcherBase.h"
-#include "imod/CMultiModelBridgeBase.h"
-#include "iprm/IEnableableParam.h"
-#include "iprm/CSelectionParam.h"
-#include "iprm/COptionsManager.h"
-#include "iqtgui/IMultiVisualStatusProvider.h"
-#include "iqtgui/CGuiComponentBase.h"
-#include "iwidgets/CMultiPageWidget.h"
+#include <imod/CMultiModelDispatcherBase.h>
+#include <imod/CMultiModelBridgeBase.h>
+#include <iprm/IEnableableParam.h>
+#include <iprm/CSelectionParam.h>
+#include <iprm/COptionsManager.h>
+#include <iqtgui/IMultiVisualStatusProvider.h>
+#include <iqtgui/CGuiComponentBase.h>
+#include <iwidgets/CMultiPageWidget.h>
 
 namespace iqtgui
 {

@@ -1,4 +1,4 @@
-#include "icomp/CXpcModel.h"
+#include <icomp/CXpcModel.h>
 
 
 // Qt includes
@@ -6,10 +6,10 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
-#include "iser/IVersionInfo.h"
+#include <istd/CChangeNotifier.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
+#include <iser/IVersionInfo.h>
 
 
 namespace icomp

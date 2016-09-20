@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "ibase/ICommandsProvider.h"
-#include "ifile/IFileNameParam.h"
-#include "ifile/IFilePersistence.h"
-#include "ifile/IFilePersistenceInfo.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <icomp/CComponentBase.h>
+#include <ibase/ICommandsProvider.h>
+#include <ifile/IFileNameParam.h>
+#include <ifile/IFilePersistence.h>
+#include <ifile/IFilePersistenceInfo.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
 
 namespace ifilegui

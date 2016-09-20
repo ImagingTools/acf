@@ -6,8 +6,8 @@
 #include <QtGui/QImage>
 
 // ACF includes
-#include "istd/IPolymorphic.h"
-#include "iimg/iimg.h"
+#include <istd/IPolymorphic.h>
+#include <iimg/iimg.h>
 
 
 namespace iimg

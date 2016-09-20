@@ -1,4 +1,4 @@
-#include "iattr/CNumericAttributeMetaInfo.h"
+#include <iattr/CNumericAttributeMetaInfo.h>
 
 
 namespace iattr

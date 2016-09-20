@@ -12,8 +12,8 @@
 
 
 // ACF includes
-#include "idoc/IDocumentManager.h"
-#include "ifilegui/CFileDialogLoaderComp.h"
+#include <idoc/IDocumentManager.h>
+#include <ifilegui/CFileDialogLoaderComp.h>
 
 
 namespace iqtdoc

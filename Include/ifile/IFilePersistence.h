@@ -6,8 +6,8 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "ifile/IFileTypeInfo.h"
+#include <istd/IChangeable.h>
+#include <ifile/IFileTypeInfo.h>
 
 
 namespace ibase

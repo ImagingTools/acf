@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "imod/CMultiModelDispatcherBase.h"
-#include "i2d/CPerspectiveCalibration2d.h"
-#include "iqt2d/TShapeParamsGuiCompBase.h"
-#include "GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h"
+#include <imod/CMultiModelDispatcherBase.h>
+#include <i2d/CPerspectiveCalibration2d.h>
+#include <iqt2d/TShapeParamsGuiCompBase.h>
+#include <GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h>
 
 
 namespace iqt2d

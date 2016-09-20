@@ -1,10 +1,10 @@
-#include "idoc/CSerializedUndoManagerComp.h"
+#include <idoc/CSerializedUndoManagerComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iser/CMemoryReadArchive.h"
-#include "icomp/CComponentBase.h"
+#include <istd/CChangeNotifier.h>
+#include <iser/CMemoryReadArchive.h>
+#include <icomp/CComponentBase.h>
 
 
 namespace idoc

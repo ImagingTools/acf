@@ -6,13 +6,13 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/TOptDelPtr.h"
-#include "imod/CMultiModelBridgeBase.h"
-#include "iser/IArchive.h"
-#include "iser/IObject.h"
-#include "iser/CArchiveTag.h"
-#include "iattr/IAttributesManager.h"
-#include "iattr/CStandardAttributesFactory.h"
+#include <istd/TOptDelPtr.h>
+#include <imod/CMultiModelBridgeBase.h>
+#include <iser/IArchive.h>
+#include <iser/IObject.h>
+#include <iser/CArchiveTag.h>
+#include <iattr/IAttributesManager.h>
+#include <iattr/CStandardAttributesFactory.h>
 
 
 namespace iattr

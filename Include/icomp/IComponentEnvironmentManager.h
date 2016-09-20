@@ -2,9 +2,9 @@
 #define icomp_IComponentEnvironmentManager_included
 
 
-#include "icomp/IPackagesManager.h"
-#include "icomp/IRegistriesManager.h"
-#include "icomp/IMetaInfoManager.h"
+#include <icomp/IPackagesManager.h>
+#include <icomp/IRegistriesManager.h>
+#include <icomp/IMetaInfoManager.h>
 
 
 namespace icomp

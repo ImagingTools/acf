@@ -2,10 +2,10 @@
 #define iview_CLineShape_included
 
 
-#include "i2d/CVector2d.h"
-#include "i2d/CLine2d.h"
+#include <i2d/CVector2d.h>
+#include <i2d/CLine2d.h>
 
-#include "iview/CInteractiveShapeBase.h"
+#include <iview/CInteractiveShapeBase.h>
 
 
 namespace iview

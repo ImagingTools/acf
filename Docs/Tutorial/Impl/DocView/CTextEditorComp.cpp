@@ -1,7 +1,7 @@
-#include "CTextEditorComp.h"
+#include <CTextEditorComp.h>
 
 
-#include "iqt/CSignalBlocker.h"
+#include <iqt/CSignalBlocker.h>
 
 
 CTextEditorComp::CTextEditorComp()

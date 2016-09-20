@@ -12,13 +12,13 @@
 
 
 // ACF includes
-#include "istd/TPointerVector.h"
-#include "imod/CMultiModelDispatcherBase.h"
-#include "iprm/ISelectionParam.h"
-#include "iprm/IOptionsManager.h"
-#include "iqtgui/IIconProvider.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "GeneratedFiles/iqtprm/ui_COptionsManagerGuiComp.h"
+#include <istd/TPointerVector.h>
+#include <imod/CMultiModelDispatcherBase.h>
+#include <iprm/ISelectionParam.h>
+#include <iprm/IOptionsManager.h>
+#include <iqtgui/IIconProvider.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <GeneratedFiles/iqtprm/ui_COptionsManagerGuiComp.h>
 
 
 namespace iqtprm

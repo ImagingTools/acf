@@ -1,8 +1,8 @@
-#include "iqt/CSettingsWriteArchive.h"
+#include <iqt/CSettingsWriteArchive.h>
 
 
 // ACF includes
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
 
 namespace iqt

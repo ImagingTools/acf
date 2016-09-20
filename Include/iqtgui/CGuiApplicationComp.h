@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "imod/TModelWrap.h"
-#include "imod/TSingleModelObserverBase.h"
-#include "iprm/IEnableableParam.h"
-#include "ibase/IRuntimeStatusProvider.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/IGuiApplication.h"
-#include "iqtgui/CApplicationCompBase.h"
+#include <imod/TModelWrap.h>
+#include <imod/TSingleModelObserverBase.h>
+#include <iprm/IEnableableParam.h>
+#include <ibase/IRuntimeStatusProvider.h>
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/IGuiApplication.h>
+#include <iqtgui/CApplicationCompBase.h>
 
 
 namespace iqtgui

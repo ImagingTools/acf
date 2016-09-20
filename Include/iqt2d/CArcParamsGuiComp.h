@@ -2,12 +2,12 @@
 #define iqt2d_CArcParamsGuiComp_included
 
 
-#include "i2d/CArc.h"
+#include <i2d/CArc.h>
 
-#include "iview/CArcShape.h"
+#include <iview/CArcShape.h>
 
-#include "iqt2d/TShapeParamsGuiCompBase.h"
-#include "GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h"
+#include <iqt2d/TShapeParamsGuiCompBase.h>
+#include <GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h>
 
 
 namespace iqt2d

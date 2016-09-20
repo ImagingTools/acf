@@ -2,7 +2,7 @@
 #define imath_CDoubleManip_included
 
 
-#include "imath/IDoubleManip.h"
+#include <imath/IDoubleManip.h>
 
 
 namespace imath

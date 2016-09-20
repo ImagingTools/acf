@@ -2,9 +2,9 @@
 #define ilog_IMessageConsumer_included
 
 
-#include "istd/IPolymorphic.h"
-#include "istd/IInformationProvider.h"
-#include "istd/TSmartPtr.h"
+#include <istd/IPolymorphic.h>
+#include <istd/IInformationProvider.h>
+#include <istd/TSmartPtr.h>
 
 
 namespace ilog

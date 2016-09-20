@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iqtgui/CMultiPageGuiCompBase.h"
+#include <iqtgui/CMultiPageGuiCompBase.h>
 
 
 namespace iqtgui

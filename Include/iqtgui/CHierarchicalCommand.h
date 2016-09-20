@@ -11,12 +11,12 @@
 #endif
 
 // ACF includes
-#include "istd/TOptPointerVector.h"
-#include "istd/THierarchicalBase.h"
-#include "iprm/CNameParam.h"
-#include "iprm/CEnableableParam.h"
-#include "ibase/ICommand.h"
-#include "iqtgui/iqtgui.h"
+#include <istd/TOptPointerVector.h>
+#include <istd/THierarchicalBase.h>
+#include <iprm/CNameParam.h>
+#include <iprm/CEnableableParam.h>
+#include <ibase/ICommand.h>
+#include <iqtgui/iqtgui.h>
 
 
 namespace iqtgui

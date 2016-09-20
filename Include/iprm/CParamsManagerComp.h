@@ -6,9 +6,9 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "imod/TModelWrap.h"
-#include "iprm/CParamsManagerCompBase.h"
+#include <istd/TDelPtr.h>
+#include <imod/TModelWrap.h>
+#include <iprm/CParamsManagerCompBase.h>
 
 
 namespace iprm

@@ -1,4 +1,4 @@
-#include "iqtgui/CTableBasedModelEditorComp.h"
+#include <iqtgui/CTableBasedModelEditorComp.h>
 
 
 // Qt includes

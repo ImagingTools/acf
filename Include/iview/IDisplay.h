@@ -2,9 +2,9 @@
 #define iview_IDisplay_included
 
 
-#include "i2d/CRect.h"
+#include <i2d/CRect.h>
 
-#include "iview/IShapeObserver.h"
+#include <iview/IShapeObserver.h>
 
 
 namespace iview

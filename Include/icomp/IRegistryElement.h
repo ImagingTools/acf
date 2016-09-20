@@ -7,10 +7,10 @@
 #include <QtCore/QSet>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "iser/ISerializable.h"
-#include "iser/IObject.h"
-#include "iattr/IAttributesProvider.h"
+#include <istd/TDelPtr.h>
+#include <iser/ISerializable.h>
+#include <iser/IObject.h>
+#include <iattr/IAttributesProvider.h>
 
 
 namespace icomp

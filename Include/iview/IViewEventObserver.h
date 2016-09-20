@@ -7,12 +7,12 @@
 
 
 // ACF includes
-#include "istd/IPolymorphic.h"
+#include <istd/IPolymorphic.h>
 
-#include "imod/IModel.h"
+#include <imod/IModel.h>
 
-#include "iview/IShapeView.h"
-#include "iview/IMouseActionObserver.h"
+#include <iview/IShapeView.h>
+#include <iview/IMouseActionObserver.h>
 
 
 namespace iview

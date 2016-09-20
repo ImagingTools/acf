@@ -1,8 +1,8 @@
-#include "ibase/CObjectSynchronizerComp.h"
+#include <ibase/CObjectSynchronizerComp.h>
 
 
 // ACF inlcudes
-#include "imod/IModel.h"
+#include <imod/IModel.h>
 
 
 namespace ibase

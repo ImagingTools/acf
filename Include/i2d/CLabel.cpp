@@ -1,10 +1,10 @@
-#include "i2d/CLabel.h"
+#include <i2d/CLabel.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/TDelPtr.h"
-#include "iser/CArchiveTag.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TDelPtr.h>
+#include <iser/CArchiveTag.h>
 
 
 namespace i2d

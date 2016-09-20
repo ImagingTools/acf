@@ -7,11 +7,11 @@
 #include <QtGui/QIcon>
 
 // ACF includes
-#include "imod/TModelWrap.h"
-#include "icomp/CComponentBase.h"
-#include "ibase/TLocalizableWrap.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/IVisualStatus.h"
+#include <imod/TModelWrap.h>
+#include <icomp/CComponentBase.h>
+#include <ibase/TLocalizableWrap.h>
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/IVisualStatus.h>
 
 
 namespace iqtgui

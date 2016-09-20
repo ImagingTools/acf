@@ -1,4 +1,4 @@
-#include "imod/CMultiModelBridgeBase.h"
+#include <imod/CMultiModelBridgeBase.h>
 
 
 namespace imod

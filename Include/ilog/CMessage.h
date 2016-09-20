@@ -6,8 +6,8 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "istd/IInformationProvider.h"
-#include "iser/IObject.h"
+#include <istd/IInformationProvider.h>
+#include <iser/IObject.h>
 
 
 namespace ilog

@@ -2,7 +2,7 @@
 #define icomp_CCompositeComponentContext_included
 
 
-#include "icomp/CComponentContext.h"
+#include <icomp/CComponentContext.h>
 
 
 namespace icomp

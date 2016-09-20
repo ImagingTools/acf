@@ -7,8 +7,8 @@
 #include <QtCore/QFile>
 
 // ACF includes
-#include "iser/CBinaryReadArchiveBase.h"
-#include "ifile/CFileArchiveInfo.h"
+#include <iser/CBinaryReadArchiveBase.h>
+#include <ifile/CFileArchiveInfo.h>
 
 
 namespace ifile

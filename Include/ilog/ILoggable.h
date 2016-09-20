@@ -2,9 +2,9 @@
 #define ilog_ILoggable_included
 
 
-#include "ilog/IMessageConsumer.h"
+#include <ilog/IMessageConsumer.h>
 
-#include "istd/IPolymorphic.h"
+#include <istd/IPolymorphic.h>
 
 
 namespace ilog

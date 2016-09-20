@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "imod/IObserver.h"
-#include "imod/IModel.h"
-#include "imod/TSingleModelObserverBase.h"
+#include <imod/IObserver.h>
+#include <imod/IModel.h>
+#include <imod/TSingleModelObserverBase.h>
 
-#include "iqtgui/CDialogGuiComp.h"
+#include <iqtgui/CDialogGuiComp.h>
 
 
 namespace iqtgui

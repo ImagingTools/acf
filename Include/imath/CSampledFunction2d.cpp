@@ -1,11 +1,11 @@
-#include "imath/CSampledFunction2d.h"
+#include <imath/CSampledFunction2d.h>
 
 
 // STL includes
 #include <cstring>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace imath

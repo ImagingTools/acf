@@ -2,9 +2,9 @@
 #define iview_IViewRulersAccessor_included
 
 
-#include "istd/IPolymorphic.h"
+#include <istd/IPolymorphic.h>
 
-#include "iview/IRuler.h"
+#include <iview/IRuler.h>
 
 
 namespace iview

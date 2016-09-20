@@ -1,4 +1,4 @@
-#include "idoc/CTextFileLoaderComp.h"
+#include <idoc/CTextFileLoaderComp.h>
 
 
 // Qt includes
@@ -7,7 +7,7 @@
 #include <QtCore/QTextStream>
 
 // ACF includes
-#include "idoc/ITextDocument.h"
+#include <idoc/ITextDocument.h>
 
 
 namespace idoc

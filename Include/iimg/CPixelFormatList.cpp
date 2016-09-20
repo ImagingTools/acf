@@ -1,11 +1,11 @@
-#include "iimg/CPixelFormatList.h"
+#include <iimg/CPixelFormatList.h>
 
 
 // Qt includes
 #include <QtCore/QObject>
 
 // ACF includes
-#include "iimg/IBitmap.h"
+#include <iimg/IBitmap.h>
 
 
 namespace iimg

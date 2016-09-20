@@ -1,4 +1,4 @@
-#include "iqtgui/CStatusBarWidgetComp.h"
+#include <iqtgui/CStatusBarWidgetComp.h>
 
 
 // Qt includes

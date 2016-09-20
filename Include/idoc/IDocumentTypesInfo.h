@@ -7,7 +7,7 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "ifile/IFileTypeInfo.h"
+#include <ifile/IFileTypeInfo.h>
 
 
 namespace idoc

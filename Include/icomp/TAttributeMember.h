@@ -6,11 +6,11 @@
 #include <QtCore/QCoreApplication>
 
 // ACF includes
-#include "iattr/TAttribute.h"
-#include "icomp/ICompositeComponent.h"
-#include "icomp/IComponentContext.h"
-#include "icomp/IRealAttributeStaticInfo.h"
-#include "icomp/CComponentContext.h"
+#include <iattr/TAttribute.h>
+#include <icomp/ICompositeComponent.h>
+#include <icomp/IComponentContext.h>
+#include <icomp/IRealAttributeStaticInfo.h>
+#include <icomp/CComponentContext.h>
 
 
 namespace icomp

@@ -10,8 +10,8 @@
 #endif
 
 // ACF includes
-#include "ipackage/CComponentAccessor.h"
-#include "ibase/IApplication.h"
+#include <ipackage/CComponentAccessor.h>
+#include <ibase/IApplication.h>
 
 
 int main(int argc, char *argv[])

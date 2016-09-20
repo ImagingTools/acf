@@ -6,7 +6,7 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "iser/IVersionInfo.h"
+#include <iser/IVersionInfo.h>
 
 
 namespace iser

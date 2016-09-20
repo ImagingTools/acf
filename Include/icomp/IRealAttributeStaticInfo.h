@@ -6,7 +6,7 @@
 #include <QtCore/QByteArray>
 
 // ACF includes
-#include "icomp/IAttributeStaticInfo.h"
+#include <icomp/IAttributeStaticInfo.h>
 
 
 namespace icomp

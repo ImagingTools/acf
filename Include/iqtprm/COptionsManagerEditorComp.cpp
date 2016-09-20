@@ -1,17 +1,17 @@
-#include "iqtprm/COptionsManagerEditorComp.h"
+#include <iqtprm/COptionsManagerEditorComp.h>
 
 
 // Qt includes
 #include <QtCore/QUuid>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iprm/IParamsSet.h"
-#include "iprm/IOptionsList.h"
-#include "iprm/ISelectionParam.h"
-#include "iqtgui/IMultiVisualStatusProvider.h"
-#include "iwidgets/CItemDelegate.h"
-#include "iwidgets/CWidgetUpdateBlocker.h"
+#include <istd/CChangeNotifier.h>
+#include <iprm/IParamsSet.h>
+#include <iprm/IOptionsList.h>
+#include <iprm/ISelectionParam.h>
+#include <iqtgui/IMultiVisualStatusProvider.h>
+#include <iwidgets/CItemDelegate.h>
+#include <iwidgets/CWidgetUpdateBlocker.h>
 
 
 namespace iqtprm

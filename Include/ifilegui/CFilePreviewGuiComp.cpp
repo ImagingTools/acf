@@ -1,4 +1,4 @@
-#include "ifilegui/CFilePreviewGuiComp.h"
+#include <ifilegui/CFilePreviewGuiComp.h>
 
 
 // Qt includes
@@ -11,7 +11,7 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace ifilegui

@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <iqtgui/TDesignerGuiCompBase.h>
 
-#include "ibase/CDelegatedProgressManager.h"
+#include <ibase/CDelegatedProgressManager.h>
 
-#include "GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h"
+#include <GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h>
 
 
 namespace iqtgui

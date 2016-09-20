@@ -11,12 +11,12 @@
 #endif
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "iprm/CEnableableParam.h"
-#include "ilog/CMessageContainer.h"
-#include "ilog/CMessage.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "GeneratedFiles/iloggui/ui_CLogGuiComp.h"
+#include <ifile/IFilePersistence.h>
+#include <iprm/CEnableableParam.h>
+#include <ilog/CMessageContainer.h>
+#include <ilog/CMessage.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <GeneratedFiles/iloggui/ui_CLogGuiComp.h>
 
 
 namespace iloggui

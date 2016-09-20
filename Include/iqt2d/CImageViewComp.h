@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "ibase/TModelObserverCompWrap.h"
-#include "i2d/ICalibration2d.h"
-#include "i2d/ICalibrationProvider.h"
-#include "iqtgui/TGuiComponentBase.h"
-#include "iqtgui/TGuiObserverWrap.h"
-#include "iview/CImageShape.h"
-#include "iqt2d/CViewProviderGuiComp.h"
+#include <icomp/CComponentBase.h>
+#include <ibase/TModelObserverCompWrap.h>
+#include <i2d/ICalibration2d.h>
+#include <i2d/ICalibrationProvider.h>
+#include <iqtgui/TGuiComponentBase.h>
+#include <iqtgui/TGuiObserverWrap.h>
+#include <iview/CImageShape.h>
+#include <iqt2d/CViewProviderGuiComp.h>
 
 
 namespace iqt2d

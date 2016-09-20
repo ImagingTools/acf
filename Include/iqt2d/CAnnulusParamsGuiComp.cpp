@@ -1,8 +1,8 @@
-#include "iqt2d/CAnnulusParamsGuiComp.h"
+#include <iqt2d/CAnnulusParamsGuiComp.h>
 
 
 // ACF includes
-#include "istd/CChangeGroup.h"
+#include <istd/CChangeGroup.h>
 
 
 namespace iqt2d

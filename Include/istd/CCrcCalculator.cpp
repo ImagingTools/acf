@@ -1,4 +1,4 @@
-#include "istd/CCrcCalculator.h"
+#include <istd/CCrcCalculator.h>
 
 // Qt includes
 #include <QtCore/QFile>

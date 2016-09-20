@@ -6,7 +6,7 @@
 #include <QtCore/QBuffer>
 
 // ACF includes
-#include "iser/CXmlStreamReadArchiveBase.h"
+#include <iser/CXmlStreamReadArchiveBase.h>
 
 
 namespace iser

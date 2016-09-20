@@ -6,7 +6,7 @@
 #include <QtCore/QtGlobal>
 
 // ACF includes
-#include "istd/TPointerBase.h"
+#include <istd/TPointerBase.h>
 
 
 namespace istd

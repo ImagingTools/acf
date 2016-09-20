@@ -1,8 +1,8 @@
-#include "iqtdoc/CDocumentImportExportCommandComp.h"
+#include <iqtdoc/CDocumentImportExportCommandComp.h>
 
 
 // ACF includes
-#include "iqtdoc/CMainWindowGuiComp.h"
+#include <iqtdoc/CMainWindowGuiComp.h>
 
 
 namespace iqtdoc

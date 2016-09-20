@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "i2d/CCircle.h"
-#include "iview/CCircleShape.h"
-#include "iqt2d/TCircleBasedParamsGuiComp.h"
+#include <i2d/CCircle.h>
+#include <iview/CCircleShape.h>
+#include <iqt2d/TCircleBasedParamsGuiComp.h>
 
-#include "GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h"
+#include <GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h>
 
 
 namespace iqt2d

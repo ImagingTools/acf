@@ -2,12 +2,12 @@
 #define icomp_TComponentCloneWrap_included
 
 
-#include "icomp/IComponent.h"
-#include "icomp/CInterfaceManipBase.h"
-#include "icomp/CComponentContext.h"
-#include "icomp/CCompositeComponent.h"
-#include "icomp/CCompositeComponentContext.h"
-#include "icomp/CSimComponentContextBase.h"
+#include <icomp/IComponent.h>
+#include <icomp/CInterfaceManipBase.h>
+#include <icomp/CComponentContext.h>
+#include <icomp/CCompositeComponent.h>
+#include <icomp/CCompositeComponentContext.h>
+#include <icomp/CSimComponentContextBase.h>
 
 
 namespace icomp

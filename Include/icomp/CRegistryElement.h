@@ -7,7 +7,7 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "icomp/IRegistryElement.h"
+#include <icomp/IRegistryElement.h>
 
 
 namespace icomp

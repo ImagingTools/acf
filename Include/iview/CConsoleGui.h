@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iqtgui/CHierarchicalCommand.h"
-#include "ibase/ICommandsProvider.h"
-#include "iview/CConsoleBase.h"
-#include "iview/CViewport.h"
-#include "iview/IShapeStatusInfo.h"
+#include <iqtgui/CHierarchicalCommand.h>
+#include <ibase/ICommandsProvider.h>
+#include <iview/CConsoleBase.h>
+#include <iview/CViewport.h>
+#include <iview/IShapeStatusInfo.h>
 
 
 // Forward declarations

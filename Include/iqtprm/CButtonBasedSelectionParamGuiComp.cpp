@@ -1,10 +1,10 @@
-#include "iqtprm/CButtonBasedSelectionParamGuiComp.h"
+#include <iqtprm/CButtonBasedSelectionParamGuiComp.h>
 
 
 // ACF includes
-#include "iprm/IOptionsList.h"
-#include "iprm/CSelectionParam.h"
-#include "iqt/CSignalBlocker.h"
+#include <iprm/IOptionsList.h>
+#include <iprm/CSelectionParam.h>
+#include <iqt/CSignalBlocker.h>
 
 
 namespace iqtprm

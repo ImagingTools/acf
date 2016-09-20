@@ -2,9 +2,9 @@
 #define iview_CInteractiveViewLayer_included
 
 
-#include "iview/ISelectableLayer.h"
-#include "iview/IShapeView.h"
-#include "iview/CViewLayer.h"
+#include <iview/ISelectableLayer.h>
+#include <iview/IShapeView.h>
+#include <iview/CViewLayer.h>
 
 
 namespace iview

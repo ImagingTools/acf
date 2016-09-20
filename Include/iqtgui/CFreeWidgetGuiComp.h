@@ -12,9 +12,9 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iqtgui/IGuiObject.h"
+#include <iqtgui/IGuiObject.h>
 
 
 namespace iqtgui

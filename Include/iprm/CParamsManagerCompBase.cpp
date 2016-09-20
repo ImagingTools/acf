@@ -1,13 +1,13 @@
-#include "iprm/CParamsManagerCompBase.h"
+#include <iprm/CParamsManagerCompBase.h>
 
 // Qt includes
 #include <QtCore/QUuid>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "imod/IModel.h"
-#include "imod/TModelWrap.h"
-#include "iprm/ISelectionParam.h"
+#include <istd/CChangeNotifier.h>
+#include <imod/IModel.h>
+#include <imod/TModelWrap.h>
+#include <iprm/ISelectionParam.h>
 
 
 namespace iprm

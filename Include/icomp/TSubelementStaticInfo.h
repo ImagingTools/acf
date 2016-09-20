@@ -7,8 +7,8 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "icomp/IElementStaticInfo.h"
-#include "icomp/CBaseComponentStaticInfo.h"
+#include <icomp/IElementStaticInfo.h>
+#include <icomp/CBaseComponentStaticInfo.h>
 
 
 namespace icomp

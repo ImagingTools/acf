@@ -1,8 +1,8 @@
-#include "iqtdoc/CHtmlHelpViewerComp.h"
+#include <iqtdoc/CHtmlHelpViewerComp.h>
 
 
 // ACF includes
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
 
 namespace iqtdoc

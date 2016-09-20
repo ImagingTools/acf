@@ -2,12 +2,12 @@
 #define iqt2d_CRectangleParamsGuiComp_included
 
 
-#include "i2d/CRectangle.h"
+#include <i2d/CRectangle.h>
 
-#include "iview/CRectangleShape.h"
+#include <iview/CRectangleShape.h>
 
-#include "iqt2d/TShapeParamsGuiCompBase.h"
-#include "GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h"
+#include <iqt2d/TShapeParamsGuiCompBase.h>
+#include <GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h>
 
 
 namespace iqt2d

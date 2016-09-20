@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "ibase/ICommandsProvider.h"
-#include "imod/CMultiModelDispatcherBase.h"
-#include "iqtgui/TGuiComponentBase.h"
-#include "iview/IColorSchema.h"
-#include "iview/CConsoleGui.h"
-#include "iview/CAffiniteCalibrationShape.h"
-#include "iqt2d/IViewProvider.h"
+#include <ibase/ICommandsProvider.h>
+#include <imod/CMultiModelDispatcherBase.h>
+#include <iqtgui/TGuiComponentBase.h>
+#include <iview/IColorSchema.h>
+#include <iview/CConsoleGui.h>
+#include <iview/CAffiniteCalibrationShape.h>
+#include <iqt2d/IViewProvider.h>
 
 
 namespace iqt2d

@@ -11,12 +11,12 @@
 #endif
 
 // ACF includes
-#include "iattr/TAttribute.h"
-#include "ibase/IApplicationInfo.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
-#include "ilog/IMessageConsumer.h"
+#include <iattr/TAttribute.h>
+#include <ibase/IApplicationInfo.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
+#include <ilog/IMessageConsumer.h>
 
-#include "GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h"
+#include <GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h>
 
 
 namespace iqtgui

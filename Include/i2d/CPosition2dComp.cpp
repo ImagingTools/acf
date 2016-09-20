@@ -1,4 +1,4 @@
-#include "i2d/CPosition2dComp.h"
+#include <i2d/CPosition2dComp.h>
 
 
 namespace i2d

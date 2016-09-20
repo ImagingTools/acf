@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "imod/IModel.h"
-#include "imod/IModelEditor.h"
-#include "imod/IObserver.h"
+#include <imod/IModel.h>
+#include <imod/IModelEditor.h>
+#include <imod/IObserver.h>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iqtgui/IGuiObject.h"
+#include <iqtgui/IGuiObject.h>
 
 
 namespace iqtgui

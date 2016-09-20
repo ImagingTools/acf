@@ -6,8 +6,8 @@
 #include <QtCore/QByteArray>
 
 // ACF includes
-#include "istd/IPolymorphic.h"
-#include "imath/TIValueManip.h"
+#include <istd/IPolymorphic.h>
+#include <imath/TIValueManip.h>
 
 
 namespace imath

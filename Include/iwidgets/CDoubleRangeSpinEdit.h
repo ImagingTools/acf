@@ -3,7 +3,7 @@
 
 
 // Local includes
-#include "GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h"
+#include <GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h>
 
 
 namespace iwidgets

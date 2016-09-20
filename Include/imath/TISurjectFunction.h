@@ -2,7 +2,7 @@
 #define imath_TISurjectFunction_included
 
 
-#include "imath/TIMathFunction.h"
+#include <imath/TIMathFunction.h>
 
 
 namespace imath

@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "iqt2d/TShapeParamsGuiCompBase.h"
+#include <iqt2d/TShapeParamsGuiCompBase.h>
 
-#include "GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h"
+#include <GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h>
 
 
 namespace iqt2d

@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iqtgui/CToolBarGuiCompBase.h"
+#include <iqtgui/CToolBarGuiCompBase.h>
 
 
 namespace iqtgui

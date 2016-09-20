@@ -1,12 +1,12 @@
-#include "iimg/CGeneralBitmap.h"
+#include <iimg/CGeneralBitmap.h>
 
 
 // STL includes
 #include <cstring>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/TDelPtr.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TDelPtr.h>
 
 
 namespace iimg

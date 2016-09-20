@@ -6,16 +6,16 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "istd/CSystem.h"
-#include "icomp/TSimComponentWrap.h"
-#include "icomp/TModelCompWrap.h"
+#include <istd/CSystem.h>
+#include <icomp/TSimComponentWrap.h>
+#include <icomp/TModelCompWrap.h>
 
 // ACF packages includes
-#include "QtPck/QtPck.h"
-#include "BasePck/BasePck.h"
-#include "QtPck/QtPck.h"
-#include "FilePck/FilePck.h"
-#include "PackagePck/PackagePck.h"
+#include <QtPck/QtPck.h>
+#include <BasePck/BasePck.h>
+#include <QtPck/QtPck.h>
+#include <FilePck/FilePck.h>
+#include <PackagePck/PackagePck.h>
 
 
 static void ShowUsage()

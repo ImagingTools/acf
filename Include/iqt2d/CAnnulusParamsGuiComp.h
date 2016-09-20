@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "i2d/CAnnulus.h"
+#include <i2d/CAnnulus.h>
 
-#include "iview/CAnnulusShape.h"
+#include <iview/CAnnulusShape.h>
 
-#include "iqt2d/TShapeParamsGuiCompBase.h"
-#include "GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h"
+#include <iqt2d/TShapeParamsGuiCompBase.h>
+#include <GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h>
 
 
 namespace iqt2d

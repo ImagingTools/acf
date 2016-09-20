@@ -6,8 +6,8 @@
 #include <QtCore/QSettings>
 
 // ACF includes
-#include "istd/IPolymorphic.h"
-#include "iqt/iqt.h"
+#include <istd/IPolymorphic.h>
+#include <iqt/iqt.h>
 
 
 namespace iqt

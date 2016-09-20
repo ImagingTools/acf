@@ -1,4 +1,4 @@
-#include "iview/CPolypointShape.h"
+#include <iview/CPolypointShape.h>
 
 
 // Qt includes
@@ -6,13 +6,13 @@
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "imod/IModel.h"
+#include <imod/IModel.h>
 
-#include "i2d/CVector2d.h"
-#include "i2d/CPolypoint.h"
+#include <i2d/CVector2d.h>
+#include <i2d/CPolypoint.h>
 
-#include "iview/IColorSchema.h"
-#include "iview/CScreenTransform.h"
+#include <iview/IColorSchema.h>
+#include <iview/CScreenTransform.h>
 
 
 namespace iview

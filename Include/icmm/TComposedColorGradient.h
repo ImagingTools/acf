@@ -6,8 +6,8 @@
 #include <QtCore/QPair>
 
 // ACF includes
-#include "istd/TRange.h"
-#include "icmm/TColorGradient.h"
+#include <istd/TRange.h>
+#include <icmm/TColorGradient.h>
 
 
 namespace icmm

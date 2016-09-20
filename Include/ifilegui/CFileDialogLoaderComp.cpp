@@ -1,4 +1,4 @@
-#include "ifilegui/CFileDialogLoaderComp.h"
+#include <ifilegui/CFileDialogLoaderComp.h>
 
 
 // Qt includes

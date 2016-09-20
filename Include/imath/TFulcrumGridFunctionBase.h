@@ -7,13 +7,13 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/TCachedUpdateManagerWrap.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TCachedUpdateManagerWrap.h>
 
-#include "iser/ISerializable.h"
-#include "iser/CArchiveTag.h"
+#include <iser/ISerializable.h>
+#include <iser/CArchiveTag.h>
 
-#include "imath/TIMathFunction.h"
+#include <imath/TIMathFunction.h>
 
 
 namespace imath

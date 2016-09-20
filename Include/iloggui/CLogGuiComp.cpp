@@ -1,4 +1,4 @@
-#include "iloggui/CLogGuiComp.h"
+#include <iloggui/CLogGuiComp.h>
 
 
 // Qt includes
@@ -15,8 +15,8 @@
 #endif
 
 // ACF includes
-#include "iwidgets/CItemDelegate.h"
-#include "iwidgets/CWidgetUpdateBlocker.h"
+#include <iwidgets/CItemDelegate.h>
+#include <iwidgets/CWidgetUpdateBlocker.h>
 
 
 namespace iloggui

@@ -2,14 +2,14 @@
 #define QtPck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "iqt/CSettingsSerializerComp.h"
-#include "iqt/CApplicationSettingsProviderComp.h"
-#include "iqt/CIniSettingsProviderComp.h"
-#include "iqt/CClipboardSerializerComp.h"
-#include "iqt/CTranslationManagerComp.h"
+#include <iqt/CSettingsSerializerComp.h>
+#include <iqt/CApplicationSettingsProviderComp.h>
+#include <iqt/CIniSettingsProviderComp.h>
+#include <iqt/CClipboardSerializerComp.h>
+#include <iqt/CTranslationManagerComp.h>
 
 
 

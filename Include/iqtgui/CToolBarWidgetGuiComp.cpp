@@ -1,4 +1,4 @@
-#include "iqtgui/CToolBarWidgetGuiComp.h"
+#include <iqtgui/CToolBarWidgetGuiComp.h>
 
 
 // Qt includes

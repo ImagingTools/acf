@@ -1,10 +1,10 @@
-#include "i2d/CSpline.h"
+#include <i2d/CSpline.h>
 
 
 // ACF includes
-#include "i2d/CSplineSegment.h"
-#include "istd/TDelPtr.h"
-#include "istd/CChangeNotifier.h"
+#include <i2d/CSplineSegment.h>
+#include <istd/TDelPtr.h>
+#include <istd/CChangeNotifier.h>
 
 namespace i2d
 {

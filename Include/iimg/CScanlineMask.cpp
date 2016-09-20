@@ -1,4 +1,4 @@
-#include "iimg/CScanlineMask.h"
+#include <iimg/CScanlineMask.h>
 
 
 // STL includes
@@ -9,7 +9,7 @@
 #include <QtCore/qmath.h>
 
 // ACF includes
-#include "iser/CPrimitiveTypesSerializer.h"
+#include <iser/CPrimitiveTypesSerializer.h>
 
 
 namespace iimg

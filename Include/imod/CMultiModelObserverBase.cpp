@@ -1,4 +1,4 @@
-#include "imod/CMultiModelObserverBase.h"
+#include <imod/CMultiModelObserverBase.h>
 
 
 namespace imod

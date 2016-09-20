@@ -11,8 +11,8 @@
 #endif
 
 // ACF includes
-#include "imod/IModelEditor.h"
-#include "imod/IModel.h"
+#include <imod/IModelEditor.h>
+#include <imod/IModel.h>
 
 
 namespace iqtgui

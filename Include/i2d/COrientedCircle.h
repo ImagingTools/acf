@@ -2,7 +2,7 @@
 #define i2d_COrientedCircle_included
 
 
-#include "i2d/CCircle.h"
+#include <i2d/CCircle.h>
 
 
 namespace i2d

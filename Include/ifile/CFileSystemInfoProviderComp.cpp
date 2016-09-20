@@ -1,4 +1,4 @@
-#include "ifile/CFileSystemInfoProviderComp.h"
+#include <ifile/CFileSystemInfoProviderComp.h>
 
 
 // Qt includes

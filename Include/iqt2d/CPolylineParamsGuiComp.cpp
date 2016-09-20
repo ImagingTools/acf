@@ -1,4 +1,4 @@
-#include "iqt2d/CPolylineParamsGuiComp.h"
+#include <iqt2d/CPolylineParamsGuiComp.h>
 
 
 namespace iqt2d

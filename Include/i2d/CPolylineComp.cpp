@@ -1,4 +1,4 @@
-#include "i2d/CPolylineComp.h"
+#include <i2d/CPolylineComp.h>
 
 
 namespace i2d

@@ -1,4 +1,4 @@
-#include "iview/CViewLayer.h"
+#include <iview/CViewLayer.h>
 
 
 // Qt includes
@@ -6,10 +6,10 @@
 
 
 // ACF includes
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
-#include "iview/IShape.h"
-#include "iview/IShapeView.h"
+#include <iview/IShape.h>
+#include <iview/IShapeView.h>
 
 
 namespace iview

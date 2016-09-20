@@ -1,9 +1,9 @@
-#include "iqt2d/CSelectableSceneExtenderComp.h"
+#include <iqt2d/CSelectableSceneExtenderComp.h>
 
 
 // ACF includes
-#include "imod/IModel.h"
-#include "imod/IObserver.h"
+#include <imod/IModel.h>
+#include <imod/IObserver.h>
 
 
 namespace iqt2d

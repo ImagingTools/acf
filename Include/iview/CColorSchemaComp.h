@@ -7,8 +7,8 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "iview/CColorSchema.h"
+#include <icomp/CComponentBase.h>
+#include <iview/CColorSchema.h>
 
 
 namespace iview

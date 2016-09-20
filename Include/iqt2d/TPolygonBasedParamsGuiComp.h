@@ -15,15 +15,15 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iser/CMemoryWriteArchive.h"
-#include "iser/CMemoryReadArchive.h"
-#include "i2d/CPolygon.h"
-#include "i2d/CPolyline.h"
-#include "iqt/CSignalBlocker.h"
-#include "iqt2d/TShapeParamsGuiCompBase.h"
+#include <istd/CChangeNotifier.h>
+#include <iser/CMemoryWriteArchive.h>
+#include <iser/CMemoryReadArchive.h>
+#include <i2d/CPolygon.h>
+#include <i2d/CPolyline.h>
+#include <iqt/CSignalBlocker.h>
+#include <iqt2d/TShapeParamsGuiCompBase.h>
 
-#include "GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h"
+#include <GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h>
 
 
 namespace iqt2d

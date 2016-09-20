@@ -6,7 +6,7 @@
 #include <QtCore/QByteArray>
 
 // ACF includes
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
 
 class IAConstraints;

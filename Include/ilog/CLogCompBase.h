@@ -6,7 +6,7 @@
 #include <QtCore/QObject>
 
 // ACF includes
-#include "ilog/TMessageDelegatorComp.h"
+#include <ilog/TMessageDelegatorComp.h>
 
 
 namespace ilog

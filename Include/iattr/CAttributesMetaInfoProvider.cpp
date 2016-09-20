@@ -1,4 +1,4 @@
-#include "iattr/CAttributesMetaInfoProvider.h"
+#include <iattr/CAttributesMetaInfoProvider.h>
 
 
 namespace iattr

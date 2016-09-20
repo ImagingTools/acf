@@ -2,7 +2,7 @@
 #define imath_CFixedPointManip_included
 
 
-#include "imath/CDoubleManip.h"
+#include <imath/CDoubleManip.h>
 
 
 namespace imath

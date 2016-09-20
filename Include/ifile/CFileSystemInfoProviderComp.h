@@ -7,10 +7,10 @@
 #include <QtCore/QMutex>
 
 // ACF includes
-#include "ilog/TLoggerCompWrap.h"
-#include "ifile/IFileSystemInfoProvider.h"
-#include "ibase/IRuntimeStatusProvider.h"
-#include "imod/CMultiModelDispatcherBase.h"
+#include <ilog/TLoggerCompWrap.h>
+#include <ifile/IFileSystemInfoProvider.h>
+#include <ibase/IRuntimeStatusProvider.h>
+#include <imod/CMultiModelDispatcherBase.h>
 
 
 namespace ifile

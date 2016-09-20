@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "iimg/CMultiPageBitmapBase.h"
-#include "iimg/CGeneralBitmap.h"
-#include "iimg/CBitmap.h"
+#include <iimg/CMultiPageBitmapBase.h>
+#include <iimg/CGeneralBitmap.h>
+#include <iimg/CBitmap.h>
 
 
 namespace iimg

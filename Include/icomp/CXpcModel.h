@@ -6,7 +6,7 @@
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
 
 namespace icomp

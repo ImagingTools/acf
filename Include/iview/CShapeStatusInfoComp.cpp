@@ -1,9 +1,9 @@
-#include "iview/CShapeStatusInfoComp.h"
+#include <iview/CShapeStatusInfoComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iview/IDisplay.h"
+#include <istd/CChangeNotifier.h>
+#include <iview/IDisplay.h>
 
 
 namespace iview

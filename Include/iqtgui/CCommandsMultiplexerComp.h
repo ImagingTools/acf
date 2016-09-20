@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "imod/CMultiModelBridgeBase.h"
-#include "icomp/CComponentBase.h"
-#include "ibase/ICommandsProvider.h"
-#include "iprm/ISelectionParam.h"
+#include <imod/CMultiModelBridgeBase.h>
+#include <icomp/CComponentBase.h>
+#include <ibase/ICommandsProvider.h>
+#include <iprm/ISelectionParam.h>
 
 
 namespace iqtgui

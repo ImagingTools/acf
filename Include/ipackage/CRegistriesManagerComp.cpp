@@ -1,4 +1,4 @@
-#include "ipackage/CRegistriesManagerComp.h"
+#include <ipackage/CRegistriesManagerComp.h>
 
 
 // Qt includes
@@ -6,11 +6,11 @@
 #include <QtCore/QFileInfo>
 
 // ACF includes
-#include "istd/CSystem.h"
-#include "icomp/CRegistry.h"
-#include "icomp/CXpcModel.h"
-#include "ifile/CSimpleXmlFileReadArchive.h"
-#include "ifile/CCompactXmlFileReadArchive.h"
+#include <istd/CSystem.h>
+#include <icomp/CRegistry.h>
+#include <icomp/CXpcModel.h>
+#include <ifile/CSimpleXmlFileReadArchive.h>
+#include <ifile/CCompactXmlFileReadArchive.h>
 
 
 namespace ipackage

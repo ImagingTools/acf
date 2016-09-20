@@ -1,4 +1,4 @@
-#include "iview/CConsoleGui.h"
+#include <iview/CConsoleGui.h>
 
 
 // Qt includes
@@ -22,12 +22,12 @@
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iwidgets/CWidgetUpdateBlocker.h"
+#include <iwidgets/CWidgetUpdateBlocker.h>
 
-#include "iview/IInteractiveShape.h"
-#include "iview/CInteractiveShapeBase.h"
+#include <iview/IInteractiveShape.h>
+#include <iview/CInteractiveShapeBase.h>
 
 
 namespace iview

@@ -1,4 +1,4 @@
-#include "iqtdoc/CDoxygenHelpFileProviderComp.h"
+#include <iqtdoc/CDoxygenHelpFileProviderComp.h>
 
 
 // Qt includes
@@ -6,9 +6,9 @@
 
 
 // ACF includes
-#include "istd/CClassInfo.h"
+#include <istd/CClassInfo.h>
 
-#include "istd/CSystem.h"
+#include <istd/CSystem.h>
 
 
 namespace iqtdoc

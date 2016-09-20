@@ -12,15 +12,15 @@
 #include <QtGui/QPrinter>
 #endif
 
-#include "imod/TSingleModelObserverBase.h"
+#include <imod/TSingleModelObserverBase.h>
 
-#include "ibase/ICommandsProvider.h"
+#include <ibase/ICommandsProvider.h>
 
-#include "iqtgui/TGuiComponentBase.h"
-#include "iqtgui/TGuiObserverWrap.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <iqtgui/TGuiComponentBase.h>
+#include <iqtgui/TGuiObserverWrap.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
-#include "idoc/ITextDocument.h"
+#include <idoc/ITextDocument.h>
 
 
 class CTextEditorComp:

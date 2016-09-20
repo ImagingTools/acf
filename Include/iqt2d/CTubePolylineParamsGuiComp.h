@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "i2d/CTubePolyline.h"
+#include <i2d/CTubePolyline.h>
 
-#include "iview/CTubePolylineShape.h"
+#include <iview/CTubePolylineShape.h>
 
-#include "iqt2d/TPolygonBasedParamsGuiComp.h"
+#include <iqt2d/TPolygonBasedParamsGuiComp.h>
 
 
 namespace iqt2d

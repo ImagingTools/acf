@@ -6,7 +6,7 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "idoc/IHelpInfoProvider.h"
+#include <idoc/IHelpInfoProvider.h>
 
 
 namespace idoc

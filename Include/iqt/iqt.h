@@ -15,12 +15,12 @@
 #include <QtCore/QDateTime>
 
 // ACF includes
-#include "istd/CIndex2d.h"
+#include <istd/CIndex2d.h>
 
-#include "i2d/CVector2d.h"
-#include "i2d/CRectangle.h"
-#include "i2d/CLine2d.h"
-#include "i2d/CRect.h"
+#include <i2d/CVector2d.h>
+#include <i2d/CRectangle.h>
+#include <i2d/CLine2d.h>
+#include <i2d/CRect.h>
 
 
 /**

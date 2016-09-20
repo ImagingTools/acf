@@ -1,15 +1,15 @@
-#include "iview/COrientedCircleShape.h"
+#include <iview/COrientedCircleShape.h>
 
 
 // Qt includes
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "imod/IModel.h"
-#include "i2d/COrientedCircle.h"
-#include "iview/IColorSchema.h"
-#include "iview/CScreenTransform.h"
-#include "iview/CPolylineShape.h"
+#include <imod/IModel.h>
+#include <i2d/COrientedCircle.h>
+#include <iview/IColorSchema.h>
+#include <iview/CScreenTransform.h>
+#include <iview/CPolylineShape.h>
 
 
 namespace iview

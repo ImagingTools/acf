@@ -1,4 +1,4 @@
-#include "ibase/CQtVersionInfoComp.h"
+#include <ibase/CQtVersionInfoComp.h>
 
 
 namespace ibase

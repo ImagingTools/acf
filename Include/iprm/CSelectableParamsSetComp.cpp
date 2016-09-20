@@ -1,10 +1,10 @@
-#include "iprm/CSelectableParamsSetComp.h"
+#include <iprm/CSelectableParamsSetComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "imod/IModel.h"
+#include <imod/IModel.h>
 
 
 namespace iprm

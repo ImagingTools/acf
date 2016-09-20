@@ -1,4 +1,4 @@
-#include "iqtgui/CTabContainerGuiComp.h"
+#include <iqtgui/CTabContainerGuiComp.h>
 
 
 // Qt includes

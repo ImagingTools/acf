@@ -1,4 +1,4 @@
-#include "iwidgets/CTextElider.h"
+#include <iwidgets/CTextElider.h>
 
 
 // Qt includes
@@ -8,7 +8,7 @@
 #include <QtCore/QEvent>
 
 // ACF includes
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
 
 namespace iwidgets

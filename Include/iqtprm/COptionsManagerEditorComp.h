@@ -11,11 +11,11 @@
 #endif
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "iprm/IOptionsManager.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <ifile/IFilePersistence.h>
+#include <iprm/IOptionsManager.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h"
+#include <GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h>
 
 
 namespace iqtprm

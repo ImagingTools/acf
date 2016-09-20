@@ -2,12 +2,12 @@
 #define imath_TISampledFunction_included
 
 
-#include "istd/IChangeable.h"
-#include "istd/TIndex.h"
-#include "istd/TRange.h"
+#include <istd/IChangeable.h>
+#include <istd/TIndex.h>
+#include <istd/TRange.h>
 
-#include "imath/TIMathFunction.h"
-#include "imath/TVector.h"
+#include <imath/TIMathFunction.h>
+#include <imath/TVector.h>
 
 
 namespace imath

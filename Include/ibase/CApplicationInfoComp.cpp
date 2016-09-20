@@ -1,4 +1,4 @@
-#include "ibase/CApplicationInfoComp.h"
+#include <ibase/CApplicationInfoComp.h>
 
 
 namespace ibase

@@ -1,4 +1,4 @@
-#include "iqtgui/CDockWidgetGuiComp.h"
+#include <iqtgui/CDockWidgetGuiComp.h>
 
 
 // Qt includes

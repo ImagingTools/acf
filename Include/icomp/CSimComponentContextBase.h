@@ -7,15 +7,15 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/TIFactory.h"
-#include "istd/CIdManipBase.h"
-#include "icomp/IAttributeStaticInfo.h"
-#include "iattr/TAttribute.h"
-#include "iattr/TMultiAttribute.h"
-#include "icomp/IComponent.h"
-#include "icomp/IComponentContext.h"
-#include "icomp/IComponentStaticInfo.h"
-#include "icomp/CRegistryElement.h"
+#include <istd/TIFactory.h>
+#include <istd/CIdManipBase.h>
+#include <icomp/IAttributeStaticInfo.h>
+#include <iattr/TAttribute.h>
+#include <iattr/TMultiAttribute.h>
+#include <icomp/IComponent.h>
+#include <icomp/IComponentContext.h>
+#include <icomp/IComponentStaticInfo.h>
+#include <icomp/CRegistryElement.h>
 
 
 namespace icomp

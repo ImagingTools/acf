@@ -2,10 +2,10 @@
 #define imath_CSampledFunction2d_included
 
 
-#include "istd/TArray.h"
-#include "istd/CIndex2d.h"
+#include <istd/TArray.h>
+#include <istd/CIndex2d.h>
 
-#include "imath/TISampledFunction.h"
+#include <imath/TISampledFunction.h>
 
 
 namespace imath

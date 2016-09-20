@@ -6,11 +6,11 @@
 #include <QtCore/QRectF>
 
 // ACF includes
-#include "istd/TRange.h"
-#include "istd/CIndex2d.h"
-#include "iser/ISerializable.h"
-#include "i2d/CObject2dBase.h"
-#include "i2d/CLine2d.h"
+#include <istd/TRange.h>
+#include <istd/CIndex2d.h>
+#include <iser/ISerializable.h>
+#include <i2d/CObject2dBase.h>
+#include <i2d/CLine2d.h>
 
 
 namespace i2d

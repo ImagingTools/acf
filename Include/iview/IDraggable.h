@@ -2,9 +2,9 @@
 #define iview_IMoveable_included
 
 
-#include "istd/IPolymorphic.h"
+#include <istd/IPolymorphic.h>
 
-#include "i2d/CVector2d.h"
+#include <i2d/CVector2d.h>
 
 
 namespace iview

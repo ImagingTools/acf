@@ -6,9 +6,9 @@
 #include <QtCore/QtGlobal>
 
 // ACF includes
-#include "imath/TVector.h"
-#include "i2d/CVector2d.h"
-#include "i3d/i3d.h"
+#include <imath/TVector.h>
+#include <i2d/CVector2d.h>
+#include <i3d/i3d.h>
 
 
 namespace i3d

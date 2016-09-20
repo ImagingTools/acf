@@ -6,11 +6,11 @@
 #include <QtCore/QSettings>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "icomp/CComponentBase.h"
-#include "ibase/IApplicationInfo.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "iqt/iqt.h"
+#include <ifile/IFilePersistence.h>
+#include <icomp/CComponentBase.h>
+#include <ibase/IApplicationInfo.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <iqt/iqt.h>
 
 
 namespace iqt

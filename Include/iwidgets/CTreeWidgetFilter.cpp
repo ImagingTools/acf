@@ -1,4 +1,4 @@
-#include "iwidgets/CTreeWidgetFilter.h"
+#include <iwidgets/CTreeWidgetFilter.h>
 
 
 // Qt includes

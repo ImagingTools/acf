@@ -8,12 +8,12 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "ifile/IFilePersistence.h"
-#include "ifile/IFilePersistenceInfo.h"
-#include "ifile/IFileNameParam.h"
-#include "ifilegui/ifilegui.h"
+#include <icomp/CComponentBase.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <ifile/IFilePersistence.h>
+#include <ifile/IFilePersistenceInfo.h>
+#include <ifile/IFileNameParam.h>
+#include <ifilegui/ifilegui.h>
 
 
 namespace ifilegui

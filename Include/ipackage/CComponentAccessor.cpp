@@ -1,20 +1,20 @@
-#include "ipackage/CComponentAccessor.h"
+#include <ipackage/CComponentAccessor.h>
 
 
 // ACF includes
-#include "icomp/IComponentEnvironmentManager.h"
-#include "icomp/IRegistryLoader.h"
-#include "icomp/TSimComponentWrap.h"
-#include "icomp/CCompositeComponentContext.h"
-#include "icomp/CRegistryElement.h"
-#include "ifile/TFileSerializerComp.h"
-#include "ifile/CSimpleXmlFileReadArchive.h"
-#include "ifile/CSimpleXmlFileWriteArchive.h"
-#include "ifile/CComposedFilePersistenceComp.h"
-#include "ifile/CCompactXmlFileReadArchive.h"
-#include "ifile/CCompactXmlFileWriteArchive.h"
-#include "ilog/CConsoleLogComp.h"
-#include "ipackage/CPackagesLoaderComp.h"
+#include <icomp/IComponentEnvironmentManager.h>
+#include <icomp/IRegistryLoader.h>
+#include <icomp/TSimComponentWrap.h>
+#include <icomp/CCompositeComponentContext.h>
+#include <icomp/CRegistryElement.h>
+#include <ifile/TFileSerializerComp.h>
+#include <ifile/CSimpleXmlFileReadArchive.h>
+#include <ifile/CSimpleXmlFileWriteArchive.h>
+#include <ifile/CComposedFilePersistenceComp.h>
+#include <ifile/CCompactXmlFileReadArchive.h>
+#include <ifile/CCompactXmlFileWriteArchive.h>
+#include <ilog/CConsoleLogComp.h>
+#include <ipackage/CPackagesLoaderComp.h>
 
 
 namespace

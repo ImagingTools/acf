@@ -1,4 +1,4 @@
-#include "iimg/CBitmapBase.h"
+#include <iimg/CBitmapBase.h>
 
 
 // STL includes
@@ -8,10 +8,10 @@
 #include <QtCore/qmath.h>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
-#include "ibase/CSize.h"
+#include <istd/CChangeNotifier.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
+#include <ibase/CSize.h>
 
 
 namespace iimg

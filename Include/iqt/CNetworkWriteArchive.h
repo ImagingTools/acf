@@ -7,8 +7,8 @@
 #include <QtNetwork/QTcpSocket>
 
 // ACF includes
-#include "iser/CMemoryWriteArchive.h"
-#include "iqt/iqt.h"
+#include <iser/CMemoryWriteArchive.h>
+#include <iqt/iqt.h>
 
 
 namespace iqt

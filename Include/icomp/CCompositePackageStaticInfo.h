@@ -6,10 +6,10 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/TDelPtr.h"
+#include <istd/TDelPtr.h>
 
-#include "icomp/CPackageStaticInfo.h"
-#include "icomp/CCompositeComponentStaticInfo.h"
+#include <icomp/CPackageStaticInfo.h>
+#include <icomp/CCompositeComponentStaticInfo.h>
 
 
 namespace icomp

@@ -2,7 +2,7 @@
 #define icomp_CPackageStaticInfo_included
 
 
-#include "icomp/CComponentStaticInfoBase.h"
+#include <icomp/CComponentStaticInfoBase.h>
 
 
 namespace iser

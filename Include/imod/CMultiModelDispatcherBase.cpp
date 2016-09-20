@@ -1,8 +1,8 @@
-#include "imod/CMultiModelDispatcherBase.h"
+#include <imod/CMultiModelDispatcherBase.h>
 
 
 // ACF includes
-#include "imod/IModel.h"
+#include <imod/IModel.h>
 
 
 namespace imod

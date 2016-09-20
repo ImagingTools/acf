@@ -2,11 +2,11 @@
 #define iqtprm_CSelectionParamIndexGuiComp_included
 
 
-#include "iprm/ISelectionParam.h"
+#include <iprm/ISelectionParam.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/iqtprm/ui_CSelectionParamIndexGuiComp.h"
+#include <GeneratedFiles/iqtprm/ui_CSelectionParamIndexGuiComp.h>
 
 
 namespace iqtprm

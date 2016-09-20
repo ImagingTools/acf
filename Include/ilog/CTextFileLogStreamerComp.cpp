@@ -1,13 +1,13 @@
-#include "ilog/CTextFileLogStreamerComp.h"
+#include <ilog/CTextFileLogStreamerComp.h>
 
 // Qt includes
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "istd/IInformationProvider.h"
-#include "imod/IModel.h"
-#include "ilog/IMessageContainer.h"
-#include "ilog/CMessage.h"
+#include <istd/IInformationProvider.h>
+#include <imod/IModel.h>
+#include <ilog/IMessageContainer.h>
+#include <ilog/CMessage.h>
 
 
 namespace ilog

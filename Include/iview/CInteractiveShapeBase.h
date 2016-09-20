@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "istd/CChangeGroup.h"
-#include "istd/TDelPtr.h"
-#include "imod/IModel.h"
-#include "iview/IInteractiveShape.h"
-#include "iview/IDraggable.h"
-#include "iview/ISelectable.h"
-#include "iview/CShapeBase.h"
+#include <istd/CChangeGroup.h>
+#include <istd/TDelPtr.h>
+#include <imod/IModel.h>
+#include <iview/IInteractiveShape.h>
+#include <iview/IDraggable.h>
+#include <iview/ISelectable.h>
+#include <iview/CShapeBase.h>
 
 // Qt includes
 #include <QtGui/QPen>

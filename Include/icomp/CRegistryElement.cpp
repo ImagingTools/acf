@@ -1,18 +1,18 @@
-#include "icomp/CRegistryElement.h"
+#include <icomp/CRegistryElement.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
-#include "iattr/TAttribute.h"
-#include "iattr/TMultiAttribute.h"
-#include "icomp/IAttributeStaticInfo.h"
-#include "icomp/IComponentStaticInfo.h"
-#include "icomp/CReferenceAttribute.h"
-#include "icomp/CFactoryAttribute.h"
-#include "icomp/CMultiReferenceAttribute.h"
-#include "icomp/CMultiFactoryAttribute.h"
+#include <istd/CChangeNotifier.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
+#include <iattr/TAttribute.h>
+#include <iattr/TMultiAttribute.h>
+#include <icomp/IAttributeStaticInfo.h>
+#include <icomp/IComponentStaticInfo.h>
+#include <icomp/CReferenceAttribute.h>
+#include <icomp/CFactoryAttribute.h>
+#include <icomp/CMultiReferenceAttribute.h>
+#include <icomp/CMultiFactoryAttribute.h>
 
 
 namespace icomp

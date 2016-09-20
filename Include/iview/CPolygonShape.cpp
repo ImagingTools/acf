@@ -1,17 +1,17 @@
-#include "iview/CPolygonShape.h"
+#include <iview/CPolygonShape.h>
 
 
 // Qt includes
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "imod/IModel.h"
-#include "i2d/CPolygon.h"
-#include "i2d/CAffineTransformation2d.h"
-#include "iqt/iqt.h"
-#include "iview/IColorSchema.h"
-#include "iview/CScreenTransform.h"
+#include <istd/CChangeNotifier.h>
+#include <imod/IModel.h>
+#include <i2d/CPolygon.h>
+#include <i2d/CAffineTransformation2d.h>
+#include <iqt/iqt.h>
+#include <iview/IColorSchema.h>
+#include <iview/CScreenTransform.h>
 
 
 namespace iview

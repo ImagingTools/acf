@@ -6,10 +6,10 @@
 #include <QtGui/QTextTableCell>
 
 // ACF includes
-#include "ilog/IMessageContainer.h"
-#include "ilog/CMessage.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "GeneratedFiles/iloggui/ui_CTextLogGuiComp.h"
+#include <ilog/IMessageContainer.h>
+#include <ilog/CMessage.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <GeneratedFiles/iloggui/ui_CTextLogGuiComp.h>
 
 
 namespace iloggui

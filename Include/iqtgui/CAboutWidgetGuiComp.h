@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "ibase/IApplicationInfo.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <ibase/IApplicationInfo.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
 
-#include "GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h"
+#include <GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h>
 
 
 namespace iqtgui

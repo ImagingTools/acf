@@ -1,4 +1,4 @@
-#include "iqtprm/CMultiParamsManagerGuiComp.h"
+#include <iqtprm/CMultiParamsManagerGuiComp.h>
 
 
 // ACF includes

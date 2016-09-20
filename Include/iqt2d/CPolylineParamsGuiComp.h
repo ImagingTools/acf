@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "i2d/CPolyline.h"
-#include "iview/CPolylineShape.h"
-#include "iqt2d/TPolygonBasedParamsGuiComp.h"
+#include <i2d/CPolyline.h>
+#include <iview/CPolylineShape.h>
+#include <iqt2d/TPolygonBasedParamsGuiComp.h>
 
 
 namespace iqt2d

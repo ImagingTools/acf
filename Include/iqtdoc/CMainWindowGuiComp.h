@@ -13,14 +13,14 @@
 #endif
 
 // ACF includes
-#include "imod/IModel.h"
-#include "imod/TSingleModelObserverBase.h"
-#include "ibase/IApplication.h"
-#include "ibase/IApplicationInfo.h"
-#include "ibase/ICommandsProvider.h"
-#include "idoc/IUndoManager.h"
-#include "idoc/IDocumentManager.h"
-#include "iqtgui/CSimpleMainWindowGuiComp.h"
+#include <imod/IModel.h>
+#include <imod/TSingleModelObserverBase.h>
+#include <ibase/IApplication.h>
+#include <ibase/IApplicationInfo.h>
+#include <ibase/ICommandsProvider.h>
+#include <idoc/IUndoManager.h>
+#include <idoc/IDocumentManager.h>
+#include <iqtgui/CSimpleMainWindowGuiComp.h>
 
 
 namespace iqtdoc

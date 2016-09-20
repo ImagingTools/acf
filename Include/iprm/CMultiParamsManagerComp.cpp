@@ -1,13 +1,13 @@
-#include "iprm/CMultiParamsManagerComp.h"
+#include <iprm/CMultiParamsManagerComp.h>
 
 
 // Qt includes
 #include <QtCore/QObject>
 
 // ACF includes
-#include "istd/CChangeGroup.h"
-#include "istd/CChangeNotifier.h"
-#include "imod/TModelWrap.h"
+#include <istd/CChangeGroup.h>
+#include <istd/CChangeNotifier.h>
+#include <imod/TModelWrap.h>
 
 
 namespace iprm

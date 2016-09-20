@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
-#include "idoc/IDocumentManager.h"
-#include "ifilegui/CExternalOpenDocumentCommandCompBase.h"
+#include <imod/TSingleModelObserverBase.h>
+#include <idoc/IDocumentManager.h>
+#include <ifilegui/CExternalOpenDocumentCommandCompBase.h>
 
 
 namespace iqtdoc

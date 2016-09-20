@@ -5,16 +5,16 @@
 // ACF includes
 #include <QtCore/QString>
 
-#include "ifile/IFilePersistence.h"
+#include <ifile/IFilePersistence.h>
 
-#include "iprm/IVariableParam.h"
+#include <iprm/IVariableParam.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "iqt2d/IViewExtender.h"
+#include <iqt2d/IViewExtender.h>
 
-#include "iqtprm/iqtprm.h"
-#include "GeneratedFiles/iqtprm/ui_CVariableParamGuiComp.h"
+#include <iqtprm/iqtprm.h>
+#include <GeneratedFiles/iqtprm/ui_CVariableParamGuiComp.h>
 
 
 namespace iqtprm

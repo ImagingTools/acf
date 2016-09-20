@@ -1,4 +1,4 @@
-#include "iimg/CBitmapSurface.h"
+#include <iimg/CBitmapSurface.h>
 
 
 // Qt includes
@@ -7,7 +7,7 @@
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iimg

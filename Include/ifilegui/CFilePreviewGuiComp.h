@@ -8,11 +8,11 @@
 #include <QtCore/QFutureWatcher>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "ifile/IFileNameParam.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <ifile/IFilePersistence.h>
+#include <ifile/IFileNameParam.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/ifilegui/ui_CFilePreviewGuiComp.h"
+#include <GeneratedFiles/ifilegui/ui_CFilePreviewGuiComp.h>
 
 
 namespace ifilegui

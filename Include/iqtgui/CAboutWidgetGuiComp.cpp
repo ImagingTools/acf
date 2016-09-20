@@ -1,4 +1,4 @@
-#include "iqtgui/CAboutWidgetGuiComp.h"
+#include <iqtgui/CAboutWidgetGuiComp.h>
 
 
 namespace iqtgui

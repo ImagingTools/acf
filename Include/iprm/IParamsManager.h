@@ -8,7 +8,7 @@
 #include <QtCore/QByteArray>
 
 // ACF includes
-#include "iprm/ISelectionParam.h"
+#include <iprm/ISelectionParam.h>
 
 
 namespace iprm

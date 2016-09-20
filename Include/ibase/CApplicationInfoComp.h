@@ -2,11 +2,11 @@
 #define ibase_CApplicationInfoComp_included
 
 
-#include "iser/IVersionInfo.h"
+#include <iser/IVersionInfo.h>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "ibase/IApplicationInfo.h"
+#include <ibase/IApplicationInfo.h>
 
 
 namespace ibase

@@ -1,10 +1,10 @@
-#include "icomp/CCompositeComponentStaticInfo.h"
+#include <icomp/CCompositeComponentStaticInfo.h>
 
 
-#include "icomp/IRegistry.h"
-#include "icomp/IComponentEnvironmentManager.h"
-#include "icomp/TComponentWrap.h"
-#include "icomp/CCompositeComponent.h"
+#include <icomp/IRegistry.h>
+#include <icomp/IComponentEnvironmentManager.h>
+#include <icomp/TComponentWrap.h>
+#include <icomp/CCompositeComponent.h>
 
 
 namespace icomp

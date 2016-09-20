@@ -6,10 +6,10 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "istd/TDelPtr.h"
-#include "imod/IModel.h"
-#include "imod/CSingleModelObserverBase.h"
+#include <istd/IChangeable.h>
+#include <istd/TDelPtr.h>
+#include <imod/IModel.h>
+#include <imod/CSingleModelObserverBase.h>
 
 
 namespace imod

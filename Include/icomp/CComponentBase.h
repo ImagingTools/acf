@@ -3,24 +3,24 @@
 
 
 // ACF includes
-#include "istd/CClassInfo.h"
-#include "iattr/TAttribute.h"
-#include "iattr/TMultiAttribute.h"
-#include "icomp/IComponent.h"
-#include "icomp/ICompositeComponent.h"
-#include "icomp/IRealComponentStaticInfo.h"
-#include "icomp/TInterfaceRegistrator.h"
-#include "icomp/TAttributeMember.h"
-#include "icomp/TMultiAttributeMember.h"
-#include "icomp/TReferenceMember.h"
-#include "icomp/TMultiReferenceMember.h"
-#include "icomp/TFactoryMember.h"
-#include "icomp/TMultiFactoryMember.h"
-#include "icomp/TAttributeStaticInfo.h"
-#include "icomp/TComponentStaticInfo.h"
-#include "icomp/TSubelementStaticInfo.h"
-#include "icomp/CBaseComponentStaticInfo.h"
-#include "icomp/CRelatedInfoRegistrator.h"
+#include <istd/CClassInfo.h>
+#include <iattr/TAttribute.h>
+#include <iattr/TMultiAttribute.h>
+#include <icomp/IComponent.h>
+#include <icomp/ICompositeComponent.h>
+#include <icomp/IRealComponentStaticInfo.h>
+#include <icomp/TInterfaceRegistrator.h>
+#include <icomp/TAttributeMember.h>
+#include <icomp/TMultiAttributeMember.h>
+#include <icomp/TReferenceMember.h>
+#include <icomp/TMultiReferenceMember.h>
+#include <icomp/TFactoryMember.h>
+#include <icomp/TMultiFactoryMember.h>
+#include <icomp/TAttributeStaticInfo.h>
+#include <icomp/TComponentStaticInfo.h>
+#include <icomp/TSubelementStaticInfo.h>
+#include <icomp/CBaseComponentStaticInfo.h>
+#include <icomp/CRelatedInfoRegistrator.h>
 
 
 namespace icomp

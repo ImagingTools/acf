@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iimg/IBitmapProvider.h"
-#include "iimg/IMultiBitmapProvider.h"
-#include "icomp/CComponentBase.h"
-#include "imod/CMultiModelBridgeBase.h"
-#include "iprm/COptionsManager.h"
+#include <iimg/IBitmapProvider.h>
+#include <iimg/IMultiBitmapProvider.h>
+#include <icomp/CComponentBase.h>
+#include <imod/CMultiModelBridgeBase.h>
+#include <iprm/COptionsManager.h>
 
 
 namespace iimg

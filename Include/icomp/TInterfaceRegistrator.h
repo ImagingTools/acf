@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "istd/CClassInfo.h"
+#include <istd/CClassInfo.h>
 
-#include "icomp/CBaseComponentStaticInfo.h"
+#include <icomp/CBaseComponentStaticInfo.h>
 
 
 namespace icomp

@@ -1,4 +1,4 @@
-#include "ipackage/CRegistryCodeSaverComp.h"
+#include <ipackage/CRegistryCodeSaverComp.h>
 
 
 // STL includes
@@ -9,10 +9,10 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "icomp/icomp.h"
-#include "icomp/CCachedEnvironmentManager.h"
-#include "iser/CMemoryWriteArchive.h"
-#include "ibase/IProgressManager.h"
+#include <icomp/icomp.h>
+#include <icomp/CCachedEnvironmentManager.h>
+#include <iser/CMemoryWriteArchive.h>
+#include <ibase/IProgressManager.h>
 
 
 namespace ipackage

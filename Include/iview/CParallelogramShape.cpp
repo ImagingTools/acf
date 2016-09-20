@@ -1,18 +1,18 @@
-#include "iview/CParallelogramShape.h"
+#include <iview/CParallelogramShape.h>
 
 
 // Qt includes
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "imod/IModel.h"
+#include <imod/IModel.h>
 
-#include "i2d/CLine2d.h"
+#include <i2d/CLine2d.h>
 
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
-#include "iview/IColorSchema.h"
-#include "iview/CScreenTransform.h"
+#include <iview/IColorSchema.h>
+#include <iview/CScreenTransform.h>
 
 
 namespace iview

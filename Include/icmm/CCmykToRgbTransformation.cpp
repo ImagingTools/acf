@@ -1,6 +1,6 @@
-#include "icmm/CCmykToRgbTransformation.h"
-#include "icmm/CRgb.h"
-#include "icmm/CCmyk.h"
+#include <icmm/CCmykToRgbTransformation.h>
+#include <icmm/CRgb.h>
+#include <icmm/CCmyk.h>
 
 
 namespace icmm

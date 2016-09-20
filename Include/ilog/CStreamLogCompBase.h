@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "ilog/CLogCompBase.h"
+#include <ilog/CLogCompBase.h>
 
 
 namespace ilog

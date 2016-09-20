@@ -2,12 +2,12 @@
 #define imod_TModelCompWrap_included
 
 
-#include "istd/IChangeable.h"
+#include <istd/IChangeable.h>
 
-#include "imod/TModelWrap.h"
+#include <imod/TModelWrap.h>
 
-#include "icomp/TComponentCloneWrap.h"
-#include "icomp/CComponentBase.h"
+#include <icomp/TComponentCloneWrap.h>
+#include <icomp/CComponentBase.h>
 
 
 namespace icomp

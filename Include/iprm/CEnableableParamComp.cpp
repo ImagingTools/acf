@@ -1,4 +1,4 @@
-#include "iprm/CEnableableParamComp.h"
+#include <iprm/CEnableableParamComp.h>
 
 
 namespace iprm

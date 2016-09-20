@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "ifile/IFileNameParam.h"
-#include "idoc/IHelpFileProvider.h"
+#include <icomp/CComponentBase.h>
+#include <ifile/IFileNameParam.h>
+#include <idoc/IHelpFileProvider.h>
 
 
 namespace iqtdoc

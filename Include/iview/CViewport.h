@@ -13,14 +13,14 @@
 #endif
 
 // ACF includes
-#include "iimg/IBitmap.h"
+#include <iimg/IBitmap.h>
 
-#include "imath/CFixedPointManip.h"
+#include <imath/CFixedPointManip.h>
 
-#include "iview/IViewEventObserver.h"
-#include "iview/CConsoleBase.h"
-#include "iview/CCalibratedViewBase.h"
-#include "iview/CImageShape.h"
+#include <iview/IViewEventObserver.h>
+#include <iview/CConsoleBase.h>
+#include <iview/CCalibratedViewBase.h>
+#include <iview/CImageShape.h>
 
 
 namespace iview

@@ -6,8 +6,8 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "idoc/ITextDocument.h"
+#include <icomp/CComponentBase.h>
+#include <idoc/ITextDocument.h>
 
 
 namespace idoc

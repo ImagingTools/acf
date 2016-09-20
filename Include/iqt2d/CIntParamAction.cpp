@@ -1,4 +1,4 @@
-#include "iqt2d/CIntParamAction.h"
+#include <iqt2d/CIntParamAction.h>
 
 // Qt includes
 #if QT_VERSION >= 0x050000

@@ -6,7 +6,7 @@
 #include <QtCore/QObject>
 
 // ACF includes
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
 
 namespace iqt

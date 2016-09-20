@@ -6,12 +6,12 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "ifile/IFilePersistence.h"
-#include "imod/IObserver.h"
-#include "ibase/ICommand.h"
-#include "idoc/IUndoManager.h"
-#include "idoc/IDocumentTypesInfo.h"
+#include <istd/IChangeable.h>
+#include <ifile/IFilePersistence.h>
+#include <imod/IObserver.h>
+#include <ibase/ICommand.h>
+#include <idoc/IUndoManager.h>
+#include <idoc/IDocumentTypesInfo.h>
 
 
 namespace idoc

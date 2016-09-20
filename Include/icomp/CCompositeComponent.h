@@ -7,12 +7,12 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/CClassInfo.h"
+#include <istd/CClassInfo.h>
 
-#include "icomp/ICompositeComponent.h"
-#include "icomp/IRegistry.h"
-#include "icomp/IComponentContext.h"
-#include "icomp/CInterfaceManipBase.h"
+#include <icomp/ICompositeComponent.h>
+#include <icomp/IRegistry.h>
+#include <icomp/IComponentContext.h>
+#include <icomp/CInterfaceManipBase.h>
 
 
 namespace icomp

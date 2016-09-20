@@ -8,12 +8,12 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/TDelPtr.h"
+#include <istd/TDelPtr.h>
 
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
-#include "icomp/IRegistryElement.h"
-#include "icomp/CComponentAddress.h"
+#include <icomp/IRegistryElement.h>
+#include <icomp/CComponentAddress.h>
 
 
 namespace icomp

@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "istd/TIHierarchical.h"
-#include "icomp/CComponentBase.h"
-#include "iprm/CParamsSet.h"
+#include <istd/TIHierarchical.h>
+#include <icomp/CComponentBase.h>
+#include <iprm/CParamsSet.h>
 
 
 namespace iprm

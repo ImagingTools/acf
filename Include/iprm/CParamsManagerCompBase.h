@@ -6,15 +6,15 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "imod/TModelWrap.h"
-#include "imod/CMultiModelBridgeBase.h"
-#include "icomp/CComponentBase.h"
-#include "iprm/IParamsSet.h"
-#include "iprm/ISelectionParam.h"
-#include "iprm/IOptionsManager.h"
-#include "iprm/IParamsManager.h"
-#include "iprm/CNameParam.h"
+#include <istd/TDelPtr.h>
+#include <imod/TModelWrap.h>
+#include <imod/CMultiModelBridgeBase.h>
+#include <icomp/CComponentBase.h>
+#include <iprm/IParamsSet.h>
+#include <iprm/ISelectionParam.h>
+#include <iprm/IOptionsManager.h>
+#include <iprm/IParamsManager.h>
+#include <iprm/CNameParam.h>
 
 
 namespace iprm

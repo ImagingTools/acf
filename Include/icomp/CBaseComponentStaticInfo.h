@@ -2,8 +2,8 @@
 #define icomp_CBaseComponentStaticInfo_included
 
 
-#include "icomp/IRealComponentStaticInfo.h"
-#include "icomp/CComponentStaticInfoBase.h"
+#include <icomp/IRealComponentStaticInfo.h>
+#include <icomp/CComponentStaticInfoBase.h>
 
 
 namespace icomp

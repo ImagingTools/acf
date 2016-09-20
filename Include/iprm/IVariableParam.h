@@ -7,8 +7,8 @@
 #include <QtCore/QSet>
 
 // ACF includes
-#include "iser/ISerializable.h"
-#include "iprm/iprm.h"
+#include <iser/ISerializable.h>
+#include <iprm/iprm.h>
 
 
 namespace iprm

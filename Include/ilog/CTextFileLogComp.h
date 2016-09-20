@@ -7,9 +7,9 @@
 #include <QtCore/QTextStream>
 
 // ACF includes
-#include "imod/CSingleModelObserverBase.h"
-#include "ifile/IFileNameParam.h"
-#include "ilog/CStreamLogCompBase.h"
+#include <imod/CSingleModelObserverBase.h>
+#include <ifile/IFileNameParam.h>
+#include <ilog/CStreamLogCompBase.h>
 
 
 namespace ilog

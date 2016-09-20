@@ -7,10 +7,10 @@
 #include <QtXml/QDomNode>
 
 // ACF includes
-#include "iser/CXmlDocumentInfoBase.h"
-#include "iser/CTextReadArchiveBase.h"
+#include <iser/CXmlDocumentInfoBase.h>
+#include <iser/CTextReadArchiveBase.h>
 
-#include "iser/iser.h"
+#include <iser/iser.h>
 
 
 namespace iser

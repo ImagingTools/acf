@@ -6,8 +6,8 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "i2d/CVector2d.h"
+#include <istd/IChangeable.h>
+#include <i2d/CVector2d.h>
 
 
 namespace iview

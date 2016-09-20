@@ -1,8 +1,8 @@
-#include "icomp/CCompositeComponentContext.h"
+#include <icomp/CCompositeComponentContext.h>
 
 
-#include "icomp/IRegistry.h"
-#include "icomp/IRegistriesManager.h"
+#include <icomp/IRegistry.h>
+#include <icomp/IRegistriesManager.h>
 
 
 namespace icomp

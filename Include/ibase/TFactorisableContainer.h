@@ -6,9 +6,9 @@
 #include <QtCore/QPair>
 
 // ACF includes
-#include "istd/TSmartPtr.h"
-#include "istd/TIFactory.h"
-#include "ibase/TSerializableContainer.h"
+#include <istd/TSmartPtr.h>
+#include <istd/TIFactory.h>
+#include <ibase/TSerializableContainer.h>
 
 
 namespace ibase

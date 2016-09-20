@@ -1,4 +1,4 @@
-#include "iqtgui/CGuiComponentBase.h"
+#include <iqtgui/CGuiComponentBase.h>
 
 
 // Qt includes
@@ -12,7 +12,7 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iqtgui

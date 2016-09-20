@@ -7,8 +7,8 @@
 #include <QtXml/QDomNode>
 
 // ACF includes
-#include "iser/CCompactXmlReadArchiveBase.h"
-#include "ifile/CFileArchiveInfo.h"
+#include <iser/CCompactXmlReadArchiveBase.h>
+#include <ifile/CFileArchiveInfo.h>
 
 
 namespace ifile

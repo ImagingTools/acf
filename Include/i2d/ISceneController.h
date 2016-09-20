@@ -2,9 +2,9 @@
 #define i2d_ISceneController_included
 
 
-#include "istd/IPolymorphic.h"
+#include <istd/IPolymorphic.h>
 
-#include "i2d/i2d.h"
+#include <i2d/i2d.h>
 
 
 namespace i2d

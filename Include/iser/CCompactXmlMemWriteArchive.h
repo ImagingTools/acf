@@ -9,7 +9,7 @@
 #include <QtXml/QDomNode>
 
 // ACF includes
-#include "iser/CCompactXmlWriteArchiveBase.h"
+#include <iser/CCompactXmlWriteArchiveBase.h>
 
 
 namespace iser

@@ -1,4 +1,4 @@
-#include "icomp/CComponentMetaDescriptionEncoder.h"
+#include <icomp/CComponentMetaDescriptionEncoder.h>
 
 
 namespace icomp

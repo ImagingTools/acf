@@ -2,7 +2,7 @@
 #define iprm_IEnableableParam_included
 
 
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
 
 namespace iprm

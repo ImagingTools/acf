@@ -1,4 +1,4 @@
-#include "iqtgui/CModelEditorGuiComp.h"
+#include <iqtgui/CModelEditorGuiComp.h>
 
 
 namespace iqtgui

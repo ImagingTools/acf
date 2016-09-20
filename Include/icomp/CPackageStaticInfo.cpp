@@ -1,8 +1,8 @@
-#include "icomp/CPackageStaticInfo.h"
+#include <icomp/CPackageStaticInfo.h>
 
 
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
 
 
 namespace icomp

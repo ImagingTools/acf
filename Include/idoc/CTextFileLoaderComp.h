@@ -3,8 +3,8 @@
 
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "icomp/CComponentBase.h"
+#include <ifile/IFilePersistence.h>
+#include <icomp/CComponentBase.h>
 
 
 namespace idoc

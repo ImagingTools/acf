@@ -13,11 +13,11 @@
 #endif
 
 // ACF includes
-#include "idoc/IDocumentMetaInfo.h"
-#include "imod/TSingleModelObserverBase.h"
-#include "ibase/TModelObserverCompWrap.h"
-#include "iqtgui/TGuiObserverWrap.h"
-#include "iqtgui/TGuiComponentBase.h"
+#include <idoc/IDocumentMetaInfo.h>
+#include <imod/TSingleModelObserverBase.h>
+#include <ibase/TModelObserverCompWrap.h>
+#include <iqtgui/TGuiObserverWrap.h>
+#include <iqtgui/TGuiComponentBase.h>
 
 
 namespace iqtdoc

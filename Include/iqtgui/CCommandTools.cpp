@@ -1,4 +1,4 @@
-#include "iqtgui/CCommandTools.h"
+#include <iqtgui/CCommandTools.h>
 
 
 namespace iqtgui

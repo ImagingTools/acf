@@ -7,9 +7,9 @@
 #include <QtCore/QByteArray>
 
 // ACF includes
-#include "iser/IObject.h"
+#include <iser/IObject.h>
 
-#include "iprm/iprm.h"
+#include <iprm/iprm.h>
 
 
 namespace iprm

@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "imod/TModelWrap.h"
-#include "idoc/TMultiPageDocumentWrap.h"
-#include "idoc/CStandardDocumentMetaInfo.h"
-#include "iimg/IMultiPageBitmapController.h"
+#include <imod/TModelWrap.h>
+#include <idoc/TMultiPageDocumentWrap.h>
+#include <idoc/CStandardDocumentMetaInfo.h>
+#include <iimg/IMultiPageBitmapController.h>
 
 
 namespace iimg

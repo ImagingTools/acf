@@ -1,4 +1,4 @@
-#include "iview/CLineShape.h"
+#include <iview/CLineShape.h>
 
 
 // Qt includes
@@ -6,13 +6,13 @@
 
 
 // ACF includes
-#include "imod/IModel.h"
-#include "i2d/CPosition2d.h"
+#include <imod/IModel.h>
+#include <i2d/CPosition2d.h>
 
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
-#include "iview/IColorSchema.h"
-#include "iview/CScreenTransform.h"
+#include <iview/IColorSchema.h>
+#include <iview/CScreenTransform.h>
 
 
 namespace iview

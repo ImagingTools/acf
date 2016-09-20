@@ -6,9 +6,9 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "imod/IModel.h"
-#include "imod/IObserver.h"
+#include <istd/IChangeable.h>
+#include <imod/IModel.h>
+#include <imod/IObserver.h>
 
 
 namespace imod

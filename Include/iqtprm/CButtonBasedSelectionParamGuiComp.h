@@ -15,11 +15,11 @@
 #endif
 
 // ACF includes
-#include "iprm/ISelectionParam.h"
-#include "iqtgui/IIconProvider.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iprm/ISelectionParam.h>
+#include <iqtgui/IIconProvider.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/iqtprm/ui_CButtonBasedSelectionParamGuiComp.h"
+#include <GeneratedFiles/iqtprm/ui_CButtonBasedSelectionParamGuiComp.h>
 
 
 namespace iqtprm

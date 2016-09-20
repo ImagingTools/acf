@@ -1,4 +1,4 @@
-#include "ibase/CUuidComp.h"
+#include <ibase/CUuidComp.h>
 
 
 // Qt includes

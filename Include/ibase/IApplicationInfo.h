@@ -6,9 +6,9 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "istd/IPolymorphic.h"
-#include "iser/IVersionInfo.h"
-#include "ibase/ibase.h"
+#include <istd/IPolymorphic.h>
+#include <iser/IVersionInfo.h>
+#include <ibase/ibase.h>
 
 
 namespace ibase

@@ -1,4 +1,4 @@
-#include "imath/CLinearInterpolator.h"
+#include <imath/CLinearInterpolator.h>
 
 
 namespace imath

@@ -1,4 +1,4 @@
-#include "iqtgui/CGuiComponentDialog.h"
+#include <iqtgui/CGuiComponentDialog.h>
 
 
 // Qt includes

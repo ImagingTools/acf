@@ -2,9 +2,9 @@
 #define i2d_CAnnulus_included
 
 
-#include "i2d/CPosition2d.h"
-#include "i2d/CCircle.h"
-#include "i2d/CRectangle.h"
+#include <i2d/CPosition2d.h>
+#include <i2d/CCircle.h>
+#include <i2d/CRectangle.h>
 
 
 namespace i2d

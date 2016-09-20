@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
+#include <ifile/IFilePersistence.h>
 
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <iqtgui/TDesignerGuiCompBase.h>
 
-#include "GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h"
+#include <GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h>
 
 
 namespace ifilegui

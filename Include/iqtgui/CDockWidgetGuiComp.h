@@ -11,8 +11,8 @@
 #endif
 
 // ACF includes
-#include "iqtgui/IMainWindowComponent.h"
-#include "iqtgui/TGuiComponentBase.h"
+#include <iqtgui/IMainWindowComponent.h>
+#include <iqtgui/TGuiComponentBase.h>
 
 
 namespace iqtgui

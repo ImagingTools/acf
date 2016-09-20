@@ -1,18 +1,18 @@
-#include "iview/CImageShape.h"
+#include <iview/CImageShape.h>
 
 
 // Qt includes
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "imod/IModel.h"
-#include "icmm/CVarColor.h"
-#include "icmm/CRgbToHsvTranformation.h"
-#include "icmm/CRgb.h"
-#include "icmm/CHsv.h"
-#include "iimg/CBitmap.h"
-#include "iview/CScreenTransform.h"
+#include <istd/TDelPtr.h>
+#include <imod/IModel.h>
+#include <icmm/CVarColor.h>
+#include <icmm/CRgbToHsvTranformation.h>
+#include <icmm/CRgb.h>
+#include <icmm/CHsv.h>
+#include <iimg/CBitmap.h>
+#include <iview/CScreenTransform.h>
 
 
 namespace iview

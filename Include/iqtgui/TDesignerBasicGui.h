@@ -3,11 +3,10 @@
 
 
 // Qt includes
-#include "qmetaobject.h"
-
+#include <QtCore/QMetaObject>
 
 // ACF includes
-#include "iqtgui/TGuiComponentBase.h"
+#include <iqtgui/TGuiComponentBase.h>
 
 
 namespace iqtgui

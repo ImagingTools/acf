@@ -7,7 +7,7 @@
 #include <QtCore/QSize>
 
 // ACF includes
-#include "istd/TIndex.h"
+#include <istd/TIndex.h>
 
 
 namespace istd

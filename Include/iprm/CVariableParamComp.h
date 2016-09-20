@@ -2,9 +2,9 @@
 #define iprm_CVariableParamComp_included
 
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iprm/IVariableParam.h"
+#include <iprm/IVariableParam.h>
 
 
 namespace iprm

@@ -13,9 +13,9 @@
 #endif
 
 // ACF includes
-#include "iqtgui/TGuiComponentBase.h"
-#include "idoc/IHelpViewer.h"
-#include "idoc/IHelpFileProvider.h"
+#include <iqtgui/TGuiComponentBase.h>
+#include <idoc/IHelpViewer.h>
+#include <idoc/IHelpFileProvider.h>
 
 
 namespace iqtdoc

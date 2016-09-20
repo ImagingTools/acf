@@ -13,16 +13,16 @@
 #endif
 
 // ACF includes
-#include "imod/CMultiModelDispatcherBase.h"
-#include "ibase/ICommandsProvider.h"
-#include "ifile/IFileNameParam.h"
-#include "iprm/IOptionsManager.h"
-#include "iqtgui/IMainWindowComponent.h"
-#include "iqtgui/IDialog.h"
-#include "iqtgui/TGuiComponentBase.h"
-#include "iqtgui/TRestorableGuiWrap.h"
-#include "iqtgui/CCommandTools.h"
-#include "ilog/IMessageConsumer.h"
+#include <imod/CMultiModelDispatcherBase.h>
+#include <ibase/ICommandsProvider.h>
+#include <ifile/IFileNameParam.h>
+#include <iprm/IOptionsManager.h>
+#include <iqtgui/IMainWindowComponent.h>
+#include <iqtgui/IDialog.h>
+#include <iqtgui/TGuiComponentBase.h>
+#include <iqtgui/TRestorableGuiWrap.h>
+#include <iqtgui/CCommandTools.h>
+#include <ilog/IMessageConsumer.h>
 
 
 namespace iqtgui

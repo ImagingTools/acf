@@ -1,4 +1,4 @@
-#include "iqtgui/CCalendarGuiComp.h"
+#include <iqtgui/CCalendarGuiComp.h>
 
 
 namespace iqtgui

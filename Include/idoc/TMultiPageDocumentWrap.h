@@ -6,14 +6,14 @@
 #include <QtCore/QList>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/TSmartPtr.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
-#include "iprm/IOptionsList.h"
-#include "idoc/IMultiPageDocument.h"
-#include "idoc/IMultiPageDocumentProvider.h"
-#include "idoc/CStandardDocumentMetaInfo.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TSmartPtr.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
+#include <iprm/IOptionsList.h>
+#include <idoc/IMultiPageDocument.h>
+#include <idoc/IMultiPageDocumentProvider.h>
+#include <idoc/CStandardDocumentMetaInfo.h>
 
 
 namespace idoc

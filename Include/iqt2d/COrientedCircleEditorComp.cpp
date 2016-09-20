@@ -1,4 +1,4 @@
-#include "iqt2d/COrientedCircleEditorComp.h"
+#include <iqt2d/COrientedCircleEditorComp.h>
 
 
 namespace iqt2d

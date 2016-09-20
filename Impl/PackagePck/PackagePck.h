@@ -2,13 +2,13 @@
 #define PackagePck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
-#include "icomp/CXpcModel.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
+#include <icomp/CXpcModel.h>
 
-#include "ipackage/CPackagesLoaderComp.h"
-#include "ipackage/CRegistriesManagerComp.h"
-#include "ipackage/CRegistryCodeSaverComp.h"
+#include <ipackage/CPackagesLoaderComp.h>
+#include <ipackage/CRegistriesManagerComp.h>
+#include <ipackage/CRegistryCodeSaverComp.h>
 
 
 /**

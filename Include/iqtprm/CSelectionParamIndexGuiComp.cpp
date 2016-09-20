@@ -1,4 +1,4 @@
-#include "iqtprm/CSelectionParamIndexGuiComp.h"
+#include <iqtprm/CSelectionParamIndexGuiComp.h>
 
 
 // Qt includes
@@ -11,9 +11,9 @@
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iprm/IOptionsList.h"
+#include <iprm/IOptionsList.h>
 
 
 namespace iqtprm

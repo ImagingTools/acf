@@ -1,14 +1,14 @@
-#include "iview/CRectangleShape.h"
+#include <iview/CRectangleShape.h>
 
 
 // Qt includes
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "imod/IModel.h"
-#include "i2d/CLine2d.h"
-#include "iqt/iqt.h"
-#include "iview/IColorSchema.h"
+#include <imod/IModel.h>
+#include <i2d/CLine2d.h>
+#include <iqt/iqt.h>
+#include <iview/IColorSchema.h>
 
 
 namespace iview

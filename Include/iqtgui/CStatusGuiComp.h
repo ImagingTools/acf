@@ -11,10 +11,10 @@
 #endif
 
 // ACF includes
-#include "istd/IInformationProvider.h"
-#include "ibase/TModelObserverCompWrap.h"
-#include "iqtgui/TGuiComponentBase.h"
-#include "iqtgui/TGuiObserverWrap.h"
+#include <istd/IInformationProvider.h>
+#include <ibase/TModelObserverCompWrap.h>
+#include <iqtgui/TGuiComponentBase.h>
+#include <iqtgui/TGuiObserverWrap.h>
 
 
 namespace iqtgui

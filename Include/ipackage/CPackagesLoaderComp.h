@@ -9,16 +9,16 @@
 #include <QtCore/QLibrary>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "icomp/IRegistryLoader.h"
-#include "icomp/CRegistry.h"
-#include "icomp/CEnvironmentManagerBase.h"
-#include "icomp/CComponentBase.h"
-#include "icomp/CCompositePackageStaticInfo.h"
-#include "icomp/export.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "ifile/IFilePersistence.h"
-#include "ifile/IFileNameParam.h"
+#include <istd/TDelPtr.h>
+#include <icomp/IRegistryLoader.h>
+#include <icomp/CRegistry.h>
+#include <icomp/CEnvironmentManagerBase.h>
+#include <icomp/CComponentBase.h>
+#include <icomp/CCompositePackageStaticInfo.h>
+#include <icomp/export.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <ifile/IFilePersistence.h>
+#include <ifile/IFileNameParam.h>
 
 
 namespace ipackage

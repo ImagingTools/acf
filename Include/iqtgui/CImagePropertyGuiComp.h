@@ -2,10 +2,10 @@
 #define iqtgui_CImagePropertyGuiComp_included
 
 
-#include "iimg/IBitmap.h"
+#include <iimg/IBitmap.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h>
 
 
 namespace iqtgui

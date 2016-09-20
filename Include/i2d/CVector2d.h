@@ -8,10 +8,10 @@
 #include <QtCore/QPointF>
 
 // ACF includes
-#include "istd/CIndex2d.h"
-#include "imath/TVector.h"
+#include <istd/CIndex2d.h>
+#include <imath/TVector.h>
 
-#include "i2d/i2d.h"
+#include <i2d/i2d.h>
 
 
 namespace i2d

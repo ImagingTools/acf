@@ -7,9 +7,9 @@
 #include <QtCore/QTextStream>
 
 // ACF includes
-#include "ifile/IFileNameParam.h"
-#include "ifile/IFilePersistence.h"
-#include "ilog/CStreamLogCompBase.h"
+#include <ifile/IFileNameParam.h>
+#include <ifile/IFilePersistence.h>
+#include <ilog/CStreamLogCompBase.h>
 
 
 namespace ilog

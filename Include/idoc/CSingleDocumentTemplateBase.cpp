@@ -1,10 +1,10 @@
-#include "idoc/CSingleDocumentTemplateBase.h"
+#include <idoc/CSingleDocumentTemplateBase.h>
 
 
 // ACF includes
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
-#include "idoc/IDocumentManager.h"
+#include <idoc/IDocumentManager.h>
 
 
 namespace idoc

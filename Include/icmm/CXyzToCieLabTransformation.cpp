@@ -1,11 +1,11 @@
-#include "icmm/CXyzToCieLabTransformation.h"
+#include <icmm/CXyzToCieLabTransformation.h>
 
 
 // Qt includes
 #include <QtCore/qmath.h>
 
 // ACF includes
-#include "icmm/CLab.h"
+#include <icmm/CLab.h>
 
 
 namespace icmm

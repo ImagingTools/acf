@@ -9,14 +9,14 @@
 #include <QtCore/QList>
 
 // ACF includes
-#include "istd/TRanges.h"
-#include "i2d/CObject2dBase.h"
-#include "i2d/CRect.h"
-#include "i2d/CCircle.h"
-#include "i2d/CAnnulus.h"
-#include "i2d/CPolygon.h"
-#include "i2d/CTubePolyline.h"
-#include "iimg/IRasterImage.h"
+#include <istd/TRanges.h>
+#include <i2d/CObject2dBase.h>
+#include <i2d/CRect.h>
+#include <i2d/CCircle.h>
+#include <i2d/CAnnulus.h>
+#include <i2d/CPolygon.h>
+#include <i2d/CTubePolyline.h>
+#include <iimg/IRasterImage.h>
 
 
 namespace iimg

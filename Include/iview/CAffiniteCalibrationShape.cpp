@@ -1,4 +1,4 @@
-#include "iview/CAffiniteCalibrationShape.h"
+#include <iview/CAffiniteCalibrationShape.h>
 
 
 // Qt includes
@@ -6,11 +6,11 @@
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iqt/iqt.h"
-#include "iview/IRuler.h"
-#include "iview/IViewRulersAccessor.h"
-#include "iview/CCalibratedViewBase.h"
+#include <istd/CChangeNotifier.h>
+#include <iqt/iqt.h>
+#include <iview/IRuler.h>
+#include <iview/IViewRulersAccessor.h>
+#include <iview/CCalibratedViewBase.h>
 
 
 namespace iview

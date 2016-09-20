@@ -7,10 +7,10 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/CSystem.h"
-#include "ibase/IProgressManager.h"
-#include "ifile/CFileSerializerCompBase.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/CSystem.h>
+#include <ibase/IProgressManager.h>
+#include <ifile/CFileSerializerCompBase.h>
 
 
 namespace ifile

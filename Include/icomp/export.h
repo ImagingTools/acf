@@ -6,8 +6,8 @@
 #include <QtCore/QtGlobal>
 
 // ACF includes
-#include "icomp/TComponentRegistrator.h"
-#include "icomp/CPackageStaticInfo.h"
+#include <icomp/TComponentRegistrator.h>
+#include <icomp/CPackageStaticInfo.h>
 
 
 namespace icomp

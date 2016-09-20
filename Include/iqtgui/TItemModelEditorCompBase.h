@@ -6,10 +6,10 @@
 #include <QtCore/QAbstractItemModel>
 
 // ACF includes
-#include "ibase/IQtItemModelProvider.h"
+#include <ibase/IQtItemModelProvider.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/TGuiObserverWrap.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqtgui/TGuiObserverWrap.h>
 
 
 namespace iqtgui

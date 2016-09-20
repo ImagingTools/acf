@@ -6,10 +6,10 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "istd/IInformationProvider.h"
-#include "istd/TIHierarchical.h"
-#include "iser/ISerializable.h"
-#include "ilog/IMessageConsumer.h"
+#include <istd/IInformationProvider.h>
+#include <istd/TIHierarchical.h>
+#include <iser/ISerializable.h>
+#include <ilog/IMessageConsumer.h>
 
 
 namespace ilog

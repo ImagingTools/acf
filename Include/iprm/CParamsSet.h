@@ -6,10 +6,10 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/TOptDelPtr.h"
-#include "istd/TPointerVector.h"
-#include "imod/CMultiModelBridgeBase.h"
-#include "iprm/IParamsSet.h"
+#include <istd/TOptDelPtr.h>
+#include <istd/TPointerVector.h>
+#include <imod/CMultiModelBridgeBase.h>
+#include <iprm/IParamsSet.h>
 
 
 namespace iprm

@@ -1,4 +1,4 @@
-#include "ifilegui/CFilePersistenceGuiComp.h"
+#include <ifilegui/CFilePersistenceGuiComp.h>
 
 
 namespace ifilegui

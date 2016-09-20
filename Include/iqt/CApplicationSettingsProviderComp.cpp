@@ -1,4 +1,4 @@
-#include "iqt/CApplicationSettingsProviderComp.h"
+#include <iqt/CApplicationSettingsProviderComp.h>
 
 
 

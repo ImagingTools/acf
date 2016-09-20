@@ -11,15 +11,15 @@
 #endif
 
 // ACF includes
-#include "ibase/ICommandsProvider.h"
-#include "idoc/IDocumentTemplate.h"
-#include "idoc/CSingleDocumentManagerBase.h"
+#include <ibase/ICommandsProvider.h>
+#include <idoc/IDocumentTemplate.h>
+#include <idoc/CSingleDocumentManagerBase.h>
 
-#include "iqtgui/TGuiComponentBase.h"
-#include "iqtgui/TRestorableGuiWrap.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <iqtgui/TGuiComponentBase.h>
+#include <iqtgui/TRestorableGuiWrap.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
-#include "iqtdoc/TQtDocumentManagerWrap.h"
+#include <iqtdoc/TQtDocumentManagerWrap.h>
 
 
 namespace iqtdoc

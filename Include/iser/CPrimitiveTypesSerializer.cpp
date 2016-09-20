@@ -1,4 +1,4 @@
-#include "iser/CPrimitiveTypesSerializer.h"
+#include <iser/CPrimitiveTypesSerializer.h>
 
 
 // Qt includes
@@ -6,7 +6,7 @@
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "iser/CArchiveTag.h"
+#include <iser/CArchiveTag.h>
 
 
 namespace iser

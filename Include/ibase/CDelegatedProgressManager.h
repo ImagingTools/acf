@@ -6,9 +6,9 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/IChangeable.h"
+#include <istd/IChangeable.h>
 
-#include "ibase/IProgressManager.h"
+#include <ibase/IProgressManager.h>
 
 
 namespace ibase

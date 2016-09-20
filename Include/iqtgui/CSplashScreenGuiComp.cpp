@@ -1,8 +1,8 @@
-#include "iqtgui/CSplashScreenGuiComp.h"
+#include <iqtgui/CSplashScreenGuiComp.h>
 
 
 // ACF includes
-#include "istd/CSystem.h"
+#include <istd/CSystem.h>
 
 
 namespace iqtgui

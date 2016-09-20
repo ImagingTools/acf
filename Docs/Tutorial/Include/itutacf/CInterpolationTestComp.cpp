@@ -1,12 +1,12 @@
-#include "itutacf/CInterpolationTestComp.h"
+#include <itutacf/CInterpolationTestComp.h>
 
 
 // ACF inlcudes
-#include "istd/CChangeNotifier.h"
-#include "istd/TRange.h"
-#include "imod/IModel.h"
-#include "imath/CLinearInterpolator.h"
-#include "imath/CAkimaInterpolator.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TRange.h>
+#include <imod/IModel.h>
+#include <imath/CLinearInterpolator.h>
+#include <imath/CAkimaInterpolator.h>
 
 
 namespace itutacf

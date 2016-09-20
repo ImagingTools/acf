@@ -2,7 +2,7 @@
 #define iview_CCircleShape_included
 
 
-#include "iview/CPinShape.h"
+#include <iview/CPinShape.h>
 
 
 namespace iview

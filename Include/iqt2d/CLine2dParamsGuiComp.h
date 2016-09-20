@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "i2d/CLine2d.h"
+#include <i2d/CLine2d.h>
 
-#include "iview/CLineShape.h"
+#include <iview/CLineShape.h>
 
-#include "iqt2d/TShapeParamsGuiCompBase.h"
-#include "GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h"
+#include <iqt2d/TShapeParamsGuiCompBase.h>
+#include <GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h>
 
 
 namespace iqt2d

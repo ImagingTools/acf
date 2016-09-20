@@ -1,10 +1,10 @@
-#include "iprm/CManagerParamsSetShadowerComp.h"
+#include <iprm/CManagerParamsSetShadowerComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "imod/IModel.h"
+#include <imod/IModel.h>
 
 
 namespace iprm

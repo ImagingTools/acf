@@ -1,4 +1,4 @@
-#include "iqtprm/CExtParamsManagerGuiComp.h"
+#include <iqtprm/CExtParamsManagerGuiComp.h>
 
 
 // Qt includes

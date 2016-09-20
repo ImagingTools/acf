@@ -6,8 +6,8 @@
 #include <vector>
 
 // ACF includes
-#include "i2d/CDataNodePolylineBase.h"
-#include "istd/CChangeNotifier.h"
+#include <i2d/CDataNodePolylineBase.h>
+#include <istd/CChangeNotifier.h>
 
 
 namespace i2d

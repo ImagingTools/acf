@@ -2,7 +2,7 @@
 #define iqtprm_included
 
 
-#include "iqt2d/iqt2d.h"
+#include <iqt2d/iqt2d.h>
 
 
 /**

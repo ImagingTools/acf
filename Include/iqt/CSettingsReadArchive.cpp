@@ -1,4 +1,4 @@
-#include "iqt/CSettingsReadArchive.h"
+#include <iqt/CSettingsReadArchive.h>
 
 
 // Qt includes

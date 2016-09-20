@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "i2d/CPosition2d.h"
+#include <i2d/CPosition2d.h>
 
-#include "iview/CPinShape.h"
+#include <iview/CPinShape.h>
 
-#include "iqt2d/TShapeParamsGuiCompBase.h"
-#include "GeneratedFiles/iqt2d/ui_CPosition2dParamsGuiComp.h"
+#include <iqt2d/TShapeParamsGuiCompBase.h>
+#include <GeneratedFiles/iqt2d/ui_CPosition2dParamsGuiComp.h>
 
 
 namespace iqt2d

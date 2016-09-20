@@ -2,12 +2,12 @@
 #define imod_TModelWrap_included
 
 
-#include "istd/TDelPtr.h"
-#include "istd/IChangeable.h"
+#include <istd/TDelPtr.h>
+#include <istd/IChangeable.h>
 
-#include "iser/TCopySerializedWrap.h"
+#include <iser/TCopySerializedWrap.h>
 
-#include "imod/CModelBase.h"
+#include <imod/CModelBase.h>
 
 
 namespace imod

@@ -7,13 +7,13 @@
 #include <QtCore/QSet>
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
-#include "ibase/TModelObserverCompWrap.h"
-#include "iprm/IParamsSet.h"
-#include "iqtgui/TGuiObserverWrap.h"
-#include "iqtgui/CComposedGuiComp.h"
-#include "iqt2d/IViewExtender.h"
-#include "iqtprm/iqtprm.h"
+#include <imod/TSingleModelObserverBase.h>
+#include <ibase/TModelObserverCompWrap.h>
+#include <iprm/IParamsSet.h>
+#include <iqtgui/TGuiObserverWrap.h>
+#include <iqtgui/CComposedGuiComp.h>
+#include <iqt2d/IViewExtender.h>
+#include <iqtprm/iqtprm.h>
 
 
 namespace iqtprm

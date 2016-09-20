@@ -9,14 +9,14 @@
 #include <QtCore/QFileSystemWatcher>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "imod/IModel.h"
-#include "imod/CMultiModelDispatcherBase.h"
-#include "icomp/CComponentBase.h"
-#include "iser/CMemoryWriteArchive.h"
-#include "ifile/IFilePersistence.h"
-#include "ifile/IFileNameParam.h"
-#include "ibase/IRuntimeStatusProvider.h"
+#include <istd/IChangeable.h>
+#include <imod/IModel.h>
+#include <imod/CMultiModelDispatcherBase.h>
+#include <icomp/CComponentBase.h>
+#include <iser/CMemoryWriteArchive.h>
+#include <ifile/IFilePersistence.h>
+#include <ifile/IFileNameParam.h>
+#include <ibase/IRuntimeStatusProvider.h>
 
 #if QT_VERSION >= 0x050000
 #include <QtCore/QLockFile>

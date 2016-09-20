@@ -6,7 +6,7 @@
 #include <QtGui/QIcon>
 
 // ACF includes
-#include "istd/IChangeable.h"
+#include <istd/IChangeable.h>
 
 
 namespace iqtgui

@@ -2,14 +2,14 @@
 #define TutorialPck_included
 
 
-#include "icomp/TModelCompWrap.h"
+#include <icomp/TModelCompWrap.h>
 
-#include "DocView/CTextEditorComp.h"
+#include <DocView/CTextEditorComp.h>
 
-#include "ModelObserver/CAbComp.h"
-#include "ModelObserver/CAbGuiComp.h"
+#include <ModelObserver/CAbComp.h>
+#include <ModelObserver/CAbGuiComp.h>
 
-#include "itutacf/CInterpolationTestComp.h"
+#include <itutacf/CInterpolationTestComp.h>
 
 
 /**

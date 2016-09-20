@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "i2d/CAnnulusSegment.h"
-#include "iview/CAnnulusSegmentShape.h"
-#include "iqt2d/TShapeParamsGuiCompBase.h"
+#include <i2d/CAnnulusSegment.h>
+#include <iview/CAnnulusSegmentShape.h>
+#include <iqt2d/TShapeParamsGuiCompBase.h>
 
-#include "GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h"
+#include <GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h>
 
 
 namespace iqt2d

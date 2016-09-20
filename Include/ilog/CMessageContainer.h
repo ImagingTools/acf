@@ -7,14 +7,14 @@
 #include <QtCore/QMutex>
 
 // ACF includes
-#include "istd/IInformationProvider.h"
-#include "istd/THierarchicalBase.h"
-#include "istd/TComposedFactory.h"
-#include "istd/TSingleFactory.h"
-#include "istd/CClassInfo.h"
-#include "iser/IObject.h"
-#include "ilog/IMessageContainer.h"
-#include "ilog/IMessageConsumer.h"
+#include <istd/IInformationProvider.h>
+#include <istd/THierarchicalBase.h>
+#include <istd/TComposedFactory.h>
+#include <istd/TSingleFactory.h>
+#include <istd/CClassInfo.h>
+#include <iser/IObject.h>
+#include <ilog/IMessageContainer.h>
+#include <ilog/IMessageConsumer.h>
 
 
 namespace ilog

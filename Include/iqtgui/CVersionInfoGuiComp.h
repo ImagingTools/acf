@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiCompBase.h"
-#include "iser/IVersionInfo.h"
+#include <iqtgui/TDesignerGuiCompBase.h>
+#include <iser/IVersionInfo.h>
 
-#include "GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h"
+#include <GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h>
 
 
 namespace iqtgui

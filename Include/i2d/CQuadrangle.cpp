@@ -1,15 +1,15 @@
-#include "i2d/CQuadrangle.h"
+#include <i2d/CQuadrangle.h>
 
 
 // Qt includes
 #include <QtCore/QObject>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "istd/CChangeNotifier.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
-#include "i2d/CVector2d.h"
+#include <istd/TDelPtr.h>
+#include <istd/CChangeNotifier.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
+#include <i2d/CVector2d.h>
 
 
 namespace i2d

@@ -19,9 +19,9 @@
 #endif
 
 // ACF includes
-#include "ibase/ICommandsProvider.h"
+#include <ibase/ICommandsProvider.h>
 
-#include "iqtgui/CHierarchicalCommand.h"
+#include <iqtgui/CHierarchicalCommand.h>
 
 
 namespace iqtgui

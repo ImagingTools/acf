@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "istd/TIFactory.h"
-#include "istd/TDelPtr.h"
+#include <istd/TIFactory.h>
+#include <istd/TDelPtr.h>
 
-#include "icomp/TAttributeMember.h"
-#include "icomp/CInterfaceManipBase.h"
-#include "icomp/CFactoryAttribute.h"
+#include <icomp/TAttributeMember.h>
+#include <icomp/CInterfaceManipBase.h>
+#include <icomp/CFactoryAttribute.h>
 
 
 namespace icomp

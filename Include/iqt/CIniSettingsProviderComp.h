@@ -4,9 +4,9 @@
 
 #include <QtCore/QString>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iqt/ISettingsProvider.h"
+#include <iqt/ISettingsProvider.h>
 
 
 namespace iqt

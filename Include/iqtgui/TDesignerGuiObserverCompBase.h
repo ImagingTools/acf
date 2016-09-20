@@ -11,10 +11,10 @@
 #endif
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
-#include "ibase/TModelObserverCompWrap.h"
-#include "iqtgui/TGuiObserverWrap.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <imod/TSingleModelObserverBase.h>
+#include <ibase/TModelObserverCompWrap.h>
+#include <iqtgui/TGuiObserverWrap.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
 
 
 namespace iqtgui

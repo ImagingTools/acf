@@ -7,14 +7,14 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "icomp/IExtPackagesManager.h"
-#include "icomp/IRegistriesManager.h"
-#include "icomp/IRegistryLoader.h"
-#include "icomp/CComponentBase.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "ifile/IFilePersistence.h"
-#include "ifile/IFileNameParam.h"
+#include <istd/TDelPtr.h>
+#include <icomp/IExtPackagesManager.h>
+#include <icomp/IRegistriesManager.h>
+#include <icomp/IRegistryLoader.h>
+#include <icomp/CComponentBase.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <ifile/IFilePersistence.h>
+#include <ifile/IFileNameParam.h>
 
 
 namespace ipackage

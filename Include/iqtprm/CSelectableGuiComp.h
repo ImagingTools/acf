@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "istd/TPointerVector.h"
+#include <istd/TPointerVector.h>
 
-#include "iprm/ISelectionParam.h"
+#include <iprm/ISelectionParam.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/iqtprm/ui_CSelectableGuiComp.h"
+#include <GeneratedFiles/iqtprm/ui_CSelectableGuiComp.h>
 
 
 namespace iqtprm

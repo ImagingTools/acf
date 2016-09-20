@@ -7,10 +7,10 @@
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "icomp/CComponentBase.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "iimg/iimg.h"
+#include <ifile/IFilePersistence.h>
+#include <icomp/CComponentBase.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <iimg/iimg.h>
 
 
 namespace iimg

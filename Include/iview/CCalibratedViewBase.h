@@ -6,13 +6,13 @@
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "istd/TOptDelPtr.h"
-#include "i2d/CRect.h"
-#include "i2d/ICalibration2d.h"
-#include "iview/IVisualCalibrationInfo.h"
-#include "iview/CViewBase.h"
-#include "iview/CDrawBuffer.h"
-#include "iview/CColorSchema.h"
+#include <istd/TOptDelPtr.h>
+#include <i2d/CRect.h>
+#include <i2d/ICalibration2d.h>
+#include <iview/IVisualCalibrationInfo.h>
+#include <iview/CViewBase.h>
+#include <iview/CDrawBuffer.h>
+#include <iview/CColorSchema.h>
 
 
 namespace iview

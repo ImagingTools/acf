@@ -1,4 +1,4 @@
-#include "ifilegui/CFileTreeViewGuiComp.h"
+#include <ifilegui/CFileTreeViewGuiComp.h>
 
 
 #define PERFORMANCE_TEST

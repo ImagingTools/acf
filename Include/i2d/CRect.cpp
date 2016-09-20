@@ -1,4 +1,4 @@
-#include "i2d/CRect.h"
+#include <i2d/CRect.h>
 
 
 namespace i2d

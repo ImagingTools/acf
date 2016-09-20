@@ -2,14 +2,14 @@
 #define CAbComp_included
 
 // ACF includes
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
 
 // AB includes
-#include "IAb.h"
-#include "IAConstraints.h"
+#include <IAb.h>
+#include <IAConstraints.h>
 
 
 /**

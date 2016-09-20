@@ -1,16 +1,16 @@
-#include "i2d/CRectangle.h"
+#include <i2d/CRectangle.h>
 
 
 // Qt includes
 #include <QtCore/QObject>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "istd/CChangeNotifier.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
-#include "i2d/CVector2d.h"
-#include "i2d/CRect.h"
+#include <istd/TDelPtr.h>
+#include <istd/CChangeNotifier.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
+#include <i2d/CVector2d.h>
+#include <i2d/CRect.h>
 
 
 namespace i2d

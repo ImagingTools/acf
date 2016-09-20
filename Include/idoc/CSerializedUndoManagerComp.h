@@ -6,13 +6,13 @@
 #include <QtCore/QList>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "ibase/TModelObserverCompWrap.h"
-#include "iser/ISerializable.h"
-#include "iser/CMemoryWriteArchive.h"
-#include "imod/TSingleModelObserverBase.h"
-#include "icomp/CComponentBase.h"
-#include "idoc/IUndoManager.h"
+#include <istd/TDelPtr.h>
+#include <ibase/TModelObserverCompWrap.h>
+#include <iser/ISerializable.h>
+#include <iser/CMemoryWriteArchive.h>
+#include <imod/TSingleModelObserverBase.h>
+#include <icomp/CComponentBase.h>
+#include <idoc/IUndoManager.h>
 
 
 namespace idoc

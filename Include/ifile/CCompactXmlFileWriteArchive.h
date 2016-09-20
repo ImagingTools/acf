@@ -7,8 +7,8 @@
 #include <QtCore/QFile>
 
 // ACF includes
-#include "ifile/CFileArchiveInfo.h"
-#include "iser/CCompactXmlWriteArchiveBase.h"
+#include <ifile/CFileArchiveInfo.h>
+#include <iser/CCompactXmlWriteArchiveBase.h>
 
 
 namespace ifile

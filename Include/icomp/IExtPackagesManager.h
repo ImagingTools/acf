@@ -7,7 +7,7 @@
 #include <QtCore/QSet>
 
 // ACF includes
-#include "icomp/IPackagesManager.h"
+#include <icomp/IPackagesManager.h>
 
 
 namespace icomp

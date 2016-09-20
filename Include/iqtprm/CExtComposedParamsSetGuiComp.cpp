@@ -1,10 +1,10 @@
-#include "iqtprm/CExtComposedParamsSetGuiComp.h"
+#include <iqtprm/CExtComposedParamsSetGuiComp.h>
 
 
 // ACF includes
-#include "iqt/CSignalBlocker.h"
-#include "iview/IShapeView.h"
-#include "iqt2d/IViewProvider.h"
+#include <iqt/CSignalBlocker.h>
+#include <iview/IShapeView.h>
+#include <iqt2d/IViewProvider.h>
 
 
 namespace iqtprm

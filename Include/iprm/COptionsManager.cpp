@@ -1,4 +1,4 @@
-#include "iprm/COptionsManager.h"
+#include <iprm/COptionsManager.h>
 
 
 // Qt includes
@@ -6,9 +6,9 @@
 #include <QtCore/QUuid>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+#include <istd/CChangeNotifier.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
 
 
 namespace iprm

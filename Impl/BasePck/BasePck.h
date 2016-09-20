@@ -2,67 +2,67 @@
 #define BasePck_included
 
 
-#include "imod/IObserver.h"
+#include <imod/IObserver.h>
 
-#include "ilog/CTextFileLogComp.h"
-#include "ilog/CConsoleLogComp.h"
-#include "ilog/CLogComp.h"
-#include "ilog/CTextFileLogStreamerComp.h"
+#include <ilog/CTextFileLogComp.h>
+#include <ilog/CConsoleLogComp.h>
+#include <ilog/CLogComp.h>
+#include <ilog/CTextFileLogStreamerComp.h>
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "idoc/CSingleDocumentTemplateComp.h"
-#include "idoc/CCompositeDocumentTemplateComp.h"
-#include "idoc/CSelectedDocModelBinderComp.h"
-#include "idoc/CSerializedUndoManagerComp.h"
-#include "idoc/CTextFileLoaderComp.h"
-#include "idoc/CTextDocumentComp.h"
-#include "idoc/CMultiPageDocumentFilePersistenceComp.h"
-#include "idoc/CStandardDocumentMetaInfo.h"
+#include <idoc/CSingleDocumentTemplateComp.h>
+#include <idoc/CCompositeDocumentTemplateComp.h>
+#include <idoc/CSelectedDocModelBinderComp.h>
+#include <idoc/CSerializedUndoManagerComp.h>
+#include <idoc/CTextFileLoaderComp.h>
+#include <idoc/CTextDocumentComp.h>
+#include <idoc/CMultiPageDocumentFilePersistenceComp.h>
+#include <idoc/CStandardDocumentMetaInfo.h>
 
-#include "ibase/CInstantiatorComp.h"
-#include "ibase/CVersionInfoComp.h"
-#include "ibase/CApplicationInfoComp.h"
-#include "ibase/CModelBinderComp.h"
-#include "ibase/CUuidComp.h"
-#include "ibase/CObjectQueueComp.h"
-#include "ibase/CMultiObserverBinderComp.h"
-#include "ibase/CQtVersionInfoComp.h"
-#include "ibase/CObjectSynchronizerComp.h"
-#include "ibase/CConsoleApplicationComp.h"
+#include <ibase/CInstantiatorComp.h>
+#include <ibase/CVersionInfoComp.h>
+#include <ibase/CApplicationInfoComp.h>
+#include <ibase/CModelBinderComp.h>
+#include <ibase/CUuidComp.h>
+#include <ibase/CObjectQueueComp.h>
+#include <ibase/CMultiObserverBinderComp.h>
+#include <ibase/CQtVersionInfoComp.h>
+#include <ibase/CObjectSynchronizerComp.h>
+#include <ibase/CConsoleApplicationComp.h>
 
-#include "iprm/CSelectableParamsSetComp.h"
-#include "iprm/CParamsManagerComp.h"
-#include "iprm/CComposedParamsSetComp.h"
-#include "iprm/CVariableParamComp.h"
-#include "iprm/CEnableableParamComp.h"
-#include "iprm/CSelectionParamComp.h"
-#include "iprm/CManagerParamsSetShadowerComp.h"
-#include "iprm/CSelectionConstraintsComp.h"
-#include "iprm/CNameParamComp.h"
-#include "iprm/CMultiParamsManagerComp.h"
-#include "iprm/COptionsManagerComp.h"
-#include "iprm/CFilteredOptionsListComp.h"
+#include <iprm/CSelectableParamsSetComp.h>
+#include <iprm/CParamsManagerComp.h>
+#include <iprm/CComposedParamsSetComp.h>
+#include <iprm/CVariableParamComp.h>
+#include <iprm/CEnableableParamComp.h>
+#include <iprm/CSelectionParamComp.h>
+#include <iprm/CManagerParamsSetShadowerComp.h>
+#include <iprm/CSelectionConstraintsComp.h>
+#include <iprm/CNameParamComp.h>
+#include <iprm/CMultiParamsManagerComp.h>
+#include <iprm/COptionsManagerComp.h>
+#include <iprm/CFilteredOptionsListComp.h>
 
-#include "i2d/CPosition2dComp.h"
-#include "i2d/CRectangleComp.h"
-#include "i2d/CCircleComp.h"
-#include "i2d/COrientedCircleComp.h"
-#include "i2d/CAnnulusComp.h"
-#include "i2d/CAnnulusSegmentComp.h"
-#include "i2d/CLine2dComp.h"
-#include "i2d/CQuadrangleComp.h"
-#include "i2d/CPolygonComp.h"
-#include "i2d/CPolylineComp.h"
-#include "i2d/CAffineCalibration2dComp.h"
-#include "i2d/CPerspectiveCalibration2dComp.h"
-#include "i2d/CStaticCalibrationProviderComp.h"
-#include "i2d/CTubePolylineComp.h"
-#include "i2d/CCalibration2dProxyComp.h"
-#include "i2d/CArcComp.h"
+#include <i2d/CPosition2dComp.h>
+#include <i2d/CRectangleComp.h>
+#include <i2d/CCircleComp.h>
+#include <i2d/COrientedCircleComp.h>
+#include <i2d/CAnnulusComp.h>
+#include <i2d/CAnnulusSegmentComp.h>
+#include <i2d/CLine2dComp.h>
+#include <i2d/CQuadrangleComp.h>
+#include <i2d/CPolygonComp.h>
+#include <i2d/CPolylineComp.h>
+#include <i2d/CAffineCalibration2dComp.h>
+#include <i2d/CPerspectiveCalibration2dComp.h>
+#include <i2d/CStaticCalibrationProviderComp.h>
+#include <i2d/CTubePolylineComp.h>
+#include <i2d/CCalibration2dProxyComp.h>
+#include <i2d/CArcComp.h>
 
-#include "imath/CSampledFunction2d.h"
+#include <imath/CSampledFunction2d.h>
 
 
 /**

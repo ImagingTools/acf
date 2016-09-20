@@ -2,13 +2,13 @@
 #define FileGuiPck_included
 
 
-#include "ifilegui/CFileTreeViewGuiComp.h"
-#include "ifilegui/CFileSystemExplorerGuiComp.h"
-#include "ifilegui/CFilePersistenceGuiComp.h"
-#include "ifilegui/CFileDialogLoaderComp.h"
-#include "ifilegui/CFilePreviewGuiComp.h"
-#include "ifilegui/CFileListProviderGuiComp.h"
-#include "ifilegui/CSimpleFilePathParamGuiComp.h"
+#include <ifilegui/CFileTreeViewGuiComp.h>
+#include <ifilegui/CFileSystemExplorerGuiComp.h>
+#include <ifilegui/CFilePersistenceGuiComp.h>
+#include <ifilegui/CFileDialogLoaderComp.h>
+#include <ifilegui/CFilePreviewGuiComp.h>
+#include <ifilegui/CFileListProviderGuiComp.h>
+#include <ifilegui/CSimpleFilePathParamGuiComp.h>
 
 
 /**

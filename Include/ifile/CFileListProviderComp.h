@@ -7,12 +7,12 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "imod/IModel.h"
-#include "imod/CSingleModelObserverBase.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "ifile/IFileListProvider.h"
-#include "ifile/IFileNameParam.h"
-#include "ifile/IFileTypeInfo.h"
+#include <imod/IModel.h>
+#include <imod/CSingleModelObserverBase.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <ifile/IFileListProvider.h>
+#include <ifile/IFileNameParam.h>
+#include <ifile/IFileTypeInfo.h>
 
 
 namespace ifile

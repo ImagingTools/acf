@@ -7,14 +7,14 @@
 #include <QtCore/QSet>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "iprm/IParamsSet.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqt2d/IViewExtender.h"
-#include "iview/IShapeFactory.h"
+#include <ifile/IFilePersistence.h>
+#include <iprm/IParamsSet.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqt2d/IViewExtender.h>
+#include <iview/IShapeFactory.h>
 
 
-#include "GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h"
+#include <GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h>
 
 
 namespace iqtprm

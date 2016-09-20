@@ -3,8 +3,8 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "ilog/IMessageConsumer.h"
+#include <icomp/CComponentBase.h>
+#include <ilog/IMessageConsumer.h>
 
 
 namespace ilog

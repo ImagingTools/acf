@@ -1,4 +1,4 @@
-#include "ipackage/CPackagesLoaderComp.h"
+#include <ipackage/CPackagesLoaderComp.h>
 
 
 // Qt includes
@@ -8,11 +8,11 @@
 #include <QtCore/QFileInfo>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/CSystem.h"
-#include "icomp/CXpcModel.h"
-#include "ifile/CSimpleXmlFileReadArchive.h"
-#include "ifile/CCompactXmlFileReadArchive.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/CSystem.h>
+#include <icomp/CXpcModel.h>
+#include <ifile/CSimpleXmlFileReadArchive.h>
+#include <ifile/CCompactXmlFileReadArchive.h>
 
 
 namespace ipackage

@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "imod/TModelWrap.h"
+#include <imod/TModelWrap.h>
 
-#include "i2d/CCircle.h"
+#include <i2d/CCircle.h>
 
-#include "iview/CCircleShape.h"
-#include "iview/CImageShape.h"
+#include <iview/CCircleShape.h>
+#include <iview/CImageShape.h>
 
 
 namespace iview

@@ -10,12 +10,12 @@
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
-#include "icomp/CComponentBase.h"
-#include "ibase/IApplicationInfo.h"
-#include "ibase/IRuntimeStatusProvider.h"
-#include "idoc/IDocumentManager.h"
-#include "iqtgui/IGuiApplication.h"
+#include <imod/TSingleModelObserverBase.h>
+#include <icomp/CComponentBase.h>
+#include <ibase/IApplicationInfo.h>
+#include <ibase/IRuntimeStatusProvider.h>
+#include <idoc/IDocumentManager.h>
+#include <iqtgui/IGuiApplication.h>
 
 
 namespace iqtdoc

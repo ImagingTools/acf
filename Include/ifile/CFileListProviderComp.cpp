@@ -1,4 +1,4 @@
-#include "ifile/CFileListProviderComp.h"
+#include <ifile/CFileListProviderComp.h>
 
 
 // Qt includes
@@ -11,7 +11,7 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace ifile

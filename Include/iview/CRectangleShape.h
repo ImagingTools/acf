@@ -2,7 +2,7 @@
 #define iview_CRectangleShape_included
 
 
-#include "iview/CInteractiveShapeBase.h"
+#include <iview/CInteractiveShapeBase.h>
 
 
 namespace iview

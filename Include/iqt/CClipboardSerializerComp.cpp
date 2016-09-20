@@ -1,4 +1,4 @@
-#include "iqt/CClipboardSerializerComp.h"
+#include <iqt/CClipboardSerializerComp.h>
 
 
 // Qt includes
@@ -12,10 +12,10 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iser/CMemoryReadArchive.h"
-#include "iser/CMemoryWriteArchive.h"
+#include <iser/CMemoryReadArchive.h>
+#include <iser/CMemoryWriteArchive.h>
 
 
 namespace iqt

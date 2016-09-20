@@ -1,4 +1,4 @@
-#include "iqtgui/CSimpleMainWindowGuiComp.h"
+#include <iqtgui/CSimpleMainWindowGuiComp.h>
 
 
 // Qt includes
@@ -14,8 +14,8 @@
 #include <QtGui/QDesktopServices>
 
 // ACF includes
-#include "iqt/CSignalBlocker.h"
-#include "ilog/CMessage.h"
+#include <iqt/CSignalBlocker.h>
+#include <ilog/CMessage.h>
 
 
 namespace iqtgui

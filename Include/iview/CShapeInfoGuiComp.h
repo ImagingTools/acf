@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "iview/IShapeStatusInfo.h"
-#include "GeneratedFiles/iview/ui_CShapeInfoGuiComp.h"
+#include <iview/IShapeStatusInfo.h>
+#include <GeneratedFiles/iview/ui_CShapeInfoGuiComp.h>
 
 
 namespace iview

@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "iview/IShapeFactory.h"
-#include "iview/IColorSchema.h"
-#include "iview/CInteractiveShapeBase.h"
+#include <icomp/CComponentBase.h>
+#include <iview/IShapeFactory.h>
+#include <iview/IColorSchema.h>
+#include <iview/CInteractiveShapeBase.h>
 
 
 namespace iview

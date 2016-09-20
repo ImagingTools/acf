@@ -1,4 +1,4 @@
-#include "iqtprm/CEnableableParamGuiComp.h"
+#include <iqtprm/CEnableableParamGuiComp.h>
 
 
 namespace iqtprm

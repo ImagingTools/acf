@@ -1,4 +1,4 @@
-#include "ifile/CAutoPersistenceComp.h"
+#include <ifile/CAutoPersistenceComp.h>
 
 
 // Qt includes
@@ -13,7 +13,7 @@
 #endif
 
 // ACF includes
-#include "ifile/IFileNameParam.h"
+#include <ifile/IFileNameParam.h>
 
 
 namespace ifile

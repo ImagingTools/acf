@@ -17,14 +17,14 @@
 #endif
 
 // ACF includes
-#include "i2d/ICalibration2d.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iview/IColorSchema.h"
-#include "iview/IShapeFactory.h"
-#include "iview/CInteractiveShapeBase.h"
-#include "iqt2d/TViewExtenderCompBase.h"
-#include "iqt2d/CIntParamAction.h"
-#include "iqt2d/CActionAdapter.h"
+#include <i2d/ICalibration2d.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iview/IColorSchema.h>
+#include <iview/IShapeFactory.h>
+#include <iview/CInteractiveShapeBase.h>
+#include <iqt2d/TViewExtenderCompBase.h>
+#include <iqt2d/CIntParamAction.h>
+#include <iqt2d/CActionAdapter.h>
 
 
 namespace iqt2d

@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
-#include "imod/TModelWrap.h"
-#include "icomp/CComponentBase.h"
-#include "iprm/INameParam.h"
-#include "ifile/IFileNameParam.h"
-#include "idoc/IDocumentManager.h"
+#include <imod/TSingleModelObserverBase.h>
+#include <imod/TModelWrap.h>
+#include <icomp/CComponentBase.h>
+#include <iprm/INameParam.h>
+#include <ifile/IFileNameParam.h>
+#include <idoc/IDocumentManager.h>
 
 
 namespace idoc

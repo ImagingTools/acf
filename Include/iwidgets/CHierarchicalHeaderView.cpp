@@ -1,4 +1,4 @@
-#include "iwidgets/CHierarchicalHeaderView.h"
+#include <iwidgets/CHierarchicalHeaderView.h>
 
 
 // Qt includes

@@ -1,4 +1,4 @@
-#include "myNamespace/CExample.h"
+#include <myNamespace/CExample.h>
 
 
 namespace myNamespace
