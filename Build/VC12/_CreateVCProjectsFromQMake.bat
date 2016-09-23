@@ -1,5 +1,6 @@
 rem echo off
 
+
 set COMPILER_EXT=VC12
 set QMAKESPEC=%QTDIR%\mkspecs\win32-msvc2013
 set path=%path%;%QTDIR%\bin
@@ -13,6 +14,6 @@ cd %~dp0\..\..\Docs\Tutorial\Build\QMake
 %QTDIR%\bin\qmake -recursive -tp vc
 
 cd %~dp0\..\..
-call Config\QMake\CopyVCProjToSubdir.js %COMPILER_EXT% -replace%QTDIR%=$(QTDIR) -replace%ACF_TOOLS_BIN%\=$(ACF_TOOLS_BIN)\ -replace%CD%\=$(RelativePath)\ -qt_verWin32=QT_32
+call Config\QMake\CopyVCProjToSubdir.js %COMPILER_EXT% -replace%QTDIR%=$(QTDIR) -replace%ACF_TOOLS_BIN%\=$(ACF_TOOLS_BIN)\ -replace%CD%\=$(RelativePath)\
 
 cd %~dp0\
