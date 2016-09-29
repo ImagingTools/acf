@@ -798,8 +798,10 @@ bool TFastVector<MaxSize, Element>::Serialize(iser::IArchive& archive)
 }
 
 
+// related global functions
+
 template <int MaxSize, class Element>
-inline uint qHash(const imath::TFastVector<MaxSize, Element>& v, uint seed = 0)
+inline uint qHash(const TFastVector<MaxSize, Element>& v, uint seed = 0)
 {
 	uint retVal = seed;
 

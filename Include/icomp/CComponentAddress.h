@@ -102,9 +102,9 @@ inline bool CComponentAddress::operator<(const CComponentAddress& address) const
 }
 
 
-// related functions
+// related global functions
 
-inline uint qHash(const icomp::CComponentAddress& address, uint seed = 0)
+inline uint qHash(const CComponentAddress& address, uint seed = 0)
 {
 	Q_UNUSED(seed);
 

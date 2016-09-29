@@ -17,27 +17,6 @@ static const iser::CArchiveTag s_colorComponentsTag("ColorComponents", "List of 
 static const iser::CArchiveTag s_componentTag("Component", "Single component", iser::CArchiveTag::TT_LEAF, &s_colorComponentsTag);
 
 
-uint qHash(const icmm::CFastColor& color, uint seed)
-{
-	quint64 retVal = seed;
-
-	union{
-		double value;
-		quint64 raw;
-	} element;
-	element.raw = 0;
-
-	int elementsCount = color.GetElementsCount();
-	for (int i = 0; i < elementsCount; ++i){
-		element.value = color[i];
-
-		retVal = (retVal >> 1) ^ (element.raw + 1);
-	}
-
-	return uint(retVal);
-}
-
-
 CFastColor::CFastColor(const icmm::CVarColor& color)
 {
 	m_elementsCount = qMin(int(MAX_ELEMENTS_COUNT), color.GetElementsCount());
@@ -150,6 +129,29 @@ bool CFastColor::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(s_colorComponentsTag);
 
 	return retVal;
+}
+
+
+// related global functions
+
+uint qHash(const CFastColor& color, uint seed)
+{
+	quint64 retVal = seed;
+
+	union{
+		double value;
+		quint64 raw;
+	} element;
+	element.raw = 0;
+
+	int elementsCount = color.GetElementsCount();
+	for (int i = 0; i < elementsCount; ++i){
+		element.value = color[i];
+
+		retVal = (retVal >> 1) ^ (element.raw + 1);
+	}
+
+	return uint(retVal);
 }
 
 

@@ -307,7 +307,7 @@ inline const CVector2d& CVector2d::GetZero()
 
 // related global functions
 
-inline uint qHash(const i2d::CVector2d& key, uint seed = 0)
+inline uint qHash(const CVector2d& key, uint seed = 0)
 {
 	Q_UNUSED(seed);
 

@@ -1002,6 +1002,46 @@ bool CScanlineMask::ResetData(CompatibilityMode /*mode*/)
 }
 
 
+bool CScanlineMask::operator==(const CScanlineMask& mask) const
+{
+	int firstLineIndex = qMin(m_firstLinePos, mask.m_firstLinePos);
+	int endLineIndex = qMax(int(m_firstLinePos + m_scanlines.size()), int(mask.m_firstLinePos + mask.m_scanlines.size()));
+	for (int lineIndex = firstLineIndex; lineIndex < endLineIndex; ++lineIndex){
+		int rangeIndex = -1;
+		if ((lineIndex >= m_firstLinePos) && (lineIndex < int(m_firstLinePos + m_scanlines.size()))){
+			rangeIndex = m_scanlines[lineIndex - m_firstLinePos];
+		}
+
+		int maskRangeIndex = -1;
+		if ((lineIndex >= mask.m_firstLinePos) && (lineIndex < int(mask.m_firstLinePos + mask.m_scanlines.size()))){
+			maskRangeIndex = mask.m_scanlines[lineIndex - mask.m_firstLinePos];
+		}
+
+		if (rangeIndex >= 0){
+			if (maskRangeIndex >= 0){
+				if (m_rangesContainer[rangeIndex] != mask.m_rangesContainer[maskRangeIndex]){
+					return false;
+				}
+			}
+			else{
+				if (!m_rangesContainer[rangeIndex].IsEmpty()){
+					return false;
+				}
+			}
+		}
+		else{
+			if (maskRangeIndex >= 0){
+				if (!mask.m_rangesContainer[maskRangeIndex].IsEmpty()){
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+
 // protected methods
 
 void CScanlineMask::CalcBoundingBox() const
@@ -1012,7 +1052,7 @@ void CScanlineMask::CalcBoundingBox() const
 		int containerIndex = m_scanlines[i];
 
 		if (containerIndex >= 0){
-			const istd::CIntRanges scanLine = m_rangesContainer[containerIndex];
+			const istd::CIntRanges& scanLine = m_rangesContainer[containerIndex];
 
 			const istd::CIntRanges::SwitchPoints& points = scanLine.GetSwitchPoints();
 
@@ -1059,6 +1099,29 @@ void CScanlineMask::InitFromBoudingBox(const i2d::CRectangle& objectBoundingBox,
 	}
 
 	ResetScanlines(istd::CIntRange(firstLinePos, endLinePos));
+}
+
+
+// related global functions
+
+uint qHash(const CScanlineMask& key, uint seed)
+{
+	uint retVal = seed;
+
+	int lineIndex = key.m_firstLinePos;
+	for (CScanlineMask::Scanlines::const_iterator iter = key.m_scanlines.cbegin(); iter != key.m_scanlines.cend(); ++iter, ++lineIndex){
+		int containerIndex = *iter;
+
+		if (containerIndex >= 0){
+			const istd::CIntRanges& scanLine = key.m_rangesContainer[containerIndex];
+
+			if (!scanLine.IsEmpty()){
+				retVal = retVal ^ qHash(scanLine, seed) ^ uint(lineIndex);
+			}
+		}
+	}
+
+	return retVal;
 }
 
 

@@ -175,16 +175,6 @@ public:
 	*/
 	void Dilate(int leftValue, int rightValue, int topValue, int bottomValue);
 
-	/**
-		Get access to internal range container.
-	*/
-	RangesContainer& GetRangesContainer();
-
-	/**
-		Get access to internal scan lines.
-	*/
-	Scanlines& GetScanLines();
-
 	// reimplemented (i2d::IObject2d)
 	virtual i2d::CVector2d GetCenter() const;
 	virtual void MoveCenterTo(const i2d::CVector2d& position);
@@ -207,6 +197,11 @@ public:
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
 
+	bool operator==(const CScanlineMask& mask) const;
+	bool operator!=(const CScanlineMask& mask) const;
+
+	friend uint qHash(const CScanlineMask& key, uint seed);
+
 protected:
 	void EnsureBoundingBoxValid() const;
 	void CalcBoundingBox() const;
@@ -226,15 +221,9 @@ private:
 
 // public inline methods
 
-inline CScanlineMask::RangesContainer& CScanlineMask::GetRangesContainer()
+inline bool CScanlineMask::operator!=(const CScanlineMask& mask) const
 {
-	return m_rangesContainer;
-}
-
-
-inline CScanlineMask::Scanlines& CScanlineMask::GetScanLines()
-{
-	return m_scanlines;
+	return !operator==(mask);
 }
 
 
@@ -246,6 +235,11 @@ inline void CScanlineMask::EnsureBoundingBoxValid() const
 		CalcBoundingBox();
 	}
 }
+
+
+// related global functions
+
+uint qHash(const CScanlineMask& key, uint seed = 0);
 
 
 } // namespace iimg

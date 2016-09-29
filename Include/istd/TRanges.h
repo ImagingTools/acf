@@ -176,8 +176,10 @@ public:
 	*/
 	void GetAsList(const TRange<ValueType>& range, RangeList& result) const;
 
-	bool operator==(const TRanges<ValueType>& ranges);
-	bool operator!=(const TRanges<ValueType>& ranges);
+	bool operator==(const TRanges<ValueType>& ranges) const;
+	bool operator!=(const TRanges<ValueType>& ranges) const;
+
+	uint GetHashValue(uint seed = 0) const;
 
 private:
 	SwitchPoints m_switchPoints;
@@ -850,16 +852,46 @@ void TRanges<ValueType>::GetAsList(const TRange<ValueType>& range, RangeList& re
 
 
 template <typename ValueType>
-bool TRanges<ValueType>::operator==(const TRanges<ValueType>& ranges)
+bool TRanges<ValueType>::operator==(const TRanges<ValueType>& ranges) const
 {
 	return (m_beginState == ranges.m_beginState) && (m_switchPoints == ranges.m_switchPoints);
 }
 
 
 template <typename ValueType>
-bool TRanges<ValueType>::operator!=(const TRanges<ValueType>& ranges)
+bool TRanges<ValueType>::operator!=(const TRanges<ValueType>& ranges) const
 {
 	return (m_beginState != ranges.m_beginState) || (m_switchPoints != ranges.m_switchPoints);
+}
+
+
+template <typename ValueType>
+uint TRanges<ValueType>::GetHashValue(uint seed) const
+{
+	uint retVal = seed;
+
+	if (m_beginState){
+		retVal++;
+	}
+
+	for (		typename TRanges<ValueType>::SwitchPoints::const_iterator iter = m_switchPoints.begin();
+				iter != m_switchPoints.end();
+				++iter){
+		const ValueType& pos = *iter;
+
+		retVal = retVal ^ uint(pos);
+	}
+
+	return retVal;
+}
+
+
+// related global functions
+
+template <typename ValueType>
+inline uint qHash(const istd::TRanges<ValueType>& key, uint seed = 0)
+{
+	return key.GetHashValue(seed);
 }
 
 
