@@ -152,10 +152,12 @@ protected:
 				const QString& messageSource,
 				int flags = 0) const;
 
+protected:
+	mutable QSet<int> m_onceMessageIds;
+
 private:
 	ilog::IMessageConsumer* m_logPtr;
 	bool m_isTracingEnabled;
-	mutable QSet<int> m_onceMessageIds;
 };
 
 
