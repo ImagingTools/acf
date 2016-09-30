@@ -1048,11 +1048,24 @@ void CScanlineMask::CalcBoundingBox() const
 {
 	istd::CIntRange rangeX = istd::CIntRange::GetInvalid();
 
+	int firstActiveLine = -1;
+	int lastActiveLine = -1;
+
 	for (int i = 0; i < int(m_scanlines.size()); ++i){
 		int containerIndex = m_scanlines[i];
 
 		if (containerIndex >= 0){
 			const istd::CIntRanges& scanLine = m_rangesContainer[containerIndex];
+
+			if (scanLine.IsEmpty()){
+				continue;
+			}
+
+			if (firstActiveLine < 0){
+				firstActiveLine = i;
+			}
+
+			lastActiveLine = i;
 
 			const istd::CIntRanges::SwitchPoints& points = scanLine.GetSwitchPoints();
 
@@ -1070,10 +1083,10 @@ void CScanlineMask::CalcBoundingBox() const
 		}
 	}
 
-	if (rangeX.IsValid()){
-		m_boundingBox.SetTop(m_firstLinePos);
+	if (rangeX.IsValid() && (firstActiveLine < lastActiveLine)){
+		m_boundingBox.SetTop(m_firstLinePos + firstActiveLine);
 		m_boundingBox.SetLeft(rangeX.GetMinValue());
-		m_boundingBox.SetBottom(m_firstLinePos + int(m_scanlines.size()));
+		m_boundingBox.SetBottom(m_firstLinePos + lastActiveLine + 1);
 		m_boundingBox.SetRight(rangeX.GetMaxValue());
 	}
 	else{
