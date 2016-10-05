@@ -81,7 +81,7 @@ CBitmap::CBitmap()
 
 CBitmap::CBitmap(const CBitmap& bitmap)
 :	BaseClass(bitmap), 
-	m_image(bitmap.m_image),
+	m_image(bitmap.m_image.copy()),
 	m_externalBuffer(NULL)
 {
 }
@@ -346,7 +346,7 @@ bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 
 		m_externalBuffer.Reset();
 
-		m_image = bitmapImplPtr->GetQImage();
+		m_image = bitmapImplPtr->GetQImage().copy();
 
 		return true;
 	}
