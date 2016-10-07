@@ -20,6 +20,13 @@ class IPackagesManager: virtual public istd::IChangeable
 public:
 	enum PackageType
 	{
+		/**
+			Package doesn't exist.
+		*/
+		PT_UNDIFINED,
+		/**
+			Type of this package cannot be found out.
+		*/
 		PT_UNKNOWN,
 		/**
 			Real packages are stored as dynamic linked libraries in \c arp files.

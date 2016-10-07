@@ -111,12 +111,10 @@ int CRegistryCodeSaverComp::SaveToFile(
 			return OS_FAILED;
 		}
 	}
-	else if ((*m_workingModeAttrPtr == WM_DEPENDENCIES) || (*m_workingModeAttrPtr == WM_DEEP_DEPENDENCIES)){
-		bool allDependencies = (*m_workingModeAttrPtr == WM_DEEP_DEPENDENCIES);
-
+	else if (*m_workingModeAttrPtr == WM_DEPENDENCIES){
 		if (filePath.isEmpty()){
 			QTextStream depsStream(stdout);
-			if (!WriteDependencies(composedAddresses, realAddresses, allDependencies, depsStream)){
+			if (!WriteDependencies(composedAddresses, realAddresses, depsStream)){
 				SendErrorMessage(0, "Build dependencies could not be written", "Source code generator");
 
 				return OS_FAILED;
@@ -133,7 +131,7 @@ int CRegistryCodeSaverComp::SaveToFile(
 			}
 
 			QTextStream depsStream(&depsFile);
-			if (!WriteDependencies(composedAddresses, realAddresses, allDependencies, depsStream)){
+			if (!WriteDependencies(composedAddresses, realAddresses, depsStream)){
 				depsFile.remove();
 
 				SendErrorMessage(0, "Build dependencies could not be written", "Source code generator");
@@ -158,7 +156,6 @@ bool CRegistryCodeSaverComp::GetFileExtensions(QStringList& result, const istd::
 	if ((flags & QF_SAVE) != 0){
 		switch (*m_workingModeAttrPtr){
 		case WM_DEPENDENCIES:
-		case WM_DEEP_DEPENDENCIES:
 			result.push_back("txt");
 			break;
 
@@ -178,7 +175,6 @@ QString CRegistryCodeSaverComp::GetTypeDescription(const QString* extensionPtr) 
 	if (extensionPtr == NULL){
 		switch (*m_workingModeAttrPtr){
 		case WM_DEPENDENCIES:
-		case WM_DEEP_DEPENDENCIES:
 			return QObject::tr("dependency file");
 
 		default:
@@ -229,6 +225,7 @@ bool CRegistryCodeSaverComp::AppendAddresses(
 			int packageType = m_packagesManagerCompPtr->GetPackageType(packageId);
 
 			switch (packageType){
+			case icomp::IPackagesManager::PT_UNKNOWN:
 			case icomp::IPackagesManager::PT_REAL:
 				if (realAddresses.find(infoPtr->address) == realAddresses.end()){
 					realAddresses.insert(infoPtr->address);
@@ -969,7 +966,6 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 bool CRegistryCodeSaverComp::WriteDependencies(
 			const Addresses& composedAddresses,
 			const Addresses& realAddresses,
-			bool allDependencies,
 			QTextStream& stream) const
 {
 	if (!m_packagesManagerCompPtr.IsValid()){
@@ -986,29 +982,35 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 			const icomp::CComponentAddress& address = *addressIter;
 			const QByteArray& packageId = address.GetPackageId();
 
-			QDir packageDir(QDir::cleanPath(m_packagesManagerCompPtr->GetPackagePath(packageId)));
+			QString packagePath = m_packagesManagerCompPtr->GetPackagePath(packageId);
 
-			stream << packageDir.absoluteFilePath(address.GetComponentId() + ".acc") << "\n";
+			if (!packagePath.isEmpty()){
+				QDir packageDir(QDir::cleanPath(packagePath));
+
+				stream << packageDir.absoluteFilePath(address.GetComponentId() + ".acc") << "\n";
+			}
 		}
 
-		if (allDependencies){
-			Ids packageIdsList;
-			for (		Addresses::const_iterator addressIter = realAddresses.constBegin();
-						addressIter != realAddresses.constEnd();
-						++addressIter){
-				const icomp::CComponentAddress& address = *addressIter;
-				packageIdsList.insert(address.GetPackageId());
-			}
+		Ids packageIdsList;
+		for (		Addresses::const_iterator addressIter = realAddresses.constBegin();
+					addressIter != realAddresses.constEnd();
+					++addressIter){
+			const icomp::CComponentAddress& address = *addressIter;
+			packageIdsList.insert(address.GetPackageId());
+		}
 
-			QList<QByteArray> sortedPackageIdsList = packageIdsList.toList();
-			qSort(sortedPackageIdsList);
+		QList<QByteArray> sortedPackageIdsList = packageIdsList.toList();
+		qSort(sortedPackageIdsList);
 
-			for (		QList<QByteArray>::const_iterator packageIter = sortedPackageIdsList.begin();
-						packageIter != sortedPackageIdsList.end();
-						++packageIter){
-				const QByteArray& packageId = *packageIter;
+		for (		QList<QByteArray>::const_iterator packageIter = sortedPackageIdsList.begin();
+					packageIter != sortedPackageIdsList.end();
+					++packageIter){
+			const QByteArray& packageId = *packageIter;
 
-				QFileInfo packageFilePath(QDir::cleanPath(m_packagesManagerCompPtr->GetPackagePath(packageId)));
+			QString packagePath = m_packagesManagerCompPtr->GetPackagePath(packageId);
+
+			if (!packagePath.isEmpty()){
+				QFileInfo packageFilePath(QDir::cleanPath(packagePath));
 
 				stream << packageFilePath.absoluteFilePath() << "\n";
 			}

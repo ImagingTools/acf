@@ -49,11 +49,7 @@ public:
 		/**
 			Generation of dependencies to all related ACF registry files.
 		*/
-		WM_DEPENDENCIES,
-		/**
-			Generation of dependencies to all known files.
-		*/
-		WM_DEEP_DEPENDENCIES
+		WM_DEPENDENCIES
 	};
 
 	I_BEGIN_COMPONENT(CRegistryCodeSaverComp);
@@ -122,7 +118,6 @@ protected:
 	bool WriteDependencies(
 				const Addresses& composedAddresses,
 				const Addresses& realAddresses,
-				bool allDependencies,
 				QTextStream& stream) const;
 	bool WriteRegistryInfo(
 				const icomp::IRegistry& registry,

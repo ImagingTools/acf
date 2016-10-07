@@ -22,7 +22,8 @@ namespace ipackage
 
 
 /**
-	Loads component packages from dynamic link libraries.
+	Manages registries and composed component.
+	It allows simple management of packages without loading of real packages.
 */
 class CRegistriesManagerComp:
 			public ilog::CLoggerComponentBase,
@@ -46,6 +47,7 @@ public:
 		I_REGISTER_INTERFACE(icomp::IRegistryLoader);
 		I_ASSIGN(m_registryLoaderCompPtr, "RegistryLoader", "Loader used to read registry", true, "RegistryLoader");
 		I_ASSIGN(m_configFilePathCompPtr, "ConfigFilePath", "Path of packages configuration file will be loaded, if enabled", false, "ConfigFilePath");
+		I_ASSIGN(m_ignoreRealPackagesAttrPtr, "AreRealPackagesIgnored", "If set to true, all real packages will be ignored", true, false);
 	I_END_COMPONENT;
 
 	// reimplemented (icomp::IPackagesManager)
@@ -104,6 +106,7 @@ private:
 
 	I_REF(ifile::IFilePersistence, m_registryLoaderCompPtr);
 	I_REF(ifile::IFileNameParam, m_configFilePathCompPtr);
+	I_ATTR(bool, m_ignoreRealPackagesAttrPtr);
 };
 
 
