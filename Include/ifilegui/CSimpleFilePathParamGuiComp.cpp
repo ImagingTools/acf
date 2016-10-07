@@ -100,7 +100,7 @@ void CSimpleFilePathParamGuiComp::OnGuiCreated()
 	if (m_filePathValidationExpressionAttrPtr.IsValid()){
 		QRegExp validationExpr = QRegExp(*m_filePathValidationExpressionAttrPtr);
 
-		PathEdit->setValidator(new QRegExpValidator(validationExpr));
+		PathEdit->setValidator(new QRegExpValidator(validationExpr, this));
 	}
 #endif
 
