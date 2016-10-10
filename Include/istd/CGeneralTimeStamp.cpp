@@ -64,7 +64,7 @@ void CGeneralTimeStamp::Start(double elapsedTime)
 QDateTime CGeneralTimeStamp::GetStartTime() const
 {
 #if QT_VERSION >= 0x040700
-	return QDateTime::currentDateTime().addMSecs(m_timer.elapsed());
+	return QDateTime::currentDateTime().addMSecs(-m_timer.elapsed());
 #else
 	return m_timer;
 #endif
