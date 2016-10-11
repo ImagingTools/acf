@@ -45,7 +45,7 @@ public:
 		Constructor with iterators.
 	*/
 	template <typename Iterator>
-	CVarVector(const Iterator& beginIter, const Iterator& endIter);
+	CVarVector(Iterator beginIter, Iterator endIter);
 
 	/**
 		Copy constructor.
@@ -256,8 +256,8 @@ inline CVarVector::CVarVector(const CVarVector& vector)
 
 
 template <typename Iterator>
-CVarVector::CVarVector(const Iterator& beginIter, const Iterator& endIter)
-	:m_elements(beginIter, endIter)
+inline CVarVector::CVarVector(Iterator beginIter, Iterator endIter)
+:	m_elements(beginIter, endIter)
 {
 }
 
