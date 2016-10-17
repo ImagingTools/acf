@@ -86,7 +86,7 @@ public:
 		I_ASSIGN_TO(m_runtimeStatusModelCompPtr, m_runtimeStatusCompPtr, false);
 		I_ASSIGN(m_staleLockTimeAttrPtr, "StaleLockTime", "Time in seconds after which a lock file is considered stale.", true, 30.0);
 		I_ASSIGN(m_tryLockTimeoutAttrPtr, "TryLockTimeout", "Lock function will wait for at most TryLockTimeout seconds for the lock file to become available."
-					"\nNOTE: Lock will wait forever until the lock file can be locked when net to negative", true, 0.0);
+					"\nNOTE: Lock will wait forever until the lock file can be locked when set to negative", true, 0.0);
 		I_ASSIGN(m_enableLockForLoadAttrPtr, "EnableLockForRead", "When enabled lock is also set when reading from file."
 					"\nNOTE: On NTFS file systems, ownership and permissions checking is disabled (in QT) by default for performance reasons."
 					"\nEnable this flag when you are known what you are doing.", true, false);
@@ -189,14 +189,14 @@ private:
 		i.e. left over by a crashed process. This is useful for the case where the PID got reused meanwhile, so one way to detect a stale
 		lock file is by the fact that it has been around for a long time.
 	*/
-	I_ATTR(float, m_staleLockTimeAttrPtr);
+	I_ATTR(double, m_staleLockTimeAttrPtr);
 
 	/**
 		Lock function will wait for at most timeout seconds for the lock file to become available.
 		Note: Passing a negative number as the timeout is equivalent to calling lock(),
 		i.e. this function will wait forever until the lock file can be locked if timeout is negative.
 	*/
-	I_ATTR(float, m_tryLockTimeoutAttrPtr);
+	I_ATTR(double, m_tryLockTimeoutAttrPtr);
 
 	/**
 		Enable settings lock also for reading.
