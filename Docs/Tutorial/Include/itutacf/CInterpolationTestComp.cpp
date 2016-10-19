@@ -34,7 +34,7 @@ void CInterpolationTestComp::OnUpdate(const istd::IChangeable::ChangeSet& /*chan
 		int nodesCount = objectPtr->GetNodesCount();
 
 		for (int nodeIndex = 0; nodeIndex < nodesCount; ++nodeIndex){
-			const i2d::CVector2d& node = objectPtr->GetNode(nodeIndex);
+			const i2d::CVector2d& node = objectPtr->GetNodePos(nodeIndex);
 			positionMap[node.GetX()] = node.GetY();
 		}
 
