@@ -63,7 +63,7 @@ private Q_SLOTS:
 private:
 	void UpdateObjectFromFile();
 
-private:
+protected:
 	I_REF(ifile::IFilePersistence, m_fileLoaderCompPtr);
 	I_FACT(istd::IChangeable, m_objectFactoryCompPtr);
 	I_REF(imod::IObserver, m_objectObserverCompPtr);
