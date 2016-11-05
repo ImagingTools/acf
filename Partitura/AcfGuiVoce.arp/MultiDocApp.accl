@@ -2,20 +2,20 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4299" Description="ACF"/>
+            <Version Id="1" Number="1654" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="SplashScreen" X="1025" Y="150" Note=""/>
-        <Element ComponentName="ApplicationInfo" X="925" Y="425" Note=""/>
         <Element ComponentName="AboutDialog" X="925" Y="700" Note=""/>
         <Element ComponentName="App" X="650" Y="150" Note=""/>
-        <Element ComponentName="Workspace" X="200" Y="425" Note=""/>
+        <Element ComponentName="ApplicationInfo" X="925" Y="425" Note=""/>
+        <Element ComponentName="DocumentTemplate" X="200" Y="700" Note=""/>
         <Element ComponentName="MainGui" X="650" Y="575" Note=""/>
         <Element ComponentName="SettingsProvider" X="375" Y="275" Note=""/>
-        <Element ComponentName="DocumentTemplate" X="200" Y="700" Note=""/>
+        <Element ComponentName="SplashScreen" X="1025" Y="150" Note=""/>
+        <Element ComponentName="Workspace" X="200" Y="425" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

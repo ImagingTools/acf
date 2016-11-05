@@ -2,14 +2,14 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4325" Description="ACF"/>
+            <Version Id="1" Number="1672" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="GuiApplication" X="575" Y="225" Note=""/>
         <Element ComponentName="ApplicationInfo" X="925" Y="225" Note=""/>
+        <Element ComponentName="GuiApplication" X="575" Y="225" Note=""/>
         <Element ComponentName="MainGui" X="575" Y="400" Note=""/>
         <Element ComponentName="SettingsProvider" X="575" Y="575" Note=""/>
     </PositionMap>

@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4299" Description="ACF"/>
+            <Version Id="1" Number="1654" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Framework for multi-document applications</Description>
@@ -73,10 +73,22 @@
                     <AttributeInfo Id="StyleSheet" Type="String" ExportId="StyleSheet">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="TitleFormat" Type="String" ExportId="TitleFormat">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="TranslationManager" Type="Reference" ExportId="TranslationManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="TrayIconsCommands" Type="Reference" ExportId="TrayIconsCommands">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="UiStartMode" Type="Integer" ExportId="UiStartMode">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseMenuIconsOnMac" Type="Boolean" ExportId="UseMenuIconsOnMac">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseTrayIcon" Type="Boolean" ExportId="UseTrayIcon">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -273,6 +285,7 @@
         <Component ExportedId="FileCommands" ComponentId="MainGui/FileCommands"/>
         <Component ExportedId="RuntimeStatus" ComponentId="App/RuntimeStatus"/>
         <Component ExportedId="SettingsProvider" ComponentId="SettingsProvider"/>
+        <Component ExportedId="TrayMessages" ComponentId="App/TrayMessages"/>
         <Component ExportedId="VisibleWindowsManager" ComponentId="MainGui/VisibleWindowsManager"/>
         <Component ExportedId="Workspace" ComponentId="Workspace"/>
     </ExportedComponents>

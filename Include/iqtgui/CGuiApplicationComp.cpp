@@ -13,6 +13,10 @@
 #include <QtGui/QVBoxLayout>
 #endif
 
+// ACF includes
+#include <iqtgui/CCommandTools.h>
+#include <iqtgui/CHierarchicalCommand.h>
+
 
 #if defined(Q_OS_MACX) && (QT_VERSION >= 0x040000) && (QT_VERSION < 0x050000)
 void qt_mac_set_menubar_icons(bool enable);
@@ -26,7 +30,8 @@ namespace iqtgui
 // public methods
 
 CGuiApplicationComp::CGuiApplicationComp()
-	:m_defaultWidgetFlags(0)
+	:m_defaultWidgetFlags(0),
+	m_trayMessages(*this)
 {
 }
 
@@ -86,7 +91,7 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 
 				frameLayout->setMargin(*m_frameSpaceSizeAttrPtr);
 
-				// create application's main widget:
+				// Create application's main widget:
 				m_mainGuiCompPtr->CreateGui(m_mainWidgetPtr.GetPtr());
 			}
 			else{
@@ -101,6 +106,28 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 
 		HideSplashScreen();
 
+		if (*m_useTrayIconAttrPtr){
+			m_trayIconPtr.SetPtr(new QSystemTrayIcon);
+			m_trayIconPtr->setIcon(QGuiApplication::windowIcon());
+
+			QMenu* trayMenuPtr = new QMenu;
+
+			if (m_trayIconCommandsCompPtr.IsValid()){
+				const iqtgui::CHierarchicalCommand* commandPtr = dynamic_cast<const iqtgui::CHierarchicalCommand*>(m_trayIconCommandsCompPtr->GetCommands());
+				if (commandPtr != NULL){
+					iqtgui::CCommandTools::CreateMenu<QMenu>(*commandPtr, *trayMenuPtr);
+				}
+			}
+
+			trayMenuPtr->addSeparator();
+
+			trayMenuPtr->addAction(tr("Quit"), this, SLOT(OnQuit()));
+
+			m_trayIconPtr->setContextMenu(trayMenuPtr);
+
+			m_trayIconPtr->setVisible(true);
+		}
+
 		if (m_mainWidgetPtr.IsValid()){
 			m_defaultWidgetFlags = m_mainWidgetPtr->windowFlags();
 
@@ -109,12 +136,10 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 			ShowWindow();
 
 			m_lastWidgetGeometry = m_mainWidgetPtr->geometry();
-		}
 
-		if (m_mainWidgetPtr.IsValid()){
 			m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_RUNNING);
 
-			// start application loop:
+			// Start application loop:
 			retVal = QApplication::exec();
 
 			m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_SHUTDOWN);
@@ -124,7 +149,24 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 
 			m_mainWidgetPtr.Reset();
 		}
+		else{
+			if (m_trayIconPtr.IsValid()){
+				m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_RUNNING);
+
+				// Start application loop:
+				retVal = QApplication::exec();
+
+				m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_SHUTDOWN);			
+			}
+		}
 	}
+
+	QMenu* trayMenuPtr = m_trayIconPtr->contextMenu();
+	if (trayMenuPtr != NULL){
+		delete trayMenuPtr;
+	}
+
+	m_trayIconPtr.Reset();
 
 	return retVal;
 }
@@ -160,12 +202,6 @@ void CGuiApplicationComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeS
 
 // reimplemented (icomp::CComponentBase)
 
-void CGuiApplicationComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-}
-
-
 void CGuiApplicationComp::OnComponentDestroyed()
 {
 	BaseClass2::EnsureModelDetached();
@@ -178,8 +214,7 @@ void CGuiApplicationComp::OnComponentDestroyed()
 
 void CGuiApplicationComp::UpdateMainWidgetDecorations()
 {
-	if (m_allowApplicationCloseCompPtr.IsValid() && m_mainWidgetPtr.IsValid())
-	{
+	if (m_allowApplicationCloseCompPtr.IsValid() && m_mainWidgetPtr.IsValid()){
 		Qt::WindowFlags windowFlags = m_defaultWidgetFlags;
 
 		if (!m_allowApplicationCloseCompPtr->IsEnabled()){
@@ -222,6 +257,19 @@ void CGuiApplicationComp::ShowWindow()
 }
 
 
+// private slots
+
+void CGuiApplicationComp::OnQuit()
+{
+	if (m_mainWidgetPtr.IsValid()){
+		m_mainWidgetPtr->close();
+	}
+	else{
+		QCoreApplication::quit();
+	}
+}
+
+
 // public methods of the embedded class RuntimeStatus
 
 CGuiApplicationComp::RuntimeStatus::RuntimeStatus()
@@ -245,6 +293,53 @@ void CGuiApplicationComp::RuntimeStatus::SetRuntimeStatus(IRuntimeStatusProvider
 ibase::IRuntimeStatusProvider::RuntimeStatus CGuiApplicationComp::RuntimeStatus::GetRuntimeStatus() const
 {
 	return m_status;
+}
+
+
+// public methods of the embedded class TrayMessages
+
+CGuiApplicationComp::TrayMessages::TrayMessages(CGuiApplicationComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (ilog::IMessageConsumer)
+
+bool CGuiApplicationComp::TrayMessages::IsMessageSupported(
+			int /*messageCategory*/,
+			int /*messageId*/,
+			const istd::IInformationProvider* /*messagePtr*/) const
+{
+	return m_parent.m_trayIconPtr.IsValid();
+}
+
+
+void CGuiApplicationComp::TrayMessages::AddMessage(const MessagePtr& messagePtr)
+{
+	if (m_parent.m_trayIconPtr.IsValid()){
+		QSystemTrayIcon::MessageIcon severityIcon = QSystemTrayIcon::NoIcon;
+
+		switch (messagePtr->GetInformationCategory()){
+		case istd::IInformationProvider::IC_INFO:
+			severityIcon = QSystemTrayIcon::Information;
+			break;
+
+		case istd::IInformationProvider::IC_WARNING:
+			severityIcon = QSystemTrayIcon::Warning;
+			break;
+
+		case istd::IInformationProvider::IC_ERROR:
+		case istd::IInformationProvider::IC_CRITICAL:
+			severityIcon = QSystemTrayIcon::Critical;
+			break;
+
+		default:
+			break;
+		}
+
+		m_parent.m_trayIconPtr->showMessage(QCoreApplication::applicationName(), messagePtr->GetInformationDescription(), severityIcon);
+	}
 }
 
 
