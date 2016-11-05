@@ -9,26 +9,6 @@ namespace ifilegui
 {
 
 
-// public methods
-
-CExternalOpenDocumentCommandCompBase::CExternalOpenDocumentCommandCompBase()
-	:m_fileCommands("&File", 100),
-	m_openDocumentCommand("Open In...", 100, ibase::ICommand::CF_GLOBAL_MENU, GI_EXERNAL_OPEN_COMMAND)
-{
-	connect(&m_openDocumentCommand, SIGNAL(triggered()), this, SLOT(OnOpenDocument()));
-	m_fileCommands.InsertChild(&m_openDocumentCommand);
-
-	m_rootCommands.InsertChild(&m_fileCommands);
-}
-
-
-// reimplemented (ibase::ICommandsProvider)
-
-const ibase::IHierarchicalCommand* CExternalOpenDocumentCommandCompBase::GetCommands() const
-{
-	return &m_rootCommands;
-}
-
 
 // protected methods
 
@@ -41,16 +21,14 @@ void CExternalOpenDocumentCommandCompBase::OnComponentCreated()
 	if (		!m_documentPersistenceCompPtr.IsValid() ||
 				!m_documentFileCompPtr.IsValid() ||
 				!m_applicationPathCompPtr.IsValid()){
-		m_openDocumentCommand.setEnabled(false);
+		m_startProcessCommand.setEnabled(false);
 	}
-	
-	m_openDocumentCommand.SetName(*m_openDocumentCommandNameAttrPtr);
 }
 
 
-// private slots
+// reimplemented (iqtgui::CProcessStartCommandComp)
 
-void CExternalOpenDocumentCommandCompBase::OnOpenDocument()
+bool CExternalOpenDocumentCommandCompBase::StartProcess(const QStringList& arguments)
 {
 	Q_ASSERT(m_documentPersistenceCompPtr.IsValid());
 	Q_ASSERT(m_documentFileCompPtr.IsValid());
@@ -60,27 +38,14 @@ void CExternalOpenDocumentCommandCompBase::OnOpenDocument()
 	if (documentPtr != NULL){
 		int saveState = m_documentPersistenceCompPtr->SaveToFile(*documentPtr, m_documentFileCompPtr->GetPath());
 		if (saveState == ifile::IFilePersistence::OS_OK){
-			QStringList arguments;
-			arguments << m_documentFileCompPtr->GetPath();
-
-			QString applicationPath = m_applicationPathCompPtr->GetPath();
-			QFileInfo applicationFileInfo(applicationPath);
-
-#ifdef Q_OS_WIN32
-			if (applicationFileInfo.suffix().isEmpty()){
-				applicationPath += ".exe";
-			}
-#endif
-#ifdef Q_OS_MAC
-			if (!applicationFileInfo.exists() && applicationFileInfo.suffix().isEmpty() && applicationFileInfo.isBundle()){
-				applicationPath += ".app";
-			}
-#endif
-#ifndef QT_NO_PROCESS
-			QProcess::startDetached(applicationPath, arguments);
-#endif // QT_NO_PROCESS
+			QStringList processArguments = arguments;
+			processArguments << m_documentFileCompPtr->GetPath();
+		
+			return BaseClass::StartProcess(processArguments);
 		}
 	}
+
+	return false;
 }
 
 

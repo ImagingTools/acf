@@ -223,6 +223,11 @@ I_EXPORT_COMPONENT(
 			"Command Selection Mux Multiplexer");
 
 I_EXPORT_COMPONENT(
+			ProcessStartCommand,
+			"Command used for starting external processes",
+			"Command Process Execute Start");
+
+I_EXPORT_COMPONENT(
 			ImagePropertyGui,
 			"Image property viewer",
 			"Observer Display GUI Image Bitmap Property");

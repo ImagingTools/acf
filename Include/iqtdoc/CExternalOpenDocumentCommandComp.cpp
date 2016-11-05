@@ -13,7 +13,7 @@ namespace iqtdoc
 
 void CExternalOpenDocumentCommandComp::UpdateCommands()
 {
-	m_openDocumentCommand.SetEnabled(false);
+	m_startProcessCommand.SetEnabled(false);
 
 	const idoc::IDocumentManager* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
@@ -22,7 +22,7 @@ void CExternalOpenDocumentCommandComp::UpdateCommands()
 			idoc::IDocumentManager::DocumentInfo documentInfo;
 			istd::IChangeable* documentPtr = objectPtr->GetDocumentFromView(*activeViewPtr, &documentInfo);
 			if ((documentPtr != NULL) && (documentInfo.documentTypeId == *m_documentTypeIdAttrPtr)){
-				m_openDocumentCommand.SetEnabled(true);
+				m_startProcessCommand.SetEnabled(true);
 			}
 		}
 	}
@@ -59,7 +59,7 @@ void CExternalOpenDocumentCommandComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (!m_documentManagerCompPtr.IsValid()){
-		m_openDocumentCommand.setEnabled(false);
+		m_startProcessCommand.setEnabled(false);
 	}
 
 	if (m_documentManagerModelCompPtr.IsValid()){

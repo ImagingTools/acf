@@ -32,6 +32,7 @@
 #include <iqtgui/CCalendarGuiComp.h>
 #include <iqtgui/CCalendarGuiComp.h>
 #include <iqtgui/CCommandsMultiplexerComp.h>
+#include <iqtgui/CProcessStartCommandComp.h>
 #include <iqtdoc/CExtendedDocumentTemplateComp.h>
 #include <iqtdoc/CStaticHelpFileProviderComp.h>
 #include <iqtdoc/CDoxygenHelpFileProviderComp.h>
@@ -106,6 +107,7 @@ typedef iqtgui::CTableBasedModelEditorComp TableBasedModelEditor;
 typedef iqtgui::CStatusGuiComp StatusGui;
 typedef iqtgui::CCalendarGuiComp CalendarGui;
 typedef icomp::TModelCompWrap<iqtgui::CCommandsMultiplexerComp> CommandsMultiplexer;
+typedef iqtgui::CProcessStartCommandComp ProcessStartCommand;
 
 typedef iqtdoc::CSingletonDocApplicationComp SingletonDocApplication;
 typedef iqtdoc::CDocumentImportExportCommandComp DocumentImportExportCommand;
