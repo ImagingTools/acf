@@ -44,6 +44,18 @@ const istd::IChangeable* CExternalOpenDocumentCommandComp::GetDocumentPtr() cons
 }
 
 
+// reimplemented (iqtgui::CStartProcessCommandComp)
+
+void CExternalOpenDocumentCommandComp::CreateMenu()
+{
+	m_fileCommand.SetName(QCoreApplication::tr("File"));
+	m_fileCommand.SetStaticFlags(ibase::ICommand::CF_GLOBAL_MENU);
+	
+	m_fileCommand.InsertChild(&m_startProcessCommand);
+	m_rootCommands.InsertChild(&m_fileCommand);
+}
+
+
 // reimplemented (imod::CSingleModelObserverBase)
 
 void CExternalOpenDocumentCommandComp::OnUpdate(const ChangeSet& /*changeSet*/)

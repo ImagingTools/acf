@@ -41,6 +41,7 @@ public:
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 protected:
+	virtual void CreateMenu();
 	virtual QStringList GetProcessArguments() const;
 	virtual bool StartProcess(const QStringList& arguments);
 
@@ -52,7 +53,6 @@ private Q_SLOTS:
 
 protected:
 	iqtgui::CHierarchicalCommand m_rootCommands;
-	iqtgui::CHierarchicalCommand m_fileCommands;
 	iqtgui::CHierarchicalCommand m_startProcessCommand;
 	
 	I_REF(ifile::IFileNameParam, m_applicationPathCompPtr);

@@ -12,13 +12,8 @@ namespace iqtgui
 // public methods
 
 CProcessStartCommandComp::CProcessStartCommandComp()
-	:m_fileCommands("&File", 100),
-	m_startProcessCommand("Start...", 100, ibase::ICommand::CF_GLOBAL_MENU, GI_START_PROCESS_COMMAND)
+	:m_startProcessCommand("Start...", 100, ibase::ICommand::CF_GLOBAL_MENU, GI_START_PROCESS_COMMAND)
 {
-	connect(&m_startProcessCommand, SIGNAL(triggered()), this, SLOT(OnStartProcessCommand()));
-	m_fileCommands.InsertChild(&m_startProcessCommand);
-
-	m_rootCommands.InsertChild(&m_fileCommands);
 }
 
 
@@ -31,6 +26,14 @@ const ibase::IHierarchicalCommand* CProcessStartCommandComp::GetCommands() const
 
 
 // protected methods
+
+void CProcessStartCommandComp::CreateMenu()
+{
+	connect(&m_startProcessCommand, SIGNAL(triggered()), this, SLOT(OnStartProcessCommand()));
+
+	m_rootCommands.InsertChild(&m_startProcessCommand);
+}
+
 
 QStringList CProcessStartCommandComp::GetProcessArguments() const
 {
@@ -51,10 +54,6 @@ bool CProcessStartCommandComp::StartProcess(const QStringList& arguments)
 	QString applicationPath = m_applicationPathCompPtr->GetPath();
 	QFileInfo applicationFileInfo(applicationPath);
 
-	if (!applicationFileInfo.exists()){
-		return false;
-	}
-
 #ifdef Q_OS_WIN32
 	if (applicationFileInfo.suffix().isEmpty()){
 		applicationPath += ".exe";
@@ -65,6 +64,13 @@ bool CProcessStartCommandComp::StartProcess(const QStringList& arguments)
 		applicationPath += ".app";
 	}
 #endif
+
+	if (!QFileInfo(applicationPath).exists()){
+		SendErrorMessage(0, QString(QCoreApplication::tr("Executable file '%1' doesn't exist")).arg(applicationPath));
+
+		return false;
+	}
+
 #ifndef QT_NO_PROCESS
 	return QProcess::startDetached(applicationPath, arguments);
 #endif // QT_NO_PROCESS
@@ -84,6 +90,8 @@ void CProcessStartCommandComp::OnComponentCreated()
 	}
 	
 	m_startProcessCommand.SetName(*m_startProcessCommandNameAttrPtr);
+
+	CreateMenu();
 }
 
 
