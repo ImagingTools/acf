@@ -161,9 +161,11 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 		}
 	}
 
-	QMenu* trayMenuPtr = m_trayIconPtr->contextMenu();
-	if (trayMenuPtr != NULL){
-		delete trayMenuPtr;
+	if (m_trayIconPtr.IsValid()){
+		QMenu* trayMenuPtr = m_trayIconPtr->contextMenu();
+		if (trayMenuPtr != NULL){
+			delete trayMenuPtr;
+		}
 	}
 
 	m_trayIconPtr.Reset();
