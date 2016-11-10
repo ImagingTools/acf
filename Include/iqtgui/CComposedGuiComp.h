@@ -47,6 +47,11 @@ public:
 		I_ASSIGN(m_flatViewAttrPtr, "FlatView", "Tries to apply flat view to the design if possible (Group Box: without frame; Tab Bar: triangular tabs; Slider: transparent grip)", true, false);
 	I_END_COMPONENT;
 
+	// reimplemented (iqtgui::CMultiPageGuiCompBase)
+	virtual int GetPagesCount() const;
+	virtual iqtgui::IGuiObject* GetPageGuiComponent(int pageIndex) const;
+
+protected:
 	QWidget* GetPageContainerWidget() const;
 
 	// reimplemented (TRestorableGuiWrap)
@@ -54,8 +59,6 @@ public:
 	virtual void OnSaveSettings(QSettings& settings) const;
 
 	// reimplemented (iqtgui::CMultiPageGuiCompBase)
-	virtual int GetPagesCount() const;
-	virtual iqtgui::IGuiObject* GetPageGuiComponent(int pageIndex) const;
 	virtual int GetDesignType() const;
 
 	// reimplemented (iqtgui::CGuiComponentBase)

@@ -24,7 +24,24 @@ namespace iqtgui
 {
 
 
-// public methods
+// reimplemented (iqtgui::CMultiPageGuiCompBase)
+
+int CComposedGuiComp::GetPagesCount() const
+{
+	return m_guisCompPtr.GetCount();
+}
+
+
+iqtgui::IGuiObject* CComposedGuiComp::GetPageGuiComponent(int pageIndex) const
+{
+	Q_ASSERT(pageIndex >= 0);
+	Q_ASSERT(pageIndex < m_guisCompPtr.GetCount());
+
+	return m_guisCompPtr[pageIndex];
+}
+
+
+// protected methods
 
 QWidget* CComposedGuiComp::GetPageContainerWidget() const
 {
@@ -70,21 +87,6 @@ void CComposedGuiComp::OnSaveSettings(QSettings& settings) const
 // protected methods
 
 // reimplemented (iqtgui::CMultiPageGuiCompBase)
-
-int CComposedGuiComp::GetPagesCount() const
-{
-	return m_guisCompPtr.GetCount();
-}
-
-
-iqtgui::IGuiObject* CComposedGuiComp::GetPageGuiComponent(int pageIndex) const
-{
-	Q_ASSERT(pageIndex >= 0);
-	Q_ASSERT(pageIndex < m_guisCompPtr.GetCount());
-
-	return m_guisCompPtr[pageIndex];
-}
-
 
 int CComposedGuiComp::GetDesignType() const
 {
