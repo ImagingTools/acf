@@ -336,31 +336,31 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	NextLine(stream);
 	stream << "// ACF includes";
 	NextLine(stream);
-	stream << "#include \"istd/TDelPtr.h\"";
+	stream << "#include <istd/TDelPtr.h>";
 	NextLine(stream);
-	stream << "#include \"icomp/CRegistry.h\"";
+	stream << "#include <icomp/CRegistry.h>";
 	NextLine(stream);
-	stream << "#include \"icomp/CCompositeComponent.h\"";
+	stream << "#include <icomp/CCompositeComponent.h>";
 	NextLine(stream);
-	stream << "#include \"icomp/CCompositeComponentContext.h\"";
+	stream << "#include <icomp/CCompositeComponentContext.h>";
 	NextLine(stream);
 	if (*m_useBinaryCodeAttrPtr){
-		stream << "#include \"icomp/CCachedEnvironmentManager.h\"";
+		stream << "#include <icomp/CCachedEnvironmentManager.h>";
 	}
 	else{
-		stream << "#include \"icomp/CCompositeComponentStaticInfo.h\"";
+		stream << "#include <icomp/CCompositeComponentStaticInfo.h>";
 	}
 	NextLine(stream);
-	stream << "#include \"icomp/CPackageStaticInfo.h\"";
+	stream << "#include <icomp/CPackageStaticInfo.h>";
 	if (*m_useBinaryCodeAttrPtr){
 		NextLine(stream);
-		stream << "#include \"icomp/CCachedEnvironmentManager.h\"";
+		stream << "#include <icomp/CCachedEnvironmentManager.h>";
 	}
 	else{
 		NextLine(stream);
-		stream << "#include \"icomp/CCompositePackageStaticInfo.h\"" << "\n";
+		stream << "#include <icomp/CCompositePackageStaticInfo.h>" << "\n";
 		NextLine(stream);
-		stream << "#include \"icomp/CEnvironmentManagerBase.h\"";
+		stream << "#include <icomp/CEnvironmentManagerBase.h>";
 	}
 
 	stream << "\n\n";
@@ -633,24 +633,27 @@ bool CRegistryCodeSaverComp::WriteIncludes(
 	stream << "\n\n";
 	stream << "// ACF includes" << "\n";
 	if (*m_useBinaryCodeAttrPtr){
-		stream << "#include \"iser/CMemoryReadArchive.h\"" << "\n";
+		stream << "#include <iser/CMemoryReadArchive.h>" << "\n";
 	}
-	stream << "#include \"icomp/CRegistryElement.h\"" << "\n";
+	stream << "#include <icomp/CRegistryElement.h>" << "\n";
 
 	Ids packageIds = ExtractPackageIds(addresses);
 	if (!packageIds.isEmpty()){
 		stream << "\n";
 		stream << "// ACF component includes" << "\n";
 
-		for (		Ids::const_iterator packageIter = packageIds.begin();
-					packageIter != packageIds.end();
+		QList<QByteArray> sortedList = packageIds.toList();
+		qSort(sortedList);
+
+		for (		QList<QByteArray>::ConstIterator packageIter = sortedList.constBegin();
+					packageIter != sortedList.constEnd();
 					++packageIter){
 			const QByteArray& packageId = *packageIter;
 			if (packageId.isEmpty()){
 				continue;
 			}
 
-			stream << "#include \"" << packageId << "/" << packageId << ".h\"" << "\n";
+			stream << "#include <" << packageId << "/" << packageId << ".h>" << "\n";
 		}
 	}
 
