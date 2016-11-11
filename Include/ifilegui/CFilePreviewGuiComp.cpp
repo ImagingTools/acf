@@ -92,6 +92,10 @@ void CFilePreviewGuiComp::OnGuiCreated()
 	if (m_noAvailableIconPathAttrPtr.IsValid()){
 		NoPreviewAvailableIcon->setPixmap(QPixmap(QString(*m_noAvailableIconPathAttrPtr)));
 	}
+
+	m_timer.setSingleShot(true);
+	m_timer.setInterval(1000);
+	connect(&m_timer, SIGNAL(timeout()), this, SLOT(UpdateFilePreview()));
 }
 
 
@@ -100,7 +104,12 @@ void CFilePreviewGuiComp::OnGuiDestroyed()
 	m_previewGenerationWatcher.waitForFinished();
 
 	if (m_objectGuiCompPtr.IsValid()){
-		m_objectGuiCompPtr->DestroyGui();	
+		m_objectGuiCompPtr->DestroyGui();
+	}
+
+	m_timer.disconnect();
+	if (m_timer.isActive()){
+		m_timer.stop();
 	}
 
 	BaseClass::OnGuiDestroyed();
@@ -176,7 +185,9 @@ void CFilePreviewGuiComp::UpdateFilePreview()
 			ResetPreview();
 
 			if (!newFilePath.isEmpty()){
-				 QTimer::singleShot(1000, this, SLOT(UpdateFilePreview()));
+				if (!m_timer.isActive()){
+					m_timer.start();
+				}
 			}
 		}
 	}
@@ -251,13 +262,17 @@ void CFilePreviewGuiComp::UpdateObjectFromFile()
 
 void CFilePreviewGuiComp::ResetPreview()
 {
-	m_previewWasGenerated = false;
+	Q_ASSERT(IsGuiCreated());
 
-	if (m_previewObjectPtr.IsValid()){
-		m_previewObjectPtr->ResetData();
+	if (IsGuiCreated()){
+		m_previewWasGenerated = false;
+
+		if (m_previewObjectPtr.IsValid()){
+			m_previewObjectPtr->ResetData();
+		}
+
+		PreviewStack->setCurrentIndex(0);
 	}
-
-	PreviewStack->setCurrentIndex(0);
 }
 
 

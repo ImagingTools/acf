@@ -1,3 +1,4 @@
+/********************************************************************************
 #ifndef ifilegui_CFilePreviewGuiComp_included
 #define ifilegui_CFilePreviewGuiComp_included
 
@@ -92,6 +93,7 @@ protected:
 	QMutex m_mutex;
 
 	bool m_previewWasGenerated;
+	QTimer m_timer;
 };
 
 
