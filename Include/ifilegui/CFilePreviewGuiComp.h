@@ -1,4 +1,3 @@
-/********************************************************************************
 #ifndef ifilegui_CFilePreviewGuiComp_included
 #define ifilegui_CFilePreviewGuiComp_included
 
@@ -7,6 +6,7 @@
 #include <QtCore/QFileSystemWatcher>
 #include <QtCore/QDateTime>
 #include <QtCore/QFutureWatcher>
+#include <QtCore/QTimer>
 
 // ACF includes
 #include <ifile/IFilePersistence.h>
