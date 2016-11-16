@@ -50,6 +50,10 @@ public:
 	*/
 	const iser::IObject* GetAttachedObject(int index) const;
 	/**
+		Get description of attached object.
+	*/
+	const QString& GetAttachedObjectDescription(int index) const;
+	/**
 		Add some object to this container.
 		\param	objectPtr	attached object, ownership of this object belongs to container (it will be removed autoamtically).
 	*/

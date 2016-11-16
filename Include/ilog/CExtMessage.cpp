@@ -68,6 +68,12 @@ const iser::IObject* CExtMessage::GetAttachedObject(int index) const
 }
 
 
+const QString& CExtMessage::GetAttachedObjectDescription(int index) const
+{
+	return m_attachedObjects[index].description;
+}
+
+
 void CExtMessage::InsertAttachedObject(const iser::IObject* objectPtr, const QString& description)
 {
 	Q_ASSERT(objectPtr != NULL);
