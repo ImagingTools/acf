@@ -1,6 +1,14 @@
 #include <iwidgets/CCollapsiblePage.h>
 
 
+// Qt includes
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QApplication>
+#include <QtGui/QScreen>
+#endif
+
+
 namespace iwidgets
 {
 
@@ -51,7 +59,17 @@ void CCollapsiblePage::SetIcon(const QIcon& icon)
 
 	CollapsiblePageIconLabel->setVisible(!m_icon.isNull());
 
-	CollapsiblePageIconLabel->setPixmap(m_icon.pixmap(m_iconSize));
+	QSize renderingIconSize = m_iconSize;
+
+#if QT_VERSION >= 0x050000
+	QScreen* primarySceenPtr = QGuiApplication::primaryScreen();
+	if (primarySceenPtr != NULL){
+		double devicePixelRatio = primarySceenPtr->devicePixelRatio();
+
+		renderingIconSize *= devicePixelRatio;
+	}
+#endif
+	CollapsiblePageIconLabel->setPixmap(m_icon.pixmap(renderingIconSize));
 }
 
 
