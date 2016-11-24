@@ -28,10 +28,10 @@ CGeneralBitmap::CGeneralBitmap(const CGeneralBitmap& bitmap)
 		// copy structure refering to external buffer
 		m_buffer.SetPtr(bitmap.m_buffer.GetPtr(), false);
 		m_size = bitmap.m_size;
-		m_linesDifference;
-		m_pixelBitsCount;
-		m_componentsCount;
-		m_pixelFormat;
+		m_linesDifference = bitmap.m_linesDifference;
+		m_pixelBitsCount = bitmap.m_pixelBitsCount;
+		m_componentsCount = bitmap.m_componentsCount;
+		m_pixelFormat = bitmap.m_pixelFormat;
 	}
 	else{
 		// copy structure refering to external buffer
@@ -218,10 +218,10 @@ CGeneralBitmap& CGeneralBitmap::operator=(const CGeneralBitmap& bitmap)
 		// copy structure refering to external buffer
 		m_buffer.SetPtr(bitmap.m_buffer.GetPtr(), false);
 		m_size = bitmap.m_size;
-		m_linesDifference;
-		m_pixelBitsCount;
-		m_componentsCount;
-		m_pixelFormat;
+		m_linesDifference = bitmap.m_linesDifference;
+		m_pixelBitsCount = bitmap.m_pixelBitsCount;
+		m_componentsCount = bitmap.m_componentsCount;
+		m_pixelFormat = bitmap.m_pixelFormat;
 	}
 	else{
 		// copy structure refering to external buffer
