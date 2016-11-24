@@ -60,8 +60,6 @@ void CCollapsiblePage::SetIcon(const QIcon& icon)
 
 	CollapsiblePageIconToolButton->setVisible(!m_icon.isNull());
 
-	QSize renderingIconSize = m_iconSize;
-
 	CollapsiblePageIconToolButton->setIcon(m_icon);
 }
 
