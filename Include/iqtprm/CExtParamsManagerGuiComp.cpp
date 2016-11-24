@@ -371,7 +371,7 @@ void CExtParamsManagerGuiComp::on_ElementList_itemSelectionChanged()
 
 void CExtParamsManagerGuiComp::CElementItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-	QStyleOptionViewItemV4 itemOption;
+	QStyleOptionViewItem itemOption;
 	initStyleOption(&itemOption, index);
 
 	int iconWidth = qMax(0, option.decorationSize.width());
