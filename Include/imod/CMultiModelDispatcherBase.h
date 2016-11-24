@@ -23,7 +23,7 @@ namespace imod
 	You will get a notification event on each change in the observed data model via OnModelChanged method call of your notification consumer.  
 	\note Notification consumer class must implement the method
 	void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) to support the notification callback.
-	\sa imod::CMultiModelBridgeBase.
+	\sa imod::CModelUpdateBridge.
 
 	\ingroup ModelObserver
 */

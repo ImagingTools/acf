@@ -6,7 +6,7 @@
 #include <iimg/IBitmapProvider.h>
 #include <iimg/IMultiBitmapProvider.h>
 #include <icomp/CComponentBase.h>
-#include <imod/CMultiModelBridgeBase.h>
+#include <imod/CModelUpdateBridge.h>
 #include <iprm/COptionsManager.h>
 
 
@@ -20,8 +20,7 @@ namespace iimg
 class CComposedBitmapProviderComp: 
 			public icomp::CComponentBase,
 			virtual public iimg::IMultiBitmapProvider,
-			protected iprm::COptionsManager,
-			protected imod::CMultiModelBridgeBase
+			protected iprm::COptionsManager
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -51,6 +50,8 @@ private:
 	I_MULTIREF(imod::IModel, m_bitmapProviderModelsCompPtr);
 	I_MULTIATTR(QString, m_bitmapLabelsAttrPtr);
 	I_MULTIATTR(QString, m_bitmapDescriptionsAttrPtr);
+
+	imod::CModelUpdateBridge m_updateBridge;
 };
 
 

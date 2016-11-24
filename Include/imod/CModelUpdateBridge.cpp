@@ -1,4 +1,4 @@
-#include <imod/CMultiModelBridgeBase.h>
+#include <imod/CModelUpdateBridge.h>
 
 
 namespace imod
@@ -7,19 +7,19 @@ namespace imod
 
 // public methods
 
-CMultiModelBridgeBase::CMultiModelBridgeBase(istd::IChangeable* changeablePtr)
+CModelUpdateBridge::CModelUpdateBridge(istd::IChangeable* changeablePtr)
 :	m_changeablePtr(changeablePtr)
 {
 }
 
 
-CMultiModelBridgeBase::~CMultiModelBridgeBase()
+CModelUpdateBridge::~CModelUpdateBridge()
 {
 	EnsureModelsDetached();
 }
 
 
-IModel* CMultiModelBridgeBase::GetObservedModel(int modelIndex) const
+IModel* CModelUpdateBridge::GetObservedModel(int modelIndex) const
 {
 	Q_ASSERT(modelIndex >= 0);
 	Q_ASSERT(modelIndex < GetModelCount());
@@ -28,13 +28,13 @@ IModel* CMultiModelBridgeBase::GetObservedModel(int modelIndex) const
 }
 
 
-int CMultiModelBridgeBase::GetModelCount() const
+int CModelUpdateBridge::GetModelCount() const
 {
 	return int(m_models.size());
 }
 
 
-void CMultiModelBridgeBase::EnsureModelsDetached()
+void CModelUpdateBridge::EnsureModelsDetached()
 {
 	while (!m_models.isEmpty()){
 		imod::IModel* modelPtr = m_models.front();
@@ -47,7 +47,7 @@ void CMultiModelBridgeBase::EnsureModelsDetached()
 
 // reimplemented (imod::IObserver)
 
-bool CMultiModelBridgeBase::IsModelAttached(const imod::IModel* modelPtr) const
+bool CModelUpdateBridge::IsModelAttached(const imod::IModel* modelPtr) const
 {
 	if (modelPtr == NULL){
 		return !m_models.isEmpty();
@@ -59,7 +59,7 @@ bool CMultiModelBridgeBase::IsModelAttached(const imod::IModel* modelPtr) const
 }
 
 
-bool CMultiModelBridgeBase::OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask)
+bool CModelUpdateBridge::OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask)
 {
 	Q_ASSERT(modelPtr != NULL);
 
@@ -75,7 +75,7 @@ bool CMultiModelBridgeBase::OnModelAttached(imod::IModel* modelPtr, istd::IChang
 }
 
 
-bool CMultiModelBridgeBase::OnModelDetached(IModel* modelPtr)
+bool CModelUpdateBridge::OnModelDetached(IModel* modelPtr)
 {
 	Models::iterator iter = qFind(m_models.begin(), m_models.end(), modelPtr);
 	if (iter != m_models.end()){
@@ -88,7 +88,7 @@ bool CMultiModelBridgeBase::OnModelDetached(IModel* modelPtr)
 }
 
 
-void CMultiModelBridgeBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr))
+void CModelUpdateBridge::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr))
 {
 	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
@@ -96,7 +96,7 @@ void CMultiModelBridgeBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr))
 }
 
 
-void CMultiModelBridgeBase::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), const istd::IChangeable::ChangeSet& /*changeSet*/)
+void CModelUpdateBridge::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 

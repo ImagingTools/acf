@@ -7,7 +7,7 @@
 
 // ACF includes
 #include <imod/CMultiModelDispatcherBase.h>
-#include <imod/CMultiModelBridgeBase.h>
+#include <imod/CModelUpdateBridge.h>
 #include <iprm/IEnableableParam.h>
 #include <iprm/CSelectionParam.h>
 #include <iprm/COptionsManager.h>
@@ -134,7 +134,7 @@ protected Q_SLOTS:
 private:
 	class PageModel:
 				public iprm::CSelectionParam,
-				public imod::CMultiModelBridgeBase,
+				public imod::CModelUpdateBridge,
 				public iprm::IOptionsList,
 				public IMultiVisualStatusProvider
 	{

@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include <imod/CMultiModelBridgeBase.h>
+#include <imod/CModelUpdateBridge.h>
 #include <icomp/CComponentBase.h>
 #include <ibase/ICommandsProvider.h>
 #include <iprm/ISelectionParam.h>
@@ -19,12 +19,12 @@ namespace iqtgui
 class CCommandsMultiplexerComp:
 			public QObject,
 			public icomp::CComponentBase,
-			protected imod::CMultiModelBridgeBase,
+			protected imod::CModelUpdateBridge,
 			virtual public ibase::ICommandsProvider
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
-	typedef imod::CMultiModelBridgeBase BaseClass2;
+	typedef imod::CModelUpdateBridge BaseClass2;
 	
 	I_BEGIN_COMPONENT(CCommandsMultiplexerComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);

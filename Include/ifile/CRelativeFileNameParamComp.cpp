@@ -17,7 +17,7 @@ namespace ifile
 // public methods
 
 CRelativeFileNameParamComp::CRelativeFileNameParamComp()
-:	imod::CMultiModelBridgeBase(this)
+:	m_updateBridge(this)
 {
 }
 
@@ -136,14 +136,14 @@ void CRelativeFileNameParamComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_relativeToModelCompPtr.IsValid()){
-		m_relativeToModelCompPtr->AttachObserver(this);
+		m_relativeToModelCompPtr->AttachObserver(&m_updateBridge);
 	}
 }
 
 
 void CRelativeFileNameParamComp::OnComponentDestroyed()
 {
-	EnsureModelsDetached();
+	m_updateBridge.EnsureModelsDetached();
 
 	BaseClass::OnComponentDestroyed();
 }

@@ -23,7 +23,7 @@ const istd::IChangeable::ChangeSet s_setDescriptionChangeSet(IOptionsList::CF_OP
 
 
 CParamsManagerCompBase::CParamsManagerCompBase()
-:	imod::CMultiModelBridgeBase(this),
+:	m_updateBridge(this),
 	m_selectedIndex(-1)
 {
 	m_selectedParams.parentPtr = this;
@@ -63,8 +63,8 @@ int CParamsManagerCompBase::InsertParamsSet(int typeIndex, int index)
 
 	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
 	if (paramsModelPtr != NULL){
-		paramsModelPtr->AttachObserver(paramsSetPtr.GetPtr());
-		paramsModelPtr->AttachObserver(this);
+		paramsModelPtr->AttachObserver(&paramsSetPtr->updateBridge);
+		paramsModelPtr->AttachObserver(&m_updateBridge);
 	}
 
 	m_paramSets.push_back(ParamSetPtr());
@@ -510,9 +510,9 @@ int CParamsManagerCompBase::FindFixedParamSetIndex(const QString& name) const
 // public methods of embedded class ParamSet
 
 CParamsManagerCompBase::ParamSet::ParamSet()
-:	CMultiModelBridgeBase(this),
-	isEnabled(true),
-	parentPtr(NULL)
+:	isEnabled(true),
+	parentPtr(NULL),
+	updateBridge(this)
 {
 }
 

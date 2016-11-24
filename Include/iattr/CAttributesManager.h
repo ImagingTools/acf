@@ -7,7 +7,7 @@
 
 // ACF includes
 #include <istd/TOptDelPtr.h>
-#include <imod/CMultiModelBridgeBase.h>
+#include <imod/CModelUpdateBridge.h>
 #include <iser/IArchive.h>
 #include <iser/IObject.h>
 #include <iser/CArchiveTag.h>
@@ -50,7 +50,7 @@ private:
 
 	const iser::IObjectFactory* m_attributesFactoryPtr;
 
-	imod::CMultiModelBridgeBase m_attributesUpdateBridge;
+	imod::CModelUpdateBridge m_attributesUpdateBridge;
 };
 
 

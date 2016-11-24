@@ -1,5 +1,5 @@
-#ifndef imod_CMultiModelBridgeBase_included
-#define imod_CMultiModelBridgeBase_included
+#ifndef imod_CModelUpdateBridge_included
+#define imod_CModelUpdateBridge_included
 
 
 // Qt includes
@@ -16,19 +16,19 @@ namespace imod
 
 
 /**
-	Reflects the changes of observed objects as changes of some other object, typically delegated to itself.
+	Reflects the changes of observed objects as changes of some other object (over istd::IChangeable), typically delegated to itself.
 	In other words: it allows to connect as observer to multiple models and call \c BeginChanges and \c EndChanges on some its changes.
 	\sa imod::CMultiModelDispatcherBase.
 
 	\ingroup ModelObserver
 
 */
-class CMultiModelBridgeBase: virtual public IObserver
+class CModelUpdateBridge: virtual public IObserver
 {
 public:
-	explicit CMultiModelBridgeBase(istd::IChangeable* changeablePtr);
+	explicit CModelUpdateBridge(istd::IChangeable* changeablePtr);
 
-	virtual ~CMultiModelBridgeBase();
+	virtual ~CModelUpdateBridge();
 
 	/**
 		Get access to connected model with the index \c index.
@@ -63,5 +63,5 @@ private:
 } // namespace imod
 
 
-#endif // !imod_CMultiModelBridgeBase_included
+#endif // !imod_CModelUpdateBridge_included
 

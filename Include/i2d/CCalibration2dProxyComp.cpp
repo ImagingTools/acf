@@ -12,7 +12,7 @@ namespace i2d
 
 
 CCalibration2dProxyComp::CCalibration2dProxyComp()
-:	imod::CMultiModelBridgeBase(this)
+:	m_updateBridge(this)
 {
 }
 
@@ -251,14 +251,14 @@ void CCalibration2dProxyComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_calibrationProviderCompPtr.IsValid() && m_calibrationProviderModelCompPtr.IsValid()){
-		m_calibrationProviderModelCompPtr->AttachObserver(this);
+		m_calibrationProviderModelCompPtr->AttachObserver(&m_updateBridge);
 	}
 }
 
 
 void CCalibration2dProxyComp::OnComponentDestroyed()
 {
-	EnsureModelsDetached();
+	m_updateBridge.EnsureModelsDetached();
 
 	BaseClass::OnComponentDestroyed();
 }

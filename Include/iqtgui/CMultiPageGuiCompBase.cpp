@@ -292,7 +292,7 @@ void CMultiPageGuiCompBase::OnPageChanged(int pageIndex)
 // public methods of the embedded class PageModel
 
 CMultiPageGuiCompBase::PageModel::PageModel()
-:	imod::CMultiModelBridgeBase(this),
+:	imod::CModelUpdateBridge(this),
 	m_parentPtr(NULL)
 {
 }

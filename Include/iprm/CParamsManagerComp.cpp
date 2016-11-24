@@ -60,8 +60,8 @@ bool CParamsManagerComp::SetSetsCount(int count)
 
 				imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
 				if (paramsModelPtr != NULL){
-					paramsModelPtr->AttachObserver(paramsSetPtr.GetPtr());
-					paramsModelPtr->AttachObserver(this);
+					paramsModelPtr->AttachObserver(&paramsSetPtr->updateBridge);
+					paramsModelPtr->AttachObserver(&m_updateBridge);
 				}
 
 				m_paramSets[i - fixedSetsCount].TakeOver(paramsSetPtr);
@@ -305,7 +305,7 @@ void CParamsManagerComp::OnComponentCreated()
 	for (int setIndex = 0; setIndex < fixedSetsCount; setIndex++){
 		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(m_fixedParamSetsCompPtr[setIndex]);
 		if (modelPtr != NULL){
-			modelPtr->AttachObserver(this);
+			modelPtr->AttachObserver(&m_updateBridge);
 		}
 	}
 
@@ -319,8 +319,8 @@ void CParamsManagerComp::OnComponentDestroyed()
 
 	for (int setIndex = 0; setIndex < fixedSetsCount; setIndex++){
 		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(m_fixedParamSetsCompPtr[setIndex]);
-		if (modelPtr != NULL && modelPtr->IsAttached(this)){
-			modelPtr->DetachObserver(this);
+		if (modelPtr != NULL && modelPtr->IsAttached(&m_updateBridge)){
+			modelPtr->DetachObserver(&m_updateBridge);
 		}
 	}
 

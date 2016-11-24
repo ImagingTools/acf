@@ -6,7 +6,7 @@ namespace i2d
 
 
 CStaticCalibrationProviderComp::CStaticCalibrationProviderComp()
-:	imod::CMultiModelBridgeBase(this)
+:	m_updateBridge(this)
 {
 }
 
@@ -32,14 +32,14 @@ void CStaticCalibrationProviderComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_calibrationModelCompPtr.IsValid()){
-		m_calibrationModelCompPtr->AttachObserver(this);
+		m_calibrationModelCompPtr->AttachObserver(&m_updateBridge);
 	}
 }
 
 
 void CStaticCalibrationProviderComp::OnComponentDestroyed()
 {
-	EnsureModelsDetached();
+	m_updateBridge.EnsureModelsDetached();
 
 	BaseClass::OnComponentDestroyed();
 }

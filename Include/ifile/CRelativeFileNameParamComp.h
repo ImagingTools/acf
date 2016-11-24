@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include <imod/CMultiModelBridgeBase.h>
+#include <imod/CModelUpdateBridge.h>
 #include <ifile/CFileNameParamComp.h>
 #include <ifile/IRelativeFilePath.h>
 
@@ -14,8 +14,7 @@ namespace ifile
 
 class CRelativeFileNameParamComp:
 			virtual public IRelativeFilePath,
-			public ifile::CFileNameParamComp,
-			protected imod::CMultiModelBridgeBase
+			public ifile::CFileNameParamComp
 {
 public:
 	typedef ifile::CFileNameParamComp BaseClass;
@@ -47,6 +46,8 @@ private:
 	I_REF(imod::IModel, m_relativeToModelCompPtr);
 
 	mutable QString m_relativePath;
+
+	imod::CModelUpdateBridge m_updateBridge;
 };
 
 

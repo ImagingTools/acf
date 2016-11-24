@@ -6,7 +6,7 @@ namespace iimg
 
 
 CComposedBitmapProviderComp::CComposedBitmapProviderComp()
-:	imod::CMultiModelBridgeBase(this)
+:	m_updateBridge(this)
 {
 }
 
@@ -54,7 +54,7 @@ void CComposedBitmapProviderComp::OnComponentCreated()
 	int descriptionsCount = m_bitmapDescriptionsAttrPtr.GetCount();
 
 	for (int bitmapIndex = 0; bitmapIndex < bitmapsCount; bitmapIndex++){
-		m_bitmapProviderModelsCompPtr[bitmapIndex]->AttachObserver(this);
+		m_bitmapProviderModelsCompPtr[bitmapIndex]->AttachObserver(&m_updateBridge);
 
 		QString optionName = QString("Bitmap %1").arg(bitmapIndex + 1);
 
@@ -76,7 +76,7 @@ void CComposedBitmapProviderComp::OnComponentCreated()
 
 void CComposedBitmapProviderComp::OnComponentDestroyed()
 {
-	EnsureModelsDetached();
+	m_updateBridge.EnsureModelsDetached();
 
 	BaseClass::OnComponentDestroyed();
 }

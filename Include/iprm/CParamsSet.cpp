@@ -16,9 +16,9 @@ namespace iprm
 
 
 CParamsSet::CParamsSet(const IParamsSet* slaveSetPtr)
-:	imod::CMultiModelBridgeBase(this),
-	m_paramsTypeId("Default"),
-	m_slaveSetPtr(slaveSetPtr)
+:	m_paramsTypeId("Default"),
+	m_slaveSetPtr(slaveSetPtr),
+	m_updateBridge(this)
 {
 }
 
@@ -31,8 +31,8 @@ bool CParamsSet::SetEditableParameter(const QByteArray& id, iser::ISerializable*
 			m_params.PushBack(new ParameterInfo(id, parameterPtr, releaseFlag));
 
 			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(parameterPtr);
-			if ((modelPtr != NULL) && !modelPtr->IsAttached(this)){
-				modelPtr->AttachObserver(this);
+			if ((modelPtr != NULL) && !modelPtr->IsAttached(&m_updateBridge)){
+				modelPtr->AttachObserver(&m_updateBridge);
 			}
 
 			return true;
@@ -306,7 +306,7 @@ bool CParamsSet::ResetData(CompatibilityMode /*mode*/)
 {
 	istd::CChangeNotifier notifier(this);
 
-	EnsureModelsDetached();
+	m_updateBridge.EnsureModelsDetached();
 
 	m_params.Reset();
 
