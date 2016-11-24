@@ -44,6 +44,7 @@ public:
 		I_ASSIGN(m_labelAttrPtr, "Label", "Label for the named object", false, "");
 		I_ASSIGN(m_labelPositionAttrPtr, "LabelPosition", "Selection label position. 0 - Left from the selector,\n1 - On top of the selector", false, LP_LEFT);
 		I_ASSIGN(m_regularExpressionAttrPtr, "InputFilter", "Input filter in form of a regular expression", false, "");
+		I_ASSIGN(m_updateOnEveryChangeAttrPtr, "UpdateOnEveryTextChange", "If set the model will be updated after every text change, else only if Enter pressed or focus lost", true, true);
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -57,11 +58,13 @@ public:
 
 private Q_SLOTS:
 	void OnNameChanged(const QString& text);
+	void OnNameEdited();
 
 private:
 	I_ATTR(QString, m_labelAttrPtr);
 	I_ATTR(int, m_labelPositionAttrPtr);
 	I_ATTR(QByteArray, m_regularExpressionAttrPtr);
+	I_ATTR(bool, m_updateOnEveryChangeAttrPtr);
 };
 
 

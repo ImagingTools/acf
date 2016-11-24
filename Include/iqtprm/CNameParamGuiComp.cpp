@@ -81,8 +81,13 @@ void CNameParamGuiComp::OnGuiCreated()
 
 	selectorLayoutPtr->addWidget(NameEdit);
 
+	if (*m_updateOnEveryChangeAttrPtr){
+		connect(NameEdit, SIGNAL(textChanged(const QString&)), this, SLOT(OnNameChanged(const QString&)));
+	}
+	else{
+		connect(NameEdit, SIGNAL(editingFinished()), this, SLOT(OnNameEdited()));
+	}
 
-	connect(NameEdit, SIGNAL(textChanged(const QString&)), this, SLOT(OnNameChanged(const QString&)));
 	if (m_regularExpressionAttrPtr.IsValid()){
 		QRegExp expression(*m_regularExpressionAttrPtr);
 
@@ -96,6 +101,12 @@ void CNameParamGuiComp::OnGuiCreated()
 // private slots
 
 void CNameParamGuiComp::OnNameChanged(const QString& /*text*/)
+{
+	DoUpdateModel();
+}
+
+
+void CNameParamGuiComp::OnNameEdited()
 {
 	DoUpdateModel();
 }

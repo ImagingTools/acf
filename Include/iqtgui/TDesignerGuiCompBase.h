@@ -59,6 +59,8 @@ QWidget* TDesignerGuiCompBase<UI, WidgetType>::CreateQtWidget(QWidget* parentPtr
 template <class UI, class WidgetType>
 void TDesignerGuiCompBase<UI, WidgetType>::OnGuiRetranslate()
 {
+	Q_ASSERT(IsGuiCreated());
+
 	WidgetType* widgetPtr = dynamic_cast<WidgetType*>(BaseClass::GetWidget());
 	if (widgetPtr != NULL){
 		UI::retranslateUi(widgetPtr);

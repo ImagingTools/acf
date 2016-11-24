@@ -58,6 +58,10 @@ bool CGuiApplicationComp::InitializeApplication(int argc, char** argv)
 	qputenv("QT_HIGHDPI_AWARE", "1");
 #endif
 
+#if QT_VERSION > 0x050600
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
+
 #if defined(Q_OS_MACX) && (QT_VERSION >= 0x040000) && (QT_VERSION < 0x050000)
 	QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, !*m_useMenuIconsOnMacAttrPtr);
 	qt_mac_set_menubar_icons(*m_useMenuIconsOnMacAttrPtr);

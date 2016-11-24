@@ -496,7 +496,7 @@ int CParamsManagerCompBase::FindFixedParamSetIndex(const QString& name) const
 		return -1;
 	}
 
-	int paramsCount = qMin(m_fixedParamSetsCompPtr.GetCount(), m_fixedSetNamesAttrPtr.GetCount());;
+	int paramsCount = qMin(m_fixedParamSetsCompPtr.GetCount(), m_fixedSetNamesAttrPtr.GetCount());
 	for (int i = 0; i < paramsCount; ++i){
 		if (m_fixedSetNamesAttrPtr[i] == name){
 			return i;
