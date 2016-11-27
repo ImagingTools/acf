@@ -156,6 +156,14 @@ void CAutoPersistenceComp::OnComponentCreated()
 		BaseClass2::RegisterModel(m_filePathModelCompPtr.GetPtr(), MI_FILEPATH);
 	}
 
+	if (m_storeOnBeginAttrPtr.IsValid() && *m_storeOnBeginAttrPtr && !QFile::exists(filePath)){
+		m_objectCompPtr.EnsureInitialized();
+		
+		if (m_objectCompPtr.IsValid()){
+			StoreObject(*m_objectCompPtr);
+		}
+	}
+
 	if (*m_reloadOnFileChangeAttrPtr){
 		m_fileWatcher.addPath(filePath);
 

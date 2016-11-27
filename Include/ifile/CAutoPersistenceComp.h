@@ -78,6 +78,7 @@ public:
 		I_ASSIGN(m_filePathCompPtr, "FilePath", "File path where object data will be stored if non anonymous loader is used", false, "FilePath");
 		I_ASSIGN_TO(m_filePathModelCompPtr, m_filePathCompPtr, false);
 		I_ASSIGN(m_restoreOnBeginAttrPtr, "RestoreOnBegin", "Flag indicating that object should be restored on begin", true, true);
+		I_ASSIGN(m_storeOnBeginAttrPtr, "StoreOnBegin", "Flag indicating that object should be stored on begin if the storage file doesn't exist", true, false);
 		I_ASSIGN(m_storeOnEndAttrPtr, "StoreOnEnd", "Flag indicating that object should be stored on end", true, true);
 		I_ASSIGN(m_storeOnChangeAttrPtr, "StoreOnChange", "Flag indicating that object should be stored on each data change", true, false);
 		I_ASSIGN(m_storeIntervalAttrPtr, "StoreInterval", "Time interval in seconds for automatic object storing", false, 10);
@@ -162,6 +163,12 @@ private:
 		Attribute for enabling the reading of the data object during component initialization (eg. on application's start)
 	*/
 	I_ATTR(bool, m_restoreOnBeginAttrPtr);
+
+	/**
+		Attribute for enabling the storing of the data object during component initialization (eg. on application's start).
+		The data object will be stored only if the storage file doesn't exist.
+	*/
+	I_ATTR(bool, m_storeOnBeginAttrPtr);
 
 	/**
 		Attribute for enabling the storing of the data object during component deinitialization (eg. on application's finish)

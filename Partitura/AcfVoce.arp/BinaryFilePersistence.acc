@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4358" Description="ACF"/>
+            <Version Id="1" Number="1687" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Simple XML-based persistence for automatic object serialization at begining and finalization of the application</Description>
@@ -13,10 +13,16 @@
         <Element Id="AutoPersistence" PackageId="FilePck" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="FileLoader" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="BinaryFileSerializer"/>
                     </AttributeInfo>
                     <AttributeInfo Id="FilePath" Type="Reference" ExportId="FilePath">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Object" Type="Reference" ExportId="Object">
@@ -29,6 +35,9 @@
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="StoreInterval" Type="Real" ExportId="StoreInterval">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="StoreOnBegin" Type="Boolean" ExportId="StoreOnBegin">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="StoreOnChange" Type="Boolean" ExportId="StoreOnChange">
