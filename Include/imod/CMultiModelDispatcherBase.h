@@ -34,6 +34,8 @@ public:
 		Register the data model to be observed. If model registration was successfull, the function returns \c true.
 		\param modelPtr	Pointer to the data model object, which should be observed.
 		\param modelId	Logical model ID for possible event filtering in the notification callback.
+						Each observed model must be registered with unique ID.
+						If you use the same ID twice, the previous connection will be disconnected.
 		\param relefantFlags	The notification will only be triggered if the value of \c relevantFlags matches the model change flags.
 	*/
 	bool RegisterModel(IModel* modelPtr, int modelId = 0, const istd::IChangeable::ChangeSet& relevantFlags = istd::IChangeable::GetAllChanges());

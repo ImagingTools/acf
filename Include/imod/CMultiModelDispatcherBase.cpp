@@ -16,10 +16,14 @@ bool CMultiModelDispatcherBase::RegisterModel(IModel* modelPtr, int modelId, con
 		proxyPtr.SetPtr(new ObserverProxy(this, modelId, relevantFlags));
 	}
 
-	if (!modelPtr->AttachObserver(proxyPtr.GetPtr())){
-		m_modelMap.remove(modelId);
+	if (!proxyPtr->IsModelAttached(modelPtr)){
+		proxyPtr->EnsureModelDetached();
 
-		return false;
+		if (!modelPtr->AttachObserver(proxyPtr.GetPtr())){
+			m_modelMap.remove(modelId);
+
+			return false;
+		}
 	}
 
 	return true;
