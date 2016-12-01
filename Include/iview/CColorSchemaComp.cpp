@@ -108,14 +108,14 @@ void CColorSchemaComp::OnComponentCreated()
 		QColor c;
 		c.setNamedColor(QString(*m_halfTransparentBrushColorAttrPtr));
 		c.setAlpha(50);
-		SetBrush(SB_BACKGROUND, QBrush(c));
+		SetBrush(SB_HALF_TRANSPARENT, QBrush(c));
 	}
 
 	if (m_halfTransparent2BrushColorAttrPtr.IsValid()){
 		QColor c;
 		c.setNamedColor(QString(*m_halfTransparent2BrushColorAttrPtr));
 		c.setAlpha(50);
-		SetBrush(SB_BACKGROUND, QBrush(c));
+		SetBrush(SB_HALF_TRANSPARENT2, QBrush(c));
 	}
 
 	if (m_normalFontFamilyAttrPtr.IsValid()){
