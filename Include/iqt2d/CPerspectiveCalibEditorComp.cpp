@@ -52,8 +52,8 @@ void CPerspectiveCalibEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 		iqt::CSignalBlocker block(GetWidget(), true);
 
 		Rotation11Spin->setValue(deform.GetAt(0, 0));
-		Rotation12Spin->setValue(deform.GetAt(1, 0));
-		Rotation21Spin->setValue(deform.GetAt(0, 1));
+		Rotation12Spin->setValue(deform.GetAt(0, 1));
+		Rotation21Spin->setValue(deform.GetAt(1, 0));
 		Rotation22Spin->setValue(deform.GetAt(1, 1));
 
 		TranslationXSpin->setValue(translation.GetX());
