@@ -13,7 +13,6 @@
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
-
 #include <iqt/iqt.h>
 
 
@@ -38,13 +37,13 @@ void CTranslationManagerComp::OnComponentCreated()
 
 	// create and install translations:
 	if (m_languagesAttrPtr.IsValid() && m_translationFilePrefixAttrPtr.IsValid()){
-		int languagesCount = GetLanguagesCount();
+		int languagesCount = m_languagesAttrPtr.GetCount();
 
 		QString translationsPath = *m_translationFilePathAttrPtr;
 		QString translationFilePrefix = *m_translationFilePrefixAttrPtr;
 
 		for (int translatorIndex = 0; translatorIndex < languagesCount; translatorIndex++){
-			QString languageId = m_languagesAttrPtr[translatorIndex];
+			QByteArray languageId = m_languagesAttrPtr[translatorIndex];
 
 			QString translatorFile = translationsPath + QString("/") + translationFilePrefix + QString("_") + languageId;
 
@@ -54,7 +53,21 @@ void CTranslationManagerComp::OnComponentCreated()
 				SendVerboseMessage(QString("Cannot load translator for: %1").arg(translatorFile), "TranslationManager");
 			}
 
-			m_translatorsList.PushBack(qtTranslatorPtr.PopPtr());
+			Translator translator;
+
+			translator.translatorPtr.SetPtr(qtTranslatorPtr.PopPtr());
+			translator.languageId = languageId;
+			
+			if (translatorIndex < m_languageNamesAttrPtr.GetCount()){
+				translator.languageName = m_languageNamesAttrPtr[translatorIndex];
+			}
+			else{
+				QLocale locale(languageId);
+
+				translator.languageName = QLocale::languageToString(locale.language());
+			}
+
+			m_translatorsList.push_back(translator);
 		}
 	}
 
@@ -75,7 +88,7 @@ void CTranslationManagerComp::OnComponentDestroyed()
 {
 	m_selectionObserver.EnsureModelDetached();
 
-	m_translatorsList.Reset();
+	m_translatorsList.clear();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -85,11 +98,7 @@ void CTranslationManagerComp::OnComponentDestroyed()
 
 int CTranslationManagerComp::GetLanguagesCount() const
 {
-	if (m_languagesAttrPtr.IsValid()){
-		return m_languagesAttrPtr.GetCount();
-	}
-
-	return 0;
+	return m_translatorsList.count();
 }
 
 
@@ -102,9 +111,9 @@ int CTranslationManagerComp::GetCurrentLanguageIndex() const
 const QTranslator* CTranslationManagerComp::GetLanguageTranslator(int languageIndex) const
 {
 	Q_ASSERT(languageIndex >= 0);
-	Q_ASSERT(languageIndex < m_translatorsList.GetCount());
+	Q_ASSERT(languageIndex < m_translatorsList.count());
 
-	return m_translatorsList.GetAt(languageIndex);
+	return m_translatorsList[languageIndex].translatorPtr.GetPtr();
 }
 
 
@@ -121,11 +130,11 @@ void CTranslationManagerComp::SwitchLanguage(int languageIndex)
 	}
 
 	if (m_currentLanguageIndex >= 0){
-		QCoreApplication::removeTranslator(m_translatorsList.GetAt(m_currentLanguageIndex));
+		QCoreApplication::removeTranslator(m_translatorsList[m_currentLanguageIndex].translatorPtr.GetPtr());
 	}
 
-	if (languageIndex >= 0 && languageIndex < m_translatorsList.GetCount()){
-		QCoreApplication::installTranslator(m_translatorsList.GetAt(languageIndex));
+	if (languageIndex >= 0 && languageIndex < m_translatorsList.count()){
+		QCoreApplication::installTranslator(m_translatorsList[languageIndex].translatorPtr.GetPtr());
 
 		m_currentLanguageIndex = languageIndex;
 	}
@@ -141,10 +150,8 @@ void CTranslationManagerComp::SetSystemLanguage()
 	QLocale local = QLocale::system();
 	QString defaultSystemLanguage = local.name();
 
-	int languagesCount = GetLanguagesCount();
-
-	for (int translatorIndex = 0; translatorIndex < languagesCount; translatorIndex++){
-		QString languageId = m_languagesAttrPtr[translatorIndex];
+	for (int translatorIndex = 0; translatorIndex < m_translatorsList.count(); translatorIndex++){
+		QString languageId = m_translatorsList[translatorIndex].languageId;
 		if (languageId == defaultSystemLanguage){
 			SwitchLanguage(translatorIndex);
 			break;
@@ -169,27 +176,10 @@ int CTranslationManagerComp::GetOptionsCount() const
 
 QString CTranslationManagerComp::GetOptionName(int index) const
 {
-	Q_ASSERT(index < GetOptionsCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_translatorsList.count());
 
-	if (index >= 0 && m_languagesAttrPtr.IsValid()){
-		if (m_languageNamesAttrPtr.IsValid()){
-			if (index < m_languageNamesAttrPtr.GetCount()){
-				return m_languageNamesAttrPtr[index];
-			}
-			else{
-				qDebug("Number of lange names mismatched");
-			}
-		}
-		else{
-			QString languageId = m_languagesAttrPtr[index];
-
-			QLocale locale(languageId);
-
-			return QLocale::languageToString(locale.language());
-		}
-	}
-
-	return QString();
+	return m_translatorsList[index].languageName;
 }
 
 
@@ -201,9 +191,10 @@ QString CTranslationManagerComp::GetOptionDescription(int /*index*/) const
 
 QByteArray CTranslationManagerComp::GetOptionId(int index) const
 {
-	Q_ASSERT(index < m_languagesAttrPtr.GetCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_translatorsList.count());
 
-	return m_languagesAttrPtr[index];
+	return m_translatorsList[index].languageId;
 }
 
 
