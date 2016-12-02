@@ -46,7 +46,8 @@ public:
 		I_ASSIGN(m_colorSchemaCompPtr, "ShapeColorSchema", "Color schema used by displayed shape", false, "ShapeColorSchema");
 		I_ASSIGN(m_fixedPositionAttrPtr, "FixedPosition", "If enabled, the shape position will be not editable", true, false);
 		I_ASSIGN(m_allowToolsMenuAttrPtr, "ShowTools", "Show extended shape edit tools", true, true);
-		I_ASSIGN(m_toolBarGuiCompPtr, "ToolBarGui", "Toolbar GUI object to fill with actions", false, "");
+		I_ASSIGN(m_toolBarGuiCompPtr, "ToolBarGui", "Toolbar GUI object to fill with actions", false, "ToolBarGui");
+		I_ASSIGN(m_shapeToolTipAttrPtr, "ShapeToolTip", "Tool tip will be show on console", false, "");
 	I_END_COMPONENT;
 
 	TShapeParamsGuiCompBase();
@@ -98,6 +99,7 @@ private:
 	I_ATTR(bool, m_fixedPositionAttrPtr);
 	I_ATTR(bool, m_allowToolsMenuAttrPtr);
 	I_REF(iqtgui::IGuiObject, m_toolBarGuiCompPtr);
+	I_ATTR(QString, m_shapeToolTipAttrPtr);
 
 	QMenu* m_menuPtr;
 	QAbstractButton* m_menuButtonPtr;
@@ -185,7 +187,11 @@ iview::IShape* TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShape(const
 		shapePtr->SetEditablePosition(!IsPositionFixed());
 
 		if (m_colorSchemaCompPtr.IsValid()){
-		shapePtr->SetUserColorSchema(m_colorSchemaCompPtr.GetPtr());
+			shapePtr->SetUserColorSchema(m_colorSchemaCompPtr.GetPtr());
+		}
+
+		if (m_shapeToolTipAttrPtr.IsValid()){
+			shapePtr->SetDefaultDescription(*m_shapeToolTipAttrPtr);
 		}
 
 		if (BaseClass::IsReadOnly()){
