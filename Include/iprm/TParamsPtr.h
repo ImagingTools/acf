@@ -161,6 +161,9 @@ void TParamsPtr<ParameterInterace>::Init(
 #endif
 		}
 	}
+	else if (isObligatory){
+		qDebug("Parameter set unavailable, cannot extract obligatory parameter %s", qPrintable(*parameterIdAttribute));
+	}
 
 	if (!BaseClass::IsValid() && defaultRef.IsValid()){
 		BaseClass::SetPtr(defaultRef.GetPtr());
