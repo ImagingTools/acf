@@ -14,6 +14,7 @@
 #endif
 
 // ACF includes
+#include <istd/CSystem.h>
 #include <iqtgui/CCommandTools.h>
 #include <iqtgui/CHierarchicalCommand.h>
 
@@ -92,7 +93,10 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 			if (m_frameSpaceSizeAttrPtr.IsValid()){
 				m_mainWidgetPtr.SetPtr(new QWidget());
 
-#if defined(Q_OS_MACX)
+				QString operationSystemName = istd::CSystem::GetOperationSystemName();
+				m_mainWidgetPtr->setProperty("OperatingSystem", operationSystemName);
+
+#if defined(Q_OS_OSX)
 				m_mainWidgetPtr->setAttribute(Qt::WA_MacNormalSize, true);
 #endif
 

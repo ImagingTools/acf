@@ -30,6 +30,20 @@ namespace iqtgui
 	Standard component for a Qt based GUI application.
 	You have several attributes to control the appearance and decoration of the application window,
 	you can define the splash screen and set some information about your application.
+
+	Some notes for using style sheets:
+	To make using of different style sheets according to the operation system possible, this component sets the property 'OperatingSystem' to the application's main widget.
+	Then you can you following syntax in your style sheet to to manage your content depend on currently running operation system:
+	\code
+	QWidget[OperatingSystem=OSX] QLabel{
+	font-size: 13pt;
+	}
+
+	QWidget[OperatingSystem=Windows] QLabel{
+	font-size: 8pt;
+	}
+	\endcode
+	Supported operation systems are: iOS, Unix, OSX and Windows. \sa istd::CSystem::GetOperationSystemName
 */
 class CGuiApplicationComp:
 			public QObject,

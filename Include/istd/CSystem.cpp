@@ -37,6 +37,24 @@ public:
 
 // public static methods
 
+QString CSystem::GetOperationSystemName()
+{
+	QString retVal;
+
+#if defined(Q_OS_WIN)
+	retVal = "Windows";
+#elif defined(Q_OS_UNIX)
+	retVal = "Unix";
+#elif defined(Q_OS_IOS)
+	retVal = "iOS";
+#elif defined(Q_OS_OSX)
+	retVal = "OSX";
+#endif
+
+	return retVal;
+}
+
+
 bool CSystem::ConvertToFileName(const QString& fileNameString, QString& fileName, const QString replacingChar)
 {
 	static char reservedCharacters[] = {

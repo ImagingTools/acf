@@ -47,6 +47,11 @@ public:
 	// static methods
 
 	/**
+		Get the name of the operation system currently used.
+	*/
+	static QString GetOperationSystemName();
+
+	/**
 		Make a valid file name from a string.
 		All not allowed characters in the \c fileNameString will be replaced by a valid symbol defined in c\replacingChar or removed if this parameter is not set.
 		\param fileNameString	Input string representing the file name
