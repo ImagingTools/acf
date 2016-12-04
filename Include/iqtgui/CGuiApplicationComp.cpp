@@ -93,13 +93,6 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 			if (m_frameSpaceSizeAttrPtr.IsValid()){
 				m_mainWidgetPtr.SetPtr(new QWidget());
 
-				QString operationSystemName = istd::CSystem::GetOperationSystemName();
-				m_mainWidgetPtr->setProperty("OperatingSystem", operationSystemName);
-
-#if defined(Q_OS_OSX)
-				m_mainWidgetPtr->setAttribute(Qt::WA_MacNormalSize, true);
-#endif
-
 				QVBoxLayout* frameLayout = new QVBoxLayout(m_mainWidgetPtr.GetPtr());
 
 				frameLayout->setMargin(*m_frameSpaceSizeAttrPtr);
@@ -112,6 +105,13 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 
 				m_mainWidgetPtr.SetPtr(m_mainGuiCompPtr->GetWidget());
 			}
+
+			QString operationSystemName = istd::CSystem::GetOperationSystemName();
+			m_mainWidgetPtr->setProperty("OperatingSystem", operationSystemName);
+
+#if defined(Q_OS_OSX)
+			m_mainWidgetPtr->setAttribute(Qt::WA_MacNormalSize, true);
+#endif
 
 			m_mainWidgetPtr->setWindowTitle(QCoreApplication::applicationName());
 			m_mainWidgetPtr->setWindowIcon(QApplication::windowIcon());
