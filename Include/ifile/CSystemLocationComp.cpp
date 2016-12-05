@@ -58,9 +58,9 @@ void CSystemLocationComp::OnComponentCreated()
 	QString applicationName = QCoreApplication::applicationName();
 	QString productName;
 	if (m_applicationInfoCompPtr.IsValid()){
-		organizationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
-		applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
-		productName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME);
+		organizationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME, false);
+		applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME, false);
+		productName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME, false);
 
 		QCoreApplication::setOrganizationName(organizationName);
 		QCoreApplication::setApplicationName(applicationName);
