@@ -146,23 +146,27 @@ void TParamsPtr<ParameterInterace>::Init(
 
 	BaseClass::Reset();
 
-	if (parameterSetPtr != NULL){
-		if (parameterIdAttribute.IsValid()){
+	if (parameterIdAttribute.IsValid()){
+		if (parameterSetPtr != NULL){
 			const iser::ISerializable* paramPtr = parameterSetPtr->GetParameter(*parameterIdAttribute);
 			const ParameterInterace* paramImplPtr = dynamic_cast<const ParameterInterace*>(paramPtr);
 			BaseClass::SetPtr(paramImplPtr);
 
 #if QT_VERSION >= 0x050000
-			I_IF_DEBUG(
-				if ((paramImplPtr == NULL) && (paramPtr != NULL)){
-					qDebug("Parameter %s in parameter set is not compatible, should be %s", qPrintable(*parameterIdAttribute), qPrintable(istd::CClassInfo::GetName<ParameterInterace>()));
-				}
-			)
+#ifndef QT_NO_DEBUG
+			if ((paramImplPtr == NULL) && (paramPtr != NULL)){
+				qDebug("Parameter %s in parameter set is not compatible, should be %s", qPrintable(*parameterIdAttribute), qPrintable(istd::CClassInfo::GetName<ParameterInterace>()));
+			}
+#endif
 #endif
 		}
-	}
-	else if (isObligatory){
-		qDebug("Parameter set unavailable, cannot extract obligatory parameter %s", qPrintable(*parameterIdAttribute));
+#if QT_VERSION >= 0x050000
+#ifndef QT_NO_DEBUG
+		else if (isObligatory){
+			qDebug("Parameter set unavailable, cannot extract obligatory parameter %s", qPrintable(*parameterIdAttribute));
+		}
+#endif
+#endif
 	}
 
 	if (!BaseClass::IsValid() && defaultRef.IsValid()){
@@ -170,26 +174,31 @@ void TParamsPtr<ParameterInterace>::Init(
 	}
 
 #if QT_VERSION >= 0x040800
-	I_IF_DEBUG(
-		if (!BaseClass::IsValid() && isObligatory){
-			QString debugMessage;
-			if (parameterIdAttribute.IsValid()){
-				iprm::IParamsSet::Ids existingParamIds = parameterSetPtr->GetParamIds();
-				QStringList existingIds;
-				for (iprm::IParamsSet::Ids::ConstIterator index = existingParamIds.constBegin(); index != existingParamIds.constEnd(); index++){
-					existingIds.push_back(*index);
-				}
+#ifndef QT_NO_DEBUG
+	if (!BaseClass::IsValid() && isObligatory){
+		QString debugMessage;
 
-				QString idList = existingIds.join(", ");
-
-				debugMessage = QString("Parameter %1 was not found in the parameter set and no default parameter is active. Following parameter IDs are registered: %2").arg(QString(*parameterIdAttribute)).arg(idList);
-			}
-			else{
-				debugMessage = QString("Parameter was not specified and no default parameter is active");
-			}
-			qDebug(qPrintable(debugMessage));
+		if (parameterSetPtr == NULL){
+			debugMessage = QString("There is no parameter set and no default parameter is active");
 		}
-	)
+		else if (parameterIdAttribute.IsValid()){
+			iprm::IParamsSet::Ids existingParamIds = parameterSetPtr->GetParamIds();
+			QStringList existingIds;
+			for (iprm::IParamsSet::Ids::ConstIterator index = existingParamIds.constBegin(); index != existingParamIds.constEnd(); index++){
+				existingIds.push_back(*index);
+			}
+
+			QString idList = existingIds.join(", ");
+
+			debugMessage = QString("Parameter %1 was not found in the parameter set and no default parameter is active. Following parameter IDs are registered: %2").arg(QString(*parameterIdAttribute)).arg(idList);
+		}
+		else{
+			debugMessage = QString("Parameter was not specified and no default parameter is active");
+		}
+
+		qDebug(qPrintable(debugMessage));
+	}
+#endif
 #endif
 }
 
