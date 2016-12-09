@@ -664,7 +664,7 @@ void CParamsManagerGuiCompBase::OnGuiModelAttached()
 	AddRemoveButtonsFrame->setVisible(areAddRemoveButtonsNeeded);
 	UpDownButtonsFrame->setVisible(areUpDownButtonsNeeded);
 
-	ButtonsFrame->setVisible(areAddRemoveButtonsNeeded && areUpDownButtonsNeeded);
+	ButtonsFrame->setVisible(areAddRemoveButtonsNeeded || areUpDownButtonsNeeded);
 }
 
 
@@ -746,8 +746,6 @@ void CParamsManagerGuiCompBase::AfterUpdate(imod::IModel* modelPtr, const istd::
 
 void CParamsManagerGuiCompBase::AttachCurrentExtender()
 {
-	DetachCurrentExtender();
-
 	iqt2d::IViewExtender* extenderPtr = GetCurrentViewExtenderPtr();
 	if (extenderPtr != NULL){
 		for (		ConnectedSceneFlags::const_iterator sceneIter = m_connectedSceneFlags.begin();
