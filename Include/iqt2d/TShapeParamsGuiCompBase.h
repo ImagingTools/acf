@@ -83,18 +83,19 @@ protected:
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
-	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiCreated();
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiDestroyed();
 	virtual void OnGuiShown();
 	virtual void OnGuiHidden();
 
-protected:
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
+
+private:
 	QMenu* m_menuPtr;
 	QAbstractButton* m_menuButtonPtr;
 
-private:
 	I_REF(imath::IUnitInfo, m_defaultUnitInfoCompPtr);
 	I_REF(iview::IColorSchema, m_colorSchemaCompPtr);
 	I_ATTR(bool, m_fixedPositionAttrPtr);
@@ -376,32 +377,19 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShapes(int /*sceneId*
 }
 
 
-// reimplemented (iqtgui::TGuiObserverWrap)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 template <class Ui, class Shape, class ShapeModel>
-void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiCreated()
+void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiDestroyed()
 {
-	BaseClass::OnGuiCreated();
-}
+	m_menuButtonPtr = NULL;
+	if (m_menuPtr != NULL){
+		m_menuPtr->deleteLater();
 
-
-template <class Ui, class Shape, class ShapeModel>
-void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	if (BaseClass::IsGuiShown()){
-		OnModelAttachedAndGuiShown(BaseClass::GetObservedModel());
+		m_menuPtr = NULL;
 	}
-}
 
-
-template <class Ui, class Shape, class ShapeModel>
-void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiModelDetached()
-{
-	OnModelDetachedOrGuiHidden(BaseClass::GetObservedModel());
-
-	BaseClass::OnGuiModelDetached();
+	BaseClass::OnGuiDestroyed();
 }
 
 
@@ -420,6 +408,28 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiHidden()
 	OnModelDetachedOrGuiHidden(BaseClass::GetObservedModel());
 
 	BaseClass::OnGuiHidden();
+}
+
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+template <class Ui, class Shape, class ShapeModel>
+void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	if (BaseClass::IsGuiShown()){
+		OnModelAttachedAndGuiShown(BaseClass::GetObservedModel());
+	}
+}
+
+
+template <class Ui, class Shape, class ShapeModel>
+void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiModelDetached()
+{
+	OnModelDetachedOrGuiHidden(BaseClass::GetObservedModel());
+
+	BaseClass::OnGuiModelDetached();
 }
 
 
