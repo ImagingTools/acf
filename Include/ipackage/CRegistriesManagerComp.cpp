@@ -178,7 +178,22 @@ const icomp::IRegistry* CRegistriesManagerComp::GetRegistry(const icomp::CCompon
 icomp::IComponentListProvider::ComponentAddresses CRegistriesManagerComp::GetComponentAddresses(int typeFlag) const
 {
 	ComponentAddresses retVal;
+
 	if ((typeFlag & CTF_COMPOSITE) != 0){
+		for (		CompositePackagesMap::ConstIterator packageIter = m_compositePackagesMap.constBegin();
+					packageIter != m_compositePackagesMap.constEnd();
+					++packageIter){
+			const QByteArray& packageId = packageIter.key();
+			const CompositePackageInfo& packageInfo = packageIter.value();
+
+			for (		ComponentIdToRegistryFileMap::ConstIterator componentIter = packageInfo.componentIdToRegistryFileMap.constBegin();
+						componentIter != packageInfo.componentIdToRegistryFileMap.constEnd();
+						++componentIter){
+				const QByteArray& componentId = componentIter.key();
+
+				retVal.insert(icomp::CComponentAddress(packageId, componentId));
+			}
+		}
 	}
 
 	return retVal;
@@ -268,6 +283,7 @@ void CRegistriesManagerComp::RegisterPackageFile(const QString& file, int defini
 			}
 
 			packageInfo.directory = packageDir;
+			packageInfo.definitionLevel = definitionLevel;
 		}
 		else if (foundIter.value().directory.canonicalPath() != fileInfo.canonicalFilePath()){
 			SendWarningMessage(
