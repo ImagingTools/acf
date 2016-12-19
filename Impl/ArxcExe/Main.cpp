@@ -33,7 +33,7 @@ static void ShowUsage()
 	std::cout << "\t-check_real                  - check if used real packages exist" << std::endl;
 	std::cout << "\t-no_binary                   - disable generating of binary coded registries" << std::endl;
 	std::cout << "\t-conf_name name              - name of configuration, e.g. 'DebugVC12_64'" << std::endl;
-	std::cout << "\t-translate [off|project|all] - control generation of translation macros, default is 'all'" << std::endl;
+	std::cout << "\t-translate [off|project|all] - control generation of translation macros, default is 'project'" << std::endl;
 	std::cout << "\t-h or -help                  - showing this help" << std::endl;
 }
 
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 	QString configName;
 	bool verboseEnabled = false;
 	int workingMode = 0;
-	int translateMode = -1;
+	int translateMode = 1;
 	bool useBinaryCode = true;
 	bool checkRealPackages = false;
 
