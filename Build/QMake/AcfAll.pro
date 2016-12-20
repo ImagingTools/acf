@@ -81,12 +81,6 @@ SUBDIRS += ipackage
 ipackage.file = ../../Include/ipackage/QMake/ipackage.pro
 
 
-# Translation
-
-SUBDIRS += AcfLoc
-AcfLoc.file = ../../Impl/AcfLoc/QMake/AcfLoc.pro
-
-
 # Component packages (build only for desktop platforms)
 !macx-ios*{
 	SUBDIRS += BasePck
@@ -123,3 +117,8 @@ AcfLoc.file = ../../Impl/AcfLoc/QMake/AcfLoc.pro
 	Arxc.file = ../../Impl/ArxcExe/QMake/Arxc.pro
 	Arxc.depends = Acf
 }
+
+# Translation
+
+SUBDIRS += AcfLoc
+AcfLoc.file = ../../Impl/AcfLoc/QMake/AcfLoc.pro
