@@ -35,10 +35,10 @@ public:
 		I_ASSIGN(m_commandSelectionCompPtr, "CommandsSelection", "Commands selector and contstraints provider", true, "CommandsSelection");
 		I_ASSIGN_TO(m_commandSelectionModelCompPtr, m_commandSelectionCompPtr, true);
 		I_ASSIGN(m_actionIconsProviderCompPtr, "ActionIcons", "Icons for the region actions", false, "ActionIcons");
-		I_ASSIGN(m_noSelectionCommandAttrPtr, "UnselectActionName", "The name of the unselect action", false, "UnselectActionName");
-		I_ASSIGN(m_menuNameAttrPtr, "MenuName", "Name of the menu for the action group", true, "MenuName");
-		I_ASSIGN(m_menuDescriptionAttrPtr, "MenuDescription", "Description for the action group", true, "MenuDescription");
-		I_ASSIGN(m_rootMenuNameAttrPtr, "RootMenu", "Name of the root command", true, "RootMenu");
+		I_ASSIGN(m_noSelectionCommandAttrPtr, "UnselectActionName", "The name of the unselect action", false, "Deselect");
+		I_ASSIGN(m_menuNameAttrPtr, "MenuName", "Name of the menu for the action group", true, "Selection");
+		I_ASSIGN(m_menuDescriptionAttrPtr, "MenuDescription", "Description for the action group", true, "");
+		I_ASSIGN(m_rootMenuNameAttrPtr, "RootMenu", "Name of the root command", true, "");
 		I_ASSIGN(m_showInToolBarAttrPtr, "ShowInToolBar", "If enabled, the action will be shown in the application's tool bar", false, false);
 	I_END_COMPONENT;
 
@@ -65,10 +65,10 @@ protected:
 	I_REF(iprm::ISelectionParam, m_commandSelectionCompPtr);
 	I_REF(imod::IModel, m_commandSelectionModelCompPtr);
 	I_REF(iqtgui::IIconProvider, m_actionIconsProviderCompPtr);
-	I_ATTR(QString, m_noSelectionCommandAttrPtr);
-	I_ATTR(QString, m_menuNameAttrPtr);
-	I_ATTR(QString, m_menuDescriptionAttrPtr);
-	I_ATTR(QString, m_rootMenuNameAttrPtr);
+	I_TEXTATTR(m_noSelectionCommandAttrPtr);
+	I_TEXTATTR(m_menuNameAttrPtr);
+	I_TEXTATTR(m_menuDescriptionAttrPtr);
+	I_TEXTATTR(m_rootMenuNameAttrPtr);
 	I_ATTR(bool, m_showInToolBarAttrPtr);
 
 	iqtgui::CHierarchicalCommand m_rootMenuCommand;

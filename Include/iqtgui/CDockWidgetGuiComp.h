@@ -56,7 +56,7 @@ private:
 	I_ATTR(int, m_dockAreaAttrPtr);
 	I_ATTR(int, m_dockFeaturesAttrPtr);
 	I_ATTR(int, m_allowedDockAreasAttrPtr);
-	I_ATTR(QString, m_dockTitleAttrPtr);
+	I_TEXTATTR(m_dockTitleAttrPtr);
 };
 
 

@@ -101,7 +101,7 @@ private:
 	I_ATTR(bool, m_fixedPositionAttrPtr);
 	I_ATTR(bool, m_allowToolsMenuAttrPtr);
 	I_REF(iqtgui::IGuiObject, m_toolBarGuiCompPtr);
-	I_ATTR(QString, m_shapeToolTipAttrPtr);
+	I_TEXTATTR(m_shapeToolTipAttrPtr);
 };
 
 

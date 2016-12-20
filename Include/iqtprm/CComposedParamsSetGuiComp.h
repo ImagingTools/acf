@@ -93,7 +93,7 @@ private:
 	I_MULTIREF(iview::IShapeFactory, m_shapeFactoriesCompPtr);
 	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 	I_MULTIATTR(QByteArray, m_idsAttrPtr);
-	I_MULTIATTR(QString, m_namesAttrPtr);
+	I_MULTITEXTATTR(m_namesAttrPtr);
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
 	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
 	I_ATTR(bool, m_showAllShapesAttrPtr);

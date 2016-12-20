@@ -39,7 +39,7 @@ public:
 private:
 	I_ATTR(int, m_versionIdAttrPtr);
 	I_ATTR(int, m_versionNumberAttrPtr);
-	I_ATTR(QString, m_versionIdDescriptionAttrPtr);
+	I_TEXTATTR(m_versionIdDescriptionAttrPtr);
 	I_MULTIATTR(int, m_knownVersionsAttrPtr);
 	I_MULTIATTR(QString, m_knownVersionNamesAttrPtr);
 	I_ATTR(bool, m_isExtensionUsedAttrPtr);

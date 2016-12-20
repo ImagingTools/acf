@@ -74,7 +74,7 @@ private:
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
 	I_MULTIREF(iqt2d::IViewExtender, m_extendersCompPtr);
 	I_MULTIATTR(QByteArray, m_idsAttrPtr);
-	I_MULTIATTR(QString, m_namesAttrPtr);
+	I_MULTITEXTATTR(m_namesAttrPtr);
 	I_ATTR(bool, m_showAllShapesAttrPtr);
 
 	typedef QMap<imod::IModelEditor*, bool> ConnectedEditorsMap;

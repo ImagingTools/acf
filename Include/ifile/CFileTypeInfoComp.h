@@ -41,13 +41,13 @@ public:
 
 private:
 	I_MULTIATTR(QString, m_fileExtensionsAttrPtr);
-	I_MULTIATTR(QString, m_typeDescriptionsAttrPtr);
+	I_MULTITEXTATTR(m_typeDescriptionsAttrPtr);
 	I_MULTIATTR(QString, m_fileExtensionsWinAttrPtr);
-	I_MULTIATTR(QString, m_typeDescriptionsWinAttrPtr);
+	I_MULTITEXTATTR(m_typeDescriptionsWinAttrPtr);
 	I_MULTIATTR(QString, m_fileExtensionsMacAttrPtr);
-	I_MULTIATTR(QString, m_typeDescriptionsMacAttrPtr);
+	I_MULTITEXTATTR(m_typeDescriptionsMacAttrPtr);
 	I_MULTIATTR(QString, m_fileExtensionsUnxAttrPtr);
-	I_MULTIATTR(QString, m_typeDescriptionsUnxAttrPtr);
+	I_MULTITEXTATTR(m_typeDescriptionsUnxAttrPtr);
 };
 
 

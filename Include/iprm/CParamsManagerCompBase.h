@@ -44,10 +44,10 @@ public:
 
 protected:
 	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
-	I_MULTIATTR(QString, m_fixedSetNamesAttrPtr);
-	I_MULTIATTR(QString, m_fixedSetDescriptionsAttrPtr);
+	I_MULTITEXTATTR(m_fixedSetNamesAttrPtr);
+	I_MULTITEXTATTR(m_fixedSetDescriptionsAttrPtr);
 	I_MULTIATTR(QByteArray, m_fixedSetIdsAttrPtr);
-	I_ATTR(QString, m_defaultSetNameAttrPtr);
+	I_TEXTATTR(m_defaultSetNameAttrPtr);
 	I_ATTR(bool, m_serializeSelectionAttrPtr);
 	I_ATTR(int, m_defaultSelectedIndexAttrPtr);
 	I_ATTR(bool, m_allowDisabledAttrPtr);

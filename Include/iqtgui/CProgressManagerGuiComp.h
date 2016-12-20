@@ -59,7 +59,7 @@ protected Q_SLOTS:
 private:
 	I_ATTR(bool, m_showCancelAttrPtr);
 	I_ATTR(bool, m_automaticHideAttrPtr);
-	I_ATTR(QString, m_descriptionAttrPtr);
+	I_TEXTATTR(m_descriptionAttrPtr);
 
 	bool m_isCanceled;
 

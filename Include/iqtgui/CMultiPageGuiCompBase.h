@@ -180,7 +180,7 @@ protected:
 	I_MULTIREF(imod::IModel, m_slaveWidgetsModelCompPtr);
 	I_MULTIREF(iprm::IEnableableParam, m_pageActivatorsCompPtr);
 	I_MULTIREF(imod::IModel, m_pageActivatorsModelCompPtr);
-	I_MULTIATTR(QString, m_pageNamesAttrPtr);
+	I_MULTITEXTATTR(m_pageNamesAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
 	I_ATTR(bool, m_useSameStretchingFactorAttrPtr);

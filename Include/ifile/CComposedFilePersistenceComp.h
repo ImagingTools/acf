@@ -63,7 +63,7 @@ protected:
 
 private:
 	I_MULTIREF(ifile::IFilePersistence, m_slaveLoadersCompPtr);
-	I_ATTR(QString, m_commonDescriptionAttrPtr);
+	I_TEXTATTR(m_commonDescriptionAttrPtr);
 
 	mutable QFileInfo m_lastOpenInfo;
 	mutable QFileInfo m_lastSaveInfo;

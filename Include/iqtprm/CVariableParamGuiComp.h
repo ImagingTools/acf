@@ -70,7 +70,7 @@ private:
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
 	I_MULTIREF(iqt2d::IViewExtender, m_extendersCompPtr);
 	I_MULTIATTR(QString, m_typeIdsAttrPtr);
-	I_MULTIATTR(QString, m_typeNamesAttrPtr);
+	I_MULTITEXTATTR(m_typeNamesAttrPtr);
 
 	typedef QMap<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;

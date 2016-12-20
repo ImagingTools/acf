@@ -50,13 +50,13 @@ protected:
 	virtual QString GetEncodedVersionName(int versionId, quint32 versionNumber) const;
 
 private:
-	I_ATTR(QString, m_companyNameAttrPtr);
-	I_ATTR(QString, m_productNameAttrPtr);
-	I_ATTR(QString, m_productEditionAttrPtr);
-	I_ATTR(QString, m_applicationNameAttrPtr);
-	I_ATTR(QString, m_applicationSubnameAttrPtr);
-	I_ATTR(QString, m_applicationTypeAttrPtr);
-	I_ATTR(QString, m_legalCopyrightAttrPtr);
+	I_TEXTATTR(m_companyNameAttrPtr);
+	I_TEXTATTR(m_productNameAttrPtr);
+	I_TEXTATTR(m_productEditionAttrPtr);
+	I_TEXTATTR(m_applicationNameAttrPtr);
+	I_TEXTATTR(m_applicationSubnameAttrPtr);
+	I_TEXTATTR(m_applicationTypeAttrPtr);
+	I_TEXTATTR(m_legalCopyrightAttrPtr);
 	I_ATTR(int, m_mainVersionIdAttrPtr);
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
 };

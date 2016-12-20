@@ -71,8 +71,8 @@ protected:
 	I_REF(ifile::IFilePersistence, m_documentPersistenceCompPtr);
 	I_REF(ifile::IFilePersistenceInfo, m_documentPersistenceInfoCompPtr);
 	I_ATTR(QByteArray, m_documentTypeIdAttrPtr);
-	I_ATTR(QString, m_importCommandNameAttrPtr);
-	I_ATTR(QString, m_exportCommandNameAttrPtr);
+	I_TEXTATTR(m_importCommandNameAttrPtr);
+	I_TEXTATTR(m_exportCommandNameAttrPtr);
 };
 
 

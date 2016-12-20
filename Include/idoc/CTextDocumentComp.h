@@ -42,7 +42,7 @@ protected:
 private:
 	QString m_text;
 
-	I_ATTR(QString, m_defaultTextAttrPtr);
+	I_TEXTATTR(m_defaultTextAttrPtr);
 };
 
 

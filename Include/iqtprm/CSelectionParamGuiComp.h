@@ -140,8 +140,8 @@ private:
 	void ApplyFilterToProxyModel(const QString& filter) const;
 
 private:
-	I_ATTR(QString, m_optionsLabelAttrPtr);
-	I_ATTR(QString, m_infoLabelAttrPtr);
+	I_TEXTATTR(m_optionsLabelAttrPtr);
+	I_TEXTATTR(m_infoLabelAttrPtr);
 	I_ATTR(int, m_uiModeAttrPtr);
 	I_ATTR(int, m_labelPositionAttrPtr);
 	I_ATTR(int, m_labelAlignAttrPtr);

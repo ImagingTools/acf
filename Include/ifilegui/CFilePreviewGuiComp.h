@@ -92,7 +92,7 @@ protected:
 	I_REF(iqtgui::IGuiObject, m_objectGuiCompPtr);	
 	I_REF(istd::IChangeable, m_currentPreviewObjectCompPtr);
 	I_ATTR(bool, m_isAsynchronPreviewGenerationEnabledAttrPtr);
-	I_ATTR(QString, m_noAvailableLabelAttrPtr);
+	I_TEXTATTR(m_noAvailableLabelAttrPtr);
 	I_ATTR(QByteArray, m_noAvailableIconPathAttrPtr);
 
 	QFileSystemWatcher m_fileSystemObserver;

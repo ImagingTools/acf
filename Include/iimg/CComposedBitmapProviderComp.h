@@ -48,8 +48,8 @@ protected:
 private:
 	I_MULTIREF(iimg::IBitmapProvider, m_bitmapProvidersCompPtr);
 	I_MULTIREF(imod::IModel, m_bitmapProviderModelsCompPtr);
-	I_MULTIATTR(QString, m_bitmapLabelsAttrPtr);
-	I_MULTIATTR(QString, m_bitmapDescriptionsAttrPtr);
+	I_MULTITEXTATTR(m_bitmapLabelsAttrPtr);
+	I_MULTITEXTATTR(m_bitmapDescriptionsAttrPtr);
 
 	imod::CModelUpdateBridge m_updateBridge;
 };

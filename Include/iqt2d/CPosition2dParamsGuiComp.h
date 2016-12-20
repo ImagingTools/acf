@@ -52,9 +52,9 @@ protected Q_SLOTS:
 	void OnActionTriggered(QAction* actionPtr);
 
 private:
-	I_ATTR(QString, m_altrnativeStrAttrPtr);
-	I_ATTR(QString, m_xLabelStrAttrPtr);
-	I_ATTR(QString, m_yLabelStrAttrPtr);
+	I_TEXTATTR(m_altrnativeStrAttrPtr);
+	I_TEXTATTR(m_xLabelStrAttrPtr);
+	I_TEXTATTR(m_yLabelStrAttrPtr);
 };
 
 

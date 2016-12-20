@@ -39,8 +39,8 @@ public:
 	virtual bool IsOptionEnabled(int index) const;
 
 private:
-	I_MULTIATTR(QString, m_optionNamesAttrPtr);
-	I_MULTIATTR(QString, m_optionDescriptionsAttrPtr);
+	I_MULTITEXTATTR(m_optionNamesAttrPtr);
+	I_MULTITEXTATTR(m_optionDescriptionsAttrPtr);
 	I_MULTIATTR(QByteArray, m_optionIdsAttrPtr);
 };
 

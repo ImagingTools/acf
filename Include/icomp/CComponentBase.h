@@ -206,11 +206,21 @@ inline bool CComponentBase::IsComponentActive() const
 	\li \c double
 	\li \c QByteArray
 	\li \c QString (will be compiled by ARX compiler using translation function 'tr')
+	Please use \c I_TEXTATTR for translateable text attributes
 	\ingroup Main
 	\ingroup ComponentConcept
 */
 #define I_ATTR(attrType, member)\
 	I_USER_ATTR(iattr::TAttribute< attrType >, member)
+
+/**
+	Declare translatable text attribute member.
+	Please use \c I_ATTR with QString parameter for non translateable text attributes
+	\ingroup Main
+	\ingroup ComponentConcept
+*/
+#define I_TEXTATTR(member)\
+	I_USER_ATTR(iattr::TAttribute<QString>, member)
 
 /**
 	Declare multiple user type attribute member.
@@ -231,7 +241,15 @@ inline bool CComponentBase::IsComponentActive() const
 	\ingroup ComponentConcept
 */
 #define I_MULTIATTR(attrType, member)\
-	I_USER_MULTIATTR(iattr::TMultiAttribute<attrType>, member)
+	I_USER_MULTIATTR(iattr::TMultiAttribute< attrType >, member)
+
+/**
+	Declare translatable multiple text attribute member.
+	Please use \c I_MULTIATTR with QString parameter for non translateable list of text attributes
+	\ingroup ComponentConcept
+*/
+#define I_MULTITEXTATTR(member)\
+	I_USER_MULTIATTR(iattr::TMultiAttribute<QString>, member)
 
 /**
 	Declare single reference to another component.

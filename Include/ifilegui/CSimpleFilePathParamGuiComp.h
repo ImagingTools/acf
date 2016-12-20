@@ -59,8 +59,8 @@ private:
 	bool IsLabelNeeded() const;
 
 private:
-	I_ATTR(QString, m_pathLabelAttrPtr);
-	I_ATTR(QString, m_startHintAttrPtr);
+	I_TEXTATTR(m_pathLabelAttrPtr);
+	I_TEXTATTR(m_startHintAttrPtr);
 	I_ATTR(bool, m_readOnlyAttrPtr);
 	I_ATTR(bool, m_filesComboAttrPtr);
 	I_ATTR(int, m_labelWidthAttrPtr);

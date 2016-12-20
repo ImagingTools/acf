@@ -48,7 +48,7 @@ protected:
 	I_ATTR(bool, m_showProductTypeAttrPtr);
 	I_ATTR(bool, m_showLegalCopyrightAttrPtr);
 	I_MULTIATTR(int, m_versionIdsAttrPtr);
-	I_MULTIATTR(QString, m_versionNamesAttrPtr);
+	I_MULTITEXTATTR(m_versionNamesAttrPtr);
 };
 
 

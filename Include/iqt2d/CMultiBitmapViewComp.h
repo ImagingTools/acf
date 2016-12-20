@@ -140,7 +140,7 @@ protected:
 
 	I_MULTIREF(iqt2d::IViewExtender, m_viewExtendersCompPtr);
 
-	I_MULTIATTR(QString, m_viewLabelPrefixesAttrPtr);
+	I_MULTITEXTATTR(m_viewLabelPrefixesAttrPtr);
 	I_ATTR(bool, m_showStatusLabelAttrPtr);
 
 	I_ATTR(bool, m_showStatusBackgroundAttrPtr);

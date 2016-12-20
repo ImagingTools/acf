@@ -43,7 +43,7 @@ protected Q_SLOTS:
 	void on_EnableableCheck_stateChanged(int state);
 
 private:
-	I_ATTR(QString, m_enableableLabelAttrPtr);
+	I_TEXTATTR(m_enableableLabelAttrPtr);
 };
 
 

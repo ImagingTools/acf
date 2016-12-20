@@ -67,7 +67,7 @@ private:
 	I_ATTR(bool, m_isNewSupportedAttrPtr);
 	I_ATTR(bool, m_isEditSupportedAttrPtr);
 	I_ATTR(QByteArray, m_documentTypeIdAttrPtr);
-	I_ATTR(QString, m_documentTypeNameAttrPtr);
+	I_TEXTATTR(m_documentTypeNameAttrPtr);
 	I_ATTR(QString, m_defaultDirectoryAttrPtr);
 	I_FACT(istd::IChangeable, m_documentCompFact);
 	I_FACT(imod::IModel, m_modelCompFact);

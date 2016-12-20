@@ -141,7 +141,7 @@ private:
 	void MakeAutoSlotConnection();
 
 	I_ATTR(QString, m_defaultStatusIconPathAttrPtr);
-	I_ATTR(QString, m_defaultStatusTextAttrPtr);
+	I_TEXTATTR(m_defaultStatusTextAttrPtr);
 	I_ATTR(QString, m_styleSheetPathAttrPtr);
 	I_ATTR(QByteArray, m_objectIdAttrPtr);
 	I_ATTR(int, m_fixedWidthAttrPtr);

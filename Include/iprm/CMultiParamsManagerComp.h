@@ -94,8 +94,8 @@ private:
 
 private:
 	I_MULTIFACT(iprm::IParamsSet, m_paramSetsFactoriesPtr);
-	I_MULTIATTR(QString, m_factoryNameNameAttrPtr);
-	I_MULTIATTR(QString, m_factoryDescriptionAttrPtr);
+	I_MULTITEXTATTR(m_factoryNameNameAttrPtr);
+	I_MULTITEXTATTR(m_factoryDescriptionAttrPtr);
 };
 
 

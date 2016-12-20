@@ -61,7 +61,7 @@ private Q_SLOTS:
 	void OnNameEdited();
 
 private:
-	I_ATTR(QString, m_labelAttrPtr);
+	I_TEXTATTR(m_labelAttrPtr);
 	I_ATTR(int, m_labelPositionAttrPtr);
 	I_ATTR(QByteArray, m_regularExpressionAttrPtr);
 	I_ATTR(bool, m_updateOnEveryChangeAttrPtr);

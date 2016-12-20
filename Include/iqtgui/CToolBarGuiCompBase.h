@@ -55,7 +55,7 @@ private:
 	I_ATTR(bool, m_useVerticalOrientationAttrPtr);
 	I_ATTR(int, m_dockFeaturesAttrPtr);
 	I_ATTR(int, m_allowedDockAreasAttrPtr);
-	I_ATTR(QString, m_titleAttrPtr);
+	I_TEXTATTR(m_titleAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(int, m_buttonStyleAttrPtr);
 };
