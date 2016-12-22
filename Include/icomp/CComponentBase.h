@@ -72,7 +72,7 @@ protected:
 	static QByteArray GetComponentId(const icomp::IComponentContext* componentContextPtr, const QByteArray& contextId = QByteArray());
 
 private:
-	CComponentBase(const CComponentBase& /*component*/){}
+	Q_DISABLE_COPY(CComponentBase)
 
 	const IComponentContext* m_contextPtr;
 	const ICompositeComponent* m_parentPtr;

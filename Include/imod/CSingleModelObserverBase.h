@@ -72,6 +72,8 @@ protected:
 	static const istd::IChangeable::ChangeSet s_undoChanges;
 
 private:
+	Q_DISABLE_COPY(CSingleModelObserverBase)
+
 	imod::IModel* m_modelPtr;
 
 	istd::IChangeable::ChangeSet m_observedIds;
