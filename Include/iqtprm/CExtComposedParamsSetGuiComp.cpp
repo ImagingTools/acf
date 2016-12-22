@@ -271,6 +271,8 @@ void CExtComposedParamsSetGuiComp::OnGuiModelAttached()
 		// add or remove gui items to the container
 		if (keepVisible){
 			CreatePage(i);
+
+			EnsurePageInitialized(i);
 		}
 		else{
 			RemovePage(i);
