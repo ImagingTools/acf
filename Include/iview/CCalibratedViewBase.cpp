@@ -6,7 +6,6 @@
 
 // ACF includes
 #include <i2d/CRectangle.h>
-#include <i2d/CNoneCalibration2d.h>
 #include <iview/IViewRulersAccessor.h>
 #include <iview/IColorSchema.h>
 #include <iview/IVisualizable.h>

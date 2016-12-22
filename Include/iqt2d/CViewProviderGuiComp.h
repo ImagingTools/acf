@@ -8,7 +8,6 @@
 #include <iqtgui/TGuiComponentBase.h>
 #include <iview/IColorSchema.h>
 #include <iview/CConsoleGui.h>
-#include <iview/CAffiniteCalibrationShape.h>
 #include <iqt2d/IViewProvider.h>
 
 
@@ -112,8 +111,6 @@ protected:
 	I_ATTR(int, m_fitModeAttrPtr);
 	I_ATTR(int, m_backgroundModeAttrPtr);
 	I_ATTR(bool, m_fullScreenModeSupportedAttrPtr);
-
-	iview::CAffiniteCalibrationShape m_calibrationShape;
 };
 
 

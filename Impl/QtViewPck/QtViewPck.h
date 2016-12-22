@@ -10,9 +10,6 @@
 #include <iview/CShapeInfoGuiComp.h>
 #include <iview/CSimpleShapeFactoryComp.h>
 #include <iview/CColorSchemaComp.h>
-#include <iview/CNoneCalibrationShape.h>
-#include <iview/CAffiniteCalibrationShape.h>
-#include <iview/CPerspectiveCalibrationShape.h>
 #include <iqt2d/TViewExtenderDelegatorCompWrap.h>
 #include <iqt2d/TMultiViewExtenderDelegatorCompWrap.h>
 #include <iqt2d/CSceneConnectorGuiComp.h>
@@ -35,7 +32,6 @@
 #include <iqt2d/CAffineTransformationParamsGuiComp.h>
 #include <iqt2d/CMultiBitmapViewComp.h>
 #include <iqt2d/CArcParamsGuiComp.h>
-#include <iqt2d/CPerspectiveCalibEditorComp.h>
 
 
 /**
@@ -49,9 +45,6 @@ typedef icomp::TModelCompWrap<iview::CShapeStatusInfoComp> ShapeStatusInfo;
 typedef iview::CShapeInfoGuiComp ShapeInfoGui;
 typedef iview::CSimpleShapeFactoryComp SimpleShapeFactory;
 typedef iview::CColorSchemaComp ColorSchema;
-typedef icomp::TMakeComponentWrap<iview::CNoneCalibrationShape, iview::IShape, imod::IObserver, iview::IVisualizable, iview::ITouchable> NoneCalibrationShape;
-typedef ibase::TMakeModelObserverCompWrap<iview::CAffiniteCalibrationShape, iview::IShape, imod::IObserver, iview::IVisualizable, iview::ITouchable> AffiniteCalibrationShape;
-typedef ibase::TMakeModelObserverCompWrap<iview::CPerspectiveCalibrationShape, iview::IShape, imod::IObserver, iview::IVisualizable, iview::ITouchable> PerspectiveCalibrationShape;
 typedef iqt2d::CViewExtenderDelegatorComp SceneExtenderDelegator;
 typedef iqt2d::CMultiViewExtenderDelegatorComp MultiSceneExtenderDelegator;
 typedef iqt2d::CSceneConnectorGuiComp SceneConnector;
@@ -74,7 +67,6 @@ typedef iqt2d::CTubePolylineParamsGuiComp TubePolylineParamsGui;
 typedef iqt2d::CAffineTransformationParamsGuiComp AffineTransformationParamsGui;
 typedef iqt2d::CMultiBitmapViewComp MultiBitmapView;
 typedef iqt2d::CArcParamsGuiComp ArcParamsGui;
-typedef iqt2d::CPerspectiveCalibEditorComp PerspectiveCalibEditor;
 
 
 } // namespace QtViewPck

@@ -55,11 +55,7 @@
 #include <i2d/CQuadrangleComp.h>
 #include <i2d/CPolygonComp.h>
 #include <i2d/CPolylineComp.h>
-#include <i2d/CAffineCalibration2dComp.h>
-#include <i2d/CPerspectiveCalibration2dComp.h>
-#include <i2d/CStaticCalibrationProviderComp.h>
 #include <i2d/CTubePolylineComp.h>
-#include <i2d/CCalibration2dProxyComp.h>
 #include <i2d/CArcComp.h>
 
 #include <imath/CSampledFunction2d.h>
@@ -118,11 +114,7 @@ typedef icomp::TModelCompWrap<i2d::CLine2dComp> Line;
 typedef icomp::TModelCompWrap<i2d::CQuadrangleComp> Quadrangle;
 typedef icomp::TModelCompWrap<i2d::CPolygonComp> Polygon;
 typedef icomp::TModelCompWrap<i2d::CPolylineComp> Polyline;
-typedef icomp::TModelCompWrap<i2d::CAffineCalibration2dComp> AffineCalibration2d;
-typedef icomp::TModelCompWrap<i2d::CPerspectiveCalibration2dComp> PerspectiveCalibration2d;
-typedef icomp::TModelCompWrap<i2d::CStaticCalibrationProviderComp> StaticCalibrationProvider;
 typedef icomp::TModelCompWrap<i2d::CTubePolylineComp> TubePolyline;
-typedef icomp::TModelCompWrap<i2d::CCalibration2dProxyComp> Calibration2dProxy;
 typedef icomp::TModelCompWrap<i2d::CArcComp> Arc;
 
 typedef icomp::TMakeComponentWrap<

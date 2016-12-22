@@ -204,29 +204,9 @@ I_EXPORT_COMPONENT(
 			"Polyline2D Object Parameter" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));
 
 I_EXPORT_COMPONENT(
-			AffineCalibration2d,
-			"Affine calibration",
-			"Affine Calibration Tranformation" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));
-
-I_EXPORT_COMPONENT(
-			PerspectiveCalibration2d,
-			"Perspectivic calibration",
-			"Perspective Calibration Tranformation" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));
-
-I_EXPORT_COMPONENT(
-			StaticCalibrationProvider,
-			"Provider of a static calibration object",
-			"2D Tranformation Calibration" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
-
-I_EXPORT_COMPONENT(
 			TubePolyline,
 			"Tube representation",
 			"2D Tube Polyline Region" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
-
-I_EXPORT_COMPONENT(
-			Calibration2dProxy,
-			"Proxy of a 2D calibration using calibration provider",
-			"2D Tranformation Calibration Proxy Provider" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
 
 I_EXPORT_COMPONENT(
 			Arc,

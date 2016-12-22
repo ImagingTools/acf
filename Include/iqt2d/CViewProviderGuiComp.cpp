@@ -98,9 +98,6 @@ void CViewProviderGuiComp::OnGuiCreated()
 	if (m_calibrationShapeCompPtr.IsValid()){
 		view.ConnectCalibrationShape(m_calibrationShapeCompPtr.GetPtr());
 	}
-	else{
-		view.ConnectCalibrationShape(&m_calibrationShape);
-	}
 
 	if (m_backgroundModeAttrPtr.IsValid()){
 		switch (*m_backgroundModeAttrPtr){
