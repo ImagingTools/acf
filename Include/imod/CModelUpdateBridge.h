@@ -26,7 +26,23 @@ namespace imod
 class CModelUpdateBridge: virtual public IObserver
 {
 public:
-	explicit CModelUpdateBridge(istd::IChangeable* changeablePtr);
+	/**
+		Flags to control the change set using for the change notification of the target object.
+	*/
+	enum UpdateFlags
+	{
+		/**
+			Change notification of the target object will be done using change set containing CF_DELEGATED flag only.
+		*/
+		UF_DELEGATED = 0x1,
+
+		/**
+			Change notification of the target object will be done using change set of observered object.
+		*/
+		UF_SOURCE = 0x2
+	};
+
+	explicit CModelUpdateBridge(istd::IChangeable* changeablePtr, int updateFlags = UF_DELEGATED);
 
 	virtual ~CModelUpdateBridge();
 
@@ -57,6 +73,8 @@ private:
 	Models m_models;
 
 	istd::IChangeable* m_changeablePtr;
+
+	int m_updateFlags;
 };
 
 

@@ -7,8 +7,9 @@ namespace imod
 
 // public methods
 
-CModelUpdateBridge::CModelUpdateBridge(istd::IChangeable* changeablePtr)
-:	m_changeablePtr(changeablePtr)
+CModelUpdateBridge::CModelUpdateBridge(istd::IChangeable* changeablePtr, int updateFlags)
+:	m_changeablePtr(changeablePtr),
+	m_updateFlags(updateFlags)
 {
 }
 
@@ -92,15 +93,29 @@ void CModelUpdateBridge::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr))
 {
 	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
-	m_changeablePtr->BeginChanges(istd::IChangeable::GetDelegatedChanges());
+	istd::IChangeable::ChangeSet changeSet = istd::IChangeable::GetAnyChange();
+	if (m_updateFlags & UF_DELEGATED){
+		changeSet = istd::IChangeable::GetDelegatedChanges();
+	}
+
+	m_changeablePtr->BeginChanges(changeSet);
 }
 
 
-void CModelUpdateBridge::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), const istd::IChangeable::ChangeSet& /*changeSet*/)
+void CModelUpdateBridge::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), const istd::IChangeable::ChangeSet& changeSet)
 {
 	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
-	m_changeablePtr->EndChanges(istd::IChangeable::GetDelegatedChanges());
+	istd::IChangeable::ChangeSet changes;
+	if (m_updateFlags & UF_DELEGATED){
+		changes += istd::IChangeable::GetDelegatedChanges();
+	}
+
+	if (m_updateFlags & UF_SOURCE){
+		changes += changeSet;
+	}
+
+	m_changeablePtr->EndChanges(changes);
 }
 
 
