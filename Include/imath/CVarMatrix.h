@@ -90,6 +90,11 @@ public:
 	void GetMultiplied(const CVarMatrix& matrix, CVarMatrix& result) const;
 
 	/**
+		Get result of multiplication of two matrices.
+	*/
+	CVarMatrix GetMultiplied(const CVarMatrix& matrix) const;
+
+	/**
 		Get result of multiplication of this matrix with scalar value.
 	*/
 	void GetScaled(double value, CVarMatrix& result) const;
@@ -108,6 +113,11 @@ public:
 		Transpose matrix.
 	*/
 	void Transpose();
+
+	/**
+		Get trace of this matrix.
+	*/
+	double GetTrace() const;
 
 	/*
 		Get square of euclidean norm.
@@ -153,6 +163,12 @@ public:
 	bool GetSolvedLSP(const CVarMatrix& vector, CVarMatrix& result, double minHhNorm = I_BIG_EPSILON) const;
 
 	/**
+		Calculate decomposition in form of QDQ where \c Q is orthogonal matrix and \c D is diagonal one.
+		It works for square matrix only.
+	*/
+	bool GetDecompositionQDQ(CVarMatrix& matrixQ, CVarVector& diagonalD, double tolerance = I_BIG_EPSILON, int maxIterations = 100) const;
+
+	/**
 		Get single column as vector.
 	*/
 	void GetColumnVector(int columnIndex, CVarVector& result);
@@ -192,6 +208,16 @@ public:
 
 
 // inline methods
+
+inline CVarMatrix CVarMatrix::GetMultiplied(const CVarMatrix& matrix) const
+{
+	CVarMatrix result;
+
+	GetMultiplied(matrix, result);
+
+	return result;
+}
+
 
 inline void CVarMatrix::Transpose()
 {

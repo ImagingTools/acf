@@ -249,6 +249,11 @@ public:
 	*/
 	void Transpose();
 
+	/**
+		Get trace of this matrix.
+	*/
+	double GetTrace() const;
+
 	/*
 		Get square of euclidean norm.
 	*/
@@ -273,6 +278,12 @@ public:
 				TMatrix<Height, Height, Element>* matrixQPtr = NULL,
 				int maxColumns = -1,
 				double minHhNorm = I_BIG_EPSILON) const;
+
+	/**
+		Calculate decomposition in form of QDQ where \c Q is orthogonal matrix and \c D is diagonal one.
+		It works for square matrix only.
+	*/
+	bool GetDecompositionQDQ(TMatrix<Height, Height, Element>& matrixQ, TVector<Height, Element>& diagonalD, double tolerance = I_BIG_EPSILON, int maxIterations = 100) const;
 
 	/**
 		Get single column as vector.
@@ -774,6 +785,20 @@ void TMatrix<Width, Height, Element>::GetTransposed(TMatrix<Height, Width, Eleme
 
 
 template <int Width, int Height, typename Element>
+double TMatrix<Width, Height, Element>::GetTrace() const
+{
+	int commonSize = qMin(Width, Height);
+
+	double retVal = 0;
+	for (int i = 0; i < commonSize; ++i){
+		retVal += m_elements[i][i];
+	}
+
+	return retVal;
+}
+
+
+template <int Width, int Height, typename Element>
 double TMatrix<Width, Height, Element>::GetFrobeniusNorm2() const
 {
 	double retVal = 0.0;
@@ -792,6 +817,51 @@ template <int Width, int Height, typename Element>
 double TMatrix<Width, Height, Element>::GetFrobeniusNorm() const
 {
 	return qSqrt(GetFrobeniusNorm2());
+}
+
+
+template <int Width, int Height, typename Element>
+bool TMatrix<Width, Height, Element>::GetDecompositionQDQ(TMatrix<Height, Height, Element>& matrixQ, TVector<Height, Element>& diagonalD, double tolerance, int maxIterations) const
+{
+	if (Width != Height){
+		return false;
+	}
+
+	TMatrix<Width, Height, Element> matrixR = *this;
+	matrixQ.Clear();
+
+	for (int i = 0; i < maxIterations; ++i){
+		TMatrix<Width, Height, Element> tempMatrixR;
+		TMatrix<Height, Height, Element> tempMatrixQ;
+		if (!matrixR.GetTriangleDecomposed(tempMatrixR, &tempMatrixQ)){
+			return false;
+		}
+		matrixR = tempMatrixR.GetMultiplied(tempMatrixQ);
+
+		matrixQ = tempMatrixQ.GetMultiplied(matrixQ);
+
+		double residue = 0;
+		istd::CIndex2d index;
+		for (index[0] = 0; index[0] < size.GetX(); ++index[0]){
+			for (index[1] = 0; index[1] < size.GetX(); ++index[1]){
+				if (index[0] != index[1]){
+					double element = matrixR.GetAt(index);
+
+					residue += element * element;
+				}
+			}
+		}
+
+		if (residue <= tolerance){
+			for (int i = 0; i < Height; ++i){
+				diagonalD[i] = matrixR.GetAt(i, i);
+			}
+
+			return true;
+		}
+	}
+
+	return false;
 }
 
 

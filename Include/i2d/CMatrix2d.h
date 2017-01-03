@@ -106,9 +106,10 @@ public:
 	CMatrix2d GetTransposed() const;
 
 	/**
-		Calculate decomposition in form of QDQ where \c Q is orthogonal matrix and \c D is diagonal one.
+		Calculate eigen vectors and eigen values.
+		The first eigen value is always bigger or equal than the second one.
 	*/
-	bool GetDecompositionQDQ(i2d::CMatrix2d& matrixQ, i2d::CVector2d& diagonalD);
+	bool GetEigenVectors(i2d::CVector2d& vector1, i2d::CVector2d& vector2, double& value1, double& value2) const;
 
 	/**
 		Calculate determinant of deformation matrix.

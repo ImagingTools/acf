@@ -96,31 +96,6 @@ bool CMatrix3d::GetInverted(CMatrix3d& result) const
 }
 
 
-bool CMatrix3d::GetDecompositionQDQ(CMatrix3d& matrixQ, CVector3d& diagonalD)
-{
-	CMatrix3d matrixR = *this;
-	matrixQ.Reset();
-
-	int i;
-	for (i = 0; i < 100; ++i){
-		CMatrix3d tempMatrixR;
-		CMatrix3d tempMatrixQ;
-		if (!matrixR.GetTriangleDecomposed(tempMatrixR, &tempMatrixQ)){
-			return false;
-		}
-		matrixR = tempMatrixR.GetMultiplied(tempMatrixQ);
-
-		matrixQ = tempMatrixQ.GetMultiplied(matrixQ);
-	}
-
-	for (i = 0; i < 3; ++i){
-		diagonalD[i] = matrixR.GetAt(i, i);
-	}
-
-	return true;
-}
-
-
 // static members
 
 CMatrix3d CMatrix3d::s_identity(1.0, 0.0, 0.0,

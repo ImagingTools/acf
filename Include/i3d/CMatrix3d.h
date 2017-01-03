@@ -102,11 +102,6 @@ public:
 	CMatrix3d GetTransposed() const;
 
 	/**
-		Calculate decomposition in form of QDQ where \c Q is orthogonal matrix and \c D is diagonal one.
-	*/
-	bool GetDecompositionQDQ(i3d::CMatrix3d& matrixQ, i3d::CVector3d& diagonalD);
-
-	/**
 		Calculate determinant of deformation matrix.
 	*/
 	double GetDet() const;

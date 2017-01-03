@@ -230,6 +230,23 @@ void CVarMatrix::GetTransposed(CVarMatrix& result) const
 }
 
 
+double CVarMatrix::GetTrace() const
+{
+	istd::CIndex2d size = GetSizes();
+
+	int commonSize = qMin(size.GetX(), size.GetY());
+
+	double retVal = 0;
+	for (int i = 0; i < commonSize; ++i){
+		double value = GetAt(istd::CIndex2d(i, i));
+
+		retVal += value;
+	}
+
+	return retVal;
+}
+
+
 double CVarMatrix::GetFrobeniusNorm2() const
 {
 	istd::CIndex2d size = GetSizes();
@@ -446,6 +463,53 @@ bool CVarMatrix::GetSolvedLSP(const CVarMatrix& vector, CVarMatrix& result, doub
 
 	if (GetTriangleDecomposed(matrixR, &matrixQY, -1, accuracy)){
 		return matrixR.GetSolvedTriangle(matrixQY, result, accuracy);
+	}
+
+	return false;
+}
+
+
+bool CVarMatrix::GetDecompositionQDQ(CVarMatrix& matrixQ, CVarVector& diagonalD, double tolerance, int maxIterations) const
+{
+	istd::CIndex2d size = GetSizes();
+
+	if (size.GetX() != size.GetY()){
+		return false;
+	}
+
+	CVarMatrix matrixR = *this;
+	matrixQ.SetSizes(size);
+	matrixQ.Clear();
+
+	for (int i = 0; i < maxIterations; ++i){
+		CVarMatrix tempMatrixR;
+		CVarMatrix tempMatrixQ;
+		if (!matrixR.GetTriangleDecomposed(tempMatrixR, &tempMatrixQ)){
+			return false;
+		}
+		matrixR = tempMatrixR.GetMultiplied(tempMatrixQ);
+
+		matrixQ = tempMatrixQ.GetMultiplied(matrixQ);
+
+		double residue = 0;
+		istd::CIndex2d index;
+		for (index[0] = 0; index[0] < size.GetX(); ++index[0]){
+			for (index[1] = 0; index[1] < size.GetX(); ++index[1]){
+				if (index[0] != index[1]){
+					double element = matrixR.GetAt(index);
+
+					residue += element * element;
+				}
+			}
+		}
+
+		if (residue <= tolerance){
+			for (int i = 0; i < size.GetX(); ++i){
+				diagonalD[i] = matrixR.GetAt(istd::CIndex2d(i, i));
+			}
+
+			return true;
+		}
 	}
 
 	return false;

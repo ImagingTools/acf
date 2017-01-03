@@ -111,28 +111,40 @@ bool CMatrix2d::GetInverted(CMatrix2d& result) const
 }
 
 
-bool CMatrix2d::GetDecompositionQDQ(CMatrix2d& matrixQ, CVector2d& diagonalD)
+bool CMatrix2d::GetEigenVectors(i2d::CVector2d& vector1, i2d::CVector2d& vector2, double& value1, double& value2) const
 {
-	CMatrix2d matrixR = *this;
-	matrixQ.Reset();
+	double trace = GetTrace();
+	double det = GetDet();
 
-	int i;
-	for (i = 0; i < 100; ++i){
-		CMatrix2d tempMatrixR;
-		CMatrix2d tempMatrixQ;
-		if (!matrixR.GetTriangleDecomposed(tempMatrixR, &tempMatrixQ)){
-			return false;
+	double delta = trace * trace - 4 * det;
+	if (delta >= 0){
+		double deltaSqrt = qSqrt(delta);
+
+		value1 = (trace + deltaSqrt) * 0.5;
+		value2 = (trace - deltaSqrt) * 0.5;
+
+		double a = GetAt(0, 0);
+		double b = GetAt(1, 0);
+		double c = GetAt(0, 1);
+		double d = GetAt(1, 1);
+
+		if (qFabs(c) > I_BIG_EPSILON){
+			vector1 = CVector2d(value1 - d, c);
+			vector2 = CVector2d(value2 - d, c);
 		}
-		matrixR = tempMatrixR.GetMultiplied(tempMatrixQ);
+		else if (qFabs(b) > I_BIG_EPSILON){
+			vector1 = CVector2d(b, value1 - a);
+			vector2 = CVector2d(b, value2 - a);
+		}
+		else{
+			vector1 = CVector2d(1, 0);
+			vector2 = CVector2d(0, 1);
+		}
 
-		matrixQ = tempMatrixQ.GetMultiplied(matrixQ);
+		return true;
 	}
 
-	for (i = 0; i < 2; ++i){
-		diagonalD[i] = matrixR.GetAt(i, i);
-	}
-
-	return true;
+	return false;
 }
 
 
