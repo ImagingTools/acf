@@ -654,6 +654,8 @@ bool CRectangle::GetTransformed(
 {
 	CRectangle* resultRectanglePtr = dynamic_cast<CRectangle*>(&result);
 	if (resultRectanglePtr != NULL){
+		*resultRectanglePtr = *this;
+
 		return resultRectanglePtr->Transform(transformation, mode, errorFactorPtr);
 	}
 
@@ -669,6 +671,8 @@ bool CRectangle::GetInvTransformed(
 {
 	CRectangle* resultRectanglePtr = dynamic_cast<CRectangle*>(&result);
 	if (resultRectanglePtr != NULL){
+		*resultRectanglePtr = *this;
+
 		return resultRectanglePtr->InvTransform(transformation, mode, errorFactorPtr);
 	}
 
