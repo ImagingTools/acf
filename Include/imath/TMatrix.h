@@ -842,8 +842,8 @@ bool TMatrix<Width, Height, Element>::GetDecompositionQDQ(TMatrix<Height, Height
 
 		double residue = 0;
 		istd::CIndex2d index;
-		for (index[0] = 0; index[0] < size.GetX(); ++index[0]){
-			for (index[1] = 0; index[1] < size.GetX(); ++index[1]){
+		for (index[0] = 0; index[0] < Width; ++index[0]){
+			for (index[1] = 0; index[1] < Width; ++index[1]){
 				if (index[0] != index[1]){
 					double element = matrixR.GetAt(index);
 
