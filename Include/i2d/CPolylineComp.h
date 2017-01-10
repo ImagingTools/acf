@@ -27,7 +27,7 @@ public:
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN_MULTI_0(m_xAttrPtr, "X", "X-Positions of the poly-line points", true);
 		I_ASSIGN_MULTI_0(m_yAttrPtr, "Y", "Y-Positions of the poly-line points", true);
-		I_ASSIGN(m_isClosedAttrPtr, "IsClosed", "Indicate if poly-line should be initially closed", true, true);
+		I_ASSIGN(m_isClosedAttrPtr, "IsClosed", "Indicate if poly-line should be initially closed", true, false);
 	I_END_COMPONENT;
 
 protected:
