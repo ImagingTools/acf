@@ -49,23 +49,16 @@ iqtgui::IGuiObject* CMultiParamsManagerGuiComp::GetEditorGuiPtr(const iprm::IPar
 
 	QByteArray paramTypeId = paramsSetPtr->GetFactoryId();
 
-	int foundTypeIndex = -1;
-	int registeredTypesCount = m_paramsSetTypeIdsAttrPtr.GetCount();
-
-	for (int typeIndex = 0; typeIndex < registeredTypesCount; typeIndex++){
+	int typesCount = qMin(m_paramsSetTypeIdsAttrPtr.GetCount(), m_paramsGuiCompPtr.GetCount());
+	for (int typeIndex = 0; typeIndex < typesCount; typeIndex++){
 		QByteArray typeId = m_paramsSetTypeIdsAttrPtr[typeIndex];
 
 		if (typeId == paramTypeId){
-			foundTypeIndex = typeIndex;
-			break;
+			return m_paramsGuiCompPtr[typeIndex];
 		}
 	}
 
-	if ((foundTypeIndex < 0) || (foundTypeIndex >= m_paramsGuiCompPtr.GetCount())){
-		return NULL;
-	}
-
-	return m_paramsGuiCompPtr[foundTypeIndex];
+	return NULL;
 }
 
 
