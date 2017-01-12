@@ -63,7 +63,7 @@ protected:
 
 	// reimplemented (iqtgui::CMultiPageGuiCompBase)
 	virtual void CreatePages();
-	virtual void OnPageChanged(int index);
+	virtual void OnPageChanged(int widgetIndex);
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();

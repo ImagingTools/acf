@@ -196,11 +196,12 @@ void CExtComposedParamsSetGuiComp::CreatePages()
 }
 
 
-void CExtComposedParamsSetGuiComp::OnPageChanged(int index)
+void CExtComposedParamsSetGuiComp::OnPageChanged(int widgetIndex)
 {
+	int pageIndex = GetLogicalPageIndex(widgetIndex);
 	int currentPageIndex = m_pageModel.GetSelectedOptionIndex();
 
-	if (index != currentPageIndex){
+	if (pageIndex != currentPageIndex){
 		for (ConnectedSceneFlags::const_iterator iter = m_connectedSceneFlags.begin();
 				iter != m_connectedSceneFlags.end();
 				++iter){
@@ -209,7 +210,7 @@ void CExtComposedParamsSetGuiComp::OnPageChanged(int index)
 			DetachFromScene(providerPtr);
 		}
 
-		m_pageModel.SetSelectedOptionIndex(index);
+		m_pageModel.SetSelectedOptionIndex(pageIndex);
 
 		for (ConnectedSceneFlags::const_iterator iter = m_connectedSceneFlags.begin();
 				iter != m_connectedSceneFlags.end();
@@ -238,11 +239,14 @@ void CExtComposedParamsSetGuiComp::OnGuiModelAttached()
 
 	bool keepGlobalVisible = false;
 
-	int elementsCount = qMin(m_observersCompPtr.GetCount(), m_idsAttrPtr.GetCount());
-	for (int i = 0; i < elementsCount; ++i){
-		const QByteArray& paramId = m_idsAttrPtr[i];
-
+	int pagesCount = BaseClass::GetPagesCount();
+	for (int i = 0; i < pagesCount; ++i){
 		bool keepVisible = true;
+
+		QByteArray paramId;
+		if (i < m_idsAttrPtr.GetCount()){
+			paramId = m_idsAttrPtr[i];
+		}
 
 		if (!paramId.isEmpty()){
 			imod::IModel* parameterModelPtr = GetObservedModel();
@@ -253,7 +257,10 @@ void CExtComposedParamsSetGuiComp::OnGuiModelAttached()
 				keepVisible = (parameterPtr != NULL);
 			}
 
-			imod::IObserver* observerPtr = m_observersCompPtr[i];
+			imod::IObserver* observerPtr = NULL;
+			if (i < m_observersCompPtr.GetCount()){
+				observerPtr = m_observersCompPtr[i];
+			}
 
 			if ((parameterModelPtr != NULL) && (observerPtr != NULL) && !parameterModelPtr->IsAttached(observerPtr)){
 				if (parameterModelPtr->AttachObserver(observerPtr)){

@@ -46,6 +46,20 @@ bool CMultiPageGuiCompBase::EnsurePageInitialized(int pageIndex)
 
 // protected methods
 
+int CMultiPageGuiCompBase::GetLogicalPageIndex(int physicalWidgetIndex) const
+{
+	for (		PageIndexToInfoMap::ConstIterator pageInfoIter = m_pageIndexToInfoMap.constBegin();
+				pageInfoIter != m_pageIndexToInfoMap.constEnd();
+				++pageInfoIter){
+		if (pageInfoIter->widgetIndex == physicalWidgetIndex){
+			return pageInfoIter.key();
+		}
+	}
+
+	return -1;
+}
+
+
 bool CMultiPageGuiCompBase::CreatePage(int pageIndex)
 {
 	Q_ASSERT(pageIndex >= 0);
@@ -247,7 +261,7 @@ QWidget* CMultiPageGuiCompBase::CreateQtWidget(QWidget* parentPtr)
 
 	connect(widgetPtr, SIGNAL(EmitPageIndexChanged(int)), this, SLOT(OnPageChanged(int)));
 
-	m_pageModel.SetSelectedOptionIndex(widgetPtr->GetCurrentPage());
+	m_pageModel.SetSelectedOptionIndex(GetLogicalPageIndex(widgetPtr->GetCurrentPage()));
 
 	return widgetPtr;
 }
@@ -322,8 +336,9 @@ void CMultiPageGuiCompBase::OnModelChanged(int /*modelId*/, const istd::IChangea
 
 // protected slots
 
-void CMultiPageGuiCompBase::OnPageChanged(int pageIndex)
+void CMultiPageGuiCompBase::OnPageChanged(int widgetIndex)
 {
+	int pageIndex = GetLogicalPageIndex(widgetIndex);
 	if (pageIndex > 0){
 		EnsurePageInitialized(pageIndex);
 	}
