@@ -5,232 +5,279 @@
     <name>Attribute</name>
     <message>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+28"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+28"/>
         <source>About</source>
         <translation>O programie</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>Files</source>
         <translation>Pliki</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>FileExplorer</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>File Selector</source>
         <translation>Selektor Pliku</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+8"/>
         <source>Log</source>
         <translation>Protokół</translation>
     </message>
     <message>
         <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="-6"/>
         <source>:/Icons/Info</source>
         <translation></translation>
     </message>
     <message>
         <location line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+4"/>
         <source>Log XML file</source>
         <translation>Plik XML Protokołu</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="-2"/>
         <source>alog</source>
         <translation></translation>
     </message>
     <message>
         <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+6"/>
         <source>.</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>Progress</source>
         <translation>Postęp</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>$(AppName) by $(CompanyName)</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
+        <location line="+2"/>
         <source>:/Translations</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>ACF</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.1</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.2</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.3</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.4</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.5</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.6</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.7</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.8</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>0.9.9</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.0.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.0.1</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.1.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.2.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.3.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.4.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.4.1</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.5.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.5.1</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.5.2</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.5.3</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.5.4</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.6.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.6.1</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.6.2</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.6.3</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.6.4</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.6.5</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.7.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.8.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>1.9.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>2.0.0</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>2.0.1</source>
         <translation></translation>
     </message>
@@ -944,29 +991,25 @@
 <context>
     <name>CPerspectiveCalibEditorComp</name>
     <message>
-        <location filename="../../../Include/iqt2d/CPerspectiveCalibEditorComp.ui" line="+29"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+175"/>
         <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+175"/>
         <source>Rotation Matrix</source>
         <translation>Macież rotacji</translation>
     </message>
     <message>
-        <location line="+73"/>
-        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+1"/>
+        <location line="+1"/>
         <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+1"/>
         <source>Translation</source>
         <translation>Translacja</translation>
     </message>
     <message>
-        <location line="+41"/>
-        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+1"/>
+        <location line="+1"/>
         <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+1"/>
         <source>Perspective</source>
         <translation>Perspektywa</translation>
     </message>
     <message>
-        <location line="+47"/>
-        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+1"/>
+        <location line="+1"/>
         <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+1"/>
         <source>Calibrate</source>
         <translation>Kalibruj</translation>
@@ -2606,7 +2649,7 @@
 <context>
     <name>iqtgui::CGuiApplicationComp</name>
     <message>
-        <location filename="../../../Include/iqtgui/CGuiApplicationComp.cpp" line="+140"/>
+        <location filename="../../../Include/iqtgui/CGuiApplicationComp.cpp" line="+138"/>
         <source>Quit</source>
         <translation>Zakończ</translation>
     </message>
