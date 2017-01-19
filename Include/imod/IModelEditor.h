@@ -41,7 +41,7 @@ public:
 		Updates model from editor.
 		This method will be called only if GUI is connected and model is attached.
 	*/
-	virtual void UpdateModel() const = 0;
+	virtual void UpdateModelFromEditor() const = 0;
 
 	/**
 		Returns \c true if the model data can be changed.

@@ -7,21 +7,6 @@ namespace iqt2d
 // public methods
 
 
-void CAffineTransformationParamsGuiComp::UpdateModel() const
-{
-	Q_ASSERT(IsGuiCreated());
-
-	i2d::CAffineTransformation2d* objectPtr = dynamic_cast<i2d::CAffineTransformation2d*>(GetObservedObject());
-	if (objectPtr != NULL){
-		i2d::CVector2d translation(TranslationSpinX->value(), TranslationSpinY->value());
-		if (objectPtr->GetTransformation().GetTranslation() != translation){
-			istd::CChangeNotifier notifier(objectPtr);
-			objectPtr->Reset(translation);
-		}
-	}
-}
-
-
 void CAffineTransformationParamsGuiComp::CreateShapes(int sceneId, Shapes& result)
 {
 	BaseClass::CreateShapes(sceneId, result);
@@ -51,6 +36,21 @@ void CAffineTransformationParamsGuiComp::OnGuiModelDetached()
 	disconnect(TranslationSpinY, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
 
 	BaseClass::OnGuiModelDetached();
+}
+
+
+void CAffineTransformationParamsGuiComp::UpdateModel() const
+{
+	Q_ASSERT(IsGuiCreated());
+
+	i2d::CAffineTransformation2d* objectPtr = dynamic_cast<i2d::CAffineTransformation2d*>(GetObservedObject());
+	if (objectPtr != NULL){
+		i2d::CVector2d translation(TranslationSpinX->value(), TranslationSpinY->value());
+		if (objectPtr->GetTransformation().GetTranslation() != translation){
+			istd::CChangeNotifier notifier(objectPtr);
+			objectPtr->Reset(translation);
+		}
+	}
 }
 
 

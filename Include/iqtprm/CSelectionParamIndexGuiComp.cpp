@@ -20,7 +20,9 @@ namespace iqtprm
 {
 
 
-// reimplemented (imod::IModelEditor)
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CSelectionParamIndexGuiComp::UpdateModel() const
 {
@@ -37,10 +39,6 @@ void CSelectionParamIndexGuiComp::UpdateModel() const
 	}
 }
 
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CSelectionParamIndexGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

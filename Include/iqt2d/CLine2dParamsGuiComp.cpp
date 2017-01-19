@@ -9,9 +9,22 @@ namespace iqt2d
 {
 
 
-// public methods
+// protected methods
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqt2d::TShapeParamsGuiCompBase)
+
+iview::CInteractiveShapeBase* CLine2dParamsGuiComp::CreateShapeInstance() const
+{
+	iview::CLineShape* shapePtr = new iview::CLineShape();
+	if (shapePtr != NULL){
+		shapePtr->SetLineDisplayMode(*m_displayArrowAttrPtr? iview::CLineShape::LDM_ARROW: iview::CLineShape::LDM_SIMPLE);
+	}
+
+	return shapePtr;
+}
+
+
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CLine2dParamsGuiComp::UpdateModel() const
 {
@@ -30,23 +43,6 @@ void CLine2dParamsGuiComp::UpdateModel() const
 	objectPtr->SetPoint2(point2);
 }
 
-
-// protected methods
-
-// reimplemented (iqt2d::TShapeParamsGuiCompBase)
-
-iview::CInteractiveShapeBase* CLine2dParamsGuiComp::CreateShapeInstance() const
-{
-	iview::CLineShape* shapePtr = new iview::CLineShape();
-	if (shapePtr != NULL){
-		shapePtr->SetLineDisplayMode(*m_displayArrowAttrPtr? iview::CLineShape::LDM_ARROW: iview::CLineShape::LDM_SIMPLE);
-	}
-
-	return shapePtr;
-}
-
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CLine2dParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

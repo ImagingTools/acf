@@ -85,13 +85,13 @@ void CMultiObserverBinderComp::UpdateEditor(const istd::IChangeable::ChangeSet& 
 }
 
 
-void CMultiObserverBinderComp::UpdateModel() const
+void CMultiObserverBinderComp::UpdateModelFromEditor() const
 {
 	int count = m_modelEditorsCompPtr.GetCount();
 	for (int i = 0; i < count; ++i){
 		imod::IModelEditor* editorPtr = m_modelEditorsCompPtr[i];
 		if (editorPtr != NULL){
-			editorPtr->UpdateModel();
+			editorPtr->UpdateModelFromEditor();
 		}
 	}
 }

@@ -24,21 +24,6 @@ namespace ifilegui
 {
 
 
-// public methods
-
-// reimplemented (imod::IModelEditor)
-
-void CSimpleFilePathParamGuiComp::UpdateModel() const
-{
-	Q_ASSERT(IsGuiCreated());
-
-	ifile::IFileNameParam* objectPtr = GetObservedObject();
-	Q_ASSERT(objectPtr != NULL);
-
-	objectPtr->SetPath(GetPathFromEditor());
-}
-
-
 // protected methods
 
 // reimplemented (iqtgui::TGuiObserverWrap)
@@ -56,6 +41,17 @@ void CSimpleFilePathParamGuiComp::OnGuiModelAttached()
 				*m_showBrowseButtonAttrPtr && 
 				((pathType == ifile::IFileNameParam::PT_DIRECTORY) || (pathType == ifile::IFileNameParam::PT_FILE)));
 	}
+}
+
+
+void CSimpleFilePathParamGuiComp::UpdateModel() const
+{
+	Q_ASSERT(IsGuiCreated());
+
+	ifile::IFileNameParam* objectPtr = GetObservedObject();
+	Q_ASSERT(objectPtr != NULL);
+
+	objectPtr->SetPath(GetPathFromEditor());
 }
 
 

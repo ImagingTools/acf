@@ -19,9 +19,17 @@ namespace iqtprm
 {
 
 
-// public methods
+// protected slots
 
-// reimplemented (imod::IModelEditor)
+void CCheckableOptionsEditorComp::OnParameterChanged()
+{
+	DoUpdateModel();
+}
+
+
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CCheckableOptionsEditorComp::UpdateModel() const
 {
@@ -46,18 +54,6 @@ void CCheckableOptionsEditorComp::UpdateModel() const
 	}
 }
 
-
-// protected slots
-
-void CCheckableOptionsEditorComp::OnParameterChanged()
-{
-	DoUpdateModel();
-}
-
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CCheckableOptionsEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {

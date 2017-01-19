@@ -47,10 +47,8 @@ public:
 		I_ASSIGN(m_updateOnEveryChangeAttrPtr, "UpdateOnEveryTextChange", "If set the model will be updated after every text change, else only if Enter pressed or focus lost", true, true);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
 	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::CGuiComponentBase)

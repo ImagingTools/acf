@@ -24,9 +24,20 @@ namespace iqtprm
 {
 
 
-// public methods
+// protected methods
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CFileNameParamGuiComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	ifile::IFileNameParam* objectPtr = GetObservedObject();
+	if (objectPtr != NULL){
+		SetPathToEditor(objectPtr->GetPath());
+	}
+}
+
 
 void CFileNameParamGuiComp::UpdateModel() const
 {
@@ -42,21 +53,6 @@ void CFileNameParamGuiComp::UpdateModel() const
 		istd::CChangeNotifier notifier(objectPtr);
 
 		objectPtr->SetPath(currentPath);
-	}
-}
-
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
-
-void CFileNameParamGuiComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	ifile::IFileNameParam* objectPtr = GetObservedObject();
-	if (objectPtr != NULL){
-		SetPathToEditor(objectPtr->GetPath());
 	}
 }
 

@@ -257,7 +257,7 @@ bool CSingleDocumentManagerBase::SaveDocument(
 
 	const imod::IModelEditor* editorPtr = CompCastPtr<imod::IModelEditor>(m_viewPtr.GetPtr());
 	if ((editorPtr != NULL) && (!editorPtr->IsReadOnly())){
-		editorPtr->UpdateModel();
+		editorPtr->UpdateModelFromEditor();
 	}
 
 	const ifile::IFilePersistence* loaderPtr = documentTemplatePtr->GetFileLoader(m_documentTypeId);

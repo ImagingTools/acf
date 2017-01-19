@@ -20,7 +20,7 @@ CTextEditorComp::CTextEditorComp()
 }
 
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CTextEditorComp::UpdateModel() const
 {
@@ -35,8 +35,6 @@ void CTextEditorComp::UpdateModel() const
 	objectPtr->SetText(textEditPtr->toPlainText());
 }
 
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CTextEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

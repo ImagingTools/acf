@@ -48,7 +48,7 @@ public:
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateEditor(const istd::IChangeable::ChangeSet& changeSet);
-	virtual void UpdateModel() const;
+	virtual void UpdateModelFromEditor() const;
 	virtual bool IsReadOnly() const;
 	virtual void SetReadOnly(bool state);
 

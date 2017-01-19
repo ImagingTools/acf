@@ -28,14 +28,12 @@ public:
 		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Horizontal mode for GUI", true, true);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
 protected Q_SLOTS:
 	void OnParameterChanged();
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 private:

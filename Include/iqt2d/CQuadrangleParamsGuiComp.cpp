@@ -11,9 +11,9 @@ namespace iqt2d
 {
 
 
-// public methods
+// protected methods
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CQuadrangleParamsGuiComp::UpdateModel() const
 {
@@ -34,10 +34,6 @@ void CQuadrangleParamsGuiComp::UpdateModel() const
 	objectPtr->SetSecondDiagonal(i2d::CLine2d(point3, point4));
 }
 
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CQuadrangleParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

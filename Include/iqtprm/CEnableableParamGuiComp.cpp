@@ -5,9 +5,22 @@ namespace iqtprm
 {
 
 
-// public methods
+// protected methods
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CEnableableParamGuiComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	iprm::IEnableableParam* objectPtr = GetObservedObject();
+	if (objectPtr != NULL){
+		
+		EnableableCheck->setChecked(objectPtr->IsEnabled());	
+		EnableableCheck->setEnabled(objectPtr->IsEnablingAllowed());
+	}
+}
+
 
 void CEnableableParamGuiComp::UpdateModel() const
 {
@@ -23,23 +36,6 @@ void CEnableableParamGuiComp::UpdateModel() const
 		istd::CChangeNotifier notifier(objectPtr);
 
 		objectPtr->SetEnabled(isEnabled);
-	}
-}
-
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
-
-void CEnableableParamGuiComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	iprm::IEnableableParam* objectPtr = GetObservedObject();
-	if (objectPtr != NULL){
-		
-		EnableableCheck->setChecked(objectPtr->IsEnabled());	
-		EnableableCheck->setEnabled(objectPtr->IsEnablingAllowed());
 	}
 }
 

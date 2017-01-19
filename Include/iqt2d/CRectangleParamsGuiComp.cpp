@@ -9,27 +9,6 @@ namespace iqt2d
 {
 
 
-// public methods
-
-// reimplemented (imod::IModelEditor)
-
-void CRectangleParamsGuiComp::UpdateModel() const
-{
-	Q_ASSERT(IsGuiCreated());
-
-	i2d::CRectangle* objectPtr = GetObservedObject();
-	Q_ASSERT(objectPtr != NULL);
-
-	istd::CChangeGroup changeGroup(objectPtr);
-	Q_UNUSED(changeGroup);
-
-	objectPtr->SetLeft(LeftSpin->value());
-	objectPtr->SetRight(RightSpin->value());
-	objectPtr->SetTop(TopSpin->value());
-	objectPtr->SetBottom(BottomSpin->value());
-}
-
-
 // protected methods
 
 // reimplemented (iqtgui::TGuiObserverWrap)
@@ -53,6 +32,23 @@ void CRectangleParamsGuiComp::OnGuiModelDetached()
 	QObject::disconnect(TopSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
 
 	BaseClass::OnGuiModelDetached();
+}
+
+
+void CRectangleParamsGuiComp::UpdateModel() const
+{
+	Q_ASSERT(IsGuiCreated());
+
+	i2d::CRectangle* objectPtr = GetObservedObject();
+	Q_ASSERT(objectPtr != NULL);
+
+	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
+
+	objectPtr->SetLeft(LeftSpin->value());
+	objectPtr->SetRight(RightSpin->value());
+	objectPtr->SetTop(TopSpin->value());
+	objectPtr->SetBottom(BottomSpin->value());
 }
 
 

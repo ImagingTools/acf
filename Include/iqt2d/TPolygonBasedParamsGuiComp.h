@@ -70,9 +70,6 @@ public:
 
 	TPolygonBasedParamsGuiComp();
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
 protected:
 	class TableModel: public QAbstractTableModel
 	{
@@ -159,15 +156,6 @@ TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TPolygonBasedP
 	m_reversePolarityAction(QIcon(":/Icons/Reverse"), "", this),
 	m_tableModel(this)
 {
-}
-
-
-// reimplemented (imod::IModelEditor)
-
-template <class PolygonBasedShape, class PolygonBasedModel>
-void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateModel() const
-{
-	Q_ASSERT(BaseClass::IsGuiCreated());
 }
 
 

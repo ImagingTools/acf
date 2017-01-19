@@ -11,14 +11,6 @@ CPolylineParamsGuiComp::CPolylineParamsGuiComp()
 }
 
 
-// reimplemented (imod::IModelEditor)
-
-void CPolylineParamsGuiComp::UpdateModel() const
-{
-	Q_ASSERT(BaseClass::IsGuiCreated());
-}
-
-
 // reimplemented (iqt2d::TShapeParamsGuiCompBase)
 
 bool CPolylineParamsGuiComp::PopulateActions(QWidget& host, imod::IModel* modelPtr)

@@ -9,9 +9,9 @@ namespace iqt2d
 {
 
 
-// public methods
+// protected methods
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CArcParamsGuiComp::UpdateModel() const
 {
@@ -29,10 +29,6 @@ void CArcParamsGuiComp::UpdateModel() const
 	objectPtr->SetEndAngle(EndAngleSpin->value());
 }
 
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CArcParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

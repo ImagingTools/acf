@@ -33,14 +33,12 @@ public:
 		I_ASSIGN(m_displayArrowAttrPtr, "DisplayArrow", "If enabled arrow will be displayed instead of line", true, false);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
 protected:
 	// reimplemented (iqt2d::TShapeParamsGuiCompBase)
 	virtual iview::CInteractiveShapeBase* CreateShapeInstance() const;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::CGuiComponentBase)

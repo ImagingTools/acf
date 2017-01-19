@@ -9,9 +9,9 @@ namespace iqt2d
 {
 
 
-// public methods
+// protected methods
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CAnnulusParamsGuiComp::UpdateModel() const
 {
@@ -33,10 +33,6 @@ void CAnnulusParamsGuiComp::UpdateModel() const
 	objectPtr->SetOuterRadius(outerRadius);
 }
 
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CAnnulusParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

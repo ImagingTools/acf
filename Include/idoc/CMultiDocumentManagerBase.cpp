@@ -325,7 +325,7 @@ bool CMultiDocumentManagerBase::SaveDocument(
 
 		const imod::IModelEditor* editorPtr = CompCastPtr<imod::IModelEditor>(viewInfo.viewPtr.GetPtr());
 		if ((editorPtr != NULL) && (!editorPtr->IsReadOnly())){
-			editorPtr->UpdateModel();
+			editorPtr->UpdateModelFromEditor();
 		}
 	}
 

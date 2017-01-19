@@ -15,28 +15,6 @@ namespace iqtprm
 
 // reimplemented (imod::IModelEditor)
 
-void CExtComposedParamsSetGuiComp::UpdateModel() const
-{
-	Q_ASSERT(IsGuiCreated() && (GetObservedObject() != NULL));
-
-	int editorsCount = qMin(GetPagesCount(), m_editorsCompPtr.GetCount());
-	for (int i = 0; i < editorsCount; ++i){
-		iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(i);
-		if ((guiPtr == NULL) || !guiPtr->IsGuiCreated()){
-			continue;
-		}
-
-		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
-		ConnectedEditorsMap::ConstIterator findIter = m_connectedEditorsMap.constFind(editorPtr);
-		if (findIter != m_connectedEditorsMap.constEnd() && (findIter.value() == true)){
-			Q_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
-
-			editorPtr->UpdateModel();
-		}
-	}
-}
-
-
 void CExtComposedParamsSetGuiComp::UpdateEditor(const istd::IChangeable::ChangeSet& changeSet)
 {
 	Q_ASSERT(IsGuiCreated());
@@ -327,6 +305,28 @@ void CExtComposedParamsSetGuiComp::OnGuiModelDetached()
 	}
 
 	BaseClass::OnGuiModelDetached();
+}
+
+
+void CExtComposedParamsSetGuiComp::UpdateModel() const
+{
+	Q_ASSERT(IsGuiCreated() && (GetObservedObject() != NULL));
+
+	int editorsCount = qMin(GetPagesCount(), m_editorsCompPtr.GetCount());
+	for (int i = 0; i < editorsCount; ++i){
+		iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(i);
+		if ((guiPtr == NULL) || !guiPtr->IsGuiCreated()){
+			continue;
+		}
+
+		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
+		ConnectedEditorsMap::ConstIterator findIter = m_connectedEditorsMap.constFind(editorPtr);
+		if (findIter != m_connectedEditorsMap.constEnd() && (findIter.value() == true)){
+			Q_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
+
+			editorPtr->UpdateModelFromEditor();
+		}
+	}
 }
 
 

@@ -22,26 +22,28 @@ class CAffineTransformationParamsGuiComp:
 						iview::CAffineTransformation2dShape,
 						i2d::CAffineTransformation2d>
 {
+	Q_OBJECT
+
 public:
 	typedef iqt2d::TShapeParamsGuiCompBase<
-	Ui::CAffineTransformationParamsGui,
-	iview::CAffineTransformation2dShape,
-	i2d::CAffineTransformation2d> BaseClass;
+				Ui::CAffineTransformationParamsGui,
+				iview::CAffineTransformation2dShape,
+				i2d::CAffineTransformation2d> BaseClass;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
-	virtual void CreateShapes(int sceneId, Shapes& result);
+	I_BEGIN_COMPONENT(CAffineTransformationParamsGuiComp);
+	I_END_COMPONENT;
 
 protected:
+	// reimplemented (iqt2d::TViewExtenderCompBase)
+	virtual void CreateShapes(int sceneId, Shapes& result);
+
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
+	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
-
-	Q_OBJECT
-	protected Q_SLOTS:
+protected Q_SLOTS:
 	void OnParamsChanged(double value);
 	void on_ResetButton_clicked(bool = false);
 };

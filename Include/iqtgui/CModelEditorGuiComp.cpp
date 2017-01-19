@@ -73,12 +73,12 @@ void CModelEditorGuiComp::UpdateEditor(const istd::IChangeable::ChangeSet& chang
 }
 
 
-void CModelEditorGuiComp::UpdateModel() const
+void CModelEditorGuiComp::UpdateModelFromEditor() const
 {
 	Q_ASSERT(IsGuiCreated());
 
 	if (m_slaveEditorCompPtr.IsValid()){
-		m_slaveEditorCompPtr->UpdateModel();
+		m_slaveEditorCompPtr->UpdateModelFromEditor();
 	}
 }
 
