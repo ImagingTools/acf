@@ -41,11 +41,11 @@ protected:
 	class UpdateBlocker
 	{
 	public:
-		UpdateBlocker(TGuiObserverWrap<Gui, Observer>* parentPtr);
+		UpdateBlocker(const TGuiObserverWrap<Gui, Observer>* parentPtr);
 		~UpdateBlocker();
 
 	private:
-		TGuiObserverWrap<Gui, Observer>& m_parent;
+		const TGuiObserverWrap<Gui, Observer>& m_parent;
 	};
 
 	/**
@@ -77,7 +77,7 @@ protected:
 		Secure update model.
 		It use GUI block mechanism and it is designed to be called directly from UI slot.
 	*/
-	bool DoUpdateModel();
+	bool DoUpdateModel() const;
 
 	/**
 		Do update of the model GUI.
@@ -116,7 +116,7 @@ private:
 
 private:
 	bool m_disableUiIfReadOnly;
-	int m_ignoreUpdatesCounter;
+	mutable int m_ignoreUpdatesCounter;
 
 	/**
 		Do editor update, if the gui change its state to visible.
@@ -240,7 +240,7 @@ void TGuiObserverWrap<Gui, Observer>::SetDisableUiIfReadOnly(bool state)
 // provate methods
 
 template <class Gui, class Observer>
-bool TGuiObserverWrap<Gui, Observer>::DoUpdateModel()
+bool TGuiObserverWrap<Gui, Observer>::DoUpdateModel() const
 {
 	if (!m_isReadOnly && !IsUpdateBlocked() && Observer::IsModelAttached()){
 		UpdateBlocker updateBlocker(this);
@@ -414,7 +414,7 @@ void TGuiObserverWrap<Gui, Observer>::DoUpdate(const istd::IChangeable::ChangeSe
 // public methods of embedded class UpdateBlocker
 
 template <class Gui, class Observer>
-TGuiObserverWrap<Gui, Observer>::UpdateBlocker::UpdateBlocker(TGuiObserverWrap<Gui, Observer>* parentPtr)
+TGuiObserverWrap<Gui, Observer>::UpdateBlocker::UpdateBlocker(const TGuiObserverWrap<Gui, Observer>* parentPtr)
 :	m_parent(*parentPtr)
 {
 	++m_parent.m_ignoreUpdatesCounter;

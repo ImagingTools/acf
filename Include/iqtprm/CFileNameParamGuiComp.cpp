@@ -365,7 +365,7 @@ void CFileNameParamGuiComp::OnPathEdited(const QString& path) const
 {
 	SetPathToEditor(path);
 
-	UpdateModel();
+	DoUpdateModel();
 }
 
 
