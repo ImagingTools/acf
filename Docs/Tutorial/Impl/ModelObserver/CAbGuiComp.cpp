@@ -53,7 +53,7 @@ void CAbGuiComp::OnGuiModelAttached()
 }
 
 
-// reimplemented (CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CAbGuiComp::OnGuiCreated()
 {

@@ -84,6 +84,7 @@ protected:
 		This method should be implmented by derived classes instead of \c imod::IModelEditor::UpdateModelFromEditor().
 	*/
 	virtual void UpdateModel() const;
+
 	/**
 		Do update of the GUI to reflect the state of model.
 		This method should be implmented by derived classes instead of \c imod::IModelEditor::UpdateEditor().

@@ -37,15 +37,15 @@ public:
 		I_ASSIGN(m_useSaveDialogAttrPtr, "UseSaveDialog", "Use save dialog instead of open one", true, false);
 	I_END_COMPONENT;
 
-	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiRetranslate();
-
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+	virtual void OnGuiRetranslate();
 
 protected Q_SLOTS:
 	void on_BrowseButton_clicked();

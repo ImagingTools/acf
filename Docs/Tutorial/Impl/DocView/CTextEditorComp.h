@@ -43,10 +43,6 @@ public:
 
 	CTextEditorComp();
 
-	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateModel() const;
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
-
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
@@ -57,6 +53,10 @@ protected Q_SLOTS:
 	void OnToUppercase();
 
 protected:
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateModel() const;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnRetranslate();

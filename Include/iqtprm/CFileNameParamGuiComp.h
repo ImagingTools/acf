@@ -46,6 +46,7 @@ public:
 		I_ASSIGN(m_showBrowseButtonAttrPtr, "ShowBrowseButton", "If enabled, the browse button will be shown", true, true);
 	I_END_COMPONENT;
 
+protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiRetranslate();
