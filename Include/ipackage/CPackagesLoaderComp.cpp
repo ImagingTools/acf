@@ -14,6 +14,10 @@
 #include <ifile/CSimpleXmlFileReadArchive.h>
 #include <ifile/CCompactXmlFileReadArchive.h>
 
+#ifdef Q_OS_WIN
+	#include <windows.h>
+#endif
+
 
 namespace ipackage
 {
@@ -444,6 +448,10 @@ icomp::GetPackageInfoFunc CPackagesLoaderComp::GetPackageFunction(const QFileInf
 	if (iter != m_libraryToInfoFuncMap.constEnd()){
 		return iter.value();
 	}
+
+#ifdef Q_OS_WIN
+	SetDllDirectory(fileInfo.absolutePath().toStdWString().c_str());
+#endif
 
 	QLibrary library(absolutePath);
 	icomp::GetPackageInfoFunc getInfoPtr = (icomp::GetPackageInfoFunc)library.resolve(I_PACKAGE_EXPORT_FUNCTION_NAME);

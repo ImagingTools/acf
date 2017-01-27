@@ -1,6 +1,7 @@
 // Qt includes
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
+#include <QtCore/QDir>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QApplication>
@@ -81,7 +82,17 @@ int main(int argc, char *argv[])
 		coreAppPtr.SetPtr(new QCoreApplication(argc, argv));
 	}
 
+	// Save current working directory:
+	QString currentWorkingDirectory = QDir::currentPath();
+
 	ipackage::CComponentAccessor componentAccessor(registryFilePath, configFilePath, isVerboseEnabled);
+
+	// Restore current working directory before executing the application:
+	if (currentWorkingDirectory != QDir::currentPath()){
+		out << "The working directory of the process has been changed during loading of the component packages!" << endl;		
+	}
+
+	QDir::setCurrent(currentWorkingDirectory);
 
 	ibase::IApplication* applicationPtr = componentAccessor.GetComponentInterface<ibase::IApplication>(componentId);
 	if (applicationPtr == NULL){
