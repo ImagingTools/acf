@@ -106,7 +106,7 @@ void CModelUpdateBridge::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), const istd::I
 {
 	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
-	istd::IChangeable::ChangeSet changes;
+	istd::IChangeable::ChangeSet changes(changeSet.GetDescription());
 	if (m_updateFlags & UF_DELEGATED){
 		changes += istd::IChangeable::GetDelegatedChanges();
 	}
