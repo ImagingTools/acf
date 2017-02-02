@@ -33,6 +33,13 @@ CQuadrangle::CQuadrangle(const CLine2d& firstDiagonal, const CLine2d& secondDiag
 }
 
 
+CQuadrangle::CQuadrangle(const CRectangle& rectangle)
+:	m_firstDiagonal(rectangle.GetLeftTop(), rectangle.GetRightBottom()),
+	m_secondDiagonal(rectangle.GetRightTop(), rectangle.GetLeftBottom())
+{
+}
+
+
 bool CQuadrangle::operator==(const CQuadrangle& quadrangle) const
 {
 	return ((m_firstDiagonal == quadrangle.m_firstDiagonal) && (m_secondDiagonal == quadrangle.m_secondDiagonal));

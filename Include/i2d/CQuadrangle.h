@@ -20,6 +20,7 @@ class CQuadrangle: public CObject2dBase
 public:
 	CQuadrangle();
 	CQuadrangle(const CLine2d& firstDiagonal, const CLine2d& secondDiagonal);
+	explicit CQuadrangle(const CRectangle& rectangle);
 
 	bool operator==(const CQuadrangle& quadrangle) const;
 	bool operator!=(const CQuadrangle& quadrangle) const;
