@@ -2,8 +2,7 @@
 
 
 // ACF includes
-#include <iprm/IOptionsList.h>
-#include <iprm/IParamsSet.h>
+#include <iprm/IParamsManager.h>
 
 
 namespace iqtprm
@@ -46,8 +45,6 @@ void CSelectableParamsSetGuiComp::OnGuiModelAttached()
 {
 	ConnectCurrentEditor();
 
-	LineSeparator->setVisible(*m_showSeparatorAttrPtr);
-
 	BaseClass::OnGuiModelAttached();
 }
 
@@ -68,7 +65,8 @@ void CSelectableParamsSetGuiComp::EnsureDetachLastEditor()
 
 	int observerIndex = qMin(m_currentParamsSetIndex, observersCount - 1);
 
-	iprm::IParamsSet* paramsSetPtr = dynamic_cast<iprm::IParamsSet*>(GetObservedObject());
+	iprm::IParamsSet* paramsSetPtr = ExtractParamsSetPtr(GetObservedModel());
+
 	if (paramsSetPtr != NULL && observerIndex >= 0){
 		imod::IObserver* observerPtr = m_slaveObserversCompPtr[observerIndex];
 		imod::IModel* paramsSetModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr);
@@ -99,7 +97,7 @@ void CSelectableParamsSetGuiComp::ConnectCurrentEditor()
 
 				int observerIndex = qMin(m_currentParamsSetIndex, observersCount - 1);
 
-				iprm::IParamsSet* paramsSetPtr = dynamic_cast<iprm::IParamsSet*>(selectionPtr);
+				iprm::IParamsSet* paramsSetPtr = ExtractParamsSetPtr(GetObservedModel());
 				if (paramsSetPtr != NULL && observerIndex >= 0){
 					imod::IObserver* observerPtr = m_slaveObserversCompPtr[observerIndex];
 					imod::IModel* paramsSetModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr);
@@ -110,6 +108,19 @@ void CSelectableParamsSetGuiComp::ConnectCurrentEditor()
 			}
 		}
 	}
+}
+
+
+// private methods
+
+iprm::IParamsSet* CSelectableParamsSetGuiComp::ExtractParamsSetPtr(imod::IModel* modelPtr) const
+{
+	iprm::IParamsManager* paramsManagerPtr = dynamic_cast<iprm::IParamsManager*>(modelPtr);
+	if ((paramsManagerPtr != NULL) && (m_currentParamsSetIndex >= 0)){
+		return paramsManagerPtr->GetParamsSet(m_currentParamsSetIndex);
+	}
+
+	return NULL;
 }
 
 
