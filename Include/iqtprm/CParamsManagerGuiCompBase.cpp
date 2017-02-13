@@ -634,7 +634,7 @@ void CParamsManagerGuiCompBase::OnGuiModelAttached()
 		if (typeConstraintsPtr != NULL){
 			int typesCount = typeConstraintsPtr->GetOptionsCount();
 
-			if (typesCount > 1){
+			if (typesCount > 0){
 				Q_ASSERT(typeConstraintsPtr != NULL);
 
 				for (int i = 0; i < typesCount; ++i){
