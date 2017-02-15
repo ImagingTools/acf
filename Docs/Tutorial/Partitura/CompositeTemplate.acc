@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4439" Description="ACF"/>
+            <Version Id="1" Number="1778" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Demonstrate using of multiple document tamplate for MDI application</Description>
@@ -31,22 +31,22 @@
         <Element Id="ApplicationInfo" PackageId="BasePck" ComponentId="ApplicationInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Composite Template"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationType" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Tutorial"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" Type="String" ExportId="">
+                    <AttributeInfo Id="CompanyName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ImagingTools"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LegalCopyright" Type="String" ExportId="">
+                    <AttributeInfo Id="LegalCopyright" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="See 'licence.txt' for copyright informations"/>
                     </AttributeInfo>
                     <AttributeInfo Id="MainVersionId" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="0"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" Type="String" ExportId="">
+                    <AttributeInfo Id="ProductName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ACF"/>
                     </AttributeInfo>
                     <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
@@ -75,9 +75,9 @@
             </Data>
         </Element>
         <Element Id="DocumentFactory" PackageId="BasePck" ComponentId="TextDocument">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultText" Type="String" ExportId="">
+                    <AttributeInfo Id="DefaultText" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Ahoj przygodo!"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -86,14 +86,14 @@
         <Element Id="DocumentLoader" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
+                    <AttributeInfo Id="FileExtensions" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>xtxt</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                    <AttributeInfo Id="TypeDescriptions" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>XML packed text</Value>
@@ -131,7 +131,7 @@
             </Data>
         </Element>
         <Element Id="ImageFactory" PackageId="BitmapPck" ComponentId="Bitmap">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
             </Data>
         </Element>
@@ -160,7 +160,7 @@
             </Data>
         </Element>
         <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
             </Data>
         </Element>
@@ -199,7 +199,7 @@
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ApplicationInfo"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ImagePath" Type="String" ExportId="">
+                    <AttributeInfo Id="ImagePath" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="../../../Docs/Images/AcfSplashScreen.png"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ShowProductType" Type="Boolean" ExportId="">
@@ -209,7 +209,7 @@
             </Data>
         </Element>
         <Element Id="ViewFactory" PackageId="TutorialPck" ComponentId="TextEditor">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
             </Data>
         </Element>

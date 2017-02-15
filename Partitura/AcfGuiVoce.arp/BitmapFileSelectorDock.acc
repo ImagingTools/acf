@@ -2,16 +2,16 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4439" Description="ACF"/>
+            <Version Id="1" Number="1778" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Bitmap file selector with preview</Description>
     <Keywords>File Name Preview Explorer Selector Choice Author='&quot;Witold Gantzke&quot;' Category='GUI'</Keywords>
     <ElementsList>
         <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
             </Data>
         </Element>
@@ -36,7 +36,7 @@
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="DefaultPath">
+                    <AttributeInfo Id="DefaultPath" Type="Text" ExportId="DefaultPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DockArea" Type="Integer" ExportId="DockArea">
@@ -45,7 +45,7 @@
                     <AttributeInfo Id="DockFeatures" Type="Integer" ExportId="DockFeatures">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileExplorerSettingsKey" Type="String" ExportId="FileExplorerSettingsKey">
+                    <AttributeInfo Id="FileExplorerSettingsKey" Type="Text" ExportId="FileExplorerSettingsKey">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="FileInfo" Type="Reference" ExportId="">
