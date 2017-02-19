@@ -16,6 +16,12 @@ else{
 # Get path to the ACF tools folder from the external variable:
 ACFTOOLS = $$(ACF_TOOLS_BIN)
 
+macx*{
+	!isEmpty(ACFTOOLS){
+		ARX_COMPILER = Arxc.app/Contents/MacOS/Arxc
+	}
+}
+
 isEmpty(ACFTOOLS){
 	# for non-cross compiling use local generated tools
 
