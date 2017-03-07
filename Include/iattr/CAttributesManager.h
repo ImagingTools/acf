@@ -22,7 +22,9 @@ namespace iattr
 /**
 	Basic implementation of an property container.
 */
-class CAttributesManager: virtual public IAttributesManager
+class CAttributesManager:
+			virtual public IAttributesManager,
+			virtual public iser::ISerializable
 {
 public:
 	explicit CAttributesManager(const iser::IObjectFactory* factoryPtr = &CStandardAttributesFactory::GetInstance());
