@@ -193,7 +193,7 @@ bool CAttributesManager::Serialize(iser::IArchive& archive)
 				return false;
 			}
 
-			AttributePtr& attributePtr = m_attributesMap[attributeTypeId];
+			AttributePtr& attributePtr = m_attributesMap[attributeId];
 			if (!attributePtr.IsValid()){
 				attributePtr.SetPtr(m_attributesFactoryPtr->CreateInstance(attributeTypeId), true);
 
