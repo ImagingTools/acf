@@ -22,6 +22,7 @@ DynamicLibrary{
 	cpp.dynamicLibrarySuffix: ".arp"
 
 	Export{
+		Depends{ name: "cpp" }
 		cpp.includePaths: ["../.."]
 	}
 

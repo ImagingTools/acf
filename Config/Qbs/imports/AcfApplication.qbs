@@ -11,6 +11,7 @@ CppApplication{
 
 	consoleApplication: true
 
+	Depends{ name: "cpp" }
 	Depends{ name: "acf" }
 	Depends{ name: "Qt.core" }
 
