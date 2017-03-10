@@ -23,8 +23,8 @@ const istd::IChangeable::ChangeSet s_setDescriptionChangeSet(IOptionsList::CF_OP
 
 
 CParamsManagerCompBase::CParamsManagerCompBase()
-:	m_updateBridge(this),
-	m_selectedIndex(-1)
+:	m_selectedIndex(-1),
+	m_updateBridge(this)
 {
 	m_selectedParams.parentPtr = this;
 }

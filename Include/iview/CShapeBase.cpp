@@ -24,7 +24,9 @@ CShapeBase::CShapeBase()
 
 
 CShapeBase::CShapeBase(const CShapeBase& shape)
-:	m_calibrationObserver(this)
+:	imod::CSingleModelObserverBase(),
+	m_displayPtr(NULL),
+	m_calibrationObserver(this)
 {
 	Q_ASSERT(shape.m_displayPtr == NULL);	// Copy contructor not allowed for shapes connected to view
 
