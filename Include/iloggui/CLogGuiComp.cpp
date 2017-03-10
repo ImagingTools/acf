@@ -387,10 +387,12 @@ void CLogGuiComp::UpdateItemVisibility(QTreeWidgetItem* itemPtr, const QString& 
 
 void CLogGuiComp::GenerateMessageList()
 {
-	Messages messageList = BaseClass2::GetMessages();
+	const Messages& messageList = BaseClass2::GetMessages();
 
-	for (Messages::ConstIterator index = messageList.constBegin(); index != messageList.constEnd(); index++){
-		AddMessageToList(*index);
+	Messages::ConstIterator iter = messageList.constEnd();
+	while (iter != messageList.constBegin()){
+		--iter;
+		AddMessageToList(*iter);
 	}
 }
 
