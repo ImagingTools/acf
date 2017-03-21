@@ -20,8 +20,8 @@ CTubeNode::CTubeNode()
 
 
 CTubeNode::CTubeNode(const CTubeNode& node)
+:	m_tubeRange(node.m_tubeRange)
 {
-	m_tubeRange = node.m_tubeRange;
 }
 
 

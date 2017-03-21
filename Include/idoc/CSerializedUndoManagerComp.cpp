@@ -18,6 +18,7 @@ static const istd::IChangeable::ChangeSet s_undoChangeSet(istd::IChangeable::CF_
 CSerializedUndoManagerComp::CSerializedUndoManagerComp()
 :	m_hasStoredDocumentState(false),
 	m_isBlocked(false),
+	m_stateChangedFlag(DCF_UNKNOWN),
 	m_isStateChangedFlagValid(false)
 {
 }

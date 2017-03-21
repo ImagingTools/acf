@@ -19,7 +19,7 @@ template <class Interface>
 class TInterfaceRegistrator
 {
 public:
-	TInterfaceRegistrator(CBaseComponentStaticInfo& staticInfo);
+	explicit TInterfaceRegistrator(CBaseComponentStaticInfo& staticInfo);
 
 protected:
 	static void* InterfaceExtractor(IComponent& component);

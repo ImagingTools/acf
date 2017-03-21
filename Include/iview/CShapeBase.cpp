@@ -13,13 +13,14 @@ namespace iview
 
 CShapeBase::CShapeBase()
 :	m_displayPtr(NULL),
-	m_calibrationObserver(this)
+	m_calibrationObserver(this),
+	m_userColorSchemaPtr(NULL),
+	m_isBoundingBoxValid(false),
+	m_boundingBox(),
+	m_isVisible(true),
+	m_layerType(iview::IViewLayer::LT_INACTIVE),
+	m_shapeTransformMode(STM_SHAPE)
 {
-	m_isVisible = true;
-	m_userColorSchemaPtr = NULL;
-	m_isBoundingBoxValid = false;
-	m_layerType = iview::IViewLayer::LT_INACTIVE;
-	m_shapeTransformMode = STM_SHAPE;
 }
 
 
@@ -27,16 +28,14 @@ CShapeBase::CShapeBase(const CShapeBase& shape)
 :	imod::CSingleModelObserverBase(),
 	m_displayPtr(NULL),
 	m_calibrationObserver(this)
+	m_userColorSchemaPtr(shape.m_userColorSchemaPtr),
+	m_isBoundingBoxValid(false),
+	m_boundingBox(),
+	m_isVisible(shape.m_isVisible),
+	m_layerType(shape.m_layerType),
+	m_shapeTransformMode(shape.m_shapeTransformMode)
 {
 	Q_ASSERT(shape.m_displayPtr == NULL);	// Copy contructor not allowed for shapes connected to view
-
-	m_displayPtr = NULL;
-
-	m_userColorSchemaPtr = shape.m_userColorSchemaPtr;
-	m_isVisible = shape.m_isVisible;
-	m_isBoundingBoxValid = false;
-	m_layerType = shape.m_layerType;
-	m_shapeTransformMode = shape.m_shapeTransformMode;
 }
 
 

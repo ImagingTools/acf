@@ -29,7 +29,7 @@ class CCheckableComboBox: public QComboBox
 public:
 	typedef QComboBox BaseClass;
 
-	CCheckableComboBox(QWidget* parentPtr = NULL);
+	explicit CCheckableComboBox(QWidget* parentPtr = NULL);
 
 	void SetItemsChecked(const QStringList& items, bool isChecked = true);
 
@@ -54,7 +54,8 @@ private:
 	public:
 		typedef QItemDelegate BaseClass;
 
-		CCheckBoxDelegate(CCheckableComboBox& parent);
+		explicit CCheckBoxDelegate(CCheckableComboBox& parent);
+
 	protected:
 		// reimplemented (QItemDelegate)
 		virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;

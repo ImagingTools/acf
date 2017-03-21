@@ -19,7 +19,7 @@ namespace iattr
 class CAttributeMetaInfo: virtual public IAttributeMetaInfo
 {
 public:
-	CAttributeMetaInfo(const QByteArray& typeId = "");
+	explicit CAttributeMetaInfo(const QByteArray& typeId = "");
 
 	void SetAttributeTypeId(const QByteArray& typeId);
 	void SetAttributeDescription(const QString& description);

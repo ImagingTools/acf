@@ -39,7 +39,7 @@ public:
 	virtual bool ProcessData(void* dataPtr, int size);
 
 protected:
-	CTextWriteArchiveBase(const IVersionInfo* versionInfoPtr);
+	explicit CTextWriteArchiveBase(const IVersionInfo* versionInfoPtr);
 
 	/**
 		Write single unformatted text node.

@@ -216,7 +216,7 @@ private:
 	public:
 		typedef imod::TSingleModelObserverBase<idoc::IUndoManager> BaseClass;
 
-		ActiveUndoManager(CMainWindowGuiComp& parent);
+		explicit ActiveUndoManager(CMainWindowGuiComp& parent);
 
 		// reimplemented (imod::IObserver)
 		virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);

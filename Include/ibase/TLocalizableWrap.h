@@ -34,7 +34,7 @@ private:
 	public:
 		typedef QObject BaseClass;
 
-		LanguageChangeEventFilter(TLocalizableWrap& parent);
+		explicit LanguageChangeEventFilter(TLocalizableWrap& parent);
 
 	protected:
 		// reimplemented (QObject)

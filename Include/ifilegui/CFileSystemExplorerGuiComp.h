@@ -56,6 +56,8 @@ public:
 		I_ASSIGN(m_allowOpenFileAttrPtr, "AllowOpenFile", "If enabled, the file will be opened by operation system shell", false, false);
 	I_END_COMPONENT;
 
+	CFileSystemExplorerGuiComp();
+
 protected:
 	/**
 		Get default list of filters.
@@ -95,7 +97,7 @@ private:
 		virtual QIcon icon(const QFileInfo& fileInfo) const;
 	};
 
-	iwidgets::CExtLineEdit* m_filterEdit;
+	iwidgets::CExtLineEdit* m_filterEditPtr;
 
 	FileIconProvider m_fileIconProvider;
 

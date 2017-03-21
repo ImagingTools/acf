@@ -214,7 +214,7 @@ const typename TViewExtenderCompBase<Base>::ShapesMap& TViewExtenderCompBase<Bas
 template <class Base>
 void TViewExtenderCompBase<Base>::UpdateAllViews()
 {
-	for (ShapesMap::iterator index = m_shapesMap.begin(); index != m_shapesMap.end(); index++){
+	for (ShapesMap::iterator index = m_shapesMap.begin(); index != m_shapesMap.end(); ++index){
 		IViewProvider* viewProvderPtr = index.key();
 		Q_ASSERT(viewProvderPtr != NULL);
 

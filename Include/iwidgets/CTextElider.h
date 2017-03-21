@@ -24,7 +24,7 @@ namespace iwidgets
 class CTextElider: public QObject
 {
 public:
-	CTextElider(QObject* parentPtr = NULL);
+	explicit CTextElider(QObject* parentPtr = NULL);
 	virtual ~CTextElider();
 
 	bool RegisterElideObject(QObject* elideObject);

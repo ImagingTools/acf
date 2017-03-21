@@ -18,7 +18,7 @@ namespace icomp
 class CComponentMetaDescriptionEncoder
 {
 public:
-	CComponentMetaDescriptionEncoder(const QString& metaDescription);
+	explicit CComponentMetaDescriptionEncoder(const QString& metaDescription);
 
 	/**
 		Get meta keys using in the meta-description.

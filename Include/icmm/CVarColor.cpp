@@ -84,7 +84,7 @@ void CVarColor::GetNormalized(CVarColor& result) const
 }
 
 
-const CVarColor& CVarColor::operator=(const CVarColor& color)
+CVarColor& CVarColor::operator=(const CVarColor& color)
 {
 	int elementsCount = color.GetElementsCount();
 

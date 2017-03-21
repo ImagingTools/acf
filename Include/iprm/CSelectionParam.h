@@ -79,7 +79,7 @@ protected:
 	class ConstraintsObserver: public imod::TSingleModelObserverBase<iprm::IOptionsList>
 	{
 	public:
-		ConstraintsObserver(CSelectionParam& parent);
+		explicit ConstraintsObserver(CSelectionParam& parent);
 
 		// reimplemented (imod::TSingleModelObserverBase<iprm::IOptionsList>)
 		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);

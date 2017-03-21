@@ -33,7 +33,7 @@ CSampledFunction2d::CSampledFunction2d(const imath::ISampledFunction2d& function
 
 	for (		SamplesContainer::Iterator index = m_samplesContainer.Begin();
 				index != m_samplesContainer.End();
-				index++){
+				++index){
 		*index = function2d.GetValueAt(index)[0];
 	}
 }
@@ -59,7 +59,7 @@ bool CSampledFunction2d::CreateGrid2d(const istd::CIndex2d& sizes, double defaul
 
 	for (		SamplesContainer::Iterator index = m_samplesContainer.Begin();
 				index != m_samplesContainer.End();
-				index++){
+				++index){
 		*index = defaultValue;
 	}
 

@@ -59,7 +59,7 @@ private:
 	public:
 		typedef imod::CSingleModelObserverBase BaseClass;
 
-		FilePathObserver(CTextFileLogComp& parent);
+		explicit FilePathObserver(CTextFileLogComp& parent);
 
 	protected:
 		// reimplemented (imod::CSingleModelObserverBase)

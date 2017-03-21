@@ -19,7 +19,7 @@ class CConsoleReader: public QObject
 public:
 	typedef QObject BaseClass;
 
-	CConsoleReader(QObject* parentPtr = NULL);
+	explicit CConsoleReader(QObject* parentPtr = NULL);
 
 	/**
 		Start reading of the user input on the console.
@@ -46,7 +46,7 @@ protected:
 	class InputObserver: public QThread
 	{
 	public:
-		InputObserver(CConsoleReader& parent);
+		explicit InputObserver(CConsoleReader& parent);
 
 		void Stop();
 

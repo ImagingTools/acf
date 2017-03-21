@@ -112,7 +112,7 @@ bool CRegistry::RemoveElementInfo(const QByteArray& elementId)
 				isDone = false;
 				break;
 			}
-			iter++;
+			++iter;
 		}
 	}
 
@@ -283,7 +283,7 @@ bool CRegistry::RenameElement(const QByteArray& oldElementId, const QByteArray& 
 	IRegistry::ExportedElementsMap newExportedComponentsMap;
 	for (		IRegistry::ExportedElementsMap::const_iterator index = m_exportedComponentsMap.begin();
 				index != m_exportedComponentsMap.end();
-				index++){
+				++index){
 		QByteArray exportComponentId;
 		QByteArray subId;
 		QByteArray newExportId = index.value();
@@ -299,7 +299,7 @@ bool CRegistry::RenameElement(const QByteArray& oldElementId, const QByteArray& 
 	IRegistry::ExportedInterfacesMap newExportedInterfacesMap;
 	for (		IRegistry::ExportedInterfacesMap::const_iterator index = m_exportedInterfacesMap.begin();
 				index != m_exportedInterfacesMap.end();
-				index++){
+				++index){
 		QByteArray elementId = index.value();
 		if (elementId == oldElementId){
 			elementId = newElementId;

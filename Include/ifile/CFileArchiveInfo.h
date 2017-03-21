@@ -18,7 +18,7 @@ namespace ifile
 class CFileArchiveInfo: virtual public IFileArchiveInfo
 {
 public:
-	CFileArchiveInfo(const QString& filePath);
+	explicit CFileArchiveInfo(const QString& filePath);
 
 	// reimplemented (ifile::IFileArchiveInfo)
 	virtual const QString& GetCurrentFilePath() const;

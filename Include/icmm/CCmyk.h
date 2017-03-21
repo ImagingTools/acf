@@ -53,7 +53,7 @@ public:
 	CCmyk operator*(double value) const;
 	CCmyk operator/(double value) const;
 
-	const CCmyk& operator=(const CCmyk& color);
+	CCmyk& operator=(const CCmyk& color);
 
 	const CCmyk& operator+=(const CCmyk& color);
 	const CCmyk& operator-=(const CCmyk& color);
@@ -137,7 +137,7 @@ inline void CCmyk::SetK(double value)
 
 // operators
 
-inline const CCmyk& CCmyk::operator=(const CCmyk& color)
+inline CCmyk& CCmyk::operator=(const CCmyk& color)
 {
 	BaseClass::operator=(color);
 

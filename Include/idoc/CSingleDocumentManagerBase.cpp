@@ -470,12 +470,10 @@ bool CSingleDocumentManagerBase::NewDocument(
 		istd::TDelPtr<istd::IChangeable> documentPtr(documentTemplatePtr->CreateDocument(realDocumentTypeId, initialize, beQuiet, ignoredPtr));
 
 		if (documentPtr.IsValid()){
-			istd::IPolymorphic* viewPtr = NULL;
-
 			EnsureViewRemoved();
 
 			if (createView){
-				viewPtr = documentTemplatePtr->CreateView(
+				istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
 							realDocumentTypeId,
 							documentPtr.GetPtr(),
 							viewTypeId);

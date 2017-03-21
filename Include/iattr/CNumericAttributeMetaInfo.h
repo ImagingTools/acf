@@ -24,7 +24,7 @@ class CNumericAttributeMetaInfo:
 public:
 	typedef CAttributeMetaInfo BaseClass;
 
-	CNumericAttributeMetaInfo(const QByteArray& typeId = "");
+	explicit CNumericAttributeMetaInfo(const QByteArray& typeId = "");
 
 	/**
 		Set minimal value of attribute.

@@ -14,7 +14,7 @@ class CDoubleRangeSpinEdit: public QWidget
 {
 	Q_OBJECT
 public:
-	CDoubleRangeSpinEdit(QWidget *parent = NULL);
+	explicit CDoubleRangeSpinEdit(QWidget *parent = NULL);
 
 	// public interface
 	void SetMinRange(double minFrom, double minTo);

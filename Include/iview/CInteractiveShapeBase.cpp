@@ -21,17 +21,18 @@ const istd::IChangeable::ChangeSet s_moveObjectChangeSet(IDisplay::CS_CONSOLE, i
 
 
 CInteractiveShapeBase::CInteractiveShapeBase()
-	:m_isSelected(false),
-	 m_isEditablePosition(true)
+:	m_isSelected(false),
+	m_isEditablePosition(true)
 {
 	AssignToLayer(IViewLayer::LT_ACTIVE);
 }
 
 
 CInteractiveShapeBase::CInteractiveShapeBase(const CInteractiveShapeBase& shape)
-	:BaseClass(shape),
-	 m_isSelected(false),
-	 m_isEditablePosition(true)
+:	BaseClass(shape),
+	m_isSelected(false),
+	m_isEditablePosition(true),
+	m_dragNotifierPtr()
 {
 }
 

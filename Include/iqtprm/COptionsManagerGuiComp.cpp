@@ -248,9 +248,10 @@ void COptionsManagerGuiComp::OnEditingFinished()
 		newOptionName = Selector->lineEdit()->text();
 	}
 
-	bool addNewOption = true;
 	iprm::ISelectionParam* selectionPtr = CompCastPtr<iprm::ISelectionParam>(GetObservedObject());
 	if (selectionPtr != NULL){
+		bool addNewOption = true;
+
 		const iprm::IOptionsList* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			int optionsCount = constraintsPtr->GetOptionsCount();

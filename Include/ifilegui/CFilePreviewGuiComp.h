@@ -78,7 +78,7 @@ protected:
 	class PreviewWidget : public QGraphicsView
 	{
 	public:
-		PreviewWidget(QWidget *parent = NULL);
+		explicit PreviewWidget(QWidget *parent = NULL);
 
 	protected:
 		// reimplemented (QWidget)

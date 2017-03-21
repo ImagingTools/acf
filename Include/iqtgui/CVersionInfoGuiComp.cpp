@@ -22,7 +22,7 @@ void CVersionInfoGuiComp::OnGuiCreated()
 		Q_ASSERT(infoPtr != NULL);
 
 		iser::IVersionInfo::VersionIds ids = infoPtr->GetVersionIds();
-		for (iser::IVersionInfo::VersionIds::const_iterator it = ids.begin(); it != ids.end(); it++){	
+		for (iser::IVersionInfo::VersionIds::const_iterator it = ids.begin(); it != ids.end(); ++it){	
 			QTreeWidgetItem* itemPtr = new QTreeWidgetItem(Tree);
 			
 			itemPtr->setText(0, infoPtr->GetVersionIdDescription(*it));

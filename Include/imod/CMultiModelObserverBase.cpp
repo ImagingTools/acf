@@ -8,8 +8,8 @@ namespace imod
 // public methods
 
 CMultiModelObserverBase::CMultiModelObserverBase()
+:	m_observedIds(istd::IChangeable::GetAllChanges())
 {
-	m_observedIds = istd::IChangeable::GetAllChanges();
 }
 
 

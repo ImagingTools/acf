@@ -29,7 +29,7 @@ quint32 CCrcCalculator::GetCrcFromStream(const ByteStream& byteStream)
 
 	for (		ByteStream::const_iterator iterBeg = byteStream.begin();
 				iterBeg != byteStream.end();
-				iterBeg++){
+				++iterBeg){
 		UpdateCrc(*iterBeg, crcValue);
 	}
 

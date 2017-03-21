@@ -20,8 +20,9 @@ namespace iwidgets
 // reimplemented (iwidgets::IMultiPageWidgetDelegate)
 
 CTabWidgetDelegate::CTabWidgetDelegate(QTabWidget::TabPosition tabPosition, bool useDocumentMode)
-	:m_tabPosition(tabPosition),
-	m_useDocumentMode(useDocumentMode)
+:	m_tabPosition(tabPosition),
+	m_useDocumentMode(useDocumentMode),
+	m_containerGuiFlags(CGF_NONE)
 {
 }
 

@@ -41,7 +41,7 @@ protected:
 	class UpdateBlocker
 	{
 	public:
-		UpdateBlocker(const TGuiObserverWrap<Gui, Observer>* parentPtr);
+		explicit UpdateBlocker(const TGuiObserverWrap<Gui, Observer>* parentPtr);
 		~UpdateBlocker();
 
 	private:

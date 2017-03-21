@@ -30,7 +30,7 @@ class CFocusDecorator: public QObject
 public:
 	typedef istd::TIFactory<QGraphicsEffect> GraphicsEffectFactory;
 
-	CFocusDecorator(QObject* parentPtr = NULL);
+	explicit CFocusDecorator(QObject* parentPtr = NULL);
 	virtual ~CFocusDecorator();
 
 	bool RegisterWidget(QWidget* widgetPtr, GraphicsEffectFactory* effectFactoryPtr);

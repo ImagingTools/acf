@@ -24,7 +24,7 @@ public:
 
 	static istd::CClassInfo s_compInterfaceType;
 
-	CBaseComponentStaticInfo(const IRealComponentStaticInfo* baseComponentPtr = NULL);
+	explicit CBaseComponentStaticInfo(const IRealComponentStaticInfo* baseComponentPtr = NULL);
 
 	/**
 		Register interface ID for this static component info.

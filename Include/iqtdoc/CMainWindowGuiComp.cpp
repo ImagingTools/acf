@@ -395,7 +395,7 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 	if (archive.IsStoring()){
 		for (		RecentFilesMap::const_iterator index = m_recentFilesMap.begin();
 					index != m_recentFilesMap.end();
-					index++){
+					++index){
 			retVal = retVal && archive.BeginTag(groupTag);
 
 			QByteArray documentTypeId = index.key();

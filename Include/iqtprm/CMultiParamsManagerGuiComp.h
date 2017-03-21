@@ -32,6 +32,8 @@ public:
 		I_ASSIGN_MULTI_0(m_paramsSetTypeIdsAttrPtr, "ParamTypeIds", "The list of type IDs for supported parameter sets", true);
 	I_END_COMPONENT;
 
+	CMultiParamsManagerGuiComp();
+
 protected:
 	// reimplemented (CParamsManagerGuiCompBase)
 	virtual imod::IObserver* GetObserverPtr(const iprm::IParamsSet* paramsSetPtr) const;
@@ -49,7 +51,7 @@ private:
 	I_MULTIREF(iqt2d::IViewExtender, m_viewExtendersCompPtr);
 	I_MULTIATTR(QByteArray, m_paramsSetTypeIdsAttrPtr);
 
-	QStackedWidget* m_parameterEditorStack;
+	QStackedWidget* m_parameterEditorStackPtr;
 
 	typedef QMap<QWidget*, iqtgui::IGuiObject*> WidgetGuiMap;
 	typedef QMap<QByteArray /*parameter type ID*/, int /*Position in the page stack*/> TypeToStackPositionMap;
@@ -59,7 +61,6 @@ private:
 	WidgetGuiMap m_widgetToGuiMap;
 	TypeToStackPositionMap m_typeToStackPositionMap;
 	TypeToExtenderMap m_typeToExtenderMap;
-	ConnectedSceneFlags m_connectedSceneFlags;
 };
 
 

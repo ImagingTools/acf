@@ -76,7 +76,7 @@ protected:
 	public:
 		typedef QAbstractTableModel BaseClass;
 
-		TableModel(TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>* parentPtr);
+		explicit TableModel(TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>* parentPtr);
 
 		// reimplemented (QAbstractTableModel)
 		virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;

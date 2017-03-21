@@ -159,7 +159,7 @@ private:
 	class CalibrationObserver: public imod::TSingleModelObserverBase<i2d::ICalibration2d>
 	{
 	public:
-		CalibrationObserver(CShapeBase* parentPtr);
+		explicit CalibrationObserver(CShapeBase* parentPtr);
 
 		// reimplemented (imod::CSingleModelObserverBase)
 		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);

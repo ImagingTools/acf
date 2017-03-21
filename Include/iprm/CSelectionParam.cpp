@@ -252,7 +252,7 @@ bool CSelectionParam::CopyFrom(const istd::IChangeable& object, CompatibilityMod
 
 				if (constraintsPtr != m_constraintsPtr){
 					istd::TDelPtr<IOptionsList> copiedConstraintsPtr;
-					if (sourceImplPtr->m_constraintsPtr != NULL){
+					if (constraintsPtr != NULL){
 						copiedConstraintsPtr.SetCastedOrRemove(constraintsPtr->CloneMe());
 					}
 
@@ -290,8 +290,8 @@ bool CSelectionParam::CopyFrom(const istd::IChangeable& object, CompatibilityMod
 
 				istd::CChangeNotifier notifier(this, &GetAllChanges());
 
-				m_selectedOptionIndex = sourceImplPtr->m_selectedOptionIndex;
-				m_selectedOptionId = sourceImplPtr->m_selectedOptionId;
+				m_selectedOptionIndex = selectedIndex;
+				m_selectedOptionId = selectedId;
 
 				SyncIndexWithId();
 

@@ -86,16 +86,12 @@ bool TMultiReferenceMember<Interface>::IsValid() const
 template <class Interface>
 bool TMultiReferenceMember<Interface>::EnsureInitialized() const
 {
-	bool retVal = false;
-
 	if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
 		const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
 			int attributesCount = BaseClass::GetCount();
 
 			m_components.resize(attributesCount);
-
-			retVal = true;
 
 			for (int i = 0; i < attributesCount; ++i){
 				const QByteArray& componentId = BaseClass::operator[](i);
@@ -109,7 +105,7 @@ bool TMultiReferenceMember<Interface>::EnsureInitialized() const
 				m_components[i] = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
 			}
 
-			m_isInitialized = retVal;
+			m_isInitialized = true;
 		}
 		else{
 			qCritical("Components are is defined, but definition component has no parent");

@@ -50,7 +50,7 @@ public:
 	CCmy operator*(double value) const;
 	CCmy operator/(double value) const;
 
-	const CCmy& operator=(const CCmy& color);
+	CCmy& operator=(const CCmy& color);
 
 	const CCmy& operator+=(const CCmy& color);
 	const CCmy& operator-=(const CCmy& color);
@@ -121,7 +121,7 @@ inline void CCmy::SetY(double value)
 
 // operators
 
-inline const CCmy& CCmy::operator=(const CCmy& color)
+inline CCmy& CCmy::operator=(const CCmy& color)
 {
 	BaseClass::operator=(color);
 

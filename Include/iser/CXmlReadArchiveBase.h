@@ -31,7 +31,7 @@ public:
 	using BaseClass::Process;
 
 protected:
-	CXmlReadArchiveBase(const CArchiveTag& rootTag);
+	explicit CXmlReadArchiveBase(const CArchiveTag& rootTag);
 
 	/**
 		Extended implementation of EndTag() with additional flag signalizing that tag is skipped.

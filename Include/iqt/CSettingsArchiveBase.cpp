@@ -80,7 +80,7 @@ QString CSettingsArchiveBase::GetBaseKey() const
 
 	for (		OpenTagsList::const_iterator tagIter = m_openTagsList.begin();
 				tagIter != m_openTagsList.end();
-				tagIter++){
+				++tagIter){
 		const TagInfo& tagInfo = *tagIter;
 
 		static const QString separator("_");

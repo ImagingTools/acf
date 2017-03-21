@@ -9,6 +9,12 @@ namespace iqtprm
 {
 
 
+CMultiParamsManagerGuiComp::CMultiParamsManagerGuiComp()
+:	m_parameterEditorStackPtr(NULL)
+{
+}
+
+
 // protected methods
 
 // reimplemented (CMultiParamsManagerGuiCompBase)
@@ -70,7 +76,7 @@ void CMultiParamsManagerGuiComp::UpdateParamsView(int selectedIndex)
 
 	int stackPosition = m_typeToStackPositionMap.value(typeId, -1);
 
-	m_parameterEditorStack->setCurrentIndex(stackPosition);
+	m_parameterEditorStackPtr->setCurrentIndex(stackPosition);
 }
 
 
@@ -88,22 +94,22 @@ void CMultiParamsManagerGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	m_parameterEditorStack = new QStackedWidget(ParamsFrame);
+	m_parameterEditorStackPtr = new QStackedWidget(ParamsFrame);
 	QLayout* layoutPtr = ParamsFrame->layout();
 	if (layoutPtr != NULL){
-		layoutPtr->addWidget(m_parameterEditorStack);
+		layoutPtr->addWidget(m_parameterEditorStackPtr);
 	}
 
 	int editorsCount = qMin(m_paramsGuiCompPtr.GetCount(), m_paramsSetTypeIdsAttrPtr.GetCount());
 	for (int editorIndex = 0; editorIndex < editorsCount; editorIndex++){
 		iqtgui::IGuiObject* guiPtr = m_paramsGuiCompPtr[editorIndex];
 		if (guiPtr != NULL){
-			QWidget* stackPage = new QWidget(m_parameterEditorStack);
+			QWidget* stackPage = new QWidget(m_parameterEditorStackPtr);
 			QVBoxLayout* pageLayoutPtr = new QVBoxLayout(stackPage);
 			pageLayoutPtr->setMargin(0);
 
 			if (guiPtr->CreateGui(stackPage)){
-				m_parameterEditorStack->insertWidget(editorIndex, stackPage);
+				m_parameterEditorStackPtr->insertWidget(editorIndex, stackPage);
 
 				m_widgetToGuiMap[stackPage] = guiPtr;
 
@@ -126,10 +132,10 @@ void CMultiParamsManagerGuiComp::OnGuiCreated()
 
 void CMultiParamsManagerGuiComp::OnGuiDestroyed()
 {
-	int pagesCount = m_parameterEditorStack->count();
+	int pagesCount = m_parameterEditorStackPtr->count();
 
 	for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
-		QWidget* pagePtr = m_parameterEditorStack->widget(pageIndex);
+		QWidget* pagePtr = m_parameterEditorStackPtr->widget(pageIndex);
 
 		WidgetGuiMap::iterator foundGuiIter = m_widgetToGuiMap.find(pagePtr);
 		Q_ASSERT(foundGuiIter != m_widgetToGuiMap.end());
@@ -138,8 +144,8 @@ void CMultiParamsManagerGuiComp::OnGuiDestroyed()
 		}
 	}
 
-	while (m_parameterEditorStack->count() > 1){
-		m_parameterEditorStack->removeWidget(m_parameterEditorStack->widget(m_parameterEditorStack->count() - 1));
+	while (m_parameterEditorStackPtr->count() > 1){
+		m_parameterEditorStackPtr->removeWidget(m_parameterEditorStackPtr->widget(m_parameterEditorStackPtr->count() - 1));
 	}
 
 	m_widgetToGuiMap.clear();

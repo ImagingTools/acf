@@ -50,7 +50,7 @@ public:
 	CRgb operator*(double value) const;
 	CRgb operator/(double value) const;
 
-	const CRgb& operator=(const CRgb& color);
+	CRgb& operator=(const CRgb& color);
 
 	const CRgb& operator+=(const CRgb& color);
 	const CRgb& operator-=(const CRgb& color);
@@ -121,7 +121,7 @@ inline void CRgb::SetBlue(double value)
 
 // operators
 
-inline const CRgb& CRgb::operator=(const CRgb& color)
+inline CRgb& CRgb::operator=(const CRgb& color)
 {
 	BaseClass::operator=(color);
 

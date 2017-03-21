@@ -84,7 +84,7 @@ protected:
 	public:
 		typedef icomp::CRegistry BaseClass;
 
-		LogingRegistry(CPackagesLoaderComp* parentPtr);
+		explicit LogingRegistry(CPackagesLoaderComp* parentPtr);
 
 		// reimplemented (icomp::IRegistry)
 		virtual ElementInfo* InsertElementInfo(

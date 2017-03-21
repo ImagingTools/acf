@@ -32,7 +32,7 @@ public:
 		\param	slavePtr	pointer to filtered slave tree object.
 							It cannot be NULL.
 	*/
-	CTreeWidgetFilter(QTreeWidget* slavePtr);
+	explicit CTreeWidgetFilter(QTreeWidget* slavePtr);
 
 protected:
 	// reimplemented (QObject)

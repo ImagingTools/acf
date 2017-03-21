@@ -44,7 +44,7 @@ private:
 	public:
 		typedef imod::TSingleModelObserverBase<imod::IModel> BaseClass;
 
-		ModelObserver(CModelProxy& parent);
+		explicit ModelObserver(CModelProxy& parent);
 
 		// reimplemented (imod::IObserver)
 		virtual bool OnModelDetached(imod::IModel* modelPtr);

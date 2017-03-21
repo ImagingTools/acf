@@ -46,7 +46,7 @@ bool CompareByArchive(const istd::IChangeable& object1, const istd::IChangeable&
 	CMemoryWriteArchive archive2;
 	retVal = retVal && const_cast<ISerializable*>(object2Ptr)->Serialize(archive2);
 
-	return (archive1 == archive2);
+	return retVal && (archive1 == archive2);
 }
 
 

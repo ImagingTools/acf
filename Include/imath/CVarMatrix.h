@@ -42,12 +42,12 @@ public:
 	/**
 		Create matrix with specified size.
 	*/
-	CVarMatrix(istd::CIndex2d size);
+	explicit CVarMatrix(istd::CIndex2d size);
 
 	/**
 		Create matrix from vector.
 	*/
-	CVarMatrix(const CVarVector& vector, bool isTransposed = false);
+	explicit CVarMatrix(const CVarVector& vector, bool isTransposed = false);
 
 	/**
 		Set all matrix cells to zero.

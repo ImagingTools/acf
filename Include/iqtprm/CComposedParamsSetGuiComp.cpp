@@ -331,10 +331,10 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 		if (guiObject){
 			iprm::IParamsSet::Ids::const_iterator iter;
 
-			bool addSpacer = false;
-
 			// add or remove gui items to the container
 			if (keepVisible){
+				bool addSpacer = false;
+
 				QString name = m_guiNames[guiObject];
 				QWidget* panelPtr;
 				if (guiMode == DT_TAB_WIDGET){

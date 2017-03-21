@@ -21,6 +21,12 @@ namespace ifilegui
 {
 
 
+CFileSystemExplorerGuiComp::CFileSystemExplorerGuiComp()
+:	m_filterEditPtr(NULL)
+{
+}
+
+
 // protected methods
 
 QStringList CFileSystemExplorerGuiComp::GetDefaultFilters() const
@@ -116,19 +122,19 @@ void CFileSystemExplorerGuiComp::OnGuiCreated()
 	FilterFrame->setVisible(*m_showUserFilterAttrPtr);
 	QLayout* filterLayoutPtr = FilterFrame->layout();
 	if (filterLayoutPtr != NULL){
-		m_filterEdit = new iwidgets::CExtLineEdit(tr("Enter text to filter file items"), 2, FilterFrame);
+		m_filterEditPtr = new iwidgets::CExtLineEdit(tr("Enter text to filter file items"), 2, FilterFrame);
 
 		// add "clear" button:
-		QToolButton* clearButton = new QToolButton(m_filterEdit);
+		QToolButton* clearButton = new QToolButton(m_filterEditPtr);
 		clearButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 		clearButton->setIcon(QIcon(":/Icons/Clear"));
-		connect(clearButton, SIGNAL(clicked()), m_filterEdit, SLOT(clear()));
+		connect(clearButton, SIGNAL(clicked()), m_filterEditPtr, SLOT(clear()));
 
-		m_filterEdit->AddWidget(clearButton, Qt::AlignRight);
+		m_filterEditPtr->AddWidget(clearButton, Qt::AlignRight);
 
-		filterLayoutPtr->addWidget(m_filterEdit);
+		filterLayoutPtr->addWidget(m_filterEditPtr);
 
-		connect(m_filterEdit, SIGNAL(editingFinished()), this, SLOT(OnFilterChanged()));
+		connect(m_filterEditPtr, SIGNAL(editingFinished()), this, SLOT(OnFilterChanged()));
 	}
 
 	FileTree->setDragDropMode(QTreeView::DragDrop);
@@ -165,7 +171,7 @@ void CFileSystemExplorerGuiComp::OnGuiCreated()
 
 void CFileSystemExplorerGuiComp::OnFilterChanged()
 {
-	QString filterText = m_filterEdit->GetText();
+	QString filterText = m_filterEditPtr->GetText();
 
 	QStringList fileFilters = GetDefaultFilters();
 

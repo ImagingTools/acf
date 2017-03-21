@@ -160,7 +160,7 @@ protected:
 	public:
 		typedef imod::CMultiModelDispatcherBase BaseClass;
 
-		CommandsObserver(CSimpleMainWindowGuiComp& parent);
+		explicit CommandsObserver(CSimpleMainWindowGuiComp& parent);
 
 		// reimplemented (imod::CMultiModelDispatcherBase)
 		void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);

@@ -23,7 +23,7 @@ class CImageShape: public CShapeBase
 public:
 	typedef CShapeBase BaseClass;
 
-	CImageShape(const icmm::IColorTransformation* colorTransformationPtr = NULL);
+	explicit CImageShape(const icmm::IColorTransformation* colorTransformationPtr = NULL);
 
 	// reimplemented (iview::IShape)
 	virtual void Draw(QPainter& drawContext) const;

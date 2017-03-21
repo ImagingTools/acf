@@ -63,7 +63,7 @@ private:
 	class CurrentParamsSetObserver: public imod::CSingleModelObserverBase
 	{
 	public:
-		CurrentParamsSetObserver(CManagerParamsSetShadowerComp* parentPtr);
+		explicit CurrentParamsSetObserver(CManagerParamsSetShadowerComp* parentPtr);
 
 		// reimplemented (imod::CSingleModelObserverBase)
 		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);

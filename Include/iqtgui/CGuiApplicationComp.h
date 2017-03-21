@@ -124,7 +124,7 @@ protected:
 	class TrayMessages: virtual public ilog::IMessageConsumer
 	{
 	public:
-		TrayMessages(CGuiApplicationComp& parent);
+		explicit TrayMessages(CGuiApplicationComp& parent);
 
 		// reimplemented (ilog::IMessageConsumer)
 		virtual bool IsMessageSupported(

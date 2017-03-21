@@ -8,6 +8,15 @@ namespace ifilegui
 {
 
 
+CFileTreeViewGuiComp::CFileTreeViewGuiComp()
+:	m_internalThreadPtr(NULL),
+	m_fileModelUpdateAllowed(true),
+	m_filesCount(0),
+	m_dirsCount(0)
+{
+}
+
+
 // protected methods
 
 // reimplemented (icomp::CComponentBase)
@@ -227,7 +236,8 @@ void CFileTreeViewGuiComp::RebuildTreeModel()
 	FileList->setUpdatesEnabled(false);
 
 	m_itemModel.clear();
-	m_filesCount = m_dirsCount = 0;
+	m_filesCount = 0;
+	m_dirsCount = 0;
 
 	// this will start DoTreeModelUpdate() in the separate thread.
 	m_internalThreadPtr->start();

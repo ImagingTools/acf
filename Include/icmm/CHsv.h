@@ -51,7 +51,7 @@ public:
 	CHsv operator*(double value) const;
 	CHsv operator/(double value) const;
 
-	const CHsv& operator=(const CHsv& color);
+	CHsv& operator=(const CHsv& color);
 
 	const CHsv& operator+=(const CHsv& color);
 	const CHsv& operator-=(const CHsv& color);
@@ -129,7 +129,7 @@ inline void CHsv::SetValue(double value)
 
 // operators
 
-inline const CHsv& CHsv::operator=(const CHsv& color)
+inline CHsv& CHsv::operator=(const CHsv& color)
 {
 	BaseClass::operator=(color);
 

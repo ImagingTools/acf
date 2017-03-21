@@ -29,6 +29,8 @@ public:
 	virtual ~CEventBasedNotifier();
 
 private:
+	CEventBasedNotifier(const CEventBasedNotifier&){}
+
 	CAssyncNotifier* m_assyncNotifierPtr;
 };
 
