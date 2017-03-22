@@ -93,6 +93,16 @@ I_EXPORT_COMPONENT(
 			"File name based on application attributes", 
 			"Application Info Process File Name")
 
+I_EXPORT_COMPONENT(
+			TextFileLog,
+			"Simple text file log",
+			"Message Consumer" IM_CATEGORY(I_SERVICE) IM_TAG("Text File Log"));
+
+I_EXPORT_COMPONENT(
+			TextFileLogStreamer,
+			"Simple text file log serializer",
+			"Log Text Write Serialize" IM_CATEGORY(I_SERVICE) IM_TAG("Text File Log Write"));
+
 
 } // namespace FilePck
 

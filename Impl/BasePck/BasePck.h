@@ -4,10 +4,8 @@
 
 #include <imod/IObserver.h>
 
-#include <ilog/CTextFileLogComp.h>
 #include <ilog/CConsoleLogComp.h>
 #include <ilog/CLogComp.h>
-#include <ilog/CTextFileLogStreamerComp.h>
 
 #include <icomp/TModelCompWrap.h>
 #include <icomp/TMakeComponentWrap.h>
@@ -68,10 +66,8 @@ namespace BasePck
 {
 
 
-typedef ilog::CTextFileLogComp TextFileLog;
 typedef ilog::CConsoleLogComp ConsoleLog;
 typedef icomp::TModelCompWrap<ilog::CLogComp> Log;
-typedef ilog::CTextFileLogStreamerComp TextFileLogStreamer;
 
 typedef ibase::CInstantiatorComp Instantiator;
 typedef ibase::CVersionInfoComp VersionInfo;

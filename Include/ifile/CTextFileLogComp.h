@@ -1,5 +1,5 @@
-#ifndef ilog_CTextFileLogComp_included
-#define ilog_CTextFileLogComp_included
+#ifndef ifile_CTextFileLogComp_included
+#define ifile_CTextFileLogComp_included
 
 
 // Qt includes
@@ -12,7 +12,7 @@
 #include <ilog/CStreamLogCompBase.h>
 
 
-namespace ilog
+namespace ifile
 {
 
 
@@ -21,10 +21,10 @@ namespace ilog
 
 	\ingroup Logging
 */
-class CTextFileLogComp: public CStreamLogCompBase
+class CTextFileLogComp: public ilog::CStreamLogCompBase
 {
 public:
-	typedef CStreamLogCompBase BaseClass;
+	typedef ilog::CStreamLogCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CTextFileLogComp);
 		I_ASSIGN(m_fileNameCompPtr, "LogFile", "Name of the log file", true, "LogFile");
@@ -75,9 +75,9 @@ private:
 };
 
 
-} // namespace ilog
+} // namespace ifile
 
 
-#endif // !ilog_CTextFileLogComp_included
+#endif // !ifile_CTextFileLogComp_included
 
 

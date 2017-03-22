@@ -1,5 +1,5 @@
-#ifndef ilog_CTextFileLogStreamerComp_included
-#define ilog_CTextFileLogStreamerComp_included
+#ifndef ifile_CTextFileLogStreamerComp_included
+#define ifile_CTextFileLogStreamerComp_included
 
 
 // Qt includes
@@ -12,7 +12,7 @@
 #include <ilog/CStreamLogCompBase.h>
 
 
-namespace ilog
+namespace ifile
 {
 
 
@@ -20,11 +20,11 @@ namespace ilog
 	Message container displaying messages as log list.
 */
 class CTextFileLogStreamerComp: 
-			public CStreamLogCompBase,
+			public ilog::CStreamLogCompBase,
 			public ifile::IFilePersistence
 {
 public:
-	typedef CStreamLogCompBase BaseClass;
+	typedef ilog::CStreamLogCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CTextFileLogStreamerComp);
 		I_REGISTER_INTERFACE(ifile::IFilePersistence);
@@ -72,9 +72,9 @@ private:
 };
 
 
-} // namespace ilog
+} // namespace ifile
 
 
-#endif // !ilog_CTextFileLogStreamerComp_included
+#endif // !ifile_CTextFileLogStreamerComp_included
 
 

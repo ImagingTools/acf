@@ -1,4 +1,4 @@
-#include <ilog/CTextFileLogStreamerComp.h>
+#include <ifile/CTextFileLogStreamerComp.h>
 
 // Qt includes
 #include <QtCore/QStringList>
@@ -10,7 +10,7 @@
 #include <ilog/CMessage.h>
 
 
-namespace ilog
+namespace ifile
 {
 
 
@@ -227,5 +227,7 @@ void CTextFileLogStreamerComp::CloseFileStream()
 }
 
 
-} // namespace
+} // namespace ifile
+
+
 

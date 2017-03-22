@@ -44,16 +44,6 @@ I_EXPORT_COMPONENT(
 			"Windows Message Consumer" IM_CATEGORY(I_SERVICE) IM_TAG("Log"));
 
 I_EXPORT_COMPONENT(
-			TextFileLog,
-			"Simple text file log",
-			"Message Consumer" IM_CATEGORY(I_SERVICE) IM_TAG("Text File Log"));
-
-I_EXPORT_COMPONENT(
-			TextFileLogStreamer,
-			"Simple text file log serializer",
-			"Log Text Write Serialize" IM_CATEGORY(I_SERVICE) IM_TAG("Text File Log Write"));
-
-I_EXPORT_COMPONENT(
 			Uuid,
 			"Unique identifier",
 			"Unique Identifier UUID Generated" IM_CATEGORY(I_SERVICE));

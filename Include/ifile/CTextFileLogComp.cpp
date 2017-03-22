@@ -1,4 +1,4 @@
-#include <ilog/CTextFileLogComp.h>
+#include <ifile/CTextFileLogComp.h>
 
 
 // Qt includes
@@ -10,7 +10,7 @@
 #include <imod/IModel.h>
 
 
-namespace ilog
+namespace ifile
 {
 
 
@@ -127,6 +127,6 @@ void CTextFileLogComp::FilePathObserver::OnUpdate(const istd::IChangeable::Chang
 }
 
 
-} // namespace ilog
+} // namespace ifile
 
 
