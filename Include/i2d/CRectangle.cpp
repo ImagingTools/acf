@@ -11,6 +11,7 @@
 #include <iser/CArchiveTag.h>
 #include <i2d/CVector2d.h>
 #include <i2d/CRect.h>
+#include <i2d/CLine2d.h>
 
 
 namespace i2d
