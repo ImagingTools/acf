@@ -517,7 +517,7 @@ bool CLine2d::ApproxFromPoints(const QSet<i2d::CVector2d>& points)
 
 CVector2d CLine2d::GetCenter() const
 {
-	return GetBoundingBox().GetCenter();
+	return (m_point1 + m_point2) * 0.5;
 }
 
 
