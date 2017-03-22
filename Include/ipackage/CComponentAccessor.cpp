@@ -29,7 +29,7 @@ struct Loader
 	icomp::TSimComponentWrap<ipackage::CPackagesLoaderComp> packagesLoaderComp;
 	icomp::TSimComponentWrap<ilog::CConsoleLogComp> log;
 
-	Loader(bool isDiagnosticEnabled)
+	explicit Loader(bool isDiagnosticEnabled)
 	{
 		log.SetBoolAttr("UseCategory", false);
 		log.SetBoolAttr("UseCode", false);

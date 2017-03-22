@@ -239,8 +239,7 @@ void CMultiDocumentWorkspaceGuiComp::SetActiveView(istd::IPolymorphic* viewPtr)
 			if (windowPtr != NULL){
 				QWidget* viewWidgetPtr = windowPtr->widget();
 				if (viewWidgetPtr != NULL){
-					iqtgui::IGuiObject* guiObjectPtr = NULL;
-					guiObjectPtr = GetViewFromWidget(*viewWidgetPtr);
+					iqtgui::IGuiObject* guiObjectPtr = GetViewFromWidget(*viewWidgetPtr);
 					if (viewPtr == guiObjectPtr){
 						workspacePtr->setActiveSubWindow(windowPtr);
 					}
