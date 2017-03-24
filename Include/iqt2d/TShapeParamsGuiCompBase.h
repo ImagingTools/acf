@@ -96,7 +96,8 @@ private:
 	QMenu* m_menuPtr;
 	QAbstractButton* m_menuButtonPtr;
 
-	QSet<QAction*> m_toolBarActions;
+	typedef QSet<QAction*> Actions;
+	Actions m_toolBarActions;
 
 	I_REF(imath::IUnitInfo, m_defaultUnitInfoCompPtr);
 	I_REF(iview::IColorSchema, m_colorSchemaCompPtr);
@@ -360,8 +361,8 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnModelDetachedOrGuiHidden(
 		toolBarPtr->disconnect();
 
 		// depopulate stored actions
-		for (QAction* actionPtr : m_toolBarActions){
-			toolBarPtr->removeAction(actionPtr);
+		for (Actions::ConstIterator iter = m_toolBarActions.constBegin(); iter != m_toolBarActions.constEnd(); ++iter){
+			toolBarPtr->removeAction(*iter);
 		}
 
 		m_toolBarActions.clear();
