@@ -6,6 +6,7 @@
 
 // ACF includes
 #include <imath/imath.h>
+#include <i2d/CVector2d.h>
 
 
 namespace i2d
@@ -29,11 +30,15 @@ CDirection2d::CDirection2d(const CDirection2d& direction)
 
 
 CDirection2d::CDirection2d(double radian)
-:	m_direction(radian)
+:	m_direction(Normalize(radian))
 {
-	Q_ASSERT(radian >= -I_PI - I_BIG_EPSILON);
-	Q_ASSERT(radian <= I_PI + I_BIG_EPSILON);
+	Q_ASSERT(Invariant());
+}
 
+
+CDirection2d::CDirection2d(const CVector2d& direction)
+:	m_direction(direction.GetAngle())
+{
 	Q_ASSERT(Invariant());
 }
 
@@ -98,13 +103,13 @@ double CDirection2d::Normalize(double radian)
 
 CDirection2d CDirection2d::FromRadian(double radian)
 {
-	return CDirection2d(CDirection2d::Normalize(radian));
+	return CDirection2d(radian);
 }
 
 
 CDirection2d CDirection2d::FromDegree(double degree)
 {
-	return CDirection2d(CDirection2d::Normalize(degree * (I_2PI / 360.0)));
+	return CDirection2d(degree * (I_2PI / 360.0));
 }
 
 

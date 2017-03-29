@@ -6,6 +6,9 @@ namespace i2d
 {
 
 
+class CVector2d;
+
+
 /**
 	Represents a direction in 2D space
 */
@@ -18,6 +21,17 @@ public:
 		Construct a new object by copy.
 	*/
 	CDirection2d(const CDirection2d& direction);
+
+	/**
+		Construct a new object from radian coordinates.
+		\param	radian	angle in radians.
+	*/
+	explicit CDirection2d(double radian);
+
+	/**
+		Construct direction using angle of vector.
+	*/
+	CDirection2d(const CVector2d& direction);
 
 	/**
 		Construct a new CDirection2d object and initialize from radian.
@@ -80,12 +94,6 @@ public:
 	bool IsInRange(const CDirection2d& leftDirectionLimit, const CDirection2d& rightDirectionLimit) const;
 
 private:
-	/**
-		Construct a new object from radian coordinates.
-		\param	radian	angle [-PI, +PI]
-	*/
-	explicit CDirection2d(double radian);
-
 	/**
 		Checks the objects invariant. This is for assertion annotation
 		\return		true if all object invariants are valid
