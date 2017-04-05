@@ -71,6 +71,9 @@ protected:
 	virtual void OnGuiCreated();
 
 private:
+	void UpdateButtonsVisibility();
+
+private:
 	I_ATTR(bool, m_allowAddRemoveAttrPtr);
 	I_ATTR(bool, m_allowUpDownAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);

@@ -173,28 +173,7 @@ void COptionsManagerEditorComp::UpdateActions()
 
 	EnsureSelectedIndexUpdated();
 
-	bool isAddAllowed = false;
-	bool isRemoveAllowed = false;
-	bool isUpAllowed = false;
-	bool isDownAllowed = false;
-
-	iprm::IOptionsManager* objectPtr = GetObservedObject();
-	if (objectPtr != NULL){
-		int operationFlags = objectPtr->GetOptionOperationFlags(m_lastSelectedIndex);
-
-		isAddAllowed = ((operationFlags & iprm::IOptionsManager::OOF_SUPPORT_INSERT) != 0);
-		isRemoveAllowed = (m_lastSelectedIndex >= 0) && ((operationFlags & iprm::IOptionsManager::OOF_SUPPORT_DELETE) != 0);
-		isUpAllowed = (m_lastSelectedIndex > 0) && ((objectPtr->GetOptionOperationFlags(m_lastSelectedIndex - 1) & iprm::IOptionsManager::OOF_SUPPORT_SWAP) != 0);
-		isDownAllowed =
-					((m_lastSelectedIndex >= 0) &&
-					(m_lastSelectedIndex < objectPtr->GetOptionsCount() - 1)) &&
-					((objectPtr->GetOptionOperationFlags(m_lastSelectedIndex + 1) & iprm::IOptionsManager::OOF_SUPPORT_SWAP) != 0);
-	}
-
-	AddButton->setEnabled(isAddAllowed);
-	RemoveButton->setEnabled(isRemoveAllowed);
-	UpButton->setEnabled(isUpAllowed);
-	DownButton->setEnabled(isDownAllowed);
+	UpdateButtonsVisibility();
 }
 
 
@@ -314,6 +293,7 @@ void COptionsManagerEditorComp::OnGuiModelAttached()
 	AddRemoveButtonsFrame->setVisible(addRemoveVisible);
 	UpDownButtonsFrame->setVisible(upDownVisible);
 
+	UpdateButtonsVisibility();
 
 	OptionsList->setVisible(true);
 }
@@ -366,8 +346,40 @@ void COptionsManagerEditorComp::OnGuiCreated()
 		OptionsList->setUniformItemSizes(true);
 	}
 
+	AddButton->setEnabled(false);
+	RemoveButton->setEnabled(false);
+	UpButton->setEnabled(false);
+	DownButton->setEnabled(false);
+
 	UpdateActions();
 }
+
+
+void COptionsManagerEditorComp::UpdateButtonsVisibility()
+{
+	if (!IsGuiCreated()) {
+		return;
+	}
+	iprm::IOptionsManager* objectPtr = GetObservedObject();
+	if (objectPtr == NULL){
+		return;
+	}
+
+	int operationFlags = objectPtr->GetOptionOperationFlags(m_lastSelectedIndex);
+
+	bool isAddAllowed = ((operationFlags & iprm::IOptionsManager::OOF_SUPPORT_INSERT) != 0);
+	bool isRemoveAllowed = (m_lastSelectedIndex >= 0) && ((operationFlags & iprm::IOptionsManager::OOF_SUPPORT_DELETE) != 0);
+	bool isUpAllowed = (m_lastSelectedIndex > 0) && ((objectPtr->GetOptionOperationFlags(m_lastSelectedIndex - 1) & iprm::IOptionsManager::OOF_SUPPORT_SWAP) != 0);
+	bool isDownAllowed = ((m_lastSelectedIndex >= 0) &&
+						(m_lastSelectedIndex < objectPtr->GetOptionsCount() - 1)) &&
+						((objectPtr->GetOptionOperationFlags(m_lastSelectedIndex + 1) & iprm::IOptionsManager::OOF_SUPPORT_SWAP) != 0);
+
+	AddButton->setEnabled(isAddAllowed);
+	RemoveButton->setEnabled(isRemoveAllowed);
+	UpButton->setEnabled(isUpAllowed);
+	DownButton->setEnabled(isDownAllowed);
+}
+
 
 
 } // namespace iqtprm
