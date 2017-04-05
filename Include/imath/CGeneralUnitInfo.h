@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include <iser/IArchive.h>
 #include <imath/IUnitInfo.h>
 
 
@@ -27,6 +28,8 @@ public:
 	void SetUnitName(const QString& name);
 	void SetDisplayMultiplicationFactor(double factor);
 	void SetValueRange(const istd::CRange& range);
+
+	virtual bool Serialize(iser::IArchive& archive);
 
 	//	reimplemented (imath::IUnitInfo)
 	virtual int GetUnitType() const;
