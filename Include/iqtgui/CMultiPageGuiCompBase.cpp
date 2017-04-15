@@ -285,6 +285,31 @@ void CMultiPageGuiCompBase::OnGuiDestroyed()
 }
 
 
+void CMultiPageGuiCompBase::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	// Modify pages with their translated names:
+	int pagesCount = GetPagesCount();
+	for (int pageIndex = 0; pageIndex < pagesCount; ++pageIndex){
+		iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(pageIndex);
+		if (guiPtr == NULL){
+			continue;
+		}
+
+		QString name;
+		if (pageIndex < m_pageNamesAttrPtr.GetCount()){
+			name = m_pageNamesAttrPtr[pageIndex];
+		}
+		else{
+			continue;
+		}
+
+		m_pageIndexToInfoMap[pageIndex].pageTitle = name;
+	}
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CMultiPageGuiCompBase::OnComponentCreated()
