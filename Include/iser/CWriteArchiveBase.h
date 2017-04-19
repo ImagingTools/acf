@@ -36,7 +36,7 @@ protected:
 		Serialize standard header.
 		During serialization of header list of known versions will be loaded.
 	*/
-	virtual bool SerializeAcfHeader();
+	bool SerializeAcfHeader();
 
 	class EmptyVersionInfo: virtual public IVersionInfo
 	{

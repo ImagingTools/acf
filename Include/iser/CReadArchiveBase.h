@@ -27,7 +27,7 @@ protected:
 		Serialize standard header.
 		During serialization of header list of known versions will be loaded.
 	*/
-	virtual bool SerializeAcfHeader();
+	bool SerializeAcfHeader();
 
 private:
 	CArchiveHeaderInfo m_versionInfo;
