@@ -142,9 +142,10 @@ inline CMatrix3d::CMatrix3d(const CMatrix3d& matrix)
 }
 
 
-inline CMatrix3d::CMatrix3d(const CVector3d& axisX,
-							const CVector3d& axisY,
-							const CVector3d& axisZ)
+inline CMatrix3d::CMatrix3d(
+			const CVector3d& axisX,
+			const CVector3d& axisY,
+			const CVector3d& axisZ)
 {
 	SetAt(0, 0, axisX[0]);
 	SetAt(0, 1, axisX[1]);
@@ -158,9 +159,10 @@ inline CMatrix3d::CMatrix3d(const CVector3d& axisX,
 }
 
 
-inline CMatrix3d::CMatrix3d(double m11, double m12, double m13,
-							double m21, double m22, double m23,
-							double m31, double m32, double m33)
+inline CMatrix3d::CMatrix3d(
+			double m11, double m12, double m13,
+			double m21, double m22, double m23,
+			double m31, double m32, double m33)
 {
 	SetAt(0, 0, m11);
 	SetAt(0, 1, m12);
