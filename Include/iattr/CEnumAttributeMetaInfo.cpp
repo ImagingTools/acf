@@ -57,7 +57,7 @@ bool CEnumAttributeMetaInfo::InsertOption(const QString& description, const iser
 }
 
 
-// reimplemented (iattr::IPropertyEnumConstraints)
+// reimplemented (iattr::IEnumAttributeMetaInfo)
 
 bool CEnumAttributeMetaInfo::IsAnyValueAllowed() const
 {

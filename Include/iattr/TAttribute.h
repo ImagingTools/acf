@@ -91,7 +91,11 @@ const Value& TAttribute<Value>::GetValue() const
 template <typename Value>
 void TAttribute<Value>::SetValue(const Value& value)
 {
-	m_value = value;
+	if (m_value != value){
+		istd::CChangeNotifier notifier(this);
+
+		m_value = value;
+	}
 }
 
 
