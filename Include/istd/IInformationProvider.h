@@ -47,6 +47,8 @@ public:
 		IC_CRITICAL
 	};
 
+	I_DECLARE_ENUM(InformationCategory, IC_NONE, IC_INFO, IC_WARNING, IC_ERROR, IC_CRITICAL);
+
 	/**
 		Additionally information flags.
 	*/
