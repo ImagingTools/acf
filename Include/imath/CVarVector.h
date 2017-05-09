@@ -435,8 +435,8 @@ inline bool CVarVector::operator==(const CVarVector& vector) const
 	}
 
 	bool retVal = true;
-	for (		Elements::const_iterator iter1 = m_elements.cbegin(), iter2 = vector.m_elements.cbegin();
-				iter1 != m_elements.cend();
+	for (		Elements::const_iterator iter1 = m_elements.begin(), iter2 = vector.m_elements.begin();
+				iter1 != m_elements.end();
 				++iter1,++iter2){
 		retVal = retVal && qFuzzyCompare(*iter1, *iter2);
 	}
