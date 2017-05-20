@@ -24,18 +24,18 @@ QWidget:disabled
 QWidget:item:hover
 {
 	background-color: transparent;
-	border-top: 1px solid #405040;
-	border-bottom: 1px solid #405040;
+	border-top: 1px solid #605040;
+	border-bottom: 1px solid #605040;
 }
 
 QWidget:item:first:hover
 {
-	border-left: 1px solid #405040;
+	border-left: 1px solid #605040;
 }
 
 QWidget:item:last:hover
 {
-	border-right: 1px solid #405040;
+	border-right: 1px solid #605040;
 }
 
 
@@ -49,7 +49,7 @@ QToolTip
 {
 	border: 1px solid black;
 	color: #b1b1b1;
-	background-color: #405040;
+	background-color: #605040;
 	padding: 1px;
 }
 
@@ -62,13 +62,13 @@ QMenuBar::item
 QMenuBar::item:selected
 {
 	background: transparent;
-	border: 1px solid #405040;
+	border: 1px solid #605040;
 }
 
 QMenuBar::item:pressed
 {
 	background: #404040;
-	border: 1px solid #405040;
+	border: 1px solid #605040;
 	margin-bottom:-1px;
 	padding-bottom:1px;
 }
@@ -86,7 +86,7 @@ QMenu::item
 
 QMenu::item:selected
 {
-	background-color: #405040;
+	background-color: #605040;
 }
 
 QMenu::separator
@@ -382,9 +382,9 @@ QTabBar::tab:top, QTabBar::tab:bottom
 	border-top: 1px solid #a1a1a1;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
-	height: 35px;
-	min-height: 35px;
-	max-height: 35px;
+	height: 32px;
+	min-height: 32px;
+	max-height: 32px;
 	min-width: 80px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -415,21 +415,19 @@ QTabBar::tab:left, QTabBar::tab:right
 	border-bottom: 1px solid #a1a1a1;
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
-	width: 35px;
-	min-width: 35px;
-	max-width: 35px;
+	width: 32px;
+	min-width: 32px;
+	max-width: 32px;
 	min-height: 80px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
-
 
 QTabBar::tab:left:selected, QTabBar::tab:right:selected
 {
 	margin-left: -3px;
 	margin-top: 5px;
 }
-
 
 QTabBar::tab:left:!selected, QTabBar::tab:right:!selected
 {
@@ -492,4 +490,16 @@ QRadioButton::indicator:hover, QCheckBox::indicator:hover
 	border: 1px solid #ffaa00;
 }
 
+
+QToolBox::tab:selected
+{
+	background-color: #605040;
+	border: 1px solid #404040;
+}
+
+QToolBox::tab:!selected
+{
+	background-color: #404040;
+	border: 1px solid #404040;
+}
 
