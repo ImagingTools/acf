@@ -1,4 +1,9 @@
-QSplashScreen > QLabel
+QSplashScreen > QWidget
+{
+    background: transparent;
+}
+
+QSplashScreen > QWidget > QLabel
 {
     background: transparent;
 }
@@ -18,15 +23,21 @@ QWidget
     background-color: #323232;
 }
 
+QWidget:disabled
+{
+    color: #606060;
+    background-color: #323232;
+}
+
 QWidget:item:hover
 {
-    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #ca0619);
+    background: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #787878, stop: 1 #808080);
     color: #000000;
 }
 
 QWidget:item:selected
 {
-    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
+    background-color: #909090;
 }
 
 QMenuBar::item
@@ -48,9 +59,7 @@ QMenuBar::item:pressed
         x1:0, y1:0,
         x2:0, y2:1,
         stop:1 #212121,
-        stop:0.4 #343434/*,
-        stop:0.2 #343434,
-        stop:0.1 #ffaa00*/
+        stop:0.4 #343434
     );
     margin-bottom:-1px;
     padding-bottom:1px;
@@ -71,20 +80,24 @@ QMenu::item:selected
     color: #000000;
 }
 
-QWidget:disabled
+QMenu::separator
 {
-    color: #404040;
-    background-color: #323232;
+    height: 2px;
+    background-color: QLinearGradient(x1:0, y1:0, x2:0, y2:1, stop:0 #161616, stop: 0.5 #151515, stop: 0.6 #212121, stop:1 #343434);
+    color: #b1b1b1;
+    padding-left: 4px;
+    margin-left: 10px;
+    margin-right: 5px;
 }
 
 QAbstractItemView
 {
-    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #4d4d4d, stop: 0.1 #646464, stop: 1 #5d5d5d);
+ /*   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #4d4d4d, stop: 0.1 #646464, stop: 1 #5d5d5d);*/
 }
 
 QWidget:focus
 {
-    /*border: 2px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);*/
+/*    border: 2px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);*/
 }
 
 QLineEdit
@@ -279,7 +292,7 @@ QPlainTextEdit
 QHeaderView::section
 {
     background-color: QLinearGradient(x1:0, y1:0, x2:0, y2:1, stop:0 #616161, stop: 0.5 #505050, stop: 0.6 #434343, stop:1 #656565);
-    color: white;
+    color: #d1d1d1;
     padding-left: 4px;
     border: 1px solid #6c6c6c;
 }
@@ -316,7 +329,7 @@ QDockWidget::close-button:pressed, QDockWidget::float-button:pressed
 QMainWindow::separator
 {
     background-color: QLinearGradient(x1:0, y1:0, x2:0, y2:1, stop:0 #161616, stop: 0.5 #151515, stop: 0.6 #212121, stop:1 #343434);
-    color: white;
+    color: #b1b1b1;
     padding-left: 4px;
     border: 1px solid #4c4c4c;
     spacing: 3px; /* spacing between items in the tool bar */
@@ -336,16 +349,6 @@ QToolBar::handle
 {
      spacing: 3px; /* spacing between items in the tool bar */
      background: url(:/images/handle.png);
-}
-
-QMenu::separator
-{
-    height: 2px;
-    background-color: QLinearGradient(x1:0, y1:0, x2:0, y2:1, stop:0 #161616, stop: 0.5 #151515, stop: 0.6 #212121, stop:1 #343434);
-    color: white;
-    padding-left: 4px;
-    margin-left: 10px;
-    margin-right: 5px;
 }
 
 QProgressBar
@@ -376,7 +379,7 @@ QTabBar::tab {
 
 QTabWidget::pane {
     border: 1px solid ;
-    top: 1px;
+    top: 1px solid red;
 }
 
 QTabBar::tab:last
