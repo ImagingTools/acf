@@ -8,12 +8,6 @@ QSplashScreen > QWidget > QLabel
     background: transparent;
 }
 
-QMdiSubWindow  
-{
-    border: 4px solid red;
-    background: green;
-}
-
 QToolTip
 {
      border: 1px solid black;
@@ -38,13 +32,12 @@ QWidget:disabled
 
 QWidget:item:hover
 {
-    background: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #787878, stop: 1 #808080);
-    color: #000000;
+    background: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #545454, stop: 1 #606060);
 }
 
 QWidget:item:selected
 {
-    background-color: #909090;
+    background-color: #606060;
 }
 
 QMenuBar::item
@@ -410,6 +403,7 @@ QTabBar::tab:!selected
 	max-height: 25px;
 	margin: 7px 03px 0px 5px;
 	background-color: #404040;
+	color: #808080;
 }
 
 
