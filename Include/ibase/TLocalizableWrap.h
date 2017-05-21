@@ -81,7 +81,7 @@ TLocalizableWrap<Base>::LanguageChangeEventFilter::LanguageChangeEventFilter(TLo
 }
 
 
-// 	protected methods of the embedded class LanguageChangeEventFilter
+// protected methods of the embedded class LanguageChangeEventFilter
 
 // reimplemented (QObject)
 
@@ -89,8 +89,8 @@ template <class Base>
 bool TLocalizableWrap<Base>::LanguageChangeEventFilter::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
 	if ((eventPtr->type() == QEvent::LanguageChange) && (sourcePtr == QCoreApplication::instance())){
-        m_parent.OnLanguageChanged();
-    }
+		m_parent.OnLanguageChanged();
+	}
 
 	return BaseClass::eventFilter(sourcePtr, eventPtr);
 }
