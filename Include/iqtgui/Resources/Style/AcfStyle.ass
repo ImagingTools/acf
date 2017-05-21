@@ -494,12 +494,12 @@ QRadioButton::indicator:hover, QCheckBox::indicator:hover
 QToolBox::tab:selected
 {
 	background-color: #605040;
-	border: 1px solid #404040;
+	border-top: 1px solid #404040;
 }
 
 QToolBox::tab:!selected
 {
-	background-color: #404040;
-	border: 1px solid #404040;
+	background-color: #323232;
+	border-top: 1px solid #404040;
 }
 
