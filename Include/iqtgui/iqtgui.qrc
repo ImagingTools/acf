@@ -71,6 +71,9 @@
     <file alias="ShowScrollbar">Resources/Icons/ShowScrollbar.svg</file>
   </qresource>
   <qresource prefix="/Styles">
-    <file alias="Acf">Resources/Style/AcfStyle.ass</file>
+    <file alias="AcfDark">Resources/Style/AcfDark.qss</file>
   </qresource>
-</RCC>
+   <qresource prefix="/Style/AcfDark/Images">
+     <file alias="CheckBoxChecked.png">Resources/Style/AcfDark/Images/CheckBoxChecked.png</file>
+   </qresource>
+ </RCC>
