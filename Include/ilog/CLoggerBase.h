@@ -1,30 +1,32 @@
-#ifndef ilog_TLoggerWrap_included
-#define ilog_TLoggerWrap_included
+#ifndef ilog_CLoggerBase_included
+#define ilog_CLoggerBase_included
 
 
 // ACF includes
 #include <istd/ILogger.h>
-#include <ilog/IMessageConsumer.h>
 #include <ilog/ILoggable.h>
-#include <ilog/CMessage.h>
 
 
 namespace ilog
 {
 
 
+class IMessageConsumer;
+
+
 /**
-	Class wrapper implementing interface istd::ILogger sending log messages over ilog::IMessageConsumer.
+	Base class implementing interface istd::ILogger sending log messages over ilog::IMessageConsumer.
 	Access to interface ilog::IMessageConsumer must be registered by user.
 	To register it use interface ilog::ILoggable implemented by this wrapper.
 
 	\ingroup Logging
 */
-template <class Base>
-class TLoggerWrap: public Base, virtual public ILoggable, virtual public istd::ILogger
+class CLoggerBase:
+			virtual public ILoggable,
+			virtual protected istd::ILogger
 {
 public:
-	TLoggerWrap();
+	CLoggerBase();
 
 	// reimplemented (ilog::ILoggable)
 	virtual void SetLogPtr(ilog::IMessageConsumer* logPtr);
@@ -148,6 +150,17 @@ protected:
 	*/
 	bool AllowMessageOnceAgain(int id);
 
+	/**
+		Decorate message parts before outputting.
+		It is designed to be overloaded if you want to change the decoration.
+	*/
+	virtual void DecorateMessage(
+				istd::IInformationProvider::InformationCategory category,
+				int id,
+				int flags,
+				QString& message,
+				QString& messageSource) const;
+
 	// reimplemented (istd::ILogger)
 	virtual bool IsLogConsumed(
 				const istd::IInformationProvider::InformationCategory* categoryPtr = NULL,
@@ -168,191 +181,9 @@ private:
 };
 
 
-// public methods
-
-template <class Base>
-TLoggerWrap<Base>::TLoggerWrap()
-:	m_logPtr(NULL),
-	m_isTracingEnabled(false)
-{
-}
-
-
-// pseudo-reimplemented (ilog::ILoggable)
-
-template <class Base>
-inline void TLoggerWrap<Base>::SetLogPtr(ilog::IMessageConsumer* logPtr)
-{
-	m_logPtr = logPtr;
-}
-
-
-template <class Base>
-inline ilog::IMessageConsumer* TLoggerWrap<Base>::GetLogPtr() const
-{
-	return m_logPtr;
-}
-
-
-// Trace protocol
-
-template <class Base>
-void TLoggerWrap<Base>::SetTracingEnabled(const bool trace)
-{
-	m_isTracingEnabled = trace;
-}
-
-
-template <class Base>
-bool TLoggerWrap<Base>::IsTracingEnabled() const
-{
-	return m_isTracingEnabled;
-}
-
-
-// protected methods
-
-template <class Base>
-bool TLoggerWrap<Base>::SendInfoMessage(int id, const QString& message, const QString& messageSource, int flags) const
-{
-	return SendLogMessage(istd::IInformationProvider::IC_INFO, id, message, messageSource, flags);
-}
-
-
-template <class Base>
-bool TLoggerWrap<Base>::SendWarningMessage(int id, const QString& message, const QString& messageSource, int flags) const
-{
-	return SendLogMessage(istd::IInformationProvider::IC_WARNING, id, message, messageSource, flags);
-}
-
-
-template <class Base>
-bool TLoggerWrap<Base>::SendErrorMessage(int id, const QString& message, const QString& messageSource, int flags) const
-{
-	return SendLogMessage(istd::IInformationProvider::IC_ERROR, id, message, messageSource, flags);
-}
-
-
-template <class Base>
-bool TLoggerWrap<Base>::SendCriticalMessage(int id, const QString& message, const QString& messageSource, int flags) const
-{
-	return SendLogMessage(istd::IInformationProvider::IC_CRITICAL, id, message, messageSource, flags);
-}
-
-
-template <class Base>
-bool TLoggerWrap<Base>::SendInfoMessageOnce(
-			int id,
-			const QString& message,
-			const QString& messageSource,
-			int flags) const
-{
-	if (!m_onceMessageIds.contains(id)){
-		m_onceMessageIds.insert(id);
-
-		return SendInfoMessage(id, message, messageSource, flags);
-	}
-
-	return false;
-}
-
-
-template <class Base>
-bool TLoggerWrap<Base>::SendWarningMessageOnce(
-			int id,
-			const QString& message,
-			const QString& messageSource,
-			int flags) const
-{
-	if (!m_onceMessageIds.contains(id)){
-		m_onceMessageIds.insert(id);
-
-		return SendWarningMessage(id, message, messageSource, flags);
-	}
-
-	return false;
-}
-
-
-
-template <class Base>
-bool TLoggerWrap<Base>::SendErrorMessageOnce(
-			int id,
-			const QString& message,
-			const QString& messageSource,
-			int flags) const
-{
-	if (!m_onceMessageIds.contains(id)){
-		m_onceMessageIds.insert(id);
-
-		return SendErrorMessage(id, message, messageSource, flags);
-	}
-
-	return false;
-}
-
-
-
-template <class Base>
-bool TLoggerWrap<Base>::SendCriticalMessageOnce(
-			int id,
-			const QString& message,
-			const QString& messageSource,
-			int flags) const
-{
-	if (!m_onceMessageIds.contains(id)){
-		m_onceMessageIds.insert(id);
-
-		return SendCriticalMessage(id, message, messageSource, flags);
-	}
-
-	return false;
-}
-
-
-// reimplemented (istd::ILogger)
-
-template <class Base>
-bool TLoggerWrap<Base>::IsLogConsumed(
-			const istd::IInformationProvider::InformationCategory* categoryPtr,
-			const int* /*flagsPtr*/) const
-{
-	return (m_logPtr != NULL) && ((categoryPtr == NULL) || m_logPtr->IsMessageSupported(*categoryPtr));
-}
-
-
-template <class Base>
-bool TLoggerWrap<Base>::SendLogMessage(
-			istd::IInformationProvider::InformationCategory category,
-			int id,
-			const QString& message,
-			const QString& messageSource,
-			int flags) const
-{
-	if (m_logPtr != NULL){
-		QString correctedMessage = message;
-		QString correctedMessageSource = messageSource;
-
-		DecorateMessage(category, id, flags, correctedMessage, correctedMessageSource);
-
-		m_logPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(category, id, correctedMessage, correctedMessageSource, flags)));
-	
-		return true;
-	}
-
-	return false;
-}
-
-template <class Base>
-bool TLoggerWrap<Base>::AllowMessageOnceAgain(int id)
-{
-	return m_onceMessageIds.remove(id);
-}
-
-
 } // namespace ilog
 
 
-#endif // !ilog_TLoggerWrap_included
+#endif // !ilog_CLoggerBase_included
 
 

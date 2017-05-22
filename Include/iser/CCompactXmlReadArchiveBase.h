@@ -45,7 +45,6 @@ protected:
 	// reimplemented (iser::CTextReadArchiveBase)
 	virtual bool ReadTextNode(QByteArray& text);
 
-	// reimplemented (istd::ILogger)
 	virtual void DecorateMessage(
 				istd::IInformationProvider::InformationCategory category,
 				int id,
