@@ -193,9 +193,13 @@ bool CAttributesManager::Serialize(iser::IArchive& archive)
 				return false;
 			}
 
-			AttributePtr attributePtr(m_attributesFactoryPtr->CreateInstance(attributeTypeId), true);
+			AttributePtr& attributePtr = m_attributesMap[attributeId];
 			if (!attributePtr.IsValid()){
-				return false;
+				attributePtr.SetPtr(m_attributesFactoryPtr->CreateInstance(attributeTypeId), true);
+
+				if (!attributePtr.IsValid()){
+					return false;
+				}
 			}
 
 			retVal = retVal && archive.BeginTag(s_objectTag);
@@ -203,12 +207,6 @@ bool CAttributesManager::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.EndTag(s_objectTag);
 
 			retVal = retVal && archive.EndTag(s_attributeTag);
-
-			if (retVal){
-				if (!InsertAttribute(attributeId, attributePtr.PopPtr(), true)){
-					return false;
-				}
-			}
 		}
 
 		retVal = retVal && archive.EndTag(s_attributesTag);
