@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4439" Description="ACF"/>
-            <Version Id="1" Number="1778" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+            <Version Id="0" Number="4504" Description="ACF"/>
+            <Version Id="1" Number="1840" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Bitmap file selector with preview</Description>
@@ -34,6 +34,9 @@
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CurrentPreviewObject" Type="Reference" ExportId="CurrentPreviewObject">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DefaultPath" Type="Text" ExportId="DefaultPath">
@@ -98,7 +101,6 @@
         <Interface InterfaceId="iqtgui::IMainWindowComponent" ComponentId="FileSelectorDockWithPreview"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="Bitmap" ComponentId="Bitmap"/>
         <Component ExportedId="BitmapFilePath" ComponentId="FileSelectorDockWithPreview/FilePath"/>
         <Component ExportedId="Loader" ComponentId="BitmapLoader"/>
     </ExportedComponents>
