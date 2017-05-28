@@ -411,7 +411,7 @@ void CPolylineShape::DrawCurve(QPainter& drawContext) const
 				double viewScale = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
 
 				for (int pointIndex = secondPointIndex; pointIndex < nodesCount; ++pointIndex){
-					segmentLine.PushEndPoint(GetScreenPosition(polylinePtr->GetNodePos(pointIndex)));
+					segmentLine.PushEndPointQuiet(GetScreenPosition(polylinePtr->GetNodePos(pointIndex)));
 
 					DrawOrientationMarker(
 								drawContext,
@@ -432,13 +432,14 @@ void CPolylineShape::DrawCurve(QPainter& drawContext) const
 				drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_NORMAL));
 			}
 
-			segmentLine.SetPoint2(firstPoint);
+			QPolygonF polyline;
+			polyline.append(firstPoint);
 
 			for (int pointIndex = secondPointIndex; pointIndex < nodesCount; ++pointIndex){
-				segmentLine.PushEndPoint(GetScreenPosition(polylinePtr->GetNodePos(pointIndex)));
-
-				drawContext.drawLine(segmentLine.GetPoint1(), segmentLine.GetPoint2());
+				polyline.append(GetScreenPosition(polylinePtr->GetNodePos(pointIndex)));
 			}
+
+			drawContext.drawPolyline(polyline);
 
 			drawContext.restore();
 		}
@@ -448,6 +449,7 @@ void CPolylineShape::DrawCurve(QPainter& drawContext) const
 
 void CPolylineShape::DrawArea(QPainter&) const
 {
+	// CPolylineShape has no filled area
 }
 
 
@@ -555,7 +557,7 @@ bool CPolylineShape::IsCurveTouched(istd::CIndex2d position) const
 		i2d::CVector2d screenPosition(position);
 
 		for (; i < nodesCount; i++){
-			segmentLine.PushEndPoint(GetScreenPosition(polylinePtr->GetNodePos(i)));
+			segmentLine.PushEndPointQuiet(GetScreenPosition(polylinePtr->GetNodePos(i)));
 
 			if (segmentLine.GetDistance(screenPosition) < logicalLineWidth){
 				return true;

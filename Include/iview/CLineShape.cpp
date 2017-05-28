@@ -100,16 +100,16 @@ ITouchable::TouchState CLineShape::IsTouched(istd::CIndex2d position) const
 	const IColorSchema& colorSchema = GetColorSchema();
 
 	if (IsSelected() && isEditablePosition){
-
 		const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_MOVE);
 
 		if (tickerBox.IsInside(position - m_points[1])){
 			return TS_TICKER;
 		}
-		else  if (tickerBox.IsInside(position - m_points[0])){
+		else if (tickerBox.IsInside(position - m_points[0])){
 			return TS_TICKER;
 		}
 	}
+
 	double distance = colorSchema.GetLogicalLineWidth();
 
 	if (CheckLine(m_points[0], m_points[1], position, distance)){
@@ -137,12 +137,12 @@ void CLineShape::Draw(QPainter& drawContext) const
 
 	const IColorSchema& colorSchema = GetColorSchema();
 
+	drawContext.save();
+
 	if (IsSelected()){
-		drawContext.save();
 		drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_SELECTED));
 	}
 	else{
-		drawContext.save();
 		drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_NORMAL));
 	}
 
@@ -197,7 +197,7 @@ bool CLineShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonTy
 
 				return true;
 			}
-			else  if (tickerBox.IsInside(position - m_points[0])){
+			else if (tickerBox.IsInside(position - m_points[0])){
 				m_referencePosition = linePtr->GetPoint1() - GetLogPosition(position);
 				m_referenceIndex = 0;
 
@@ -337,10 +337,10 @@ void CLineShape::SetLogDragPosition(const i2d::CVector2d& position)
 // static methods
 
 bool CLineShape::CheckLine(
-				const istd::CIndex2d& firstPoint,
-				const istd::CIndex2d& secondPoint,
-				const istd::CIndex2d& point,
-				double maxDistance)
+			const istd::CIndex2d& firstPoint,
+			const istd::CIndex2d& secondPoint,
+			const istd::CIndex2d& point,
+			double maxDistance)
 {
 	i2d::CLine2d line = i2d::CLine2d(i2d::CVector2d(firstPoint), i2d::CVector2d(secondPoint));
 	double distance = line.GetDistance(i2d::CVector2d(point));

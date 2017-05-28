@@ -199,7 +199,6 @@ void CPolygonShape::Draw(QPainter& drawContext) const
 
 			drawContext.save();
 			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_TICKER));
-			drawContext.save();
 			drawContext.setBrush(colorSchema.GetBrush(IColorSchema::SB_TICKER));
 
 			if (IsSelected()){
@@ -212,7 +211,6 @@ void CPolygonShape::Draw(QPainter& drawContext) const
 				}
 			}
 
-			drawContext.restore();
 			drawContext.restore();
 		}
 	}
@@ -350,38 +348,7 @@ i2d::CVector2d CPolygonShape::GetSegmentMiddle(int index) const
 
 void CPolygonShape::DrawCurve(QPainter& drawContext) const
 {
-	Q_ASSERT(IsDisplayConnected());
-
-	const imod::IModel* modelPtr = GetObservedModel();
-	if (modelPtr != NULL){
-		const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-		Q_ASSERT(&polygon != NULL);
-
-		const IColorSchema& colorSchema = GetColorSchema();
-		if (IsSelected()){
-			drawContext.save();
-			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_SELECTED));
-		}
-		else{
-			drawContext.save();
-			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_NORMAL));
-		}
-
-		int nodesCount = polygon.GetNodesCount();
-		if (nodesCount > 0){
-			QPointF point1 = GetScreenPosition(polygon.GetNodePos(nodesCount - 1));
-
-			for (int i = 0; i < nodesCount; i++){
-				QPointF point2 = GetScreenPosition(polygon.GetNodePos(i));
-
-				drawContext.drawLine(point1, point2);
-
-				point1 = point2;
-			}
-		}
-	}
-
-	drawContext.restore();
+	// not needed because QPainter::drawPolygon (see DrawArea) draws the borders as well...
 }
 
 
@@ -404,12 +371,14 @@ void CPolygonShape::DrawArea(QPainter& drawContext) const
 				m_screenPoints[i] = GetScreenPosition(polygonPtr->GetNodePos(i));
 			}
 
+			drawContext.save();
+
 			if (IsSelected()){
-				drawContext.save();
+				drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_SELECTED));
 				drawContext.setBrush(colorSchema.GetBrush(IColorSchema::SB_HALF_TRANSPARENT));
 			}
 			else{
-				drawContext.save();
+				drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_NORMAL));
 				drawContext.setBrush(colorSchema.GetBrush(IColorSchema::SB_HALF_TRANSPARENT2));
 			}
 			
@@ -503,7 +472,7 @@ bool CPolygonShape::IsCurveTouched(istd::CIndex2d position) const
 		i2d::CVector2d screenPosition(position);
 
 		for (int i = 0; i < nodesCount; i++){
-			segmentLine.PushEndPoint(GetScreenPosition(polygonPtr->GetNodePos(i)));
+			segmentLine.PushEndPointQuiet(GetScreenPosition(polygonPtr->GetNodePos(i)));
 
 			if (segmentLine.GetDistance(screenPosition) < logicalLineWidth){
 				return true;

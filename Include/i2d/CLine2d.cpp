@@ -185,10 +185,10 @@ double CLine2d::GetDistance(const CVector2d& position) const
 
 	CVector2d point1Diff = position - m_point1;
 	double dotProduct = point1Diff.GetDotProduct(diff);
-	if (dotProduct < 0){	// if the first point is the nearest
+	if (dotProduct <= 0.0){	// if the first point is the nearest
 		return m_point1.GetDistance(position);
 	}
-	if (dotProduct > diffLength * diffLength){	// if the second point is the nearest
+	else if (dotProduct >= diffLength * diffLength){	// if the second point is the nearest
 		return m_point2.GetDistance(position);
 	}
 
