@@ -5,7 +5,6 @@
 // ACF includes
 #include <imod/TSingleModelObserverBase.h>
 #include <icomp/CComponentBase.h>
-#include <ibase/TModelObserverCompWrap.h>
 #include <i2d/CPolygon.h>
 
 
@@ -14,23 +13,15 @@ namespace itutacf
 
 
 /**
-	\internal
-*/
-class CInterpolationTestCompBase:
-			public icomp::CComponentBase,
-			public imod::TSingleModelObserverBase<i2d::CPolygon>
-{
-};
-
-
-/**
 	Component for synchronization between some polyline and his interpolated slave.
 */
 class CInterpolationTestComp:
-			public ibase::TModelObserverCompWrap<CInterpolationTestCompBase>
+			public icomp::CComponentBase,
+			public imod::TSingleModelObserverBase<i2d::CPolygon>
 {
 public:
-	typedef ibase::TModelObserverCompWrap<CInterpolationTestCompBase> BaseClass;
+	typedef icomp::CComponentBase BaseClass;
+	typedef imod::TSingleModelObserverBase<i2d::CPolygon> BaseClass2;
 
 	I_BEGIN_COMPONENT(CInterpolationTestComp);
 		I_ASSIGN(m_slaveObjectCompPtr, "SlaveObject", "Reference data object", true, "SlaveObject");

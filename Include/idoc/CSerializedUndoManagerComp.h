@@ -7,7 +7,6 @@
 
 // ACF includes
 #include <istd/TDelPtr.h>
-#include <ibase/TModelObserverCompWrap.h>
 #include <iser/ISerializable.h>
 #include <iser/CMemoryWriteArchive.h>
 #include <imod/TSingleModelObserverBase.h>
@@ -19,28 +18,17 @@ namespace idoc
 {
 
 
-class CSerializedUndoManagerCompBase:
-			public icomp::CComponentBase,
-			public imod::TSingleModelObserverBase<iser::ISerializable>
-{
-public:
-	typedef icomp::CComponentBase BaseClass;
-
-	I_BEGIN_BASE_COMPONENT(CSerializedUndoManagerCompBase);
-	I_END_COMPONENT;
-};
-
-
 /**
 	Implements multi level UNDO mechanism based on storing complete objects state at each step using serialization.
 	To trace if UNDO is available you can use ACF model/observer.
 */
 class CSerializedUndoManagerComp:
-			public ibase::TModelObserverCompWrap<CSerializedUndoManagerCompBase>,
+			public icomp::CComponentBase,
+			public imod::TSingleModelObserverBase<iser::ISerializable>,
 			virtual public IUndoManager
 {
 public:
-	typedef ibase::TModelObserverCompWrap<CSerializedUndoManagerCompBase> BaseClass;
+	typedef icomp::CComponentBase BaseClass;
 	typedef imod::TSingleModelObserverBase<iser::ISerializable> BaseClass2;
 
 	I_BEGIN_COMPONENT(CSerializedUndoManagerComp);

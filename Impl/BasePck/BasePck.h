@@ -19,6 +19,7 @@
 #include <idoc/CMultiPageDocumentFilePersistenceComp.h>
 #include <idoc/CStandardDocumentMetaInfo.h>
 
+#include <ibase/TModelObserverCompWrap.h>
 #include <ibase/CInstantiatorComp.h>
 #include <ibase/CVersionInfoComp.h>
 #include <ibase/CApplicationInfoComp.h>
@@ -93,7 +94,8 @@ typedef icomp::TModelCompWrap<iprm::CNameParamComp> NameParam;
 typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;
 typedef idoc::CSelectedDocModelBinderComp SelectedDocModelBinder;
-typedef icomp::TModelCompWrap<idoc::CSerializedUndoManagerComp> SerializedUndoManager;
+typedef ibase::TModelObserverCompWrap<
+			icomp::TModelCompWrap<idoc::CSerializedUndoManagerComp> > SerializedUndoManager;
 typedef idoc::CTextFileLoaderComp TextFileLoader;
 typedef icomp::TModelCompWrap<idoc::CTextDocumentComp> TextDocument;
 typedef idoc::CMultiPageDocumentFilePersistenceComp MultiPageDocumentFilePersistence;

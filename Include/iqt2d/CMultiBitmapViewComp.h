@@ -16,7 +16,6 @@
 
 // ACF includes
 #include <istd/TPointerVector.h>
-#include <ibase/TModelObserverCompWrap.h>
 #include <imod/CMultiModelDispatcherBase.h>
 #include <imod/TSingleModelObserverBase.h>
 #include <istd/IInformationProvider.h>
@@ -35,16 +34,15 @@ namespace iqt2d
 
 
 class CMultiBitmapViewComp:
-			public ibase::TModelObserverCompWrap<
-						iqtgui::TGuiObserverWrap<
-									iqtgui::TGuiComponentBase<QWidget>, imod::TSingleModelObserverBase<iimg::IMultiBitmapProvider> > >,
+			public iqtgui::TGuiObserverWrap<
+						iqtgui::TGuiComponentBase<QWidget>,
+						imod::TSingleModelObserverBase<iimg::IMultiBitmapProvider> >,
 			protected imod::CMultiModelDispatcherBase
 {
 public:
-	typedef ibase::TModelObserverCompWrap<
-				iqtgui::TGuiObserverWrap<
-							iqtgui::TGuiComponentBase<QWidget>,
-							imod::TSingleModelObserverBase<iimg::IMultiBitmapProvider> > > BaseClass;
+	typedef	iqtgui::TGuiObserverWrap<
+				iqtgui::TGuiComponentBase<QWidget>,
+				imod::TSingleModelObserverBase<iimg::IMultiBitmapProvider> > BaseClass;
 
 	typedef imod::CMultiModelDispatcherBase BaseClass2;
 
@@ -52,15 +50,12 @@ public:
 		I_ASSIGN(m_horizontalViewsAttrPtr, "HorizontalViewsCount", "Number of horizontal views", false, 1);
 		I_ASSIGN(m_verticalViewsAttrPtr, "VerticalViewsCount", "Number of vertical views", false, 1);
 		I_ASSIGN(m_verticalViewLayoutAttrPtr, "UseVerticalLayout", "Layout of the single view", true, true);
-
 		I_ASSIGN_MULTI_0(m_viewExtendersCompPtr, "ViewExtenders", "View extenders", false);
-		
 		I_ASSIGN_MULTI_0(m_informationProvidersCompPtr, "InformationProviders", "Information providers", false);
 		I_ASSIGN_TO(m_informationModelsCompPtr, m_informationProvidersCompPtr, true);
 		I_ASSIGN(m_generalInformationProviderCompPtr, "GeneralInformationProvider", "General information provider", false, "GeneralInformationProvider");
 		I_ASSIGN_TO(m_generalInformationModelCompPtr, m_generalInformationProviderCompPtr, true);
 		I_ASSIGN(m_optionsListCompPtr, "OptionsList", "List to provide dynamic descriptions", false, "OptionsList");
-
 		I_ASSIGN_MULTI_0(m_viewLabelPrefixesAttrPtr, "ViewLabelPrefixes", "Prefixes used to title the single bitmap view. If none present, information from InformationProviders will be used.", false);
 		I_ASSIGN(m_showStatusLabelAttrPtr, "ShowStatusLabel", "If active then status will be shown in the view's header", true, false);
 		I_ASSIGN(m_showStatusBackgroundAttrPtr, "ShowStatusBackground", "If active then status will be shown as the view's background color", true, false);
@@ -131,18 +126,14 @@ protected:
 	I_ATTR(int, m_horizontalViewsAttrPtr);
 	I_ATTR(int, m_verticalViewsAttrPtr);
 	I_ATTR(bool, m_verticalViewLayoutAttrPtr);
-
 	I_REF(istd::IInformationProvider, m_generalInformationProviderCompPtr);
 	I_REF(imod::IModel, m_generalInformationModelCompPtr);
 	I_MULTIREF(istd::IInformationProvider, m_informationProvidersCompPtr);
 	I_MULTIREF(imod::IModel, m_informationModelsCompPtr);
 	I_REF(iprm::IOptionsList, m_optionsListCompPtr);
-
 	I_MULTIREF(iqt2d::IViewExtender, m_viewExtendersCompPtr);
-
 	I_MULTITEXTATTR(m_viewLabelPrefixesAttrPtr);
 	I_ATTR(bool, m_showStatusLabelAttrPtr);
-
 	I_ATTR(bool, m_showStatusBackgroundAttrPtr);
 	I_ATTR(QByteArray, m_viewBackgroundColorAttrPtr);
 	

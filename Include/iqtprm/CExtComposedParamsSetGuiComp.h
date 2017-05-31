@@ -8,7 +8,6 @@
 
 // ACF includes
 #include <imod/TSingleModelObserverBase.h>
-#include <ibase/TModelObserverCompWrap.h>
 #include <iprm/IParamsSet.h>
 #include <iqtgui/TGuiObserverWrap.h>
 #include <iqtgui/CComposedGuiComp.h>
@@ -24,15 +23,13 @@ namespace iqtprm
 	New version of parameter set UI based on standard multi page UI concept.
 */
 class CExtComposedParamsSetGuiComp:
-			public ibase::TModelObserverCompWrap<
-						iqtgui::TGuiObserverWrap<
-									iqtgui::CComposedGuiComp, imod::TSingleModelObserverBase<iprm::IParamsSet> > >,
+			public iqtgui::TGuiObserverWrap<
+						iqtgui::CComposedGuiComp, imod::TSingleModelObserverBase<iprm::IParamsSet> >,
 			public iqt2d::IViewExtender
 {
 public:
-	typedef ibase::TModelObserverCompWrap<
-				iqtgui::TGuiObserverWrap<
-							iqtgui::CComposedGuiComp, imod::TSingleModelObserverBase<iprm::IParamsSet> > > BaseClass;
+	typedef iqtgui::TGuiObserverWrap<
+						iqtgui::CComposedGuiComp, imod::TSingleModelObserverBase<iprm::IParamsSet> > BaseClass;
 
 	I_BEGIN_COMPONENT(CExtComposedParamsSetGuiComp);
 		I_REGISTER_INTERFACE(iqt2d::IViewExtender);

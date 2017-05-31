@@ -3,6 +3,7 @@
 
 
 #include <icomp/TModelCompWrap.h>
+#include <ibase/TModelObserverCompWrap.h>
 
 #include <DocView/CTextEditorComp.h>
 
@@ -24,7 +25,7 @@ typedef CTextEditorComp TextEditor;
 typedef icomp::TModelCompWrap<CAbComp> AB;
 typedef CAbGuiComp AbGui;
 
-typedef itutacf::CInterpolationTestComp InterpolationTest;
+typedef ibase::TModelObserverCompWrap<itutacf::CInterpolationTestComp> InterpolationTest;
 
 
 } // namespace TutorialPck

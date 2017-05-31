@@ -7,7 +7,6 @@
 
 // ACF includes
 #include <ibase/IQtItemModelProvider.h>
-
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
 #include <iqtgui/TGuiObserverWrap.h>
 
@@ -22,13 +21,13 @@ namespace iqtgui
 */
 template <class ItemWidgetClass>
 class TItemModelEditorCompBase:
-				public ibase::TModelObserverCompWrap<
+				public ibase::TModelObserverCompBaseWrap<
 							TGuiObserverWrap<
 										TGuiComponentBase<ItemWidgetClass>,
 										imod::TSingleModelObserverBase<ibase::IQtItemModelProvider> > >
 {
 public:
-	typedef ibase::TModelObserverCompWrap<
+	typedef ibase::TModelObserverCompBaseWrap<
 				TGuiObserverWrap<
 							TGuiComponentBase<ItemWidgetClass>,
 							imod::TSingleModelObserverBase<ibase::IQtItemModelProvider> > > BaseClass;

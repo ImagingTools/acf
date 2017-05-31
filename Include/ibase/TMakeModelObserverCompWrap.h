@@ -29,7 +29,7 @@ template <	class Base,
 			typename Interface8 = void,
 			typename Interface9 = void,
 			typename Interface10 = void>
-class TMakeModelObserverCompWrap: public ibase::TModelObserverCompWrap< icomp::TMakeComponentWrap<
+class TMakeModelObserverCompWrap: public ibase::TModelObserverCompBaseWrap< icomp::TMakeComponentWrap<
 			Base,
 			Interface1,
 			Interface2,
@@ -43,7 +43,7 @@ class TMakeModelObserverCompWrap: public ibase::TModelObserverCompWrap< icomp::T
 			Interface10> >
 {
 public:
-	typedef ibase::TModelObserverCompWrap< icomp::TMakeComponentWrap<
+	typedef ibase::TModelObserverCompBaseWrap< icomp::TMakeComponentWrap<
 				Base,
 				Interface1,
 				Interface2,

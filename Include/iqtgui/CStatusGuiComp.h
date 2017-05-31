@@ -12,7 +12,7 @@
 
 // ACF includes
 #include <istd/IInformationProvider.h>
-#include <ibase/TModelObserverCompWrap.h>
+#include <imod/TSingleModelObserverBase.h>
 #include <iqtgui/TGuiComponentBase.h>
 #include <iqtgui/TGuiObserverWrap.h>
 
@@ -22,16 +22,14 @@ namespace iqtgui
 
 
 class CStatusGuiComp:
-			public ibase::TModelObserverCompWrap<
-						iqtgui::TGuiObserverWrap<
-									iqtgui::TGuiComponentBase<QLabel>,
-									imod::TSingleModelObserverBase<istd::IInformationProvider> > >
+			public iqtgui::TGuiObserverWrap<
+						iqtgui::TGuiComponentBase<QLabel>,
+						imod::TSingleModelObserverBase<istd::IInformationProvider> >
 {
 public:
-	typedef ibase::TModelObserverCompWrap<
-				iqtgui::TGuiObserverWrap<
-							iqtgui::TGuiComponentBase<QLabel>,
-							imod::TSingleModelObserverBase<istd::IInformationProvider> > > BaseClass;
+	typedef iqtgui::TGuiObserverWrap<
+				iqtgui::TGuiComponentBase<QLabel>,
+				imod::TSingleModelObserverBase<istd::IInformationProvider> > BaseClass;
 
 	I_BEGIN_COMPONENT(CStatusGuiComp);
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of status icon", true, 64);

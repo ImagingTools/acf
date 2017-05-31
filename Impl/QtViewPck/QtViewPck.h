@@ -5,7 +5,7 @@
 // ACF includes
 #include <icomp/TModelCompWrap.h>
 #include <icomp/TMakeComponentWrap.h>
-#include <ibase/TMakeModelObserverCompWrap.h>
+#include <ibase/TModelObserverCompWrap.h>
 #include <iview/CShapeStatusInfoComp.h>
 #include <iview/CShapeInfoGuiComp.h>
 #include <iview/CSimpleShapeFactoryComp.h>
@@ -48,7 +48,8 @@ typedef iview::CColorSchemaComp ColorSchema;
 typedef iqt2d::CViewExtenderDelegatorComp SceneExtenderDelegator;
 typedef iqt2d::CMultiViewExtenderDelegatorComp MultiSceneExtenderDelegator;
 typedef iqt2d::CSceneConnectorGuiComp SceneConnector;
-typedef icomp::TModelCompWrap<iqt2d::CImageViewComp> ImageView;
+typedef ibase::TModelObserverCompWrap<
+			icomp::TModelCompWrap<iqt2d::CImageViewComp> > ImageView;
 typedef iqt2d::CPosition2dParamsGuiComp Position2dParamsGui;
 typedef iqt2d::CLine2dParamsGuiComp Line2dParamsGui;
 typedef iqt2d::CRectangleParamsGuiComp RectangleParamsGui;
@@ -65,7 +66,7 @@ typedef iqt2d::CExtendedConsoleGuiComp ExtendedConsoleGui;
 typedef iqt2d::CPolylineParamsGuiComp PolylineParamsGui;
 typedef iqt2d::CTubePolylineParamsGuiComp TubePolylineParamsGui;
 typedef iqt2d::CAffineTransformationParamsGuiComp AffineTransformationParamsGui;
-typedef iqt2d::CMultiBitmapViewComp MultiBitmapView;
+typedef ibase::TModelObserverCompWrap<iqt2d::CMultiBitmapViewComp> MultiBitmapView;
 typedef iqt2d::CArcParamsGuiComp ArcParamsGui;
 
 
