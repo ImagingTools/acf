@@ -131,7 +131,7 @@ public:
 	bool Increase(const TIndex& boundaries);
 
 	/**
-		Decrese this index inside the boundaries.
+		Decrease this index inside the boundaries.
 		\return	false, if decrease wasn't possible (e.g. overflow).
 	*/
 	bool Decrease(const TIndex& boundaries);
@@ -141,6 +141,11 @@ public:
 		\return	multiplication of all elements.
 	*/
 	int GetProductVolume() const;
+
+	/**
+		Get index of iteration from zero to current index inside some boundaries.
+	*/
+	int GetIterationIndex(const TIndex& boundaries) const;
 
 	/**
 		Get begin value of element access iterator.
@@ -163,7 +168,6 @@ public:
 	TIndex& operator+=(const TIndex& index);
 	TIndex operator-(const TIndex& index) const;
 	TIndex& operator-=(const TIndex& index);
-
 
 	// static methods
 	/**
@@ -517,6 +521,22 @@ int TIndex<Dimensions>::GetProductVolume() const
 
 	for (int i = 0; i < Dimensions; ++i){
 		retVal *= m_elements[i];
+	}
+
+	return retVal;
+}
+
+
+template <int Dimensions>
+int TIndex<Dimensions>::GetIterationIndex(const TIndex& boundaries) const
+{
+	int retVal = 0;
+
+	int positionBase = 1;
+	for (int i = 0; i < Dimensions; ++i){
+		retVal += m_elements[i] * positionBase;
+
+		positionBase *= boundaries.m_elements[i];
 	}
 
 	return retVal;
