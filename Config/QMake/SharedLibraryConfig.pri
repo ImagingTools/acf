@@ -4,6 +4,7 @@ include (GeneralConfig.pri)
 
 INCLUDEPATH += $$OUT_PWD/../../../Include
 INCLUDEPATH += $$_PRO_FILE_PWD_/../../../Include
+INCLUDEPATH += $$PWD/../../Impl
 
 TEMPLATE = lib
 
