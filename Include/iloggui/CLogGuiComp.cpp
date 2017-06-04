@@ -8,6 +8,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QScrollBar>
+#include <QtWidgets/QItemDelegate>
 #else
 #include <QtGui/QHeaderView>
 #include <QtGui/QToolBar>
@@ -15,7 +16,6 @@
 #endif
 
 // ACF includes
-#include <iwidgets/CItemDelegate.h>
 #include <iwidgets/CWidgetUpdateBlocker.h>
 
 
@@ -23,13 +23,13 @@ namespace iloggui
 {
 
 
-class ItemDelegate: public iwidgets::CItemDelegate
+class ItemDelegate: public QItemDelegate
 {
 public:
-	typedef iwidgets::CItemDelegate BaseClass;
+	typedef QItemDelegate BaseClass;
 
-	ItemDelegate(int itemHeight = 20, QObject* parent = NULL)
-		:BaseClass(itemHeight, parent)
+	ItemDelegate(QObject* parent)
+		:BaseClass(parent)
 	{
 	}
 
@@ -229,7 +229,7 @@ void CLogGuiComp::OnGuiCreated()
 
 	LogView->header()->setStretchLastSection(true);
 
-	ItemDelegate* itemDelegate = new ItemDelegate(20, this);
+	ItemDelegate* itemDelegate = new ItemDelegate(this);
 	LogView->setItemDelegate(itemDelegate);
 	LogView->header()->hide();
 
@@ -246,7 +246,7 @@ void CLogGuiComp::OnGuiCreated()
 	FilterText->setClearButtonEnabled(true);
 #endif
 
-	LogView->header()->resizeSection(CT_ICON, itemDelegate->GetItemHeight());
+	LogView->header()->resizeSection(CT_ICON, LogView->iconSize().width() + 4);
 
 	QToolBar* toolBar = new QToolBar(ToolBarFrame);
 	if (ToolBarFrame->layout()){

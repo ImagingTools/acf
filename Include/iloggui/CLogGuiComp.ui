@@ -17,9 +17,6 @@
    <iconset>
     <normaloff>.</normaloff>.</iconset>
   </property>
-  <property name="styleSheet">
-   <string/>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
