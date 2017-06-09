@@ -346,7 +346,7 @@ i2d::CVector2d CPolygonShape::GetSegmentMiddle(int index) const
 }
 
 
-void CPolygonShape::DrawCurve(QPainter& drawContext) const
+void CPolygonShape::DrawCurve(QPainter& /*drawContext*/) const
 {
 	// not needed because QPainter::drawPolygon (see DrawArea) draws the borders as well...
 }
