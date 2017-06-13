@@ -21,7 +21,8 @@ More theoretical considerations about the component-based development can be fou
 http://en.wikipedia.org/wiki/Component-based_software_engineering
 
 \section HowItWorks How it works
-The main idea behind ACF is to see each software product as a composition of components with clearly defined interfaces. Interface is also the only way for communication between components.
+The main idea behind ACF is to see each software product as a composition of components with clearly defined interfaces.
+Interface is also the only way for communication between components.
 The usual steps to implement a component are:
 
 - A C++ interface must be defined.
