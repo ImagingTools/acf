@@ -5,7 +5,7 @@
 // STL includes
 #include <set>
 
-// QT includes
+// Qt includes
 #include <QtCore/QList>
 
 // ACF includes

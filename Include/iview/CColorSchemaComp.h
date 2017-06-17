@@ -2,7 +2,7 @@
 #define iview_CColorSchemaComp_included
 
 
-// QT includes
+// Qt includes
 #include <QtCore/QByteArray>
 #include <QtCore/QString>
 
