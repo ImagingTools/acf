@@ -115,59 +115,44 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 
 		retVal = retVal && archive.BeginTag(paramsSetTag);
 
-		retVal = retVal && archive.BeginTag(nameTag);
-		if (isStoring){
-			QString name = GetParamsSetName(i);
-
-			retVal = retVal && archive.Process(name);
-		}
-		else{
-			QString name;
-
-			retVal = retVal && archive.Process(name);
-			if (!retVal){
-				return false;
-			}
-
-			SetParamsSetName(i, name);
-		}
-		retVal = retVal && archive.EndTag(nameTag);
-
+		QString name;
+		QByteArray uuid;
 		bool isEnabled = true;
 		if (isStoring){
+			name = GetParamsSetName(i);
+			uuid = GetOptionId(i);
 			isEnabled = IsOptionEnabled(i);
 		}
 
+		retVal = retVal && archive.BeginTag(nameTag);
+		retVal = retVal && archive.Process(name);
+		retVal = retVal && archive.EndTag(nameTag);
+
 		quint32 version = 0;
-		if (		!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version) ||
-					(version > 3185)){
+		bool hasVersion = archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version);
+
+		if (!hasVersion || (version > 3185)){
 			retVal = retVal && archive.BeginTag(enabledTag);
 			retVal = retVal && archive.Process(isEnabled);
 			retVal = retVal && archive.EndTag(enabledTag);
-			if (!retVal){
-				return false;
-			}
 		}
 
-		QByteArray uuid = GetOptionId(i);
-		
-		if (		!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version) ||
-					(version > 3649)){
-
+		if (!hasVersion || (version > 3649)){
 			retVal = retVal && archive.BeginTag(uuidTag);
 			retVal = retVal && archive.Process(uuid);
 			retVal = retVal && archive.EndTag(uuidTag);
-			if (retVal){
-				int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
-				if (i >= fixedSetsCount){
-					m_paramSets[i - fixedSetsCount]->uuid = uuid;
-				}
-			}
-			else{
-				return false;
-			}
 		}
+
+		if (!retVal){
+			return false;
+		}
+
 		if (!isStoring){
+			SetParamsSetName(i, name);
+			int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
+			if (i >= fixedSetsCount){
+				m_paramSets[i - fixedSetsCount]->uuid = uuid;
+			}
 			SetOptionEnabled(i, isEnabled);
 		}
 
