@@ -26,6 +26,9 @@ namespace iqtgui
 {
 
 
+static int s_argc = 0;
+
+
 CApplicationCompBase::CApplicationCompBase()
 :	m_useSplashScreen(false)
 {
@@ -60,7 +63,8 @@ bool CApplicationCompBase::InitializeApplication(int argc, char** argv)
 	}
 
 	if (!m_applicationPtr.IsValid()){
-		m_applicationPtr.SetPtr(new QApplication(argc, argv));
+		s_argc = argc;
+		m_applicationPtr.SetPtr(new QApplication(s_argc, argv));
 		if (!m_applicationPtr.IsValid()){
 			return false;
 		}
