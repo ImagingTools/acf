@@ -180,7 +180,7 @@ void CSimpleFilePathParamGuiComp::on_BrowseButton_clicked()
 			}
 
 			// if we want to save: use save dialog
-			if (m_useSaveDialogAttrPtr.IsValid()){
+			if (m_useSaveDialogAttrPtr.IsValid() && *m_useSaveDialogAttrPtr){
 				QString filePath = QFileDialog::getSaveFileName(
 					GetQtWidget(),
 					tr("Select file to save"),
