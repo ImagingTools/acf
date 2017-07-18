@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 	// Save current working directory:
 	QString currentWorkingDirectory = QDir::currentPath();
 
-	ipackage::CComponentAccessor componentAccessor(registryFilePath, configFilePath, isVerboseEnabled);
+	ipackage::CComponentAccessor componentAccessor(registryFilePath, configFilePath, isVerboseEnabled, true);
 
 	// Restore current working directory before executing the application:
 	if (currentWorkingDirectory != QDir::currentPath()){
@@ -106,6 +106,10 @@ int main(int argc, char *argv[])
 		retVal = 0;
 	}
 	else{
+		applicationPtr->InitializeApplication(argc, argv);
+
+		componentAccessor.EnsureAutoInitComponentsCreated();
+
 		retVal = applicationPtr->Execute(argc, argv);
 	}
 

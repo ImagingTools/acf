@@ -27,7 +27,7 @@ class CCompositeComponent:
 			virtual public ICompositeComponent
 {
 public:
-	CCompositeComponent();
+	CCompositeComponent(bool manualAutoInit);
 	virtual ~CCompositeComponent();
 
 	/**
@@ -106,6 +106,8 @@ private:
 	const CCompositeComponentContext* m_contextPtr;
 	const ICompositeComponent* m_parentPtr;
 	bool m_isParentOwner;
+
+	bool m_manualAutoInit;
 
 	mutable bool m_autoInitialized;
 	mutable IRegistry::Ids m_autoInitComponentIds;

@@ -72,18 +72,6 @@ bool CApplicationCompBase::InitializeApplication(int argc, char** argv)
 		if (IsComponentActive()){
 			InitializeComponentApplication();
 		}
-
-		icomp::CCompositeComponent* rootComponentPtr = NULL;
-
-		for (		icomp::ICompositeComponent* componentPtr = const_cast<icomp::ICompositeComponent*>(GetParentComponent(true));
-					componentPtr != NULL;
-					componentPtr = const_cast<icomp::ICompositeComponent*>(componentPtr->GetParentComponent(true))){
-			rootComponentPtr = dynamic_cast<icomp::CCompositeComponent*>(componentPtr);
-		}
-
-		if (rootComponentPtr != NULL){
-			rootComponentPtr->EnsureAutoInitComponentsCreated();
-		}
 	}
 
 	return true;

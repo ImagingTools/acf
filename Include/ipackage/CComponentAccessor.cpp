@@ -72,8 +72,9 @@ namespace ipackage
 CComponentAccessor::CComponentAccessor(
 			const QString& registryFile,
 			const QString& configFile,
-			bool isDiagnosticEnabled)
-:	m_isAutoInitBlocked(false)
+			bool isDiagnosticEnabled,
+			bool manualAutoInit)
+:	m_mainComponent(manualAutoInit)
 {
 	static Loader loader(isDiagnosticEnabled);
 	loader.packagesLoaderComp.LoadPackages(configFile);
@@ -82,8 +83,6 @@ CComponentAccessor::CComponentAccessor(
 	const icomp::IRegistry* registryPtr = loader.packagesLoaderComp.GetRegistryFromFile(usedRegistryFile);
 	if (registryPtr != NULL){
 		static icomp::CRegistryElement dummyElement;
-
-		m_isAutoInitBlocked = true;
 
 		m_mainComponentStaticInfoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(
 					*registryPtr,
@@ -99,6 +98,12 @@ CComponentAccessor::CComponentAccessor(
 					""));
 		m_mainComponent.SetComponentContext(m_mainComponentContextPtr.GetPtr(), NULL, false);
 	}
+}
+
+
+bool CComponentAccessor::EnsureAutoInitComponentsCreated() const
+{
+	return m_mainComponent.EnsureAutoInitComponentsCreated();
 }
 
 

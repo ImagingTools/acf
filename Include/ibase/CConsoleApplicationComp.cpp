@@ -52,18 +52,6 @@ bool CConsoleApplicationComp::InitializeApplication(int argc, char** argv)
 		QCoreApplication::setApplicationName(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME));
 	}
 
-	icomp::CCompositeComponent* rootComponentPtr = NULL;
-
-	for (		icomp::ICompositeComponent* componentPtr = const_cast<icomp::ICompositeComponent*>(GetParentComponent(true));
-				componentPtr != NULL;
-				componentPtr = const_cast<icomp::ICompositeComponent*>(componentPtr->GetParentComponent(true))){
-		rootComponentPtr = dynamic_cast<icomp::CCompositeComponent*>(componentPtr);
-	}
-
-	if (rootComponentPtr != NULL){
-		rootComponentPtr->EnsureAutoInitComponentsCreated();
-	}
-
 	for (int i = 0; i < m_componentsToInitializeCompPtr.GetCount(); ++i){
 		istd::IPolymorphic* componentPtr = m_componentsToInitializeCompPtr[i];
 		Q_UNUSED(componentPtr);

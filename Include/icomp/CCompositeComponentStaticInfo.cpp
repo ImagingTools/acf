@@ -171,7 +171,7 @@ const IRegistry& CCompositeComponentStaticInfo::GetRegistry() const
 
 IComponent* CCompositeComponentStaticInfo::CreateComponent() const
 {
-	return new CCompositeComponent();
+	return new CCompositeComponent(true);
 }
 
 

@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include <istd/CClassInfo.h>
 #include <icomp/ICompositeComponent.h>
 #include <icomp/TComponentWrap.h>
 #include <icomp/CSimComponentContextBase.h>

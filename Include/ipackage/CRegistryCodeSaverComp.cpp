@@ -390,13 +390,19 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	NextLine(stream);
 
 	NextLine(stream);
-	stream << "template <class InterfaceType>";
-	NextLine(stream);
-	stream << "InterfaceType* GetInterface(const QByteArray& subId = \"\"){return GetComponentInterface<InterfaceType>(subId);}";
+	stream << className << "(const icomp::IRegistryElement* userMainElementPtr = NULL, bool manualAutoInit = false);";
 	stream << "\n";
 
 	NextLine(stream);
-	stream << className << "(const icomp::IRegistryElement* userMainElementPtr = NULL);";
+	stream << "template <class InterfaceType>";
+	NextLine(stream);
+	stream << "InterfaceType* GetInterface(const QByteArray& subId = \"\"){";
+	ChangeIndent(1);
+	NextLine(stream);
+	stream << "return GetComponentInterface<InterfaceType>(subId);";
+	ChangeIndent(-1);
+	NextLine(stream);
+	stream << "}";
 	stream << "\n";
 
 	NextLine(stream);
@@ -603,8 +609,8 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	ChangeIndent(-1);
 	NextLine(stream);
 	stream << "};";
-	stream << "\n";
 
+	stream << "\n";
 	ChangeIndent(-1);
 	NextLine(stream);
 	stream << "private:";
@@ -675,8 +681,10 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 			QTextStream& stream) const
 {
 	NextLine(stream);
-	stream << className << "::" << className << "(const icomp::IRegistryElement* userMainElementPtr)";
+	stream << className << "::" << className << "(const icomp::IRegistryElement* userMainElementPtr, bool manualAutoInit)";
 
+	NextLine(stream);
+	stream << ":\tBaseClass(manualAutoInit)";
 	NextLine(stream);
 	stream << "{";
 	ChangeIndent(1);
