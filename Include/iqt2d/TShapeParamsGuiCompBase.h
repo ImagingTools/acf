@@ -23,6 +23,7 @@
 #include <iview/IShapeFactory.h>
 #include <iview/CInteractiveShapeBase.h>
 #include <iqt2d/TViewExtenderCompBase.h>
+#include <iprm/IEnableableParam.h>
 
 
 namespace iqt2d
@@ -43,6 +44,7 @@ public:
 		I_ASSIGN(m_defaultUnitInfoCompPtr, "DefaultUnitInfo", "Provide default information about the logical value units e.g. mm, this will be used if no unit information found in model", false, "DefaultUnitInfo");
 		I_ASSIGN(m_colorSchemaCompPtr, "ShapeColorSchema", "Color schema used by displayed shape", false, "ShapeColorSchema");
 		I_ASSIGN(m_fixedPositionAttrPtr, "FixedPosition", "If enabled, the shape position will be not editable", true, false);
+		I_ASSIGN(m_fixedPositionParamPtr, "FixedPositionParam", "If set, will be used instead of FixedPosition attribute", false, "FixedPositionParam");
 		I_ASSIGN(m_allowToolsMenuAttrPtr, "ShowTools", "Show extended shape edit tools", true, true);
 		I_ASSIGN(m_toolBarGuiCompPtr, "ToolBarGui", "Toolbar GUI object to fill with actions", false, "ToolBarGui");
 		I_ASSIGN(m_shapeToolTipAttrPtr, "ShapeToolTip", "Tool tip will be show on console", false, "");
@@ -101,6 +103,7 @@ private:
 
 	I_REF(imath::IUnitInfo, m_defaultUnitInfoCompPtr);
 	I_REF(iview::IColorSchema, m_colorSchemaCompPtr);
+	I_REF(iprm::IEnableableParam, m_fixedPositionParamPtr);
 	I_ATTR(bool, m_fixedPositionAttrPtr);
 	I_ATTR(bool, m_allowToolsMenuAttrPtr);
 	I_REF(iqtgui::IGuiObject, m_toolBarGuiCompPtr);
@@ -219,6 +222,10 @@ iview::IShape* TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShape(const
 template <class Ui, class Shape, class ShapeModel>
 bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::IsPositionFixed() const
 {
+	if (m_fixedPositionParamPtr.IsValid()){
+		return m_fixedPositionParamPtr->IsEnabled();
+	}
+
 	return *m_fixedPositionAttrPtr;
 }
 
@@ -434,6 +441,8 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiModelAttached()
 	if (BaseClass::IsGuiShown()){
 		OnModelAttachedAndGuiShown(BaseClass::GetObservedModel());
 	}
+
+	m_fixedPositionParamPtr.EnsureInitialized();
 }
 
 
