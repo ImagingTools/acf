@@ -205,7 +205,6 @@ inline bool CComponentBase::IsComponentActive() const
 	\li \c int
 	\li \c double
 	\li \c QByteArray
-	\li \c QString (will be compiled by ARX compiler using translation function 'tr')
 	Please use \c I_TEXTATTR for translatable text attributes
 	\ingroup Main
 	\ingroup ComponentConcept

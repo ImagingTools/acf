@@ -1395,15 +1395,15 @@ bool CRegistryCodeSaverComp::WriteComponentTranslation(
 					const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = component.GetAttributeInfo(attributeId);
 
 					if ((attrInfoPtr != NULL) && attrInfoPtr->attributePtr.IsValid()){
-						const icomp::CTextAttribute* stringAttribute = dynamic_cast<const icomp::CTextAttribute*>(attrInfoPtr->attributePtr.GetPtr());
-						if (stringAttribute != NULL){
+						const icomp::CTextAttribute* localizableAttributePtr = dynamic_cast<const icomp::CTextAttribute*>(attrInfoPtr->attributePtr.GetPtr());
+						if (localizableAttributePtr != NULL){
 							if (!translationFound){
 								NextLine(stream);
 								stream << "// translations";
 							}
 
 							NextLine(stream);
-							stream << "#define TRANSLATED_TEXT QT_TRANSLATE_NOOP(\"Attribute\", " << GetStringLiteral(stringAttribute->GetValue()) << "); // Attribute " << attributeId << " in " << componentId;
+							stream << "#define TRANSLATED_TEXT QT_TRANSLATE_NOOP(\"Attribute\", " << GetStringLiteral(localizableAttributePtr->GetValue()) << "); // Attribute " << attributeId << " in " << componentId;
 							NextLine(stream);
 							stream << "#undef TRANSLATED_TEXT";
 
@@ -1411,16 +1411,16 @@ bool CRegistryCodeSaverComp::WriteComponentTranslation(
 							continue;
 						}
 
-						const icomp::CMultiTextAttribute* stringAttributePtr = dynamic_cast<const icomp::CMultiTextAttribute*>(attrInfoPtr->attributePtr.GetPtr());
-						if (stringAttributePtr != NULL){
-							for (int index = 0; index < stringAttributePtr->GetValuesCount(); index++){
+						const icomp::CMultiTextAttribute* localizableMultiAttributePtr = dynamic_cast<const icomp::CMultiTextAttribute*>(attrInfoPtr->attributePtr.GetPtr());
+						if (localizableMultiAttributePtr != NULL){
+							for (int index = 0; index < localizableMultiAttributePtr->GetValuesCount(); index++){
 								if (!translationFound){
 									NextLine(stream);
 									stream << "// translations";
 								}
 
 								NextLine(stream);
-								stream << "#define TRANSLATED_TEXT QT_TRANSLATE_NOOP(\"Attribute\", " << GetStringLiteral(stringAttributePtr->GetValueAt(index)) << "); // Attribute " << attributeId << " in " << componentId;
+								stream << "#define TRANSLATED_TEXT QT_TRANSLATE_NOOP(\"Attribute\", " << GetStringLiteral(localizableMultiAttributePtr->GetValueAt(index)) << "); // Attribute " << attributeId << " in " << componentId;
 								NextLine(stream);
 								stream << "#undef TRANSLATED_TEXT";
 
@@ -1608,7 +1608,7 @@ bool CRegistryCodeSaverComp::GetAttributeValue(
 
 	const iattr::CStringAttribute* stringAttribute = dynamic_cast<const iattr::CStringAttribute*>(&attribute);
 	if (stringAttribute != NULL){
-		valueString = "QT_TRANSLATE_NOOP(\"Attribute\", " + GetStringLiteral(stringAttribute->GetValue()) + ")";
+		valueString = GetStringLiteral(stringAttribute->GetValue());
 		typeName = "iattr::CStringAttribute";
 
 		return true;
@@ -1695,7 +1695,7 @@ bool CRegistryCodeSaverComp::GetMultiAttributeValue(
 	const iattr::CStringListAttribute* stringAttributePtr = dynamic_cast<const iattr::CStringListAttribute*>(&attribute);
 	if (stringAttributePtr != NULL){
 		for (int index = 0; index < stringAttributePtr->GetValuesCount(); index++){
-			valueStrings.push_back("QT_TRANSLATE_NOOP(\"Attribute\", " + GetStringLiteral(stringAttributePtr->GetValueAt(index)) + ")");
+			valueStrings.push_back(GetStringLiteral(stringAttributePtr->GetValueAt(index)));
 		}
 
 		typeName = "iattr::CStringListAttribute";
