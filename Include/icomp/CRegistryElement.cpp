@@ -143,11 +143,6 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
 	Q_UNUSED(notifier);
 
-	quint32 version = quint32(-1);
-	archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version);
-
-	bool isOldFormat = (version < 4423);
-
 	bool retVal = true;
 
 	retVal = retVal && archive.BeginTag(s_flagsTag);
@@ -188,14 +183,6 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 			bool isEnabled = info.attributePtr.IsValid();
 			QByteArray attributeType = isEnabled? info.attributePtr->GetFactoryId(): info.attributeTypeName;
-			if (isOldFormat){
-				if (attributeType == icomp::CTextAttribute::GetTypeName()){
-					attributeType = iattr::CStringAttribute::GetTypeName();
-				}
-				else if (attributeType == icomp::CMultiTextAttribute::GetTypeName()){
-					attributeType = iattr::CStringListAttribute::GetTypeName();
-				}
-			}
 
 			retVal = retVal && archive.BeginTag(s_attributeTypeTag);
 			retVal = retVal && archive.Process(attributeType);
@@ -261,15 +248,6 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 			if (!retVal){
 				return false;
-			}
-
-			if (isOldFormat){
-				if (attributeType == iattr::CStringAttribute::GetTypeName()){
-					attributeType = CTextAttribute::GetTypeName();
-				}
-				else if (attributeType == iattr::CStringListAttribute::GetTypeName()){
-					attributeType = CMultiTextAttribute::GetTypeName();
-				}
 			}
 
 			AttributeInfo* infoPtr = InsertAttributeInfo(attributeId, attributeType);
