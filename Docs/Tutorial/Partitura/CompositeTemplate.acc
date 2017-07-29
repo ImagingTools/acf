@@ -86,7 +86,7 @@
         <Element Id="DocumentLoader" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileExtensions" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>xtxt</Value>
@@ -199,7 +199,7 @@
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ApplicationInfo"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ImagePath" Type="Text" ExportId="">
+                    <AttributeInfo Id="ImagePath" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="../../../Docs/Images/AcfSplashScreen.png"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ShowProductType" Type="Boolean" ExportId="">

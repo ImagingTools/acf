@@ -39,7 +39,7 @@
                     <AttributeInfo Id="CurrentPreviewObject" Type="Reference" ExportId="CurrentPreviewObject">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultPath" Type="Text" ExportId="DefaultPath">
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="DefaultPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DockArea" Type="Integer" ExportId="DockArea">
@@ -48,7 +48,7 @@
                     <AttributeInfo Id="DockFeatures" Type="Integer" ExportId="DockFeatures">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileExplorerSettingsKey" Type="Text" ExportId="FileExplorerSettingsKey">
+                    <AttributeInfo Id="FileExplorerSettingsKey" Type="String" ExportId="FileExplorerSettingsKey">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="FileInfo" Type="Reference" ExportId="">

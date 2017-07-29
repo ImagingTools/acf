@@ -13,7 +13,7 @@
         <Element Id="ModelDialogGui" PackageId="QtGuiPck" ComponentId="ModelDialogGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DialogIconPath" Type="Text" ExportId="IconPath">
+                    <AttributeInfo Id="DialogIconPath" Type="String" ExportId="IconPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DialogTitle" Type="Text" ExportId="Title">
@@ -52,7 +52,7 @@
         <Element Id="UrlParam" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" Type="Text" ExportId="DefaultUrl">
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="DefaultUrl">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="PathType" Type="Integer" ExportId="">
@@ -64,7 +64,7 @@
         <Element Id="UrlParamFactory" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" Type="Text" ExportId="DefaultUrl">
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="DefaultUrl">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="PathType" Type="Integer" ExportId="">

@@ -30,7 +30,7 @@
                     <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="DefaultPathModel">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultStatusIcon" Type="Text" ExportId="DefaultStatusIcon">
+                    <AttributeInfo Id="DefaultStatusIcon" Type="String" ExportId="DefaultStatusIcon">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DefaultStatusText" Type="Text" ExportId="DefaultStatusText">
@@ -57,7 +57,7 @@
                     <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultStatusIcon" Type="Text" ExportId="DefaultStatusIcon">
+                    <AttributeInfo Id="DefaultStatusIcon" Type="String" ExportId="DefaultStatusIcon">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DefaultStatusText" Type="Text" ExportId="DefaultStatusText">

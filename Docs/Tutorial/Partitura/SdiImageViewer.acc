@@ -74,10 +74,10 @@
                     <AttributeInfo Id="ShowSplashProductType" Type="Boolean" ExportId="">
                         <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SplashScreenImage" Type="Text" ExportId="">
+                    <AttributeInfo Id="SplashScreenImage" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="../../../Docs/Images/AcfSplashScreen.png"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StyleSheet" Type="Text" ExportId="">
+                    <AttributeInfo Id="StyleSheet" Type="String" ExportId="">
                         <Data IsEnabled="true" Value=":/Styles/AcfDark.qss"/>
                     </AttributeInfo>
                     <AttributeInfo Id="UiStartMode" Type="Integer" ExportId="">
