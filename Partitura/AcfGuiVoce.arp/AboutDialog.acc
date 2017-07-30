@@ -37,7 +37,7 @@
                     <AttributeInfo Id="VersionIds" Type="Integer[]" ExportId="VersionIds">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionNames" Type="String[]" ExportId="VersionNames">
+                    <AttributeInfo Id="VersionNames" Type="Text[]" ExportId="VersionNames">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

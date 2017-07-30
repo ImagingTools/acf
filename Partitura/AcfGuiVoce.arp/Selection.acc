@@ -13,7 +13,7 @@
         <Element Id="SelectionConstraints" PackageId="BasePck" ComponentId="SelectionConstraints">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="OptionNames" Type="String[]" ExportId="OptionNames">
+                    <AttributeInfo Id="OptionNames" Type="Text[]" ExportId="OptionNames">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

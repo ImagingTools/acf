@@ -43,7 +43,7 @@
                     <AttributeInfo Id="VersionIds" Type="Integer[]" ExportId="DisplayVersionIds">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionNames" Type="String[]" ExportId="DisplayVersionNames">
+                    <AttributeInfo Id="VersionNames" Type="Text[]" ExportId="DisplayVersionNames">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -244,7 +244,7 @@
                     <AttributeInfo Id="VersionIds" Type="Integer[]" ExportId="DisplayVersionIds">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionNames" Type="String[]" ExportId="DisplayVersionNames">
+                    <AttributeInfo Id="VersionNames" Type="Text[]" ExportId="DisplayVersionNames">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
