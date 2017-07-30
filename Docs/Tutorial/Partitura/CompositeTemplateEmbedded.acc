@@ -169,7 +169,7 @@
                     <Element Id="DocumentFactory" PackageId="BasePck" ComponentId="TextDocument">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="DefaultText" Type="String" ExportId="">
+                                <AttributeInfo Id="DefaultText" Type="Text" ExportId="">
                                     <Data IsEnabled="true" Value="Ahoj przygodo!"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
@@ -216,7 +216,7 @@
                                 <AttributeInfo Id="DocumentTypeId" Type="Id" ExportId="">
                                     <Data IsEnabled="true" Value="Text"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="DocumentTypeName" Type="String" ExportId="">
+                                <AttributeInfo Id="DocumentTypeName" Type="Text" ExportId="">
                                     <Data IsEnabled="true" Value="Text Document"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="IsEditSupported" Type="Boolean" ExportId="">
@@ -276,7 +276,7 @@
                                 <AttributeInfo Id="DocumentTypeId" Type="Id" ExportId="">
                                     <Data IsEnabled="true" Value="Image"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="DocumentTypeName" Type="String" ExportId="">
+                                <AttributeInfo Id="DocumentTypeName" Type="Text" ExportId="">
                                     <Data IsEnabled="true" Value="Image"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="IsEditSupported" Type="Boolean" ExportId="">

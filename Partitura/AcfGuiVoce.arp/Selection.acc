@@ -46,7 +46,7 @@
         <Element Id="SelectionParamGui" PackageId="QtGuiPck" ComponentId="SelectionParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="OptionsLabel" Type="String" ExportId="OptionsLabel">
+                    <AttributeInfo Id="OptionsLabel" Type="Text" ExportId="OptionsLabel">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="UiMode" Type="Integer" ExportId="SelectionGuiLayout">

@@ -31,10 +31,10 @@
                     <AttributeInfo Id="FileTypeInfo" Type="Reference" ExportId="FileTypeInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathLabel" Type="String" ExportId="PathLabel">
+                    <AttributeInfo Id="PathLabel" Type="Text" ExportId="PathLabel">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StartHint" Type="String" ExportId="StartHint">
+                    <AttributeInfo Id="StartHint" Type="Text" ExportId="StartHint">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

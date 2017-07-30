@@ -69,7 +69,7 @@ private:
 	I_ATTR(double, m_splashTimeAttrPtr);
 	I_ATTR(QString, m_styleSheetAttrPtr);
 	I_ATTR(QString, m_iconPathAttrPtr);
-	I_TEXTATTR(m_titleFormatAttrPtr);
+	I_ATTR(QString, m_titleFormatAttrPtr);
 
 	bool m_useSplashScreen;
 	istd::CGeneralTimeStamp m_splashScreenTimer;
