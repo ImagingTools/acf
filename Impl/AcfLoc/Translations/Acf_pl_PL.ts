@@ -4,281 +4,37 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+28"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+28"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+29"/>
         <source>About</source>
         <translation>O programie</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>Files</source>
         <translation>Pliki</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>FileExplorer</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>File Selector</source>
         <translation>Selektor Pliku</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+8"/>
+        <location line="+4"/>
         <source>Log</source>
         <translation>Protokół</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="-6"/>
-        <source>:/Icons/Info</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+4"/>
+        <location line="-2"/>
         <source>Log XML file</source>
         <translation>Plik XML Protokołu</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="-2"/>
-        <source>alog</source>
-        <translation></translation>
+        <source>Progress</source>
+        <translation type="vanished">Postęp</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+6"/>
-        <source>.</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>Progress</source>
-        <translation>Postęp</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>$(AppName) by $(CompanyName)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <location line="+2"/>
-        <source>:/Translations</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
         <source>ACF</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.4</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.5</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.6</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.7</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.8</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>0.9.9</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.0.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.0.1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.1.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.2.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.3.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.4.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.4.1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.5.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.5.1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.5.2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.5.3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.5.4</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.6.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.6.1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.6.2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.6.3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.6.4</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.6.5</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.7.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.8.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>1.9.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>2.0.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+2"/>
-        <source>2.0.1</source>
         <translation></translation>
     </message>
 </context>
@@ -286,13 +42,11 @@
     <name>CAbGuiComp</name>
     <message>
         <location filename="../../../Docs/Tutorial/Impl/ModelObserver/CAbGuiComp.ui" line="+28"/>
-        <location filename="../../../Docs/Tutorial/AuxInclude/Qt5_VC12/GeneratedFiles/ModelObserver/ui_CAbGuiComp.h" line="+90"/>
         <source>A</source>
         <translation></translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../Docs/Tutorial/AuxInclude/Qt5_VC12/GeneratedFiles/ModelObserver/ui_CAbGuiComp.h" line="+1"/>
         <source>B</source>
         <translation></translation>
     </message>
@@ -302,14 +56,12 @@
     <message>
         <location filename="../../../Include/iqtgui/CAboutWidgetGuiComp.ui" line="+14"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+199"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+199"/>
         <source>About...</source>
         <translation>O produkcie...</translation>
     </message>
     <message>
         <location line="+169"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+1"/>
         <source>Version</source>
         <translation>Wersja</translation>
     </message>
@@ -319,35 +71,30 @@
     <message>
         <location filename="../../../Include/iqt2d/CAffineTransformationParamsGui.ui" line="+17"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+94"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+94"/>
         <source>Translation</source>
         <translation>Translacja</translation>
     </message>
     <message>
         <location line="+6"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
         <source>X</source>
         <translation></translation>
     </message>
     <message>
         <location line="+20"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
         <source>Y</source>
         <translation></translation>
     </message>
     <message>
         <location line="+23"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
         <source>Set to no transformation (zero translation and rotation angle and 1:1 scale)</source>
         <translation>Wyzeruj transformację (bez skali i translacji)</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
         <source>Reset</source>
         <translation>Wyzeruj</translation>
     </message>
@@ -357,14 +104,12 @@
     <message>
         <location filename="../../../Include/iqt2d/CAnnulusParamsGuiComp.ui" line="+35"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+115"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+115"/>
         <source>Position</source>
         <translation>Pozycja</translation>
     </message>
     <message>
         <location line="+46"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+2"/>
         <source>Radii</source>
         <translation>Promienie</translation>
     </message>
@@ -374,28 +119,24 @@
     <message>
         <location filename="../../../Include/iqt2d/CAnnulusSegmentParamsGuiComp.ui" line="+35"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+147"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+147"/>
         <source>Position</source>
         <translation>Pozycja</translation>
     </message>
     <message>
         <location line="+46"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
         <source>Radii</source>
         <translation>Promienie</translation>
     </message>
     <message>
         <location line="+46"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
         <source>Angles</source>
         <translation>Kąty</translation>
     </message>
     <message>
         <location line="+33"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+1"/>
         <source>°</source>
         <translation>°</translation>
     </message>
@@ -405,28 +146,24 @@
     <message>
         <location filename="../../../Include/iqt2d/CArcParamsGuiComp.ui" line="+26"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+141"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+141"/>
         <source>Position</source>
         <translation>Pozycja</translation>
     </message>
     <message>
         <location line="+58"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
         <source>Radius</source>
         <translation>Promień</translation>
     </message>
     <message>
         <location line="+36"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
         <source>Start Angle</source>
         <translation>Kąt początkowy</translation>
     </message>
     <message>
         <location line="+7"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
         <source>End Angle</source>
         <translation>Kąt końcowy</translation>
     </message>
@@ -434,8 +171,6 @@
         <location line="+7"/>
         <location line="+13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
-        <location line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
         <location line="+1"/>
         <source>°</source>
         <translation>°</translation>
@@ -446,21 +181,18 @@
     <message>
         <location filename="../../../Include/iqt2d/CCircleParamsGuiComp.ui" line="+35"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+130"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+130"/>
         <source>Position</source>
         <translation>Pozycja</translation>
     </message>
     <message>
         <location line="+94"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+4"/>
         <source>Tools</source>
         <translation>Narzędzia</translation>
     </message>
     <message>
         <location line="-48"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="-2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="-2"/>
         <source>Radius</source>
         <translation>Promień</translation>
     </message>
@@ -470,7 +202,6 @@
     <message>
         <location filename="../../../Include/iwidgets/CCollapsiblePage.ui" line="+89"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iwidgets/ui_CCollapsiblePage.h" line="+109"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iwidgets/ui_CCollapsiblePage.h" line="+109"/>
         <source>Page</source>
         <translation>Strona</translation>
     </message>
@@ -480,14 +211,12 @@
     <message>
         <location filename="../../../Include/iqtprm/CComposedParamsSetGuiComp.ui" line="+61"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="+97"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="+97"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
         <location line="-17"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="-1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="-1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
@@ -497,7 +226,6 @@
     <message>
         <location filename="../../../Include/iwidgets/CDoubleRangeSpinEdit.ui" line="+26"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+102"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+102"/>
         <source>from</source>
         <translation>od</translation>
     </message>
@@ -506,15 +234,12 @@
         <location line="+39"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+1"/>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+1"/>
-        <location line="+2"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
         <location line="-26"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="-1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="-1"/>
         <source>to</source>
         <translation>do</translation>
     </message>
@@ -524,21 +249,18 @@
     <message>
         <location filename="../../../Include/iqtprm/CElementEditorGui.ui" line="+14"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+117"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+117"/>
         <source>Element Properties</source>
         <translation>Właściwości Elementu</translation>
     </message>
     <message>
         <location line="+9"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
         <source>Element name</source>
         <translation>Nazwa elementu</translation>
     </message>
     <message>
         <location line="+15"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
         <source>Element description</source>
         <translation>Opis elementu</translation>
     </message>
@@ -548,7 +270,6 @@
     <message>
         <location filename="../../../Include/iqtprm/CEnableableParamGuiComp.ui" line="+26"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CEnableableParamGuiComp.h" line="+56"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CEnableableParamGuiComp.h" line="+56"/>
         <source>Enabled</source>
         <translation>Włączony</translation>
     </message>
@@ -558,84 +279,72 @@
     <message>
         <location filename="../../../Include/iqtprm/CExtParamsManagerGuiComp.ui" line="+95"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+148"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+148"/>
         <source>Add</source>
         <translation>Dodaj</translation>
     </message>
     <message>
         <location line="+13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Ins</source>
         <translation></translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Add new element</source>
         <translation>Dodaj nowy element</translation>
     </message>
     <message>
         <location line="+13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Edit</source>
         <translation>Edycja</translation>
     </message>
     <message>
         <location line="+13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Return</source>
         <translation></translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Change properties of the selected element</source>
         <translation>Zmienia właściwości wybranego elementu</translation>
     </message>
     <message>
         <location line="+13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Clone</source>
         <translation>Duplikuj</translation>
     </message>
     <message>
         <location line="+13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Ctrl+Ins</source>
         <translation></translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Duplicate selected element</source>
         <translation>Duplikuje wybrzny element</translation>
     </message>
     <message>
         <location line="+13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Remove</source>
         <translation>Usuń</translation>
     </message>
     <message>
         <location line="+13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Del</source>
         <translation></translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+1"/>
         <source>Delete selected element</source>
         <translation>Usuwa wybrany element</translation>
     </message>
@@ -645,7 +354,6 @@
     <message>
         <location filename="../../../Include/ifilegui/CFileListProviderGuiComp.ui" line="+33"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFileListProviderGuiComp.h" line="+52"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileListProviderGuiComp.h" line="+52"/>
         <source>File</source>
         <translation>Plik</translation>
     </message>
@@ -655,28 +363,24 @@
     <message>
         <location filename="../../../Include/iqtprm/CFileNameParamGuiComp.ui" line="+38"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+92"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+92"/>
         <source>Directory</source>
         <translation>Katalog</translation>
     </message>
     <message>
         <location line="+7"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
         <source>Path</source>
         <translation>Scieżka</translation>
     </message>
     <message>
         <location line="+7"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
         <location line="+20"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -686,14 +390,12 @@
     <message>
         <location filename="../../../Include/ifilegui/CFilePersistenceGuiComp.ui" line="+20"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+56"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+56"/>
         <source>Load</source>
         <translation>Wczytaj</translation>
     </message>
     <message>
         <location line="+7"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+1"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
@@ -703,7 +405,6 @@
     <message>
         <location filename="../../../Include/ifilegui/CFilePreviewGuiComp.ui" line="+64"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFilePreviewGuiComp.h" line="+107"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFilePreviewGuiComp.h" line="+107"/>
         <source>No Preview Available</source>
         <translation>Podgląd niedostępny</translation>
     </message>
@@ -713,14 +414,12 @@
     <message>
         <location filename="../../../Include/ifilegui/CFileTreeViewGuiComp.ui" line="+86"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+207"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+207"/>
         <source>Wildcards * and ? are allowed</source>
         <translation>Symbole ogólne * i ? są dozwolone</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <source>Type filter text here...</source>
         <translation>Wpisz tutaj tekst filtra
 ...</translation>
@@ -728,7 +427,6 @@
     <message>
         <location line="+7"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <source>Reset filter</source>
         <translation>Usuń filtr</translation>
     </message>
@@ -741,45 +439,36 @@
         <location line="+4"/>
         <location line="+4"/>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
-        <location line="+4"/>
-        <location line="+4"/>
-        <location line="+5"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location line="-82"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="-11"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="-11"/>
         <source>Expand all items</source>
         <translation>Rozwiń wszystkie elementy</translation>
     </message>
     <message>
         <location line="+14"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+4"/>
         <source>Collapse all items</source>
         <translation>Zwiń wszystkie elementy</translation>
     </message>
     <message>
         <location line="+51"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+3"/>
         <source>Update in progress...</source>
         <translation>Uaktualnienie w trakcie...</translation>
     </message>
     <message>
         <location line="+14"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <source>Refresh view</source>
         <translation>Odśwież widok</translation>
     </message>
     <message>
         <location line="+10"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+3"/>
         <source>F5</source>
         <translation></translation>
     </message>
@@ -789,21 +478,18 @@
     <message>
         <location filename="../../../Include/iqtgui/CImagePropertyGuiComp.ui" line="+20"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+53"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+53"/>
         <source>Display navigation bar</source>
         <translation>Pasek nawigacji dla podglądu</translation>
     </message>
     <message>
         <location line="+13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+4"/>
         <source>Property</source>
         <translation>Cecha</translation>
     </message>
     <message>
         <location line="+5"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="-1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="-1"/>
         <source>Value</source>
         <translation>Wartość</translation>
     </message>
@@ -813,14 +499,12 @@
     <message>
         <location filename="../../../Include/iqt2d/CLine2dParamsGuiComp.ui" line="+27"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+114"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+114"/>
         <source>First point</source>
         <translation>Pierwszy punkt</translation>
     </message>
     <message>
         <location line="+46"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+2"/>
         <source>Second point</source>
         <translation>Drugi punkt</translation>
     </message>
@@ -828,37 +512,32 @@
 <context>
     <name>CLogGuiComp</name>
     <message>
-        <location filename="../../../Include/iloggui/CLogGuiComp.ui" line="+105"/>
-        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+113"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+113"/>
+        <location filename="../../../Include/iloggui/CLogGuiComp.ui" line="+102"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+112"/>
         <source>Search</source>
         <translation>Szukaj</translation>
     </message>
     <message>
         <location line="+43"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+5"/>
         <source>State</source>
         <translation>Typ</translation>
     </message>
     <message>
         <location line="+5"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
         <source>Time</source>
         <translation>Czas</translation>
     </message>
     <message>
         <location line="+5"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
         <source>Source</source>
         <translation>Źródło</translation>
     </message>
     <message>
         <location line="+5"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
         <source>Message</source>
         <translation>Komunikat</translation>
     </message>
@@ -868,56 +547,48 @@
     <message>
         <location filename="../../../Include/iqtprm/COptionsManagerEditorComp.ui" line="+75"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+157"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+157"/>
         <source>Insert new item</source>
         <translation>Wstaw nowy element</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
         <source>Add</source>
         <translation>Dodaj</translation>
     </message>
     <message>
         <location line="+11"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
         <source>Remove selected item</source>
         <translation>Usuń zaznaczony element</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
         <source>Remove</source>
         <translation>Usuń</translation>
     </message>
     <message>
         <location line="+42"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
         <source>Move selected item up</source>
         <translation>Przenieś element w górę</translation>
     </message>
     <message>
         <location line="+25"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+6"/>
         <source>Load all parameters from file</source>
         <translation>Wczytaj wszystkie parametry z pliku</translation>
     </message>
     <message>
         <location line="+11"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+3"/>
         <source>Save all parameters to file</source>
         <translation>Zapisz wszystkie parametry do pliku</translation>
     </message>
     <message>
         <location line="-25"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="-6"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="-6"/>
         <source>Move selected item down</source>
         <translation>Przenieś element na dół</translation>
     </message>
@@ -927,63 +598,54 @@
     <message>
         <location filename="../../../Include/iqtprm/CParamsManagerGuiCompBase.ui" line="+45"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+202"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+202"/>
         <source>List</source>
         <translation>Lista</translation>
     </message>
     <message>
         <location line="+68"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Insert new item</source>
         <translation>Wstaw nowy element</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Add</source>
         <translation>Dodaj</translation>
     </message>
     <message>
         <location line="+17"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Remove selected item</source>
         <translation>Usuń zaznaczony element</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Remove</source>
         <translation>Usuń</translation>
     </message>
     <message>
         <location line="+48"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Move selected item up</source>
         <translation>Przenieś element w górę</translation>
     </message>
     <message>
         <location line="+25"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+6"/>
         <source>Load all parameters from file</source>
         <translation>Wczytaj wszystkie parametry z pliku</translation>
     </message>
     <message>
         <location line="+11"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+3"/>
         <source>Save all parameters to file</source>
         <translation>Zapisz wszystkie parametry do pliku</translation>
     </message>
     <message>
         <location line="-25"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="-6"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="-6"/>
         <source>Move selected item down</source>
         <translation>Przenieś element na dół</translation>
     </message>
@@ -991,28 +653,20 @@
 <context>
     <name>CPerspectiveCalibEditorComp</name>
     <message>
-        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+175"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+175"/>
         <source>Rotation Matrix</source>
-        <translation>Macież rotacji</translation>
+        <translation type="vanished">Macież rotacji</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+1"/>
         <source>Translation</source>
-        <translation>Translacja</translation>
+        <translation type="vanished">Translacja</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+1"/>
         <source>Perspective</source>
-        <translation>Perspektywa</translation>
+        <translation type="vanished">Perspektywa</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPerspectiveCalibEditorComp.h" line="+1"/>
         <source>Calibrate</source>
-        <translation>Kalibruj</translation>
+        <translation type="vanished">Kalibruj</translation>
     </message>
 </context>
 <context>
@@ -1020,91 +674,78 @@
     <message>
         <location filename="../../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="+53"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+120"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+120"/>
         <source>Add new point</source>
         <translation>Dodaj nowy punkt</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Append</source>
         <translation>Dopisz</translation>
     </message>
     <message>
         <location line="+31"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+8"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+8"/>
         <source>Copy parameters to clipboard</source>
         <translation>Kopiuj parametry do schowka</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Copy</source>
         <translation>Kopiuj</translation>
     </message>
     <message>
         <location line="+14"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
         <source>Paste parameters from clipboard</source>
         <translation>Wklej parametry ze schowka</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Paste</source>
         <translation>Wklej</translation>
     </message>
     <message>
         <location line="+27"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Tools</source>
         <translation>Narzędzia</translation>
     </message>
     <message>
         <location line="-64"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="-14"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="-14"/>
         <source>Remove current point</source>
         <translation>Usuń wybrany punkt</translation>
     </message>
     <message>
         <location line="+3"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Remove</source>
         <translation>Usuń</translation>
     </message>
     <message>
         <location line="-10"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="-4"/>
         <source>Ctrl+Ins</source>
         <translation></translation>
     </message>
     <message>
         <location line="+17"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+5"/>
         <source>Shift+Del</source>
         <translation></translation>
     </message>
     <message>
         <location line="+17"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+5"/>
         <source>Ctrl+C</source>
         <translation></translation>
     </message>
     <message>
         <location line="+17"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+5"/>
         <source>Ctrl+V</source>
         <translation></translation>
     </message>
@@ -1114,7 +755,6 @@
     <message>
         <location filename="../../../Include/iqt2d/CPosition2dParamsGuiComp.ui" line="+94"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CPosition2dParamsGuiComp.h" line="+110"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CPosition2dParamsGuiComp.h" line="+110"/>
         <source>Position</source>
         <translation>Pozycja</translation>
     </message>
@@ -1124,14 +764,12 @@
     <message>
         <location filename="../../../Include/iqtgui/CProgressManagerGuiComp.ui" line="+20"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+68"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+68"/>
         <source>Progress</source>
         <translation>Postęp</translation>
     </message>
     <message>
         <location line="+23"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+1"/>
         <source>Cancel</source>
         <translation>Przerwij</translation>
     </message>
@@ -1141,7 +779,6 @@
     <message>
         <location filename="../../../Include/iqt2d/CQuadrangleParamsGuiComp.ui" line="+20"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+215"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+215"/>
         <source>First Diagonal</source>
         <translation>Pierwsza przekątna</translation>
     </message>
@@ -1149,8 +786,6 @@
         <location line="+12"/>
         <location line="+125"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+1"/>
-        <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+1"/>
         <location line="+5"/>
         <source>First point</source>
         <translation>Pierwszy punkt</translation>
@@ -1160,15 +795,12 @@
         <location line="+125"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
-        <location line="+5"/>
         <source>Second point</source>
         <translation>Drugi punkt</translation>
     </message>
     <message>
         <location line="-70"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
         <source>Second Diagonal</source>
         <translation>Druga przekątna</translation>
     </message>
@@ -1178,28 +810,24 @@
     <message>
         <location filename="../../../Include/iqt2d/CRectangleParamsGuiComp.ui" line="+104"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+137"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+137"/>
         <source>Left</source>
         <translation>Lewy</translation>
     </message>
     <message>
         <location line="+26"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+2"/>
         <source>Right</source>
         <translation>Prawy</translation>
     </message>
     <message>
         <location line="-13"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="-1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="-1"/>
         <source>Top</source>
         <translation>Górny</translation>
     </message>
     <message>
         <location line="-62"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="-4"/>
         <source>Bottom</source>
         <translation>Dolny</translation>
     </message>
@@ -1209,7 +837,6 @@
     <message>
         <location filename="../../../Include/iqtprm/CSelectableGuiComp.ui" line="+49"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CSelectableGuiComp.h" line="+94"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CSelectableGuiComp.h" line="+94"/>
         <source>No selection</source>
         <translation>Nic nie wybrano</translation>
     </message>
@@ -1219,14 +846,12 @@
     <message>
         <location filename="../../../Include/iqtprm/CSelectionParamGuiComp.ui" line="+83"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CSelectionParamGuiComp.h" line="+114"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CSelectionParamGuiComp.h" line="+114"/>
         <source>InfoLabel</source>
         <translation></translation>
     </message>
     <message>
         <location line="+28"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CSelectionParamGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CSelectionParamGuiComp.h" line="+1"/>
         <source>OptionDescriptionLabel</source>
         <translation></translation>
     </message>
@@ -1236,7 +861,6 @@
     <message>
         <location filename="../../../Include/iqtprm/CSelectionParamIndexGuiComp.ui" line="+19"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtprm/ui_CSelectionParamIndexGuiComp.h" line="+73"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtprm/ui_CSelectionParamIndexGuiComp.h" line="+73"/>
         <source>Iterations</source>
         <translation>Powtórzenia</translation>
     </message>
@@ -1246,28 +870,24 @@
     <message>
         <location filename="../../../Include/ifilegui/CSimpleFilePathParamGuiComp.ui" line="+38"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+86"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+86"/>
         <source>Directory</source>
         <translation>Katalog</translation>
     </message>
     <message>
         <location line="+7"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
         <source>Path</source>
         <translation>Scieżka</translation>
     </message>
     <message>
         <location line="+7"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
         <location line="+10"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -1277,14 +897,12 @@
     <message>
         <location filename="../../../Include/iqtgui/CSplashScreenGuiComp.ui" line="+384"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+223"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+223"/>
         <source>Version</source>
         <translation>Wersja</translation>
     </message>
     <message>
         <location line="+222"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+2"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -1327,49 +945,42 @@
     <message>
         <location filename="../../../Include/iloggui/CTextLogGuiComp.ui" line="+72"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+154"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+154"/>
         <source>Severity</source>
         <translation>Ważność</translation>
     </message>
     <message>
         <location line="+14"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+3"/>
         <source>Any</source>
         <translation>Dowolna</translation>
     </message>
     <message>
         <location line="+5"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Info</source>
         <translation>Informacja</translation>
     </message>
     <message>
         <location line="+5"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Warning</source>
         <translation>Ostrzeżenie</translation>
     </message>
     <message>
         <location line="+5"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
         <location line="+8"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
         <source>Source</source>
         <translation>Źródło</translation>
     </message>
     <message>
         <location line="+82"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
         <source>Search</source>
         <translation>Szukaj</translation>
     </message>
@@ -1379,14 +990,12 @@
     <message>
         <location filename="../../../Include/iqtgui/CVersionInfoGuiComp.ui" line="+36"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="+57"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="+57"/>
         <source>Module</source>
         <translation>Moduł</translation>
     </message>
     <message>
         <location line="+5"/>
         <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="-1"/>
-        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="-1"/>
         <source>Version</source>
         <translation>Wersja</translation>
     </message>
@@ -1441,7 +1050,7 @@
         <translation>Nie można wczytać obiektu z pliku</translation>
     </message>
     <message>
-        <location filename="../../../Include/ipackage/CPackagesLoaderComp.cpp" line="+246"/>
+        <location filename="../../../Include/ipackage/CPackagesLoaderComp.cpp" line="+250"/>
         <location line="+33"/>
         <source>Packages conflict: %1 - %2</source>
         <translation>Konflikt pakietów: %1 - %2</translation>
@@ -1459,7 +1068,7 @@
         <translation>Nowa definicja pakietu złożonego została yignorowana: %1 (poprzednia: %2)</translation>
     </message>
     <message>
-        <location line="+113"/>
+        <location line="+117"/>
         <source>Cannot register package %1 (%2)</source>
         <translation>Nie można zarejestrować pakietu %1 (%2)</translation>
     </message>
@@ -1511,17 +1120,17 @@
         <translation>%1: Komponent wewnętrzny &apos;%2&apos; jest niezdefiniowany</translation>
     </message>
     <message>
-        <location line="+1018"/>
+        <location line="+1030"/>
         <source>Unknown attribute type: %1</source>
         <translation>Nieznany typ atrybutu: %1</translation>
     </message>
     <message>
-        <location filename="../../../Include/iqtgui/CApplicationCompBase.cpp" line="+177"/>
+        <location filename="../../../Include/iqtgui/CApplicationCompBase.cpp" line="+169"/>
         <source>ACF application</source>
         <translation>Aplikacja ACF</translation>
     </message>
     <message>
-        <location filename="../../../Include/iview/CImageShape.cpp" line="+174"/>
+        <location filename="../../../Include/iview/CImageShape.cpp" line="+173"/>
         <source>Gray value %1%</source>
         <translation>Jasność %1%</translation>
     </message>
@@ -1611,12 +1220,12 @@
         <translation>Czas ostatniej zmiany dokumentu</translation>
     </message>
     <message>
-        <location filename="../../../Include/ipackage/CPackagesLoaderComp.cpp" line="-155"/>
+        <location filename="../../../Include/ipackage/CPackagesLoaderComp.cpp" line="-159"/>
         <source>Cannot load meta description for registry %1 (%2)</source>
         <translation>Nie mogę wczytać meta opisu rejestru %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../../../Include/ipackage/CRegistryCodeSaverComp.cpp" line="-1116"/>
+        <location filename="../../../Include/ipackage/CRegistryCodeSaverComp.cpp" line="-1128"/>
         <source>dependency file</source>
         <translation>plik zależności</translation>
     </message>
@@ -1641,7 +1250,7 @@
         <translation>Zmiana selekcji</translation>
     </message>
     <message>
-        <location line="+261"/>
+        <location line="+255"/>
         <source>%1_%2</source>
         <translation>%1_%2</translation>
     </message>
@@ -1678,7 +1287,7 @@
         <translation>Modyfikacja obiektu</translation>
     </message>
     <message>
-        <location filename="../../../Include/i2d/CPolypoint.cpp" line="+348"/>
+        <location filename="../../../Include/i2d/CPolypoint.cpp" line="+347"/>
         <source>Clear all nodes</source>
         <translation>Usunięcie wszystkich punktów</translation>
     </message>
@@ -1718,7 +1327,7 @@
         <translation>Zmiana diagonali</translation>
     </message>
     <message>
-        <location filename="../../../Include/i2d/CRectangle.cpp" line="+21"/>
+        <location filename="../../../Include/i2d/CRectangle.cpp" line="+22"/>
         <source>Reset rectangle</source>
         <translation>Wyzerowanie prostokąta</translation>
     </message>
@@ -1813,12 +1422,12 @@
         <translation>Usunięcie elementu</translation>
     </message>
     <message>
-        <location filename="../../../Include/iprm/CMultiParamsManagerComp.cpp" line="+17"/>
+        <location filename="../../../Include/iprm/CMultiParamsManagerComp.cpp" line="+20"/>
         <source>Enable/disable option</source>
         <translation>Wł./wył. opcji</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-2"/>
         <source>Change parameter type</source>
         <translation>Zmiana typu parametru</translation>
     </message>
@@ -1828,8 +1437,8 @@
         <translation>Zmiana nazwy parametru</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location filename="../../../Include/iprm/CParamsManagerCompBase.cpp" line="-265"/>
+        <location line="+2"/>
+        <location filename="../../../Include/iprm/CParamsManagerCompBase.cpp" line="-259"/>
         <source>Insert parameter</source>
         <translation>Wstawienie parametru</translation>
     </message>
@@ -1916,7 +1525,7 @@
         <translation>%1 (Linia: %2)</translation>
     </message>
     <message>
-        <location filename="../../../Include/iser/CCompactXmlReadArchiveBase.cpp" line="+271"/>
+        <location filename="../../../Include/iser/CCompactXmlReadArchiveBase.cpp" line="+269"/>
         <source>%1 (node: %2)</source>
         <translation>%1 (Punkt: %2)</translation>
     </message>
@@ -2017,7 +1626,7 @@
 <context>
     <name>ifile::CFileListProviderComp</name>
     <message>
-        <location filename="../../../Include/ifile/CFileListProviderComp.cpp" line="+96"/>
+        <location filename="../../../Include/ifile/CFileListProviderComp.cpp" line="+90"/>
         <source>Specified path &apos;%1&apos; is not a directory</source>
         <translation>Wskazana ścieżka nie jest katalogiem: %1</translation>
     </message>
@@ -2053,7 +1662,7 @@
 <context>
     <name>ifilegui::CFileSystemExplorerGuiComp</name>
     <message>
-        <location filename="../../../Include/ifilegui/CFileSystemExplorerGuiComp.cpp" line="+119"/>
+        <location filename="../../../Include/ifilegui/CFileSystemExplorerGuiComp.cpp" line="+147"/>
         <source>Enter text to filter file items</source>
         <translation>Wprowadź tekst do elementów filtra plików</translation>
     </message>
@@ -2061,7 +1670,7 @@
 <context>
     <name>ifilegui::CFileTreeViewGuiComp</name>
     <message>
-        <location filename="../../../Include/ifilegui/CFileTreeViewGuiComp.cpp" line="+249"/>
+        <location filename="../../../Include/ifilegui/CFileTreeViewGuiComp.cpp" line="+259"/>
         <source>File</source>
         <translation>Plik</translation>
     </message>
@@ -2069,7 +1678,7 @@
 <context>
     <name>ifilegui::CSimpleFilePathParamGuiComp</name>
     <message>
-        <location filename="../../../Include/ifilegui/CSimpleFilePathParamGuiComp.cpp" line="+149"/>
+        <location filename="../../../Include/ifilegui/CSimpleFilePathParamGuiComp.cpp" line="+151"/>
         <source>Select directory</source>
         <translation>Wybierz katalog</translation>
     </message>
@@ -2206,7 +1815,7 @@
 <context>
     <name>iloggui::CLogGuiComp</name>
     <message>
-        <location filename="../../../Include/iloggui/CLogGuiComp.cpp" line="+168"/>
+        <location filename="../../../Include/iloggui/CLogGuiComp.cpp" line="+165"/>
         <source>New informations available</source>
         <translation>Dostępne są nowe informacje</translation>
     </message>
@@ -2291,7 +1900,7 @@
 <context>
     <name>iqt2d</name>
     <message>
-        <location filename="../../../Include/iqt2d/TPolygonBasedParamsGuiComp.h" line="+389"/>
+        <location filename="../../../Include/iqt2d/TPolygonBasedParamsGuiComp.h" line="+377"/>
         <source>Flip horizontally</source>
         <translation>Odbij poziomo</translation>
     </message>
@@ -2324,7 +1933,7 @@
 <context>
     <name>iqt2d::CPolylineParamsGuiComp</name>
     <message>
-        <location filename="../../../Include/iqt2d/CPolylineParamsGuiComp.cpp" line="+54"/>
+        <location filename="../../../Include/iqt2d/CPolylineParamsGuiComp.cpp" line="+46"/>
         <source>Open/close line</source>
         <translation>Otwórz/zamknij linię</translation>
     </message>
@@ -2568,12 +2177,12 @@
     <name>iqtdoc::CMultiDocumentWorkspaceGuiComp</name>
     <message>
         <location filename="../../../Include/iqtdoc/CMultiDocumentWorkspaceGuiComp.cpp" line="+97"/>
-        <location line="+555"/>
+        <location line="+554"/>
         <source>&lt;no name&gt;</source>
         <translation>&lt;bez nazwy&gt;</translation>
     </message>
     <message>
-        <location line="-229"/>
+        <location line="-228"/>
         <source>Do you want to save your changes made in document
 %1</source>
         <translation>Czy chcesz zapisać swoje zmiany w dokumencie %1</translation>
@@ -2599,12 +2208,12 @@
         <translation>&amp;Zamyka wszystkie dokumenty</translation>
     </message>
     <message>
-        <location line="-387"/>
+        <location line="-386"/>
         <source>%1 &lt;%2&gt;</source>
         <translation>%1 &lt;%2&gt;</translation>
     </message>
     <message>
-        <location line="+317"/>
+        <location line="+316"/>
         <source>Close document</source>
         <translation>Zamknij dokument</translation>
     </message>
@@ -2829,7 +2438,7 @@
 <context>
     <name>iqtprm::CFileNameParamGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtprm/CFileNameParamGuiComp.cpp" line="+109"/>
+        <location filename="../../../Include/iqtprm/CFileNameParamGuiComp.cpp" line="+105"/>
         <source>&lt;Enter path&gt;</source>
         <translation>&lt;Wstaw ścieżkę&gt;</translation>
     </message>
@@ -2852,7 +2461,7 @@
 <context>
     <name>iqtprm::CSelectionParamGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtprm/CSelectionParamGuiComp.cpp" line="+296"/>
+        <location filename="../../../Include/iqtprm/CSelectionParamGuiComp.cpp" line="+302"/>
         <location line="+83"/>
         <source>Reset</source>
         <translation>Wyzeruj</translation>
