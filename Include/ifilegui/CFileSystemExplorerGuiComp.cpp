@@ -93,6 +93,14 @@ void CFileSystemExplorerGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /
 	if (objectPtr != NULL){
 		QString currentFilePath = istd::CSystem::GetEnrolledPath(objectPtr->GetPath());
 
+		QDir::Filters filters = objectPtr->GetPathType() == ifile::IFileNameParam::PT_DIRECTORY?
+					(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Drives | QDir::AllDirs):
+					(QDir::Drives | QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::AllDirs);
+
+		if (m_fileSystemModel.filter() != filters){
+			m_fileSystemModel.setFilter(filters);
+		}
+
 		InvalidateFileSystemModel(currentFilePath);
 
 		QModelIndex index = m_fileSystemModel.index(currentFilePath);
