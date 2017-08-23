@@ -4,10 +4,6 @@
 
 // ACF includes
 #include <imod/TModelWrap.h>
-
-#include <i2d/CCircle.h>
-
-#include <iview/CCircleShape.h>
 #include <iview/CImageShape.h>
 
 
@@ -15,30 +11,30 @@ namespace iview
 {
 
 
-// helper template for circle shapes
+// helper template for shapes
 
-template<class Object = i2d::CCircle, class Shape = iview::CCircleShape>
-struct TCircleVisualObject
+template<class Object, class Shape>
+struct TVisualObject: public Shape
 {
-	TCircleVisualObject(bool editable = false);
+	typedef Shape BaseClass;
+
+	TVisualObject(bool editable = false);
 
 	typedef imod::TModelWrap<Object> PositionModel;
 
 	istd::TDelPtr<PositionModel> model;
-	istd::TDelPtr<Shape> shape;
 };
 
 
 template<class Object, class Shape>
-TCircleVisualObject<Object, Shape>::TCircleVisualObject(bool editable)
+TVisualObject<Object, Shape>::TVisualObject(bool editable)
 {
 	model.SetPtr(new PositionModel);
 
-	shape.SetPtr(new Shape);
-	shape->SetEditablePosition(editable);
-	shape->SetEditableRadius(editable);
+	BaseClass::SetEditablePosition(editable);
+	BaseClass::SetEditableRadius(editable);
 
-	model->AttachObserver(shape.GetPtr());
+	model->AttachObserver(this);
 }
 
 
