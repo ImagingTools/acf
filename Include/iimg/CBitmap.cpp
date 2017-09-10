@@ -361,7 +361,7 @@ bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 			if (IsFormatSupported(pixelFormat)){
 				if (CreateBitmap(pixelFormat, size)){
 					// do not copy empty image
-					if (size.IsSizeEmpty()){	
+					if (size.IsSizeEmpty()){
 						return true;
 					}
 
