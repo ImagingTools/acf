@@ -125,26 +125,6 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 }
 
 
-// reimplemented (istd::IChangeable)
-
-bool CRelativeFileNameParamComp::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
-{
-	const CRelativeFileNameParamComp* sourcePtr = dynamic_cast<const CRelativeFileNameParamComp*>(&object);
-	if (sourcePtr != NULL){
-	
-		if (m_relativePath != sourcePtr->m_relativePath){
-			istd::CChangeNotifier changeNotifier(this);
-
-			m_relativePath = sourcePtr->m_relativePath;
-		}
-
-		return true;
-	}
-
-	return false;
-}
-
-
 // protected methods
 
 // reimplemented (icomp::CComponentBase)

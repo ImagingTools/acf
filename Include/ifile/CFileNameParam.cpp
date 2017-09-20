@@ -73,6 +73,38 @@ bool CFileNameParam::Serialize(iser::IArchive& archive)
 }
 
 
+// reimplemented (istd::IChangeable)
+
+int CFileNameParam::GetSupportedOperations() const
+{
+	return SO_COPY | SO_COMPARE;
+}
+
+
+bool CFileNameParam::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
+{
+	const CFileNameParam* sourcePtr = dynamic_cast<const CFileNameParam*>(&object);
+	if (sourcePtr != NULL){
+		SetPath(sourcePtr->GetPath());
+
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CFileNameParam::IsEqual(const IChangeable& object) const
+{
+	const CFileNameParam* sourcePtr = dynamic_cast<const CFileNameParam*>(&object);
+	if (sourcePtr != NULL){
+		return QFileInfo(GetPath()) == QFileInfo(sourcePtr->GetPath());
+	}
+
+	return false;
+}
+
+
 } // namespace ifile
 
 
