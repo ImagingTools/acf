@@ -14,6 +14,12 @@ static const iser::CArchiveTag s_paramTypeIdTag("TypeId", "Paramter type ID used
 static const iser::CArchiveTag s_parameterTag("Parameter", "Paramter object depending on type ID", iser::CArchiveTag::TT_GROUP);
 
 
+CVariableParamComp::CVariableParamComp()
+:	m_updateBridge(this)
+{
+}
+
+
 // reimplemented (iprm::IVariableParam)
 
 IVariableParam::TypeIds CVariableParamComp::GetKnownTypeIds() const
@@ -60,7 +66,12 @@ bool CVariableParamComp::AssignTypeId(const QByteArray& typeId)
 			iser::ISerializable* newParamPtr = m_factoriesFact.CreateInstance(i);
 			if (newParamPtr != NULL){
 				if (m_paramPtr.IsValid()){
-					newParamPtr->CopyFrom(*m_paramPtr);
+					newParamPtr->CopyFrom(*m_paramPtr, CM_CONVERT);
+				}
+
+				imod::IModel* newParamModelPtr = dynamic_cast<imod::IModel*>(newParamPtr);
+				if (newParamModelPtr != NULL){
+					newParamModelPtr->AttachObserver(&m_updateBridge);
 				}
 
 				m_paramPtr.SetPtr(newParamPtr);
