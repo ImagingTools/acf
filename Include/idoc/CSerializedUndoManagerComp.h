@@ -35,7 +35,7 @@ public:
 		I_REGISTER_INTERFACE(idoc::IUndoManager);
 		I_REGISTER_INTERFACE(idoc::IDocumentStateComparator);
 		I_REGISTER_INTERFACE(imod::IObserver);
-		I_ASSIGN(m_maxBufferSizeAttrPtr, "MaxBufferSizeAttrPtr", "Maximal memory size of the Undo-buffer in MByte", false, 100);
+		I_ASSIGN(m_maxBufferSizeAttrPtr, "MaxBufferSize", "Maximal memory size of the Undo-buffer in MByte", false, 100);
 	I_END_COMPONENT;
 
 	CSerializedUndoManagerComp();
