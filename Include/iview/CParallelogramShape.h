@@ -99,7 +99,7 @@ protected:
 	virtual void EnsureValidNodes() const;
 
 	virtual bool IsTickerTouched(istd::CIndex2d position) const;
-	virtual bool IsFigureTouched(istd::CIndex2d position) const;
+	virtual bool IsCurveTouched(istd::CIndex2d position) const;
 	virtual void DrawTickers(QPainter& drawContext) const;
 	virtual void DrawFigure(QPainter& drawContext) const;
 

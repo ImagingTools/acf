@@ -53,7 +53,7 @@ ITouchable::TouchState CParallelogramShape::IsTouched(istd::CIndex2d position) c
 		return TS_TICKER;
 	}
 
-	if (IsFigureTouched(position)){
+	if (IsCurveTouched(position)){
 		bool isEditablePosition = IsEditablePosition();
 		return isEditablePosition? TS_DRAGGABLE: TS_INACTIVE;
 	}
@@ -330,7 +330,7 @@ bool CParallelogramShape::IsTickerTouched(istd::CIndex2d position) const
 }
 
 
-bool CParallelogramShape::IsFigureTouched(istd::CIndex2d position) const
+bool CParallelogramShape::IsCurveTouched(istd::CIndex2d position) const
 {
 	const i2d::CParallelogram* parallelogramPtr = dynamic_cast<const i2d::CParallelogram*>(GetObservedModel());
 	if (IsDisplayConnected() && (parallelogramPtr != NULL)){

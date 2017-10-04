@@ -24,6 +24,8 @@ protected:
 	// reimplemented (iview::CPolygonShape)
 	virtual i2d::CVector2d GetSegmentMiddle(int index) const;
 	virtual void DrawCurve(QPainter& drawContext) const;
+
+	// reimplemented (iview::CRectControlledShapeBase)
 	virtual bool IsCurveTouched(istd::CIndex2d position) const;
 
 	// reimplemented (iview::CShapeBase)

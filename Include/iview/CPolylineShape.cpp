@@ -37,7 +37,7 @@ bool CPolylineShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton butt
 				int editMode = GetEditMode();
 				switch (editMode){
 				case ISelectable::EM_NONE:
-					if (IsSelected() && IsEditablePosition() && CTransformableRectangleShape::OnMouseButton(position, buttonType, downFlag)){
+					if (IsSelected() && IsEditablePosition() && CRectControlledShapeBase::OnMouseButton(position, buttonType, downFlag)){
 						return true;
 					}
 					break;
@@ -470,8 +470,8 @@ void CPolylineShape::DrawSelectionElements(QPainter& drawContext) const
 
 		case ISelectable::EM_NONE:
 			if (IsEditablePosition()){
-				CTransformableRectangleShape::DrawFigure(drawContext);
-				CTransformableRectangleShape::DrawTickers(drawContext);
+				CRectControlledShapeBase::DrawFigure(drawContext);
+				CRectControlledShapeBase::DrawTickers(drawContext);
 			}
 			break;
 
@@ -528,6 +528,8 @@ void CPolylineShape::DrawSelectionElements(QPainter& drawContext) const
 	}
 }
 
+
+// reimplemented (iview::CRectControlledShapeBase)
 
 bool CPolylineShape::IsCurveTouched(istd::CIndex2d position) const
 {

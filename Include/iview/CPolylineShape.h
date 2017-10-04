@@ -53,6 +53,8 @@ protected:
 	virtual void DrawCurve(QPainter& drawContext) const;
 	virtual void DrawArea(QPainter& drawContext) const;
 	virtual void DrawSelectionElements(QPainter& drawContext) const;
+
+	// reimplemented (iview::CRectControlledShapeBase)
 	virtual bool IsCurveTouched(istd::CIndex2d position) const;
 
 	// reimplemented (iview::CShapeBase)

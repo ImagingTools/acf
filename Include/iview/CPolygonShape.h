@@ -10,17 +10,17 @@
 #include <i2d/CVector2d.h>
 
 
-#include <iview/CTransformableRectangleShape.h>
+#include <iview/CRectControlledShapeBase.h>
 
 
 namespace iview
 {
 
 
-class CPolygonShape: public CTransformableRectangleShape
+class CPolygonShape: public CRectControlledShapeBase
 {
 public:
-	typedef CTransformableRectangleShape BaseClass;
+	typedef CRectControlledShapeBase BaseClass;
 	typedef CInteractiveShapeBase ShapeBaseClass;
 	
 	CPolygonShape();
@@ -65,10 +65,10 @@ protected:
 	virtual void DrawCurve(QPainter& drawContext) const;
 	virtual void DrawArea(QPainter& drawContext) const;
 	virtual void DrawSelectionElements(QPainter& drawContext) const;
-	virtual bool IsCurveTouched(istd::CIndex2d position) const;
 
-	// reimplemented (iview::CTransformableRectangleShape)
+	// reimplemented (iview::CRectControlledShapeBase)
 	virtual void EnsureValidNodes() const;
+	virtual bool IsCurveTouched(istd::CIndex2d position) const;
 
 	// reimplemented (iview::CInteractiveShapeBase)
 	virtual void BeginLogDrag(const i2d::CVector2d& reference);

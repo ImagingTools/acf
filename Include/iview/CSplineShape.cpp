@@ -112,6 +112,8 @@ void CSplineShape::DrawCurve(QPainter& drawContext) const
 }
 
 
+// reimplemented (iview::CRectControlledShapeBase)
+
 bool CSplineShape::IsCurveTouched(istd::CIndex2d position) const
 {
 	const i2d::CSpline* splinePtr = dynamic_cast<const i2d::CSpline*>(GetObservedModel());

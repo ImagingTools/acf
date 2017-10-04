@@ -49,7 +49,7 @@ bool CPolygonShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton butto
 				int editMode = GetEditMode();
 				switch (editMode){
 				case ISelectable::EM_NONE:
-					if (IsSelected() && IsEditablePosition() && CTransformableRectangleShape::OnMouseButton(position, buttonType, downFlag)){
+					if (IsSelected() && IsEditablePosition() && CRectControlledShapeBase::OnMouseButton(position, buttonType, downFlag)){
 						return true;
 					}
 					break;
@@ -407,8 +407,8 @@ void CPolygonShape::DrawSelectionElements(QPainter& drawContext) const
 
 		case ISelectable::EM_NONE:
 			if (IsEditablePosition()){
-				CTransformableRectangleShape::DrawFigure(drawContext);
-				CTransformableRectangleShape::DrawTickers(drawContext);
+				CRectControlledShapeBase::DrawFigure(drawContext);
+				CRectControlledShapeBase::DrawTickers(drawContext);
 			}
 			break;
 
@@ -452,39 +452,7 @@ void CPolygonShape::DrawSelectionElements(QPainter& drawContext) const
 }
 
 
-bool CPolygonShape::IsCurveTouched(istd::CIndex2d position) const
-{
-	Q_ASSERT(IsDisplayConnected());
-
-	const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetObservedModel());
-	if (polygonPtr != NULL){
-		int nodesCount = polygonPtr->GetNodesCount();
-		if (nodesCount < 2){
-			return false;
-		}
-
-		const IColorSchema& colorSchema = GetColorSchema();
-		double logicalLineWidth = colorSchema.GetLogicalLineWidth();
-
-		i2d::CLine2d segmentLine;
-		segmentLine.SetPoint2(GetScreenPosition(polygonPtr->GetNodePos(nodesCount - 1)));
-
-		i2d::CVector2d screenPosition(position);
-
-		for (int i = 0; i < nodesCount; i++){
-			segmentLine.PushEndPointQuiet(GetScreenPosition(polygonPtr->GetNodePos(i)));
-
-			if (segmentLine.GetDistance(screenPosition) < logicalLineWidth){
-				return true;
-			}
-		}
-	}
-
-	return false;
-}
-
-
-// reimplemented (iview::CTransformableRectangleShape)
+// reimplemented (iview::CRectControlledShapeBase)
 
 void CPolygonShape::EnsureValidNodes() const
 {
@@ -536,6 +504,38 @@ void CPolygonShape::EnsureValidNodes() const
 
 		ResetNodes();
 	}
+}
+
+
+bool CPolygonShape::IsCurveTouched(istd::CIndex2d position) const
+{
+	Q_ASSERT(IsDisplayConnected());
+
+	const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetObservedModel());
+	if (polygonPtr != NULL){
+		int nodesCount = polygonPtr->GetNodesCount();
+		if (nodesCount < 2){
+			return false;
+		}
+
+		const IColorSchema& colorSchema = GetColorSchema();
+		double logicalLineWidth = colorSchema.GetLogicalLineWidth();
+
+		i2d::CLine2d segmentLine;
+		segmentLine.SetPoint2(GetScreenPosition(polygonPtr->GetNodePos(nodesCount - 1)));
+
+		i2d::CVector2d screenPosition(position);
+
+		for (int i = 0; i < nodesCount; i++){
+			segmentLine.PushEndPointQuiet(GetScreenPosition(polygonPtr->GetNodePos(i)));
+
+			if (segmentLine.GetDistance(screenPosition) < logicalLineWidth){
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 
