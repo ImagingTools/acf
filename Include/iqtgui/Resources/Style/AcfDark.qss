@@ -416,6 +416,7 @@ QTabBar::tab:top, QTabBar::tab:bottom
 	max-height: 2em;
 	min-width: 7em;
 	padding-left: 5px;
+	padding-right: 5px;
 }
 
 QTabBar::tab:top
@@ -490,6 +491,7 @@ QTabBar::tab:left
 	max-width: 2em;
 	min-height: 7em;
 	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 QTabBar::tab:right
@@ -502,6 +504,7 @@ QTabBar::tab:right
 	max-width: 2em;
 	min-height: 7em;
 	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 QTabBar::tab:left:selected, QTabBar::tab:right:selected
