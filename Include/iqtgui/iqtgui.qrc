@@ -74,6 +74,8 @@
     <file alias="AcfDark">Resources/Style/AcfDark.qss</file>
   </qresource>
    <qresource prefix="/Style/AcfDark/Images">
-     <file alias="CheckBoxChecked.png">Resources/Style/AcfDark/Images/CheckBoxChecked.png</file>
-   </qresource>
+		 <file alias="CheckBoxChecked.png">Resources/Style/AcfDark/Images/CheckBoxChecked.png</file>
+		 <file alias="ArrowUp.svg">Resources/Style/AcfDark/Images/ArrowUp.svg</file>
+		 <file alias="ArrowDown.svg">Resources/Style/AcfDark/Images/ArrowDown.svg</file>
+	 </qresource>
  </RCC>
