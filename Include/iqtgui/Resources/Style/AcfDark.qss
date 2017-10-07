@@ -307,7 +307,7 @@ QCheckBox::indicator
 
 QCheckBox::indicator:checked
 {
-	image:url(:/Style/AcfDark/Images/CheckBoxChecked.png);
+	image:url(:/Style/AcfDark/Images/CheckBoxChecked.svg);
 }
 
 QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
