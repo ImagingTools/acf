@@ -56,7 +56,7 @@ public:
 	virtual void OnComponentDestroyed();
 
 	// reimplemented (iqt::ITranslationManager)
-	virtual int GetLanguagesCount() const;
+	virtual const iprm::IOptionsList& GetLanguagesInfo() const;
 	virtual int GetCurrentLanguageIndex() const;
 	virtual const QTranslator* GetLanguageTranslator(int languageIndex) const;
 	virtual const ITranslationManager* GetSlaveTranslationManager() const;
