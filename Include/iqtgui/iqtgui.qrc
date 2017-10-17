@@ -77,5 +77,7 @@
 		<file alias="CheckBoxChecked.svg">Resources/Style/AcfDark/Images/CheckBoxChecked.svg</file>
 		<file alias="ArrowUp.svg">Resources/Style/AcfDark/Images/ArrowUp.svg</file>
 		<file alias="ArrowDown.svg">Resources/Style/AcfDark/Images/ArrowDown.svg</file>
+		<file alias="SplitVertical.svg">Resources/Style/AcfDark/Images/SplitVertical.svg</file>
+		<file alias="SplitHorizontal.svg">Resources/Style/AcfDark/Images/SplitHorizontal.svg</file>
 	</qresource>
 </RCC>

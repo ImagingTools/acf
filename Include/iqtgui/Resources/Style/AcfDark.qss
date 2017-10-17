@@ -842,3 +842,40 @@ QComboBox::down-arrow:disabled
 }
 
 
+QTextEdit, QPlainTextEdit
+{
+	border: 1px solid #505050;
+	border-radius: 4px;
+}
+
+QTextEdit:focus, QPlainTextEdit:focus
+{
+	border: 1px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
+}
+
+
+QTabWidget::pane
+{
+	border: 1px solid #505050;
+	border-radius: 4px;
+}
+
+
+QSplitter::handle:horizontal
+{
+	image:url(:/Style/AcfDark/Images/SplitVertical.svg);
+	width: 4px;
+}
+
+QSplitter::handle:vertical
+{
+	image:url(:/Style/AcfDark/Images/SplitHorizontal.svg);
+	height: 4px;
+}
+
+QSplitter::handle:pressed
+{
+	url(images/splitter_pressed.png);
+}
+
+
