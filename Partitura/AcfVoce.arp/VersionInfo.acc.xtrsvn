@@ -53,6 +53,7 @@
 								<Value>2.0.0</Value>
 								<Value>2.0.1</Value>
 								<Value>2.0.2</Value>
+								<Value>2.0.3</Value>
 							</Values>
                         </Data>
                     </AttributeInfo>
@@ -93,6 +94,7 @@
                                 <Value>3990</Value>
                                 <Value>4145</Value>
                                 <Value>4442</Value>
+                                <Value>4590</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
