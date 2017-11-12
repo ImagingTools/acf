@@ -179,9 +179,7 @@ QLineEdit
 	border: 1px solid #303030;
 	border-radius: 4px;
 	padding: 2px;
-	height: 1.2em;
 	min-height: 1.2em;
-	max-height: 1.2em;
 }
 
 QLineEdit:focus
@@ -809,9 +807,7 @@ QSpinBox::down-arrow, QDoubleSpinBox::down-arrow
 QComboBox
 {
 	padding: 2px;
-	height: 1.2em;
 	min-height: 1.2em;
-	max-height: 1.2em;
 	border:1px solid #303030;
 	border-radius: 4px;
 	background-color: #505050;
