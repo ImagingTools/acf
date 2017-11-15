@@ -393,6 +393,9 @@ bool CAutoPersistenceComp::LockFile(const QString& filePath, bool store) const
 		int timeout = int(*m_tryLockTimeoutAttrPtr * 1000.0);
 		return m_lockFilePtr->tryLock(timeout);
 	}
+#else
+	Q_UNUSED(filePath);
+	Q_UNUSED(store);
 #endif
 
 	return true;

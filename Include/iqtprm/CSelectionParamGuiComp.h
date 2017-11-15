@@ -5,14 +5,15 @@
 // Qt includes
 #include <QtCore/QtGlobal>
 #include <QtGui/QStandardItemModel>
-#include <QtCore/QSortFilterProxyModel>
 #if QT_VERSION >= 0x050000
+#include <QtCore/QSortFilterProxyModel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QCompleter>
 #else
+#include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QComboBox>
 #include <QtGui/QRadioButton>

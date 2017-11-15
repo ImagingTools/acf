@@ -122,7 +122,11 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 
 		if (*m_useTrayIconAttrPtr){
 			m_trayIconPtr.SetPtr(new QSystemTrayIcon);
+#if QT_VERSION >= 0x050000
 			m_trayIconPtr->setIcon(QGuiApplication::windowIcon());
+#else
+			m_trayIconPtr->setIcon(QApplication::windowIcon());
+#endif
 
 			QMenu* trayMenuPtr = new QMenu;
 

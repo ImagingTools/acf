@@ -22,8 +22,8 @@ CCompositeComponent::CCompositeComponent(bool manualAutoInit)
 :	m_contextPtr(NULL),
 	m_parentPtr(NULL),
 	m_isParentOwner(false),
-	m_autoInitialized(false),
-	m_manualAutoInit(manualAutoInit)
+	m_manualAutoInit(manualAutoInit),
+	m_autoInitialized(false)
 {
 }
 

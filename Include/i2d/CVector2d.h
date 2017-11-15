@@ -3,8 +3,12 @@
 
 
 // Qt includes
-#include <QtCore/QtMath>
 #include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtCore/QtMath>
+#else
+#include <QtCore/qmath.h>
+#endif
 #include <QtCore/QPointF>
 
 // ACF includes

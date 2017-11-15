@@ -10,6 +10,7 @@
 #else
 #include <QtGui/QHeaderView>
 #include <QtGui/QToolBar>
+#include <QtGui/QItemDelegate>
 #endif
 
 // ACF includes

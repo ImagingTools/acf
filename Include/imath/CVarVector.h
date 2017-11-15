@@ -6,7 +6,12 @@
 #include <vector>
 
 // Qt includes
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
 #include <QtCore/QtMath>
+#else
+#include <QtCore/qmath.h>
+#endif
 #include <QtCore/QVector>
 
 // ACF includes

@@ -86,6 +86,9 @@ protected:
 		virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 		virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
+		using QAbstractTableModel::dataChanged;
+		using QAbstractTableModel::layoutChanged;
+
 	private:
 		TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>* m_parentPtr;
 	};
