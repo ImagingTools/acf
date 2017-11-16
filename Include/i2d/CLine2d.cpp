@@ -198,7 +198,6 @@ double CLine2d::GetDistance(const CVector2d& position) const
 			return qAbs(diff.GetCrossProductZ(point1Diff) / qSqrt(diffLength2));	// return distance to the line
 		}
 	}
-
 }
 
 
