@@ -43,7 +43,13 @@ QVariant CStandardDocumentMetaInfo::GetMetaInfo(int metaInfoType) const
 
 bool CStandardDocumentMetaInfo::SetMetaInfo(int metaInfoType, const QVariant& metaInfo)
 {
-	if (m_infosMap[metaInfoType] != metaInfo){
+	if (		!m_infosMap.contains(metaInfoType) ||
+				(m_infosMap.contains(metaInfoType) &&
+				(m_infosMap[metaInfoType].type() == metaInfo.type()) &&
+				(m_infosMap[metaInfoType] != metaInfo)) ||
+				(m_infosMap.contains(metaInfoType) &&
+				(m_infosMap[metaInfoType].type() != metaInfo.type()))
+				){
 		istd::CChangeNotifier notifier(this, &s_setMetaInfoChangeSet);
 		Q_UNUSED(notifier);
 
