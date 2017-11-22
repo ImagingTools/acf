@@ -41,9 +41,13 @@ const QString& CRelativeFileNameParamComp::GetPath() const
 	const QString& relativePath = BaseClass::GetPath();
 
 	if (m_relativeToCompPtr.IsValid()){
-		const QString& basePath = m_relativeToCompPtr->GetPath();
+		QString basePath = m_relativeToCompPtr->GetPath();
 		if (!basePath.isEmpty()){
-			m_relativePath = QDir::cleanPath(basePath + "/" + relativePath);
+			QString retVal = QDir::cleanPath(basePath + "/" + relativePath);
+
+			if (m_relativePath != retVal){
+				m_relativePath = retVal;
+			}
 
 			return m_relativePath;
 		}
