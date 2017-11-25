@@ -138,17 +138,13 @@ QAbstractItemView
 	outline: 0;
 }
 
-QAbstractItemView
+QAbstractItemView:!no-frame
 {
 	border: 1px solid #505050;
 	padding: 2px;
 	border-radius: 4px;
 }
 
-QAbstractItemView:focus
-{
-	border: 1px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
-}
 
 QAbstractItemView::item
 {
