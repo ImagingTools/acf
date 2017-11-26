@@ -99,7 +99,7 @@ public:
 		\param resourceId			ID of the file resource.
 		\return Pointer to the meta-info instance or \c NULL, if no information could be provided.
 	*/
-	virtual ifile::IFileMetaInfoProvider::ConstMetaInfoPtr GetFileMetaInfo(const QByteArray& resourceId) const = 0;
+	virtual ifile::IFileMetaInfoProvider::MetaInfoPtr GetFileMetaInfo(const QByteArray& resourceId) const = 0;
 
 	/**
 		Get the name of the file resource in the storage.
