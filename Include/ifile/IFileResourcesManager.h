@@ -28,6 +28,7 @@ class IFileResourcesManager: virtual public istd::IChangeable
 public:
 	typedef istd::TSmartPtr<istd::IChangeable> DataObjectPtr;
 	typedef QList<QByteArray> Ids;
+	typedef IFileMetaInfoProvider::MetaInfoPtr MetaInfoPtr;
 
 	/**
 		Status of the resource license.
