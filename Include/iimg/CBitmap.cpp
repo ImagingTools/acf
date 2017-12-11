@@ -337,12 +337,26 @@ int CBitmap::GetSupportedOperations() const
 
 bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 {
+	const iimg::IBitmap* sourcePtr = dynamic_cast<const IBitmap*>(&object);
+	if (sourcePtr != NULL){
+		const i2d::ICalibration2d* calibrationPtr = sourcePtr->GetCalibration();
+		if (calibrationPtr != NULL){
+			istd::TDelPtr<i2d::ICalibration2d> bitmapCalibrationPtr;
+			bitmapCalibrationPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+			if (bitmapCalibrationPtr.IsValid()){
+				SetCalibration(bitmapCalibrationPtr.PopPtr(), true);
+			}
+		}	
+	}
+	else{
+		return false;
+	}
+
+	istd::CChangeNotifier notifier(this);
+	Q_UNUSED(notifier);
+
 	const CBitmap* bitmapImplPtr = dynamic_cast<const CBitmap*>(&object);
-
 	if (bitmapImplPtr != NULL){
-		istd::CChangeNotifier notifier(this);
-		Q_UNUSED(notifier);
-
 		m_externalBuffer.Reset();
 
 		m_image = bitmapImplPtr->GetQImage().copy();
@@ -350,51 +364,45 @@ bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 		return true;
 	}
 	else{
-		const IBitmap* bitmapPtr = dynamic_cast<const IBitmap*>(&object);
-		if (bitmapPtr != NULL){
-			istd::CChangeNotifier notifier(this);
-			Q_UNUSED(notifier);
+		istd::CIndex2d size = sourcePtr->GetImageSize();
 
-			istd::CIndex2d size = bitmapPtr->GetImageSize();
-
-			iimg::IBitmap::PixelFormat pixelFormat = bitmapPtr->GetPixelFormat();
-			if (IsFormatSupported(pixelFormat)){
-				if (CreateBitmap(pixelFormat, size)){
-					// do not copy empty image
-					if (size.IsSizeEmpty()){
-						return true;
-					}
-
-					int lineBytesCount = qMin(GetLineBytesCount(), bitmapPtr->GetLineBytesCount());
-					Q_ASSERT(lineBytesCount >= 0);
-					if (lineBytesCount <= 0){
-						return false;
-					}
-
-					for (int y = 0; y < size.GetY(); ++y){
-						std::memcpy(GetLinePtr(y), bitmapPtr->GetLinePtr(y), lineBytesCount);
-					}
-
+		iimg::IBitmap::PixelFormat pixelFormat = sourcePtr->GetPixelFormat();
+		if (IsFormatSupported(pixelFormat)){
+			if (CreateBitmap(pixelFormat, size)){
+				// do not copy empty image
+				if (size.IsSizeEmpty()){
 					return true;
 				}
-			}
-			else if (mode == CM_CONVERT){
-				switch (pixelFormat){
-				case PF_FLOAT32:
-					return ConvertToGrayImage<float, float>(*bitmapPtr, *this);
 
-				case PF_FLOAT64:
-					return ConvertToGrayImage<double, double>(*bitmapPtr, *this);
-
-				case PF_GRAY16:
-					return ConvertToGrayImage<quint16, quint32>(*bitmapPtr, *this);
-
-				case PF_GRAY32:
-					return ConvertToGrayImage<quint32, quint64>(*bitmapPtr, *this);
-
-				default:
-					break;
+				int lineBytesCount = qMin(GetLineBytesCount(), sourcePtr->GetLineBytesCount());
+				Q_ASSERT(lineBytesCount >= 0);
+				if (lineBytesCount <= 0){
+					return false;
 				}
+
+				for (int y = 0; y < size.GetY(); ++y){
+					std::memcpy(GetLinePtr(y), sourcePtr->GetLinePtr(y), lineBytesCount);
+				}
+
+				return true;
+			}
+		}
+		else if (mode == CM_CONVERT){
+			switch (pixelFormat){
+			case PF_FLOAT32:
+				return ConvertToGrayImage<float, float>(*sourcePtr, *this);
+
+			case PF_FLOAT64:
+				return ConvertToGrayImage<double, double>(*sourcePtr, *this);
+
+			case PF_GRAY16:
+				return ConvertToGrayImage<quint16, quint32>(*sourcePtr, *this);
+
+			case PF_GRAY32:
+				return ConvertToGrayImage<quint32, quint64>(*sourcePtr, *this);
+
+			default:
+				break;
 			}
 		}
 	}
