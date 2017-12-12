@@ -66,7 +66,9 @@ win32{
 }
 
 arxCompiler.name = ARX-Compiler
-arxCompiler.CONFIG += no_link target_predeps
+arcCompiler.target = $${ARXC_OUTDIR}/C${QMAKE_FILE_BASE}.h
+arxCompiler.CONFIG += no_link
+arxCompiler.CONFIG += target_predeps
 arxCompiler.output = $$ARX_COMPILER_OUTPUT
 arxCompiler.commands = $$ARX_COMPILER_COMMAND
 arxCompiler.input = ARXC_FILES
