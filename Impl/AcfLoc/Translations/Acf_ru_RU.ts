@@ -3950,64 +3950,159 @@ Interfaces:</source>
 <context>
     <name>iview::CConsoleGui</name>
     <message>
-        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+596"/>
+        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+602"/>
         <source>Zoom In</source>
         <translation>Увеличить</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>Zoom Out</source>
         <translation>Уменьшить</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>Reset Zoom</source>
         <translation>Сбросить скалирование</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Zoom to Fit</source>
-        <translation>Автоматическое скалирование</translation>
+        <translation type="vanished">Автоматическое скалирование</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Objects Selection Mode</source>
-        <translation>Режим выбора обьектов</translation>
+        <translation type="vanished">Режим выбора обьектов</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Objects Modification Mode</source>
-        <translation>Режим модификации обьектов</translation>
+        <translation type="vanished">Режим модификации обьектов</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Points Adding Mode</source>
-        <translation>Режим добавления точек</translation>
+        <translation type="vanished">Режим добавления точек</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Points Removing Mode</source>
-        <translation>Режим удаления точек</translation>
+        <translation type="vanished">Режим удаления точек</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-11"/>
+        <source>&amp;View</source>
+        <translation type="unfinished">&amp;Вид</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Fit Contents To View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Fit To View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Zoom to fit content area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Selection Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Object Selection Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Modify Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Object Modification Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Modify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Add Points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Point Adding Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Add</source>
+        <translation type="unfinished">Добавить</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Remove Points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Point Removing Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Remove</source>
+        <translation type="unfinished">Удалить</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Grid</source>
         <translation>Показывать/Скрывать сетку</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+0"/>
+        <source>Show Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Ruler</source>
         <translation>Показывать/Скрывать линейку</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+0"/>
+        <source>Show Ruler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Millimeters</source>
         <translation>Показывать/Скрывать сетку в миллиметрах</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+0"/>
+        <source>Grid in Millimeter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Scrollbars</source>
         <translation>Показывать/Скрывать элементы прокрутки</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Show Scrollbars</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

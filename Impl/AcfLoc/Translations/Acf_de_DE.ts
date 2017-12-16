@@ -2480,64 +2480,159 @@
 <context>
     <name>iview::CConsoleGui</name>
     <message>
-        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+596"/>
+        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+602"/>
         <source>Zoom In</source>
         <translation>Vergrößern</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>Zoom Out</source>
         <translation>Verkleinern</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>Reset Zoom</source>
-        <translation>Skalierung zurücksetzen</translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Zoom to Fit</source>
+        <translation type="vanished">Bild fixieren</translation>
+    </message>
+    <message>
+        <source>Objects Selection Mode</source>
+        <translation type="vanished">Gesamtobjekt bearbeiten</translation>
+    </message>
+    <message>
+        <source>Objects Modification Mode</source>
+        <translation type="vanished">Objektpunkte bearbeiten</translation>
+    </message>
+    <message>
+        <source>Points Adding Mode</source>
+        <translation type="vanished">Objektpunkte hinzufügen</translation>
+    </message>
+    <message>
+        <source>Points Removing Mode</source>
+        <translation type="vanished">Objektpunkte löschen</translation>
+    </message>
+    <message>
+        <location line="-11"/>
+        <source>&amp;View</source>
+        <translation>&amp;Ansicht</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Fit Contents To View</source>
         <translation>Bild fixieren</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>Objects Selection Mode</source>
+        <location line="+0"/>
+        <source>Fit To View</source>
+        <translation>Bild fixieren</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Zoom to fit content area</source>
+        <translation>Auf die Größe des Kontents skalieren</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Selection Mode</source>
+        <translation>Alles auswählen</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Object Selection Mode</source>
         <translation>Gesamtobjekt bearbeiten</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Objects Modification Mode</source>
+        <location line="+0"/>
+        <source>Selection</source>
+        <translation>Auswählen</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Modify Mode</source>
+        <translation>Bearbeiten</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Object Modification Mode</source>
         <translation>Objektpunkte bearbeiten</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Points Adding Mode</source>
+        <location line="+0"/>
+        <source>Modify</source>
+        <translation>Bearbeiten</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Add Points</source>
+        <translation>Hinzufügen</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Point Adding Mode</source>
         <translation>Objektpunkte hinzufügen</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Points Removing Mode</source>
+        <location line="+0"/>
+        <source>Add</source>
+        <translation>Hinzufügen</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Remove Points</source>
+        <translation>Punkte löschen</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Point Removing Mode</source>
         <translation>Objektpunkte löschen</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+0"/>
+        <source>Remove</source>
+        <translation>Löschen</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Grid</source>
         <translation>Gitter anzeigen/verstecken</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>Show/Hide Ruler</source>
-        <translation>Messer anzeigen/verstecken</translation>
+        <location line="+0"/>
+        <source>Show Grid</source>
+        <translation>Gitter</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
+        <source>Show/Hide Ruler</source>
+        <translation>Lineal anzeigen/verstecken</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Show Ruler</source>
+        <translation>Lineal</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Millimeters</source>
         <translation>Millimeters/Pixels</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+0"/>
+        <source>Grid in Millimeter</source>
+        <translation>Gitter in mm</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Scrollbars</source>
         <translation>Scrollbars anzeigen/verstecken</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Show Scrollbars</source>
+        <translation>Scrollbars</translation>
     </message>
 </context>
 <context>

@@ -2474,64 +2474,159 @@
 <context>
     <name>iview::CConsoleGui</name>
     <message>
-        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+596"/>
+        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+602"/>
         <source>Zoom In</source>
         <translation>Powiększ</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>Zoom Out</source>
         <translation>Zmniejsz</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>Reset Zoom</source>
         <translation>Przywróć domyślne powiększenie</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Zoom to Fit</source>
-        <translation>Wypełnij</translation>
+        <translation type="vanished">Wypełnij</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Objects Selection Mode</source>
-        <translation>Tryb zaznaczania obiektów</translation>
+        <translation type="vanished">Tryb zaznaczania obiektów</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Objects Modification Mode</source>
-        <translation>Tryb modyfikacji obiektów</translation>
+        <translation type="vanished">Tryb modyfikacji obiektów</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Points Adding Mode</source>
-        <translation>Tryb dodawania punktów</translation>
+        <translation type="vanished">Tryb dodawania punktów</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Points Removing Mode</source>
-        <translation>Tryb usuwania punktów</translation>
+        <translation type="vanished">Tryb usuwania punktów</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-11"/>
+        <source>&amp;View</source>
+        <translation type="unfinished">Wido&amp;k</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Fit Contents To View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Fit To View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Zoom to fit content area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Selection Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Object Selection Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Modify Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Object Modification Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Modify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Add Points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Point Adding Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Add</source>
+        <translation type="unfinished">Dodaj</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Remove Points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Point Removing Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Remove</source>
+        <translation type="unfinished">Usuń</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Grid</source>
         <translation>Pokaż/ukryj siatkę</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+0"/>
+        <source>Show Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Ruler</source>
         <translation>Pokaż/ukryj linijkę</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+0"/>
+        <source>Show Ruler</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Millimeters</source>
         <translation>pokaż/ukryj milimetry</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+0"/>
+        <source>Grid in Millimeter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Show/Hide Scrollbars</source>
         <translation>Pokaż/ukryj paski przewijania</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Show Scrollbars</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

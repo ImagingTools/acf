@@ -168,6 +168,12 @@ void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 }
 
 
+void CConsoleGui::RetranslateGui()
+{
+	UpdateCommands();
+}
+
+
 // reimplemented (iview::CConsoleBase)
 
 void CConsoleGui::UpdateCursorInfo(const QString& infoText)
@@ -587,74 +593,63 @@ void CConsoleGui::UpdateCommands()
 
 	m_rootCommands.ResetChilds();
 	m_commands.ResetChilds();
-
+	
+	m_commands.SetVisuals(tr("&View"), tr("&View"), tr("&View"));
 	m_rootCommands.InsertChild(&m_commands);
 
 	// zoom commands
 	if (AreZoomsVisible()){
-		m_zoomInCommand.setIcon(QIcon(":/Icons/ZoomIn"));
-		m_zoomInCommand.setToolTip(tr("Zoom In"));
+		m_zoomInCommand.SetVisuals(tr("Zoom In"), tr("Zoom In"), tr("Zoom In"), QIcon(":/Icons/ZoomIn"));
 		m_commands.InsertChild(&m_zoomInCommand);
 
-		m_zoomOutCommand.setIcon(QIcon(":/Icons/ZoomOut"));
-		m_zoomOutCommand.setToolTip(tr("Zoom Out"));
+		m_zoomOutCommand.SetVisuals(tr("Zoom Out"), tr("Zoom Out"), tr("Zoom Out"), QIcon(":/Icons/ZoomOut"));
 		m_commands.InsertChild(&m_zoomOutCommand);
 
-		m_zoomResetCommand.setIcon(QIcon(":/Icons/ZoomReset"));
-		m_zoomResetCommand.setToolTip(tr("Reset Zoom"));
+		m_zoomResetCommand.SetVisuals(tr("Reset Zoom"), tr("Reset Zoom"), tr("Reset Zoom"), QIcon(":/Icons/ZoomReset"));
 		m_commands.InsertChild(&m_zoomResetCommand);
 	}
 
 	if (IsZoomToFitVisible()){
-		m_zoomToFitCommand.setIcon(QIcon(":/Icons/ZoomToFit"));
-		m_zoomToFitCommand.setToolTip(tr("Zoom to Fit"));
+		m_zoomToFitCommand.SetVisuals(tr("Fit Contents To View"), tr("Fit To View"), tr("Zoom to fit content area"), QIcon(":/Icons/ZoomToFit"));
 		m_commands.InsertChild(&m_zoomToFitCommand);
 	}
 
 	// points commands
 	if (ArePolylineButtonsVisible()){
-		m_pointsSelectCommand.setIcon(QIcon(":/Icons/PointsNone"));
-		m_pointsSelectCommand.setToolTip(tr("Objects Selection Mode"));
+		m_pointsSelectCommand.SetVisuals(tr("Selection Mode"), tr("Selection"), tr("Object Selection Mode"), QIcon(":/Icons/PointsNone"));
 		m_commands.InsertChild(&m_pointsSelectCommand);
 
-		m_pointsMoveCommand.setIcon(QIcon(":/Icons/PointsMove"));
-		m_pointsMoveCommand.setToolTip(tr("Objects Modification Mode"));
+		m_pointsMoveCommand.SetVisuals(tr("Modify Mode"), tr("Modify"), tr("Object Modification Mode"), QIcon(":/Icons/PointsMove"));
 		m_commands.InsertChild(&m_pointsMoveCommand);
 
-		m_pointsAddCommand.setIcon(QIcon(":/Icons/PointsAdd"));
-		m_pointsAddCommand.setToolTip(tr("Points Adding Mode"));
+		m_pointsAddCommand.SetVisuals(tr("Add Points"), tr("Add"), tr("Point Adding Mode"), QIcon(":/Icons/PointsAdd"));
 		m_commands.InsertChild(&m_pointsAddCommand);
 
-		m_pointsSubCommand.setIcon(QIcon(":/Icons/PointsSub"));
-		m_pointsSubCommand.setToolTip(tr("Points Removing Mode"));
+		m_pointsSubCommand.SetVisuals(tr("Remove Points"), tr("Remove"), tr("Point Removing Mode"), QIcon(":/Icons/PointsSub"));
 		m_commands.InsertChild(&m_pointsSubCommand);
 	}
 
 	// components visibility commands
 	if (IsGridButtonVisible()){
-		m_gridVisibleCommand.setIcon(QIcon(":/Icons/Grid"));
-		m_gridVisibleCommand.setToolTip(tr("Show/Hide Grid"));
+		m_gridVisibleCommand.SetVisuals(tr("Show Grid"), tr("Show Grid"), tr("Show/Hide Grid"), QIcon(":/Icons/Grid"));
 		m_gridVisibleCommand.setChecked(IsGridVisible());
 		m_commands.InsertChild(&m_gridVisibleCommand);
 	}
 
 	if (IsRulerButtonVisible()){
-		m_rulerVisibleCommand.setIcon(QIcon(":/Icons/ShowRuler"));
-		m_rulerVisibleCommand.setToolTip(tr("Show/Hide Ruler"));
+		m_rulerVisibleCommand.SetVisuals(tr("Show Ruler"), tr("Show Ruler"), tr("Show/Hide Ruler"), QIcon(":/Icons/ShowRuler"));
 		m_rulerVisibleCommand.setChecked(IsRulerVisible());
 		m_commands.InsertChild(&m_rulerVisibleCommand);
 	}
 
 	if (IsMmButtonVisible()){
-		m_gridInMmVisibleCommand.setIcon(QIcon(":/Icons/LogicalUnit"));
-		m_gridInMmVisibleCommand.setToolTip(tr("Show/Hide Millimeters"));
+		m_gridInMmVisibleCommand.SetVisuals(tr("Grid in Millimeter"), tr("Grid in Millimeter"), tr("Show/Hide Millimeters"), QIcon(":/Icons/LogicalUnit"));
 		m_gridInMmVisibleCommand.setChecked(IsGridInMm());
 		m_commands.InsertChild(&m_gridInMmVisibleCommand);
 	}
 
 	if (IsScrollbarsButtonVisible()){
-		m_scrollVisibleCommand.setIcon(QIcon(":/Icons/ShowScrollbar"));
-		m_scrollVisibleCommand.setToolTip(tr("Show/Hide Scrollbars"));
+		m_scrollVisibleCommand.SetVisuals(tr("Show Scrollbars"), tr("Show Scrollbars"), tr("Show/Hide Scrollbars"), QIcon(":/Icons/ShowScrollbar"));
 		m_scrollVisibleCommand.setChecked(AreScrollbarsVisible());
 		m_commands.InsertChild(&m_scrollVisibleCommand);
 	}

@@ -20,7 +20,7 @@ namespace iqt2d
 	It allows setting of display calibration and supports \c i2d::ICalibrationProvider to get it.
 */
 class CViewProviderGuiComp: 
-			public	iqtgui::TGuiComponentBase<iview::CConsoleGui>,
+			public iqtgui::TGuiComponentBase<iview::CConsoleGui>,
 			virtual public ibase::ICommandsProvider,
 			virtual public IViewProvider,
 			protected imod::CMultiModelDispatcherBase
@@ -87,6 +87,7 @@ protected:
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+	virtual void OnGuiRetranslate();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
