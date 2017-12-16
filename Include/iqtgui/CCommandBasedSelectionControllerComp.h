@@ -6,6 +6,7 @@
 #include <imod/TSingleModelObserverBase.h>
 #include <icomp/CComponentBase.h>
 #include <ibase/ICommandsProvider.h>
+#include <ibase/TLocalizableWrap.h>
 #include <iprm/ISelectionParam.h>
 #include <iqtgui/IIconProvider.h>
 #include <iqtgui/CHierarchicalCommand.h>
@@ -21,13 +22,13 @@ namespace iqtgui
 */
 class CCommandBasedSelectionControllerComp:
 			public QObject,
-			public icomp::CComponentBase,
+			public ibase::TLocalizableWrap<icomp::CComponentBase>,
 			protected imod::TSingleModelObserverBase<iprm::ISelectionParam>,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ibase::TLocalizableWrap<icomp::CComponentBase> BaseClass;
 	typedef imod::TSingleModelObserverBase<iprm::ISelectionParam> BaseClass2;
 	
 	I_BEGIN_COMPONENT(CCommandBasedSelectionControllerComp);
@@ -48,6 +49,9 @@ public:
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 protected:
+	// reimplemented (ibase::TLocalizableWrap)
+	virtual void OnLanguageChanged();
+
 	// reimpemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
