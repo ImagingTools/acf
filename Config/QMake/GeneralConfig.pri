@@ -67,13 +67,6 @@ win32-msvc*{
 		}
 	}
 
-	CONFIG(release, debug|release){
-		# activate debug info also for release builds
-		QMAKE_LFLAGS += /DEBUG
-
-		# activate debug info also for release builds
-		QMAKE_CXXFLAGS += /Zi /Fd$$DESTDIR/"$$TARGET".pdb
-	}
 	
 	contains(QMAKE_HOST.arch, x86_64){
 		PLATFORM_CODE = x64
