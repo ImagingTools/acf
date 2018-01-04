@@ -59,7 +59,7 @@ protected:
 	virtual void DrawCurve(QPainter& drawContext) const;
 	virtual void DrawSelectionElements(QPainter& drawContext) const;
 
-private:
+protected:
 	enum EditMode
 	{
 		EM_NONE,
