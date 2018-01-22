@@ -26,6 +26,8 @@ CLogCompBase::CLogCompBase()
 }
 
 
+// reimplemented (ilog::IMessageConsumer)
+
 void CLogCompBase::AddMessage(const MessagePtr& messagePtr)
 {
 	if (messagePtr.IsValid() && IsMessageSupported(messagePtr->GetInformationCategory())){
@@ -39,6 +41,7 @@ void CLogCompBase::AddMessage(const MessagePtr& messagePtr)
 		}
 	}
 }
+
 
 // private slots
 
