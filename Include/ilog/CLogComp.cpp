@@ -70,7 +70,6 @@ void CLogComp::OnComponentCreated()
 	if (slaveContainerPtr != NULL){
 		BaseClass2::AddChildContainer(slaveContainerPtr);
 	}
-
 }
 
 
