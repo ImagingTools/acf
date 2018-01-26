@@ -51,7 +51,7 @@ CWriteArchiveBase::CWriteArchiveBase(const IVersionInfo* versionInfoPtr)
 
 
 bool CWriteArchiveBase::SerializeAcfHeader()
-{	
+{
 	return CArchiveHeaderInfo::WriteArchiveHeader(*this, m_versionInfoPtr);
 }
 

@@ -30,13 +30,15 @@ bool CCompressedXmlFileReadArchive::OpenFile(const QString& filePath)
 	m_openFileName = "";
 
 	QFile file(filePath);
-	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+	if (!file.open(QIODevice::ReadOnly)){
 		return false;
 	}
 
 	m_openFileName = filePath;
 
-	m_buffer.setData(qUncompress(file.readAll()));
+	QByteArray uncompressedData = qUncompress(file.readAll());
+
+	m_buffer.setData(uncompressedData);
 
 	if (!BaseClass::SetContent(&m_buffer)){
 		file.close();

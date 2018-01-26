@@ -27,7 +27,7 @@ public:
 		/**
 			Standard size of pens set.
 		*/
-		NORMAL_SET_SIZE = 16,
+		NORMAL_SET_SIZE = 16
 	};
 
 	CColorSchema();
