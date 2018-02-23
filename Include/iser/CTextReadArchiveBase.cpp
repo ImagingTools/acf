@@ -296,11 +296,21 @@ bool CTextReadArchiveBase::ProcessData(void* dataPtr, int size)
 	QByteArray text;
 	if (ReadTextNode(text)){
 		QByteArray decodedData = QByteArray::fromBase64(text);
-		Q_ASSERT(size == int(decodedData.size()));
+		if (size == int(decodedData.size())){
+			std::memcpy(dataPtr, decodedData.constData(), size);
 
-		std::memcpy(dataPtr, decodedData.constData(), size);
-
-		return true;
+			return true;
+		}
+		else{
+			if (IsLogConsumed()){
+				SendLogMessage(
+							istd::IInformationProvider::IC_ERROR,
+							MI_TAG_ERROR,
+							QString("Data block damaged"),
+							"TextReader",
+							istd::IInformationProvider::ITF_SYSTEM);
+			}
+		}
 	}
 
 	return false;
