@@ -121,6 +121,66 @@ inline void CRgb::SetBlue(double value)
 
 // operators
 
+inline CRgb CRgb::operator+(const CRgb& color) const
+{
+	CRgb retVal = *this;
+
+	retVal += color;
+
+	return retVal;
+}
+
+
+inline CRgb CRgb::operator-(const CRgb& color) const
+{
+	CRgb retVal = *this;
+
+	retVal -= color;
+
+	return retVal;
+}
+
+
+inline CRgb CRgb::operator*(const CRgb& color) const
+{
+	CRgb retVal = *this;
+
+	retVal *= color;
+
+	return retVal;
+}
+
+
+inline CRgb CRgb::operator/(const CRgb& color) const
+{
+	CRgb retVal = *this;
+
+	retVal /= color;
+
+	return retVal;
+}
+
+
+inline CRgb CRgb::operator*(double value) const
+{
+	CRgb retVal = *this;
+
+	retVal *= value;
+
+	return retVal;
+}
+
+
+inline CRgb CRgb::operator/(double value) const
+{
+	CRgb retVal = *this;
+
+	retVal /= value;
+
+	return retVal;
+}
+
+
 inline CRgb& CRgb::operator=(const CRgb& color)
 {
 	BaseClass::operator=(color);
