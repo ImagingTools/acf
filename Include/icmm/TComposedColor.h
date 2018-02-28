@@ -394,6 +394,30 @@ bool TComposedColor<Size>::Serialize(iser::IArchive& archive)
 }
 
 
+// related global functions
+
+template <int Size>
+uint qHash(const TComposedColor<Size>& color, uint seed = 0)
+{
+	quint64 retVal = seed;
+
+	union{
+		double value;
+		quint64 raw;
+	} element;
+	element.raw = 0;
+
+	int elementsCount = color.GetElementsCount();
+	for (int i = 0; i < elementsCount; ++i){
+		element.value = color[i];
+
+		retVal = (retVal >> 1) ^ (element.raw + 1);
+	}
+
+	return uint(retVal);
+}
+
+
 } // namespace icmm
 
 
