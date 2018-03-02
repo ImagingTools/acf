@@ -38,10 +38,10 @@ istd::IChangeable* TComponentCloneWrap<BaseClass>::CloneMe(istd::IChangeable::Co
 				// we have to check if our owner has a parent composite component.
 				// In this case we have to factorize not our component, but the complete parent composite component:
 				const CCompositeComponent* parentCompositeComponentPtr = dynamic_cast<const CCompositeComponent*>(parentComponentPtr->GetParentComponent());
-				if (parentCompositeComponentPtr != NULL){
-					const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(parentCompositeComponentPtr->GetComponentContext());
+					if (parentCompositeComponentPtr != NULL){
+						const CCompositeComponentContext* parentContextPtr = dynamic_cast<const CCompositeComponentContext*>(parentCompositeComponentPtr->GetComponentContext());
 
-					const IRegistry& registry = contextPtr->GetRegistry();
+					const IRegistry& registry = parentContextPtr->GetRegistry();
 					IRegistry::Ids elementIds = registry.GetElementIds();
 
 					for (IRegistry::Ids::ConstIterator elemIter = elementIds.constBegin(); elemIter != elementIds.constEnd(); ++elemIter){

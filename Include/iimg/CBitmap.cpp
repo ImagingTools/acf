@@ -20,8 +20,7 @@ namespace iimg
 
 // global functions
 
-template <	typename PixelType,
-			typename WorkingType>
+template <typename PixelType, typename WorkingType>
 bool ConvertToGrayImage(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 {
 	istd::CIndex2d size = inputBitmap.GetImageSize();
@@ -199,7 +198,7 @@ bool CBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, 
 
 	QImage::Format imageFormat = CalcQtFormat(pixelFormat);
 	if (imageFormat != QImage::Format_Invalid){
-		QImage image((quint8*)dataPtr, size.GetX(), size.GetY(), imageFormat);
+		QImage image((quint8*)dataPtr, size.GetX(), size.GetY(), linesDifference, imageFormat);
 		
 		Q_ASSERT(!image.isNull());
 		if (image.isNull()){
@@ -482,6 +481,9 @@ QImage::Format CBitmap::CalcQtFormat(PixelFormat pixelFormat) const
 iimg::IBitmap::PixelFormat CBitmap::CalcFromQtFormat(QImage::Format imageFormat) const
 {
 	switch (imageFormat){
+	case QImage::Format_RGB888:
+		return PF_RGB24;
+
 	case QImage::Format_RGB32:
 		return PF_RGB;
 

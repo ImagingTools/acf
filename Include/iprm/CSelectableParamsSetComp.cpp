@@ -105,6 +105,10 @@ iser::ISerializable* CSelectableParamsSetComp::GetEditableParameter(const QByteA
 
 bool CSelectableParamsSetComp::Serialize(iser::IArchive& /*archive*/)
 {
+	if (!*m_allowEditingAttrPtr){
+		return true;
+	}
+
 	return false;
 }
 

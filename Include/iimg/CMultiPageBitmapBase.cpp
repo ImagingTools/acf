@@ -14,17 +14,22 @@ istd::IChangeable* CMultiPageBitmapBase::InsertPage(
 			const iprm::IParamsSet* /*pageParameterPtr*/,
 			int position)
 {
-	istd::CChangeNotifier changePtr(this);
-
 	Page newPage;
 
-	IBitmap* bitmapPtr = CreateBitmap();
-
 	if (pageMetaInfoPtr != NULL){
-		newPage.pageMetaInfo.CopyFrom(*pageMetaInfoPtr);
+		if (!newPage.pageMetaInfo.CopyFrom(*pageMetaInfoPtr)){
+			return NULL;
+		}
+	}
+
+	IBitmap* bitmapPtr = CreateBitmap();
+	if (bitmapPtr == NULL){
+		return NULL;
 	}
 
 	newPage.pagePtr.SetPtr(bitmapPtr);
+
+	istd::CChangeNotifier changePtr(this);
 
 	if (position < 0){
 		m_documentPages.push_back(newPage);
