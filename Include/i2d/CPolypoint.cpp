@@ -324,7 +324,7 @@ bool CPolypoint::ApplyTransform(Nodes& nodes,
 		transPoints.push_back(transPoint);
 	}
 
-	nodes = std::move(transPoints);
+	nodes = transPoints;
 
 	if (errorFactorPtr != NULL){
 		*errorFactorPtr = 0;
