@@ -14,7 +14,7 @@ namespace istd
 {
 
 
-class CAssyncNotifier;
+class CAsyncNotifier;
 
 
 /**
@@ -31,7 +31,7 @@ public:
 private:
 	CEventBasedNotifier(const CEventBasedNotifier&){}
 
-	CAssyncNotifier* m_assyncNotifierPtr;
+	CAsyncNotifier* m_asyncNotifierPtr;
 };
 
 
@@ -40,17 +40,17 @@ private:
 
 	Help class to realize the post-processing of \c istd::IChangeable::EndChanges
 */
-class CAssyncNotifier: protected QObject
+class CAsyncNotifier: protected QObject
 {
 	Q_OBJECT
 
 	friend class CEventBasedNotifier;
 
 public:
-	~CAssyncNotifier();
+	~CAsyncNotifier();
 
 protected:
-	CAssyncNotifier(istd::IChangeable* slavePtr, const IChangeable::ChangeSet& changeSet);
+	CAsyncNotifier(istd::IChangeable* slavePtr, const IChangeable::ChangeSet& changeSet);
 
 protected Q_SLOTS:
 	void DoBeginChanges();

@@ -17,25 +17,25 @@ CEventBasedNotifier::CEventBasedNotifier(istd::IChangeable* slavePtr,  const ICh
 	Q_ASSERT(changeSetPtr != NULL);
 
 	if (slavePtr != NULL){
-		m_assyncNotifierPtr = new CAssyncNotifier(slavePtr, *changeSetPtr);
+		m_asyncNotifierPtr = new CAsyncNotifier(slavePtr, *changeSetPtr);
 	}
 	else{
-		m_assyncNotifierPtr = NULL;
+		m_asyncNotifierPtr = NULL;
 	}
 }
 
 
 CEventBasedNotifier::~CEventBasedNotifier()
 {
-	if (m_assyncNotifierPtr != NULL){
-		m_assyncNotifierPtr->deleteLater();
+	if (m_asyncNotifierPtr != NULL){
+		m_asyncNotifierPtr->deleteLater();
 	}
 }
 
 
-// public methods of the internal class CAssyncNotifier
+// public methods of the internal class CAsyncNotifier
 
-CAssyncNotifier::CAssyncNotifier(istd::IChangeable* slavePtr, const IChangeable::ChangeSet& changeSet)
+CAsyncNotifier::CAsyncNotifier(istd::IChangeable* slavePtr, const IChangeable::ChangeSet& changeSet)
 :	m_slavePtr(slavePtr),
 	m_changeIds(changeSet),
  	m_isBeginCalled(false)
@@ -52,7 +52,7 @@ CAssyncNotifier::CAssyncNotifier(istd::IChangeable* slavePtr, const IChangeable:
 }
 
 
-CAssyncNotifier::~CAssyncNotifier()
+CAsyncNotifier::~CAsyncNotifier()
 {
 	Q_ASSERT(m_isBeginCalled);
 
@@ -64,7 +64,7 @@ CAssyncNotifier::~CAssyncNotifier()
 
 // protected slots
 
-void CAssyncNotifier::DoBeginChanges()
+void CAsyncNotifier::DoBeginChanges()
 {
 	Q_ASSERT(!m_isBeginCalled);
 
