@@ -368,6 +368,10 @@ CRectangle CRectangle::GetIntersection(const CRectangle& rect) const
 	double outputRight = qMin(rect.GetRight(), GetRight());
 	double outputBottom = qMin(rect.GetBottom(), GetBottom());
 
+	if ((outputLeft > outputRight) || (outputTop > outputBottom)){
+		return GetEmpty();
+	}
+
 	return CRectangle(outputLeft, outputTop, outputRight - outputLeft, outputBottom - outputTop);
 }
 
