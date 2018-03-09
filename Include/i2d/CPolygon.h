@@ -16,6 +16,8 @@ namespace i2d
 class CPolygon: public CPolypoint
 {
 public:
+	typedef CPolypoint BaseClass;
+
 	/**
 		Get outline length of this polygon.
 	*/
@@ -37,6 +39,9 @@ public:
 		Reverses nodes order.
 	*/
 	virtual void ReverseNodes();
+
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 };
 
 

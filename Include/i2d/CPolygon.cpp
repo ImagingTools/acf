@@ -116,6 +116,29 @@ void CPolygon::ReverseNodes()
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CPolygon::CopyFrom(const IChangeable& object, CompatibilityMode mode)
+{
+	const CRectangle* rectanglePtr = dynamic_cast<const CRectangle*>(&object);
+	if (rectanglePtr != NULL){		
+		istd::CChangeNotifier changeNotifier(this);
+		Q_UNUSED(changeNotifier);
+
+		BaseClass::SetNodesCount(4);
+		BaseClass::SetNodePos(0, rectanglePtr->GetLeftTop());
+		BaseClass::SetNodePos(1, rectanglePtr->GetRightTop());
+		BaseClass::SetNodePos(2, rectanglePtr->GetRightBottom());
+		BaseClass::SetNodePos(3, rectanglePtr->GetLeftBottom());
+
+		return CObject2dBase::CopyFrom(object, mode);
+	}
+
+	return BaseClass::CopyFrom(object, mode);
+
+}
+
+
 } // namespace i2d
 
 

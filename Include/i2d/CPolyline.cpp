@@ -3,7 +3,7 @@
 
 // ACF includes
 #include <istd/TDelPtr.h>
-#include <istd/CChangeNotifier.h>
+#include <istd/CChangeGroup.h>
 #include <istd/CClassInfo.h>
 
 
@@ -160,15 +160,17 @@ QByteArray CPolyline::GetFactoryId() const {
 
 bool CPolyline::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
-	const CPolyline* polylinePtr = dynamic_cast<const CPolyline*>(&object);
+	istd::CChangeGroup changeGroup(this);
+	Q_UNUSED(changeGroup);
 
-	if (polylinePtr != NULL){
-		istd::CChangeNotifier changeNotifier(this);
-		Q_UNUSED(changeNotifier);
-
-		BaseClass::CopyFrom(object, mode);
-
-		SetClosed(polylinePtr->IsClosed());
+	if (BaseClass::CopyFrom(object, mode)){
+		const CPolyline* polylinePtr = dynamic_cast<const CPolyline*>(&object);
+		if (polylinePtr != NULL){
+			SetClosed(polylinePtr->IsClosed());
+		}
+		else{
+			SetClosed(true);
+		}
 
 		return true;
 	}
