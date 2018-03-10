@@ -1,6 +1,9 @@
 #include <iview/CConsoleGui.h>
 
 
+// STL includes
+#include <cmath>
+
 // Qt includes
 #include <QtCore/QDebug>
 #include <QtGui/QWheelEvent>
@@ -457,7 +460,7 @@ bool CConsoleGui::OnWheelEvent(QWheelEvent* eventPtr)
 			return true;
 	}
 
-	const double scale = ::exp2(factor);
+	const double scale = std::exp2(factor);
 	const istd::CIndex2d screenPos = iqt::GetCIndex2d(eventPtr->pos());
 	const i2d::CVector2d logPos = transform.GetClientPosition(screenPos);
 
