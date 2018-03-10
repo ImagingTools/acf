@@ -37,9 +37,9 @@ void CImageShape::Draw(QPainter& drawContext) const
 			i2d::CRect bitmapArea(istd::CIndex2d(0, 0), bitmapSize);
 
 			i2d::CVector2d corners[3];
-			corners[0] = GetScreenPosition(i2d::CVector2d(0, 0));
-			corners[1] = GetScreenPosition(i2d::CVector2d(bitmapSize.GetX(), 0));
-			corners[2] = GetScreenPosition(i2d::CVector2d(0, bitmapSize.GetY()));
+			corners[0] = GetScreenPosition(i2d::CVector2d(m_pixmapOffset.x(), m_pixmapOffset.y()));
+			corners[1] = GetScreenPosition(i2d::CVector2d(bitmapSize.GetX() + m_pixmapOffset.x(), m_pixmapOffset.y()));
+			corners[2] = GetScreenPosition(i2d::CVector2d(m_pixmapOffset.x(), bitmapSize.GetY() + m_pixmapOffset.y()));
 
 			i2d::CMatrix2d destDeform(corners[1] - corners[0], corners[2] - corners[0]);
 			i2d::CAffine2d destTransform(destDeform, corners[0]);
@@ -76,6 +76,9 @@ void CImageShape::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::C
 
 		qtBitmapPtr->CopyFrom(*bitmapPtr);
 	}
+	else{
+		m_pixmapOffset = providerPtr->GetQImage().offset();
+	}
 
 	if (m_colorTransformationPtr != NULL){
 		QImage image = providerPtr->GetQImage().copy();
@@ -105,10 +108,10 @@ i2d::CRect CImageShape::CalcBoundingBox() const
 
 		istd::CIndex2d corners[4];
 
-		corners[0] = GetScreenPosition(i2d::CVector2d(0, 0)).ToIndex2d();
-		corners[1] = GetScreenPosition(i2d::CVector2d(size.GetX(), 0)).ToIndex2d();
-		corners[2] = GetScreenPosition(i2d::CVector2d(0, size.GetY())).ToIndex2d();
-		corners[3] = GetScreenPosition(i2d::CVector2d(size.GetX(), size.GetY())).ToIndex2d();
+		corners[0] = GetScreenPosition(i2d::CVector2d(m_pixmapOffset.x(), m_pixmapOffset.y())).ToIndex2d();
+		corners[1] = GetScreenPosition(i2d::CVector2d(size.GetX() + m_pixmapOffset.x(), m_pixmapOffset.y())).ToIndex2d();
+		corners[2] = GetScreenPosition(i2d::CVector2d(m_pixmapOffset.x(), size.GetY() + m_pixmapOffset.y())).ToIndex2d();
+		corners[3] = GetScreenPosition(i2d::CVector2d(size.GetX() + m_pixmapOffset.x(), size.GetY() + m_pixmapOffset.y())).ToIndex2d();
 
 		boundingBox = i2d::CRect(corners[0], corners[0]);
 		boundingBox.Union(corners[1]);
@@ -132,6 +135,9 @@ ITouchable::TouchState CImageShape::IsTouched(istd::CIndex2d position) const
 		ibase::CSize size = bitmapPtr->GetImageSize();
 
 		istd::CIndex2d bitmapPosition = GetLogPosition(i2d::CVector2d(position)).ToIndex2d();
+		bitmapPosition.SetX(bitmapPosition.GetX() - m_pixmapOffset.x() - 1);
+		bitmapPosition.SetY(bitmapPosition.GetY() - m_pixmapOffset.y() - 1);
+
 		if (		(bitmapPosition.GetX() >= 0) &&
 					(bitmapPosition.GetY() >= 0) &&
 					(bitmapPosition.GetX() < size.GetX()) &&
@@ -156,6 +162,9 @@ QString CImageShape::GetShapeDescriptionAt(istd::CIndex2d position) const
 		ibase::CSize size = bitmapPtr->GetImageSize();
 
 		istd::CIndex2d bitmapPosition = GetLogPosition(i2d::CVector2d(position)).ToIndex2d();
+		bitmapPosition.SetX(bitmapPosition.GetX() - m_pixmapOffset.x() - 1);
+		bitmapPosition.SetY(bitmapPosition.GetY() - m_pixmapOffset.y() - 1);
+
 		if (		(bitmapPosition.GetX() >= 0) &&
 					(bitmapPosition.GetY() >= 0) &&
 					(bitmapPosition.GetX() < size.GetX()) &&

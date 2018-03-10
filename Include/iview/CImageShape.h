@@ -5,12 +5,11 @@
 // Qt includes
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
+#include <QtCore/QPoint>
 
 // ACF includes
 #include <icmm/IColorTransformation.h>
-
 #include <iimg/IBitmap.h>
-
 #include <iview/CShapeBase.h>
 
 
@@ -50,6 +49,7 @@ private:
 
 private:
 	QPixmap m_pixmap;
+	QPoint m_pixmapOffset;
 
 	const icmm::IColorTransformation* m_colorTransformationPtr;
 };
