@@ -32,15 +32,19 @@ void CAnnulusSegmentParamsGuiComp::UpdateModel() const
 	double outerRadius = OuterRadiusSpin->value();
 	objectPtr->SetOuterRadius(outerRadius);
 
-	double beginAngle = imath::GetRadianFromDegree(BeginAngleSB->value());
+	double beginDegrees = BeginAngleSB->value();
+	double objectDegrees = imath::GetDegreeFromRadian(objectPtr->GetBeginAngle());
 	double prec = qPow(0.1, BeginAngleSB->decimals() + 1);
-	if (beginAngle - objectPtr->GetBeginAngle() > prec){
+	if (qAbs(beginDegrees - objectDegrees) > prec){
+		double beginAngle = imath::GetRadianFromDegree(beginDegrees);
 		objectPtr->SetBeginAngle(beginAngle);
 	}
 
-	double endAngle = imath::GetRadianFromDegree(EndAngleSB->value());
+	double endDegrees = EndAngleSB->value();
+	objectDegrees = imath::GetDegreeFromRadian(objectPtr->GetEndAngle());
 	prec = qPow(0.1, EndAngleSB->decimals() + 1);
-	if (endAngle - objectPtr->GetEndAngle() > prec){
+	if (qAbs(endDegrees - objectDegrees) > prec){
+		double endAngle = imath::GetRadianFromDegree(endDegrees);
 		objectPtr->SetEndAngle(endAngle);
 	}
 }

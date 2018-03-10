@@ -1,5 +1,6 @@
 #include <i2d/CAnnulus.h>
 
+
 // ACF includes
 #include <istd/TDelPtr.h>
 #include <istd/CChangeNotifier.h>
@@ -15,7 +16,7 @@
 namespace i2d
 {
 
-	
+
 // static constants
 static const iser::CArchiveTag s_innerRadiusTag("InnerRadius", "Inner radius", iser::CArchiveTag::TT_LEAF);
 static const iser::CArchiveTag s_outerRadiusTag("OuterRadius", "Outer radius", iser::CArchiveTag::TT_LEAF);
@@ -126,11 +127,13 @@ bool CAnnulus::operator != (const CAnnulus & ref) const
 bool CAnnulus::ConvertToPolygon(i2d::CPolygon& result, int segmentsCount) const
 {
 	double beginAngle = 0;
-	double endAngle = 2 * I_PI;
+	double endAngle = I_2PI;
 	const i2d::CAnnulusSegment* segmentPtr = dynamic_cast<const i2d::CAnnulusSegment*>(this);
 	if (segmentPtr != NULL){
 		beginAngle = segmentPtr->GetBeginAngle();
 		endAngle = segmentPtr->GetEndAngle();
+		if (beginAngle > endAngle)
+			endAngle += I_2PI;
 	}
 
 	double minRadius = m_radiusRange.GetMinValue();
@@ -138,6 +141,9 @@ bool CAnnulus::ConvertToPolygon(i2d::CPolygon& result, int segmentsCount) const
 
 	if (segmentsCount < 3){
 		segmentsCount = int(minRadius + maxRadius) * (endAngle - beginAngle) * 0.5 + 1;
+		if (segmentsCount < 3){
+			segmentsCount = 3;	// fall back
+		}
 	}
 
 	i2d::CVector2d directionVector;

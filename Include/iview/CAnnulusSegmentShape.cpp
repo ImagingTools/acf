@@ -144,14 +144,16 @@ bool CAnnulusSegmentShape::OnMouseMove(istd::CIndex2d position)
 	case EM_ANGLE1:
 		{
 			i2d::CVector2d delta = cp - center;
-			double beginAngle = qAtan2(delta.GetY(), delta.GetX());
+			double beginAngle = delta.GetAngle();
 			double endAngle = objectPtr->GetEndAngle();
+
 			if (beginAngle > endAngle){
-				endAngle += 2 * I_PI;
+				endAngle += I_2PI;
 			}
-			else if (beginAngle + 2 * I_PI < endAngle){
-				endAngle -= 2 * I_PI;
+			else if (beginAngle + I_2PI < endAngle){
+				endAngle -= I_2PI;
 			}
+
 			objectPtr->SetBeginAngle(beginAngle);
 			objectPtr->SetEndAngle(endAngle);
 
@@ -164,13 +166,15 @@ bool CAnnulusSegmentShape::OnMouseMove(istd::CIndex2d position)
 		{
 			i2d::CVector2d delta = cp - center;
 			double beginAngle = objectPtr->GetBeginAngle();
-			double endAngle = qAtan2(delta.GetY(), delta.GetX());
+			double endAngle = delta.GetAngle();
+
 			if (beginAngle > endAngle){
-				beginAngle -= 2 * I_PI;
+				beginAngle -= I_2PI;
 			}
-			else if (beginAngle + 2 * I_PI < endAngle){
-				beginAngle += 2 * I_PI;
+			else if (beginAngle + I_2PI < endAngle){
+				beginAngle += I_2PI;
 			}
+
 			objectPtr->SetBeginAngle(beginAngle);
 			objectPtr->SetEndAngle(endAngle);
 
@@ -392,16 +396,16 @@ void CAnnulusSegmentShape::DrawArea(
 	QPointF startScreenPos = GetScreenPosition(realCenter + deltaStartAngle);
 	
 	i2d::CVector2d temp;
-	temp.Init(startAngle);
+	temp.Init(-startAngle);
 	double startAngleDeg = GetDegreeAndleOfPoint(center, GetScreenPosition(realCenter + temp));
 
 	i2d::CVector2d deltaEndAngle;
-	deltaEndAngle.Init(stopAngle, realMaxRadius);
+	deltaEndAngle.Init(-stopAngle, realMaxRadius);
 	
-	temp.Init(stopAngle);
+	temp.Init(-stopAngle);
 	double stopAngleDeg = GetDegreeAndleOfPoint(center, GetScreenPosition(realCenter + temp));
 
-	qreal sweepLength = startAngleDeg - stopAngleDeg;
+	qreal sweepLength = stopAngleDeg - startAngleDeg;
 	if (sweepLength <= 0)
 		sweepLength += 360;
 
@@ -412,8 +416,8 @@ void CAnnulusSegmentShape::DrawArea(
 
 	QPainterPath painterPath;
 	painterPath.moveTo(startScreenPos);
-	painterPath.arcTo(maxRect, startAngleDeg, -sweepLength);
-	painterPath.arcTo(minRect, stopAngleDeg, sweepLength);
+	painterPath.arcTo(maxRect, -startAngleDeg, -sweepLength);
+	painterPath.arcTo(minRect, -stopAngleDeg, sweepLength);
 	painterPath.closeSubpath();
 
 	painter.drawPath(painterPath);
@@ -422,6 +426,23 @@ void CAnnulusSegmentShape::DrawArea(
 
 double CAnnulusSegmentShape::GetDegreeAndleOfPoint(const i2d::CVector2d& center, const QPointF& point) const
 {
+	// range conditions
+	if (point.x() == center.GetX()){
+		if (point.y() == center.GetY())
+			return 0;
+		else if (point.y() > center.GetY())
+			return 270;
+		else
+			return 90;
+	}
+	else 
+	if (point.y() == center.GetY()){
+		if (point.x() > center.GetX())
+			return 0;
+		else
+			return 180;
+	}
+
 	// check sector
 	if (point.x() <= center.GetX() && point.y() <= center.GetY()){
 		// sector 2

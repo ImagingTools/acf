@@ -1,4 +1,5 @@
 #include <iimg/CScanlineMask.h>
+#include <i2d/CAnnulusSegment.h>
 
 
 // STL includes
@@ -109,6 +110,17 @@ bool CScanlineMask::CreateFromGeometry(const i2d::IObject2d& geometry, const i2d
 	const i2d::CTubePolyline* polylinePtr = dynamic_cast<const i2d::CTubePolyline*>(&geometry);
 	if (polylinePtr != NULL){
 		CreateFromTube(*polylinePtr, clipAreaPtr);
+
+		return true;
+	}
+
+	const i2d::CAnnulusSegment* ringSegmentPtr = dynamic_cast<const i2d::CAnnulusSegment*>(&geometry);
+	if (ringSegmentPtr != NULL){
+		i2d::CPolygon polygon;
+		if (!ringSegmentPtr->ConvertToPolygon(polygon))
+			return false;
+
+		CreateFromPolygon(polygon, clipAreaPtr);
 
 		return true;
 	}
