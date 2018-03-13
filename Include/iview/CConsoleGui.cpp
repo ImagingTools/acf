@@ -441,7 +441,7 @@ void CConsoleGui::UpdateScrollbarsValues()
 
 bool CConsoleGui::OnWheelEvent(QWheelEvent* eventPtr)
 {
-	if (!m_viewPtr || IsZoomToFit()){
+	if ((m_viewPtr == NULL) || IsZoomToFit()){
 		return true;
 	}
 
@@ -453,11 +453,9 @@ bool CConsoleGui::OnWheelEvent(QWheelEvent* eventPtr)
 	const double actualScale = transform.GetDeformMatrix().GetFrobeniusNorm();
 	const double factor = mouseWheelZoomStep * eventPtr->delta() / 120.0;
 
-	if (
-		(actualScale < minZoomScale && factor < 0) || 
-		(actualScale > maxZoomScale && factor > 0)
-	){
-			return true;
+	if (		((actualScale < minZoomScale) && (factor < 0)) || 
+				((actualScale > maxZoomScale) && (factor > 0))){
+		return true;
 	}
 
 	const double scale = pow(2.0, factor);
