@@ -18,6 +18,8 @@ namespace iqtgui
 
 int CDialogApplicationComp::Execute(int argc, char** argv)
 {
+	m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_STARTING);
+
 	if (InitializeApplication(argc, argv)){
 		QByteArray appStyle;
 
@@ -41,9 +43,13 @@ int CDialogApplicationComp::Execute(int argc, char** argv)
 		if (m_mainDialogCompPtr.IsValid()){
 			m_mainDialogCompPtr->ExecuteDialog(NULL);
 
+			m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_SHUTDOWN);
+
 			return 0;
 		}
 	}
+
+	m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_SHUTDOWN);
 
 	return -1;
 }

@@ -11,11 +11,9 @@
 #endif
 
 // ACF includes
-#include <imod/TModelWrap.h>
 #include <imod/TSingleModelObserverBase.h>
 #include <iprm/IEnableableParam.h>
 #include <ilog/IMessageConsumer.h>
-#include <ibase/IRuntimeStatusProvider.h>
 #include <ibase/ICommandsProvider.h>
 #include <iqtgui/IGuiObject.h>
 #include <iqtgui/IGuiApplication.h>
@@ -58,10 +56,6 @@ public:
 
 	I_BEGIN_COMPONENT(CGuiApplicationComp);
 		I_REGISTER_INTERFACE(ibase::IApplication);
-		I_REGISTER_SUBELEMENT(RuntimeStatus);
-		I_REGISTER_SUBELEMENT_INTERFACE(RuntimeStatus, ibase::IRuntimeStatusProvider, ExtractRuntimeStatus);
-		I_REGISTER_SUBELEMENT_INTERFACE(RuntimeStatus, imod::IModel, ExtractRuntimeStatus);
-		I_REGISTER_SUBELEMENT_INTERFACE(RuntimeStatus, istd::IChangeable, ExtractRuntimeStatus);
 		I_REGISTER_SUBELEMENT(TrayMessages);
 		I_REGISTER_SUBELEMENT_INTERFACE(TrayMessages, ilog::IMessageConsumer, ExtractTrayMessages);
 		I_ASSIGN(m_mainGuiCompPtr, "MainGui", "Gui object shown as main window", false, "MainGui");
@@ -92,29 +86,6 @@ protected:
 	virtual void OnComponentDestroyed();
 
 protected:
-	class RuntimeStatus: public ibase::IRuntimeStatusProvider
-	{
-	public:
-		RuntimeStatus();
-
-		void SetRuntimeStatus(IRuntimeStatusProvider::RuntimeStatus runtimeStatus);
-
-		// reimplemented (ibase::IRuntimeStatusProvider)
-		virtual IRuntimeStatusProvider::RuntimeStatus GetRuntimeStatus() const;
-
-	private:
-		IRuntimeStatusProvider::RuntimeStatus m_status;
-	};
-
-	imod::TModelWrap<RuntimeStatus> m_runtimeStatus;
-
-	// static template methods for sub element access
-	template <class InterfaceType>
-	static InterfaceType* ExtractRuntimeStatus(CGuiApplicationComp& component)
-	{
-		return &component.m_runtimeStatus;
-	}
-
 	template <class InterfaceType>
 	static InterfaceType* ExtractTrayMessages(CGuiApplicationComp& component)
 	{

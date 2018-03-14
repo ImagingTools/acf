@@ -289,32 +289,6 @@ void CGuiApplicationComp::OnQuit()
 }
 
 
-// public methods of the embedded class RuntimeStatus
-
-CGuiApplicationComp::RuntimeStatus::RuntimeStatus()
-	:m_status(RS_NONE)
-{
-}
-
-
-void CGuiApplicationComp::RuntimeStatus::SetRuntimeStatus(IRuntimeStatusProvider::RuntimeStatus runtimeStatus)
-{
-	if (m_status != runtimeStatus){
-		istd::CChangeNotifier changePtr(this);
-
-		m_status = runtimeStatus;
-	}
-}
-
-
-// reimplemented (ibase::IRuntimeStatusProvider)
-
-ibase::IRuntimeStatusProvider::RuntimeStatus CGuiApplicationComp::RuntimeStatus::GetRuntimeStatus() const
-{
-	return m_status;
-}
-
-
 // public methods of the embedded class TrayMessages
 
 CGuiApplicationComp::TrayMessages::TrayMessages(CGuiApplicationComp& parent)
