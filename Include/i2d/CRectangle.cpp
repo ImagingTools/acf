@@ -574,8 +574,8 @@ CRectangle::operator QRectF() const
 	return QRectF(
 				m_horizontalRange.GetMinValue(),
 				m_verticalRange.GetMaxValue(),
-				m_horizontalRange.GetMinValue(),
-				m_verticalRange.GetMaxValue());
+				m_horizontalRange.GetLength(),
+				m_verticalRange.GetLength());
 }
 
 
@@ -723,7 +723,6 @@ bool CRectangle::GetInvTransformed(
 
 QByteArray CRectangle::GetFactoryId() const
 {
-
 	return GetTypeName();
 }
 
