@@ -174,7 +174,7 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 				// Start application loop:
 				retVal = QApplication::exec();
 
-				m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_SHUTDOWN);			
+				m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_SHUTDOWN);
 			}
 		}
 	}

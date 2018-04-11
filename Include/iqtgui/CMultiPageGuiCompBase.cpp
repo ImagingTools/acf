@@ -77,7 +77,9 @@ bool CMultiPageGuiCompBase::CreatePage(int pageIndex)
 		iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
 		Q_ASSERT(multiPageWidgetPtr != NULL);
 
-		pageInfo.widgetIndex = multiPageWidgetPtr->InsertPage(pageInfo.widgetPtr, pageInfo.pageTitle);
+		QString pageTitle = *m_supressPageTitleAttrPtr ? QString() : pageInfo.pageTitle;
+
+		pageInfo.widgetIndex = multiPageWidgetPtr->InsertPage(pageInfo.widgetPtr, pageTitle);
 
 		if (		(pageIndex < m_slaveWidgetsVisualCompPtr.GetCount()) &&
 					(pageIndex < m_slaveWidgetsModelCompPtr.GetCount())){

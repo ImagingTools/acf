@@ -58,6 +58,7 @@ public:
 		I_ASSIGN_MULTI_0(m_pageVisibilityActivatorsCompPtr, "PageVisibilityActivators", "Optional visibility activators for each page (show/hide)", false);
 		I_ASSIGN_TO(m_pageVisibilityActivatorsModelCompPtr, m_pageVisibilityActivatorsCompPtr, false);
 		I_ASSIGN(m_lazyPagesInitializationAttrPtr, "LazyPagesInitialization", "If enabled, CreateGui for a page will be called only when this page will be selected", true, false);
+		I_ASSIGN(m_supressPageTitleAttrPtr, "SupressPageTitle", "Supress page title on the container widget", true, false);
 	I_END_COMPONENT;
 
 	CMultiPageGuiCompBase();
@@ -192,6 +193,7 @@ protected:
 	I_MULTIREF(iprm::IEnableableParam, m_pageVisibilityActivatorsCompPtr);
 	I_MULTIREF(imod::IModel, m_pageVisibilityActivatorsModelCompPtr);
 	I_ATTR(bool, m_lazyPagesInitializationAttrPtr);
+	I_ATTR(bool, m_supressPageTitleAttrPtr);
 
 	imod::TModelWrap<PageModel> m_pageModel;
 
