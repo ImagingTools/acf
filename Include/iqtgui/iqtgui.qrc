@@ -79,5 +79,9 @@
 		<file alias="ArrowDown.svg">Resources/Style/AcfDark/Images/ArrowDown.svg</file>
 		<file alias="SplitVertical.svg">Resources/Style/AcfDark/Images/SplitVertical.svg</file>
 		<file alias="SplitHorizontal.svg">Resources/Style/AcfDark/Images/SplitHorizontal.svg</file>
+		<file alias="ArrowDownRight.svg">Resources/Style/AcfDark/Images/ArrowDownRight.svg</file>
+		<file alias="ArrowDownRightHighlight.svg">Resources/Style/AcfDark/Images/ArrowDownRightHighlight.svg</file>
+		<file alias="ArrowRight.svg">Resources/Style/AcfDark/Images/ArrowRight.svg</file>
+		<file alias="ArrowRightHighlight.svg">Resources/Style/AcfDark/Images/ArrowRightHighlight.svg</file>
 	</qresource>
 </RCC>

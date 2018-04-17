@@ -909,3 +909,29 @@ QTableView QTableCornerButton::section
 }
 
 
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+        border-image: none;
+        image: url(:/Style/AcfDark/Images/ArrowRight.svg);
+}
+
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  {
+        border-image: none;
+        image: url(:/Style/AcfDark/Images/ArrowDownRight.svg);
+}
+
+
+QTreeView::branch:has-children:!has-siblings:closed:hover,
+QTreeView::branch:closed:has-children:has-siblings:hover {
+        border-image: none;
+        image: url(:/Style/AcfDark/Images/ArrowRightHighlinght.svg);
+}
+
+
+QTreeView::branch:open:has-children:!has-siblings:hover,
+QTreeView::branch:open:has-children:has-siblings:hover  {
+        border-image: none;
+        image: url(:/Style/AcfDark/Images/ArrowDownRightHighlinght.svg);
+}
