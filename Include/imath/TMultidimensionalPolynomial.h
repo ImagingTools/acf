@@ -25,6 +25,9 @@ public:
 	typedef imath::TIMathFunction<TVector<Dimensions>, Element> BaseClass;
 	typedef istd::TArray<Element, Dimensions> Coefficients;
 
+	TMultidimensionalPolynomial();
+	explicit TMultidimensionalPolynomial(const Coefficients& coefficients);
+
 	const Coefficients& GetCoefficients() const;
 	void SetCoefficients(const Coefficients& coefficients);
 
@@ -54,23 +57,36 @@ protected:
 				ResultType& result) const;
 
 private:
-	istd::TArray<Element, Dimensions> m_coefficiens;
+	istd::TArray<Element, Dimensions> m_coefficients;
 };
 
 
 // public methods
 
 template <int Dimensions, class Element>
-const TMultidimensionalPolynomial<Dimensions, Element>::Coefficients& TMultidimensionalPolynomial<Dimensions, Element>::GetCoefficients() const
+TMultidimensionalPolynomial<Dimensions, Element>::TMultidimensionalPolynomial()
 {
-	return m_coefficiens;
+}
+
+
+template <int Dimensions, class Element>
+TMultidimensionalPolynomial<Dimensions, Element>::TMultidimensionalPolynomial(const Coefficients& coefficients)
+:	m_coefficients(coefficients)
+{
+}
+
+
+template <int Dimensions, class Element>
+typename const TMultidimensionalPolynomial<Dimensions, Element>::Coefficients& TMultidimensionalPolynomial<Dimensions, Element>::GetCoefficients() const
+{
+	return m_coefficients;
 }
 
 
 template <int Dimensions, class Element>
 void TMultidimensionalPolynomial<Dimensions, Element>::SetCoefficients(const Coefficients& coefficients)
 {
-	m_coefficiens = coefficients;
+	m_coefficients = coefficients;
 }
 
 
@@ -80,14 +96,14 @@ template <int Dimensions, class Element>
 bool TMultidimensionalPolynomial<Dimensions, Element>::GetValueAt(const ArgumentType& argument, ResultType& result) const
 {
 	istd::TIndex<Dimensions> index;
-	CumulateRecursiveValueAt(argument, Dimensions - 1, gridSize, index, 1.0, result);
+	CumulateRecursiveValueAt(argument, Dimensions - 1, index, result);
 
 	return true;
 }
 
 
 template <int Dimensions, class Element>
-ResultType TMultidimensionalPolynomial<Dimensions, Element>::GetValueAt(const ArgumentType& argument) const
+typename TMultidimensionalPolynomial<Dimensions, Element>::ResultType TMultidimensionalPolynomial<Dimensions, Element>::GetValueAt(const ArgumentType& argument) const
 {
 	typename BaseClass::ResultType retVal;
 
@@ -105,7 +121,7 @@ double TMultidimensionalPolynomial<Dimensions, Element>::GetBaseFunctionValue(co
 	Element retVal = 1;
 
 	for (int dimension = 0; dimension < Dimensions; ++dimension){
-		retVal *= std::pow(argument.GetAt(dimension), coeffIndex.GetAt(dimension));
+		retVal *= std::pow(argument.GetElement(dimension), coeffIndex.GetAt(dimension));
 	}
 
 	return retVal;
@@ -129,18 +145,18 @@ void TMultidimensionalPolynomial<Dimensions, Element>::CumulateRecursiveValueAt(
 
 	double partArgument = argument[dimension];
 
-	if (dimension <= 0){
-		result = 0;
+	result = 0;
 
+	if (dimension <= 0){
 		for (indexElement = dimensionSize - 1; indexElement >= 0; --indexElement){
-			result = result * partArgument + m_coefficiens.GetAt(index);
+			result = result * partArgument + m_coefficients.GetAt(index);
 		}
 	}
 	else{
 		for (indexElement = dimensionSize - 1; indexElement >= 0; --indexElement){
 			ResultType partResult;
 
-			CumulateRecursiveValueAt(argument, dimension - 1, index, result);
+			CumulateRecursiveValueAt(argument, dimension - 1, index, partResult);
 
 			result = result * partArgument + partResult;
 		}
