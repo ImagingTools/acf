@@ -240,6 +240,40 @@ CGeneralBitmap& CGeneralBitmap::operator=(const CGeneralBitmap& bitmap)
 }
 
 
+bool CGeneralBitmap::operator==(const CGeneralBitmap& bitmap) const
+{
+	if (m_size != bitmap.m_size){
+		return false;
+	}
+
+	if (m_pixelFormat != bitmap.m_pixelFormat){
+		return false;
+	}
+
+	if (m_pixelBitsCount != bitmap.m_pixelBitsCount){
+		return false;
+	}
+
+	if (m_buffer.IsValid() && bitmap.m_buffer.IsValid() && (m_buffer.GetPtr() != bitmap.m_buffer.GetPtr())){
+		int lineBytes = (m_pixelBitsCount * m_size.GetX() + 7) >> 3;
+
+		for (int y = 0; y < m_size.GetY(); ++y){
+			if (std::memcmp(GetLinePtr(y), bitmap.GetLinePtr(y), lineBytes) != 0){
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+
+bool CGeneralBitmap::operator!=(const CGeneralBitmap& bitmap) const
+{
+	return !operator==(bitmap);
+}
+
+
 // protected methods
 
 bool CGeneralBitmap::CreateBitmap(

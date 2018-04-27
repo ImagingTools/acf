@@ -42,7 +42,10 @@ public:
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
+	// operators
 	CGeneralBitmap& operator=(const CGeneralBitmap& bitmap);
+	bool operator==(const CGeneralBitmap& bitmap) const;
+	bool operator!=(const CGeneralBitmap& bitmap) const;
 
 protected:
 	/**
