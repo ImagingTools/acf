@@ -22,7 +22,7 @@ namespace iattr
 	Don't use direct this class, use macros \c I_ATTR and \c I_ASSIGN instead.
 */
 template <typename Value>
-class TAttribute: virtual public iser::TCopySerializedWrap<iser::IObject>
+class TAttribute: public iser::TCopySerializedWrap<iser::IObject>
 {
 public:
 	typedef Value ValueType;

@@ -25,7 +25,7 @@ namespace iattr
 	Don't use direct this class, use macros I_MULTIATTR and I_ASSIGN instead.
 */
 template <typename Value>
-class TMultiAttribute: virtual public iser::TCopySerializedWrap<iser::IObject>
+class TMultiAttribute: public iser::TCopySerializedWrap<iser::IObject>
 {
 public:
 	typedef Value ValueType;
