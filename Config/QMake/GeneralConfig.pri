@@ -31,14 +31,14 @@ win32-msvc*{
 	QMAKE_CXXFLAGS += /wd4718
 }
 
-!isEmpty($$COMPAT_MKSPEC){
-	eval(COMPAT_MKSPEC = win32-msvc2005){
+!isEmpty(MSVC_VER){
+	contains(MSVC_VER, "8.0"){
 		COMPILER_NAME = VC8
 
 		message("Using Visual Studio 2005");
 	}
 
-	eval(COMPAT_MKSPEC = win32-msvc2008){
+	contains(MSVC_VER, "9.0"){
 		COMPILER_NAME = VC9
 		QMAKE_CXXFLAGS -= /Gd
 		QMAKE_CXXFLAGS -= /GD
@@ -48,21 +48,21 @@ win32-msvc*{
 		message("Using Visual Studio 2008");
 	}
 
-	eval(COMPAT_MKSPEC = win32-msvc2010){
+	contains(MSVC_VER, "10.0"){
 		QMAKE_CXXFLAGS += /wd4996
 		COMPILER_NAME = VC10
 
 		message("Using Visual Studio 2010");
 	}
 
-	eval(COMPAT_MKSPEC = win32-msvc2012){
+	contains(MSVC_VER, "11.0"){
 		QMAKE_CXXFLAGS += /wd4996
 		COMPILER_NAME = VC11
 
 		message("Using Visual Studio 2012");
 	}
 
-	eval(COMPAT_MKSPEC = win32-msvc2013){
+	contains(MSVC_VER, "12.0"){
 		QMAKE_CXXFLAGS += /wd4996 /Qpar /Gy /Gw /FS
 		COMPILER_NAME = VC12
 		CONFIG += c++11
@@ -70,7 +70,7 @@ win32-msvc*{
 		message("Using Visual Studio 2013");
 	}
 
-	equals(COMPAT_MKSPEC, win32-msvc2015){
+	contains(MSVC_VER, "14.0"){
 		QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit-
 		COMPILER_NAME = VC14
 
@@ -86,7 +86,7 @@ win32-msvc*{
 		message("Using Visual Studio 2015");
 	}
 
-	equals(COMPAT_MKSPEC, win32-msvc2017){
+	contains(MSVC_VER, "15.0"){
 		QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit-
 		COMPILER_NAME = VC15
 
