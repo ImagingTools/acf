@@ -41,9 +41,9 @@ const iser::ISerializable* CComposedParamsSetComp::GetParameter(const QByteArray
 	for (int i = 0; i < slavesCount; ++i){
 		const IParamsSet* slavePtr = m_slaveParamsCompPtr[i];
 		if (slavePtr != NULL){
-			const iser::ISerializable* paramPtr = slavePtr->GetParameter(id);
-			if (paramPtr != NULL){
-				return paramPtr;
+			const iser::ISerializable* slaveParamPtr = slavePtr->GetParameter(id);
+			if (slaveParamPtr != NULL){
+				return slaveParamPtr;
 			}
 		}
 	}

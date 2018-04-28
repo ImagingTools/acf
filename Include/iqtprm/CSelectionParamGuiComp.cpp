@@ -1,5 +1,12 @@
 #include <iqtprm/CSelectionParamGuiComp.h>
 
+// Qt includes
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QButtonGroup>
+#else
+#include <QtGui/QButtonGroup>
+#endif
 
 // ACF includes
 #include <istd/CChangeNotifier.h>

@@ -133,7 +133,7 @@ void* TSubelementStaticInfo<ComponentType>::GetComponentInterface(
 		if (interfaceType.IsConst()){
 			istd::CClassInfo nonConstType = interfaceType.GetConstCasted(false);
 
-			typename InterfaceExtractors::ConstIterator foundIter = m_interfaceExtractors.constFind(nonConstType.GetName());
+			foundIter = m_interfaceExtractors.constFind(nonConstType.GetName());
 			if (foundIter != m_interfaceExtractors.constEnd()){
 				InterfaceExtractorPtr extractorPtr = foundIter.value();
 

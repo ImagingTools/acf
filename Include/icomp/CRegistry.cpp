@@ -591,7 +591,7 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 	static iser::CArchiveTag registriesListTag("EmbeddedRegistriesList", "List of embedded registries", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag registryTag("EmbeddedRegistry", "Description of single embedded registry", iser::CArchiveTag::TT_GROUP, &registriesListTag);
 	static iser::CArchiveTag registryIdTag("Id", "ID of embedded registry", iser::CArchiveTag::TT_LEAF, &registryTag);
-	static iser::CArchiveTag s_dataTag("Data", "Data of single embedded registry", iser::CArchiveTag::TT_GROUP, &registryTag);
+	static iser::CArchiveTag dataTag("Data", "Data of single embedded registry", iser::CArchiveTag::TT_GROUP, &registryTag);
 
 	bool isStoring = archive.IsStoring();
 
@@ -625,9 +625,9 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 			retVal = retVal && archive.Process(const_cast<QByteArray&>(iter.key()));
 			retVal = retVal && archive.EndTag(registryIdTag);
 
-			retVal = retVal && archive.BeginTag(s_dataTag);
+			retVal = retVal && archive.BeginTag(dataTag);
 			retVal = retVal && registryPtr->Serialize(archive);
-			retVal = retVal && archive.EndTag(s_dataTag);
+			retVal = retVal && archive.EndTag(dataTag);
 
 			retVal = retVal && archive.EndTag(registryTag);
 		}
@@ -723,7 +723,7 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 	static iser::CArchiveTag exportedComponentsTag("ExportedComponents", "List of exported components", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag componentTag("Component", "Exported component info", iser::CArchiveTag::TT_GROUP, &exportedComponentsTag);
 	static iser::CArchiveTag exportedIdTag("ExportedId", "Exported component ID", iser::CArchiveTag::TT_LEAF, &componentTag);
-	static iser::CArchiveTag s_componentIdTag("ComponentId", "ID of component in registry", iser::CArchiveTag::TT_LEAF, &componentTag);
+	static iser::CArchiveTag componentIdTag("ComponentId", "ID of component in registry", iser::CArchiveTag::TT_LEAF, &componentTag);
 
 	bool isStoring = archive.IsStoring();
 
@@ -743,9 +743,9 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 			retVal = retVal && archive.Process(const_cast< QByteArray&>(iter.key()));
 			retVal = retVal && archive.EndTag(exportedIdTag);
 
-			retVal = retVal && archive.BeginTag(s_componentIdTag);
+			retVal = retVal && archive.BeginTag(componentIdTag);
 			retVal = retVal && archive.Process(iter.value());
-			retVal = retVal && archive.EndTag(s_componentIdTag);
+			retVal = retVal && archive.EndTag(componentIdTag);
 
 			retVal = retVal && archive.EndTag(componentTag);
 		}

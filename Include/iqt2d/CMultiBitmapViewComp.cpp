@@ -91,7 +91,7 @@ void CMultiBitmapViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chang
 
 	const iprm::IOptionsList* bitmapListPtr = objectPtr->GetBitmapListInfo();
 	if (bitmapListPtr != NULL){
-		int bitmapsCount = bitmapListPtr->GetOptionsCount();
+		Q_ASSERT(bitmapsCount == bitmapListPtr->GetOptionsCount());
 		for (int i = 0; i < bitmapsCount; ++i){
 			Q_ASSERT(i < viewsCount);
 

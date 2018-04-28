@@ -119,13 +119,13 @@ void CAffineTransformation2dShape::Draw(QPainter& drawContext) const
 
 	// draw full and empty circles representing control points
 	for (int i = 0; i < ACTIVE_POINTS_COUNT; i++){
-		i2d::CVector2d cp = tsp[i];
-		istd::CIndex2d currentPoint(cp.GetX(), cp.GetY());
+		i2d::CVector2d activePoint = tsp[i];
+		istd::CIndex2d currentPoint(activePoint.GetX(), activePoint.GetY());
 		ControlPoint pointType = (ControlPoint)(1 << i);
 		if ((m_activeControlPoints & pointType) == 0){
 			drawContext.setPen(transformedSystemPen);
 			drawContext.setBrush(Qt::NoBrush);
-			drawContext.drawEllipse(cp.GetX() - circleRadius, cp.GetY() - circleRadius, circleRadius* 2, circleRadius* 2);
+			drawContext.drawEllipse(activePoint.GetX() - circleRadius, activePoint.GetY() - circleRadius, circleRadius* 2, circleRadius* 2);
 			//			colorSchema.DrawTicker(drawContext, currentPoint, IColorSchema::TT_SELECTED_INACTIVE);
 		}
 		else if (pointType == POINT5){
@@ -346,9 +346,10 @@ void CAffineTransformation2dShape::SetLogDragPosition(const i2d::CVector2d& posi
 
 	case CAffineTransformation2dShape::POINT5:
 		{
-			i2d::CVector2d relativeVec = points[4] - points[0];
-			double oldAngle = atan2(relativeVec.GetY(), relativeVec.GetX());
+			relativeVec = points[4] - points[0];
 			relativeVec += offset;
+
+			double oldAngle = atan2(relativeVec.GetY(), relativeVec.GetX());
 			double newAngle = atan2(relativeVec.GetY(), relativeVec.GetX());
 			angle += newAngle - oldAngle;
 		}

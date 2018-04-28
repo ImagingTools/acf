@@ -305,10 +305,10 @@ bool TMultiPageDocumentWrap<Base>::CopyFrom(const istd::IChangeable& object, Com
 	// copy via idoc::IMultiPageDocumentProvider
 	const idoc::IMultiPageDocumentProvider* docProviderPtr = dynamic_cast<const idoc::IMultiPageDocumentProvider*>(&object);
 	if (docProviderPtr != NULL){
-		const idoc::IMultiPageDocument* docPtr = docProviderPtr->GetDocument();
-		if (docPtr != NULL){	
+		const idoc::IMultiPageDocument* sourceDocPtr = docProviderPtr->GetDocument();
+		if (sourceDocPtr != NULL){
 			// recursive call
-			return CopyFrom(*docPtr, mode);
+			return CopyFrom(*sourceDocPtr, mode);
 		}
 	}
 

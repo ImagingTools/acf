@@ -13,9 +13,9 @@ bool CTubePolylineComp::InsertNode(const i2d::CVector2d& node)
 {
 	if (BaseClass2::InsertNode(node)){
 		if (!m_defaultTubeRange.IsEmpty() && m_defaultTubeRange.IsValid()){
-			CTubeNode& node = GetTNodeDataRef(GetNodesCount() - 1);
+			CTubeNode& nodeDataRef = GetTNodeDataRef(GetNodesCount() - 1);
 
-			node.SetTubeRange(m_defaultTubeRange);
+			nodeDataRef.SetTubeRange(m_defaultTubeRange);
 		}
 
 		return true;
@@ -29,9 +29,9 @@ bool CTubePolylineComp::InsertNode(int index, const i2d::CVector2d& node)
 {
 	if (BaseClass2::InsertNode(index, node)){
 		if (!m_defaultTubeRange.IsEmpty() && m_defaultTubeRange.IsValid()){
-			CTubeNode& node = GetTNodeDataRef(index);
+			CTubeNode& nodeDataRef = GetTNodeDataRef(index);
 
-			node.SetTubeRange(m_defaultTubeRange);
+			nodeDataRef.SetTubeRange(m_defaultTubeRange);
 		}
 
 		return true;

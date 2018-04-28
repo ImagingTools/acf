@@ -187,9 +187,6 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 		}
 	}
 	else{
-		istd::CChangeNotifier notifier(this, &GetAllChanges());
-		Q_UNUSED(notifier);
-
 		m_infosMap.clear();
 
 		for (int itemIndex = 0; itemIndex < metaInfosCount; ++itemIndex){

@@ -8,6 +8,7 @@
 #include <QtWidgets/QCommandLinkButton>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QButtonGroup>
 #else
 #include <QtGui/QCommandLinkButton>
 #include <QtGui/QToolButton>

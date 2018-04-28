@@ -963,9 +963,9 @@ int CScanlineMask::GetComponentsCount() const
 
 icmm::CVarColor CScanlineMask::GetColorAt(const istd::CIndex2d& position) const
 {
-	int scanLine = position.GetY() - m_firstLinePos;
-	if ((scanLine >= 0) && (scanLine < int(m_scanlines.size()))){
-		int containerIndex = m_scanlines[scanLine];
+	int scanLineIndex = position.GetY() - m_firstLinePos;
+	if ((scanLineIndex >= 0) && (scanLineIndex < int(m_scanlines.size()))){
+		int containerIndex = m_scanlines[scanLineIndex];
 
 		if (containerIndex >= 0){
 			const istd::CIntRanges& scanLine = m_rangesContainer[containerIndex];
