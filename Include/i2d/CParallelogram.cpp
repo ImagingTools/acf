@@ -30,12 +30,14 @@ void CParallelogram::SetRotation(double angle)
 	if (curr != angle){
 		istd::CChangeNotifier changeNotifier(this, &s_objectModifiedChange);
 		Q_UNUSED(changeNotifier);
-		const double da = angle - curr;
-		const double cos = std::cos(da);
-		const double sin = std::sin(da);
-		const i2d::CMatrix2d rotation(cos, sin, -sin, cos);
+		const double cos = std::cos(angle);
+		const double sin = std::sin(angle);
+		const double width = GetWidth();
+		const double height = GetHeight();
 		const i2d::CVector2d center = GetCenter();
-		m_transform.GetDeformMatrixRef().Multiply(rotation);
+		const i2d::CMatrix2d scale(width, 0, 0, height);
+		const i2d::CMatrix2d rotation(cos, sin, -sin, cos);
+		m_transform.SetDeformMatrix(rotation.GetMultiplied(scale));
 		const i2d::CVector2d newCenter = GetCenter();
 
 		m_transform.SetTranslation(GetTranslation() - (newCenter - center));
@@ -70,23 +72,18 @@ double CParallelogram::GetWidth() const
 
 void CParallelogram::SetWidth(double w)
 {
-	if (GetWidth() != w && w >= 0){
+	if (GetWidth() != w){
 		istd::CChangeNotifier changeNotifier(this, &s_objectModifiedChange);
 		Q_UNUSED(changeNotifier);
 
-		i2d::CMatrix2d& parallDeform = m_transform.GetDeformMatrixRef();
-		const i2d::CVector2d& axisX = parallDeform.GetAxisX();
-		double length = axisX.GetLength();
-
-		if (length > I_EPSILON) {
-			const double d = w / length;
-			parallDeform.SetAt(0, 0, axisX.GetX()*d);
-			parallDeform.SetAt(0, 1, axisX.GetY()*d);
-		}
-		else{
-			parallDeform.SetAt(0, 0, w);
-			parallDeform.SetAt(0, 1, 0);
-		}
+		const double angle = GetRotation();
+		const double cos = std::cos(angle);
+		const double sin = std::sin(angle);
+		const double height = GetHeight();
+		const i2d::CVector2d center = GetCenter();
+		const i2d::CMatrix2d scale(w, 0, 0, height);
+		const i2d::CMatrix2d rotation(cos, sin, -sin, cos);
+		m_transform.SetDeformMatrix(rotation.GetMultiplied(scale));
 	}
 }
 
@@ -101,23 +98,18 @@ double CParallelogram::GetHeight() const
 
 void CParallelogram::SetHeight(double h)
 {
-	if (GetHeight() != h && h >= 0){
+	if (GetHeight() != h){
 		istd::CChangeNotifier changeNotifier(this, &s_objectModifiedChange);
 		Q_UNUSED(changeNotifier);
 
-		i2d::CMatrix2d& parallDeform = m_transform.GetDeformMatrixRef();
-		const i2d::CVector2d& axisY = parallDeform.GetAxisY();
-		double length = axisY.GetLength();
-
-		if (length > I_EPSILON) {
-			const double d = h / length;
-			parallDeform.SetAt(1, 0, axisY.GetX()*d);
-			parallDeform.SetAt(1, 1, axisY.GetY()*d);
-		}
-		else{
-			parallDeform.SetAt(1, 0, 0);
-			parallDeform.SetAt(1, 1, h);
-		}
+		const double angle = GetRotation();
+		const double cos = std::cos(angle);
+		const double sin = std::sin(angle);
+		const double width = GetWidth();
+		const i2d::CVector2d center = GetCenter();
+		const i2d::CMatrix2d scale(width, 0, 0, h);
+		const i2d::CMatrix2d rotation(cos, sin, -sin, cos);
+		m_transform.SetDeformMatrix(rotation.GetMultiplied(scale));
 	}
 }
 
