@@ -235,7 +235,7 @@ inline CMatrix2d CMatrix2d::GetInverted() const
 
 inline CMatrix2d CMatrix2d::GetTransposed() const
 {
-	return CMatrix2d(GetAt(0, 0), GetAt(0, 1), GetAt(1, 0), GetAt(1, 1));
+	return CMatrix2d(GetAt(0, 0), GetAt(1, 0), GetAt(0, 1), GetAt(1, 1));
 }
 
 

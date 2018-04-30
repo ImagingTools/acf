@@ -243,9 +243,9 @@ inline CMatrix3d CMatrix3d::GetInverted() const
 
 inline CMatrix3d CMatrix3d::GetTransposed() const
 {
-	return	CMatrix3d(	GetAt(0, 0), GetAt(0, 1), GetAt(0, 2),
-						GetAt(1, 0), GetAt(1, 1), GetAt(1, 2),
-						GetAt(2, 0), GetAt(2, 1), GetAt(2, 2));
+	return	CMatrix3d(	GetAt(0, 0), GetAt(1, 0), GetAt(2, 0),
+						GetAt(0, 1), GetAt(1, 1), GetAt(2, 1),
+						GetAt(0, 2), GetAt(1, 2), GetAt(2, 2));
 }
 
 
