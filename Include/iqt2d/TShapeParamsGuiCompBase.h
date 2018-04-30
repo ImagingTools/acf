@@ -48,7 +48,6 @@ public:
 		I_ASSIGN(m_allowToolsMenuAttrPtr, "ShowTools", "Show extended shape edit tools", true, true);
 		I_ASSIGN(m_toolBarGuiCompPtr, "ToolBarGui", "Toolbar GUI object to fill with actions", false, "ToolBarGui");
 		I_ASSIGN(m_shapeToolTipAttrPtr, "ShapeToolTip", "Tool tip will be show on console", false, "");
-		I_ASSIGN(m_hideParameterEditorAttrPtr, "HideParameterEditor", "If set, the parameter editor will be hidden (only shape will be visible)", true, false);
 	I_END_COMPONENT;
 
 	TShapeParamsGuiCompBase();
@@ -107,7 +106,6 @@ private:
 	I_REF(iprm::IEnableableParam, m_fixedPositionParamPtr);
 	I_ATTR(bool, m_fixedPositionAttrPtr);
 	I_ATTR(bool, m_allowToolsMenuAttrPtr);
-	I_ATTR(bool, m_hideParameterEditorAttrPtr);
 	I_REF(iqtgui::IGuiObject, m_toolBarGuiCompPtr);
 	I_TEXTATTR(m_shapeToolTipAttrPtr);
 };
@@ -421,10 +419,6 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnGuiShown()
 	BaseClass::OnGuiShown();
 
 	OnModelAttachedAndGuiShown(BaseClass::GetObservedModel());
-
-	if (*m_hideParameterEditorAttrPtr){
-		GetQtWidget()->hide();
-	}
 }
 
 
