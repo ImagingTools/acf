@@ -24,12 +24,15 @@ class TMultidimensionalPolynomial: public imath::TIMathFunction<TVector<Dimensio
 public:
 	typedef imath::TIMathFunction<TVector<Dimensions>, Element> BaseClass;
 	typedef istd::TArray<Element, Dimensions> Coefficients;
+	typedef typename Coefficients::SizesType CoeffGridSize;
 
 	TMultidimensionalPolynomial();
 	explicit TMultidimensionalPolynomial(const Coefficients& coefficients);
 
 	const Coefficients& GetCoefficients() const;
 	void SetCoefficients(const Coefficients& coefficients);
+
+	bool ApproximateCoefficientsFromFulcrums(const CoeffGridSize& coeffGridSize, const ArgumentType* arguments, ResultType* destValues, int count);
 
 	// reimplemented (imath::TIMathFunction)
 	virtual bool GetValueAt(const ArgumentType& argument, ResultType& result) const;
@@ -87,6 +90,59 @@ template <int Dimensions, class Element>
 void TMultidimensionalPolynomial<Dimensions, Element>::SetCoefficients(const Coefficients& coefficients)
 {
 	m_coefficients = coefficients;
+}
+
+
+template <int Dimensions, class Element>
+bool TMultidimensionalPolynomial<Dimensions, Element>::ApproximateCoefficientsFromFulcrums(
+			const CoeffGridSize& coeffGridSize,
+			const ArgumentType* arguments,
+			ResultType* destValues,
+			int count)
+{
+	m_coefficients.SetSizes(coeffGridSize);
+
+	if (coeffGridSize.IsSizeEmpty()){
+		return true;
+	}
+
+	imath::CVarMatrix valueMatrix(istd::CIndex2d(coeffGridSize.GetProductVolume(), count));
+	imath::CVarMatrix destValueVector(istd::CIndex2d(1, count));
+
+	typedef imath::TMultidimensionalPolynomial<2, double> Polynomial;
+
+	for (int matrixRow = 0; matrixRow < count; ++matrixRow){
+		const ArgumentType& argument = arguments[matrixRow];
+		double measValue = double(destValues[matrixRow]);
+
+		int matrixCol = 0;
+		CoeffGridSize coeffIndex = CoeffGridSize::GetZero();
+		do{
+			double baseValue = GetBaseFunctionValue(argument, coeffIndex);
+
+			valueMatrix.SetAt(istd::CIndex2d(matrixCol++, matrixRow), baseValue);
+		} while (coeffIndex.Increase(coeffGridSize));
+
+		destValueVector.SetAt(istd::CIndex2d(0, matrixRow), measValue);
+	}
+
+	imath::CVarMatrix resultMatrix = imath::CVarMatrix(istd::CIndex2d(coeffGridSize.GetProductVolume(), 1));
+	resultMatrix.Clear();
+
+	if (!valueMatrix.GetSolvedLSP(destValueVector, resultMatrix)){
+		return false;
+	}
+	Q_ASSERT(resultMatrix.GetSizes() == istd::CIndex2d(1, coeffGridSize.GetProductVolume()));
+
+	m_coefficients.SetSizes(coeffGridSize);
+
+	int resultRow = 0;
+	CoeffGridSize coeffIndex = CoeffGridSize::GetZero();
+	do{
+		m_coefficients.SetAt(coeffIndex, resultMatrix.GetAt(istd::CIndex2d(0, resultRow++)));
+	} while (coeffIndex.Increase(coeffGridSize));
+
+	return true;
 }
 
 
