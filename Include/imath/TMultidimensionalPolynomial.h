@@ -151,8 +151,7 @@ bool TMultidimensionalPolynomial<Dimensions, Element>::ApproximateCoefficientsFr
 template <int Dimensions, class Element>
 bool TMultidimensionalPolynomial<Dimensions, Element>::GetValueAt(const ArgumentType& argument, ResultType& result) const
 {
-	istd::TIndex<Dimensions> index;
-	CumulateRecursiveValueAt(argument, Dimensions - 1, index, result);
+	result = TMultidimensionalPolynomial::GetValueAt(argument);
 
 	return true;
 }
@@ -163,9 +162,117 @@ typename TMultidimensionalPolynomial<Dimensions, Element>::ResultType TMultidime
 {
 	typename BaseClass::ResultType retVal;
 
-	GetValueAt(argument, retVal);
+	istd::TIndex<Dimensions> index;
+	CumulateRecursiveValueAt(argument, Dimensions - 1, index, retVal);
 
 	return retVal;
+}
+
+
+template <>
+inline typename TMultidimensionalPolynomial<1, double>::ResultType TMultidimensionalPolynomial<1, double>::GetValueAt(const ArgumentType& argument) const
+{
+	double partArgument = argument[0];
+	int dimensionSize = m_coefficients.GetSize(0);
+
+	ResultType result = 0;
+
+	istd::TIndex<1> index;
+	int& indexElement = index[0];
+	for (indexElement = dimensionSize - 1; indexElement >= 0; --indexElement){
+		result = result * partArgument + m_coefficients.GetAt(index);
+	}
+
+	return result;
+}
+
+
+template <>
+inline typename TMultidimensionalPolynomial<2, double>::ResultType TMultidimensionalPolynomial<2, double>::GetValueAt(const ArgumentType& argument) const
+{
+	double partArgument1 = argument[0];
+	double partArgument2 = argument[1];
+
+	int dimensionSize1 = m_coefficients.GetSize(0);
+	int dimensionSize2 = m_coefficients.GetSize(1);
+
+	ResultType result = 0;
+
+	istd::TIndex<2> index;
+	int& indexElement1 = index[0];
+	int& indexElement2 = index[1];
+
+	if (dimensionSize1 == 1){
+		indexElement1 = 0;
+		for (indexElement2 = dimensionSize2 - 1; indexElement2 >= 0; --indexElement2){
+			result = result * partArgument2 + m_coefficients.GetAt(index);
+		}
+	}
+	else{
+		for (indexElement2 = dimensionSize2 - 1; indexElement2 >= 0; --indexElement2){
+			indexElement1 = dimensionSize1 - 1;
+			ResultType partResult = m_coefficients.GetAt(index);
+
+			for (indexElement1 = dimensionSize1 - 2; indexElement1 >= 0; --indexElement1){
+				partResult = partResult * partArgument1 + m_coefficients.GetAt(index);
+			}
+
+			result = result * partArgument2 + partResult;
+		}
+	}
+
+	return result;
+}
+
+
+template <>
+inline typename TMultidimensionalPolynomial<3, double>::ResultType TMultidimensionalPolynomial<3, double>::GetValueAt(const ArgumentType& argument) const
+{
+	double partArgument1 = argument[0];
+	double partArgument2 = argument[1];
+	double partArgument3 = argument[2];
+
+	int dimensionSize1 = m_coefficients.GetSize(0);
+	int dimensionSize2 = m_coefficients.GetSize(1);
+	int dimensionSize3 = m_coefficients.GetSize(2);
+
+	ResultType result = 0;
+
+	istd::TIndex<3> index;
+	int& indexElement1 = index[0];
+	int& indexElement2 = index[1];
+	int& indexElement3 = index[2];
+
+	if (dimensionSize1 == 1){
+		indexElement1 = 0;
+
+		for (indexElement3 = dimensionSize3 - 1; indexElement3 >= 0; --indexElement3){
+			ResultType partResult = 0;
+			for (indexElement2 = dimensionSize2 - 1; indexElement2 >= 0; --indexElement2){
+				partResult = partResult * partArgument2 + m_coefficients.GetAt(index);
+			}
+			result = result * partArgument3 + partResult;
+		}
+	}
+	else{
+		for (indexElement3 = dimensionSize3 - 1; indexElement3 >= 0; --indexElement3){
+			ResultType partResult2 = 0;
+
+			for (indexElement2 = dimensionSize2 - 1; indexElement2 >= 0; --indexElement2){
+				indexElement1 = dimensionSize1 - 1;
+				ResultType partResult = m_coefficients.GetAt(index);
+
+				for (indexElement1 = dimensionSize1 - 2; indexElement1 >= 0; --indexElement1){
+					partResult = partResult * partArgument1 + m_coefficients.GetAt(index);
+				}
+
+				partResult2 = partResult2 * partArgument2 + partResult;
+			}
+			result = result * partArgument3 + partResult2;
+		}
+	}
+
+	return result;
 }
 
 
