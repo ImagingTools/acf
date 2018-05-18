@@ -31,7 +31,7 @@ public:
 	TIndex();
 
 	/**
-		Constructor initializing all member to specified value.
+		Constructor initializing all members to specified value.
 	*/
 	explicit TIndex(int value);
 
