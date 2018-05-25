@@ -67,7 +67,7 @@ bool TSerializableContainer<ItemClass, ContainerType>::Serialize(iser::IArchive&
 
 			ItemClass& item = BaseClass::GetAt(index);
 
-			bool retVal = archive.BeginTag(itemTag);
+			retVal = retVal && archive.BeginTag(itemTag);
 
 			retVal = retVal && SerializeItem(item, archive);
 
@@ -78,7 +78,7 @@ bool TSerializableContainer<ItemClass, ContainerType>::Serialize(iser::IArchive&
 		for (int index = 0; index < itemCount; index++){
 			ItemClass& item = BaseClass::GetAt(index);
 
-			bool retVal = archive.BeginTag(itemTag);
+			retVal = retVal && archive.BeginTag(itemTag);
 
 			retVal = retVal && SerializeItem(item, archive);
 

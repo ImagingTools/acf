@@ -96,7 +96,7 @@ win32-msvc*{
 	}
 
 	contains(MSVC_VER, "15.0"){
-		QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit-
+		QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit- /D__STDC_LIMIT_MACROS
 		COMPILER_NAME = VC15
 
 		CONFIG(release, debug|release){
