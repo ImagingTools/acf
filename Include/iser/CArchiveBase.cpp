@@ -34,9 +34,6 @@ const CArchiveTag& CArchiveBase::GetAcfRootTag()
 // private methods
 
 CArchiveBase::CArchiveBase(const CArchiveBase&)
-:	istd::IPolymorphic(),
-	iser::IArchive(),
-	istd::ILogger()
 {
 }
 

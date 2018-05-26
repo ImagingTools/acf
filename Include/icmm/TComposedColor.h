@@ -105,10 +105,7 @@ inline TComposedColor<Size>::TComposedColor()
 
 template <int Size>
 inline TComposedColor<Size>::TComposedColor(const BaseClass& value)
-:	BaseClass(value),
-	iser::ISerializable(),
-	istd::IChangeable(),
-	istd::IPolymorphic()
+:	BaseClass(value)
 {
 }
 

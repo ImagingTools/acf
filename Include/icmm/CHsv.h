@@ -74,10 +74,7 @@ inline CHsv::CHsv(double h, double s, double v)
 
 
 inline CHsv::CHsv(const CHsv& color)
-:	istd::IPolymorphic(),
-	istd::IChangeable(),
-	iser::ISerializable(),
-	BaseClass(color)
+:	BaseClass(color)
 {
 }
 

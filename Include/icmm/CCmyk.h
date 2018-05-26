@@ -77,10 +77,7 @@ inline CCmyk::CCmyk(double c, double m, double y, double k)
 
 
 inline CCmyk::CCmyk(const CCmyk& color)
-:	istd::IPolymorphic(),
-	istd::IChangeable(),
-	iser::ISerializable(),
-	BaseClass(color)
+:	BaseClass(color)
 {
 }
 

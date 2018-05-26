@@ -73,10 +73,7 @@ inline CCmy::CCmy(double c, double m, double y)
 
 
 inline CCmy::CCmy(const CCmy& color)
-:	istd::IPolymorphic(),
-	istd::IChangeable(),
-	iser::ISerializable(),
-	BaseClass(color)
+:	BaseClass(color)
 {
 }
 
