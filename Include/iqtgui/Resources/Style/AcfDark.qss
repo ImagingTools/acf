@@ -347,7 +347,7 @@ QCheckBox:disabled
 	color: #414141;
 }
 
-QCheckBox::indicator
+QCheckBox::indicator, QTreeView::indicator
 {
 	color: #b1b1b1;
 	background-color: #323232;
@@ -357,10 +357,19 @@ QCheckBox::indicator
 	padding: -2px;
 }
 
-QCheckBox::indicator:checked
+QCheckBox::indicator:checked, QTreeView::indicator:checked
 {
+	border: none;
 	image:url(:/Style/AcfDark/Images/CheckBoxChecked.svg);
 }
+
+
+QCheckBox::indicator:indeterminate, QTreeView::indicator:indeterminate
+{
+	border: none;
+	image:url(:/Style/AcfDark/Images/CheckBoxTristate);
+}
+
 
 QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
 {
@@ -866,3 +875,5 @@ QTreeView::branch:open:has-children:has-siblings:hover
 	border-image: none;
 	image: url(:/Style/AcfDark/Images/ArrowDownRightHighlight.svg);
 }
+
+
