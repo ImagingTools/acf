@@ -85,6 +85,45 @@ void CSceneConnectorGuiComp::OnGuiDestroyed()
 }
 
 
+
+// reimplemented (TRestorableGuiWrap)
+
+void CSceneConnectorGuiComp::OnRestoreSettings(const QSettings& settings)
+{
+	Q_ASSERT(IsGuiCreated());
+
+	// preserve overriding of splitter orientation:
+	Qt::Orientation splitterOrientation = splitter->orientation();
+
+	QByteArray splitterState = settings.value(GetSettingsKey()).toByteArray();
+
+	splitter->restoreState(splitterState);
+
+	splitter->setOrientation(splitterOrientation);
+}
+
+
+void CSceneConnectorGuiComp::OnSaveSettings(QSettings& settings) const
+{
+	Q_ASSERT(IsGuiCreated());
+
+	QByteArray splitterState = splitter->saveState();
+
+	settings.setValue(GetSettingsKey(), splitterState);
+}
+
+
+QString CSceneConnectorGuiComp::GetSettingsKey() const
+{
+	QString settingsKey = "Splitter";
+	if (m_settingsKeyAttrPtr.IsValid()){
+		settingsKey = *m_settingsKeyAttrPtr + QString("/") + settingsKey;
+	}
+
+	return settingsKey;
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CSceneConnectorGuiComp::OnComponentCreated()

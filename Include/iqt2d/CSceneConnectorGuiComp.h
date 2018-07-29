@@ -9,6 +9,7 @@
 #include <iqtgui/CHierarchicalCommand.h>
 #include <iqt2d/IViewProvider.h>
 #include <iqt2d/IViewExtender.h>
+#include <iqtgui/TRestorableGuiWrap.h>
 
 #include <GeneratedFiles/iqt2d/ui_CSceneConnectorGuiComp.h>
 
@@ -18,11 +19,11 @@ namespace iqt2d
 
 
 class CSceneConnectorGuiComp:
-			public iqtgui::TDesignerGuiCompBase<Ui::CSceneConnectorGuiComp, QWidget>,
+			public iqtgui::TRestorableGuiWrap<iqtgui::TDesignerGuiCompBase<Ui::CSceneConnectorGuiComp, QWidget> >,
 			virtual public ibase::ICommandsProvider
 {
 public:
-	typedef iqtgui::TDesignerGuiCompBase<Ui::CSceneConnectorGuiComp, QWidget> BaseClass;
+	typedef iqtgui::TRestorableGuiWrap<iqtgui::TDesignerGuiCompBase<Ui::CSceneConnectorGuiComp, QWidget> > BaseClass;
 
 	I_BEGIN_COMPONENT(CSceneConnectorGuiComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
@@ -32,6 +33,7 @@ public:
 		I_ASSIGN(m_extenderGuiCompPtr, "ExtenderGui", "Gui providing parameters displayed on scene", false, "ExtenderGui");
 		I_ASSIGN_TO(m_extenderCommandsCompPtr, m_extenderGuiCompPtr, false);
 		I_ASSIGN_TO(m_extenderCompPtr, m_extenderGuiCompPtr, true);
+		I_ASSIGN(m_settingsKeyAttrPtr, "SettingsKey", "Key for saving/restoring of the layout information in the registry", false, "SettingsKey");
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::ICommandsProvider)
@@ -46,13 +48,20 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+	// reimplemented (TRestorableGuiWrap)
+	virtual void OnRestoreSettings(const QSettings& settings);
+	virtual void OnSaveSettings(QSettings& settings) const;
+
 private:
+	QString GetSettingsKey() const;
+
 	I_REF(iqtgui::IGuiObject, m_sceneGuiCompPtr);
 	I_REF(ibase::ICommandsProvider, m_sceneCommandsCompPtr);
 	I_REF(IViewProvider, m_sceneProviderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_extenderGuiCompPtr);
 	I_REF(ibase::ICommandsProvider, m_extenderCommandsCompPtr);
 	I_REF(IViewExtender, m_extenderCompPtr);
+	I_ATTR(QString, m_settingsKeyAttrPtr);
 
 	mutable iqtgui::CHierarchicalCommand m_commands;
 };

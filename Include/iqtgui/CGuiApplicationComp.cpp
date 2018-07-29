@@ -243,6 +243,11 @@ void CGuiApplicationComp::UpdateMainWidgetDecorations()
 
 		if (windowFlags != m_mainWidgetPtr->windowFlags()){
 			m_mainWidgetPtr->setWindowFlags(windowFlags);
+
+#if QT_VERSION >= 0x050000
+			// workaround to go full screen after start (Windows, Qt 5.6 - 5.11)
+			m_mainWidgetPtr->showMaximized();
+#endif
 		}
 	}
 }
