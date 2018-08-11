@@ -24,6 +24,12 @@ CMultiPageGuiCompBase::CMultiPageGuiCompBase()
 }
 
 
+iprm::ISelectionParam& CMultiPageGuiCompBase::GetPageModelRef()
+{
+	return m_pageModel;
+}
+
+
 bool CMultiPageGuiCompBase::EnsurePageInitialized(int pageIndex)
 {
 	Q_ASSERT(pageIndex >= 0);
@@ -476,6 +482,21 @@ bool CMultiPageGuiCompBase::PageModel::SetSelectedOptionIndex(int index)
 	}
 
 	return false;
+}
+
+
+iprm::ISelectionParam* CMultiPageGuiCompBase::PageModel::GetSubselection(int index) const
+{
+	CMultiPageGuiCompBase* pageGuiPtr = dynamic_cast<CMultiPageGuiCompBase*>(m_parentPtr->GetPageGuiComponent(index));
+	if (pageGuiPtr != NULL){
+		// Sub-selection page control is enabled for stack design only:
+		int designType = pageGuiPtr->GetDesignType();
+		if (designType == iwidgets::CMultiPageWidget::DT_STACK){
+			return &pageGuiPtr->GetPageModelRef();
+		}
+	}
+
+	return NULL;
 }
 
 
