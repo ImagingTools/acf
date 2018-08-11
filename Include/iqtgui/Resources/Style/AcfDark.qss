@@ -349,9 +349,7 @@ QCheckBox:disabled
 
 QCheckBox::indicator, QTreeView::indicator
 {
-	color: #b1b1b1;
-	background-color: #323232;
-	border: 1px solid #b1b1b1;
+	border: 1px solid #505050;
 	width: 14px;
 	height: 14px;
 	padding: -2px;
