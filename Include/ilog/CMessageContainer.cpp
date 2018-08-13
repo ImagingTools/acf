@@ -9,6 +9,7 @@
 #include <iser/IArchive.h>
 #include <iser/CArchiveTag.h>
 #include <ilog/CMessage.h>
+#include <ilog/CExtMessage.h>
 
 
 namespace ilog
@@ -481,6 +482,7 @@ CMessageContainer::MessageFactory& CMessageContainer::GetMessageFactory()
 
 
 I_REGISTER_MESSAGE_TYPE(CMessage, CMessage::GetMessageTypeId());
+I_REGISTER_MESSAGE_TYPE(CExtMessage, CExtMessage::GetTypeName());
 
 
 } // namespace ilog
