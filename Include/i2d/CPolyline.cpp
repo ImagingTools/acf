@@ -121,6 +121,165 @@ i2d::CVector2d CPolyline::GetKneeVector(int nodeIndex) const
 	return kneeVector;
 }
 
+bool CPolyline::GetAdjacentNodes(double atPositionNormalized, i2d::CVector2d& previous, i2d::CVector2d& next, double& alpha) const
+{
+	int previousIndex, nextIndex;
+	if (GetAdjacentNodeIndices(atPositionNormalized, previousIndex, nextIndex, alpha)){
+		previous = GetNodePos(previousIndex);
+		next = GetNodePos(nextIndex);
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CPolyline::GetAdjacentNodes(const i2d::CVector2d& position, i2d::CVector2d& previous, i2d::CVector2d& next) const
+{
+	int previousIndex, nextIndex;
+	if (GetAdjacentNodeIndices(position, previousIndex, nextIndex)){
+		previous = GetNodePos(previousIndex);
+		next = GetNodePos(nextIndex);
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CPolyline::GetAdjacentNodeIndices(double atPositionNormalized, int& previousIndex, int& nextIndex, double& alpha) const
+{
+	Q_ASSERT(atPositionNormalized >= 0);
+	Q_ASSERT(atPositionNormalized <= 1);
+
+	const int nodesCount = GetNodesCount();
+
+	double positionOnLine = atPositionNormalized * GetLength();
+
+	nextIndex = 0;
+	previousIndex = 0;
+
+	istd::CRange lengthRange(0, 0);
+	i2d::CVector2d prevNodePos, nextNodePos;
+
+	while (positionOnLine > lengthRange.GetMaxValue() - I_BIG_EPSILON){
+		previousIndex = nextIndex;
+		prevNodePos = GetNodePos(previousIndex);
+
+		nextIndex = (nextIndex + 1) % nodesCount;
+
+		nextNodePos = GetNodePos(nextIndex);
+		double lengthMax = lengthRange.GetMaxValue() + nextNodePos.GetDistance(prevNodePos);
+
+		lengthRange.SetMinValue(lengthRange.GetMaxValue());
+		lengthRange.SetMaxValue(lengthMax);
+	}
+
+	alpha = (positionOnLine - lengthRange.GetMinValue()) / lengthRange.GetLength();
+
+	if (alpha < 0){
+		return false;
+	}
+
+	return true;
+}
+
+
+bool CPolyline::GetAdjacentNodeIndices(const i2d::CVector2d& point, int& previousIndex, int& nextIndex) const
+{
+	int nodesCount = GetNodesCount();
+	int segmentsCount = GetSegmentsCount();
+
+	nextIndex = 0;
+	previousIndex = 0;
+
+	bool retVal = false;
+	double minDistance = qInf();
+
+	if (segmentsCount > 0){
+		Q_ASSERT(nodesCount > 0);	// No segments without nodes!
+
+		int prevNodeIndex = 0;
+		i2d::CVector2d prevNodePos = GetNodePos(prevNodeIndex);
+
+		i2d::CVector2d prevKnee = GetKneeVector(prevNodeIndex);
+		i2d::CVector2d prevToPoint = point - prevNodePos;
+		bool afterPrev = (prevKnee.GetCrossProductZ(prevToPoint) > 0);
+
+		for (int segmentIndex = 0; segmentIndex < segmentsCount; ++segmentIndex){
+			int nextNodeIndex = (segmentIndex + 1) % nodesCount;
+			i2d::CVector2d nextNodePos = GetNodePos(nextNodeIndex);
+			i2d::CVector2d nextKnee = GetKneeVector(nextNodeIndex);
+
+			i2d::CVector2d nextToPoint = point - nextNodePos;
+
+			bool afterNext = (nextKnee.GetCrossProductZ(nextToPoint) > 0);
+			if (afterPrev && !afterNext){
+				const i2d::CLine2d segment = GetSegmentLine(segmentIndex);
+				const double totalDistance = segment.GetDistance(point);
+				if (totalDistance < minDistance){
+					previousIndex = prevNodeIndex;
+					nextIndex = nextNodeIndex;
+					retVal = true;
+
+					minDistance = totalDistance;
+				}
+			}
+
+			prevNodeIndex = nextNodeIndex;
+			prevNodePos = nextNodePos;
+			afterPrev = afterNext;
+		}
+
+		if (!retVal){
+			previousIndex = prevNodeIndex - 1;
+			nextIndex = segmentsCount % nodesCount;
+			retVal = true;
+		}
+	}
+
+	return retVal;
+}
+
+bool CPolyline::GetAdjacentLine(double atPositionNormalized, i2d::CLine2d& line, double& alpha) const
+{
+	i2d::CVector2d a;
+	i2d::CVector2d b;
+	if (GetAdjacentNodes(atPositionNormalized, a, b, alpha)){
+		line = i2d::CLine2d(a, b);
+		line.SetCalibration(GetCalibration());
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CPolyline::GetAdjacentLine(const i2d::CVector2d& position, i2d::CLine2d& line) const
+{
+	i2d::CVector2d a;
+	i2d::CVector2d b;
+	if (GetAdjacentNodes(position, a, b)){
+		line = i2d::CLine2d(a, b);
+		line.SetCalibration(GetCalibration());
+		return true;
+	}
+
+	return false;
+}
+
+bool CPolyline::GetInterpolatedPosition(const double atPositionNormalized, i2d::CVector2d& output) const
+{
+	i2d::CLine2d adhesiveAoiLineSegment;
+	double alpha;
+	if (GetAdjacentLine(atPositionNormalized, adhesiveAoiLineSegment, alpha)){
+		output = adhesiveAoiLineSegment.GetPoint1() * (1.0 - alpha) + adhesiveAoiLineSegment.GetPoint2() * alpha;
+		return true;
+	}
+
+	return false;
+}
+
 
 // reimplemented (iser::ISerializable)
 
