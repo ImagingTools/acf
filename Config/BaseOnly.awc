@@ -10,8 +10,8 @@
     <PackageDirs/>
     <PackageFiles>
         <FilePath>../Partitura/AcfVoce.arp</FilePath>
-        <FilePath>../Bin/$(ConfigurationDir)BasePck.arp</FilePath>
-        <FilePath>$(ApplicationDir)/BasePck.arp</FilePath>
+		<FilePath>$(ApplicationDir)/BasePck.arp</FilePath>
+		<FilePath>../Bin/$(ConfigurationDir)BasePck.arp</FilePath>
     </PackageFiles>
     <RegistryFiles/>
 </Acf>
