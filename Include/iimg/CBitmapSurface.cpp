@@ -57,7 +57,10 @@ void CBitmapSurface::CreateSurfaceFromBitmap()
 					functionValue = qGray(*((int*)(bufferPtr)));
 				}
 				else if (pixelBitsCount == 8){
-					functionValue = *bufferPtr;					
+					functionValue = *bufferPtr;
+				}
+				else if (pixelBitsCount == 16){
+					functionValue = *bufferPtr;
 				}
 			}
 
