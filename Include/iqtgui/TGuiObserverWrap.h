@@ -294,7 +294,7 @@ template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::UpdateModelFromEditor() const
 {
 	if (!m_isReadOnly && !m_isUpdatePending){
-		UpdateModel();
+		DoUpdateModel();
 	}
 }
 
