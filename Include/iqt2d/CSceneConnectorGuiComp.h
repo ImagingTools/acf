@@ -27,7 +27,7 @@ public:
 
 	I_BEGIN_COMPONENT(CSceneConnectorGuiComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
-		I_ASSIGN(m_sceneGuiCompPtr, "SceneGui", "Gui providing scene information", true, "SceneGui");
+		I_ASSIGN(m_sceneGuiCompPtr, "SceneGui", "GUI providing scene information", true, "SceneGui");
 		I_ASSIGN_TO(m_sceneCommandsCompPtr, m_sceneGuiCompPtr, false);
 		I_ASSIGN_TO(m_sceneProviderCompPtr, m_sceneGuiCompPtr, true);
 		I_ASSIGN(m_extenderGuiCompPtr, "ExtenderGui", "Gui providing parameters displayed on scene", false, "ExtenderGui");

@@ -93,13 +93,13 @@ void CSceneConnectorGuiComp::OnRestoreSettings(const QSettings& settings)
 	Q_ASSERT(IsGuiCreated());
 
 	// preserve overriding of splitter orientation:
-	Qt::Orientation splitterOrientation = splitterPtr->orientation();
+	Qt::Orientation splitterOrientation = splitter->orientation();
 
 	QByteArray splitterState = settings.value(GetSettingsKey()).toByteArray();
 
-	splitterPtr->restoreState(splitterState);
+	splitter->restoreState(splitterState);
 
-	splitterPtr->setOrientation(splitterOrientation);
+	splitter->setOrientation(splitterOrientation);
 }
 
 
@@ -107,7 +107,7 @@ void CSceneConnectorGuiComp::OnSaveSettings(QSettings& settings) const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	QByteArray splitterState = splitterPtr->saveState();
+	QByteArray splitterState = splitter->saveState();
 
 	settings.setValue(GetSettingsKey(), splitterState);
 }

@@ -29,8 +29,8 @@ public:
 	virtual Result GetValueAt(const Argument& argument) const;
 
 private:
-	typedef QPair<istd::CRange, Gradient> IntervallGradient;
-	typedef QVector<IntervallGradient> Gradients;
+	typedef QPair<istd::CRange, Gradient> IntervalGradient;
+	typedef QVector<IntervalGradient> Gradients;
 	
 	Gradients m_gradients;
 };
@@ -51,7 +51,7 @@ template <class GradientFunction>
 bool TColorGradient<GradientFunction>::GetValueAt(const Argument& argument, Result& result) const
 {
 	for (int gradientIndex = 0; gradientIndex < int(m_gradients.size()); gradientIndex++){
-		IntervallGradient gradient = m_gradients[gradientIndex];
+		IntervalGradient gradient = m_gradients[gradientIndex];
 
 		if (gradient.first.Contains(argument)){
 			return gradient.second.GetValueAt(argument, result);
