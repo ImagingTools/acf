@@ -73,8 +73,14 @@ public:
 	*/
 	void SetGridInMm(bool state = true);
 
+	/**
+		Get default calibration layer.
+	*/
 	const iview::IViewLayer& GetCalibrationLayer() const;
 
+	/**
+		Get default tools layer.
+	*/
 	const iview::IViewLayer& GetToolsLayer() const;
 
 	/**

@@ -27,7 +27,7 @@ bool ConvertToGrayImage(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 
 	if (outputBitmap.CreateBitmap(IBitmap::PF_GRAY, size)){
 		// do not copy empty image
-		if (size.IsSizeEmpty()){	
+		if (size.IsSizeEmpty()){
 			return true;
 		}
 
@@ -364,7 +364,7 @@ bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 			if (bitmapCalibrationPtr.IsValid()){
 				SetCalibration(bitmapCalibrationPtr.PopPtr(), true);
 			}
-		}	
+		}
 	}
 	else{
 		return false;
