@@ -61,6 +61,7 @@ public:
 		I_ASSIGN(m_allowViewRepeatingAttrPtr, "AllowViewRepeating", "If enabled, multiple views for the same document are allowed", false, true);
 		I_ASSIGN(m_rememberOpenDocumentsParamPtr, "RememberOpenDocumentsOnExit", "If enabled, restores open documents from previous session", false, "RememberOpenDocumentsOnExit");
 		I_ASSIGN(m_workspaceBackgroundColorAttrPtr, "WorkspaceBackgroundColor", "Background color of the MDI workspace", false, "");
+		I_ASSIGN(m_defaultCreatedDocumentTypeIdAttrPtr, "DefaultCreatedDocumentTypeId", "Type-ID of the document that should be created if the workspace is empty", false, "");
 	I_END_COMPONENT;
 
 	enum GroupId
@@ -117,7 +118,8 @@ protected:
 				const QByteArray& viewTypeId,
 				QByteArray& documentTypeId,
 				bool beQuiet,
-				bool* ignoredPtr);
+				bool* ignoredPtr,
+				ibase::IProgressManager* progressManagerPtr);
 	virtual void SetActiveView(istd::IPolymorphic* viewPtr);
 
 	// reimplemented (QObject)
@@ -214,6 +216,7 @@ private:
 	I_ATTR(bool, m_showPathAsTipAttrPtr);
 	I_ATTR(bool, m_allowViewRepeatingAttrPtr);
 	I_ATTR(QString, m_workspaceBackgroundColorAttrPtr);
+	I_ATTR(QByteArray, m_defaultCreatedDocumentTypeIdAttrPtr);
 };
 
 

@@ -217,7 +217,8 @@ bool CMultiDocumentManagerBase::OpenDocument(
 			istd::IChangeable** documentPtr,
 			FileToTypeMap* loadedMapPtr,
 			bool beQuiet,
-			bool* ignoredPtr)
+			bool* ignoredPtr,
+			ibase::IProgressManager* progressManagerPtr)
 {
 	if (ignoredPtr != NULL){
 		*ignoredPtr = false;
@@ -247,7 +248,7 @@ bool CMultiDocumentManagerBase::OpenDocument(
 		if (documentTypeIdPtr != NULL){
 			documentTypeId = *documentTypeIdPtr;
 		}
-		istd::IChangeable* openDocumentPtr = OpenSingleDocument(fileName, createView, viewTypeId, documentTypeId, beQuiet, ignoredPtr);
+		istd::IChangeable* openDocumentPtr = OpenSingleDocument(fileName, createView, viewTypeId, documentTypeId, beQuiet, ignoredPtr, progressManagerPtr);
 		if (openDocumentPtr != NULL){
 			if (loadedMapPtr != NULL){
 				loadedMapPtr->operator[](fileName) = documentTypeId;
@@ -275,7 +276,8 @@ bool CMultiDocumentManagerBase::SaveDocument(
 			bool requestFileName,
 			FileToTypeMap* savedMapPtr,
 			bool beQuiet,
-			bool* ignoredPtr)
+			bool* ignoredPtr,
+			ibase::IProgressManager* progressManagerPtr)
 {
 	if (ignoredPtr != NULL){
 		*ignoredPtr = false;
@@ -334,7 +336,7 @@ bool CMultiDocumentManagerBase::SaveDocument(
 		return false;
 	}
 
-	int saveState = loaderPtr->SaveToFile(*infoPtr->documentPtr, filePath);
+	int saveState = loaderPtr->SaveToFile(*infoPtr->documentPtr, filePath, progressManagerPtr);
 	if (saveState == ifile::IFilePersistence::OS_OK){
 		if ((infoPtr->filePath != filePath) || infoPtr->isDirty){
 			istd::CChangeNotifier notifierPtr(this);
@@ -383,7 +385,7 @@ bool CMultiDocumentManagerBase::SaveDirtyDocuments(bool beQuiet, bool* ignoredPt
 			}
 
 			if (beQuiet || QueryDocumentSave(*infoPtr, ignoredPtr)){
-				if (!SaveDocument(documentIndex, false, NULL, beQuiet, ignoredPtr)){
+				if (!SaveDocument(documentIndex, false, NULL, beQuiet, ignoredPtr, NULL)){
 					return false;
 				}
 			}
@@ -535,7 +537,8 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenSingleDocument(
 			const QByteArray& viewTypeId,
 			QByteArray& documentTypeId,
 			bool beQuiet,
-			bool* ignoredPtr)
+			bool* ignoredPtr,
+			ibase::IProgressManager* progressManagerPtr)
 {
 	if (ignoredPtr != NULL){
 		*ignoredPtr = false;
@@ -601,7 +604,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenSingleDocument(
 
 			ifile::IFilePersistence* loaderPtr = documentTemplatePtr->GetFileLoader(documentTypeId);
 			if (		(loaderPtr != NULL) &&
-						(loaderPtr->LoadFromFile(*infoPtr->documentPtr, filePath) == ifile::IFilePersistence::OS_OK)){
+						(loaderPtr->LoadFromFile(*infoPtr->documentPtr, filePath, progressManagerPtr) == ifile::IFilePersistence::OS_OK)){
 				RegisterDocument(infoPtr.GetPtr());
 
 				infoPtr->isDirty = false;
@@ -853,7 +856,7 @@ bool CMultiDocumentManagerBase::SerializeOpenDocumentList(iser::IArchive& archiv
 			retVal = retVal && archive.Process(documentTypeId);
 			retVal = retVal && archive.EndTag(s_documentTypeIdTag);
 
-			istd::IChangeable* openDocumentPtr = OpenSingleDocument(filePath, false, "", documentTypeId, true, NULL);
+			istd::IChangeable* openDocumentPtr = OpenSingleDocument(filePath, false, "", documentTypeId, true, NULL, NULL);
 			if (openDocumentPtr == NULL){
 				return false;
 			}

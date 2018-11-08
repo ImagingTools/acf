@@ -52,13 +52,15 @@ public:
 				istd::IChangeable** documentPtr = NULL,
 				FileToTypeMap* loadedMapPtr = NULL,
 				bool beQuiet = false,
-				bool* ignoredPtr = NULL);
+				bool* ignoredPtr = NULL,
+				ibase::IProgressManager* progressManagerPtr = NULL);
 	virtual bool SaveDocument(
 				int documentIndex = -1,
 				bool requestFileName = false,
 				FileToTypeMap* savedMapPtr = NULL,
 				bool beQuiet = false,
-				bool* ignoredPtr = NULL);
+				bool* ignoredPtr = NULL,
+				ibase::IProgressManager* progressManagerPtr = NULL);
 	virtual bool SaveDirtyDocuments(bool beQuiet = false, bool* ignoredPtr = NULL);
 	virtual bool CloseDocument(int documentIndex = -1, bool beQuiet = false, bool* ignoredPtr = NULL);
 	virtual bool CloseView(istd::IPolymorphic* viewPtr = NULL, bool beQuiet = false, bool* ignoredPtr = NULL);
@@ -78,7 +80,8 @@ protected:
 				const QByteArray& viewTypeId,
 				QByteArray& documentTypeId,
 				bool beQuiet,
-				bool* ignoredPtr);
+				bool* ignoredPtr,
+				ibase::IProgressManager* progressManagerPtr);
 
 	/**
 		Create instance of specified document without attaching to this manager.

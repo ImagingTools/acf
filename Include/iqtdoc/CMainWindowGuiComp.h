@@ -18,10 +18,12 @@
 #include <ibase/IApplication.h>
 #include <ibase/IApplicationInfo.h>
 #include <ibase/ICommandsProvider.h>
+#include <ibase/CDelegatedProgressManager.h>
 #include <idoc/IUndoManager.h>
 #include <idoc/IDocumentManager.h>
 #include <iqtgui/IDropConsumer.h>
 #include <iqtgui/CSimpleMainWindowGuiComp.h>
+#include <iqtgui/CGuiComponentDialog.h>
 
 
 namespace iqtdoc
@@ -42,6 +44,8 @@ public:
 		I_ASSIGN_TO(m_documentManagerCommandsCompPtr, m_documentManagerCompPtr, false);
 		I_ASSIGN(m_applicationCompPtr, "Application", "Access to the application's command line", true, "Application");
 		I_ASSIGN(m_dropConsumerCompPtr, "DropConsumer", "Optionaly defined drop consumer. If no consumer is set, the document manager will process the drop content", false, "DropConsumer");
+		I_ASSIGN(m_persistenceProgressCompPtr, "PersistenceProgress", "Progress management loading and saving of the documents", false, "PersistenceProgress");
+		I_ASSIGN_TO(m_persistenceProgressGuiCompPtr, m_persistenceProgressCompPtr, false);
 		I_ASSIGN(m_isCopyPathVisibleAttrPtr, "IsCopyPathVisible", "If true, operation Tools/CopyDocumentPath will be visible", true, false);
 		I_ASSIGN(m_isOpenContainingFolderVisibleAttrPtr, "IsOpenContainingFolderVisible", "If true, operation Tools/Open Containing Folder will be visible", true, false);
 		I_ASSIGN(m_maxRecentFilesCountAttrPtr, "MaxRecentFiles", "Maximal size of recent file list for one document type", true, 10);
@@ -57,6 +61,8 @@ protected:
 	I_REF(ibase::ICommandsProvider, m_documentManagerCommandsCompPtr);
 	I_REF(ibase::IApplication, m_applicationCompPtr);
 	I_REF(iqtgui::IDropConsumer, m_dropConsumerCompPtr);
+	I_REF(ibase::IProgressManager, m_persistenceProgressCompPtr);
+	I_REF(iqtgui::IGuiObject, m_persistenceProgressGuiCompPtr);
 	I_ATTR(bool, m_isCopyPathVisibleAttrPtr);
 	I_ATTR(bool, m_isOpenContainingFolderVisibleAttrPtr);
 	I_ATTR(int, m_maxRecentFilesCountAttrPtr);
@@ -116,7 +122,8 @@ public:
 	virtual bool OnModelDetached(imod::IModel* modelPtr);
 
 protected:
-	virtual bool OpenFile(const QString& fileName);
+	virtual bool OpenFile(const QString& fileName, const QByteArray* documentTypeIdPtr = NULL);
+	virtual bool SaveActiveDocument();
 
 	virtual void OnActiveViewChanged();
 	virtual void OnActiveDocumentChanged();
@@ -146,6 +153,7 @@ protected:
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
 	virtual void OnRetranslate();
 
 	// reimplemented (imod::TSingleModelObserverBase)
@@ -163,7 +171,6 @@ protected Q_SLOTS:
 	void OnOpen();
 	void OnSave();
 	void OnSaveAs();
-	void OnOpenDocument(const QByteArray* documentTypeIdPtr = NULL);
 	void OnQuit();
 	void OnUndo();
 	void OnRedo();
@@ -232,6 +239,26 @@ private:
 		CMainWindowGuiComp& m_parent;
 	};
 
+	class ProgressObserver: public ibase::CDelegatedProgressManager
+	{
+	public:
+		typedef ibase::CDelegatedProgressManager BaseClass;
+
+		ProgressObserver(
+					CMainWindowGuiComp& parent,
+					ibase::IProgressManager* slaveManagerPtr,
+					const QByteArray& progressId,
+					const QString& description,
+					bool isCancelable = false);
+
+	protected:
+		// reimplemented (istd::IChangeable)
+		virtual void OnEndChanges(const ChangeSet& changeSet);
+
+	private:
+		CMainWindowGuiComp& m_parent;
+	};
+
 	template <class InterfaceType>
 	static InterfaceType* GetFileCommands(CMainWindowGuiComp& parent)
 	{
@@ -268,6 +295,9 @@ private:
 	typedef istd::TDelPtr<iqtgui::CHierarchicalCommand> RecentGroupCommandPtr;
 	typedef QMap<QByteArray, RecentGroupCommandPtr> RecentFilesMap;
 	RecentFilesMap m_recentFilesMap;
+
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_persistenceProgressDialogPtr;
+	istd::TDelPtr<ProgressObserver> m_persistenceProgressPtr;
 };
 
 

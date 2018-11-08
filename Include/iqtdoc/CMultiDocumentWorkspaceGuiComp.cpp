@@ -211,7 +211,8 @@ istd::IChangeable* CMultiDocumentWorkspaceGuiComp::OpenSingleDocument(
 			const QByteArray& viewTypeId,
 			QByteArray& documentTypeId,
 			bool beQuiet,
-			bool* ignoredPtr)
+			bool* ignoredPtr,
+			ibase::IProgressManager* progressManagerPtr)
 {
 	bool allowViewRepeating = true;
 	if (m_allowViewRepeatingAttrPtr.IsValid()){
@@ -223,7 +224,7 @@ istd::IChangeable* CMultiDocumentWorkspaceGuiComp::OpenSingleDocument(
 		createView = false;
 	}
 
-	return BaseClass::OpenSingleDocument(filePath, createView, viewTypeId, documentTypeId, beQuiet, ignoredPtr);
+	return BaseClass::OpenSingleDocument(filePath, createView, viewTypeId, documentTypeId, beQuiet, ignoredPtr, progressManagerPtr);
 }
 
 
@@ -307,6 +308,14 @@ void CMultiDocumentWorkspaceGuiComp::OnRestoreSettings(const QSettings& settings
 					"OpenDocumentList");
 
 		SerializeOpenDocumentList(archive);
+	}
+
+	// Create the default document, if no document exists:
+	if (m_defaultCreatedDocumentTypeIdAttrPtr.IsValid() && (GetDocumentsCount() == 0)){
+		QByteArray defaultDocumentTypeId = *m_defaultCreatedDocumentTypeIdAttrPtr;
+		if (m_documentTemplateCompPtr.IsValid()){
+			InsertNewDocument(defaultDocumentTypeId);
+		}
 	}
 }
 

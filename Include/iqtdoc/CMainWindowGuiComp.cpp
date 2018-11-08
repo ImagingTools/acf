@@ -170,10 +170,9 @@ bool CMainWindowGuiComp::OnModelDetached(imod::IModel* modelPtr)
 }
 
 
-
 // protected methods
 
-bool CMainWindowGuiComp::OpenFile(const QString& fileName)
+bool CMainWindowGuiComp::OpenFile(const QString& fileName, const QByteArray* documentTypeIdPtr)
 {
 	bool retVal = false;
 
@@ -181,16 +180,56 @@ bool CMainWindowGuiComp::OpenFile(const QString& fileName)
 		idoc::IDocumentManager::FileToTypeMap fileMap;
 
 		bool ignoredFlag = false;
-		retVal = m_documentManagerCompPtr->OpenDocument(NULL, &fileName, true, "", NULL, &fileMap, false, &ignoredFlag);
+
+		if (m_persistenceProgressDialogPtr.IsValid()){
+			m_persistenceProgressDialogPtr->setWindowTitle(tr("Loading the document..."));
+		}
+
+		retVal = m_documentManagerCompPtr->OpenDocument(
+					documentTypeIdPtr,
+					fileName.isEmpty() ? NULL : &fileName,
+					true,
+					"",
+					NULL,
+					&fileMap,
+					false,
+					&ignoredFlag,
+					m_persistenceProgressPtr.GetPtr());
 		if (retVal){
 			UpdateRecentFileList(fileMap);
 		}
 		else if (!ignoredFlag){
-			QMessageBox::warning(GetWidget(), "", tr("Document could not be opened"));
+			QMessageBox::warning(GetWidget(), tr("Opening document..."), tr("Document could not be opened"));
 
 			RemoveFromRecentFileList(QString(fileName));
 		}
+
+		BaseClass::UpdateMenuActions();
 	}
+
+	return retVal;
+}
+
+
+bool CMainWindowGuiComp::SaveActiveDocument()
+{
+	bool retVal = false;
+
+	if (m_persistenceProgressDialogPtr.IsValid()){
+		m_persistenceProgressDialogPtr->setWindowTitle(tr("Saving the document..."));
+	}
+
+	bool ignoredFlag = false;
+	idoc::IDocumentManager::FileToTypeMap fileMap;
+	retVal = m_documentManagerCompPtr->SaveDocument(-1, false, &fileMap, false, &ignoredFlag, m_persistenceProgressPtr.GetPtr());
+	if (retVal){
+		UpdateRecentFileList(fileMap);
+	}
+	else if (!ignoredFlag) {
+		QMessageBox::critical(GetWidget(), "", tr("File could not be saved!"));
+	}
+
+	BaseClass::UpdateMenuActions();
 
 	return retVal;
 }
@@ -690,6 +729,18 @@ void CMainWindowGuiComp::OnGuiCreated()
 		return;
 	}
 
+	if (m_persistenceProgressCompPtr.IsValid() && m_persistenceProgressGuiCompPtr.IsValid()){
+		m_persistenceProgressDialogPtr.SetPtr(
+					new iqtgui::CGuiComponentDialog(
+								m_persistenceProgressGuiCompPtr.GetPtr(),
+								QDialogButtonBox::NoButton,
+								false));
+		m_persistenceProgressDialogPtr->setWindowModality(Qt::WindowModal);
+		m_persistenceProgressDialogPtr->setWindowFlags(((m_persistenceProgressDialogPtr->windowFlags() | Qt::CustomizeWindowHint) & ~(Qt::WindowCloseButtonHint | Qt::WindowSystemMenuHint)));
+
+		m_persistenceProgressPtr.SetPtr (new ProgressObserver(*this, m_persistenceProgressCompPtr.GetPtr(), "Persistence", QString()));
+	}
+
 	UpdateUndoMenu();
 
 	mainWindowPtr->setAcceptDrops(true);
@@ -701,9 +752,7 @@ void CMainWindowGuiComp::OnGuiCreated()
 			QString documentFileName = applicationArguments[1];
 			idoc::IDocumentManager::FileToTypeMap fileMap;
 
-			if (m_documentManagerCompPtr->OpenDocument(NULL, &documentFileName, true, "", NULL, &fileMap)){
-				UpdateRecentFileList(fileMap);
-			}
+			OpenFile(documentFileName);
 		}
 	}
 
@@ -716,6 +765,14 @@ void CMainWindowGuiComp::OnGuiCreated()
 	}
 
 	mainWindowPtr->installEventFilter(this);
+}
+
+
+void CMainWindowGuiComp::OnGuiDestroyed()
+{
+	BaseClass::OnGuiDestroyed();
+
+	m_persistenceProgressPtr.Reset();
 }
 
 
@@ -878,15 +935,13 @@ void CMainWindowGuiComp::OnNew()
 
 void CMainWindowGuiComp::OnOpen()
 {
-	OnOpenDocument(NULL);
+	OpenFile(QString());
 }
 
 
 void CMainWindowGuiComp::OnSave()
 {
 	if (m_documentManagerCompPtr.IsValid()){
-		idoc::IDocumentManager::FileToTypeMap fileMap;
-
 		istd::IPolymorphic* activeViewPtr = m_documentManagerCompPtr->GetActiveView();
 		Q_ASSERT(activeViewPtr != NULL);
 
@@ -925,7 +980,7 @@ void CMainWindowGuiComp::OnSave()
 								GetWidget(),
 								tr("Save file"),
 								QString(tr("The file %1 cannot be overwritten. Possible you have not enough permissions")).arg(activeDocumentInfo.filePath));
-					return;	
+					return;
 				}
 			}
 			break;
@@ -934,15 +989,7 @@ void CMainWindowGuiComp::OnSave()
 			return;
 		}
 
-		bool ignoredFlag = false;
-		if (m_documentManagerCompPtr->SaveDocument(-1, false, &fileMap, false, &ignoredFlag)){
-			UpdateRecentFileList(fileMap);
-		}
-		else if (!ignoredFlag){
-			QMessageBox::critical(GetWidget(), "", tr("File could not be saved!"));
-		}
-
-		BaseClass::UpdateMenuActions();
+		SaveActiveDocument();
 	}
 }
 
@@ -958,24 +1005,6 @@ void CMainWindowGuiComp::OnSaveAs()
 		}
 		else if (!ignoredFlag){
 			QMessageBox::critical(GetWidget(), "", tr("File could not be saved!"));
-		}
-
-		BaseClass::UpdateMenuActions();
-	}
-}
-
-
-void CMainWindowGuiComp::OnOpenDocument(const QByteArray* documentTypeIdPtr)
-{
-	idoc::IDocumentManager::FileToTypeMap fileMap;
-
-	bool ignoredFlag = false;
-	if (m_documentManagerCompPtr.IsValid()){
-		if (m_documentManagerCompPtr->OpenDocument(documentTypeIdPtr, NULL, true, "", NULL, &fileMap, false, &ignoredFlag)){
-			UpdateRecentFileList(fileMap);
-		}
-		else if (!ignoredFlag){
-			QMessageBox::warning(GetWidget(), "", tr("Document could not be opened"));
 		}
 
 		BaseClass::UpdateMenuActions();
@@ -1110,6 +1139,41 @@ bool CMainWindowGuiComp::ActiveUndoManager::OnModelAttached(imod::IModel* modelP
 void CMainWindowGuiComp::ActiveUndoManager::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	m_parent.UpdateUndoMenu();
+}
+
+
+// public methods of embedded class ProgressObserver
+
+CMainWindowGuiComp::ProgressObserver::ProgressObserver(
+			CMainWindowGuiComp & parent,
+			ibase::IProgressManager* slaveManagerPtr,
+			const QByteArray& progressId,
+			const QString& description,
+			bool isCancelable)
+	:BaseClass(slaveManagerPtr, progressId, description, isCancelable),
+	m_parent(parent)
+{
+}
+
+
+// protected methods of embedded class ProgressObserver
+
+// reimplemented (istd::IChangeable)
+
+void CMainWindowGuiComp::ProgressObserver::OnEndChanges(const ChangeSet& changeSet)
+{
+	if (changeSet.Contains(ibase::CDelegatedProgressManager::CF_SESSIONS_NUMBER)){
+		if (m_parent.m_persistenceProgressDialogPtr.IsValid()){
+			if (GetOpenSessionsCount() > 0){
+				m_parent.m_persistenceProgressDialogPtr->show();
+			}
+			else{
+				m_parent.m_persistenceProgressDialogPtr->hide();
+			}
+		}
+	}
+
+	BaseClass::OnEndChanges(changeSet);
 }
 
 

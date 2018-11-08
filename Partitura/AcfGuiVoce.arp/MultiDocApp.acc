@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4562" Description="ACF"/>
-            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4720" Description="ACF"/>
+            <Version Id="1" Number="2009" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330496" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Framework for multi-document applications</Description>
@@ -148,6 +148,9 @@
                     <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="Workspace"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="DropConsumer" Type="Reference" ExportId="MainGuiDropConsumer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="IconSize" Type="Integer" ExportId="IconSize">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
@@ -179,6 +182,9 @@
                         <Data IsEnabled="true" Value="10"/>
                     </AttributeInfo>
                     <AttributeInfo Id="OpenCommandVisible" Type="Boolean" ExportId="OpenCommandVisible">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PersistenceProgress" Type="Reference" ExportId="DocumentPersistenceProgress">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="SaveCommandVisible" Type="Boolean" ExportId="SaveCommandVisible">
@@ -254,6 +260,9 @@
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="AllowViewRepeating" Type="Boolean" ExportId="AllowViewRepeating">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultCreatedDocumentTypeId" Type="Id" ExportId="DefaultCreatedDocumentTypeId">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DocumentTemplate" Type="Reference" ExportId="">
