@@ -370,7 +370,7 @@ void CPolygonShape::DrawArea(QPainter& drawContext) const
 			}
 
 			for (int i = 0; i < qtPolygon.size(); i++){
-				qtPolygon[i] = polygonPtr->GetNodePos(i);
+				qtPolygon[i] = GetScreenPosition(polygonPtr->GetNodePos(i));
 			}
 
 			drawContext.save();
