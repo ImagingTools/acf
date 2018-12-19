@@ -3,6 +3,7 @@
 
 
 // Qt includes
+#include <QtCore/QVector>
 #include <QtCore/QList>
 #include <QtCore/QMutex>
 

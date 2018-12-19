@@ -2,6 +2,9 @@
 #define iattr_TAttribute_included
 
 
+// Qt includes
+#include <QtCore/QByteArray>
+
 // ACF includes
 #include <istd/CChangeNotifier.h>
 #include <istd/CClassInfo.h>
