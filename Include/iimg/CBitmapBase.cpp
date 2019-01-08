@@ -117,29 +117,64 @@ icmm::CVarColor CBitmapBase::GetColorAt(const istd::CIndex2d& position) const
 	Q_ASSERT(position.IsValid());
 	Q_ASSERT(position.IsInside(GetImageSize()));
 
-	int componentsCount = GetComponentsCount();
+	switch (GetPixelFormat()){
+	case PF_GRAY:
+	case PF_RGB:
+	case PF_RGBA:
+	case PF_RGB24:
+		{
+			int componentsCount = GetComponentsCount();
 
-	icmm::CVarColor retVal(componentsCount);
+			icmm::CVarColor retVal(componentsCount);
 
-	int byteOffsetX = (GetPixelBitsCount() * position.GetX()) >> 3;
+			int byteOffsetX = (GetPixelBitsCount() * position.GetX()) >> 3;
 
-	quint8* pixelPtr = (quint8*)GetLinePtr(position.GetY());
-	Q_ASSERT(pixelPtr != NULL);
-	pixelPtr += byteOffsetX;
+			quint8* pixelPtr = (quint8*)GetLinePtr(position.GetY());
+			Q_ASSERT(pixelPtr != NULL);
+			pixelPtr += byteOffsetX;
 
-	for (int i = 0; i < componentsCount; ++i){
-		quint8 componentValue;
-		if (GetComponentBitsCount(i) == 8){
-			componentValue = pixelPtr[i];
+			for (int i = 0; i < componentsCount; ++i){
+				quint8 componentValue;
+				if (GetComponentBitsCount(i) == 8){
+					componentValue = pixelPtr[i];
+				}
+				else{
+					componentValue = 0;
+				}
+
+				retVal.SetElement(i, componentValue / 255.0);
+			}
+
+			return retVal;
 		}
-		else{
-			componentValue = 0;
+
+	case PF_GRAY16:
+		{
+			quint16* pixelPtr = (quint16*)GetLinePtr(position.GetY());
+			return icmm::CVarColor(1, pixelPtr[position.GetX()] / 65535.0);
 		}
 
-		retVal.SetElement(i, componentValue / 255.0);
+	case PF_GRAY32:
+		{
+			quint32* pixelPtr = (quint32*)GetLinePtr(position.GetY());
+			return icmm::CVarColor(1, pixelPtr[position.GetX()] / 4294967295.0);
+		}
+
+	case PF_FLOAT32:
+		{
+			float* pixelPtr = (float*)GetLinePtr(position.GetY());
+			return icmm::CVarColor(1, pixelPtr[position.GetX()]);
+		}
+
+	case PF_FLOAT64:
+		{
+			double* pixelPtr = (double*)GetLinePtr(position.GetY());
+			return icmm::CVarColor(1, pixelPtr[position.GetX()]);
+		}
+
+	default:
+		return icmm::CVarColor();
 	}
-
-	return retVal;
 }
 
 
