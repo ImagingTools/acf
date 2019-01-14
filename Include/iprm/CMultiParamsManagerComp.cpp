@@ -25,7 +25,8 @@ static const iser::CArchiveTag s_typeIdTag("TypeId", "Type id of factory of para
 static const iser::CArchiveTag s_nameTag("Name", "Name of set", iser::CArchiveTag::TT_LEAF, &s_paramsSetTag);
 static const iser::CArchiveTag s_uuidTag("Uuid", "Uuid of parameter set", iser::CArchiveTag::TT_LEAF, &s_paramsSetTag);
 static const iser::CArchiveTag s_enabledTag("Enabled", "Is parameter set enabled", iser::CArchiveTag::TT_LEAF, &s_paramsSetTag);
-static const iser::CArchiveTag s_valueTag("Value", "Value of set", iser::CArchiveTag::TT_GROUP, &s_paramsSetTag, true);
+static const iser::CArchiveTag s_oldValueTag("Value", "Value of set", iser::CArchiveTag::TT_GROUP, &s_paramsSetTag, true);
+static const iser::CArchiveTag s_valueTag("Value", "Value of set", iser::CArchiveTag::TT_WEAK, &s_paramsSetTag, true);
 static const iser::CArchiveTag s_selectedIndexTag("Selected", "Selected index", iser::CArchiveTag::TT_LEAF);
 
 
@@ -145,9 +146,16 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 			return false;
 		}
 
-		retVal = retVal && archive.BeginTag(s_valueTag);
-		retVal = retVal && paramsSetPtr->Serialize(archive);
-		retVal = retVal && archive.EndTag(s_valueTag);
+		if (!hasVersion || (version > 4745)){
+			retVal = retVal && archive.BeginTag(s_valueTag);
+			retVal = retVal && paramsSetPtr->Serialize(archive);
+			retVal = retVal && archive.EndTag(s_valueTag);
+		}
+		else{
+			retVal = retVal && archive.BeginTag(s_oldValueTag);
+			retVal = retVal && paramsSetPtr->Serialize(archive);
+			retVal = retVal && archive.EndTag(s_oldValueTag);
+		}
 
 		retVal = retVal && archive.EndTag(s_paramsSetTag);
 	}
