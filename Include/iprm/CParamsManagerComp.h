@@ -37,9 +37,6 @@ public:
 	// reimplemented (iprm::IParamsManager)
 	virtual const IOptionsList* GetParamsTypeConstraints() const;
 
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-
 	// reimplemented (iprm::IOptionsManager)
 	virtual int GetOptionOperationFlags(int index = -1) const;
 	virtual bool SetOptionEnabled(int index, bool isEnabled = true);
@@ -52,6 +49,12 @@ public:
 	virtual bool SwapOptions(int index1, int index2);
 	virtual bool SetOptionName(int optionIndex, const QString& optionName);
 	virtual bool SetOptionDescription(int optionIndex, const QString& optionDescription);
+
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
+
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS);
 
 protected:
 	// reimplemented (CParamsManagerCompBase)

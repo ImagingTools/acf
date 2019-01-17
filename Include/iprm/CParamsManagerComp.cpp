@@ -1,6 +1,9 @@
 #include <iprm/CParamsManagerComp.h>
 
 
+// QtCore includes
+#include <QtCore/QUuid>
+
 // ACF includes
 #include <istd/CChangeNotifier.h>
 #include <istd/TChangeDelegator.h>
@@ -77,6 +80,68 @@ bool CParamsManagerComp::SetSetsCount(int count)
 const IOptionsList* CParamsManagerComp::GetParamsTypeConstraints() const
 {
 	return NULL;
+}
+
+
+// reimplemented (iprm::IOptionsManager)
+
+int CParamsManagerComp::GetOptionOperationFlags(int index) const
+{
+	return GetIndexOperationFlags(index);
+}
+
+
+bool CParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
+{
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+
+	int fixedSetsCount = m_fixedSetNamesAttrPtr.GetCount();
+	if ((index < fixedSetsCount) || !*m_allowDisabledAttrPtr || !*m_supportEnablingAttrPtr){
+		return false;
+	}
+
+	if (m_paramSets[index - fixedSetsCount]->isEnabled != isEnabled){
+		istd::CChangeNotifier notifier(this, &s_enableOptionChangeSet);
+		Q_UNUSED(notifier);
+
+		m_paramSets[index - fixedSetsCount]->isEnabled = isEnabled;
+	}
+
+	return true;
+}
+
+
+bool CParamsManagerComp::RemoveOption(int index)
+{
+	return RemoveParamsSet(index);
+}
+
+
+bool CParamsManagerComp::InsertOption(
+			const QString& /*optionName*/,
+			const QByteArray& /*optionId*/,
+			const QString& /*optionDescription*/,
+			int /*index*/)
+{
+	return false;
+}
+
+
+bool CParamsManagerComp::SwapOptions(int index1, int index2)
+{
+	return SwapParamsSet(index1, index2);
+}
+
+
+bool CParamsManagerComp::SetOptionName(int optionIndex, const QString& optionName)
+{
+	return SetParamsSetName(optionIndex, optionName);
+}
+
+
+bool CParamsManagerComp::SetOptionDescription(int /*optionIndex*/, const QString& /*optionDescription*/)
+{
+	return false;
 }
 
 
@@ -194,65 +259,49 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 }
 
 
-// reimplemented (iprm::IOptionsManager)
+// reimplemented (istd::IChangeable)
 
-int CParamsManagerComp::GetOptionOperationFlags(int index) const
+bool CParamsManagerComp::CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode)
 {
-	return GetIndexOperationFlags(index);
-}
-
-
-bool CParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
-{
-	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
-
-	int fixedSetsCount = m_fixedSetNamesAttrPtr.GetCount();
-	if ((index < fixedSetsCount) || !*m_allowDisabledAttrPtr || !*m_supportEnablingAttrPtr){
+	const CParamsManagerComp* sourcePtr = dynamic_cast<const CParamsManagerComp*>(&object);
+	if (sourcePtr == NULL){
 		return false;
 	}
 
-	if (m_paramSets[index - fixedSetsCount]->isEnabled != isEnabled){
-		istd::CChangeNotifier notifier(this, &s_enableOptionChangeSet);
-		Q_UNUSED(notifier);
-
-		m_paramSets[index - fixedSetsCount]->isEnabled = isEnabled;
+	int paramsCount = sourcePtr->GetParamsSetsCount();
+	if (!SetSetsCount(paramsCount)){
+		return false;
 	}
 
+	for (int i = 0; i < paramsCount; ++i){
+		IParamsSet* targetParamsSetPtr = GetParamsSet(i);
+		Q_ASSERT(targetParamsSetPtr != NULL);
+
+		const IParamsSet* sourceParamSetPtr = sourcePtr->GetParamsSet(i);
+		Q_ASSERT(sourceParamSetPtr != NULL);
+
+		SetParamsSetName(i, sourcePtr->GetParamsSetName(i));
+		SetOptionEnabled(i, sourcePtr->IsOptionEnabled(i));
+
+		m_paramSets[i]->uuid = QUuid::createUuid().toByteArray();
+		
+		targetParamsSetPtr->CopyFrom(*sourceParamSetPtr, mode);
+	}
+
+	int selectedIndex = sourcePtr->GetSelectedOptionIndex();
+	
+	if (selectedIndex > paramsCount){
+		if (m_defaultSelectedIndexAttrPtr.IsValid()){
+				selectedIndex = *m_defaultSelectedIndexAttrPtr;
+		}
+		else{
+			selectedIndex = -1;
+		}
+	}
+
+	m_selectedIndex = selectedIndex;
+
 	return true;
-}
-
-
-bool CParamsManagerComp::RemoveOption(int index)
-{
-	return RemoveParamsSet(index);
-}
-
-
-bool CParamsManagerComp::InsertOption(
-			const QString& /*optionName*/,
-			const QByteArray& /*optionId*/,
-			const QString& /*optionDescription*/,
-			int /*index*/)
-{
-	return false;
-}
-
-
-bool CParamsManagerComp::SwapOptions(int index1, int index2)
-{
-	return SwapParamsSet(index1, index2);
-}
-
-
-bool CParamsManagerComp::SetOptionName(int optionIndex, const QString& optionName)
-{
-	return SetParamsSetName(optionIndex, optionName);
-}
-
-
-bool CParamsManagerComp::SetOptionDescription(int /*optionIndex*/, const QString& /*optionDescription*/)
-{
-	return false;
 }
 
 
@@ -278,7 +327,6 @@ iprm::IParamsSet* CParamsManagerComp::CreateParamsSetInstance(int /*typeIndex*/)
 
 	return NULL;
 }
-
 
 
 // reimplemented (icomp::CComponentBase)
