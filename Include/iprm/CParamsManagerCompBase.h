@@ -28,6 +28,7 @@ public:
 
 	I_BEGIN_BASE_COMPONENT(CParamsManagerCompBaseAttr);
 		I_ASSIGN(m_elementIndexParamIdAttrPtr, "ElementIndexParamId", "ID of index of returned parameter set in manager list", false, "Index");
+		I_ASSIGN(m_elementUuidParamIdAttrPtr, "ElementUuidParamId", "ID of object uuid of returned parameter set in manager list", false, "Uuid");
 		I_ASSIGN(m_elementNameParamIdAttrPtr, "ElementNameParamId", "ID of the name of returned parameter set in manager list", false, "Name");
 		I_ASSIGN(m_elementDescriptionParamIdAttrPtr, "ElementDescriptionParamId", "ID of the description of returned parameter set in manager list", false, "Description");
 		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of references to fixed parameter set", false);
@@ -54,6 +55,7 @@ protected:
 	I_ATTR(bool, m_supportEnablingAttrPtr);
 	I_ATTR(bool, m_allowEditFixedAttrPtr);
 	I_ATTR(QByteArray, m_elementIndexParamIdAttrPtr);
+	I_ATTR(QByteArray, m_elementUuidParamIdAttrPtr);
 	I_ATTR(QByteArray, m_elementNameParamIdAttrPtr);
 	I_ATTR(QByteArray, m_elementDescriptionParamIdAttrPtr);
 };
@@ -161,7 +163,7 @@ protected:
 		virtual bool SetSelectedOptionIndex(int index);
 		virtual ISelectionParam* GetSubselection(int index) const;
 
-		// reimplemented (iser::INameParam)
+		// reimplemented (iprm::INameParam)
 		virtual const QString& GetName() const;
 		virtual void SetName(const QString& name);
 		virtual bool IsNameFixed() const;
@@ -172,13 +174,34 @@ protected:
 		// reimplemented (iser::ISerializable)
 		virtual bool Serialize(iser::IArchive& archive);
 
+		class UuidParam: virtual public INameParam
+		{
+		public:
+			UuidParam(const ParamSet& parent) : m_parent(parent) {}
+
+			// reimplemented (iprm::INameParam)
+			virtual const QString& GetName() const 
+			{
+				m_uuid = m_parent.uuid;
+				return m_uuid;
+			}
+			virtual void SetName(const QString& /*name*/) {}
+			virtual bool IsNameFixed() const { return true; }
+
+			// reimplemented (iser::ISerializable)
+			virtual bool Serialize(iser::IArchive& /*archive*/) { return true; }
+		private:
+			mutable QString m_uuid;
+			const ParamSet& m_parent;
+		};
+
 		istd::TDelPtr<IParamsSet> paramSetPtr;
 		QByteArray uuid;
 		QString name;
 		iprm::CNameParam description;
 		bool isEnabled;
 		CParamsManagerCompBase* parentPtr;
-
+		UuidParam uuidParam;
 		imod::CModelUpdateBridge updateBridge;
 	};
 	

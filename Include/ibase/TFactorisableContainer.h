@@ -70,8 +70,8 @@ protected:
 	virtual InterfaceClass* CreateElement(const QByteArray& itemKey);
 	virtual void OnElementCreated(InterfaceClass* elementPtr);
 
-	// reimplemented (ibase::TContainer)
-	virtual bool SerializeItem(ItemClass& item, iser::IArchive& archive);
+	// reimplemented (ibase::TSerializableContainer)
+	virtual bool SerializeItem(ItemClass& item, iser::IArchive& archive, iser::CArchiveTag* parentTagPtr = NULL);
 
 protected:
 	istd::TIFactory<InterfaceClass>* m_itemFactoryPtr;
@@ -196,7 +196,7 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.Process(itemKey);
 		retVal = retVal && archive.EndTag(keyTag);
 
-		if (!archive.IsStoring()){	
+		if (!archive.IsStoring()){
 			item.second = itemKey;
 			InterfaceClass* interfacePtr = CreateElement(itemKey);
 			if (interfacePtr != NULL){
@@ -211,7 +211,7 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 
 		ItemClass& containerItem = BaseClass::GetAt(index);
 
-		retVal = retVal && SerializeItem(containerItem, archive);
+		retVal = retVal && SerializeItem(containerItem, archive, &itemTag);
 
 		retVal = retVal && archive.EndTag(itemTag);
 	}
@@ -257,7 +257,7 @@ void TFactorisableContainer<InterfaceClass>::OnElementCreated(InterfaceClass* /*
 // reimplemented (ibase::TContainer)
 
 template <class InterfaceClass>
-bool TFactorisableContainer<InterfaceClass>::SerializeItem(ItemClass& item, iser::IArchive& archive)
+bool TFactorisableContainer<InterfaceClass>::SerializeItem(ItemClass& item, iser::IArchive& archive, iser::CArchiveTag* /*parentTagPtr*/)
 {
 	iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(item.first.GetPtr());
 	if (serializablePtr != NULL){

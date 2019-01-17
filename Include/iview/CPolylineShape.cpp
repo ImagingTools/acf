@@ -364,6 +364,30 @@ void CPolylineShape::DrawOrientationMarker(
 	drawContext.restore();
 }
 
+void CPolylineShape::DrawOrientationMarker(
+			QPainter& drawContext,
+			const i2d::CVector2d& point,
+			const i2d::CVector2d& direction,
+			double maxWidth,
+			const iview::IColorSchema& colorSchema)
+{
+	const i2d::CRect& tickerBox = colorSchema.GetTickerBox(iview::IColorSchema::TT_CHECKBOX_ON);
+	const double sizeBase = qMin(maxWidth, double(tickerBox.GetHeight() + tickerBox.GetWidth()));
+
+	const i2d::CVector2d directionNormal = direction.GetNormalized(sizeBase);
+	i2d::CVector2d orthogonal = directionNormal.GetOrthogonal();
+
+	QPolygonF arrow = QPolygonF();
+	arrow.push_back(point + orthogonal * 0.5);
+	arrow.push_back(point + directionNormal);
+	arrow.push_back(point - orthogonal * 0.5);
+
+	drawContext.save();
+	drawContext.setPen(colorSchema.GetPen(iview::IColorSchema::SP_YELLOW));
+	drawContext.setBrush(QBrush(QColor(255, 255, 0)));
+	drawContext.drawPolygon(arrow);
+	drawContext.restore();
+}
 
 // protected methods
 

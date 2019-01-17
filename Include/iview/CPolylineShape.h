@@ -48,6 +48,12 @@ public:
 				const i2d::CLine2d& segmentLine,
 				double scale);
 
+	static void DrawOrientationMarker(
+				QPainter& drawContext,
+				const i2d::CVector2d& point,
+				const i2d::CVector2d& direction,
+				double maxWidth,
+				const iview::IColorSchema& colorSchema);
 protected:
 	// reimplemented (iview::CPolygonShape)
 	virtual void DrawCurve(QPainter& drawContext) const;
