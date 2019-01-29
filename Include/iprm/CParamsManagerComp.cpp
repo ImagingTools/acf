@@ -283,7 +283,14 @@ bool CParamsManagerComp::CopyFrom(const istd::IChangeable& object, istd::IChange
 		SetParamsSetName(i, sourcePtr->GetParamsSetName(i));
 		SetOptionEnabled(i, sourcePtr->IsOptionEnabled(i));
 
-		m_paramSets[i]->uuid = QUuid::createUuid().toByteArray();
+		if (i >= m_fixedParamSetsCompPtr.GetCount()){
+			int paramIndex = i - m_fixedParamSetsCompPtr.GetCount();
+
+			Q_ASSERT(paramIndex < m_paramSets.count());
+			Q_ASSERT(m_paramSets[paramIndex].IsValid());
+	
+			m_paramSets[paramIndex]->uuid = QUuid::createUuid().toByteArray();
+		}
 		
 		targetParamsSetPtr->CopyFrom(*sourceParamSetPtr, mode);
 	}
