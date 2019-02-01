@@ -45,7 +45,7 @@ bool CReflectedBitmapBase::CopyImageFrom(const QImage& image)
 
 bool CReflectedBitmapBase::CalculateCache(const ChangeSet& changeSet)
 {
-	if (!changeSet.Contains(CF_BLOCK_BITMAP_CONVERSION)){
+	if (!changeSet.ContainsExplicit(CF_BLOCK_BITMAP_CONVERSION)){
 		return ConvertToQImage(m_image);
 	}
 
