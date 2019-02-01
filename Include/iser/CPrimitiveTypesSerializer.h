@@ -78,6 +78,13 @@ public:
 				const QByteArray& containerTagName = "Elements",
 				const QByteArray& elementTagName = "Element");
 
+	template <typename ContainterType>
+	static bool SerializeContainer(
+				iser::IArchive& archive,
+				ContainterType& container,
+				const QByteArray& containerTagName,
+				const QByteArray& elementTagName);
+
 	/**
 		Method for serialization of the enumerated value using ACF's meta information extensions for the C++ enums.
 		This implementation supports both methods for serialization of the enumerator - as integer value or in textual form.
@@ -112,6 +119,56 @@ bool CPrimitiveTypesSerializer::SerializeIndex(iser::IArchive& archive, istd::TI
 	for (int i = 0; i < Dimensions; ++i){
 		retVal = retVal && archive.Process(index[i]);
 	}
+
+	return retVal;
+}
+
+
+template <typename ContainerType>
+bool CPrimitiveTypesSerializer::SerializeContainer(
+	iser::IArchive& archive,
+	ContainerType& container,
+	const QByteArray& containerTagName,
+	const QByteArray& elementTagName)
+{
+	iser::CArchiveTag elementsTag(containerTagName, "List of elements", iser::CArchiveTag::TT_MULTIPLE);
+	iser::CArchiveTag elementTag(elementTagName, "Single element", iser::CArchiveTag::TT_LEAF, &elementsTag);
+
+	bool retVal = true;
+
+	bool isStoring = archive.IsStoring();
+	int elementsCount = container.count();
+
+	retVal = retVal && archive.BeginMultiTag(elementsTag, elementTag, elementsCount);
+	if (!retVal){
+		return false;
+	}
+
+	if (isStoring){
+		for (int i = 0; i < elementsCount; ++i){
+			ContainerType::value_type element = container[i];
+
+			retVal = retVal && archive.BeginTag(elementTag);
+			retVal = retVal && archive.Process(element);
+			retVal = retVal && archive.EndTag(elementTag);
+		}
+	}
+	else{
+		container.clear();
+
+		for (int i = 0; i < elementsCount; ++i){
+			ContainerType::value_type element;
+			retVal = retVal && archive.BeginTag(elementTag);
+			retVal = retVal && archive.Process(element);
+			retVal = retVal && archive.EndTag(elementTag);
+
+			if (retVal){
+				container.push_back(element);
+			}
+		}
+	}
+
+	retVal = retVal && archive.EndTag(elementsTag);
 
 	return retVal;
 }

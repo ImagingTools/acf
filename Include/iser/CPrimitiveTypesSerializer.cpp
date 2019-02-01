@@ -272,48 +272,7 @@ bool CPrimitiveTypesSerializer::SerializeQStringList(
 			const QByteArray& containerTagName,
 			const QByteArray& elementTagName)
 {
-	iser::CArchiveTag elementsTag(containerTagName, "List of elements", iser::CArchiveTag::TT_MULTIPLE);
-	iser::CArchiveTag elementTag(elementTagName, "Single container element", iser::CArchiveTag::TT_LEAF, &elementsTag);
-
-	bool retVal = true;
-
-	bool isStoring = archive.IsStoring();
-	int elementsCount = stringList.count();
-
-	retVal = retVal && archive.BeginMultiTag(elementsTag, elementTag, elementsCount);
-	if (!retVal){
-		return false;
-	}
-
-	if (isStoring){
-		for (int i = 0; i < elementsCount; ++i){
-			retVal = retVal && archive.BeginTag(elementTag);
-
-			QString element = stringList[i];
-			retVal = retVal && archive.Process(element);
-
-			retVal = retVal && archive.EndTag(elementTag);
-		}
-	}
-	else{
-		stringList.clear();
-
-		for (int i = 0; i < elementsCount; ++i){
-			retVal = retVal && archive.BeginTag(elementTag);
-
-			QString element;
-			retVal = retVal && archive.Process(element);
-			if (retVal){
-				stringList.push_back(element);
-			}
-
-			retVal = retVal && archive.EndTag(elementTag);
-		}
-	}
-
-	retVal = retVal && archive.EndTag(elementsTag);
-
-	return retVal;
+	return SerializeContainer<QStringList>(archive, stringList, containerTagName, elementTagName);
 }
 
 
