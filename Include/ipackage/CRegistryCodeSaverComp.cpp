@@ -1004,7 +1004,15 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 			if (!packagePath.isEmpty()){
 				QDir packageDir(QDir::cleanPath(packagePath));
 
-				stream << packageDir.absoluteFilePath(address.GetComponentId() + ".acc") << "\n";
+				QFileInfo outputFilePathOld(packageDir.absoluteFilePath(address.GetComponentId() + ".arx"));
+				QFileInfo outputFilePathNew(packageDir.absoluteFilePath(address.GetComponentId() + ".acc"));
+
+				if (outputFilePathOld.exists()){
+					stream << outputFilePathOld.absoluteFilePath() << "\n";
+				}
+				else if (outputFilePathNew.exists()){
+					stream << outputFilePathNew.absoluteFilePath() << "\n";
+				}
 			}
 		}
 
