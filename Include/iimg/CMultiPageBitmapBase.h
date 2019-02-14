@@ -37,13 +37,15 @@ public:
 	// reimplemented (iimg::IMultiPageBitmapController)
 	virtual iimg::IBitmap* InsertBitmap(
 				iimg::IBitmap::PixelFormat pixelFormat,
-				const istd::CIndex2d& size);
+				const istd::CIndex2d& size,
+				const idoc::IDocumentMetaInfo* metaInfoPtr = NULL);
 	virtual iimg::IBitmap* InsertBitmap(
 				iimg::IBitmap::PixelFormat pixelFormat,
 				const istd::CIndex2d& size,
 				void* dataPtr,
 				bool releaseFlag,
-				int linesDifference = 0);
+				int linesDifference = 0,
+				const idoc::IDocumentMetaInfo* metaInfoPtr = NULL);
 	virtual void RemoveBitmap(int index);
 
 	// reimplemented (istd::IChangeable)

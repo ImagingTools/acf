@@ -4,6 +4,7 @@
 
 // ACF includes
 #include <iimg/IMultiBitmapProvider.h>
+#include <idoc/IDocumentMetaInfo.h>
 
 
 namespace iimg
@@ -24,7 +25,8 @@ public:
 	*/
 	virtual iimg::IBitmap* InsertBitmap(
 				iimg::IBitmap::PixelFormat pixelFormat,
-				const istd::CIndex2d& size) = 0;
+				const istd::CIndex2d& size,
+				const idoc::IDocumentMetaInfo* metaInfoPtr = NULL) = 0;
 
 	/**
 		Inserts a new bitmap.
@@ -42,7 +44,8 @@ public:
 				const istd::CIndex2d& size,
 				void* dataPtr,
 				bool releaseFlag,
-				int linesDifference = 0) = 0;
+				int linesDifference = 0,
+				const idoc::IDocumentMetaInfo* metaInfoPtr = NULL) = 0;
 
 	/**
 		Removes the bitmap at the given index.

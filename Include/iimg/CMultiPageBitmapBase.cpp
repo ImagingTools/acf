@@ -68,9 +68,10 @@ const iimg::IBitmap* CMultiPageBitmapBase::GetBitmap(int bitmapIndex) const
 
 iimg::IBitmap* CMultiPageBitmapBase::InsertBitmap(
 			iimg::IBitmap::PixelFormat pixelFormat, 
-			const istd::CIndex2d& size)
+			const istd::CIndex2d& size,
+			const idoc::IDocumentMetaInfo* metaInfoPtr)
 {
-	iimg::IBitmap* pagePtr = dynamic_cast<iimg::IBitmap*>(InsertPage());
+	iimg::IBitmap* pagePtr = dynamic_cast<iimg::IBitmap*>(InsertPage(metaInfoPtr));
 	if (!pagePtr->CreateBitmap(pixelFormat, size)){
 		RemovePage(GetPagesCount() - 1);
 
@@ -86,9 +87,10 @@ iimg::IBitmap* CMultiPageBitmapBase::InsertBitmap(
 			const istd::CIndex2d& size, 
 			void* dataPtr, 
 			bool releaseFlag, 
-			int linesDifference /*= 0*/)
+			int linesDifference /*= 0*/,
+			const idoc::IDocumentMetaInfo* metaInfoPtr)
 {
-	iimg::IBitmap* pagePtr = dynamic_cast<iimg::IBitmap*>(InsertPage());
+	iimg::IBitmap* pagePtr = dynamic_cast<iimg::IBitmap*>(InsertPage(metaInfoPtr));
 	if (!pagePtr->CreateBitmap(pixelFormat, size, dataPtr, releaseFlag, linesDifference)){
 		RemovePage(GetPagesCount() - 1);
 
