@@ -655,7 +655,7 @@ void CViewBase::OnShapeSelected(IInteractiveShape& shape, bool state)
 		for (int listenerIndex = 0; listenerIndex < int(m_viewListeners.size()); listenerIndex++){
 			bool accepted = m_viewListeners.at(listenerIndex)->OnSelectChange(*this, m_lastMousePosition, shape, state);
 			if (accepted){
-				break;		
+				break;
 			}
 		}
 	}

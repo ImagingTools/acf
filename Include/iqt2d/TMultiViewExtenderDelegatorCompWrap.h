@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include <icomp/CComponentBase.h>
 #include <iqt2d/IViewExtender.h>
 
 

@@ -40,12 +40,14 @@ bool ConvertToGrayImage(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 			for (int x = 0; x < size.GetX(); ++x){
 				PixelType value = inputLinePtr[x];
 
-				if (value < minValue){
-					minValue = value;
-				}
+				if (!qIsNaN(double(value))){
+					if (value < minValue){
+						minValue = value;
+					}
 
-				if (value > maxValue){
-					maxValue = value;
+					if (value > maxValue){
+						maxValue = value;
+					}
 				}
 			}
 		}
