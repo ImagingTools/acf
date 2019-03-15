@@ -4,11 +4,15 @@
 
 // Qt includes
 #include <QtCore/QVector>
+#include <QtCore/QMutex>
 
 // ACF includes
 #include <istd/IChangeable.h>
 #include <imod/IModel.h>
 #include <imod/IObserver.h>
+
+
+#include <atomic>
 
 
 namespace imod
@@ -69,12 +73,16 @@ public:
 	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 private:
+	bool IsAttached(const imod::IModel* modelPtr) const;
+
 	typedef QVector<imod::IModel*> Models;
 	Models m_models;
 
 	istd::IChangeable* m_changeablePtr;
 
 	int m_updateFlags;
+
+	mutable QMutex m_mutex;
 };
 
 

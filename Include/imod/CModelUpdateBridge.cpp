@@ -22,8 +22,10 @@ CModelUpdateBridge::~CModelUpdateBridge()
 
 IModel* CModelUpdateBridge::GetObservedModel(int modelIndex) const
 {
+	QMutexLocker lock(&m_mutex);
+
 	Q_ASSERT(modelIndex >= 0);
-	Q_ASSERT(modelIndex < GetModelCount());
+	Q_ASSERT(modelIndex < m_models.size());
 
 	return m_models.at(modelIndex);
 }
@@ -31,6 +33,8 @@ IModel* CModelUpdateBridge::GetObservedModel(int modelIndex) const
 
 int CModelUpdateBridge::GetModelCount() const
 {
+	QMutexLocker lock(&m_mutex);
+
 	return int(m_models.size());
 }
 
@@ -50,13 +54,9 @@ void CModelUpdateBridge::EnsureModelsDetached()
 
 bool CModelUpdateBridge::IsModelAttached(const imod::IModel* modelPtr) const
 {
-	if (modelPtr == NULL){
-		return !m_models.isEmpty();
-	}
+	QMutexLocker lock(&m_mutex);
 
-	Models::const_iterator foundIter = qFind(m_models.begin(), m_models.end(), modelPtr);
-
-	return (foundIter != m_models.end());
+	return IsAttached(modelPtr);
 }
 
 
@@ -64,20 +64,24 @@ bool CModelUpdateBridge::OnModelAttached(imod::IModel* modelPtr, istd::IChangeab
 {
 	Q_ASSERT(modelPtr != NULL);
 
-	if (IsModelAttached(modelPtr)){
-		return false;
+	QMutexLocker lock(&m_mutex);
+
+	if (!IsAttached(modelPtr)){
+		m_models.push_back(modelPtr);
+
+		changeMask = istd::IChangeable::GetAllChanges();
+
+		return true;
 	}
 
-	m_models.push_back(modelPtr);
-
-	changeMask = istd::IChangeable::GetAllChanges();
-
-	return true;
+	return false;
 }
 
 
 bool CModelUpdateBridge::OnModelDetached(IModel* modelPtr)
 {
+	QMutexLocker lock(&m_mutex);
+
 	Models::iterator iter = qFind(m_models.begin(), m_models.end(), modelPtr);
 	if (iter != m_models.end()){
 		m_models.erase(iter);
@@ -89,33 +93,50 @@ bool CModelUpdateBridge::OnModelDetached(IModel* modelPtr)
 }
 
 
-void CModelUpdateBridge::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr))
+void CModelUpdateBridge::BeforeUpdate(IModel* modelPtr)
 {
-	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
+	QMutexLocker lock(&m_mutex);
 
-	istd::IChangeable::ChangeSet changeSet = istd::IChangeable::GetAnyChange();
-	if (m_updateFlags & UF_DELEGATED){
-		changeSet = istd::IChangeable::GetDelegatedChanges();
+	if (IsAttached(modelPtr)) {
+		istd::IChangeable::ChangeSet changeSet = istd::IChangeable::GetAnyChange();
+		if (m_updateFlags & UF_DELEGATED){
+			changeSet = istd::IChangeable::GetDelegatedChanges();
+		}
+
+		m_changeablePtr->BeginChanges(changeSet);
 	}
-
-	m_changeablePtr->BeginChanges(changeSet);
 }
 
 
-void CModelUpdateBridge::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), const istd::IChangeable::ChangeSet& changeSet)
+void CModelUpdateBridge::AfterUpdate(IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
-	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
+	QMutexLocker lock(&m_mutex);
 
-	istd::IChangeable::ChangeSet changes(changeSet.GetDescription());
-	if (m_updateFlags & UF_DELEGATED){
-		changes += istd::IChangeable::GetDelegatedChanges();
+	if (IsAttached(modelPtr)) {
+		istd::IChangeable::ChangeSet changes(changeSet.GetDescription());
+		if (m_updateFlags & UF_DELEGATED){
+			changes += istd::IChangeable::GetDelegatedChanges();
+		}
+
+		if (m_updateFlags & UF_SOURCE){
+			changes += changeSet;
+		}
+
+		m_changeablePtr->EndChanges(changes);
+	}
+}
+
+
+// private methods
+
+bool CModelUpdateBridge::IsAttached(const imod::IModel* modelPtr) const
+{
+	if (modelPtr != nullptr){
+		Models::const_iterator foundIter = qFind(m_models.begin(), m_models.end(), modelPtr);
+		return (foundIter != m_models.end());
 	}
 
-	if (m_updateFlags & UF_SOURCE){
-		changes += changeSet;
-	}
-
-	m_changeablePtr->EndChanges(changes);
+	return !m_models.isEmpty();
 }
 
 

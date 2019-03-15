@@ -4,6 +4,7 @@
 
 // Qt includes
 #include <QtCore/QVector>
+#include <QtCore/QMutex>
 
 // ACF includes
 #include <imod/IModel.h>
@@ -68,11 +69,14 @@ protected:
 	virtual void OnUpdate(IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 private:
-	typedef QVector<IModel*> Models;
+	bool IsAttached(const imod::IModel* modelPtr) const;
 
+	typedef QVector<IModel*> Models;
 	Models m_models;
 
 	istd::IChangeable::ChangeSet m_observedIds;
+
+	mutable QMutex m_mutex;
 };
 
 
