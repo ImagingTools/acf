@@ -132,7 +132,7 @@ void CModelUpdateBridge::AfterUpdate(IModel* modelPtr, const istd::IChangeable::
 
 bool CModelUpdateBridge::IsAttached(const imod::IModel* modelPtr) const
 {
-	if (modelPtr != nullptr){
+	if (modelPtr != NULL){
 		Models::const_iterator foundIter = qFind(m_models.begin(), m_models.end(), modelPtr);
 		return (foundIter != m_models.end());
 	}
