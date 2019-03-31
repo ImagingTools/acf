@@ -92,8 +92,6 @@ iqt2d::IViewExtender* CMultiParamsManagerGuiComp::GetCurrentViewExtenderPtr() co
 
 void CMultiParamsManagerGuiComp::OnGuiCreated()
 {
-	BaseClass::OnGuiCreated();
-
 	m_parameterEditorStackPtr = new QStackedWidget(ParamsFrame);
 	QLayout* layoutPtr = ParamsFrame->layout();
 	if (layoutPtr != NULL){
@@ -127,6 +125,7 @@ void CMultiParamsManagerGuiComp::OnGuiCreated()
 		m_typeToExtenderMap[typeId] = extenderPtr;
 	}
 
+	BaseClass::OnGuiCreated();
 }
 
 
@@ -149,6 +148,10 @@ void CMultiParamsManagerGuiComp::OnGuiDestroyed()
 	}
 
 	m_widgetToGuiMap.clear();
+
+	delete m_parameterEditorStackPtr;
+
+	m_parameterEditorStackPtr = NULL;
 
 	BaseClass::OnGuiDestroyed();
 }
