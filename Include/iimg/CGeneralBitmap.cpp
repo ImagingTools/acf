@@ -99,7 +99,7 @@ bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d&
 
 	case PF_XYZ32:
 		componentsCount = 3;
-		pixelBitsCount = 32;
+		pixelBitsCount = 96;
 		break;
 
 	case PF_USER:
