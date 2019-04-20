@@ -97,6 +97,11 @@ bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d&
 		pixelBitsCount = 64;
 		break;
 
+	case PF_XYZ32:
+		componentsCount = 3;
+		pixelBitsCount = 32;
+		break;
+
 	case PF_USER:
 		break;
 
@@ -128,6 +133,15 @@ bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d&
 
 	case PF_GRAY32:
 		return CreateBitmap(size, dataPtr, releaseFlag, linesDifference, 32, 1, PF_GRAY32);
+
+	case PF_FLOAT32:
+		return CreateBitmap(size, dataPtr, releaseFlag, linesDifference, 32, 1, PF_FLOAT32);
+
+	case PF_FLOAT64:
+		return CreateBitmap(size, dataPtr, releaseFlag, linesDifference, 64, 1, PF_FLOAT64);
+
+	case PF_XYZ32:
+		return CreateBitmap(size, dataPtr, releaseFlag, linesDifference, 32, 3, PF_XYZ32);
 
 	default:
 		return false;

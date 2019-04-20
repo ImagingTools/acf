@@ -73,6 +73,12 @@ public:
 		PF_FLOAT64,
 
 		/**
+			Pixel value is a 32-bit floating 3D-coordinate (X,Y,Z)
+			In this mode the bitmap represents an organized 3D-point cloud.
+		*/
+		PF_XYZ32,
+
+		/**
 			First user defined pixel format.
 		*/
 		PF_USER = 256
