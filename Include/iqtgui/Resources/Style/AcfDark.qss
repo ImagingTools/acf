@@ -761,13 +761,6 @@ QComboBox:editable:focus, QComboBox:editable:on
 	border: 1px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
 }
 
-QComboBox:disabled
-{
-	background-color: #f2f2f2;
-	border: 1px solid #cccccc;
-	color: #cccccc;
-}
-
 QComboBox QAbstractItemView
 {
 	background; transparent;
