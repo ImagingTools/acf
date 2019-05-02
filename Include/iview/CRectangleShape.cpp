@@ -206,7 +206,6 @@ bool CRectangleShape::OnMouseMove(istd::CIndex2d position)
 
 		i2d::CVector2d newPos;
 		i2d::CVector2d deltaTranslate = cp - m_referencePosition;
-		i2d::CRectangle translatedModel = modelArea.GetTranslated(deltaTranslate);
 
 		switch (m_editNode){
 		case EN_CORNER11:
