@@ -474,8 +474,10 @@ void CComposedParamsSetGuiComp::OnGuiModelDetached()
 	int guiMode = *m_designTypeAttrPtr;
 	if (guiMode == DT_TAB_WIDGET){
 		QTabWidget* tabWidget = static_cast<QTabWidget*>(m_guiContainerPtr);
-		for (int i = tabWidget->count() - 1; i >= 0; i--){
-			tabWidget->removeTab(i);
+		if (tabWidget != NULL){
+			for (int i = tabWidget->count() - 1; i >= 0; i--){
+				tabWidget->removeTab(i);
+			}
 		}
 	}
 	else if (guiMode == DT_TOOL_BOX){
