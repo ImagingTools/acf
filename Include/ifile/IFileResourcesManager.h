@@ -46,7 +46,7 @@ public:
 		LS_OK,
 
 		/**
-			The resource is licensed, but the user of the repository has no valid licenes for using it.
+			The resource is licensed, but the user of the repository has no valid licenses for using it.
 		*/
 		LS_NOT_VALID
 	};
@@ -58,8 +58,8 @@ public:
 	virtual Ids GetFileIds() const = 0;
 
 	/**
-		Get type contraints describing each supported type of resource.
-		\return	NULL, if no type constraints are known.
+		Get type contraints describing each supported type of a resource.
+		\return	Type constraints, if available or \c NULL, if no type constraints are known.
 	*/
 	virtual const IFileResourceTypeConstraints* GetResourceTypeConstraints() const = 0;
 
@@ -75,7 +75,7 @@ public:
 		\param ID of the resource (file) type.
 		\param Initial state of the data object. Can be \c NULL.
 		\param File path of the new resource.
-		\param Name (alais) of the resource.
+		\param Name (alias) of the resource.
 		\return ID of the created resource or an empty string if the operation failed.
 	*/
 	virtual QByteArray CreateNewFile(
@@ -86,7 +86,7 @@ public:
 
 	/**
 		Remove file from the resources storage.
-		\param resourceId ID of the file. 
+		\param resourceId ID of the file to be removed.
 	*/
 	virtual bool RemoveFile(const QByteArray& fileId) = 0;
 
