@@ -3,7 +3,6 @@
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
-#include <istd/IFactoryInfo.h>
 #include <istd/TDelPtr.h>
 #include <iser/IObject.h>
 #include <iser/IArchive.h>
