@@ -242,12 +242,9 @@ bool CStackWidgetDelegate::IsPageVisible(const QWidget& containerWidget, int pag
 
 bool CStackWidgetDelegate::SetPageVisible(QWidget& containerWidget, int pageIndex, bool isPageVisible)
 {
-	QWidget* pageWidgetPtr = GetPageWidgetPtr(containerWidget, pageIndex);
-	if (pageWidgetPtr != NULL){
-		pageWidgetPtr->setVisible(isPageVisible);
-
-		return true;
-	}
+	Q_UNUSED(containerWidget);
+	Q_UNUSED(pageIndex);
+	Q_UNUSED(isPageVisible);
 
 	return false;
 }
