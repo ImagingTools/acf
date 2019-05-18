@@ -70,6 +70,18 @@ void CVarMatrix::InitToIdentity(int size)
 }
 
 
+double CVarMatrix::GetElementAt(int x, int y) const
+{
+	return BaseClass::GetAt(istd::CIndex2d(x, y));
+}
+
+
+double& CVarMatrix::GetElementRef(int x, int y)
+{
+	return BaseClass::GetAtRef(istd::CIndex2d(x, y));
+}
+
+
 double CVarMatrix::GetMaxElement() const
 {
 	istd::CIndex2d size = GetSizes();

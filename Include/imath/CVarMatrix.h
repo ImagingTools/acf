@@ -60,6 +60,16 @@ public:
 	void InitToIdentity(int size);
 
 	/*
+		Get a matrix element at the given position.
+	*/
+	double GetElementAt(int x, int y) const;
+
+	/*
+		Get the reference of a matrix element at the given position.
+	*/
+	double& GetElementRef(int x, int y);
+
+	/**
 		Get maximal element.
 	*/
 	double GetMaxElement() const;
