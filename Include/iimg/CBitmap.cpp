@@ -1,9 +1,6 @@
 #include <iimg/CBitmap.h>
 
 
-// include STL
-#include <cstring>
-
 // Qt includes
 #include <QtCore/QVector>
 #include <QtCore/QMutexLocker>
@@ -74,6 +71,95 @@ bool ConvertToGrayImage(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 	return false;
 }
 
+
+bool ConvertXyzToRgb(const IBitmap& inputBitmap, CBitmap& outputBitmap)
+{
+	if (inputBitmap.GetPixelFormat() != IBitmap::PF_XYZ32){
+		return false;
+	}
+
+	istd::CIndex2d size = inputBitmap.GetImageSize();
+
+	if (outputBitmap.CreateBitmap(IBitmap::PF_RGB24, size)){
+		// do not copy empty image
+		if (size.IsSizeEmpty()){
+			return true;
+		}
+
+		float minX = std::numeric_limits<float>::max();
+		float maxX = std::numeric_limits<float>::min();
+		float minY = std::numeric_limits<float>::max();
+		float maxY = std::numeric_limits<float>::min();
+		float minZ = std::numeric_limits<float>::max();
+		float maxZ = std::numeric_limits<float>::min();
+
+		for (int j = 0; j < size.GetY(); ++j){
+			const float* inputLinePtr = (const float*)inputBitmap.GetLinePtr(j);
+
+			for (int i = 0; i < size.GetX(); ++i){
+				const int k = i * 3;
+				float x = inputLinePtr[k];
+				float y = inputLinePtr[k + 1];
+				float z = inputLinePtr[k + 2];
+
+				if (!qIsNaN(x)){
+					if (x < minX){
+						minX = x;
+					}
+
+					if (x > maxX){
+						maxX = x;
+					}
+				}
+
+				if (!qIsNaN(y)){
+					if (y < minY){
+						minY = y;
+					}
+
+					if (y > maxY){
+						maxY = y;
+					}
+				}
+
+				if (!qIsNaN(z)){
+					if (z < minZ){
+						minZ = z;
+					}
+
+					if (z > maxZ){
+						maxZ = z;
+					}
+				}
+			}
+		}
+
+		if (maxX > minX && maxY > minY && maxZ > minZ){
+			for (int j = 0; j < size.GetY(); ++j){
+				const float* inputLinePtr = (const float*)inputBitmap.GetLinePtr(j);
+				quint8* outputLinePtr = (quint8*)outputBitmap.GetLinePtr(j);
+
+				for (int i = 0; i < size.GetX(); ++i){
+					const int k = i * 3;
+					float x = inputLinePtr[k];
+					float y = inputLinePtr[k + 1];
+					float z = inputLinePtr[k + 2];
+
+					outputLinePtr[k] = quint8(255 * (x - minX) / (maxX - minX));
+					outputLinePtr[k + 1] = quint8(255 * (y - minY) / (maxY - minY));
+					outputLinePtr[k + 2] = quint8(255 * (z - minZ) / (maxZ - minZ));
+				}
+			}
+		}
+		else {
+			outputBitmap.ClearImage();
+		}
+
+		return true;
+	}
+
+	return false;
+}
 
 // public static methods
 
@@ -420,6 +506,9 @@ bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 
 			case PF_GRAY32:
 				return ConvertToGrayImage<quint32, quint64>(*sourcePtr, *this);
+
+			case PF_XYZ32:
+				return ConvertXyzToRgb(*sourcePtr, *this);
 
 			default:
 				break;
