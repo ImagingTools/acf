@@ -6,6 +6,7 @@
 
 #include <ilog/CConsoleLogComp.h>
 #include <ilog/CLogComp.h>
+#include <ilog/CStandardStreamBridgeComp.h>
 
 #include <icomp/TModelCompWrap.h>
 #include <icomp/TMakeComponentWrap.h>
@@ -45,7 +46,6 @@
 #include <iprm/CFilteredOptionsListComp.h>
 #include <iprm/CParamsSetDelegatorComp.h>
 
-
 #include <i2d/CPosition2dComp.h>
 #include <i2d/CRectangleComp.h>
 #include <i2d/CCircleComp.h>
@@ -60,6 +60,7 @@
 #include <i2d/CArcComp.h>
 #include <i2d/CParallelogramComp.h>
 #include <i2d/CObject2dProxyComp.h>
+
 #include <imath/CSampledFunction2d.h>
 
 
@@ -72,6 +73,7 @@ namespace BasePck
 
 typedef ilog::CConsoleLogComp ConsoleLog;
 typedef icomp::TModelCompWrap<ilog::CLogComp> Log;
+typedef ilog::CStandardStreamBridgeComp StandardStreamBridge;
 
 typedef ibase::CInstantiatorComp Instantiator;
 typedef ibase::CVersionInfoComp VersionInfo;
@@ -93,6 +95,10 @@ typedef icomp::TModelCompWrap<iprm::CSelectionParamComp> SelectionParam;
 typedef iprm::CManagerParamsSetShadowerComp ManagerParamsSetShadower;
 typedef icomp::TModelCompWrap<iprm::CSelectionConstraintsComp> SelectionConstraints;
 typedef icomp::TModelCompWrap<iprm::CNameParamComp> NameParam;
+typedef icomp::TModelCompWrap<iprm::CMultiParamsManagerComp> MultiParamsManager;
+typedef icomp::TModelCompWrap<iprm::COptionsManagerComp> OptionsManager;
+typedef icomp::TModelCompWrap<iprm::CFilteredOptionsListComp> FilteredOptionsList;
+typedef icomp::TModelCompWrap<iprm::CParamsSetDelegatorComp> ParamsSetDelegator;
 
 typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;
@@ -125,11 +131,6 @@ typedef icomp::TMakeComponentWrap<
 			imath::ISampledFunction2d,
 			istd::IChangeable,
 			imod::IModel> SampledFunction2d;
-
-typedef icomp::TModelCompWrap<iprm::CMultiParamsManagerComp> MultiParamsManager;
-typedef icomp::TModelCompWrap<iprm::COptionsManagerComp> OptionsManager;
-typedef icomp::TModelCompWrap<iprm::CFilteredOptionsListComp> FilteredOptionsList;
-typedef icomp::TModelCompWrap<iprm::CParamsSetDelegatorComp> ParamsSetDelegator;
 
 
 } // namespace BasePck

@@ -14,6 +14,22 @@ I_EXPORT_PACKAGE(
 			IM_PROJECT("ACF") IM_TAG("Basic") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
+			ConsoleLog,
+			"Simple log on windows console",
+			"Windows Message Consumer" IM_CATEGORY(I_SERVICE) IM_TAG("Log"));
+
+I_EXPORT_COMPONENT(
+			Log,
+			"Data model of the logging component",
+			IM_TAG("Log"));
+
+I_EXPORT_COMPONENT(
+			StandardStreamBridge,
+			"Bridge between STL-streams and message consumer",
+			IM_TAG("Log"));
+
+
+I_EXPORT_COMPONENT(
 			TextFileLoader,
 			"Simple file serializer for text files",
 			"Text Loader File Serializer Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Text Loader"));
@@ -39,11 +55,6 @@ I_EXPORT_COMPONENT(
 			"Observer Bind Composition Connection" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Composition"));
 
 I_EXPORT_COMPONENT(
-			ConsoleLog,
-			"Simple log on windows console",
-			"Windows Message Consumer" IM_CATEGORY(I_SERVICE) IM_TAG("Log"));
-
-I_EXPORT_COMPONENT(
 			Uuid,
 			"Unique identifier",
 			"Unique Identifier UUID Generated" IM_CATEGORY(I_SERVICE));
@@ -52,11 +63,6 @@ I_EXPORT_COMPONENT(
 			ObjectQueue,
 			"Queue of any objects",
 			"Objects Queue List FIFO Stack Elements Serial Delay Line" IM_CATEGORY(I_SERVICE));
-
-I_EXPORT_COMPONENT(
-			Log,
-			"Data model of the logging component",
-			IM_TAG("Log"));
 
 I_EXPORT_COMPONENT(
 			MultiObserverBinder,
@@ -122,6 +128,27 @@ I_EXPORT_COMPONENT(
 			NameParam,
 			"Name parameter",
 			"Name Parameter" IM_CATEGORY(I_DATA_MODEL));
+
+I_EXPORT_COMPONENT(
+			MultiParamsManager,
+			"Manager of multi parameters set",
+			"Parameters Set Multi Manager" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Composition Parameter"));
+
+I_EXPORT_COMPONENT(
+			OptionsManager,
+			"Simple manager for a list of options",
+			"Manager Option Selection" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
+
+I_EXPORT_COMPONENT(
+			FilteredOptionsList,
+			"Filtered list of options",
+			"Option Options List Filter" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
+
+I_EXPORT_COMPONENT(
+			ParamsSetDelegator,
+			"Delegator of parameter set",
+			"Parameter Data Delegate" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
+
 
 I_EXPORT_COMPONENT(
 			SingleDocumentTemplate,
@@ -232,26 +259,6 @@ I_EXPORT_COMPONENT(
 			SampledFunction2d,
 			"Sampled function with 2-dimensional input",
 			"Function Sample" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Sampling Model"));
-
-I_EXPORT_COMPONENT(
-			MultiParamsManager,
-			"Manager of multi parameters set",
-			"Parameters Set Multi Manager" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Composition Parameter"));
-
-I_EXPORT_COMPONENT(
-			OptionsManager,
-			"Simple manager for a list of options",
-			"Manager Option Selection" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
-
-I_EXPORT_COMPONENT(
-			FilteredOptionsList,
-			"Filtered list of options",
-			"Option Options List Filter" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
-
-I_EXPORT_COMPONENT(
-			ParamsSetDelegator,
-			"Delegator of parameter set",
-			"Parameter Data Delegate" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
 
 
 } // namespace BasePck
