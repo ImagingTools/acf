@@ -1,10 +1,12 @@
 #include <iprm/CParamsManagerCompBase.h>
 
+
 // Qt includes
 #include <QtCore/QUuid>
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
+#include <istd/CChangeGroup.h>
 #include <imod/IModel.h>
 #include <imod/TModelWrap.h>
 #include <iprm/ISelectionParam.h>
@@ -21,6 +23,7 @@ const istd::IChangeable::ChangeSet s_renameChangeSet(IParamsManager::CF_SET_NAME
 const istd::IChangeable::ChangeSet s_selectChangeSet(ISelectionParam::CF_SELECTION_CHANGED, QObject::tr("Change selection"));
 const istd::IChangeable::ChangeSet s_setDescriptionChangeSet(IOptionsList::CF_OPTIONS_CHANGED, QObject::tr("Change description"));
 const istd::IChangeable::ChangeSet s_setEnableChangeSet(IOptionsList::CF_OPTIONS_CHANGED, QObject::tr("Enable/Disable"));
+const istd::IChangeable::ChangeSet s_flagsChangeSet(IOptionsList::CF_OPTIONS_CHANGED);
 
 
 CParamsManagerCompBase::CParamsManagerCompBase()
@@ -249,6 +252,16 @@ int CParamsManagerCompBase::GetIndexOperationFlags(int index) const
 		retVal |= MF_COUNT_FIXED;
 	}
 
+	int userFlags = 0;
+	if ((index >= m_fixedParamSetsCompPtr.GetCount()) && (index < CParamsManagerCompBase::GetParamsSetsCount())){
+		userFlags = m_paramSets[index]->userFlags;
+	}
+	else{
+		if (m_fixedParamsSetFlagsMap.contains(index)){
+			userFlags = m_fixedParamsSetFlagsMap[index];
+		}
+	}
+
 	if ((index >= 0) && (index < CParamsManagerCompBase::GetParamsSetsCount())){
 		retVal |= MF_SUPPORT_EDIT;
 
@@ -257,7 +270,59 @@ int CParamsManagerCompBase::GetIndexOperationFlags(int index) const
 		}
 	}
 
-	return retVal;
+	return retVal | userFlags;
+}
+
+
+bool CParamsManagerCompBase::SetIndexOperationFlags(int index, int flags)
+{
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+
+	istd::CChangeGroup changeGroup(this);
+
+	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
+	if (index < fixedSetsCount){
+		if (!m_fixedParamsSetFlagsMap.contains(index) || m_fixedParamsSetFlagsMap[index] != flags){
+			istd::CChangeNotifier notifier(this, &s_flagsChangeSet);
+			Q_UNUSED(notifier);
+
+			if (flags <= 0){
+				m_fixedParamsSetFlagsMap.remove(index);
+			}
+			else{
+				m_fixedParamsSetFlagsMap[index] = flags;
+			}
+		}
+	}
+	else{
+		if (m_paramSets[index - fixedSetsCount]->userFlags != flags){
+			istd::CChangeNotifier notifier(this, &s_flagsChangeSet);
+			Q_UNUSED(notifier);
+
+			m_paramSets[index - fixedSetsCount]->userFlags = flags;
+		}
+	}
+
+	// Set selection to some avaialable index, if the currently selected option was set to inactive:
+	if (flags & MF_INACTIVE){
+		int selectedIndex = GetSelectedOptionIndex();
+		if (selectedIndex == index){
+			for (int i = 0; i < GetOptionsCount(); ++i) {
+				if ((GetIndexOperationFlags(i) & MF_INACTIVE) == 0){
+					SetSelectedOptionIndex(i);
+
+					break;
+				}
+			}
+
+			// Of no enabled parameter set could not be selected, reset selection:
+			if (selectedIndex == GetSelectedOptionIndex()){
+				SetSelectedOptionIndex(-1);
+			}
+		}
+	}
+
+	return true;
 }
 
 
@@ -341,28 +406,6 @@ void CParamsManagerCompBase::SetParamsSetDescription(int index, const QString& d
 		Q_UNUSED(notifier);
 
 		m_paramSets[index - fixedSetsCount]->description.SetName(description);
-	}
-}
-
-void CParamsManagerCompBase::SetParamsSetEnabled(int index, bool enable)
-{
-	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
-
-	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
-	if (index < fixedSetsCount){
-		if (!m_isFixedParamsSetEnable.contains(index) || m_isFixedParamsSetEnable[index] != enable){
-			istd::CChangeNotifier notifier(this, &s_setEnableChangeSet);
-			Q_UNUSED(notifier);
-			m_isFixedParamsSetEnable[index] = enable;
-		}
-		return;
-	}
-
-	if (m_paramSets[index - fixedSetsCount]->isEnabled != enable){
-		istd::CChangeNotifier notifier(this, &s_setEnableChangeSet);
-		Q_UNUSED(notifier);
-
-		m_paramSets[index - fixedSetsCount]->isEnabled = enable;
 	}
 }
 
@@ -461,10 +504,6 @@ bool CParamsManagerCompBase::IsOptionEnabled(int index) const
 
 	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
 	if (!*m_allowDisabledAttrPtr || (index < fixedSetsCount)){
-		if (m_isFixedParamsSetEnable.contains(index)){
-			return m_isFixedParamsSetEnable[index];
-		}
-
 		return true;
 	}
 
@@ -546,6 +585,43 @@ void CParamsManagerCompBase::OnComponentCreated()
 	if (m_defaultSelectedIndexAttrPtr.IsValid() && (*m_defaultSelectedIndexAttrPtr < fixedSetsCount)){
 		m_selectedIndex = *m_defaultSelectedIndexAttrPtr;
 	}
+}
+
+
+// public methods of embedded class UuidParam
+
+CParamsManagerCompBase::UuidParam::UuidParam(const ParamSet& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (iprm::INameParam)
+
+const QString& CParamsManagerCompBase::UuidParam::GetName() const
+{
+	m_uuid = m_parent.uuid;
+
+	return m_uuid;
+}
+
+
+void CParamsManagerCompBase::UuidParam::SetName(const QString& /*name*/)
+{
+}
+
+
+bool CParamsManagerCompBase::UuidParam::IsNameFixed() const
+{
+	return true;
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CParamsManagerCompBase::UuidParam::Serialize(iser::IArchive& /*archive*/)
+{
+	return true;
 }
 
 

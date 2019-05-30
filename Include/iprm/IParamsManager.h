@@ -25,6 +25,7 @@ class IParamsManager: virtual public iprm::ISelectionParam
 {
 public:
 	typedef QSet<QByteArray> TypeIds;
+
 	/**
 		Bitwise coded flags used to find out supported features.
 	*/
@@ -82,6 +83,7 @@ public:
 		CF_SET_ENABLE_CHANGED
 	};
 
+
 	/**
 		Get operation control flags of some paramter set or whole manager.
 		\sa ManagerFlags.
@@ -93,6 +95,15 @@ public:
 						To check if you can insert at the last position please use index value equal to current number of parameter set.
 	*/
 	virtual int GetIndexOperationFlags(int index = -1) const = 0;
+
+	/**
+		Set operation control flags of some parameter-set. Only single parameter-set related flags can be set.
+		\sa ManagerFlags.
+		\param	flags	Operation flags to be used.
+		\param	index	Index addressing position in parameter set list.
+		\return	Status of the operation.
+	*/
+	virtual bool SetIndexOperationFlags(int index, int flags) = 0;
 
 	/**
 		Get number of managed set.
@@ -159,11 +170,6 @@ public:
 		Set the description of the specified parameter set.
 	*/
 	virtual void SetParamsSetDescription(int index, const QString& description) = 0;
-
-	/**
-		Enable/Disable of the specified parameter set.
-	*/
-	virtual void SetParamsSetEnabled(int index, bool enable) = 0;
 };
 
 

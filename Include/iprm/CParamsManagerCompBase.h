@@ -95,12 +95,12 @@ public:
 	virtual IParamsSet* GetParamsSet(int index) const;
 	virtual IParamsSet* CreateParameterSet(int typeIndex = -1, int index = -1) const;
 	virtual int GetIndexOperationFlags(int index = -1) const;
+	virtual bool SetIndexOperationFlags(int index, int flags);
 	virtual int GetParamsSetsCount() const;
 	virtual QString GetParamsSetName(int index) const;
 	virtual bool SetParamsSetName(int index, const QString& name);
 	virtual QString GetParamsSetDescription(int index) const;
 	virtual void SetParamsSetDescription(int index, const QString& description);
-	virtual void SetParamsSetEnabled(int index, bool enable);
 
 	// reimplemented (iprm::ISelectionParam)
 	virtual const IOptionsList* GetSelectionConstraints() const;
@@ -145,6 +145,26 @@ protected:
 protected:
 	int m_selectedIndex;
 
+	class ParamSet;
+
+	class UuidParam: virtual public INameParam
+	{
+	public:
+		UuidParam(const ParamSet& parent);
+
+		// reimplemented (iprm::INameParam)
+		virtual const QString& GetName() const;
+		virtual void SetName(const QString& name);
+		virtual bool IsNameFixed() const;
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive);
+
+	private:
+		mutable QString m_uuid;
+		const ParamSet& m_parent;
+	};
+
 	class ParamSet:
 				virtual public IParamsSet,
 				virtual public ISelectionParam,
@@ -178,32 +198,12 @@ protected:
 		// reimplemented (istd::IChangeable)
 		virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS);
 
-		class UuidParam : virtual public INameParam
-		{
-		public:
-			UuidParam(const ParamSet& parent) : m_parent(parent) {}
-
-			// reimplemented (iprm::INameParam)
-			virtual const QString& GetName() const 
-			{
-				m_uuid = m_parent.uuid;
-				return m_uuid;
-			}
-			virtual void SetName(const QString& /*name*/) {}
-			virtual bool IsNameFixed() const { return true; }
-
-			// reimplemented (iser::ISerializable)
-			virtual bool Serialize(iser::IArchive& /*archive*/) { return true; }
-		private:
-			mutable QString m_uuid;
-			const ParamSet& m_parent;
-		};
-
 		istd::TDelPtr<IParamsSet> paramSetPtr;
 		QByteArray uuid;
 		QString name;
 		iprm::CNameParam description;
 		bool isEnabled;
+		int userFlags;
 		CParamsManagerCompBase* parentPtr;
 		UuidParam uuidParam;
 		imod::CModelUpdateBridge updateBridge;
@@ -236,7 +236,7 @@ protected:
 
 	imod::CModelUpdateBridge m_updateBridge;
 
-	QMap<int, bool> m_isFixedParamsSetEnable;
+	QMap<int, int> m_fixedParamsSetFlagsMap;
 
 private:
 	// static template methods for subelement access

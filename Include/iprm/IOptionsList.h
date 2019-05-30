@@ -89,6 +89,15 @@ public:
 };
 
 
+// Helper methods
+
+/**
+	Find the option index by the given ID.
+	\return Found index or -1, if no option with the given ID was found.
+*/
+int FindOptionIndexById(const QByteArray& id, const iprm::IOptionsList& list);
+
+
 } // namespace iprm
 
 

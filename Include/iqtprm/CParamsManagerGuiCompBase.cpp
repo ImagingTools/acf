@@ -1,6 +1,9 @@
 #include <iqtprm/CParamsManagerGuiCompBase.h>
 
 
+// Qt includes
+#include <QtGui/QStandardItemModel>
+
 // ACF includes
 #include <istd/CChangeNotifier.h>
 #include <iprm/IParamsSet.h>
@@ -218,13 +221,13 @@ void CParamsManagerGuiCompBase::on_ParamsComboBox_currentIndexChanged(int /*inde
 	const iprm::IOptionsList* constraintsPtr = selectionPtr->GetSelectionConstraints();
 
 	if (		(constraintsPtr != NULL) &&
-		(selectedIndex < constraintsPtr->GetOptionsCount()) &&
-		(selectedIndex != selectionPtr->GetSelectedOptionIndex())){
-			if (selectionPtr->SetSelectedOptionIndex(selectedIndex)){
-				UpdateParamsView(selectedIndex);
-			}
+				(selectedIndex < constraintsPtr->GetOptionsCount()) &&
+				(selectedIndex != selectionPtr->GetSelectedOptionIndex())){
+		if (selectionPtr->SetSelectedOptionIndex(selectedIndex)){
+			UpdateParamsView(selectedIndex);
+		}
 
-			return;
+		return;
 	}
 
 	if (selectedIndex < 0){
@@ -353,7 +356,7 @@ void CParamsManagerGuiCompBase::UpdateTree()
 {
 	ParamsTree->clear();
 
-	int selectedIndex = -1;	
+	int selectedIndex = -1;
 
 	iprm::IParamsManager* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
@@ -368,9 +371,12 @@ void CParamsManagerGuiCompBase::UpdateTree()
 			bool isOptionEnabled = (paramsListPtr == NULL) ? true : paramsListPtr->IsOptionEnabled(paramSetIndex);
 
 			Qt::ItemFlags itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
-
 			if ((flags & iprm::IParamsManager::MF_SUPPORT_RENAME) != 0){
 				itemFlags |= Qt::ItemIsEditable;
+			}
+
+			if (!isOptionEnabled){
+				itemFlags &= ~Qt::ItemIsEnabled;
 			}
 
 			if (*m_supportEnablingAttrPtr && (paramsListPtr != NULL) && (flags & iprm::IOptionsManager::OOF_SUPPORT_ENABLING) != 0){
@@ -396,15 +402,15 @@ void CParamsManagerGuiCompBase::UpdateTree()
 			if (paramsSetPtr != NULL){
 				QByteArray id = paramsSetPtr->GetFactoryId();
 				if (m_factoryIconIndexMap.contains(id)){
-					int iconIndex = m_factoryIconIndexMap[id];						
+					int iconIndex = m_factoryIconIndexMap[id];
 					QIcon icon = m_stateIconsMap.value(iconIndex);
-					paramsSetItemPtr->setIcon(0, icon);						
+					paramsSetItemPtr->setIcon(0, icon);
 				}
-			}		
+			}
 
 			ParamsTree->addTopLevelItem(paramsSetItemPtr);
 
-			paramsSetItemPtr->setSelected(paramSetIndex == selectedIndex);	
+			paramsSetItemPtr->setSelected(paramSetIndex == selectedIndex);
 		}
 	}
 
@@ -419,20 +425,26 @@ void CParamsManagerGuiCompBase::UpdateComboBox()
 	ParamsComboBox->clear();
 
 	int selectedIndex = -1;	
-
+	int setsCount = 0;
 	iprm::IParamsManager* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
-		int setsCount = objectPtr->GetParamsSetsCount();
+		setsCount = objectPtr->GetParamsSetsCount();
 
 		const iprm::IOptionsList* paramsListPtr = objectPtr->GetSelectionConstraints();
-		selectedIndex = objectPtr->GetSelectedOptionIndex();		
+		selectedIndex = objectPtr->GetSelectedOptionIndex();
 
 		for (int paramSetIndex = 0; paramSetIndex < setsCount; ++paramSetIndex){
 			int flags = objectPtr->GetIndexOperationFlags(paramSetIndex);
+			bool isOptionEnabled = (paramsListPtr == NULL) ? true : paramsListPtr->IsOptionEnabled(paramSetIndex);
 
 			Qt::ItemFlags itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 			if ((flags & iprm::IParamsManager::MF_SUPPORT_RENAME) != 0){
 				itemFlags |= Qt::ItemIsEditable;
+			}
+
+			// for inactive items, no operations are allowed
+			if (flags & iprm::IParamsManager::MF_INACTIVE){
+				itemFlags = 0;
 			}
 
 			QString name = objectPtr->GetParamsSetName(paramSetIndex);
@@ -441,20 +453,23 @@ void CParamsManagerGuiCompBase::UpdateComboBox()
 			if (paramsSetPtr != NULL){
 				QByteArray id = paramsSetPtr->GetFactoryId();
 				if (m_factoryIconIndexMap.contains(id)){
-					int iconIndex = m_factoryIconIndexMap[id];						
+					int iconIndex = m_factoryIconIndexMap[id];
 					icon = m_stateIconsMap.value(iconIndex);
 				}
 			}
 
+			if (		*m_supportEnablingAttrPtr && 
+						(flags & iprm::IOptionsManager::OOF_SUPPORT_ENABLING) != 0){
+				ParamsComboBox->setItemData(paramSetIndex, isOptionEnabled ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);
+			}
+
 			ParamsComboBox->addItem(icon, name, paramSetIndex);
 
-			if (*m_supportEnablingAttrPtr && 
-				(paramsListPtr != NULL) && 
-				(flags & iprm::IOptionsManager::OOF_SUPPORT_ENABLING) != 0)
-			{
-				bool isOptionEnabled = (paramsListPtr == NULL) ? true : paramsListPtr->IsOptionEnabled(paramSetIndex);
+			QStandardItemModel* itemModelPtr = qobject_cast<QStandardItemModel*>(ParamsComboBox->model());
+			if (itemModelPtr != NULL){
+				QStandardItem* newItemPtr = itemModelPtr->item(ParamsComboBox->count() - 1);
 
-				ParamsComboBox->setItemData(paramSetIndex, isOptionEnabled ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);
+				newItemPtr->setFlags(itemFlags);
 			}
 		}
 	}
