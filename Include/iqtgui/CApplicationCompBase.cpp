@@ -71,11 +71,6 @@ bool CApplicationCompBase::InitializeApplication(int argc, char** argv)
 
 		if (IsComponentActive()){
 			InitializeComponentApplication();
-
-			for (int i = 0; i < m_componentsToInitializeCompPtr.GetCount(); ++i){
-				istd::IPolymorphic* componentPtr = m_componentsToInitializeCompPtr[i];
-				Q_UNUSED(componentPtr);
-			}
 		}
 	}
 
@@ -212,6 +207,15 @@ void CApplicationCompBase::ApplyStyleSheet()
 	else{
 		// Reset style sheet:
 		m_applicationPtr->setStyleSheet("");
+	}
+}
+
+
+void CApplicationCompBase::InitializeComponents()
+{
+	for (int i = 0; i < m_componentsToInitializeCompPtr.GetCount(); ++i){
+		istd::IPolymorphic* componentPtr = m_componentsToInitializeCompPtr[i];
+		Q_UNUSED(componentPtr);
 	}
 }
 

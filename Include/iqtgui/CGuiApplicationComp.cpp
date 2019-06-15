@@ -285,6 +285,8 @@ void CGuiApplicationComp::OnEventLoopStarted()
 {
 	m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_RUNNING);
 
+	InitializeComponents();
+	
 	Q_ASSERT(qApp->startingUp() == false);
 }
 
