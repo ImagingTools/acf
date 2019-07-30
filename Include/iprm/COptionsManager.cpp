@@ -474,6 +474,38 @@ bool COptionsManager::Serialize(iser::IArchive& archive)
 }
 
 
+// reimplemented (iser::IChangeable)
+
+int COptionsManager::GetSupportedOperations() const
+{
+	return SO_COPY;
+}
+
+
+bool COptionsManager::CopyFrom(const IChangeable& object, CompatibilityMode /*mode*/)
+{
+	const iprm::COptionsManager* sourcePtr = dynamic_cast<const iprm::COptionsManager*>(&object);
+	if (sourcePtr != NULL){
+		m_options.clear();
+
+		int optionsCount = sourcePtr->m_options.count();
+		for (int i = 0; i < optionsCount; ++i){
+			OptionInfo option;
+			option.optionId = sourcePtr->GetOptionId(i);
+			option.optionName = sourcePtr->GetOptionName(i);
+			option.optionDescription = sourcePtr->GetOptionDescription(i);
+			option.isEnabled = sourcePtr->IsOptionEnabled(i);
+
+			m_options.push_back(option);
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+
 } // namespace iprm
 
 

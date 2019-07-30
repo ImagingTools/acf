@@ -178,6 +178,52 @@ bool CPolygon::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 }
 
 
+double CPolygon::GetArea(bool oriented) const
+{
+	const int nodesCount = GetNodesCount();
+	if (nodesCount < 3){
+		return 0;
+	}
+
+	double result = 0;
+
+	for (int i = 1; i < nodesCount; ++i){
+		result += GetNodePos(i - 1).GetX() * GetNodePos(i).GetY();
+	}
+
+	result += GetNodePos(nodesCount - 1).GetX() * GetNodePos(0).GetY();
+
+	for (int i = 1; i < nodesCount; ++i){
+		result -= GetNodePos(i).GetX() * GetNodePos(i - 1).GetY();
+	}
+
+	result -= GetNodePos(0).GetX() * GetNodePos(nodesCount - 1).GetY();
+
+	result *= 0.5;
+
+	return oriented ? result : qAbs(result);
+}
+
+
+double CPolygon::GetPerimeter() const
+{
+	const int nodesCount = GetNodesCount();
+	if (nodesCount < 2){
+		return 0;
+	}
+
+	double result = 0;
+	for (int i = 1; i < nodesCount; ++i){
+		result += GetNodePos(i).GetDistance(GetNodePos(i - 1));
+	}
+
+	result += GetNodePos(nodesCount - 1).GetDistance(GetNodePos(0));
+
+	return result;
+}
+
+
+
 // reimplemented (iser::IObject)
 
 QByteArray CPolygon::GetFactoryId() const

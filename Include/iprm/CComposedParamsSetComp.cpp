@@ -83,14 +83,20 @@ istd::IPolymorphic* CComposedParamsSetComp::GetParent() const
 
 // reimplemented (istd::IChangeable)
 
+int CComposedParamsSetComp::GetSupportedOperations() const
+{
+    return SO_COPY | SO_COMPARE;
+}
+
+
 bool CComposedParamsSetComp::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	// Copy all fixed parameters from external parameter set
 	const iprm::IParamsSet* objectParamsSetPtr = dynamic_cast<const iprm::IParamsSet*>(&object);
-
 	if (objectParamsSetPtr == NULL){
 		return false;
 	}
+
 	int setsCount = qMin(m_parametersCompPtr.GetCount(), m_parametersIdAttrPtr.GetCount());
 
 	for (int i = 0; i < setsCount; ++i){
@@ -99,6 +105,45 @@ bool CComposedParamsSetComp::CopyFrom(const IChangeable& object, CompatibilityMo
 		if (paramPtr != NULL){
 			const iser::ISerializable* objectParamPtr = objectParamsSetPtr->GetParameter(id);
 			if ((objectParamPtr == NULL) || !paramPtr->CopyFrom(*objectParamPtr, mode)){
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+
+bool CComposedParamsSetComp::IsEqual(const IChangeable& object) const
+{
+	const iprm::CComposedParamsSetComp* objectParamsSetPtr = dynamic_cast<const iprm::CComposedParamsSetComp*>(&object);
+	if (objectParamsSetPtr == NULL){
+		return false;
+	}
+
+	if (m_parametersCompPtr.GetCount() != objectParamsSetPtr->m_parametersCompPtr.GetCount()){
+		return false;
+	}
+
+	if (m_parametersIdAttrPtr.GetCount() != objectParamsSetPtr->m_parametersIdAttrPtr.GetCount()){
+		return false;
+	}
+
+	int setsCount = qMin(m_parametersCompPtr.GetCount(), m_parametersIdAttrPtr.GetCount());
+	for (int i = 0; i < setsCount; ++i){
+		if (m_parametersIdAttrPtr[i] != objectParamsSetPtr->m_parametersIdAttrPtr[i]){
+			return false;
+		}
+
+		iser::ISerializable* paramPtr = m_parametersCompPtr[i];
+		const iser::ISerializable* objectParamPtr = objectParamsSetPtr->m_parametersCompPtr[i];
+
+		if ((paramPtr != NULL && objectParamPtr == NULL) || (paramPtr == NULL && objectParamPtr != NULL)){
+			return false;
+		}
+
+		if ((paramPtr != NULL) && (objectParamPtr != NULL)){
+			if (!paramPtr->IsEqual(*objectParamPtr)){
 				return false;
 			}
 		}

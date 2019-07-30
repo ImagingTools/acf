@@ -38,6 +38,11 @@ public:
 	virtual int GetNodesCount() const;
 
 	/**
+		Return \c true if there are no points.
+	*/
+	bool IsEmpty() const;
+
+	/**
 		Return position of node at specified index.
 		\param	index	an index in node table.
 	*/
@@ -143,6 +148,12 @@ private:
 inline int CPolypoint::GetNodesCount() const
 {
 	return int(m_positions.size());
+}
+
+
+inline bool CPolypoint::IsEmpty() const
+{
+	return m_positions.empty();
 }
 
 

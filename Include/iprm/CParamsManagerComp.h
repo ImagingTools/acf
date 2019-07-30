@@ -54,7 +54,10 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// reimplemented (istd::IChangeable)
+	virtual int GetSupportedOperations() const;
 	virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool IsEqual(const IChangeable& object) const;
+
 
 protected:
 	// reimplemented (CParamsManagerCompBase)

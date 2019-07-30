@@ -34,18 +34,31 @@ public:
 		Flip object by X-axis.
 	*/
 	virtual void FlipByX();
+
 	/** 
 		Flip object by Y-axis.
 	*/
 	virtual void FlipByY();
+
 	/** 
 		Rotate object around its center.
 	*/
 	virtual void Rotate(double radians);
+
 	/** 
 		Reverses nodes order.
 	*/
 	virtual void ReverseNodes();
+
+	/**
+		Get area of the polygon.
+	*/
+	double GetArea(bool oriented = false) const;
+
+	/**
+		Get perimeter of the polygon.
+	*/
+	double GetPerimeter() const;
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);

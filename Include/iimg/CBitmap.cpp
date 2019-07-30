@@ -1,6 +1,8 @@
 #include <iimg/CBitmap.h>
 
 
+#include <cstring>// include std::memcpy
+
 // Qt includes
 #include <QtCore/QVector>
 #include <QtCore/QMutexLocker>

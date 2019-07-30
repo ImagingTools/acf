@@ -230,10 +230,9 @@ int CParamsManagerCompBase::GetIndexOperationFlags(int index) const
 	Q_ASSERT(index < GetParamsSetsCount());
 
 	int retVal = 0;
-	int fixedCount = m_fixedParamSetsCompPtr.GetCount();
 
 	if (IsParameterCreationSupported()){
-		if ((index < 0) || (index >= fixedCount)){
+		if ((index < 0) || (index >= m_fixedParamSetsCompPtr.GetCount())){
 			retVal |= MF_SUPPORT_INSERT | MF_SUPPORT_SWAP | MF_SUPPORT_RENAME;
 			
 			if (*m_allowDisabledAttrPtr){
@@ -254,12 +253,13 @@ int CParamsManagerCompBase::GetIndexOperationFlags(int index) const
 	}
 
 	int userFlags = 0;
+	const int fixedCount = m_fixedParamSetsCompPtr.GetCount();
 
-	if ((index >= fixedCount) && (index < CParamsManagerCompBase::GetParamsSetsCount())){
+	if ((index >= fixedCount) && (index < CParamsManagerCompBase::GetParamsSetsCount())) {
 		userFlags = m_paramSets[index - fixedCount]->userFlags;
 	}
 	else{
-		if (m_fixedParamsSetFlagsMap.contains(index)){
+		if (m_fixedParamsSetFlagsMap.contains(index)) {
 			userFlags = m_fixedParamsSetFlagsMap[index];
 		}
 	}
@@ -267,7 +267,7 @@ int CParamsManagerCompBase::GetIndexOperationFlags(int index) const
 	if ((index >= 0) && (index < CParamsManagerCompBase::GetParamsSetsCount())){
 		retVal |= MF_SUPPORT_EDIT;
 
-		if (index < fixedCount && !*m_allowEditFixedAttrPtr){
+		if ((index < fixedCount) && !*m_allowEditFixedAttrPtr){
 			retVal &= ~MF_SUPPORT_EDIT;
 		}
 	}
@@ -800,9 +800,10 @@ CParamsManagerCompBase::SelectedParams::SelectedParams()
 iprm::IParamsSet::Ids CParamsManagerCompBase::SelectedParams::GetParamIds(bool editableOnly) const
 {
 	if (!editableOnly && (parentPtr != NULL) && (parentPtr->m_selectedIndex >= 0)){
-		const ParamSetPtr& selectedParamsSetPtr = parentPtr->m_paramSets[parentPtr->m_selectedIndex];
-
-		return selectedParamsSetPtr->GetParamIds();
+		const IParamsSet* selectedParamsSetPtr = parentPtr->GetParamsSet(parentPtr->m_selectedIndex);
+		if (selectedParamsSetPtr != NULL) {
+			return selectedParamsSetPtr->GetParamIds();
+		}
 	}
 
 	return iprm::IParamsSet::Ids();
@@ -812,8 +813,10 @@ iprm::IParamsSet::Ids CParamsManagerCompBase::SelectedParams::GetParamIds(bool e
 const iser::ISerializable* CParamsManagerCompBase::SelectedParams::GetParameter(const QByteArray& id) const
 {
 	if ((parentPtr != NULL) && (parentPtr->m_selectedIndex >= 0)){
-		const ParamSetPtr& selectedParamsSetPtr = parentPtr->m_paramSets[parentPtr->m_selectedIndex];
-		return selectedParamsSetPtr->GetParameter(id);
+		const IParamsSet* selectedParamsSetPtr = parentPtr->GetParamsSet(parentPtr->m_selectedIndex);
+		if (selectedParamsSetPtr != NULL) {
+			return selectedParamsSetPtr->GetParameter(id);
+		}
 	}
 
 	return NULL;
@@ -831,8 +834,10 @@ iser::ISerializable* CParamsManagerCompBase::SelectedParams::GetEditableParamete
 QByteArray CParamsManagerCompBase::SelectedParams::GetFactoryId() const
 {
 	if ((parentPtr != NULL) && (parentPtr->m_selectedIndex >= 0)){
-		const ParamSetPtr& selectedParamsSetPtr = parentPtr->m_paramSets[parentPtr->m_selectedIndex];
-		return selectedParamsSetPtr->GetFactoryId();
+		const IParamsSet* selectedParamsSetPtr = parentPtr->GetParamsSet(parentPtr->m_selectedIndex);
+		if (selectedParamsSetPtr != NULL) {
+			return selectedParamsSetPtr->GetFactoryId();
+		}
 	}
 
 	return "";
