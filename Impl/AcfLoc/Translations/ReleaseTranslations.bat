@@ -2,3 +2,4 @@
 %QTDIR%\bin\lrelease.exe Acf_de_DE.ts
 %QTDIR%\bin\lrelease.exe Acf_pl_PL.ts
 %QTDIR%\bin\lrelease.exe Acf_ru_RU.ts
+%QTDIR%\bin\lrelease.exe Acf_fr_FR.ts
