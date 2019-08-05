@@ -20,9 +20,9 @@ CProgressDialog::CProgressDialog(QWidget* parentWidget)
 // reimplemented (ibase::IProgressManager)
 
 int CProgressDialog::BeginProgressSession(
-			const QByteArray& progressId,
+			const QByteArray& /*progressId*/,
 			const QString& description,
-			bool isCancelable)
+			bool /*isCancelable*/)
 {
 	setWindowTitle(description);
 
