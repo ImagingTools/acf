@@ -42,6 +42,7 @@ void CLogCompBase::AddMessage(const MessagePtr& messagePtr)
 	}
 }
 
+
 // private slots
 
 void CLogCompBase::OnAddMessage(const MessagePtr& messagePtr)
