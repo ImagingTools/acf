@@ -98,7 +98,13 @@ bool CFileNameParam::IsEqual(const IChangeable& object) const
 {
 	const CFileNameParam* sourcePtr = dynamic_cast<const CFileNameParam*>(&object);
 	if (sourcePtr != NULL){
-		return QFileInfo(GetPath()) == QFileInfo(sourcePtr->GetPath());
+		QString pathThis = GetPath();
+		QString partSource = sourcePtr->GetPath();
+		if (pathThis.isEmpty() && partSource.isEmpty()) {
+			return true;
+		}
+
+		return QFileInfo(pathThis) == QFileInfo(partSource);
 	}
 
 	return false;
