@@ -42,13 +42,17 @@ int CModelUpdateBridge::GetModelCount() const
 
 void CModelUpdateBridge::EnsureModelsDetached()
 {
-	QWriteLocker lock(&m_modelListMutex);
+	QReadLocker lock(&m_modelListMutex);
 
 	while (!m_models.isEmpty()){
 		imod::IModel* modelPtr = m_models.front();
 		Q_ASSERT(modelPtr != NULL);
 
+		lock.unlock();
+
 		modelPtr->DetachObserver(this);
+
+		lock.relock();
 	}
 }
 
@@ -117,7 +121,7 @@ void CModelUpdateBridge::AfterUpdate(IModel* modelPtr, const istd::IChangeable::
 {
 	QReadLocker lock(&m_modelListMutex);
 
-	if (IsAttached(modelPtr)) {
+	if (IsAttached(modelPtr)){
 		istd::IChangeable::ChangeSet changes(changeSet.GetDescription());
 		if (m_updateFlags & UF_DELEGATED){
 			changes += istd::IChangeable::GetDelegatedChanges();
@@ -148,4 +152,5 @@ bool CModelUpdateBridge::IsAttached(const imod::IModel* modelPtr) const
 
 
 } // namespace imod
+
 

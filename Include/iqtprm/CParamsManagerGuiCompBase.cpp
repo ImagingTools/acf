@@ -424,7 +424,7 @@ void CParamsManagerGuiCompBase::UpdateComboBox()
 {
 	ParamsComboBox->clear();
 
-	int selectedIndex = -1;	
+	int selectedIndex = -1;
 	int setsCount = 0;
 	iprm::IParamsManager* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
