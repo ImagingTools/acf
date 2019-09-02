@@ -288,7 +288,7 @@ public:
 	/**
 		Get single column as vector.
 	*/
-	void GetColumnVector(int columnIndex, TVector<Height, Element>& result);
+	void GetColumnVector(int columnIndex, TVector<Height, Element>& result) const;
 
 	/**
 		Set a single column vector to matrix.
@@ -866,7 +866,7 @@ bool TMatrix<Width, Height, Element>::GetDecompositionQDQ(TMatrix<Height, Height
 
 
 template <int Width, int Height, typename Element>
-void TMatrix<Width, Height, Element>::GetColumnVector(int columnIndex, TVector<Height, Element>& result)
+void TMatrix<Width, Height, Element>::GetColumnVector(int columnIndex, TVector<Height, Element>& result) const
 {
 	Q_ASSERT(columnIndex < Width);
 	Q_ASSERT(columnIndex >= 0);
