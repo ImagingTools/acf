@@ -79,6 +79,12 @@ public:
 		PF_XYZ32,
 
 		/**
+			Pixel value is a 32-bit floating 2D-coordinate (X,Y)
+			In this mode the bitmap represents 2D calibration from pixel to mm.
+		*/
+		PF_XY32,
+
+		/**
 			First user defined pixel format.
 		*/
 		PF_USER = 256
