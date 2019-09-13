@@ -104,7 +104,7 @@ bool CFileNameParam::IsEqual(const IChangeable& object) const
 			return true;
 		}
 
-		return QFileInfo(pathThis) == QFileInfo(partSource);
+		return QFileInfo(pathThis).absoluteFilePath() == QFileInfo(partSource).absoluteFilePath();
 	}
 
 	return false;
