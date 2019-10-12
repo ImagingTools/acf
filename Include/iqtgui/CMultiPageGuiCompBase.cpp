@@ -12,6 +12,9 @@
 #include <QtGui/QVBoxLayout>
 #endif
 
+// ACF includes
+#include <istd/CChangeGroup.h>
+
 
 namespace iqtgui
 {
@@ -469,6 +472,8 @@ void CMultiPageGuiCompBase::PageModel::UpdatePageState()
 bool CMultiPageGuiCompBase::PageModel::SetSelectedOptionIndex(int index)
 {
 	Q_ASSERT(m_parentPtr != NULL);
+
+	istd::CChangeGroup changeGroup(this);
 
 	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(m_parentPtr->GetWidget());
 	if ((multiPageWidgetPtr != NULL) && BaseClass::SetSelectedOptionIndex(index)){

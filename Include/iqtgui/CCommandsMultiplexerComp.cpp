@@ -40,7 +40,7 @@ void CCommandsMultiplexerComp::BeforeUpdate(imod::IModel* I_IF_DEBUG(modelPtr))
 {
 	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
-	ChangeSet changeSet(CF_DELEGATED, ibase::ICommandsProvider::CF_COMMANDS);
+	ChangeSet changeSet(ibase::ICommandsProvider::CF_COMMANDS);
 
 	BeginChanges(changeSet);
 }
@@ -50,9 +50,7 @@ void CCommandsMultiplexerComp::AfterUpdate(imod::IModel* I_IF_DEBUG(modelPtr), c
 {
 	I_IF_DEBUG(Q_ASSERT(IsModelAttached(modelPtr)));
 
-	ChangeSet composedChangeSet = changeSet;
-
-	composedChangeSet += CF_DELEGATED;
+	ChangeSet composedChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
 
 	EndChanges(composedChangeSet);
 }

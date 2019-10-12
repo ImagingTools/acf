@@ -28,14 +28,13 @@ const ibase::IHierarchicalCommand* CCommandsBinderComp::GetCommands() const
 
 // reimplemented (imod::CMultiModelDispatcherBase)
 
-void CCommandsBinderComp::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& changeSet)
+void CCommandsBinderComp::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	if (m_isUpdateLocked){
 		return;
 	}
 
-	ChangeSet workingChanges = changeSet;
-	workingChanges += istd::IChangeable::CF_ALL_DATA;
+	ChangeSet workingChanges(ibase::ICommandsProvider::CF_COMMANDS);
 
 	istd::CChangeNotifier notifier(this, &workingChanges);
 
