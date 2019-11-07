@@ -2,8 +2,8 @@
 #define istd_TTransPtr_included
 
 
-// STD includes
-#include <memory>
+// Qt includes
+#include <QtCore/QSharedPointer>
 
 
 namespace istd
@@ -60,7 +60,7 @@ public:
 	Type& operator*() const;
 	Type* operator->() const;
 
-	std::shared_ptr<Type> m_impl;
+	QSharedPointer<Type> m_impl;
 
 protected:
 	TTransPtr();
