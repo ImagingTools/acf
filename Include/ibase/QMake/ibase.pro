@@ -8,4 +8,3 @@ include(../../../Config/QMake/StaticConfig.pri)
 	}
 }
 
-

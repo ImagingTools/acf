@@ -13,3 +13,4 @@ LIBS += -L$$OUT_PWD/../../../../../Lib/$$COMPILER_DIR/Tutorial -lDocView
 
 include(../../../../../Config/QMake/AcfQt.pri)
 include(../../../../../Config/QMake/AcfStd.pri)
+

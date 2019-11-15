@@ -7,3 +7,4 @@ QT += xml
 
 include(../../../Config/QMake/AcfQt.pri)
 include(../../../Config/QMake/AcfStd.pri)
+

@@ -7,3 +7,4 @@ LIBS += -lipackage
 QT += xml
 
 include(../../../Config/QMake/AcfStd.pri)
+

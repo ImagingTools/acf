@@ -19,3 +19,4 @@ LIBS += -lipackage
 
 include(../../../Config/QMake/AcfStd.pri)
 include(../../../Config/QMake/AcfQt.pri)
+

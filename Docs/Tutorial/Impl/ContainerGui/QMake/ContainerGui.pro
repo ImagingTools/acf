@@ -11,3 +11,4 @@ QT += core gui
 
 include(../../../../../Config/QMake/AcfQt.pri)
 include(../../../../../Config/QMake/AcfStd.pri)
+
