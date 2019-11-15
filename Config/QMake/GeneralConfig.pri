@@ -113,7 +113,7 @@ win32-msvc*{
 
 	contains(MSVC_VER, "16.0"){
 		QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit- /D__STDC_LIMIT_MACROS
-		COMPILER_NAME = VC15
+                COMPILER_NAME = VC16
 
 		CONFIG(release, debug|release){
 			#extra optimizations
