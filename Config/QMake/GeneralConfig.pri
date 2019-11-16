@@ -44,7 +44,7 @@ win32-msvc*{
 	contains(MSVC_VER, "8.0"){
 		COMPILER_NAME = VC8
 
-		message("Using Visual Studio 2005");
+#		message("Using Visual Studio 2005");
 	}
 
 	contains(MSVC_VER, "9.0"){
@@ -54,21 +54,21 @@ win32-msvc*{
 		QMAKE_CXXFLAGS -= -Gd
 		QMAKE_CXXFLAGS -= -GD
 
-		message("Using Visual Studio 2008");
+#		message("Using Visual Studio 2008");
 	}
 
 	contains(MSVC_VER, "10.0"){
 		QMAKE_CXXFLAGS += /wd4996
 		COMPILER_NAME = VC10
 
-		message("Using Visual Studio 2010");
+#		message("Using Visual Studio 2010");
 	}
 
 	contains(MSVC_VER, "11.0"){
 		QMAKE_CXXFLAGS += /wd4996
 		COMPILER_NAME = VC11
 
-		message("Using Visual Studio 2012");
+#		message("Using Visual Studio 2012");
 	}
 
 	contains(MSVC_VER, "12.0"){
@@ -76,7 +76,7 @@ win32-msvc*{
 		COMPILER_NAME = VC12
 		CONFIG += c++11
 
-		message("Using Visual Studio 2013");
+#		message("Using Visual Studio 2013");
 	}
 
 	contains(MSVC_VER, "14.0"){
@@ -92,7 +92,7 @@ win32-msvc*{
 			QMAKE_LFLAGS += /MACHINE:X64
 		}
 
-		message("Using Visual Studio 2015");
+#		message("Using Visual Studio 2015");
 	}
 
 	contains(MSVC_VER, "15.0"){
@@ -108,7 +108,7 @@ win32-msvc*{
 			QMAKE_LFLAGS += /MACHINE:X64
 		}
 
-		message("Using Visual Studio 2017");
+#		message("Using Visual Studio 2017");
 	}
 
 	contains(MSVC_VER, "16.0"){
@@ -124,7 +124,7 @@ win32-msvc*{
 			QMAKE_LFLAGS += /MACHINE:X64
 		}
 
-		message("Using Visual Studio 2019");
+#		message("Using Visual Studio 2019");
 	}
 }
 else{
