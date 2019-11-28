@@ -98,6 +98,7 @@ public Q_SLOTS:
 	void OnHScrollbarChanged(int newPos);
 	void OnVScrollbarChanged(int newPos);
 	void UpdateView();
+	void OnStopFullScreen();
 
 Q_SIGNALS:
 	bool selectionChanged(const iview::IShapeView& view, const istd::CIndex2d& position, const iview::IInteractiveShape& shape, bool state);
