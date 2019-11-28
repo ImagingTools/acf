@@ -29,8 +29,6 @@ public:
 	I_BEGIN_COMPONENT(CCircleParamsGuiComp);
 	I_END_COMPONENT;
 
-protected:
-
 protected Q_SLOTS:
 	void OnParamsChanged(double value);
 	void OnActionTriggered(QAction* actionPtr);

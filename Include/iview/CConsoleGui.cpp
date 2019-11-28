@@ -655,7 +655,7 @@ void CConsoleGui::UpdateCommands()
 	}
 
 	if (IsMmButtonVisible()){
-		m_gridInMmVisibleCommand.SetVisuals(tr("Grid in Millimeter"), tr("Grid in Millimeter"), tr("Show/Hide Millimeters"), QIcon(":/Icons/LogicalUnit"));
+		m_gridInMmVisibleCommand.SetVisuals(tr("Grid in Millimeter"), tr("Millimeter"), tr("Show grid in millimeters"), QIcon(":/Icons/LogicalUnit"));
 		m_gridInMmVisibleCommand.setChecked(IsGridInMm());
 		m_commands.InsertChild(&m_gridInMmVisibleCommand);
 	}
