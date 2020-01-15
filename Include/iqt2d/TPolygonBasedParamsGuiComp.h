@@ -86,6 +86,7 @@ protected:
 		virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
 		virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 		virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+		virtual bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 
 		using QAbstractTableModel::dataChanged;
 		using QAbstractTableModel::layoutChanged;
@@ -249,7 +250,7 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnRemoveN
 
 		int row = selected.isEmpty()? -1: selected.front().row();
 		if (row >= 0){
-			objectPtr->RemoveNode(row);
+			m_tableModel.removeRows(row, 1);
 		}
 	}
 }
@@ -565,6 +566,21 @@ Qt::ItemFlags TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::
 	}
 
 	return Qt::ItemIsSelectable;
+}
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+bool TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TableModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+	Q_EMIT beginRemoveRows(parent, row, row + count - 1);
+	
+	i2d::CPolygon* objectPtr = m_parentPtr->GetObservedObject();
+	if (objectPtr != nullptr){
+		objectPtr->RemoveNode(row);
+	}
+
+	Q_EMIT endRemoveRows();
+
+	return true;
 }
 
 

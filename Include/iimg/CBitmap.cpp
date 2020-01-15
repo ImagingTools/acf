@@ -40,11 +40,11 @@ bool ConvertToGrayImage(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 				PixelType value = inputLinePtr[x];
 
 				if (!qIsNaN(double(value))){
-					if (value < minValue){
+					if (value < minValue || qIsNaN(double(minValue))){
 						minValue = value;
 					}
 
-					if (value > maxValue){
+					if (value > maxValue || qIsNaN(double(maxValue))){
 						maxValue = value;
 					}
 				}
@@ -89,9 +89,9 @@ bool ConvertXyToRgb(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 		}
 
 		float minX = std::numeric_limits<float>::max();
-		float maxX = std::numeric_limits<float>::min();
+		float maxX = std::numeric_limits<float>::lowest();
 		float minY = std::numeric_limits<float>::max();
-		float maxY = std::numeric_limits<float>::min();
+		float maxY = std::numeric_limits<float>::lowest();
 
 		for (int j = 0; j < size.GetY(); ++j) {
 			const float* inputLinePtr = (const float*)inputBitmap.GetLinePtr(j);
@@ -166,11 +166,11 @@ bool ConvertXyzToRgb(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 		}
 
 		float minX = std::numeric_limits<float>::max();
-		float maxX = std::numeric_limits<float>::min();
+		float maxX = -std::numeric_limits<float>::max();
 		float minY = std::numeric_limits<float>::max();
-		float maxY = std::numeric_limits<float>::min();
+		float maxY = -std::numeric_limits<float>::max();
 		float minZ = std::numeric_limits<float>::max();
-		float maxZ = std::numeric_limits<float>::min();
+		float maxZ = -std::numeric_limits<float>::max();
 
 		for (int j = 0; j < size.GetY(); ++j){
 			const float* inputLinePtr = (const float*)inputBitmap.GetLinePtr(j);

@@ -46,6 +46,7 @@ public:
 
 	// reimplemented (iview::ITouchable)
 	virtual TouchState IsTouched(istd::CIndex2d position) const;
+	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const;
 
 	// reimplemented (iview::IVisualizable)
 	virtual void Draw(QPainter& drawContext) const;
