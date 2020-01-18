@@ -68,6 +68,11 @@ public:
 		DT_COLLAPSIBLE_GROUPS,
 
 		/**
+			The pages will be placed into a mini-widget container.
+		*/
+		DT_MINI_WIDGETS,
+
+		/**
 			User defined container implementation.
 		*/
 		DT_USER = 1024
