@@ -89,9 +89,9 @@ bool ConvertXyToRgb(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 		}
 
 		float minX = std::numeric_limits<float>::max();
-		float maxX = std::numeric_limits<float>::lowest();
+		float maxX = -std::numeric_limits<float>::max();
 		float minY = std::numeric_limits<float>::max();
-		float maxY = std::numeric_limits<float>::lowest();
+		float maxY = -std::numeric_limits<float>::max();
 
 		for (int j = 0; j < size.GetY(); ++j) {
 			const float* inputLinePtr = (const float*)inputBitmap.GetLinePtr(j);

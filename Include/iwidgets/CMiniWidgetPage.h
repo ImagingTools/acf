@@ -23,8 +23,13 @@ public:
 	void SetIconSize(const QSize& size);
 	void SetIcon(const QIcon& icon);
 
+
+Q_SIGNALS:
+	void PostUpdatePalette();
+
 private Q_SLOTS:
 	void SetPageVisible(bool visible);
+	void OnUpdatePalette();
 
 private:
 	QIcon m_icon;

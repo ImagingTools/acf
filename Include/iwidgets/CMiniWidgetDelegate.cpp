@@ -55,8 +55,8 @@ QWidget* CMiniWidgetDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, in
 
 	Q_ASSERT(boxLayoutPtr != NULL);
 
-	boxLayoutPtr->setMargin(9);
-	boxLayoutPtr->setSpacing(9);
+	boxLayoutPtr->setMargin(11);
+	boxLayoutPtr->setSpacing(11);
 
 	m_containerGuiFlags = containerGuiFlags;
 	m_orientation = orientation;
@@ -89,13 +89,6 @@ int CMiniWidgetDelegate::InsertPage(
 
 	QLayout* containerLayoutPtr = containerWidget.layout();
 	Q_ASSERT(containerLayoutPtr != NULL);
-
-	int widgetCount = containerLayoutPtr->count();
-	if (widgetCount > 0){
-		--widgetCount; // spacer not included
-	}
-
-	bool even = (widgetCount % 2) == 0;
 
 	CMiniWidgetPage* groupPanelPtr = new CMiniWidgetPage(&containerWidget);
 	groupPanelPtr->SetTitle(pageTitle);

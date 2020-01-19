@@ -16,16 +16,17 @@
   <property name="styleSheet">
    <string notr="true">QWidget[MiniWidgetContainer=true]
 {
-	background-color: #e6e8eb;
+	background-color: #ebebee;
 	color: #aaccff;
-	border-radius: 4px;
-	border: 1px solid #cfd1d4;
+	border-radius: 5px;
+	border: 1px solid #cdcdd1;
 }
 
 QLabel#PageLabel
 {
-	color: #9ea0a3;
+	color: #335777;
 	font-size: 12pt;
+	font-family: &quot;Arial&quot;;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
