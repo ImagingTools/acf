@@ -574,7 +574,7 @@ bool TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::TableMode
 	Q_EMIT beginRemoveRows(parent, row, row + count - 1);
 	
 	i2d::CPolygon* objectPtr = m_parentPtr->GetObservedObject();
-	if (objectPtr != nullptr){
+	if (objectPtr != NULL){
 		objectPtr->RemoveNode(row);
 	}
 

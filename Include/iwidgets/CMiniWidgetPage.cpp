@@ -1,6 +1,10 @@
 #include <iwidgets/CMiniWidgetPage.h>
 
 
+// Qt includes
+#include <QtWidgets/QGraphicsEffect>
+
+
 namespace iwidgets
 {
 
@@ -17,6 +21,14 @@ CMiniWidgetPage::CMiniWidgetPage(QWidget* parentPtr)
 	PageIconToolButton->setHidden(true);
 
 	connect(this, SIGNAL(PostUpdatePalette()), this, SLOT(OnUpdatePalette()), Qt::QueuedConnection);
+
+	QGraphicsDropShadowEffect* shadowPtr = new QGraphicsDropShadowEffect;
+	shadowPtr->setXOffset(0);
+	shadowPtr->setYOffset(0);
+	shadowPtr->setBlurRadius(8);
+	shadowPtr->setColor(qRgb(128, 128, 128));
+
+	setGraphicsEffect(shadowPtr);
 }
 
 

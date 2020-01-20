@@ -18,15 +18,14 @@
 {
 	background-color: #ebebee;
 	color: #aaccff;
-	border-radius: 5px;
-	border: 1px solid #cdcdd1;
+	boder-radius: 5px;
 }
 
 QLabel#PageLabel
 {
 	color: #335777;
 	font-size: 12pt;
-	font-family: &quot;Arial&quot;;
+	font-family: &quot;Segoe UI&quot;;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
