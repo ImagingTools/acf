@@ -245,6 +245,11 @@ QString CImageShape::GetShapeDescriptionAt(istd::CIndex2d position) const
 				}
 				break;
 
+			case iimg::IBitmap::PF_FLOAT32:
+			case iimg::IBitmap::PF_FLOAT64:
+				pixelValueInfo = QObject::tr("Value %1").arg(pixelValue[0], 3, 'f', 3);
+				break;
+
 			default:
 				pixelValueInfo = "[";
 				for (int i = 0; i < pixelValue.GetElementsCount(); ++i){
