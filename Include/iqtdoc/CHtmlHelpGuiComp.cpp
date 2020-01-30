@@ -43,6 +43,14 @@ void CHtmlHelpGuiComp::ShowHelp(const QString& contextText, const istd::IPolymor
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
+void CHtmlHelpGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	ShowHelp("", NULL);
+}
+
+
 void CHtmlHelpGuiComp::OnGuiShown()
 {
 	BaseClass::OnGuiShown();

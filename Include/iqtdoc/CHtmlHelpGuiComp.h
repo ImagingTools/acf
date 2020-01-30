@@ -42,6 +42,7 @@ public:
 	virtual void ShowHelp(const QString& contextText, const istd::IPolymorphic* contextObjectPtr);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
 	virtual void OnGuiShown();
 
 private:
