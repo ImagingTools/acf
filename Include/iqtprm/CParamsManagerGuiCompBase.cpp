@@ -717,10 +717,14 @@ void CParamsManagerGuiCompBase::OnGuiCreated()
 
 	if (*m_comboBoxViewAttrPtr){
 		ParamsTree->hide();
+
 		horizontalSpacer->changeSize(0,0);
+		ParamViewSplitter->setChildrenCollapsible(false);
+
 		AddButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 		RemoveButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
-	} else {
+	}
+	else{
 		ParamsComboBox->hide();
 	}
 
