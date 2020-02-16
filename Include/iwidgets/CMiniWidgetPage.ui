@@ -23,7 +23,7 @@
 
 QLabel#PageLabel
 {
-	color: #335777;
+	color: #505050;
 	font-size: 12pt;
 	font-weight: bold;
 	font-family: &quot;Segoe UI&quot;;

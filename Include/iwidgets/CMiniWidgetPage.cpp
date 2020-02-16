@@ -89,10 +89,10 @@ void CMiniWidgetPage::OnUpdatePalette()
 {
 	QPalette currentPalette = palette();
 
-	currentPalette.setBrush(QPalette::Active, QPalette::Text, QColor("#335777"));
-	currentPalette.setBrush(QPalette::WindowText, QColor("#335777"));
-	currentPalette.setBrush(QPalette::ButtonText, QColor("#335777"));
-	currentPalette.setBrush(QPalette::BrightText, QColor("#335777"));
+	currentPalette.setBrush(QPalette::Active, QPalette::Text, QColor("#505050"));
+	currentPalette.setBrush(QPalette::WindowText, QColor("#505050"));
+	currentPalette.setBrush(QPalette::ButtonText, QColor("#505050"));
+	currentPalette.setBrush(QPalette::BrightText, QColor("#505050"));
 
 	//currentPalette.setBrush(QPalette::Active, QPalette::Button, QColor("white"));
 	//currentPalette.setBrush(QPalette::Inactive, QPalette::Button, QColor("white"));
