@@ -14,16 +14,9 @@
    <string/>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget[MiniWidgetContainer=true]
+   <string notr="true">QLabel#PageLabel
 {
-	background-color: white;
-	color: #aaccff;
-	border-radius: 5px;
-}
-
-QLabel#PageLabel
-{
-	color: #505050;
+	color: #656565;
 	font-size: 12pt;
 	font-weight: bold;
 	font-family: &quot;Segoe UI&quot;;
