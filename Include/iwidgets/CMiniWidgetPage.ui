@@ -14,14 +14,7 @@
    <string/>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLabel#PageLabel
-{
-	color: #757575;
-	font-size: 14pt;
-	font-weight: bold;
-	font-family: &quot;Segoe UI&quot;;
-}
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="spacing">
