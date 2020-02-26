@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include <istd/TDelPtr.h>
 #include <istd/CChangeNotifier.h>
 #include <iser/IArchive.h>
 #include <iser/CArchiveTag.h>
@@ -93,6 +94,17 @@ bool CEnableableParam::CopyFrom(const IChangeable& object, CompatibilityMode /*m
 	}
 
 	return false;
+}
+
+
+istd::IChangeable* CEnableableParam::CloneMe(istd::IChangeable::CompatibilityMode mode) const
+{
+	istd::TDelPtr<CEnableableParam> clonedPtr(new CEnableableParam);
+	if (clonedPtr->CopyFrom(*this, mode)){
+		return clonedPtr.PopPtr();
+	}
+
+	return nullptr;
 }
 
 
