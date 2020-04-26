@@ -80,6 +80,9 @@ protected:
 	virtual void OnGuiModelDetached();
 	virtual void UpdateModel() const;
 
+	QList<imod::IModelEditor*> GetModelEditors() const;
+	QList<QByteArray> GetIds() const;
+
 protected Q_SLOTS:
 	void OnEditorChanged(int index);
 	void on_LoadParamsButton_clicked();

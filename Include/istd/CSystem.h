@@ -29,18 +29,32 @@ public:
 	struct FileDriveInfo
 	{
 		FileDriveInfo()
-			:totalBytes(0),
-			freeBytes(0)
+			: totalBytes(0),
+			freeBytes(0),
+			isValid(false)
 		{
 		}
 
 		bool operator ==(const FileDriveInfo& info) const
 		{
-			return (totalBytes == info.totalBytes) && (freeBytes == info.freeBytes);
+			return (totalBytes == info.totalBytes) && (freeBytes == info.freeBytes) && (isValid == info.isValid);
 		}
 
 		quint64 totalBytes;
 		quint64 freeBytes;
+		bool isValid;
+	};
+
+	struct FileDriveDescriptor
+	{
+		FileDriveInfo info;
+		QString name;
+		QByteArray id;
+
+		bool operator == (const FileDriveDescriptor& driveInfo) const
+		{
+			return (info == driveInfo.info) && (name == driveInfo.name) && (id == driveInfo.id);
+		}
 	};
 
 

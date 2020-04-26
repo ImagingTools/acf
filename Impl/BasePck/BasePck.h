@@ -45,6 +45,7 @@
 #include <iprm/COptionsManagerComp.h>
 #include <iprm/CFilteredOptionsListComp.h>
 #include <iprm/CParamsSetDelegatorComp.h>
+#include <iprm/CParameterStateProviderComp.h>
 
 #include <i2d/CPosition2dComp.h>
 #include <i2d/CRectangleComp.h>
@@ -99,6 +100,7 @@ typedef icomp::TModelCompWrap<iprm::CMultiParamsManagerComp> MultiParamsManager;
 typedef icomp::TModelCompWrap<iprm::COptionsManagerComp> OptionsManager;
 typedef icomp::TModelCompWrap<iprm::CFilteredOptionsListComp> FilteredOptionsList;
 typedef icomp::TModelCompWrap<iprm::CParamsSetDelegatorComp> ParamsSetDelegator;
+typedef iprm::CParameterStateProviderComp ParameterStateProvider;
 
 typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;

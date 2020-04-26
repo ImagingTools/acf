@@ -149,6 +149,11 @@ I_EXPORT_COMPONENT(
 			"Delegator of parameter set",
 			"Parameter Data Delegate" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
 
+I_EXPORT_COMPONENT(
+			ParameterStateProvider,
+			"Provider of the parameter states",
+			"Parameter State" IM_TAG("Parameter"));
+
 
 I_EXPORT_COMPONENT(
 			SingleDocumentTemplate,
