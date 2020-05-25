@@ -486,6 +486,29 @@ Dest* CompCastPtr(istd::IPolymorphic* objectPtr)
 
 
 /**
+	Query for a given interface.
+*/
+template <class Dest>
+Dest* QueryInterface(istd::IPolymorphic* objectPtr, const QByteArray& componentId = QByteArray())
+{
+	const icomp::IComponent* componentPtr = dynamic_cast<const icomp::IComponent*>(objectPtr);
+	if (componentPtr != NULL){
+		icomp::ICompositeComponent* parentComponentPtr = const_cast<icomp::ICompositeComponent*>(componentPtr->GetParentComponent(true));
+
+		if (parentComponentPtr != NULL){
+			Dest* retVal = (Dest*)parentComponentPtr->GetInterface(istd::CClassInfo(typeid(Dest)), componentId);
+			if (retVal != NULL){
+				return retVal;
+			}
+
+			return QueryInterface<Dest>(parentComponentPtr, componentId);
+		}
+	}
+	return NULL;
+}
+
+
+/**
 	Cast to specified interface trying to use component interface query.
 	It extends standard dynamic_cast functinality when you use composed components.
 	\overload
