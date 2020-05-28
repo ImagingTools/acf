@@ -154,6 +154,15 @@ I_EXPORT_COMPONENT(
 			"Provider of the parameter states",
 			"Parameter State" IM_TAG("Parameter"));
 
+I_EXPORT_COMPONENT(
+			TextParam,
+			"Text parameter",
+			"Text Parameter" IM_CATEGORY(I_DATA_MODEL));
+
+I_EXPORT_COMPONENT(
+			IdParam,
+			"ID parameter",
+			"ID Parameter" IM_CATEGORY(I_DATA_MODEL));
 
 I_EXPORT_COMPONENT(
 			SingleDocumentTemplate,
