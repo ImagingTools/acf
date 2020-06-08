@@ -2,7 +2,6 @@
 
 
 // Qt includes
-#include <QtCore/QMapIterator>
 #include <QtGui/QPainter>
 
 // ACF includes
@@ -141,10 +140,14 @@ bool CInteractiveViewLayer::OnMouseButton(istd::CIndex2d position, Qt::MouseButt
 
 	IViewEventObserver* listenerPtr = dynamic_cast<IViewEventObserver*>(viewPtr);
 
-	for (ShapeList::reverse_iterator iter = m_activeShapes.rbegin(); iter != m_activeShapes.rend(); ++iter) {
+	QVectorIterator<ShapeWithBoundingBox> activeShapeIterator(m_activeShapes);
+	activeShapeIterator.toBack();
 
-		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(iter->shapePtr);
-		const i2d::CRect& boundingBox = iter->box;
+	while (activeShapeIterator.hasPrevious()){
+		const ShapeWithBoundingBox& shape = activeShapeIterator.previous();
+
+		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(shape.shapePtr);
+		const i2d::CRect& boundingBox = shape.box;
 		if (			(uiShapePtr != m_focusedShapePtr) &&
 						uiShapePtr->IsVisible() &&
 						boundingBox.IsInside(position)){
@@ -178,10 +181,14 @@ bool CInteractiveViewLayer::OnMouseButton(istd::CIndex2d position, Qt::MouseButt
 
 	int keysState = GetKeysState();
 
-	for (ShapeList::reverse_iterator inactiveIter = m_shapes.rbegin(); inactiveIter != m_shapes.rend(); ++inactiveIter) {
+	QVectorIterator<ShapeWithBoundingBox> inactiveShapeIterator(m_shapes);
+	inactiveShapeIterator.toBack();
 
-		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveIter->shapePtr);
-		const i2d::CRect& boundingBox = inactiveIter->box;
+	while (inactiveShapeIterator.hasPrevious()){
+		const ShapeWithBoundingBox& inactiveShape = inactiveShapeIterator.previous();
+
+		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveShape.shapePtr);
+		const i2d::CRect& boundingBox = inactiveShape.box;
 		if (			(uiShapePtr != m_focusedShapePtr) &&
 						uiShapePtr->IsVisible() &&
 						boundingBox.IsInside(position)){
@@ -243,11 +250,15 @@ bool CInteractiveViewLayer::OnFocusedMouseMove(istd::CIndex2d position)
 
 ITouchable::TouchState CInteractiveViewLayer::IsTouched(istd::CIndex2d position, IInteractiveShape** shapePtrPtr) const
 {
-	for (ShapeList::const_reverse_iterator iter = m_activeShapes.rbegin(); iter != m_activeShapes.rend(); ++iter) {
+	QVectorIterator<ShapeWithBoundingBox> activeShapeIterator(m_activeShapes);
+	activeShapeIterator.toBack();
 
-		IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(iter->shapePtr);
+	while (activeShapeIterator.hasPrevious()){
+		const ShapeWithBoundingBox& activeShape = activeShapeIterator.previous();
+
+		IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(activeShape.shapePtr);
 		Q_ASSERT(uiShapePtr != NULL);
-		const i2d::CRect& boundingBox = iter->box;
+		const i2d::CRect& boundingBox = activeShape.box;
 
 		if (boundingBox.IsInside(position)){
 			ITouchable::TouchState touchState = uiShapePtr->IsTouched(position);
@@ -260,11 +271,15 @@ ITouchable::TouchState CInteractiveViewLayer::IsTouched(istd::CIndex2d position,
 		}
 	}
 
-	for (ShapeList::const_reverse_iterator inactiveIter = m_shapes.rbegin(); inactiveIter != m_shapes.rend(); ++inactiveIter) {
+	QVectorIterator<ShapeWithBoundingBox> inactiveShapeIterator(m_shapes);
+	inactiveShapeIterator.toBack();
 
-		IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveIter->shapePtr);
+	while (inactiveShapeIterator.hasPrevious()){
+		const ShapeWithBoundingBox& inactiveShape = inactiveShapeIterator.previous();
+
+		IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveShape.shapePtr);
 		Q_ASSERT(uiShapePtr != NULL);
-		const i2d::CRect& boundingBox = inactiveIter->box;
+		const i2d::CRect& boundingBox = inactiveShape.box;
 
 		if (boundingBox.IsInside(position)){
 			ITouchable::TouchState touchState = uiShapePtr->IsTouched(position);

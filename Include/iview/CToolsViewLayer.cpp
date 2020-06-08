@@ -2,7 +2,6 @@
 
 
 // Qt includes
-#include <QtCore/QMapIterator>
 #include <QtGui/QPainter>
 
 // ACF includes
@@ -43,8 +42,13 @@ void CToolsViewLayer::DrawFocusedShape(QPainter& drawContext)
 
 bool CToolsViewLayer::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
-	for (ShapeList::reverse_iterator inactiveIter = m_shapes.rbegin(); inactiveIter != m_shapes.rend(); ++inactiveIter) {
-		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveIter->shapePtr);
+	QVectorIterator<ShapeWithBoundingBox> shapeIterator(m_shapes);
+	shapeIterator.toBack();
+
+	while (shapeIterator.hasPrevious()){
+		const ShapeWithBoundingBox& shape = shapeIterator.previous();
+
+		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(shape.shapePtr);
 
 		if (uiShapePtr->OnMouseButton(position, buttonType, downFlag)){
 			return true;
@@ -63,8 +67,13 @@ bool CToolsViewLayer::OnFocusedMouseButton(istd::CIndex2d /*position*/, Qt::Mous
 
 bool CToolsViewLayer::OnFocusedMouseMove(istd::CIndex2d position)
 {
-	for (ShapeList::reverse_iterator inactiveIter = m_shapes.rbegin(); inactiveIter != m_shapes.rend(); ++inactiveIter) {
-		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveIter->shapePtr);
+	QVectorIterator<ShapeWithBoundingBox> inactiveShapeIterator(m_shapes);
+	inactiveShapeIterator.toBack();
+
+	while (inactiveShapeIterator.hasPrevious()){
+		const ShapeWithBoundingBox& inactiveShape = inactiveShapeIterator.previous();
+
+		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveShape.shapePtr);
 
 		if (uiShapePtr->OnMouseMove(position)){
 			return true;
@@ -77,8 +86,13 @@ bool CToolsViewLayer::OnFocusedMouseMove(istd::CIndex2d position)
 
 ITouchable::TouchState CToolsViewLayer::IsTouched(istd::CIndex2d position, IInteractiveShape** shapePtrPtr) const
 {
-	for (ShapeList::const_reverse_iterator inactiveIter = m_shapes.rbegin(); inactiveIter != m_shapes.rend(); ++inactiveIter) {
-		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveIter->shapePtr);
+	QVectorIterator<ShapeWithBoundingBox> inactiveShapeIterator(m_shapes);
+	inactiveShapeIterator.toBack();
+
+	while (inactiveShapeIterator.hasPrevious()){
+		const ShapeWithBoundingBox& inactiveShape = inactiveShapeIterator.previous();
+
+		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveShape.shapePtr);
 		if (uiShapePtr == NULL){
 			continue;
 		}
