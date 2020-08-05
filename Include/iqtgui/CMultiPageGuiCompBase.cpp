@@ -345,11 +345,6 @@ void CMultiPageGuiCompBase::OnComponentCreated()
 			continue;
 		}
 
-		QByteArray pageId;
-		if (pageIndex < m_pageIdsAttrPtr.GetCount()){
-			pageId = m_pageIdsAttrPtr[pageIndex];
-		}
-
 		m_pageIndexToInfoMap[pageIndex].pageTitle = name;
 	}
 
