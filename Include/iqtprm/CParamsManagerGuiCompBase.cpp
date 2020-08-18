@@ -314,6 +314,13 @@ iqt2d::IViewExtender* CParamsManagerGuiCompBase::GetCurrentViewExtenderPtr() con
 }
 
 
+void CParamsManagerGuiCompBase::OnParameterSelectionChanged()
+{
+	DetachCurrentExtender();
+	AttachCurrentExtender();
+}
+
+
 // protected methods
 
 void CParamsManagerGuiCompBase::UpdateActions()
@@ -758,8 +765,7 @@ void CParamsManagerGuiCompBase::AfterUpdate(imod::IModel* modelPtr, const istd::
 	BaseClass::AfterUpdate(modelPtr, changeSet);
 
 	if (changeSet.Contains(iprm::ISelectionParam::CF_SELECTION_CHANGED)){
-		DetachCurrentExtender();
-		AttachCurrentExtender();
+		OnParameterSelectionChanged();
 	}
 }
 

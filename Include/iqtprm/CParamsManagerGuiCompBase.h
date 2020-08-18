@@ -83,6 +83,11 @@ protected:
 	*/
 	virtual iqt2d::IViewExtender* GetCurrentViewExtenderPtr() const;
 
+	/**
+		Callback for parameter selection
+	*/
+	virtual void OnParameterSelectionChanged();
+
 	void UpdateActions();
 	void UpdateTree();
 	void UpdateComboBox();
@@ -113,7 +118,6 @@ private:
 	I_ATTR(bool, m_supportEnablingAttrPtr);
 	I_ATTR(bool, m_comboBoxViewAttrPtr);
 	I_ATTR(bool, m_comboBoxEditableAttrPtr);
-	I_REF(iqt2d::IViewExtender, m_extenderCompPtr);
 	I_REF(iqtgui::IIconProvider, m_iconProviderCompPtr);
 	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 
