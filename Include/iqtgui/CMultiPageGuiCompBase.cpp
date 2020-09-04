@@ -330,6 +330,23 @@ void CMultiPageGuiCompBase::OnGuiRetranslate()
 }
 
 
+void CMultiPageGuiCompBase::OnTryClose(bool* ignoredPtr)
+{
+	int pageCount = GetPagesCount();
+	for (int i = 0; i < pageCount; i++){
+		iqtgui::IGuiObject* guiObjectPtr = GetPageGuiComponent(i);
+		if (guiObjectPtr != nullptr){
+			guiObjectPtr->OnTryClose(ignoredPtr);
+
+			if (ignoredPtr != nullptr && *ignoredPtr == true){
+				SetCurrentPage(i);
+				return;
+			}
+		}
+	}
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CMultiPageGuiCompBase::OnComponentCreated()

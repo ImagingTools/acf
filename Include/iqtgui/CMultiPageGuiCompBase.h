@@ -146,6 +146,7 @@ protected:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 	virtual void OnGuiRetranslate();
+	virtual void OnTryClose(bool* ignoredPtr = nullptr);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

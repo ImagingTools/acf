@@ -92,7 +92,7 @@ void CImageShape::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::C
 	}
 	else{
 		const QImage& image = providerPtr->GetQImage();
-		if (!image.isNull()) {
+		if (!image.isNull()){
 			m_pixmap = QPixmap::fromImage(image, Qt::AutoColor);
 		}
 		else{

@@ -80,7 +80,6 @@ void CParallelogram::SetWidth(double w)
 		const double cos = std::cos(angle);
 		const double sin = std::sin(angle);
 		const double height = GetHeight();
-		const i2d::CVector2d center = GetCenter();
 		const i2d::CMatrix2d scale(w, 0, 0, height);
 		const i2d::CMatrix2d rotation(cos, sin, -sin, cos);
 		m_transform.SetDeformMatrix(rotation.GetMultiplied(scale));
@@ -106,7 +105,6 @@ void CParallelogram::SetHeight(double h)
 		const double cos = std::cos(angle);
 		const double sin = std::sin(angle);
 		const double width = GetWidth();
-		const i2d::CVector2d center = GetCenter();
 		const i2d::CMatrix2d scale(width, 0, 0, h);
 		const i2d::CMatrix2d rotation(cos, sin, -sin, cos);
 		m_transform.SetDeformMatrix(rotation.GetMultiplied(scale));
