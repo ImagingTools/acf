@@ -195,6 +195,8 @@ void CMultiPageGuiCompBase::CreatePages()
 
 	bool firstPageInitialized = false;
 
+	int intialPageIndex = *m_defaultPageIndexAttrPtr;
+
 	int pagesCount = GetPagesCount();
 	for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
 		CreatePage(pageIndex);
@@ -202,16 +204,21 @@ void CMultiPageGuiCompBase::CreatePages()
 		bool initPage = !isLazyInit;
 
 		if (!firstPageInitialized && m_pageModel.IsOptionEnabled(pageIndex)){
-			firstPageInitialized = true;
-			m_pageModel.SetSelectedOptionIndex(pageIndex);
+			if (pageIndex >= intialPageIndex){
+				firstPageInitialized = true;
 
-			initPage = true;
+				initPage = true;
+
+				intialPageIndex = pageIndex;
+			}
 		}
 
 		if (initPage){
 			EnsurePageInitialized(pageIndex);
 		}
 	}
+
+	m_pageModel.SetSelectedOptionIndex(intialPageIndex);
 
 	UpdateVisualElements();
 }
@@ -425,7 +432,7 @@ void CMultiPageGuiCompBase::PageModel::SetParent(CMultiPageGuiCompBase* parentPt
 		m_parentPtr = parentPtr;
 
 		if (parentPtr != NULL){
-			BaseClass::SetSelectedOptionIndex(0);
+			BaseClass::SetSelectedOptionIndex(*m_parentPtr->m_defaultPageIndexAttrPtr);
 
 			BaseClass::SetSelectionConstraints(this);
 		}
