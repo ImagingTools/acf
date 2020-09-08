@@ -76,6 +76,18 @@ bool CParamsSetDelegatorComp::Serialize(iser::IArchive& archive)
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CParamsSetDelegatorComp::CopyFrom(const IChangeable& object, CompatibilityMode mode)
+{
+	if (m_slaveParamsSetCompPtr.IsValid()){
+		return m_slaveParamsSetCompPtr->CopyFrom(object, mode);
+	}
+
+	return false;
+}
+
+
 // protected methods
 
 // reimplemented (icomp::CComponentBase)
