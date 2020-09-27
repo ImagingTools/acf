@@ -182,7 +182,7 @@ CFileSystemInfoProviderComp::DriveInfos CFileSystemInfoProviderComp::CalculateDr
 
 	QFileInfoList drives = QDir::drives();
 	for (int i = 0; i < drives.count(); ++i){
-		DriveInfo driveInfo;
+		istd::CSystem::FileDriveDescriptor driveInfo;
 
 		QString drivePath = drives[i].absolutePath();
 

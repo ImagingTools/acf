@@ -68,19 +68,7 @@ protected:
 	virtual void run();
 
 protected:
-	struct DriveInfo
-	{
-		istd::CSystem::FileDriveInfo info;
-		QString name;
-		QByteArray id;
-
-		bool operator == (const DriveInfo& driveInfo) const
-		{
-			return (info == driveInfo.info) && (name == driveInfo.name) && (id == driveInfo.id);
-		}
-	};
-
-	typedef std::vector<DriveInfo> DriveInfos;
+	typedef std::vector<istd::CSystem::FileDriveDescriptor> DriveInfos;
 
 Q_SIGNALS:
 	void EmitUpdate(const DriveInfos& driveInfos);
