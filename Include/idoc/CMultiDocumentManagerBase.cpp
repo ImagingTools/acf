@@ -327,7 +327,11 @@ bool CMultiDocumentManagerBase::SaveDocument(
 
 		filePath = GetSaveFilePath(infoPtr->documentTypeId, infoPtr->documentPtr.GetPtr(), filePath);
 		if (filePath.isEmpty()){
-			return true;
+			if (ignoredPtr != NULL){
+				*ignoredPtr = true;
+			}
+
+			return false;
 		}
 	}
 
