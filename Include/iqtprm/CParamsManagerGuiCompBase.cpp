@@ -537,6 +537,8 @@ void CParamsManagerGuiCompBase::UpdateParamsView(int selectedIndex)
 	}
 
 	UpdateActions();
+
+	OnParameterSelectionChanged();
 }
 
 
