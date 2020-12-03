@@ -161,6 +161,8 @@ bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d&
 
 void CGeneralBitmap::ResetImage()
 {
+	istd::CChangeNotifier notifier(this);
+
 	m_size.Reset();
 	m_buffer.Reset();
 	m_linesDifference = 0;
@@ -175,10 +177,13 @@ void CGeneralBitmap::ClearImage()
 		return;
 	}
 
+	istd::CChangeNotifier notifier(this);
+
 	// we have to do this line by line because line addresses are not obligatory plain.
 	int lineSize = GetLineBytesCount();
 	for (int y = 0; y < m_size.GetY(); y ++){
 		quint8* lineBufferPtr = (quint8*)GetLinePtr(y);
+
 		std::memset(lineBufferPtr, 0, lineSize); 
 	}
 }
@@ -236,6 +241,8 @@ istd::IChangeable* CGeneralBitmap::CloneMe(CompatibilityMode mode) const
 
 CGeneralBitmap& CGeneralBitmap::operator=(const CGeneralBitmap& bitmap)
 {
+	istd::CChangeNotifier notifier(this);
+
 	if (!bitmap.m_buffer.IsToRelase()){
 		// copy structure refering to external buffer
 		m_buffer.SetPtr(bitmap.m_buffer.GetPtr(), false);
