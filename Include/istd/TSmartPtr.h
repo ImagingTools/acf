@@ -28,6 +28,7 @@ public:
 	TSmartPtr(const TTransPtr<Type>& trans);
 
 	void SetPtr(Type* pointer);
+	bool operator==(const TSmartPtr& other) const;
 
 	/**
 		Set this pointer using casted pointer of other type.
@@ -80,6 +81,13 @@ template <class Type>
 inline void TSmartPtr<Type>::SetPtr(Type* pointer)
 {
 	m_impl.reset(pointer);
+}
+
+
+template <class Type>
+inline bool TSmartPtr<Type>::operator==(const TSmartPtr<Type>& other) const
+{
+	return GetPtr() == other.GetPtr();
 }
 
 
