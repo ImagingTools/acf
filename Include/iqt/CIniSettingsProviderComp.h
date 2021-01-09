@@ -2,10 +2,11 @@
 #define iqt_CIniSettingsProviderComp_included
 
 
+// Qt includes
 #include <QtCore/QString>
 
+// ACF includes
 #include <icomp/CComponentBase.h>
-
 #include <iqt/ISettingsProvider.h>
 
 
