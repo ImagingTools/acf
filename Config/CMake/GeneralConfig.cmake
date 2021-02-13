@@ -1,0 +1,115 @@
+#General base configuration should be included from all ACF-based projects
+
+project(${PROJECT_NAME} VERSION ${PROJECT_VERSION} LANGUAGES CXX)
+
+add_compile_options(-fno-rtti)
+add_compile_options(-msse2)
+
+set(PLATFORM_CODE i86)
+
+if(${CMAKE_CXX_COMPILER_ARCHITECTURE_ID} STREQUAL X86_64)
+	set(PLATFORM_CODE x64)
+endif()
+
+set(COMPILER_NAME "CMAKE")
+
+if(${MSVC})
+	set(COMPILER_NAME "VC")
+	add_compile_options(-W4)
+	set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /wd4127 /wd4250 /wd4347 /wd4355 /wd4365 /wd4481 /wd4505 /wd4510 /wd4511 /wd4512 /wd4548 /wd4571 /wd4619 /wd4625 /wd4626 /wd4640 /wd4702 /wd4710 /wd4820 /wd4826")
+	set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /MP /fp:fast")
+	set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS")
+	set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /bigobj")
+	set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /wd4718")
+	if(${CMAKE_CXX_COMPILER_ARCHITECTURE_ID} STREQUAL X86)
+		set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /arch:SSE2")
+	endif()
+endif()
+
+if(${MSVC_TOOLSET_VERSION} STREQUAL 80)
+	message("Visual Studio 2005")
+	set(COMPILER_NAME "VC8")
+endif()
+
+if(${MSVC_TOOLSET_VERSION} STREQUAL 90)
+	message("Visual Studio 2008")
+	set(COMPILER_NAME "VC9")
+	string(REPLACE "/Gd" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+	string(REPLACE "/GD" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+	string(REPLACE "-Gd" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+	string(REPLACE "-GD" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+endif()
+
+if(${MSVC_TOOLSET_VERSION} STREQUAL 100)
+	message("Visual Studio 2010")
+	set(COMPILER_NAME "VC10")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4996")
+endif()
+
+if(${MSVC_TOOLSET_VERSION} STREQUAL 110)
+	message("Visual Studio 2012")
+	set(COMPILER_NAME "VC11")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4996")
+endif()
+
+if(${MSVC_TOOLSET_VERSION} STREQUAL 120)
+	message("Visual Studio 2013")
+	set(COMPILER_NAME "VC12")
+	add_compile_options(-std=c++11)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4996 /Qpar /Gy /Gw /FS")
+endif()
+
+if(${MSVC_TOOLSET_VERSION} STREQUAL 140)
+	message("Visual Studio 2015")
+	set(COMPILER_NAME "VC14")
+	set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /Qpar /Gy /Gw /FS /Zc:threadSafeInit-")
+	set(CMAKE_CXX_FLAGS_RELEASE_INIT "${CMAKE_CXX_FLAGS_RELEASE_INIT} /Ot /Oi /Ob2 /GS-")
+	if(${CMAKE_CXX_COMPILER_ARCHITECTURE_ID} STREQUAL X86)
+		set(CMAKE_CXX_LINK_LIBRARY_FLAG "${CMAKE_CXX_LINK_LIBRARY_FLAG} /MACHINE:X64")
+	endif()
+endif()
+if(${MSVC_TOOLSET_VERSION} STREQUAL 141)
+	message("Visual Studio 2017")
+	set(COMPILER_NAME "VC15")
+	set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /Qpar /Gy /Gw /FS /Zc:threadSafeInit-")
+	set(CMAKE_CXX_FLAGS_RELEASE_INIT "${CMAKE_CXX_FLAGS_RELEASE_INIT} /Ot /Oi /Ob2 /GS-")
+	if(${CMAKE_CXX_COMPILER_ARCHITECTURE_ID} STREQUAL X86)
+		set(CMAKE_CXX_LINK_LIBRARY_FLAG "${CMAKE_CXX_LINK_LIBRARY_FLAG} /MACHINE:X64")
+	endif()
+endif()
+if(${MSVC_TOOLSET_VERSION} STREQUAL 142)
+	message("Visual Studio 2019")
+	set(COMPILER_NAME "VC16")
+	set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /Qpar /Gy /Gw /FS /Zc:threadSafeInit-")
+	set(CMAKE_CXX_FLAGS_RELEASE_INIT "${CMAKE_CXX_FLAGS_RELEASE_INIT} /Ot /Oi /Ob2 /GS-")
+	if(${CMAKE_CXX_COMPILER_ARCHITECTURE_ID} STREQUAL X86)
+		set(CMAKE_CXX_LINK_LIBRARY_FLAG "${CMAKE_CXX_LINK_LIBRARY_FLAG} /MACHINE:X64")
+	endif()
+endif()
+if(${CMAKE_CXX_COMPILER_ARCHITECTURE_ID} STREQUAL X86)
+	set(COMPILER_NAME "${COMPILER_NAME}_64")
+endif()
+#message(${CMAKE_BUILD_TYPE})
+
+
+set(COMPILER_DIR ${CMAKE_BUILD_TYPE}${COMPILER_NAME}${PLATFORM_CODE})
+
+set(AUXINCLUDEDIR "AuxInclude/Qt${QT_MAJOR_VERSION}_${COMPILER_NAME}")
+set(AUXINCLUDEPATH ../../../${AUXINCLUDEDIR})
+
+include_directories(${AUXINCLUDEPATH})
+
+set(UI_DIR ${AUXINCLUDEPATH}/GeneratedFiles/"${PROJECT_NAME}")
+set(MOC_DIR ${AUXINCLUDEPATH}/GeneratedFiles/"${PROJECT_NAME}")
+set(RCC_DIR ${AUXINCLUDEPATH}/GeneratedFiles/"${PROJECT_NAME}")
+
+include_directories("${PROJECT_DIR}/../../Include")
+include_directories("${UI_DIR}")
+include_directories("${Qt${QT_MAJOR_VERSION}_DIR}/../../../include/")
+
+find_package("Qt${QT_MAJOR_VERSION}" COMPONENTS Core REQUIRED)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
