@@ -47,6 +47,11 @@ void CHtmlHelpGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
+	QTextBrowser* editorPtr = GetQtWidget();
+	Q_ASSERT(editorPtr != NULL);
+
+	editorPtr->setFrameShape(QFrame::NoFrame);
+
 	ShowHelp("", NULL);
 }
 
