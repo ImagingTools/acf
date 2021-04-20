@@ -12,6 +12,7 @@
 #include <ibase/TLocalizableWrap.h>
 #include <iqtgui/IGuiObject.h>
 #include <iqtgui/IVisualStatus.h>
+#include <iqtgui/TDesignSchemaHandlerWrap.h>
 
 
 namespace iqtgui
@@ -22,12 +23,14 @@ namespace iqtgui
 	Base class for classes implementing interface iqtgui::IGuiObject.
 */
 class CGuiComponentBase:
-			public QObject, 
-			public ibase::TLocalizableWrap<icomp::CComponentBase>,
+			public QObject,
+			public TDesignSchemaHandlerWrap<
+						ibase::TLocalizableWrap<icomp::CComponentBase>>,
 			virtual public IGuiObject
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef TDesignSchemaHandlerWrap<
+				ibase::TLocalizableWrap<icomp::CComponentBase>> BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CGuiComponentBase);
 		I_REGISTER_INTERFACE(IGuiObject);
@@ -101,11 +104,6 @@ protected:
 	virtual void OnGuiRetranslate();
 
 	/**
-		Called from widget event filter when GUI should be polished (e.g. after change of color palette or style)
-	*/
-	virtual void OnGuiPolished();
-
-	/**
 		Called just after GUI is initialized.
 	*/
 	virtual void OnGuiCreated();
@@ -126,6 +124,9 @@ protected:
 
 	// reimplemented (ibase::TLocalizableWrap)
 	virtual void OnLanguageChanged();
+
+	// reimplemented (ibase::TDesignSchemaHandlerWrap)
+	virtual void OnDesignSchemaChanged();
 
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
