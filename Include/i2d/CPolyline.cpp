@@ -280,6 +280,14 @@ bool CPolyline::GetInterpolatedPosition(const double atPositionNormalized, i2d::
 	return false;
 }
 
+i2d::CVector2d CPolyline::GetInterpolatedPosition(double position) const
+{
+	i2d::CVector2d result = i2d::CVector2d::GetZero();
+	GetInterpolatedPosition(position, result);
+
+	return result;
+}
+
 
 // reimplemented (iser::ISerializable)
 
