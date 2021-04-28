@@ -37,6 +37,7 @@ public:
 	I_BEGIN_COMPONENT(CTranslationManagerComp);
 		I_REGISTER_INTERFACE(iqt::ITranslationManager);
 		I_REGISTER_INTERFACE(iprm::IOptionsList);
+		I_ASSIGN(m_ignoreLocaleAttrPtr, "IgnoreLocale", "Ignore locale in language IDs", true, false);
 		I_ASSIGN(m_translationFilePathAttrPtr, "TranslationFilePath", "Base file path got translations", true, "");
 		I_ASSIGN(m_translationFilePrefixAttrPtr, "TranslationFilePrefix", "Prefix of the translation file", true, "");
 		I_ASSIGN_MULTI_0(m_languagesAttrPtr, "LanguageIds", "List of language IDs in ISO-format", true);
@@ -71,7 +72,10 @@ public:
 	virtual QByteArray GetOptionId(int index) const;
 	virtual bool IsOptionEnabled(int index) const;
 
-private:
+protected:
+	virtual void LoadTranslations();
+
+protected:
 	/**
 		\internal
 		Internally used language selection observer.
@@ -89,7 +93,8 @@ private:
 		CTranslationManagerComp& m_parent;
 	};
 
-private:
+protected:
+	I_ATTR(bool, m_ignoreLocaleAttrPtr);
 	I_ATTR(QString, m_translationFilePathAttrPtr);
 	I_ATTR(QByteArray, m_translationFilePrefixAttrPtr);
 	I_MULTIATTR(QByteArray, m_languagesAttrPtr);
