@@ -53,8 +53,9 @@ protected:
 	virtual void OnGuiModelDetached();
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
-	// reimplemented (iqtgui::CComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiRetranslate();
 
 private:
 	I_ATTR(int, m_iconSizeAttrPtr);

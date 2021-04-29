@@ -230,6 +230,54 @@ void CComposedParamsSetGuiComp::OnGuiDestroyed()
 }
 
 
+void CComposedParamsSetGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	int guiMode = *m_designTypeAttrPtr;
+
+	int elementsCount = qMin(m_observersCompPtr.GetCount(), m_idsAttrPtr.GetCount());
+	for (int i = 0; i < elementsCount; ++i){
+		QString name;
+		if (i < m_namesAttrPtr.GetCount()){
+			name = m_namesAttrPtr[i];
+		}
+
+		iqtgui::IGuiObject* guiObjectPtr = m_guisCompPtr[i];
+		if (guiObjectPtr != NULL){
+			const PanelData& panelData = m_guiToWidgetMap[guiObjectPtr];
+
+			if (panelData.pagePtr != NULL){
+				if (guiMode == DT_TAB_WIDGET){
+					QTabWidget* tabWidgetPtr = static_cast<QTabWidget*>(m_guiContainerPtr);
+					for (int i = 0; i < tabWidgetPtr->count(); i++){
+						if (tabWidgetPtr->widget(i) == panelData.pagePtr){
+							tabWidgetPtr->setTabText(i, name);
+							break;
+						}
+					}
+				}
+				else if (guiMode == DT_TOOL_BOX){
+					QToolBox* toolBoxPtr = static_cast<QToolBox*>(m_guiContainerPtr);
+					for (int i = 0; i < toolBoxPtr->count(); i++){
+						if (toolBoxPtr->widget(i) == panelData.pagePtr){
+							toolBoxPtr->setItemText(i, name);
+							break;
+						}
+					}
+				}
+				else{
+					QGroupBox* groupBoxPtr = dynamic_cast<QGroupBox*>(panelData.pagePtr);
+					if (groupBoxPtr != nullptr){
+						groupBoxPtr->setTitle(name);
+					}
+				}
+			}
+		}
+	}
+}
+
+
 // reimplemented (iqt2d::IViewExtender)
 
 void CComposedParamsSetGuiComp::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
@@ -502,8 +550,10 @@ void CComposedParamsSetGuiComp::OnGuiModelDetached()
 	}
 	else if (guiMode == DT_TOOL_BOX){
 		QToolBox* toolBox = static_cast<QToolBox*>(m_guiContainerPtr);
-		for (int i = toolBox->count() - 1; i >= 0; i--){
-			toolBox->removeItem(i);
+		if (toolBox != NULL){
+			for (int i = toolBox->count() - 1; i >= 0; i--){
+				toolBox->removeItem(i);
+			}
 		}
 	}
 

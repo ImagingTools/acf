@@ -63,6 +63,7 @@ public:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+	virtual void OnGuiRetranslate();
 
 	// reimplemented (iqt2d::IViewExtender)
 	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);

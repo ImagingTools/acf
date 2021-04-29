@@ -35,7 +35,13 @@ int CDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog(*m_dialogButtonsAttrPtr, parentPtr));
 	if (dialogPtr.IsValid()){
 		if (*m_isModalAttrPtr){
-			return dialogPtr->exec();
+			m_dialogPtr = dialogPtr.GetPtr();
+		
+			int retVal = dialogPtr->exec();
+		
+			m_dialogPtr = NULL;
+
+			return retVal;
 		}
 		else{
 			m_dialogPtr = dialogPtr.GetPtr();
@@ -98,6 +104,15 @@ iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog(int buttons, 
 
 void CDialogGuiComp::OnRetranslate()
 {
+	if (m_dialogPtr != NULL){
+		if (m_dialogTitleAttrPtr.IsValid()){
+			m_dialogPtr->setWindowTitle((*m_dialogTitleAttrPtr));
+		}
+		else{
+			m_dialogPtr->setWindowTitle(QCoreApplication::applicationName());
+		}
+	}
+
 	istd::CChangeNotifier changePtr(&m_commandsProvider);
 
 	QIcon commandIcon;
