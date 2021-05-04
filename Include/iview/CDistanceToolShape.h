@@ -52,7 +52,7 @@ private:
 		MS_DONE
 	};
 
-	bool IsDistanceToolActive() const;
+	bool IsDistanceMeasureToolActive() const;
 	void BeginDrag();
 	void EndDrag();
 

@@ -84,7 +84,7 @@
                     <AttributeInfo Id="ColorSchema" Type="Reference" ExportId="ColorSchema">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DistanceShape" Type="Reference" ExportId="DistanceShape">
+                    <AttributeInfo Id="DistanceMeasureShape" Type="Reference" ExportId="DistanceMeasureShape">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="FitMode" Type="Integer" ExportId="FitMode">

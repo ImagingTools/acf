@@ -200,16 +200,34 @@ void CConsoleBase::SetMmButtonVisible(bool state)
 }
 
 
-bool CConsoleBase::IsDistanceButtonVisible() const
+bool CConsoleBase::IsDistanceMeasureButtonVisible() const
 {
-	return m_isDistanceButtonVisible;
+	return m_isDistanceMeasureButtonVisible;
 }
 
 
-void CConsoleBase::SetDistanceButtonVisible(bool state)
+void CConsoleBase::SetDistanceMeasureButtonVisible(bool state)
 {
-	if (state != m_isDistanceButtonVisible){
-		m_isDistanceButtonVisible = state;
+	if (state != m_isDistanceMeasureButtonVisible){
+		m_isDistanceMeasureButtonVisible = state;
+
+		UpdateComponentsPosition();
+
+		UpdateCommands();
+	}
+}
+
+
+bool CConsoleBase::IsPointMeasureButtonVisible() const
+{
+	return m_isPointMeasureButtonVisible;
+}
+
+
+void CConsoleBase::SetPointMeasureButtonVisible(bool state)
+{
+	if (state != m_isPointMeasureButtonVisible) {
+		m_isPointMeasureButtonVisible = state;
 
 		UpdateComponentsPosition();
 
@@ -257,7 +275,8 @@ void CConsoleBase::Init()
 	m_isZoomToFit = false;
 	m_fitMode = FM_BOTH;
 	m_isFullScreenAllowed = true;
-	m_isDistanceButtonVisible = false;
+	m_isDistanceMeasureButtonVisible = false;
+	m_isPointMeasureButtonVisible = false;
 }
 
 
@@ -286,19 +305,35 @@ bool CConsoleBase::IsRulerVisible() const
 }
 
 
-bool CConsoleBase::IsDistanceToolActive() const
+bool CConsoleBase::IsDistanceMeasureToolActive() const
 {
 	const CViewport& view = GetView();
 
-	return view.IsDistanceToolActive();
+	return view.IsDistanceMeasureToolActive();
 }
 
 
-void CConsoleBase::SetDistanceToolActive(bool state)
+void CConsoleBase::SetDistanceMeasureToolActive(bool state)
 {
 	CViewport& view = GetViewRef();
 
-	view.SetDistanceToolActive(state);
+	view.SetDistanceMeasureToolActive(state);
+}
+
+
+bool CConsoleBase::IsPointMeasureToolActive() const
+{
+	const CViewport& view = GetView();
+
+	return view.IsPointMeasureToolActive();
+}
+
+
+void CConsoleBase::SetPointMeasureToolActive(bool state)
+{
+	CViewport& view = GetViewRef();
+
+	view.SetPointMeasureToolActive(state);
 }
 
 

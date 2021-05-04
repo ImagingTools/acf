@@ -9,10 +9,12 @@
 #include <iview/IColorSchema.h>
 #include <iview/CConsoleGui.h>
 #include <iqt2d/IViewProvider.h>
+#include <iqt2d/IViewActivationHandler.h>
 
 
 namespace iqt2d
 {
+
 
 
 class CViewProviderGuiCompAttr: public iqtgui::TGuiComponentBase<iview::CConsoleGui>
@@ -95,7 +97,9 @@ public:
 		I_ASSIGN_TO(m_calibrationProviderModelCompPtr, m_calibrationProviderCompPtr, false);
 		I_ASSIGN(m_colorSchemaCompPtr, "ColorSchema", "Color schema used for console", false, "ColorSchema");
 		I_ASSIGN(m_calibrationShapeCompPtr, "CalibrationShape", "Calibration shape displaying calibration grid, if not choosen default affine calibration shape will be used", false, "CalibrationShape");
-		I_ASSIGN(m_distanceShapeCompPtr, "DistanceShape", "Distance measurement shape", false, "DistanceShape");
+		I_ASSIGN(m_distanceMeasureShapeCompPtr, "DistanceMeasureShape", "Distance measurement shape", false, "DistanceMeasureShape");
+		I_ASSIGN(m_pointMeasureShapeCompPtr, "PointMeasureShape", "Point measurement shape", false, "PointMeasureShape");
+		I_ASSIGN(m_viewActivationHandlerCompPtr, "ViewActivationHandler", "Handler for observation the visual status of the view provider", false, "ViewActivationHandler");
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::ICommandsProvider)
@@ -110,6 +114,8 @@ protected:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 	virtual void OnGuiRetranslate();
+	virtual void OnGuiShown();
+	virtual void OnGuiHidden();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
@@ -124,7 +130,9 @@ private:
 	I_REF(imod::IModel, m_calibrationProviderModelCompPtr);
 	I_REF(iview::IColorSchema, m_colorSchemaCompPtr);
 	I_REF(iview::IShape, m_calibrationShapeCompPtr);
-	I_REF(iview::IShape, m_distanceShapeCompPtr);
+	I_REF(iview::IShape, m_distanceMeasureShapeCompPtr);
+	I_REF(iview::IShape, m_pointMeasureShapeCompPtr);
+	I_REF(IViewActivationHandler, m_viewActivationHandlerCompPtr);
 };
 
 

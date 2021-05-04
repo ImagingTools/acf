@@ -19,7 +19,12 @@ public:
 	/**
 		Check if the distance measuring is active.
 	*/
-	virtual bool IsDistanceToolActive() const = 0;
+	virtual bool IsDistanceMeasureToolActive() const = 0;
+
+	/**
+		Check if the point measuring is active.
+	*/
+	virtual bool IsPointMeasureToolActive() const = 0;
 };
 
 

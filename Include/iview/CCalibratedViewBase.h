@@ -53,9 +53,15 @@ public:
 	virtual void ConnectCalibrationShape(iview::IShape* shapePtr);
 
 	/**
-		Set distance tool active.
+		Set distance measure tool active.
 	*/
-	virtual void SetDistanceToolActive(bool state = true);
+	virtual void SetDistanceMeasureToolActive(bool state = true);
+
+	/**
+		Set point measure tool active.
+	*/
+	virtual void SetPointMeasureToolActive(bool state = true);
+
 
 	/**
 		Connect visualisation shape for ruler object.
@@ -125,7 +131,8 @@ public:
 	virtual bool IsGridInMm() const;
 
 	// reimplemented (iview::IToolsLayerInfo)
-	virtual bool IsDistanceToolActive() const;
+	virtual bool IsDistanceMeasureToolActive() const;
+	virtual bool IsPointMeasureToolActive() const;
 
 	// reimplemented (i2d::ICalibrationProvider)
 	virtual const i2d::ICalibration2d* GetCalibration() const;
@@ -151,7 +158,8 @@ private:
 	bool m_isGridVisible;
 	bool m_isGridInMm;
 	double m_minGridDistance;
-	bool m_isDistanceToolActive;
+	bool m_isDistanceMeasureToolActive;
+	bool m_isPointMeasureToolActive;
 
 	int m_calibrationLayerIndex;
 	int m_toolsLayerIndex;
@@ -223,16 +231,40 @@ inline bool CCalibratedViewBase::IsGridInMm() const
 }
 
 
-inline bool CCalibratedViewBase::IsDistanceToolActive() const
+inline bool CCalibratedViewBase::IsDistanceMeasureToolActive() const
 {
-	return m_isDistanceToolActive;
+	return m_isDistanceMeasureToolActive;
 }
 
 
-inline void CCalibratedViewBase::SetDistanceToolActive(bool state)
+inline void CCalibratedViewBase::SetDistanceMeasureToolActive(bool state)
 {
-	if (m_isDistanceToolActive != state){
-		m_isDistanceToolActive = state;
+	if (state){
+		m_isPointMeasureToolActive = false;
+	}
+
+	if (m_isDistanceMeasureToolActive != state){
+		m_isDistanceMeasureToolActive = state;
+
+		InvalidateBackground();
+	}
+}
+
+
+inline bool CCalibratedViewBase::IsPointMeasureToolActive() const
+{
+	return m_isPointMeasureToolActive;
+}
+
+
+inline void CCalibratedViewBase::SetPointMeasureToolActive(bool state)
+{
+	if (state){
+		m_isDistanceMeasureToolActive = false;
+	}
+
+	if (m_isPointMeasureToolActive != state){
+		m_isPointMeasureToolActive = state;
 
 		InvalidateBackground();
 	}

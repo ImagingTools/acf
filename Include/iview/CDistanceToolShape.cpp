@@ -30,7 +30,7 @@ bool CDistanceToolShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton 
 {
 	m_dragNodeIndex = -1;
 
-	if (!IsDistanceToolActive()){
+	if (!IsDistanceMeasureToolActive()){
 		return false;
 	}
 
@@ -101,7 +101,7 @@ bool CDistanceToolShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton 
 
 bool CDistanceToolShape::OnMouseMove(istd::CIndex2d position)
 {
-	if (!IsDistanceToolActive()){
+	if (!IsDistanceMeasureToolActive()){
 		m_measureState = CDistanceToolShape::MS_NONE;
 		m_dragNodeIndex = -1;
 		return false;
@@ -261,7 +261,7 @@ void CDistanceToolShape::DrawLabel(QPainter& drawContext) const
 	QPen rectPen(QColor::fromRgb(20, 20, 20));
 	drawContext.setPen(rectPen);
 
-	drawContext.drawRoundRect(backRect, 5, 5);
+	drawContext.drawRoundedRect(backRect, 5, 5);
 
 	drawContext.setBrush(Qt::lightGray);
 	drawContext.setPen(Qt::lightGray);
@@ -286,7 +286,7 @@ void CDistanceToolShape::Draw(QPainter& drawContext) const
 		return;
 	}
 
-	if (!IsDistanceToolActive()){
+	if (!IsDistanceMeasureToolActive()){
 		linePtr->GetPoint1Ref().Reset(); 
 		linePtr->GetPoint2Ref().Reset();
 		return;
@@ -351,7 +351,7 @@ i2d::CRect CDistanceToolShape::CalcBoundingBox() const
 
 // private methods
 
-bool CDistanceToolShape::IsDistanceToolActive() const
+bool CDistanceToolShape::IsDistanceMeasureToolActive() const
 {
 	iview::IToolsLayerInfo* rulerInfoPtr = NULL;
 	iview::IDisplay* displayPtr = GetDisplayPtr();
@@ -362,7 +362,7 @@ bool CDistanceToolShape::IsDistanceToolActive() const
 		displayPtr = displayPtr->GetParentDisplayPtr();
 	}
 
-	if (rulerInfoPtr != NULL && rulerInfoPtr->IsDistanceToolActive()){
+	if (rulerInfoPtr != NULL && rulerInfoPtr->IsDistanceMeasureToolActive()){
 		return true;
 	}
 
