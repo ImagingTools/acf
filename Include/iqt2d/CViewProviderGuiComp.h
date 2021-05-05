@@ -112,8 +112,6 @@ protected:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 	virtual void OnGuiRetranslate();
-	virtual void OnGuiShown();
-	virtual void OnGuiHidden();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
