@@ -153,12 +153,6 @@ function(acf_wrap_ui outfiles)
 	set("${outfiles}" "${${outfiles}}" PARENT_SCOPE)
 endfunction()
 
-
-
-link_directories(${ACFDIR}/Lib/${CMAKE_BUILD_TYPE}${TARGETNAME})
-link_directories(${ACFSLNDIR}/Lib/${CMAKE_BUILD_TYPE}${TARGETNAME})
-
-
 if(${MSVC})
 	#link_libraries("C:/Program Files (x86)/Windows Kits/10/Lib/10.0.19041.0/um/x64/Mpr.lib")
    link_libraries("Mpr.lib")
