@@ -491,13 +491,15 @@ bool CSingleDocumentManagerBase::NewDocument(
 				m_viewPtr.SetPtr(viewPtr);
 
 				m_viewTypeId = viewTypeId;
-
-				OnViewRegistered(viewPtr);
 			}
 
 			m_documentPtr.TakeOver(documentPtr);
 
 			m_documentTypeId = realDocumentTypeId;
+
+			if (m_viewPtr.IsValid()){
+				OnViewRegistered(m_viewPtr.GetPtr());
+			}
 
 			return true;
 		}
