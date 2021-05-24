@@ -1,3 +1,3 @@
 project(AcfQt LANGUAGES CXX)
 
-include($ENV{ACFPUBLICDIR}/Build/CMake/StaticConfig.cmake)
+include($ENV{ACFCONFIGDIR}/Build/CMake/StaticConfig.cmake)
