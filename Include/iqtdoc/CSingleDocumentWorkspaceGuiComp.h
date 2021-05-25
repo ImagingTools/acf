@@ -89,7 +89,7 @@ protected:
 	// reimplemented (TRestorableGuiWrap)
 	virtual void OnRestoreSettings(const QSettings& settings);
 
-private:
+protected:
 	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
 	I_REF(iprm::IEnableableParam, m_rememberOpenDocumentParamPtr);
 
