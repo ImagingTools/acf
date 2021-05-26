@@ -43,6 +43,7 @@ private:
 	};
 
 	DesignSchemaEventsFilter m_designSchemaEventsFilter;
+	bool m_isFilterInstalled;
 };
 
 
@@ -50,7 +51,8 @@ private:
 
 template <class Base>
 TDesignSchemaHandlerWrap<Base>::TDesignSchemaHandlerWrap()
-	:m_designSchemaEventsFilter(*this)
+	:m_designSchemaEventsFilter(*this),
+	m_isFilterInstalled(false)
 {
 }
 
@@ -61,10 +63,18 @@ void TDesignSchemaHandlerWrap<Base>::EnableDesignHandler(bool enable)
 	QCoreApplication* applicationPtr = QCoreApplication::instance();
 	if (applicationPtr != NULL){
 		if (enable){
-			applicationPtr->installEventFilter(&m_designSchemaEventsFilter);
+			if (!m_isFilterInstalled){
+				applicationPtr->installEventFilter(&m_designSchemaEventsFilter);
+
+				m_isFilterInstalled = true;
+			}
 		}
 		else{
-			applicationPtr->removeEventFilter(&m_designSchemaEventsFilter);
+			if (m_isFilterInstalled){
+				applicationPtr->removeEventFilter(&m_designSchemaEventsFilter);
+
+				m_isFilterInstalled = false;
+			}
 		}
 	}
 }

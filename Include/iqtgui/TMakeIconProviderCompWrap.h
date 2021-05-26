@@ -20,58 +20,49 @@ class TMakeIconProviderCompWrap: public Base
 public:
 	typedef Base BaseClass;
 
-	I_BEGIN_BASE_COMPONENT(TMakeIconProviderCompWrap);
-		I_ASSIGN(m_prefixAttrPtr, "IconResourcePrefix", "Icon resource prefix", true, "");
-	I_END_COMPONENT;
-
 	virtual QIcon GetIcon(const QString& iconName) const;
-
-private:
-	I_ATTR(QString, m_prefixAttrPtr);
 };
 
 
 template <class Base>
 QIcon TMakeIconProviderCompWrap<Base>::GetIcon(const QString& iconName) const
 {
-	if ((*m_prefixAttrPtr).isEmpty()){
-		return QIcon(iconName);
-	}
-
-	QString prefix = *m_prefixAttrPtr + "/";
-
 	QIcon icon;
 	QPixmap pixmap;
 
-	if (pixmap.load(prefix + iconName + "_Off_Normal")){
+	if (pixmap.load(iconName)){
 		icon.addPixmap(pixmap, QIcon::Normal, QIcon::Off);
 	}
 
-	if (pixmap.load(prefix + iconName + "_Off_Disabled")){
+	if (pixmap.load(iconName + "_Off_Normal")){
+		icon.addPixmap(pixmap, QIcon::Normal, QIcon::Off);
+	}
+
+	if (pixmap.load(iconName + "_Off_Disabled")){
 		icon.addPixmap(pixmap, QIcon::Disabled, QIcon::Off);
 	}
 
-	if (pixmap.load(prefix + iconName + "_Off_Active")){
+	if (pixmap.load(iconName + "_Off_Active")){
 		icon.addPixmap(pixmap, QIcon::Active, QIcon::Off);
 	}
 
-	if (pixmap.load(prefix + iconName + "_Off_Selected")){
+	if (pixmap.load(iconName + "_Off_Selected")){
 		icon.addPixmap(pixmap, QIcon::Selected, QIcon::Off);
 	}
 
-	if (pixmap.load(prefix + iconName + "_On_Normal")){
+	if (pixmap.load(iconName + "_On_Normal")){
 		icon.addPixmap(pixmap, QIcon::Normal, QIcon::On);
 	}
 
-	if (pixmap.load(prefix + iconName + "_On_Disabled")){
+	if (pixmap.load(iconName + "_On_Disabled")){
 		icon.addPixmap(pixmap, QIcon::Disabled, QIcon::On);
 	}
 
-	if (pixmap.load(prefix + iconName + "_On_Active")){
+	if (pixmap.load(iconName + "_On_Active")){
 		icon.addPixmap(pixmap, QIcon::Active, QIcon::On);
 	}
 
-	if (pixmap.load(prefix + iconName + "_On_Selected")){
+	if (pixmap.load(iconName + "_On_Selected")){
 		icon.addPixmap(pixmap, QIcon::Selected, QIcon::On);
 	}
 
