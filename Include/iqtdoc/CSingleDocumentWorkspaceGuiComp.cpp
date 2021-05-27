@@ -73,6 +73,25 @@ void CSingleDocumentWorkspaceGuiComp::OnTryClose(bool* ignoredPtr)
 
 void CSingleDocumentWorkspaceGuiComp::UpdateTitle()
 {
+	QWidget* widgetPtr = GetQtWidget();
+	if (widgetPtr != NULL){
+		QString titleName = GenerateDocumentTitle();
+
+		widgetPtr->setWindowTitle(titleName);
+
+		QList<QWidget*> widgets = QApplication::allWidgets();
+		for (QList<QWidget*>::Iterator widgetIter = widgets.begin(); widgetIter != widgets.end(); ++widgetIter){
+			QMainWindow* mainWindowPtr = qobject_cast<QMainWindow*>(*widgetIter);
+			if (mainWindowPtr != NULL){
+				mainWindowPtr->setWindowTitle(m_applicationName + QString(" - [%1]").arg(titleName));
+			}
+		}
+	}
+}
+
+
+QString CSingleDocumentWorkspaceGuiComp::GenerateDocumentTitle() const
+{
 	QString titleName = tr("<no name>");
 
 	QString documentFilePath = GetCurrentDocumentFilePath();
@@ -87,19 +106,8 @@ void CSingleDocumentWorkspaceGuiComp::UpdateTitle()
 			titleName += " *";
 		}
 	}
-
-	QWidget* widgetPtr = GetQtWidget();
-	if (widgetPtr != NULL){
-		widgetPtr->setWindowTitle(titleName);
-
-		QList<QWidget*> widgets = QApplication::allWidgets();
-		for (QList<QWidget*>::Iterator widgetIter = widgets.begin(); widgetIter != widgets.end(); ++widgetIter){
-			QMainWindow* mainWindowPtr = qobject_cast<QMainWindow*>(*widgetIter);
-			if (mainWindowPtr != NULL){
-				mainWindowPtr->setWindowTitle(m_applicationName + QString(" - [%1]").arg(titleName));
-			}
-		}
-	}
+	
+	return titleName;
 }
 
 

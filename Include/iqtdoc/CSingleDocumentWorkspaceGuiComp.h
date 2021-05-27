@@ -68,7 +68,12 @@ protected:
 	/**
 		Update titles of views or all views of specified document.
 	*/
-	void UpdateTitle();
+	virtual void UpdateTitle();
+
+	/**
+		Generate the title of the current document.
+	*/
+	virtual QString GenerateDocumentTitle() const;
 
 	// reimplemented (idoc::CSingleDocumentManagerBase)
 	virtual QString GetOpenFilePath(const QByteArray* documentTypeIdPtr = NULL) const;
