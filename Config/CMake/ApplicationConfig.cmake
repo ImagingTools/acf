@@ -11,7 +11,6 @@ file(GLOB QRC_FILES "${PROJECT_SOURCE_DIR}/../*.qrc")
 file(GLOB PROJECT_SRC
     ${HEADER_FILES}
     ${SOURCES_FILES}
-	${RC_FILE}
 )
 
 message("SOURCES_FILE_AUX " "${SOURCES_FILE_AUX}")
@@ -26,7 +25,14 @@ target_sources(${PROJECT_NAME} PRIVATE ${MOC_SOURCES})
 target_sources(${PROJECT_NAME} PRIVATE ${UI_SOURCES})
 target_sources(${PROJECT_NAME} PRIVATE ${RESOURCES_FILES})
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES_FILE_AUX})
-target_sources(${PROJECT_NAME} PRIVATE ${RC_FILE})
+set(RESOURCE_FILES
+  ${RC_FILE})
+set_target_properties(${PROJECT_NAME} PROPERTIES
+  RESOURCE "${RESOURCE_FILES}")
+
+set_property(
+        TARGET ${PROJECT_NAME}
+        PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 
 qt5_use_modules(${PROJECT_NAME} Core Widgets Gui Xml Network XmlPatterns Svg Concurrent)
@@ -36,4 +42,6 @@ set_property(
     TARGET ${PROJECT_NAME}
     PROPERTY RUNTIME_OUTPUT_DIRECTORY ${outbindir})
 
-#set(EXECUTABLE_OUTPUT_PATH "${ACFDIRBUILD}")
+if(ACF_CONVERT_FILES)
+	SET_TARGET_PROPERTIES( ${PROJECT_NAME} PROPERTIES LINK_FLAGS ${RC_COMPILE_FILE} )
+endif()

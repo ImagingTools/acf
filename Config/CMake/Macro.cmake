@@ -47,6 +47,7 @@ macro(get_target_name target_name)
 		if(${CMAKE_CL_64} STREQUAL 1)
 			set(COMPILER_NAME "${COMPILER_NAME}_64")
 		endif()
+
 	elseif(${APPLE})
 
 		if("${CMAKE_OSX_ARCHITECTURES}" STREQUAL "arm64")
@@ -58,8 +59,17 @@ macro(get_target_name target_name)
 			add_compile_definitions(COMPILER_NAME=ClangOSX)
 			add_compile_definitions(PLATFORM_CODE=x64)
 		endif()
+
+	elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+
+		if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+			set(COMPILER_NAME "GCCLinux_64")
+		else()
+			set(COMPILER_NAME "${COMPILER_NAME}_64")
+		endif()
 	endif()
 
+	message("CMAKE_SYSTEM_NAME" "${CMAKE_SYSTEM_NAME}")
 	message("CMAKE_CXX_COMPILER_ARCHITECTURE_ID " "${CMAKE_CL_64}")
 
 

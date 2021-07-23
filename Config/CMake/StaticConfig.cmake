@@ -46,18 +46,10 @@ set_property(
 set_property(
 	TARGET ${PROJECT_NAME}
 	PROPERTY CMAKE_RUNTIME_OUTPUT_DIRECTORY ${outlibdir})
+set_property(
+	TARGET ${PROJECT_NAME}
+	PROPERTY POSITION_INDEPENDENT_CODE ON)
 
-#set(LIBRARY_OUTPUT_PATH "${ACFDIRBUILD}")
-#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${ACFDIRBUILD}")
-
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${ACFDIRBUILD}")
-
-#find_package( Qt5Core REQUIRED )
-
-#qt5_use_modules(${PROJECT_NAME} Core Widgets Gui Xml Network XmlPatterns Svg Concurrent)
-	message(" CMAKE_PREFIX_PATH " ${CMAKE_PREFIX_PATH})
-#qt5_use_modules(${PROJECT_NAME} Core)
+message(" CMAKE_PREFIX_PATH " ${CMAKE_PREFIX_PATH})
 target_link_libraries(${PROJECT_NAME} Qt5::Core )
-#Qt5::Widgets Qt5::Gui Qt5::Xml Qt5::Network Qt5::XmlPatterns Qt5::Svg Qt5::Concurrent
-#target_link_libraries(${PROJECT_NAME} Core)
 
