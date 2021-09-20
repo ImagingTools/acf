@@ -214,9 +214,24 @@ void CGuiApplicationComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeS
 	if (m_mainWidgetPtr.IsValid()){
 		m_lastWidgetGeometry = m_mainWidgetPtr->geometry();
 
+		Qt::WindowStates state = m_mainWidgetPtr->windowState();
+
 		UpdateMainWidgetDecorations();
 
-		ShowWindow();
+		if (state & Qt::WindowMinimized){
+			m_mainWidgetPtr->showMinimized();
+		}
+		else if (state & Qt::WindowMaximized){
+			m_mainWidgetPtr->showMaximized();
+		}
+		else if (state & Qt::WindowFullScreen){
+			m_mainWidgetPtr->showMaximized(); // Workaround bug in Qt
+
+			m_mainWidgetPtr->showFullScreen();
+		}
+		else{
+			m_mainWidgetPtr->show();
+		}
 
 		if (		!m_mainWidgetPtr->isMaximized() &&
 					!m_mainWidgetPtr->isMinimized() &&
