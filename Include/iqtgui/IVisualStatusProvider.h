@@ -13,7 +13,7 @@ namespace iqtgui
 class IVisualStatusProvider: virtual public istd::IChangeable
 {
 public:
-	virtual const IVisualStatus* GetVisualStatus() const;
+	virtual const IVisualStatus* GetVisualStatus() const = 0;
 };
 
 

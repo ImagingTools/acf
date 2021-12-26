@@ -21,38 +21,67 @@ set(ACFTOOLS "$ENV{ACFDIR}/../AcfTools")
 set(ARXCBIN "${ACFDIR}/Bin/${CMAKE_BUILD_TYPE}${TARGETNAME}/${ARX_COMPILER}")
 set(ACFBIN "${ACFDIR}/Bin/${CMAKE_BUILD_TYPE}${TARGETNAME}/${ACF_TOOL}")
 
-set(ARXC_OUTFILE_NAME C${PROJECT_NAME}.cpp)
+get_filename_component(ARXC_FILES_NAME "${ARXC_FILES}" NAME_WE)
 
-#message("ArxcBin: ${ARXCBIN} ${ARXC_FILES} -o ${ARXC_OUTFILE_NAME} -config ${ARXC_CONFIG} -conf_name ${TARGETNAME} -env_vars ${ENV_VARS} -v")
+set(ARXC_OUTFILE_NAME C${ARXC_FILES_NAME}.cpp)
+
+# collecting additional deps for ARX
+set(ARX_DEPS_LIST)
+if(ARXC_CONFIG AND ARX_GENERATE_DEPENDENCIES_LIST)
+	set(ARX_DEPS_FILE_PATH "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/ArxDependsList.txt")
+	set(ARX_ERRORS_FILE_PATH "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/ArxDependsList_errors.txt")
+
+	message("Collectiong ARX dependences for ${PROJECT_NAME}")
+	message("Executing: ${ARXCBIN} ${ARXC_FILES} -mode depends -config ${ARXC_CONFIG} -conf_name ${TARGETNAME} -env_vars ${ENV_VARS}")
+
+	execute_process(
+		COMMAND
+			${ARXCBIN} ${ARXC_FILES} -mode depends -config ${ARXC_CONFIG} -conf_name ${TARGETNAME} -env_vars ${ENV_VARS}
+		OUTPUT_FILE
+			${ARX_DEPS_FILE_PATH}
+		ERROR_FILE
+			${ARX_ERRORS_FILE_PATH}
+		RESULT_VARIABLE
+			ARX_DEPS_GENERATION_RESULT_CODE
+	)
+
+	if(NOT ARX_DEPS_GENERATION_RESULT_CODE EQUAL 0)
+		message(FATAL_ERROR "Cannot to create dependens [${ARX_DEPS_GENERATION_RESULT_CODE}] see '${ARX_DEPS_FILE_PATH}' and ${ARX_ERRORS_FILE_PATH}' files for detales")
+	endif()
+
+	file(STRINGS ${ARX_DEPS_FILE_PATH} ARX_DEPS_LIST)
+	message("${PROJECT_NAME} ARX deps detected:-----------------------------")
+	message("${ARX_DEPS_LIST}")
+	message("-----------------------------")
+endif()
 
 add_custom_command(OUTPUT ${ARXC_OUTFILE_NAME}
 	COMMAND ${ARXCBIN}
 	ARGS ${ARXC_FILES} -o ${ARXC_OUTFILE_NAME} -config ${ARXC_CONFIG} -conf_name ${TARGETNAME} -env_vars ${ENV_VARS} -v
-	DEPENDS ${ARXCBIN} ${ARXC_FILES} VERBATIM)
+	DEPENDS ${ARXCBIN} ${ARXC_FILES} ${ARX_DEPS_LIST} VERBATIM)
 
-set(HEADER_FILE_AUX "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/C${PROJECT_NAME}.h")
-set(SOURCES_FILE_AUX "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/C${PROJECT_NAME}.cpp")
+set(HEADER_FILE_AUX "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/C${ARXC_FILES_NAME}.h")
+set(SOURCES_FILE_AUX "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/C${ARXC_FILES_NAME}.cpp")
 
 
 if(WIN32)
 	if(ACF_CONVERT_FILES)
 		set(RC_FILE "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/${PROJECT_NAME}.rc")
-	set(RC_COMPILE_FILE "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/${PROJECT_NAME}.res")
+		set(RC_COMPILE_FILE "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/${PROJECT_NAME}.res")
 
-	    add_custom_command(
+		add_custom_command(
 			OUTPUT ${RC_FILE}
 			COMMAND ${ACFBIN}
 			ARGS ${ACF_CONVERT_REGISTRY} -console -config ${ACF_CONVERT_CONFIG} -input ${ACF_CONVERT_FILES} -o ${RC_FILE} -env_vars ${ENV_VARS}
 			COMMENT "Start convert ${PROJECT_NAME}.rc"
-			DEPENDS ${ACF_CONVERT_FILES} VERBATIM)
+			DEPENDS ${ACF_CONVERT_FILES} ${ARX_DEPS_LIST} VERBATIM)
 		add_custom_target(CONVERT_FILES${PROJECT_NAME} ALL DEPENDS ${RC_FILE})
 		add_custom_command(
 			OUTPUT ${RC_COMPILE_FILE}
-			COMMAND ${CMAKE_RC_COMPILER} ${RC_FILE}  #/fo ${RC_COMPILE_FILE}
-#            COMMAND windres -o ${RC_COMPILE_FILE} ${RC_FILE}  # MINGW
-            WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+			COMMAND ${CMAKE_RC_COMPILER} ${RC_FILE}
+			WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 			COMMENT "Start ${PROJECT_NAME}.rc compiler"
-			DEPENDS ${RC_FILE} VERBATIM)
+			DEPENDS ${RC_FILE} ${ARX_DEPS_LIST} VERBATIM)
 		add_custom_target(COMPILE_RES${PROJECT_NAME} ALL DEPENDS ${RC_COMPILE_FILE})
 
 	endif()

@@ -20,6 +20,7 @@ CJsonStringWriteArchive::CJsonStringWriteArchive(
 	m_stream(&inputString),
 	m_jsonFormat(jsonFormat)
 {
+	m_stream.setCodec("UTF-8");
 	m_firstTag = true;
 }
 
@@ -64,7 +65,7 @@ bool CJsonStringWriteArchive::BeginTag(const CArchiveTag& tag)
 		}
 	}
 
-	WriteTag(tag, "{", false);
+	WriteTag(tag, "{");
 
 	m_firstTag = true;
 
@@ -130,7 +131,7 @@ void CJsonStringWriteArchive::WriteTag(const CArchiveTag &tag, QString separator
 		m_stream << ",";
 	}
 
-	if (isWriteTag){
+	if (isWriteTag && !tag.GetId().isEmpty()){
 		m_stream << "\"" << tag.GetId() << "\":";
 	}
 
