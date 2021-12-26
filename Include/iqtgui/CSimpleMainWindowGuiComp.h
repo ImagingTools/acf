@@ -92,6 +92,7 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE(VisibleWindowsManager, iprm::IOptionsList, GetVisibleWindowsManager);
 		I_REGISTER_SUBELEMENT_INTERFACE(VisibleWindowsManager, imod::IModel, GetVisibleWindowsManager);
 		I_REGISTER_SUBELEMENT_INTERFACE(VisibleWindowsManager, istd::IChangeable, GetVisibleWindowsManager);
+		I_ASSIGN(m_enableGeometryRestoringAttrPtr, "EnableGeometryRestoring", "If enabled geometry will be restored", true, true);
 		I_ASSIGN(m_progressMessagesComsumerCompPtr, "ProgressMessagesConsumer", "Consumer of the progress messages", false, "");
 	I_END_COMPONENT;
 
@@ -256,6 +257,7 @@ private:
 
 	IndexToIndexMap m_commandIndexToMainCompMap;
 
+	I_ATTR(bool, m_enableGeometryRestoringAttrPtr);
 	I_REF(ilog::IMessageConsumer, m_progressMessagesComsumerCompPtr);
 };
 
