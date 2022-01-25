@@ -4,11 +4,9 @@ cmake_minimum_required(VERSION 3.1.0)
 
 project(Acf)
 
-set(QT_DEFAULT_MAJOR_VERSION 5)
-
 set(ACFDIR "${CMAKE_CURRENT_LIST_DIR}/../../../Acf")
 
-include("${ACFDIR}/Config/CMake/Macro.cmake")
+include("${ACFDIR}/Config/CMake/ProjectRoot.cmake")
 
 set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
@@ -20,7 +18,7 @@ subdirlist(IMPL_DIRS ${IMPL_DIR})
 
 get_target_name(TARGETNAME)
 
-set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}/GeneratedFiles")
+set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}/GeneratedFiles")
 
 set(ACFBINDIR "${CMAKE_CURRENT_LIST_DIR}/../../Bin/${CMAKE_BUILD_TYPE}${TARGETNAME}")
 
