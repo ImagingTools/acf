@@ -58,7 +58,7 @@ QString CSystem::GetOperationSystemName()
 }
 
 
-bool CSystem::ConvertToFileName(const QString& fileNameString, QString& fileName, const QString replacingChar)
+bool CSystem::ConvertToFileName(const QString& fileNameString, QString& fileName, const QString& replacingChar)
 {
 	static char reservedCharacters[] = {
 		'\\',
@@ -165,7 +165,7 @@ QString CSystem::GetEnrolledPath(const QString& path, bool envVars, bool embedde
 {
 	QString retVal = path;
 
-	int	endIndex = 0;
+	int endIndex = 0;
 	for (		int beginIndex;
 				((beginIndex = retVal.indexOf("$(", endIndex)) >= 0);){
 		endIndex = retVal.indexOf(")", beginIndex + 2);
@@ -289,48 +289,45 @@ bool CSystem::RemoveDirectory(const QString& directoryPath)
 bool CSystem::FileCopy(const QString& source, const QString& result, bool overWrite)
 {
 	QFileInfo sourceFile(source);
-	if (!sourceFile.exists())
-	{
+	if (!sourceFile.exists()){
 		return false;
 	}
 
-	if (result.isEmpty())
-	{
+	if (!sourceFile.isFile()){
+		return false;
+	}
+
+	if (result.isEmpty()){
 		return false;
 	}
 
 	QFileInfo resultFile(result);
 	resultFile.setCaching(false);
 
-	const QDir&  resultDir = resultFile.absoluteDir();
-	if (!resultDir.exists())
-	{
-		if (!resultDir.mkpath(resultDir.absolutePath()))
-		{
+	QDir resultDir = resultFile.absoluteDir();
+	if (!resultDir.exists()){
+		if (!resultDir.mkpath(resultDir.absolutePath())){
 			return false;
 		}
 	}
+
 	Q_ASSERT(resultDir.exists());
 
-	if (resultFile.exists())
-	{
-		if (overWrite)
-		{
+	if (resultFile.exists()){
+		if (overWrite){
 			if (!QFile::remove(resultFile.absoluteFilePath())){
 				qDebug() << QString("File '%1' could not be overwritten").arg(resultFile.absoluteFilePath());
 
 				return false;
 			}
 		}
-		else
-		{
+		else{
 			return false;
 		}
 	}
 
 	Q_ASSERT(!resultFile.exists());
-	if (!QFile::copy(source, resultFile.absoluteFilePath()))
-	{
+	if (!QFile::copy(source, resultFile.absoluteFilePath())){
 		return false;
 	}
 
@@ -341,13 +338,11 @@ bool CSystem::FileCopy(const QString& source, const QString& result, bool overWr
 bool CSystem::FileMove(const QString& source, const QString& targetFolder, bool overWrite)
 {
 	QFileInfo sourceFile(source);
-	if (!sourceFile.exists())
-	{
+	if (!sourceFile.exists()){
 		return false;
 	}
 
-	if (targetFolder.isEmpty())
-	{
+	if (targetFolder.isEmpty()){
 		return false;
 	}
 
@@ -356,35 +351,29 @@ bool CSystem::FileMove(const QString& source, const QString& targetFolder, bool 
 	QFileInfo resultFile(targetFilePath);
 	resultFile.setCaching(false);
 
-	const QDir&  resultDir = resultFile.absoluteDir();
-	if (!resultDir.exists())
-	{
-		if (!resultDir.mkpath(resultDir.absolutePath()))
-		{
+	QDir resultDir = resultFile.absoluteDir();
+	if (!resultDir.exists()){
+		if (!resultDir.mkpath(resultDir.absolutePath())){
 			return false;
 		}
 	}
 	Q_ASSERT(resultDir.exists());
 
-	if (resultFile.exists())
-	{
-		if (overWrite)
-		{
+	if (resultFile.exists()){
+		if (overWrite){
 			if (!QFile::remove(resultFile.absoluteFilePath())){
 				qDebug() << QString("File '%1' could not be overwritten").arg(resultFile.absoluteFilePath());
 
 				return false;
 			}
 		}
-		else
-		{
+		else{
 			return false;
 		}
 	}
 
 	Q_ASSERT(!resultFile.exists());
-	if (!QFile::rename(source, resultFile.absoluteFilePath()))
-	{
+	if (!QFile::rename(source, resultFile.absoluteFilePath())){
 		return false;
 	}
 
@@ -408,7 +397,7 @@ QString CSystem::GetCurrentUserName()
 
 #if defined(Q_OS_MAC)
 	userName = QString(getenv("USER"));
-#elif defined(Q_OS_WIN32)
+#elif defined(Q_OS_WIN)
 	userName = QString(getenv("USERNAME"));
 #endif
 
@@ -475,9 +464,26 @@ QString CSystem::GetCompilerVariable(const QString& varName)
 		return GetCompilerVariable("CompileMode") + GetCompilerVariable("CompilerName");
 	}
 	else if (varName == "CompilerName"){
-
-#if defined(_MSC_VER)
-#if _MSC_VER >= 1920
+#ifdef __clang__
+		QString retVal = "Clang";
+		if (sizeof(void*) > 4){
+			return retVal + "_64";
+		}
+		else{
+			return retVal;
+		}
+#elif defined(__MINGW32__)
+		return "MinGW";
+#elif defined(__MINGW64__)
+		return "MinGW_64";
+#elif defined(__GNUC__)
+		return "GCC";
+#elif defined(__INTEL_COMPILER)
+		return "ICC";
+#elif defined(_MSC_VER)
+#if _MSC_VER >= 1930
+		QString retVal = "VC17";
+#elif _MSC_VER >= 1920
 		QString retVal = "VC16";
 #elif _MSC_VER >= 1910
 		QString retVal = "VC15";
@@ -552,8 +558,31 @@ QString CSystem::ConvertNetworkPathToUnc(const QString& localPath)
 }
 
 
-// private static attributes
+QString CSystem::GetCompilerInfo()
+{
+	QString compilerName("C/C++ compiler");
 
+#if defined(_MSC_VER)
+	compilerName = QString("Microsoft Visual C++ compiler %1.%2.%3").arg(_MSC_VER / 100).arg(_MSC_VER % 100).arg(_MSC_FULL_VER % 100000);
+#endif
+
+#if defined(__INTEL_COMPILER)
+	compilerName = QString("Intel C++ compiler %1.%2").arg(__INTEL_COMPILER / 100).arg(__INTEL_COMPILER % 100);
+#endif
+
+#if defined(__GNUC__)
+#if defined(__VERSION__)
+	compilerName = QString("GNU C++ compiler %1").arg(__VERSION__);
+#else
+	compilerName = QString("GNU C++ compiler %1.%2.%3").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__);
+#endif
+#endif
+
+	return compilerName;
+}
+
+
+// private static attributes
 QString CSystem::s_compilerMode = CSystem::GetCompilerVariable("CompileMode");
 QString CSystem::s_compilerName = CSystem::GetCompilerVariable("CompilerName");
 QString CSystem::s_platformCode = CSystem::GetCompilerVariable("PlatformCode");

@@ -19,12 +19,12 @@
         <translation>Выбор файла</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+4"/>
         <source>Log</source>
         <translation>Журнал</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-2"/>
         <source>Log XML file</source>
         <translation>Файлы журнала</translation>
     </message>
@@ -33,7 +33,7 @@
         <translation type="obsolete">Выполнено</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+4"/>
         <source>ACF</source>
         <translation></translation>
     </message>
@@ -815,13 +815,13 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CLogGuiComp</name>
     <message>
-        <location filename="../../../Include/iloggui/CLogGuiComp.ui" line="+102"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+111"/>
+        <location filename="../../../Include/iloggui/CLogGuiComp.ui" line="+112"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+114"/>
         <source>Search</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+47"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+5"/>
         <source>State</source>
         <translation>Состояние</translation>
@@ -1796,7 +1796,7 @@ See &apos;License.txt&apos; for license information</source>
         <translation>Формат файла не поддерживается</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+55"/>
         <source>File %1 does not exist</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1900,12 +1900,12 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <location line="+3"/>
         <source>Version</source>
-        <translation>Версия</translation>
+        <translation type="unfinished">Версия</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Checksum</source>
-        <translation>Контрольная сумма</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+14"/>
@@ -2095,7 +2095,7 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+56"/>
+        <location line="+80"/>
         <source>Value %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2329,7 +2329,7 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../Include/iqtgui/CSimpleMainWindowGuiComp.cpp" line="+484"/>
+        <location filename="../../../Include/iqtgui/CSimpleMainWindowGuiComp.cpp" line="+486"/>
         <source>Initializing User Interface...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2339,7 +2339,7 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../Include/iser/CCompactXmlReadArchiveBase.cpp" line="+291"/>
+        <location filename="../../../Include/iser/CCompactXmlReadArchiveBase.cpp" line="+312"/>
         <source>%1 (node: %2)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2848,7 +2848,7 @@ Interfaces:</source>
 <context>
     <name>ifile::CAutoPersistenceComp</name>
     <message>
-        <location filename="../../../Include/ifile/CAutoPersistenceComp.cpp" line="+88"/>
+        <location filename="../../../Include/ifile/CAutoPersistenceComp.cpp" line="+70"/>
         <source>Load data from file %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2858,7 +2858,7 @@ Interfaces:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+21"/>
         <source>Save data to file %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2873,7 +2873,7 @@ Interfaces:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+192"/>
+        <location line="+185"/>
         <source>Detected change of file %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2883,7 +2883,7 @@ Interfaces:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+43"/>
         <source>Possible deadlock conditions: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2986,12 +2986,17 @@ Interfaces:</source>
         <translation type="unfinished">Неподдерживаемый формат изображения</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+24"/>
         <source>Cannot load file %1</source>
         <translation type="unfinished">Не удалось загрузить файл (%1)</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+17"/>
+        <source>Cannot set the loaded data to the end-point object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
         <source>Cannot save file %1</source>
         <translation type="unfinished">Не удалось сохранить файл %1</translation>
     </message>
@@ -3071,8 +3076,7 @@ Interfaces:</source>
         <translation type="unfinished">Изображение</translation>
     </message>
     <message>
-        <location line="-147"/>
-        <location line="+24"/>
+        <location line="-123"/>
         <source>Object is not supported image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3080,7 +3084,7 @@ Interfaces:</source>
 <context>
     <name>iloggui::CLogGuiComp</name>
     <message>
-        <location filename="../../../Include/iloggui/CLogGuiComp.cpp" line="+188"/>
+        <location filename="../../../Include/iloggui/CLogGuiComp.cpp" line="+210"/>
         <source>New informations available</source>
         <translation>Есть новые сообщения</translation>
     </message>
@@ -3100,34 +3104,81 @@ Interfaces:</source>
         <translation>Имеются сообщения о критических ошибках!</translation>
     </message>
     <message>
-        <location line="+83"/>
+        <location line="-129"/>
+        <location line="+190"/>
+        <location line="+93"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="-282"/>
+        <location line="+190"/>
+        <location line="+102"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="-291"/>
+        <location line="+190"/>
+        <location line="+111"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="-300"/>
+        <location line="+190"/>
+        <location line="+120"/>
         <source>Clear</source>
         <translation>Стереть</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="-309"/>
+        <location line="+190"/>
+        <location line="+133"/>
         <source>Export...</source>
         <translation>Экспортировать...</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="-322"/>
+        <location line="+190"/>
+        <location line="+141"/>
         <source>Diagnostic Mode</source>
         <translation>Диагностика</translation>
+    </message>
+    <message>
+        <location line="-146"/>
+        <source>Show all messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show warinig and error messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show only error messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Remove all messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Export log to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Switch to Diagnostic Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Import existing file into the collection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3689,12 +3740,12 @@ Interfaces:</source>
 <context>
     <name>iqtdoc::CSingleDocumentWorkspaceGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="+98"/>
+        <location filename="../../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="+117"/>
         <source>&lt;no name&gt;</source>
         <translation>&lt;без названия&gt;</translation>
     </message>
     <message>
-        <location line="+101"/>
+        <location line="+90"/>
         <source>Close document</source>
         <translation>Закрыть документ</translation>
     </message>
@@ -3873,12 +3924,12 @@ Interfaces:</source>
 <context>
     <name>iqtgui::CSimpleMainWindowGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtgui/CSimpleMainWindowGuiComp.cpp" line="-236"/>
+        <location filename="../../../Include/iqtgui/CSimpleMainWindowGuiComp.cpp" line="-238"/>
         <source>Standard</source>
         <translation>Стандартные</translation>
     </message>
     <message>
-        <location line="+326"/>
+        <location line="+328"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
@@ -4093,7 +4144,7 @@ Interfaces:</source>
 <context>
     <name>iview::CConsoleGui</name>
     <message>
-        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+631"/>
+        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+643"/>
         <source>Zoom In</source>
         <translation>Увеличить</translation>
     </message>
@@ -4254,6 +4305,16 @@ Interfaces:</source>
     <message>
         <location line="+0"/>
         <source>Activate distance measurement tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Position</source>
+        <translation type="unfinished">Позиция</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Activate position measurement tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

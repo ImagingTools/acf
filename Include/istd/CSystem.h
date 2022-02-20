@@ -72,7 +72,7 @@ public:
 		\param fileName	Resulting file name if the conversion was successful.
 		\return \c true if the operation was successful, otherwise \c false.
 	*/
-	static bool ConvertToFileName(const QString& fileNameString, QString& fileName, const QString replacingChar = QString());
+	static bool ConvertToFileName(const QString& fileNameString, QString& fileName, const QString& replacingChar = QString());
 
 	/**
 		Get normalized path with enrolled system variables.
@@ -109,7 +109,7 @@ public:
 	/** 
 		Copy files and directories from one folder to another.
 	*/
-	static bool CopyDirectory(const QString &srcPath, const QString &dstPath);
+	static bool CopyDirectory(const QString& sourcePath, const QString& destinationPath);
 
 	/**
 		Remove a given directory with all contents.
@@ -160,6 +160,11 @@ public:
 		Convert a mapped network path to UNC representation.
 	*/
 	static QString ConvertNetworkPathToUnc(const QString& localPath);
+
+	/**
+		Get the comiler info.
+	*/
+	static QString GetCompilerInfo();
 
 private:
 	static QString s_compilerMode;

@@ -1,6 +1,7 @@
 #ifndef iimg_CPixelFormatList_included
 #define iimg_CPixelFormatList_included
 
+#include <QtCore/QSet>
 
 // ACF includes
 #include <iprm/IOptionsList.h>
