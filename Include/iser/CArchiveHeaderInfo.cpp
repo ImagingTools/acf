@@ -123,7 +123,16 @@ bool CArchiveHeaderInfo::WriteArchiveHeader(IArchive& archive, const IVersionInf
 
 	retVal = retVal && archive.BeginMultiTag(s_versionInfosTag, s_versionInfoTag, versionIdsCount);
 
+
+#if QT_VERSION >= 0x060000
 	QList<int> sortedIds(ids.begin(), ids.end());
+#else
+	QList<int> sortedIds = ids.toList();
+#endif
+
+	QList<int> sortedIds(ids.begin(), ids.end());
+	
+	
 	std::sort(sortedIds.begin(), sortedIds.end());
 
 	for (		QList<int>::iterator iter = sortedIds.begin();
