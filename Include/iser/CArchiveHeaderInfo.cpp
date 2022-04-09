@@ -169,8 +169,13 @@ bool CArchiveHeaderInfo::WriteArchiveHeader(IArchive& archive, const IVersionInf
 
 CArchiveHeaderInfo::VersionIds CArchiveHeaderInfo::GetVersionIds() const
 {
+#if QT_VERSION >= 0x600000
 	QList<int> keys  = m_versionIdList.keys();
+
 	return QSet<int>(keys.begin(), keys.end());
+#else
+	return m_versionIdList.keys().toSet();
+#endif
 }
 
 
