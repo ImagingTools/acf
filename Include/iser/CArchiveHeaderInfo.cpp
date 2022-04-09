@@ -130,9 +130,6 @@ bool CArchiveHeaderInfo::WriteArchiveHeader(IArchive& archive, const IVersionInf
 	QList<int> sortedIds = ids.toList();
 #endif
 
-	QList<int> sortedIds(ids.begin(), ids.end());
-	
-	
 	std::sort(sortedIds.begin(), sortedIds.end());
 
 	for (		QList<int>::iterator iter = sortedIds.begin();
