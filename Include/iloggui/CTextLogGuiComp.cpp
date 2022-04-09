@@ -120,7 +120,12 @@ void CTextLogGuiComp::UpdateFilters()
 		}
 
 		if (!sources.isEmpty()){
-			SourceFilterCB->addItems(QStringList(sources.begin(), sources.end()));
+#if QT_VERSION > QT_VERSION_CHECK(5, 15, 0)
+			QStringList sourceItems = QStringList(sources.begin(), sources.end());
+#else
+			QStringList sourceItems = sources.toList();
+#endif
+			SourceFilterCB->addItems(sourceItems);
 		}
 	}
 }
