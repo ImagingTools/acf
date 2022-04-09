@@ -26,7 +26,7 @@ namespace istd
 class IChangeable: virtual public IPolymorphic
 {
 public:
-	typedef QMap<QByteArray,QVariant> ChangeInfoMap;
+	typedef QMultiMap<QByteArray,QVariant> ChangeInfoMap;
 
 	/**
 		Set of change flags (its IDs).

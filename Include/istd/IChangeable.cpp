@@ -227,14 +227,7 @@ IChangeable::ChangeSet IChangeable::ChangeSet::operator+(const ChangeSet& change
 
 	retVal.m_ids += m_ids;
 	retVal.m_ids += changeSet.m_ids;
-
-#if QT_VERSION > QT_VERSION_CHECK(5, 15, 0)
-	retVal.m_infoMap.insert(changeSet.m_infoMap);
-#else
-	for (QByteArray key : changeSet.m_infoMap.keys()) {
-		retVal.m_infoMap.insert(key, changeSet.m_infoMap.value(key));
-	}
-#endif
+	retVal.m_infoMap += changeSet.m_infoMap;
 
 	if (!changeSet.m_description.isEmpty()){
 		retVal.m_description = changeSet.m_description;
@@ -258,14 +251,7 @@ IChangeable::ChangeSet& IChangeable::ChangeSet::operator+=(int changeId)
 IChangeable::ChangeSet& IChangeable::ChangeSet::operator+=(const ChangeSet& changeSet)
 {
 	m_ids += changeSet.m_ids;
-
-#if QT_VERSION > QT_VERSION_CHECK(5, 15, 0)
-	m_infoMap.insert(changeSet.m_infoMap);
-#else
-	for (QByteArray key : changeSet.m_infoMap.keys()) {
-		m_infoMap.insert(key, changeSet.m_infoMap.value(key));
-	}
-#endif
+	m_infoMap += changeSet.m_infoMap;
 
 	if (!changeSet.m_description.isEmpty()){
 		m_description = changeSet.m_description;
