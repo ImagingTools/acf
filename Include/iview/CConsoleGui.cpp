@@ -476,7 +476,7 @@ bool CConsoleGui::OnWheelEvent(QWheelEvent* eventPtr)
 	}
 
 	const double scale = pow(2.0, factor);
-	const istd::CIndex2d screenPos = iqt::GetCIndex2d(eventPtr->pixelDelta());
+	const istd::CIndex2d screenPos = iqt::GetCIndex2d(eventPtr->position().toPoint());
 	const i2d::CVector2d logPos = transform.GetClientPosition(screenPos);
 
 	i2d::CAffine2d zoomTransform;
