@@ -9,8 +9,8 @@ message("_qt_bin_dir " ${_qt_bin_dir}/windeployqt.exe)
 
 function(windeploy target listOptions listFiles)
     add_custom_command(TARGET ${target} POST_BUILD
-		COMMAND "${Qt5_DIR}/../../../bin/windeployqt.exe"
-		--verbose 1
+		COMMAND "${Qt${QT_VERSION_MAJOR}_DIR}/../../../bin/windeployqt.exe"
+		verbose 1
 		${listOptions}
 		${listFiles}
 		

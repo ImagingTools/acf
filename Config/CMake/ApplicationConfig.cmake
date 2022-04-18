@@ -24,23 +24,20 @@ target_sources(${PROJECT_NAME} PRIVATE ${MOC_SOURCES})
 target_sources(${PROJECT_NAME} PRIVATE ${UI_SOURCES})
 target_sources(${PROJECT_NAME} PRIVATE ${RESOURCES_FILES})
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES_FILE_AUX})
-set(RESOURCE_FILES ${RC_FILE})
-set_target_properties(${PROJECT_NAME} PROPERTIES RESOURCE "${RESOURCE_FILES}")
 
 set_property(
 	TARGET ${PROJECT_NAME}
 	PROPERTY POSITION_INDEPENDENT_CODE ON)
 
-
-acf_use_qt_modules()
-
 if(NOT ANDROID)
-set(outbindir "${AUX_INCLUDE_DIR}/../../../Bin/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
-set_property(
-	TARGET ${PROJECT_NAME}
-	PROPERTY RUNTIME_OUTPUT_DIRECTORY ${outbindir})
+	set(outbindir "${AUX_INCLUDE_DIR}/../../../Bin/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
+	set_property(
+		TARGET ${PROJECT_NAME}
+		PROPERTY RUNTIME_OUTPUT_DIRECTORY ${outbindir})
 endif()
 
 if(ACF_CONVERT_FILES)
-	SET_TARGET_PROPERTIES( ${PROJECT_NAME} PROPERTIES LINK_FLAGS ${RC_COMPILE_FILE} )
+	set_target_properties( ${PROJECT_NAME} PROPERTIES LINK_FLAGS ${RC_COMPILE_FILE} )
 endif()
+
+acf_use_qt_modules()
