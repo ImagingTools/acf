@@ -87,30 +87,27 @@ int CBitmapLoaderComp::LoadFromFile(
 	istd::CChangeNotifier notifier(&data);
 
 	QImage image;
-	if (image.load(filePath)){
-		bool isOk = false;
+	if (!image.load(filePath)){
+		SendInfoMessage(MI_CANNOT_LOAD, tr("Cannot load file %1").arg(filePath));
+		return OS_FAILED;
+	}
 
-		CBitmap* qtBitmapPtr = dynamic_cast<CBitmap*>(&data);
-		if (qtBitmapPtr != NULL){
-			isOk = qtBitmapPtr->CopyImageFrom(image);
-		}
-		else{
-			CBitmap tempQtBitmap(image);
+	bool isOk = false;
 
-			isOk = data.CopyFrom(tempQtBitmap);
-		}
-
-		if (isOk){
-			return OS_OK;
-		}
-		else{
-			SendInfoMessage(MI_BAD_OBJECT_TYPE, tr("Object is not supported image"));
-		}
+	CBitmap* qtBitmapPtr = dynamic_cast<CBitmap*>(&data);
+	if (qtBitmapPtr != NULL){
+		isOk = qtBitmapPtr->CopyImageFrom(image);
 	}
 	else{
-		SendInfoMessage(MI_CANNOT_LOAD, tr("Cannot load file %1").arg(filePath));
+		CBitmap tempQtBitmap(image);
+
+		isOk = data.CopyFrom(tempQtBitmap);
 	}
 
+		if (isOk){
+		return OS_OK;
+}
+	SendInfoMessage(MI_BAD_OBJECT_TYPE, tr("Cannot set the loaded data to the end-point object"));
 	return OS_FAILED;
 }
 
@@ -160,7 +157,6 @@ bool CBitmapLoaderComp::GetFileExtensions(QStringList& result, const istd::IChan
 
 	if ((flags & QF_LOAD) != 0){
 		QList<QByteArray> imageFormats = QImageReader::supportedImageFormats();
-
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 		formatList += QSet<QByteArray>(imageFormats.begin(), imageFormats.end());
 #else

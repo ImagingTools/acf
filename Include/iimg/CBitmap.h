@@ -45,7 +45,6 @@ public:
 	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0);
 	virtual int GetLinesDifference() const;
 	virtual int GetPixelsDifference() const;
-	virtual int GetPixelBitsCount() const;
 	virtual const void* GetLinePtr(int positionY) const;
 	virtual void* GetLinePtr(int positionY);
 
@@ -53,8 +52,6 @@ public:
 	virtual void ResetImage();
 	virtual void ClearImage();
 	virtual istd::CIndex2d GetImageSize() const;
-	virtual int GetComponentsCount() const;
-	virtual icmm::CVarColor GetColorAt(const istd::CIndex2d& position) const;
 
 	// reimplemented (iser::IObject)
 	virtual QByteArray GetFactoryId() const;

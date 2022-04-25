@@ -1,7 +1,6 @@
 #ifndef iimg_CGeneralBitmap_included
 #define iimg_CGeneralBitmap_included
 
-
 // ACF includes
 #include <istd/TOptDelPtr.h>
 #include <iimg/CBitmapBase.h>
@@ -27,7 +26,6 @@ public:
 	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0);
 	virtual int GetLinesDifference() const;
 	virtual int GetPixelsDifference() const;
-	virtual int GetPixelBitsCount() const;
 	virtual const void* GetLinePtr(int positionY) const;
 	virtual void* GetLinePtr(int positionY);
 
@@ -35,7 +33,6 @@ public:
 	virtual void ResetImage();
 	virtual void ClearImage();
 	virtual istd::CIndex2d GetImageSize() const;
-	virtual int GetComponentsCount() const;
 
 	// reimplemented (istd::IChangeable)
 	virtual int GetSupportedOperations() const;
@@ -81,12 +78,10 @@ protected:
 				PixelFormat pixelFormat);
 
 private:
-	istd::TOptDelPtr<quint8, true> m_buffer;
+	istd::TOptDelPtr<uint8_t, true> m_buffer;
 
 	istd::CIndex2d m_size;
 	int m_linesDifference;
-	int m_pixelBitsCount;
-	int m_componentsCount;
 	PixelFormat m_pixelFormat;
 };
 
@@ -103,13 +98,7 @@ inline int CGeneralBitmap::GetLinesDifference() const
 
 inline int CGeneralBitmap::GetPixelsDifference() const
 {
-	return m_pixelBitsCount >> 3;
-}
-
-
-inline int CGeneralBitmap::GetPixelBitsCount() const
-{
-	return m_pixelBitsCount;
+	return GetPixelBitsCount() >> 3;
 }
 
 
@@ -136,12 +125,6 @@ inline void* CGeneralBitmap::GetLinePtr(int positionY)
 inline istd::CIndex2d CGeneralBitmap::GetImageSize() const
 {
 	return m_size;
-}
-
-
-inline int CGeneralBitmap::GetComponentsCount() const
-{
-	return m_componentsCount;
 }
 
 

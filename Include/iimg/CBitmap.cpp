@@ -16,7 +16,6 @@
 namespace iimg
 {
 
-
 // global functions
 
 template <typename PixelType, typename WorkingType>
@@ -298,6 +297,8 @@ bool CBitmap::IsFormatSupported(PixelFormat pixelFormat) const
 	switch (pixelFormat){
 		case PF_MONO:
 		case PF_GRAY:
+		case PF_GRAY16:
+		case PF_RGB24:
 		case PF_RGB:
 		case PF_RGBA:
 			return true;
@@ -393,12 +394,6 @@ int CBitmap::GetPixelsDifference() const
 }
 
 
-int CBitmap::GetPixelBitsCount() const
-{
-	return GetComponentsCount() * 8;
-}
-
-
 const void* CBitmap::GetLinePtr(int positionY) const
 {
 	Q_ASSERT(positionY >= 0);
@@ -441,59 +436,6 @@ void CBitmap::ClearImage()
 istd::CIndex2d CBitmap::GetImageSize() const
 {
 	return m_image.size();
-}
-
-
-int CBitmap::GetComponentsCount() const
-{
-	switch (m_image.format()){
-	case QImage::Format_Indexed8:
-	case QImage::Format_Mono:
-	case QImage::Format_MonoLSB:
-#if QT_VERSION >= 0x050500
-	case QImage::Format_Grayscale8:
-	case QImage::Format_Alpha8:
-#endif
-		return 1;
-
-	case QImage::Format_RGB16:
-	case QImage::Format_RGB555:
-	case QImage::Format_RGB444:
-	case QImage::Format_ARGB4444_Premultiplied:
-		return 2;
-
-	case QImage::Format_ARGB8565_Premultiplied:
-	case QImage::Format_RGB666:
-	case QImage::Format_ARGB6666_Premultiplied:
-	case QImage::Format_RGB888:
-	case QImage::Format_ARGB8555_Premultiplied:
-		return 3;
-
-	case QImage::Format_RGB32:
-	case QImage::Format_ARGB32:
-	case QImage::Format_ARGB32_Premultiplied:
-		return 4;
-
-	default:
-		return 0;
-	}
-}
-
-icmm::CVarColor CBitmap::GetColorAt(const istd::CIndex2d& position) const
-{
-	PixelFormat pixelFormat = GetPixelFormat();
-	if (pixelFormat == PF_RGB){
-		icmm::CVarColor rgbValue(3);
-		QRgb pixel = m_image.pixel(position.GetX(), position.GetY());
-
-		rgbValue[2] = qRed(pixel) / 255.0;
-		rgbValue[1] = qGreen(pixel) / 255.0;
-		rgbValue[0] = qBlue(pixel) / 255.0;
-
-		return rgbValue;
-	}
-
-	return BaseClass::GetColorAt(position);
 }
 
 
@@ -573,9 +515,6 @@ bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 			case PF_FLOAT64:
 				return ConvertToGrayImage<double, double>(*sourcePtr, *this);
 
-			case PF_GRAY16:
-				return ConvertToGrayImage<quint16, quint32>(*sourcePtr, *this);
-
 			case PF_GRAY32:
 				return ConvertToGrayImage<quint32, quint64>(*sourcePtr, *this);
 
@@ -631,10 +570,10 @@ QImage::Format CBitmap::CalcQtFormat(PixelFormat pixelFormat) const
 		case PF_MONO:
 			return QImage::Format_Mono;
 
-		// just pixel mapped formats
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
 		case PF_GRAY16:
 			return QImage::Format_Grayscale16;
-
+#endif
 		case PF_GRAY32:
 			return QImage::Format_ARGB32;
 
@@ -657,6 +596,10 @@ iimg::IBitmap::PixelFormat CBitmap::CalcFromQtFormat(QImage::Format imageFormat)
 	case QImage::Format_ARGB32_Premultiplied:
 		return PF_RGBA;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+	case QImage::Format::Format_Grayscale16:
+		return PF_GRAY16;
+#endif
 	case QImage::Format_Indexed8:
 #if QT_VERSION >= 0x050500
 	case QImage::Format_Grayscale8:
@@ -666,14 +609,6 @@ iimg::IBitmap::PixelFormat CBitmap::CalcFromQtFormat(QImage::Format imageFormat)
 
 	case QImage::Format_Mono:
 		return PF_MONO;
-
-	// just pixel mapped formats
-	case QImage::Format_Grayscale16:
-	case QImage::Format_RGB16:
-	case QImage::Format_RGB555:
-	case QImage::Format_RGB444:
-	case QImage::Format_ARGB4444_Premultiplied:
-		return PF_GRAY16;
 
 	default:
 		return PF_UNKNOWN;

@@ -30,9 +30,11 @@ public:
 	virtual bool CreateImageFromRegion(const iimg::IBitmap& sourceBitmap, const i2d::CRect& region);
 	virtual int GetLineBytesCount() const;
 	virtual int GetComponentBitsCount(int componentIndex = 0) const;
+	virtual int GetPixelBitsCount() const;
 
 	// reimplemented (iimg::IRasterImage)
 	virtual bool IsEmpty() const;
+	virtual int GetComponentsCount() const;
 	virtual icmm::CVarColor GetColorAt(const istd::CIndex2d& position) const;
 	virtual bool SetColorAt(const istd::CIndex2d& position, const icmm::CVarColor& color);
 
@@ -41,6 +43,11 @@ public:
 
 	// reimplemented (istd::IChangeable)
 	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+
+protected:
+	static int GetComponentsCount(IBitmap::PixelFormat format);
+	static int GetComponentBitsCount(IBitmap::PixelFormat format, int componentIndex);
+	static int GetPixelBitsCount(IBitmap::PixelFormat format);
 };
 
 

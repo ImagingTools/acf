@@ -89,16 +89,9 @@ int CBitmapBase::GetLineBytesCount() const
 }
 
 
-int CBitmapBase::GetComponentBitsCount(int /*componentIndex*/) const
+int CBitmapBase::GetComponentBitsCount(int componentIndex) const
 {
-	int componentsCount = GetComponentsCount();
-
-	if (componentsCount > 0){
-		return GetPixelBitsCount() / componentsCount;
-	}
-	else{
-		return 0;
-	}
+	return GetComponentBitsCount(GetPixelFormat(), componentIndex);
 }
 
 
@@ -112,40 +105,53 @@ bool CBitmapBase::IsEmpty() const
 }
 
 
+int CBitmapBase::GetComponentsCount() const
+{
+	return GetComponentsCount(GetPixelFormat());
+}
+
+
+int CBitmapBase::GetPixelBitsCount() const
+{
+	return GetPixelBitsCount(GetPixelFormat());
+}
+
+
 icmm::CVarColor CBitmapBase::GetColorAt(const istd::CIndex2d& position) const
 {
 	Q_ASSERT(position.IsValid());
 	Q_ASSERT(position.IsInside(GetImageSize()));
 
 	switch (GetPixelFormat()){
-	case PF_GRAY:
 	case PF_RGB:
 	case PF_RGBA:
 	case PF_RGB24:
 		{
-			int componentsCount = GetComponentsCount();
+			const int componentsCount = GetComponentsCount();
 
 			icmm::CVarColor retVal(componentsCount);
 
-			int byteOffsetX = (GetPixelBitsCount() * position.GetX()) >> 3;
+			const int byteOffsetX = (GetPixelBitsCount() * position.GetX()) >> 3;
 
 			quint8* pixelPtr = (quint8*)GetLinePtr(position.GetY());
 			Q_ASSERT(pixelPtr != NULL);
 			pixelPtr += byteOffsetX;
 
 			for (int i = 0; i < componentsCount; ++i){
-				quint8 componentValue;
-				if (GetComponentBitsCount(i) == 8){
-					componentValue = pixelPtr[i];
-				}
-				else{
-					componentValue = 0;
-				}
-
+				const quint8 componentValue = GetComponentBitsCount(i) == 8 ? pixelPtr[i] : 0;
 				retVal.SetElement(i, componentValue / 255.0);
 			}
 
+			if (GetPixelFormat() == PF_RGB)
+				retVal.SetElement(3, 1.0); // alpha channel is always 255
+
 			return retVal;
+		}
+
+	case PF_GRAY:
+		{
+			quint8* pixelPtr = (quint8*)GetLinePtr(position.GetY());
+			return icmm::CVarColor(1, pixelPtr[position.GetX()] / 255.0);
 		}
 
 	case PF_GRAY16:
@@ -173,6 +179,7 @@ icmm::CVarColor CBitmapBase::GetColorAt(const istd::CIndex2d& position) const
 		}
 
 	default:
+		Q_ASSERT(false);
 		return icmm::CVarColor();
 	}
 }
@@ -192,6 +199,9 @@ bool CBitmapBase::SetColorAt(const istd::CIndex2d& position, const icmm::CVarCol
 	pixelPtr += byteOffsetX;
 
 	int commonComponentsCount = qMin(color.GetElementsCount(), componentsCount);
+	if (commonComponentsCount > 3 && GetPixelFormat() == PF_RGB)
+		commonComponentsCount = 3;
+
 	for (int i = 0; i < commonComponentsCount; ++i){
 		if (GetComponentBitsCount(i) != 8){
 			return false;
@@ -305,6 +315,104 @@ bool CBitmapBase::ResetData(CompatibilityMode /*mode*/)
 	ResetImage();
 
 	return true;
+}
+
+
+int CBitmapBase::GetComponentsCount(IBitmap::PixelFormat format)
+{
+	switch (format){
+		case PF_MONO:
+		case PF_GRAY:
+		case PF_GRAY16:
+		case PF_GRAY32:
+		case PF_FLOAT32:
+		case PF_FLOAT64:
+			return 1;
+
+		case PF_XY32:
+			return 2;
+
+		case PF_RGB24:
+		case PF_XYZ32:
+			return 3;
+
+		case PF_RGB: // hidden alpha-channel
+		case PF_RGBA:
+			return 4;
+
+		default:
+			return -1;
+	}
+}
+
+
+int CBitmapBase::GetComponentBitsCount(IBitmap::PixelFormat format, int)
+{
+	switch (format){
+		case PF_MONO:
+			return 1;
+
+		case PF_GRAY:
+		case PF_RGB24:
+		case PF_RGB:
+		case PF_RGBA:
+			return 8;
+
+		case PF_GRAY16:
+			return 16;
+
+		case PF_GRAY32:
+			return 32;
+
+		case PF_FLOAT32:
+			return 32;
+
+		case PF_FLOAT64:
+			return 64;
+
+		case PF_XYZ32:
+			return 32;
+
+		case PF_XY32:
+			return 32;
+
+		default:
+			return -1;
+	}
+}
+
+
+int CBitmapBase::GetPixelBitsCount(IBitmap::PixelFormat format)
+{
+	switch (format){
+		case PF_MONO:
+			return 1;
+
+		case PF_GRAY:
+			return 8;
+
+		case PF_GRAY16:
+			return 16;
+
+		case PF_RGB24:
+			return 24;
+
+		case PF_RGB:
+		case PF_RGBA:
+		case PF_GRAY32:
+		case PF_FLOAT32:
+			return 32;
+
+		case PF_FLOAT64:
+		case PF_XY32:
+			return 64;
+
+		case PF_XYZ32:
+			return 96;
+
+		default:
+			return -1;
+	}
 }
 
 
