@@ -3,6 +3,8 @@
 
 
 // ACF includes
+#include <iqtgui/TMakeIconProviderCompWrap.h>
+#include <iqtgui/TDesignSchemaHandlerWrap.h>
 #include <iqtgui/CHierarchicalCommand.h>
 #include <ibase/ICommandsProvider.h>
 #include <iview/CConsoleBase.h>
@@ -125,9 +127,27 @@ protected:
 	virtual void OnBoundingBoxChanged();
 	
 	// reimplemented (QObject)
-	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);	
+	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
 
 	iview::CViewport* m_viewPtr;
+
+protected:
+	class UiResourcesManager: public iqtgui::TMakeIconProviderCompWrap<iqtgui::TDesignSchemaHandlerWrap<QObject>>
+	{
+	public:
+		UiResourcesManager(CConsoleGui& parent)
+			:m_parent(parent)
+		{
+		}
+
+	protected:
+		virtual void OnDesignSchemaChanged() override
+		{
+			m_parent.UpdateCommands();
+		}
+
+		CConsoleGui& m_parent;
+	};
 
 private:
 	bool ConnectSignalSlots();
@@ -163,8 +183,10 @@ private:
 
 	bool m_isFullScreenMode;
 	bool m_isViewMaximized;
-	QWidget* m_viewWidget;	
-	iview::CScreenTransform m_savedTransform;	
+	QWidget* m_viewWidget;
+	iview::CScreenTransform m_savedTransform;
+
+	UiResourcesManager m_uiResourcesManager;
 };
 
 
@@ -192,6 +214,5 @@ inline CViewport& CConsoleGui::GetViewRef()
 
 
 #endif // !iview_CConsoleGui_included
-
 
 

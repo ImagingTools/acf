@@ -54,7 +54,8 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	m_pointsSubCommand("Remove Points", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR | ibase::ICommand::CF_EXCLUSIVE | ibase::ICommand::CF_ONOFF, CGI_SHAPE_EDITOR),
 	m_shapeStatusInfoPtr(NULL),
 	m_isFullScreenMode(false),
-	m_isViewMaximized(false)
+	m_isViewMaximized(false),
+	m_uiResourcesManager(*this)
 {
 	m_viewWidget = new QWidget(this);
 
@@ -102,6 +103,8 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	vLayout->setContentsMargins(0,0,0,0);
 	m_viewWidget->setParent(this);
 	vLayout->addWidget(m_viewWidget);
+
+	m_uiResourcesManager.EnableDesignHandler();
 }
 
 
@@ -625,69 +628,69 @@ void CConsoleGui::UpdateCommands()
 
 	// zoom commands
 	if (AreZoomsVisible()){
-		m_zoomInCommand.SetVisuals(tr("Zoom In"), tr("Zoom In"), tr("Zoom In"), QIcon(":/Icons/ZoomIn"));
+		m_zoomInCommand.SetVisuals(tr("Zoom In"), tr("Zoom In"), tr("Zoom In"), m_uiResourcesManager.GetIcon(":/Icons/ZoomIn"));
 		m_commands.InsertChild(&m_zoomInCommand);
 
-		m_zoomOutCommand.SetVisuals(tr("Zoom Out"), tr("Zoom Out"), tr("Zoom Out"), QIcon(":/Icons/ZoomOut"));
+		m_zoomOutCommand.SetVisuals(tr("Zoom Out"), tr("Zoom Out"), tr("Zoom Out"), m_uiResourcesManager.GetIcon(":/Icons/ZoomOut"));
 		m_commands.InsertChild(&m_zoomOutCommand);
 
-		m_zoomResetCommand.SetVisuals(tr("Reset Zoom"), tr("Reset Zoom"), tr("Reset Zoom"), QIcon(":/Icons/ZoomReset"));
+		m_zoomResetCommand.SetVisuals(tr("Reset Zoom"), tr("Reset Zoom"), tr("Reset Zoom"), m_uiResourcesManager.GetIcon(":/Icons/ZoomReset"));
 		m_commands.InsertChild(&m_zoomResetCommand);
 	}
 
 	if (IsZoomToFitVisible()){
-		m_zoomToFitCommand.SetVisuals(tr("Fit Contents To View"), tr("Fit To View"), tr("Zoom to fit content area"), QIcon(":/Icons/ZoomToFit"));
+		m_zoomToFitCommand.SetVisuals(tr("Fit Contents To View"), tr("Fit To View"), tr("Zoom to fit content area"), m_uiResourcesManager.GetIcon(":/Icons/ZoomToFit"));
 		m_commands.InsertChild(&m_zoomToFitCommand);
 	}
 
 	// points commands
 	if (ArePolylineButtonsVisible()){
-		m_pointsSelectCommand.SetVisuals(tr("Object Area Mode"), tr("Area"), tr("Object Area Mode"), QIcon(":/Icons/PointsNone"));
+		m_pointsSelectCommand.SetVisuals(tr("Object Area Mode"), tr("Area"), tr("Object Area Mode"), m_uiResourcesManager.GetIcon(":/Icons/PointsNone"));
 		m_commands.InsertChild(&m_pointsSelectCommand);
 
-		m_pointsMoveCommand.SetVisuals(tr("Move Mode"), tr("Move"), tr("Object Move Mode"), QIcon(":/Icons/PointsMove"));
+		m_pointsMoveCommand.SetVisuals(tr("Move Mode"), tr("Move"), tr("Object Move Mode"), m_uiResourcesManager.GetIcon(":/Icons/PointsMove"));
 		m_commands.InsertChild(&m_pointsMoveCommand);
 
-		m_pointsAddCommand.SetVisuals(tr("Add Points"), tr("Add"), tr("Point Adding Mode"), QIcon(":/Icons/PointsAdd"));
+		m_pointsAddCommand.SetVisuals(tr("Add Points"), tr("Add"), tr("Point Adding Mode"), m_uiResourcesManager.GetIcon(":/Icons/PointsAdd"));
 		m_commands.InsertChild(&m_pointsAddCommand);
 
-		m_pointsSubCommand.SetVisuals(tr("Remove Points"), tr("Remove"), tr("Point Removing Mode"), QIcon(":/Icons/PointsSub"));
+		m_pointsSubCommand.SetVisuals(tr("Remove Points"), tr("Remove"), tr("Point Removing Mode"), m_uiResourcesManager.GetIcon(":/Icons/PointsSub"));
 		m_commands.InsertChild(&m_pointsSubCommand);
 	}
 
 	// components visibility commands
 	if (IsGridButtonVisible()){
-		m_gridVisibleCommand.SetVisuals(tr("Show Grid"), tr("Show Grid"), tr("Show/Hide Grid"), QIcon(":/Icons/Grid"));
+		m_gridVisibleCommand.SetVisuals(tr("Show Grid"), tr("Show Grid"), tr("Show/Hide Grid"), m_uiResourcesManager.GetIcon(":/Icons/Grid"));
 		m_gridVisibleCommand.setChecked(IsGridVisible());
 		m_commands.InsertChild(&m_gridVisibleCommand);
 	}
 
 	if (IsRulerButtonVisible()){
-		m_rulerVisibleCommand.SetVisuals(tr("Show Ruler"), tr("Show Ruler"), tr("Show/Hide Ruler"), QIcon(":/Icons/ShowRuler"));
+		m_rulerVisibleCommand.SetVisuals(tr("Show Ruler"), tr("Show Ruler"), tr("Show/Hide Ruler"), m_uiResourcesManager.GetIcon(":/Icons/ShowRuler"));
 		m_rulerVisibleCommand.setChecked(IsRulerVisible());
 		m_commands.InsertChild(&m_rulerVisibleCommand);
 	}
 
 	if (IsDistanceMeasureButtonVisible()){
-		m_distanceMeasureToolCommand.SetVisuals(tr("Distance"), tr("Distance"), tr("Activate distance measurement tool"), QIcon(":/Icons/Ruler"));
+		m_distanceMeasureToolCommand.SetVisuals(tr("Distance"), tr("Distance"), tr("Activate distance measurement tool"), m_uiResourcesManager.GetIcon(":/Icons/Ruler"));
 		m_distanceMeasureToolCommand.setChecked(IsDistanceMeasureToolActive());
 		m_commands.InsertChild(&m_distanceMeasureToolCommand);
 	}
 
-	if (IsPointMeasureButtonVisible()) {
-		m_pointMeasureToolCommand.SetVisuals(tr("Position"), tr("Position"), tr("Activate position measurement tool"), QIcon(":/Icons/Pointer"));
+	if (IsPointMeasureButtonVisible()){
+		m_pointMeasureToolCommand.SetVisuals(tr("Position"), tr("Position"), tr("Activate position measurement tool"), m_uiResourcesManager.GetIcon(":/Icons/Pointer"));
 		m_pointMeasureToolCommand.setChecked(IsDistanceMeasureToolActive());
 		m_commands.InsertChild(&m_pointMeasureToolCommand);
 	}
 
 	if (IsMmButtonVisible()){
-		m_gridInMmVisibleCommand.SetVisuals(tr("Grid in Millimeter"), tr("Millimeter"), tr("Show grid in millimeters"), QIcon(":/Icons/LogicalUnit"));
+		m_gridInMmVisibleCommand.SetVisuals(tr("Grid in Millimeter"), tr("Millimeter"), tr("Show grid in millimeters"), m_uiResourcesManager.GetIcon(":/Icons/LogicalUnit"));
 		m_gridInMmVisibleCommand.setChecked(IsGridInMm());
 		m_commands.InsertChild(&m_gridInMmVisibleCommand);
 	}
 
 	if (IsScrollbarsButtonVisible()){
-		m_scrollVisibleCommand.SetVisuals(tr("Show Scrollbars"), tr("Show Scrollbars"), tr("Show/Hide Scrollbars"), QIcon(":/Icons/ShowScrollbar"));
+		m_scrollVisibleCommand.SetVisuals(tr("Show Scrollbars"), tr("Show Scrollbars"), tr("Show/Hide Scrollbars"), m_uiResourcesManager.GetIcon(":/Icons/ShowScrollbar"));
 		m_scrollVisibleCommand.setChecked(AreScrollbarsVisible());
 		m_commands.InsertChild(&m_scrollVisibleCommand);
 	}

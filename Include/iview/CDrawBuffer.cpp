@@ -56,7 +56,6 @@ void CDrawBuffer::CopyRectTo(const i2d::CRect& source, QPainter& drawContext, is
 void CDrawBuffer::EnsureDrawContext()
 {
 	if (!m_drawContextPtr.IsValid()){
-
 		m_drawContextPtr.SetPtr(new QPainter(this));
 
 		m_drawContextPtr->setRenderHint(QPainter::Antialiasing, true);
