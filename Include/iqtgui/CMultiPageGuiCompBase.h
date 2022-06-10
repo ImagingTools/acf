@@ -1,3 +1,25 @@
+/********************************************************************************
+**
+**	Copyright (C) 2007-2017 Witold Gantzke & Kirill Lepskiy
+**
+**	This file is part of the ACF Toolkit.
+**
+**	This file may be used under the terms of the GNU Lesser
+**	General Public License version 2.1 as published by the Free Software
+**	Foundation and appearing in the file LicenseLGPL.txt included in the
+**	packaging of this file.  Please review the following information to
+**	ensure the GNU Lesser General Public License version 2.1 requirements
+**	will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+**	If you are unsure which license is appropriate for your use, please
+**	contact us at info@imagingtools.de.
+**
+** 	See http://www.ilena.org or write info@imagingtools.de for further
+** 	information about the ACF.
+**
+********************************************************************************/
+
+
 #ifndef iqtgui_CMultiPageGuiCompBase_included
 #define iqtgui_CMultiPageGuiCompBase_included
 
@@ -35,6 +57,7 @@ public:
 		I_ASSIGN(m_lazyPagesInitializationAttrPtr, "LazyPagesInitialization", "If enabled, CreateGui for a page will be called only when this page will be selected", true, false);
 		I_ASSIGN(m_supressPageTitleAttrPtr, "SupressPageTitle", "Supress page title on the container widget", true, false);
 		I_ASSIGN(m_defaultPageIndexAttrPtr, "DefaultStartPageIndex", "Index of the start page", true, 0);
+		I_ASSIGN(m_filterWheelEventAttrPtr, "FilterWheelEvents", "If true, the container will filter the wheel events for ComboBoxes and SpinBoxes to avoid an accident changing values in them", true, true);
 	I_END_COMPONENT;
 
 protected:
@@ -47,6 +70,7 @@ protected:
 	I_ATTR(bool, m_lazyPagesInitializationAttrPtr);
 	I_ATTR(bool, m_supressPageTitleAttrPtr);
 	I_ATTR(int, m_defaultPageIndexAttrPtr);
+	I_ATTR(bool, m_filterWheelEventAttrPtr);
 };
 
 
