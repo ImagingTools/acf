@@ -342,6 +342,8 @@ bool CBitmapBase::ResetData(CompatibilityMode /*mode*/)
 }
 
 
+// protected static methods
+
 int CBitmapBase::GetComponentsCount(IBitmap::PixelFormat format)
 {
 	switch (format){
@@ -364,6 +366,7 @@ int CBitmapBase::GetComponentsCount(IBitmap::PixelFormat format)
 		case PF_RGB: // hidden alpha-channel
 		case PF_RGBA:
 		case PF_RGBA64:
+		case PF_CMYK:
 			return 4;
 
 		default:
@@ -382,6 +385,7 @@ int CBitmapBase::GetComponentBitsCount(IBitmap::PixelFormat format, int)
 		case PF_RGB24:
 		case PF_RGB:
 		case PF_RGBA:
+		case PF_CMYK:
 			return 8;
 
 		case PF_GRAY16:
@@ -429,6 +433,7 @@ int CBitmapBase::GetPixelBitsCount(IBitmap::PixelFormat format)
 		case PF_RGBA:
 		case PF_GRAY32:
 		case PF_FLOAT32:
+		case PF_CMYK:
 			return 32;
 
 		case PF_RGB48:
