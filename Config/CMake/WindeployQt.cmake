@@ -2,20 +2,20 @@ find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS Core REQUIRED)
 
 # get absolute path to qmake, then use it to find windeployqt executable
 
-get_target_property(_qmake_executable Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
-get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
-
-message("_qt_bin_dir " ${_qt_bin_dir}/windeployqt.exe)
-
 function(windeploy target listOptions listFiles)
-    add_custom_command(TARGET ${target} POST_BUILD
-		COMMAND "${Qt${QT_VERSION_MAJOR}_DIR}/../../../bin/windeployqt.exe"
-#		verbose 1
+	get_target_property(qmake_executable Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
+	get_filename_component(qt_bin_dir "${qmake_executable}" DIRECTORY)
+	set(windeployqt_executable ${qt_bin_dir}/windeployqt.exe)
+
+	message("windeployqt_executable ${windeployqt_executable} ${listOptions} ${listFiles}")
+
+	add_custom_command(
+		TARGET ${target} POST_BUILD
+		COMMAND "${windeployqt_executable}"
 		${listOptions}
 		${listFiles}
-		
+		DEPENDS ${listFiles}
 		COMMENT "Deploying Qt libraries using windeployqt for compilation target '${target}' ..."
-    )
-	message("text:  ${options} ${files}")
+    	)
 endfunction()
 
