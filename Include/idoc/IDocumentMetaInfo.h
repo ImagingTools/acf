@@ -6,6 +6,7 @@
 #include <QtCore/QVariant>
 
 // ACF includes
+#include <istd/TSmartPtr.h>
 #include <istd/IChangeable.h>
 
 
@@ -126,6 +127,9 @@ public:
 	*/
 	virtual bool IsMetaInfoWritable(int metaInfoType) const = 0;
 };
+
+
+typedef istd::TSmartPtr<IDocumentMetaInfo> MetaInfoPtr;
 
 
 } // namespace idoc
