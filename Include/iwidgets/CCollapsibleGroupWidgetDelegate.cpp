@@ -19,6 +19,7 @@
 
 // ACF includes
 #include <iwidgets/CCollapsiblePage.h>
+#include <iwidgets/CWidgetWheelEventBlocker.h>
 
 
 namespace iwidgets
@@ -109,6 +110,10 @@ int CCollapsibleGroupWidgetDelegate::InsertPage(
 	}
 
 	bool even = (widgetCount % 2) == 0;
+
+	if (m_containerGuiFlags & CGF_FILTER_WHEEL_EVENTS){
+		new CWidgetWheelEventBlocker(pageWidgetPtr);
+	}
 
 	CCollapsiblePage* groupPanelPtr = new CCollapsiblePage(containerWidgetPtr);
 	groupPanelPtr->setProperty("IsAlternating", QVariant(even));

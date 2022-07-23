@@ -473,11 +473,7 @@ bool CMultiPageWidget::CreateContainerGui()
 	}
 
 	if (m_containerGuiFlags & IMultiPageWidgetDelegate::CGF_FILTER_WHEEL_EVENTS){
-		m_widgetWheelEventBlocker.SetProcessingFlags(
-					CWidgetWheelEventBlocker::PF_COMBO_BOXES |
-					CWidgetWheelEventBlocker::PF_SPIN_BOXES |
-					CWidgetWheelEventBlocker::PF_COLLECT_CHILDREN);
-		m_widgetWheelEventBlocker.AcquireChildScrollArea(*m_guiContainerPtr);
+		m_widgetWheelEventBlockerPtr = new CWidgetWheelEventBlocker((m_guiContainerPtr.GetPtr()));
 	}
 
 	return m_guiContainerPtr.IsValid();

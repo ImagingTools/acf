@@ -36,8 +36,8 @@ void CCollapsiblePage::SetTitle(const QString& text)
 
 void CCollapsiblePage::SetWidget(QWidget* pageWidgetPtr)
 {
+	pageWidgetPtr->setParent(CollapsiblePageFrame);
 	CollapsiblePageFrame->layout()->addWidget(pageWidgetPtr);
-
 	m_pageWidgetPtr = pageWidgetPtr;
 }
 

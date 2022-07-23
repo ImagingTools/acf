@@ -5,6 +5,7 @@
 #include <QtWidgets/QAbstractSpinBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QAbstractScrollArea>
+#include <QtWidgets/QLayoutItem>
 
 // Acf includes
 #include <istd/CChangeNotifier.h>
@@ -17,88 +18,33 @@ namespace iwidgets
 
 // public methods
 
-CWidgetWheelEventBlocker::CWidgetWheelEventBlocker(int flags, QObject* parentPtr):
-	QObject(parentPtr),
+CWidgetWheelEventBlocker::CWidgetWheelEventBlocker(QWidget* parentPtr, int flags)
+	:QObject(parentPtr),
 	m_processingFlags(flags)
 {
-
+	AddSupportedChildWidgets(*parentPtr);
 }
 
 
-int CWidgetWheelEventBlocker::GetProcessingFlags() const
+// protected methods
+
+void CWidgetWheelEventBlocker::FilterWidgets(ObjectPtrList& widgetPtrsList)
 {
-	return m_processingFlags;
-}
-
-
-const CWidgetWheelEventBlocker::ObjectsPtrsList CWidgetWheelEventBlocker::GetWatchedWidgets() const
-{
-	return m_watchingWidgetPtrsList;
-}
-
-
-void CWidgetWheelEventBlocker::SetProcessingFlags(int flags)
-{
-	if (m_processingFlags != flags){
-		istd::CChangeNotifier changeNotifier(this);
-
-		m_processingFlags = flags;
-	}
-}
-
-
-void CWidgetWheelEventBlocker::AddProcessingFlag(ProcessingFlags flag)
-{
-	if (!(m_processingFlags & flag)){
-		istd::CChangeNotifier changeNotifier(this);
-
-		m_processingFlags |= flag;
-	}
-}
-
-
-void CWidgetWheelEventBlocker::AcquireChildScrollArea(QObject& parentObject)
-{
-	for (QAbstractScrollArea* childScrollAreaPtr : parentObject.findChildren<QAbstractScrollArea*>(QString(), Qt::FindChildrenRecursively)){
-		AddSupportedChildWidgets(*childScrollAreaPtr);
-	}
-	QAbstractScrollArea* scrollAreaPtr = dynamic_cast<QAbstractScrollArea*>(&parentObject);
-	if (scrollAreaPtr != nullptr){
-		AddSupportedChildWidgets(*scrollAreaPtr);
-	}
-}
-
-bool CWidgetWheelEventBlocker::AddChildrenWidgetsFromParent(QObject& parentObject)
-{
-	return AddSupportedChildWidgets(parentObject);
-}
-
-
-bool CWidgetWheelEventBlocker::AddWidgets(ObjectsPtrsList& widgetPtrsList)
-{
-	istd::CChangeGroup groupChanges(this);
-
-	bool retVal = false;
 	for (QObject* povidedWidgetPtr : widgetPtrsList){
-		bool widgetAdded = false;
-		if (m_processingFlags & PF_COMBO_BOXES){
+		if (m_processingFlags & AW_COMBO_BOXES){
 			QComboBox* providedComboBoxPtr = dynamic_cast<QComboBox*>(povidedWidgetPtr);
 			if (providedComboBoxPtr != nullptr){
 				AcquireWidget(*providedComboBoxPtr);
-				retVal = true;
-				widgetAdded = true;
 			}
 		}
 
-		if (!widgetAdded && (m_processingFlags & PF_SPIN_BOXES)){
+		if (m_processingFlags & AW_SPIN_BOXES){
 			QAbstractSpinBox* providedSpinBoxPtr = dynamic_cast<QAbstractSpinBox*>(povidedWidgetPtr);
 			if (providedSpinBoxPtr != nullptr){
 				AcquireWidget(*providedSpinBoxPtr);
-				retVal = true;
 			}
 		}
 	}
-	return retVal;
 }
 
 
@@ -106,101 +52,79 @@ bool CWidgetWheelEventBlocker::AddWidgets(ObjectsPtrsList& widgetPtrsList)
 
 bool CWidgetWheelEventBlocker::eventFilter(QObject* objectPtr, QEvent* eventPtr)
 {
-	if (m_processingFlags & PF_COLLECT_CHILDREN){
-		QWidget* widgetPtr = dynamic_cast<QWidget*>(objectPtr);
-		if (widgetPtr != nullptr){
-			QChildEvent* childEventPtr = dynamic_cast<QChildEvent*>(eventPtr);
-			if (childEventPtr != nullptr){
-				QObject* addedChildWidgetPtr = childEventPtr->child();
-				if (addedChildWidgetPtr != nullptr){
-					AddSupportedChildWidgets(*addedChildWidgetPtr);
+	int eventType = eventPtr->type();
+	if (eventType != QEvent::Wheel && eventType != QEvent::ChildAdded){
+		return QObject::eventFilter(objectPtr, eventPtr);
+	}
+
+	if (eventType == QEvent::ChildAdded){
+		QList<QWidget*> children = objectPtr->findChildren<QWidget*>(QString(), Qt::FindChildrenRecursively);
+		for (QWidget* childPtr: children){
+			AddSupportedChildWidgets(*childPtr);
+		}
+	}
+	else if (eventType == QEvent::Wheel){
+		if (m_filteredWidgets.contains(dynamic_cast<QWidget*>(objectPtr))){
+			if (m_processingFlags & AW_COMBO_BOXES){
+				const QComboBox* comboBoxPtr = dynamic_cast<const QComboBox*>(objectPtr);
+				if (comboBoxPtr != nullptr){
+					return true;
+				}
+			}
+
+			if (m_processingFlags & AW_SPIN_BOXES){
+				const QAbstractSpinBox* spinBoxPtr = dynamic_cast<const QAbstractSpinBox*>(objectPtr);
+				if (spinBoxPtr != nullptr){
+					return true;
 				}
 			}
 		}
 	}
 
-	if (m_watchingWidgetPtrsList.contains(dynamic_cast<QWidget*>(objectPtr))){
-		if (m_processingFlags & PF_COMBO_BOXES){
-			QComboBox* comboBoxPtr = dynamic_cast<QComboBox*>(objectPtr);
-			if (comboBoxPtr != nullptr && eventPtr->type() == QEvent::Wheel){
-				return true;
-			}
-		}
+	return QObject::eventFilter(objectPtr, eventPtr);
+}
 
-		if (m_processingFlags & PF_SPIN_BOXES){
-			QAbstractSpinBox* spinBoxPtr = dynamic_cast<QAbstractSpinBox*>(objectPtr);
-			if (spinBoxPtr != nullptr){
-				if (eventPtr->type() == QEvent::Show){
-					spinBoxPtr->setFocusPolicy(Qt::StrongFocus);
-				}
-				else if (eventPtr->type() == QEvent::Wheel){
-					if (!spinBoxPtr->hasFocus()){
-						return true;
-					}
-				}
-			}
+
+void CWidgetWheelEventBlocker::AddSupportedChildWidgets(QWidget& parentObject)
+{
+	QComboBox* comboBoxPtr = dynamic_cast<QComboBox*>(&parentObject);
+	QAbstractSpinBox* spinBoxPtr = dynamic_cast<QAbstractSpinBox*>(&parentObject);
+	if (comboBoxPtr != nullptr){
+		if (m_processingFlags & AW_COMBO_BOXES){
+			AcquireWidget(*comboBoxPtr);
 		}
 	}
-	return BaseClass::eventFilter(objectPtr, eventPtr);
-}
-
-
-int CWidgetWheelEventBlocker::GetSupportedOperations() const
-{
-	return (BaseClass2::SO_OBSERVE | BaseClass2::SO_RESET);
-}
-
-
-bool CWidgetWheelEventBlocker::ResetData(CompatibilityMode mode)
-{
-	istd::CChangeNotifier changeNotifier(this);
-
-	m_watchingWidgetPtrsList.clear();
-	m_processingFlags = PF_NONE;
-	return true;
-}
-
-
-bool CWidgetWheelEventBlocker::AddSupportedChildWidgets(QObject& parentObject)
-{
-	istd::CChangeGroup groupChanges(this);
-
-	bool retVal = false;
-	if (!m_watchingWidgetPtrsList.contains(&parentObject) && m_processingFlags & PF_COLLECT_CHILDREN){
+	else if(spinBoxPtr != nullptr){
+		if (m_processingFlags & AW_SPIN_BOXES){
+			AcquireWidget(*spinBoxPtr);
+		}
+	}
+	else {
+		// required for the child-added event
 		parentObject.installEventFilter(this);
-		for (QObject* childObjectPtr : parentObject.findChildren<QObject*>(QString(), Qt::FindChildrenRecursively)){
-			m_watchingWidgetPtrsList << childObjectPtr;
-			AddSupportedChildWidgets(*childObjectPtr);
-		}
-	}
 
-	if (m_processingFlags & PF_COMBO_BOXES){
-		for (QComboBox* childComboBoxPtr : parentObject.findChildren<QComboBox*>(QString(), Qt::FindChildrenRecursively)){
-			AcquireWidget(*childComboBoxPtr);
-			retVal = true;
+		if (m_processingFlags & AW_COMBO_BOXES){
+			for (QComboBox* childComboBoxPtr : parentObject.findChildren<QComboBox*>(QString(), Qt::FindChildrenRecursively)){
+				AcquireWidget(*childComboBoxPtr);
+			}
 		}
-	}
 
-	if (m_processingFlags & PF_SPIN_BOXES){
-		for (QAbstractSpinBox* childSpinBoxPtr : parentObject.findChildren<QAbstractSpinBox*>(QString(), Qt::FindChildrenRecursively)){
-			AcquireWidget(*childSpinBoxPtr);
-			retVal = true;
+		if (m_processingFlags & AW_SPIN_BOXES){
+			for (QAbstractSpinBox* childSpinBoxPtr : parentObject.findChildren<QAbstractSpinBox*>(QString(), Qt::FindChildrenRecursively)){
+				AcquireWidget(*childSpinBoxPtr);
+			}
 		}
 	}
-	return retVal;
 }
 
 
-void CWidgetWheelEventBlocker::AcquireWidget(QObject& widget)
+void CWidgetWheelEventBlocker::AcquireWidget(QWidget& widget)
 {
-	if (!m_watchingWidgetPtrsList.contains(&widget)){
-		istd::CChangeNotifier changeNotifier(this);
-
-		widget.installEventFilter(this);
-		m_watchingWidgetPtrsList << &widget;
-	}
+	widget.installEventFilter(this);
+	m_filteredWidgets.insert(&widget);
 }
 
 
 } // namespace iwidgets
+
 
