@@ -108,13 +108,11 @@ public:
 	virtual iview::IShapeView* GetView() const;
 
 protected:
-	// reimplemented (ibase::TDesignSchemaHandlerWrap)
-	virtual void OnDesignSchemaChanged();
-
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 	virtual void OnGuiRetranslate();
+	virtual void OnGuiDesignChanged();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);

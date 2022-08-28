@@ -141,6 +141,7 @@ protected:
 		}
 
 	protected:
+		// reimplemented (iqtgui::TDesignSchemaHandlerWrap)
 		virtual void OnDesignSchemaChanged() override
 		{
 			m_parent.UpdateCommands();

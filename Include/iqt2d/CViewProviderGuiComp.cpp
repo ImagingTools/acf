@@ -48,20 +48,6 @@ iview::IShapeView* CViewProviderGuiComp::GetView() const
 
 // protected methods
 
-// reimplemented (ibase::TDesignSchemaHandlerWrap)
-
-void CViewProviderGuiComp::OnDesignSchemaChanged()
-{
-	BaseClass::OnDesignSchemaChanged();
-
-	iview::CConsoleGui* consolePtr = GetQtWidget();
-	Q_ASSERT(consolePtr != nullptr);
-
-	consolePtr->GetViewRef().SetDefaultColorSchema(nullptr);
-	consolePtr->GetViewRef().InvalidateBackground();
-}
-
-
 // reimplemented (CGuiComponentBase)
 
 void CViewProviderGuiComp::OnGuiCreated()
@@ -184,6 +170,18 @@ void CViewProviderGuiComp::OnGuiRetranslate()
 	if (consolePtr != NULL){
 		consolePtr->RetranslateGui();
 	}
+}
+
+
+void CViewProviderGuiComp::OnGuiDesignChanged()
+{
+	BaseClass::OnGuiDesignChanged();
+
+	iview::CConsoleGui* consolePtr = GetQtWidget();
+	Q_ASSERT(consolePtr != nullptr);
+
+	consolePtr->GetViewRef().SetDefaultColorSchema(nullptr);
+	consolePtr->GetViewRef().InvalidateBackground();
 }
 
 
