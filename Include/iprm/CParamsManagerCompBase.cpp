@@ -70,19 +70,19 @@ int CParamsManagerCompBase::InsertParamsSet(int typeIndex, int index)
 		paramsModelPtr->AttachObserver(&m_updateBridge);
 	}
 
-	m_paramSets.push_back(ParamSetPtr());
 	if (index >= 0){
 		int insertIndex = index - fixedParamsCount;
+		m_paramSets.push_back(ParamSetPtr());
 
 		for (int i = m_paramSets.size() - 1; i > insertIndex; --i){
-			m_paramSets[i].TakeOver(m_paramSets[i - 1]);
+			m_paramSets[i] = m_paramSets[i - 1];
 		}
-		m_paramSets[insertIndex].TakeOver(paramsSetPtr);
+		m_paramSets[insertIndex] = paramsSetPtr;
 
 		return index;
 	}
 	else{
-		m_paramSets.last().TakeOver(paramsSetPtr);
+		m_paramSets.push_back(paramsSetPtr);
 
 		return GetParamsSetsCount() - 1;
 	}
@@ -104,10 +104,7 @@ bool CParamsManagerCompBase::RemoveParamsSet(int index)
 	
 		m_selectedIndex = index - 1;
 
-		istd::TDelPtr<ParamSet> removedParamsSetPtr;
-		removedParamsSetPtr.TakeOver(m_paramSets[removeIndex]);
-
-		EnsureParamsSetModelDetached(removedParamsSetPtr->paramSetPtr.GetPtr());
+		EnsureParamsSetModelDetached(m_paramSets[removeIndex]->paramSetPtr.GetPtr());
 
 		m_paramSets.removeAt(removeIndex);
 
@@ -163,7 +160,8 @@ IParamsSet* CParamsManagerCompBase::GetParamsSet(int index) const
 		m_elementNameParamIdAttrPtr.IsValid() ||
 		m_elementDescriptionParamIdAttrPtr.IsValid()
 	){
-		return m_paramSets[index - fixedSetsCount].GetPtr();
+		ParamSetPtr paramSetPtr = m_paramSets[index - fixedSetsCount];
+		return paramSetPtr.GetPtr();
 	}
 	else{
 		return m_paramSets[index - fixedSetsCount]->paramSetPtr.GetPtr();

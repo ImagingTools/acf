@@ -349,8 +349,7 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		paramsSetPtr->isEnabled = isEnabled;
 		paramsSetPtr->parentPtr = this;
 
-		m_paramSets.push_back(ParamSetPtr());
-		m_paramSets.back().TakeOver(paramsSetPtr);
+		m_paramSets.push_back(paramsSetPtr);
 
 		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
 		if (paramsModelPtr != NULL){

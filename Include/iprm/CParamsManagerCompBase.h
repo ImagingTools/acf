@@ -6,7 +6,7 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include <istd/TDelPtr.h>
+#include <istd/TSmartPtr.h>
 #include <imod/TModelWrap.h>
 #include <imod/CModelUpdateBridge.h>
 #include <icomp/CComponentBase.h>
@@ -228,7 +228,7 @@ protected:
 		CParamsManagerCompBase* parentPtr;
 	};
 
-	typedef istd::TDelPtr<ParamSet> ParamSetPtr;
+	typedef istd::TSmartPtr<ParamSet> ParamSetPtr;
 
 	typedef QList<ParamSetPtr> ParamSets;
 

@@ -66,7 +66,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 					paramsModelPtr->AttachObserver(&m_updateBridge);
 				}
 
-				m_paramSets[i - fixedSetsCount].TakeOver(paramsSetPtr);
+				m_paramSets[i - fixedSetsCount] = paramsSetPtr;
 			}
 		}
 	}
