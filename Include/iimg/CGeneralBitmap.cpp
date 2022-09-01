@@ -60,8 +60,9 @@ IBitmap::PixelFormat CGeneralBitmap::GetPixelFormat() const
 
 bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, int, int)
 {
-	if (!IsFormatSupported(pixelFormat))
+	if (!IsFormatSupported(pixelFormat)){
 		return false;
+	}
 
 	return CreateBitmap(size, GetPixelBitsCount(pixelFormat), GetComponentsCount(pixelFormat), pixelFormat);
 }
@@ -69,8 +70,9 @@ bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d&
 
 bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference)
 {
-	if (!IsFormatSupported(pixelFormat))
+	if (!IsFormatSupported(pixelFormat)){
 		return false;
+	}
 
 	return CreateBitmap(size, dataPtr, releaseFlag, linesDifference, GetPixelBitsCount(pixelFormat), GetComponentsCount(pixelFormat), pixelFormat);
 }

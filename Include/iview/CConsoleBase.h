@@ -64,6 +64,13 @@ public:
 		FM_COVER
 	};
 
+	enum BlockFlags
+	{
+		BF_COMMANDS = 1,
+		BF_VIEW = 2,
+		BF_ALL = 0xffff
+	};
+
 	explicit CConsoleBase(QWidget* parent);
 
 	// console visibility
@@ -122,6 +129,8 @@ public:
 	bool IsBackgroundActive() const;
 
 	void UpdateView();
+
+	void SetUpdateBlocked(bool isBlocked, int flags = BF_ALL);
 
 	// abstract methods
 
@@ -195,6 +204,8 @@ private:
 	bool m_isFullScreenAllowed;
 
 	friend class CViewport;
+
+	int m_updateBlockFlags;
 };
 
 
