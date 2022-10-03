@@ -98,7 +98,12 @@ iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog(int buttons, 
 			dialogPtr->setWindowIcon(QApplication::windowIcon());
 		}
 
-		dialogPtr->SetDialogGeometry(m_initialDialogSizeAttrPtr.IsValid() ? *m_initialDialogSizeAttrPtr : 0.0);
+		if (m_initialDialogSizeXAttrPtr.IsValid() && m_initialDialogSizeYAttrPtr.IsValid()){
+			dialogPtr->SetDialogGeometry(*m_initialDialogSizeXAttrPtr, *m_initialDialogSizeYAttrPtr);
+		}
+		else{
+			dialogPtr->SetDialogGeometry(m_initialDialogSizeAttrPtr.IsValid() ? *m_initialDialogSizeAttrPtr : 0.0);
+		}
 
 		if (*m_defaultButtonAttrPtr != 0){
 			QDialogButtonBox* boxPtr = const_cast<QDialogButtonBox*>(dialogPtr->GetButtonBoxPtr());

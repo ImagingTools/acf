@@ -34,7 +34,8 @@ CGuiComponentDialog::CGuiComponentDialog(
 	:BaseClass(parentWidgetPtr, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
 	m_buttonsBox(NULL),
 	m_guiObjectPtr(NULL),
-	m_screenFactor(0.0),
+	m_screenFactorX(0.0),
+	m_screenFactorY(0.0),
 	m_screenPositionPtr(NULL)
 {
 	// GUI pointer must be valid:
@@ -86,7 +87,17 @@ CGuiComponentDialog::~CGuiComponentDialog()
 
 void CGuiComponentDialog::SetDialogGeometry(double screenFactor, const QPoint* positionPtr)
 {
-	m_screenFactor = screenFactor;
+	m_screenFactorX = screenFactor;
+	m_screenFactorY = screenFactor;
+
+	m_screenPositionPtr = positionPtr;
+}
+
+
+void CGuiComponentDialog::SetDialogGeometry(double screenFactorX, double screenFactorY, const QPoint* positionPtr)
+{
+	m_screenFactorX = screenFactorX;
+	m_screenFactorY = screenFactorY;
 
 	m_screenPositionPtr = positionPtr;
 }
@@ -176,10 +187,11 @@ void CGuiComponentDialog::showEvent(QShowEvent* eventPtr)
 	screenRect = desktopPtr->screenGeometry((m_guiObjectPtr != NULL) ? m_guiObjectPtr->GetWidget() : NULL);
 #endif
 
-	if (m_screenFactor > 0){
-		double screenFactor = qMin(0.99, m_screenFactor);
+	if (m_screenFactorX > 0 && m_screenFactorY > 0){
+		double screenFactorX = qMin(0.99, m_screenFactorX);
+		double screenFactorY = qMin(0.99, m_screenFactorY);
 
-		BaseClass::resize(int(screenRect.width() * screenFactor), int(screenRect.height() * screenFactor));
+		BaseClass::resize(int(screenRect.width() * screenFactorX), int(screenRect.height() * screenFactorY));
 	}
 	else{
 		BaseClass::resize(sizeHint());

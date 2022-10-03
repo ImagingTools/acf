@@ -14,18 +14,36 @@ namespace iqtgui
 {
 
 
+class CDialogGuiCompAttr: public icomp::CComponentBase
+{
+public:
+	typedef icomp::CComponentBase BaseClass;
+
+	I_BEGIN_COMPONENT(CDialogGuiCompAttr);
+		I_ASSIGN(m_initialDialogSizeAttrPtr, "DialogSize", "Initial size of the dialog. The value is proportion of dialog size to desktop size", false, 0.5);
+		I_ASSIGN(m_initialDialogSizeXAttrPtr, "DialogSizeX", "Initial size of the dialog. The value is proportion of dialog size to desktop width", false, 0.5);
+		I_ASSIGN(m_initialDialogSizeYAttrPtr, "DialogSizeY", "Initial size of the dialog. The value is proportion of dialog size to desktop height", false, 0.5);
+	I_END_COMPONENT;
+
+protected:
+	I_ATTR(double, m_initialDialogSizeAttrPtr);
+	I_ATTR(double, m_initialDialogSizeXAttrPtr);
+	I_ATTR(double, m_initialDialogSizeYAttrPtr);
+};
+
+
 /**
 	Dialog based representation of any UI-Component.
 	This component provides also a menu command and can be integrated into a consumer of ibase::ICommandsProvider interface.
 */
 class CDialogGuiComp:
 			public QObject,
-			public icomp::CComponentBase,
+			public CDialogGuiCompAttr,
 			virtual public iqtgui::IDialog
 {
 	Q_OBJECT
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef CDialogGuiCompAttr BaseClass;
 	typedef QObject BaseClass2;
 
 	I_BEGIN_COMPONENT(CDialogGuiComp);
@@ -40,7 +58,6 @@ public:
 		I_ASSIGN(m_menuNameAttrPtr, "MenuName", "Name of the menu for the action group", true, "MenuName");
 		I_ASSIGN(m_menuDescriptionAttrPtr, "MenuDescription", "Description for the action group", true, "");
 		I_ASSIGN(m_rootMenuNameAttrPtr, "RootMenu", "Name of the root command", true, "");
-		I_ASSIGN(m_initialDialogSizeAttrPtr, "DialogSize", "Initial size of the dialog. The value is proportion of dialog size to desktop size", false, 0.5);
 		I_ASSIGN(m_isModalAttrPtr, "IsModal", "Modality of the dialog", true, true);
 		I_ASSIGN(m_dialogButtonsAttrPtr, "DialogButtons", "Dialog buttons. See QDialogButtonBox::StandardButton for details", true, QDialogButtonBox::Ok);
 		I_ASSIGN(m_defaultButtonAttrPtr, "DefaultDialogButton", "Default dialog button.See Qt::StandardButton for details", true, 0);
@@ -95,7 +112,6 @@ private:
 	I_TEXTATTR(m_menuNameAttrPtr);
 	I_TEXTATTR(m_menuDescriptionAttrPtr);
 	I_TEXTATTR(m_rootMenuNameAttrPtr);
-	I_ATTR(double, m_initialDialogSizeAttrPtr);
 	I_ATTR(bool, m_isModalAttrPtr);
 	I_ATTR(int, m_dialogButtonsAttrPtr);
 	I_ATTR(int, m_defaultButtonAttrPtr);
