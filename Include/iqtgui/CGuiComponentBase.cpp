@@ -23,7 +23,7 @@ namespace iqtgui
 CGuiComponentBase::CGuiComponentBase()
 :	m_widgetPtr(NULL),
 	m_isGuiShown(false),
-	m_hasPendingDesignChanges(false)
+	m_hasPendingDesignChanges(true)
 {
 }
 
