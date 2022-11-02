@@ -3,6 +3,7 @@
 
 
 // Qt includes
+#include <QtCore/QFileInfo>
 #include <QtGui/QIcon>
 
 
@@ -24,6 +25,7 @@ template <class Base>
 QIcon TMakeIconProviderCompWrap<Base>::GetIcon(const QString& iconName) const
 {
 	QIcon icon;
+
 	const bool isDefaultIconAvailable = QFileInfo(iconName).exists();
 
 	if (QFileInfo(iconName + "_Off_Normal").exists()){
@@ -42,6 +44,7 @@ QIcon TMakeIconProviderCompWrap<Base>::GetIcon(const QString& iconName) const
 
 	if (QFileInfo(iconName + "_Off_Disabled").exists()){
 		icon.addFile(iconName + "_Off_Disabled", QSize(), QIcon::Disabled, QIcon::Off);
+	}
 
 	if (QFileInfo(iconName + "_Off_Active").exists()){
 		icon.addFile(iconName + "_Off_Active", QSize(), QIcon::Active, QIcon::Off);
