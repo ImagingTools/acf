@@ -219,7 +219,7 @@ bool CSystem::CopyDirectory(const QString& sourcePath, const QString& destinatio
 	CSystem::RemoveDirectory(destinationPath);
 
 	QDir parentDstDir(QFileInfo(destinationPath).path());
-	if (!parentDstDir.mkdir(QFileInfo(destinationPath).fileName())){
+	if (!parentDstDir.mkpath(QFileInfo(destinationPath).fileName())){
 		return false;
 	}
 
