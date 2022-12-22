@@ -185,7 +185,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentWrap<FilePck::SimpleXmlFileSerializer> oldFormatLoaderComp;
 	oldFormatLoaderComp.InsertMultiAttr("FileExtensions", QString("arx"));
-	if (workingMode == 0){
+	if (verboseEnabled || workingMode == 0){
 		oldFormatLoaderComp.SetRef("Log", &log);
 	}
 	oldFormatLoaderComp.SetRef("VersionInfo", &applicationInfo);
@@ -194,7 +194,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentWrap<FilePck::CompactXmlFileSerializer> newFormatLoaderComp;
 	newFormatLoaderComp.InsertMultiAttr("FileExtensions", QString("acc"));
-	if (workingMode == 0){
+	if (verboseEnabled || workingMode == 0){
 		newFormatLoaderComp.SetRef("Log", &log);
 	}
 	newFormatLoaderComp.SetRef("VersionInfo", &applicationInfo);
@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<PackagePck::RegistriesManager> registriesManagerComp;
 	registriesManagerComp.SetRef("RegistryLoader", &registryLoaderComp);
 	registriesManagerComp.SetBoolAttr("AreRealPackagesIgnored", !checkRealPackages);
-	if (workingMode == 0){
+	if (verboseEnabled || workingMode == 0){
 		registriesManagerComp.SetRef("Log", &log);
 	}
 	registriesManagerComp.SetBoolAttr("EnableVerbose", verboseEnabled);
@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
 	registriesManagerComp.LoadPackages(configFile);
 
 	icomp::TSimComponentWrap<PackagePck::RegistryCodeSaver> codeSaverComp;
-	if (workingMode == 0){
+	if (verboseEnabled || workingMode == 0){
 		codeSaverComp.SetRef("Log", &log);
 	}
 	codeSaverComp.SetRef("PackagesManager", &registriesManagerComp);
