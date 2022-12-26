@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
 			istd::CSystem::SetUserVariables(compilerMode, acfQtVersion, compilerName, platformCode);
 
 			if (verboseEnabled){
-				std::cout << "Extra configuration: compilerMode='" << compilerMode.toStdString() << "' acfQtVersion='" << acfQtVersion.toStdString() << "' compilerName='" << configName.toStdString() << "' platformCode='" << platformCode.toStdString() << "'" << std::endl;
+				std::cout << "Extra configuration: compilerMode='" << compilerMode.toStdString() << "' acfQtVersion='" << acfQtVersion.toStdString() << "' compilerName='" << compilerName.toStdString() << "' platformCode='" << platformCode.toStdString() << "'" << std::endl;
 			}
 		}
 	}

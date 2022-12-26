@@ -166,6 +166,9 @@ QString CSystem::GetEnrolledPath(const QString& path, bool envVars, bool embedde
 
 		QString left = retVal.left(beginIndex);
 		QString variableValue = GetVariableValue(varName, envVars, embeddedVars);
+		if (variableValue.isEmpty()){
+			qDebug() << "Variable:" << varName << "used in:" << path << "could not be resolved";
+		}
 
 		retVal = left + variableValue + retVal.mid(endIndex + 1);
 
