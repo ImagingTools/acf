@@ -56,8 +56,8 @@ private:
 	bool m_serializeHeader;
 	iser::CArchiveTag m_rootTag;
 
-	bool m_isSeparatorNeeded;	// idicate that separator must be added before something is outputted
-	bool m_allowAttribute;		// indicate if attribute outputting is allowed now
+//	bool m_isSeparatorNeeded;	// idicate that separator must be added before something is outputted
+//	bool m_allowAttribute;		// indicate if attribute outputting is allowed now
 
 	QList<const iser::CArchiveTag*> m_tagsStack;
 };

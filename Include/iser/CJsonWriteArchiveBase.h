@@ -44,7 +44,7 @@ protected:
 	bool InitStream();
 	bool InitArchive(QIODevice* devicePtr);
 	bool InitArchive(QByteArray& inputString);
-	bool WriteTag(const iser::CArchiveTag& tag, QString separator, bool isWriteTag = true);
+	bool WriteTag(const iser::CArchiveTag& tag, QString separator);
 
 	// reimplemented (iser::CTextWriteArchiveBase)
 	virtual bool WriteTextNode(const QByteArray& text);

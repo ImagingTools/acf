@@ -142,13 +142,22 @@ bool CJsonWriteArchiveBase::InitArchive(QByteArray &inputString)
 }
 
 
-bool CJsonWriteArchiveBase::WriteTag(const CArchiveTag &tag, QString separator, bool isWriteTag)
+bool CJsonWriteArchiveBase::WriteTag(const CArchiveTag &tag, QString separator)
 {
 	if (!m_firstTag){
 		m_stream << ",";
 	}
 
-	if (isWriteTag && !tag.GetId().isEmpty()){
+	bool isWritePrefix = true;
+
+	if (tag.GetTagType() == iser::CArchiveTag::TT_GROUP && !m_tagsStack.isEmpty()){
+		const iser::CArchiveTag* lastTagPtr = m_tagsStack.last();
+		if (lastTagPtr->GetTagType() == iser::CArchiveTag::TT_MULTIPLE){
+			isWritePrefix = false;
+		}
+	}
+
+	if (!tag.GetId().isEmpty() && isWritePrefix){
 		m_stream << "\"" << tag.GetId() << "\":";
 	}
 
