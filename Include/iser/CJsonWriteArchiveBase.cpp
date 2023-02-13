@@ -164,11 +164,6 @@ bool CJsonWriteArchiveBase::WriteTag(const CArchiveTag &tag, QString separator)
 		}
 	}
 
-//	if (tag.GetTagType() == iser::CArchiveTag::TT_GROUP
-//			|| tag.GetTagType() == iser::CArchiveTag::TT_MULTIPLE ){
-//		isWritePrefix = false;
-//	}
-
 	if (m_tagsStack.isEmpty()){
 		isWritePrefix = false;
 	}
