@@ -14,9 +14,9 @@ class CJsonFileReadArchive: public iser::CJsonReadArchiveBase
 public:
 	typedef iser::CJsonReadArchiveBase BaseClass;
 
-	CJsonFileReadArchive(const QString& filePath = "", const iser::IVersionInfo* infoPtr = nullptr);
+	CJsonFileReadArchive(const QString& filePath = "", bool serializeHeader = true);
 
-	bool OpenFile(const QString& filePath);
+	bool OpenFile(const QString& filePath, bool serializeHeader);
 };
 
 

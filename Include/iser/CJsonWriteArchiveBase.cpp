@@ -5,6 +5,9 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 
+// ACF includes
+#include <iser/CArchiveHeaderInfo.h>
+
 
 namespace iser
 {
@@ -119,33 +122,39 @@ bool CJsonWriteArchiveBase::Process(QByteArray &value)
 
 // protected methods
 
-bool CJsonWriteArchiveBase::InitStream()
+bool CJsonWriteArchiveBase::InitStream(bool serializeHeader)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 	m_stream.setCodec("UTF-8");
 #endif
 	m_firstTag = true;
 
+	BeginTag(m_rootTag);
+
+	if (serializeHeader){
+		SerializeAcfHeader();
+	}
+
 	return true;
 }
 
 
-bool CJsonWriteArchiveBase::InitArchive(QIODevice *devicePtr)
+bool CJsonWriteArchiveBase::InitArchive(QIODevice *devicePtr, bool serializeHeader)
 {
 	m_stream.setDevice(devicePtr);
 	
-	return InitStream();
+	return InitStream(serializeHeader);
 }
 
 
-bool CJsonWriteArchiveBase::InitArchive(QByteArray &inputString)
+bool CJsonWriteArchiveBase::InitArchive(QByteArray &inputString, bool serializeHeader)
 {
 	m_buffer.setBuffer(&inputString);
 	if (m_buffer.open(QIODevice::WriteOnly | QIODevice::Text)){
 		m_stream.setDevice(&m_buffer);
 	}
 	
-	return InitStream();
+	return InitStream(serializeHeader);
 }
 
 

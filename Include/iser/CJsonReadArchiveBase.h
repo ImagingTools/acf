@@ -30,17 +30,17 @@ public:
 	CJsonReadArchiveBase();
 
 	// reimplemented (iser::IArchive)
-	virtual bool BeginTag(const iser::CArchiveTag& tag);
-	virtual bool BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& subTag, int& count);
-	virtual bool EndTag(const iser::CArchiveTag& tag);
-	virtual bool Process(QString& value);
+	virtual bool BeginTag(const iser::CArchiveTag& tag) override;
+	virtual bool BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& subTag, int& count) override;
+	virtual bool EndTag(const iser::CArchiveTag& tag) override;
+	virtual bool Process(QString& value) override;
 
 protected:
-	bool InitArchive(const QByteArray& inputString);
+	bool InitArchive(const QByteArray& inputString, bool serializeHeader = false);
 	bool ReadStringNode(QString& text);
 
 	// reimplemented (iser::CTextReadArchiveBase)
-	virtual bool ReadTextNode(QByteArray& text);
+	virtual bool ReadTextNode(QByteArray& text) override;
 
 protected:
 	QJsonDocument m_document;

@@ -11,14 +11,14 @@ namespace ifile
 
 // public methods
 
-CJsonFileReadArchive::CJsonFileReadArchive(const QString& filePath, const iser::IVersionInfo* infoPtr)
+CJsonFileReadArchive::CJsonFileReadArchive(const QString& filePath, bool serializeHeader)
 	:BaseClass()
 {
-	OpenFile(filePath);
+	OpenFile(filePath, serializeHeader);
 }
 
 
-bool CJsonFileReadArchive::OpenFile(const QString &filePath)
+bool CJsonFileReadArchive::OpenFile(const QString &filePath, bool serializeHeader)
 {
 	QFile file(filePath);
 	if (!file.open(QIODevice::ReadOnly)){
@@ -27,7 +27,7 @@ bool CJsonFileReadArchive::OpenFile(const QString &filePath)
 
 	QByteArray inputString = file.readAll();
 
-	return InitArchive(inputString);
+	return InitArchive(inputString, serializeHeader);
 }
 
 
