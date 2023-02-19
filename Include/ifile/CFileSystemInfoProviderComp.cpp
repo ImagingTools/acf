@@ -102,6 +102,8 @@ void CFileSystemInfoProviderComp::OnComponentCreated()
 		RegisterModel(m_runtimeStatusModelCompPtr.GetPtr(), MI_RUNTIME_STATUS);
 	}
 
+	OnUpdate(CalculateDriveInfos());
+
 	if (m_autoUpdatePeriodAttr.IsValid()){
 		m_sleepInterval = *m_autoUpdatePeriodAttr;
 
@@ -189,6 +191,8 @@ CFileSystemInfoProviderComp::DriveInfos CFileSystemInfoProviderComp::CalculateDr
 		driveInfo.info = istd::CSystem::GetFileDriveInfo(drivePath);
 		
 		driveInfo.name = QDir::toNativeSeparators(drivePath);
+
+		driveInfo.id = driveInfo.name.toUtf8();
 
 		driveInfos.push_back(driveInfo);
 	}
