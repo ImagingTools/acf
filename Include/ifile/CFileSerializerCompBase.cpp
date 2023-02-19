@@ -134,6 +134,16 @@ bool CFileSerializerCompBase::CheckOutputFile(const QString filePath, bool beQui
 }
 
 
+// reimplemented (icomp::CComponentBase)
+
+void CFileSerializerCompBase::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_versionInfoCompPtr.EnsureInitialized();
+}
+
+
 } // namespace ifile
 
 

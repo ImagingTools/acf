@@ -42,7 +42,7 @@ public:
 				const istd::IChangeable* dataObjectPtr,
 				const QString* filePathPtr = NULL,
 				int flags = -1,
-				bool beQuiet = true) const;
+				bool beQuiet = true) const override;
 
 protected:
 	/**
@@ -64,6 +64,9 @@ protected:
 		Check if output file is OK.
 	*/
 	bool CheckOutputFile(const QString filePath, bool beQuiet = true) const;
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated() override;
 
 private:
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
