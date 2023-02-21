@@ -9,7 +9,8 @@ namespace iser
 
 CJsonReadArchiveBase::CJsonReadArchiveBase()
 			: CTextReadArchiveBase(),
-			m_rootTag("", "", iser::CArchiveTag::TT_GROUP)
+			m_rootTag("", "", iser::CArchiveTag::TT_GROUP),
+			m_rootTagEnabled(false)
 {
 
 }
@@ -23,12 +24,14 @@ bool CJsonReadArchiveBase::BeginTag(const iser::CArchiveTag& tag)
 
 	int tagType = tag.GetTagType();
 
-	if (m_iterators.isEmpty()){
-		if (tagType == iser::CArchiveTag::TT_LEAF){
-
-			return false;
+	if (m_iterators.isEmpty() && tagType == iser::CArchiveTag::TT_LEAF){
+		if (m_iterators.isEmpty()){
+			BeginTag(m_rootTag);
+			m_rootTagEnabled = true;
 		}
+	}
 
+	if (m_iterators.isEmpty()){
 		HelperIterator newHelperIterator;
 		bool isObject = m_document.isObject();
 		QJsonObject jsonObject = m_document.object();
@@ -174,7 +177,7 @@ bool CJsonReadArchiveBase::InitArchive(const QByteArray &inputString, bool seria
 		return false;
 	}
 
-	BeginTag(m_rootTag);
+//	BeginTag(m_rootTag);
 
 	if (serializeHeader){
 		SerializeAcfHeader();

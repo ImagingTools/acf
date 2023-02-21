@@ -26,7 +26,9 @@ CJsonMemWriteArchive::CJsonMemWriteArchive(
 CJsonMemWriteArchive::~CJsonMemWriteArchive()
 {
 	if (m_buffer.isOpen()){
-		EndTag(m_rootTag);
+		if (m_rootTagEnabled){
+			EndTag(m_rootTag);
+		}
 		m_buffer.close();
 	}
 }

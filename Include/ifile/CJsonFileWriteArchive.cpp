@@ -22,7 +22,9 @@ CJsonFileWriteArchive::CJsonFileWriteArchive(const QString& filePath, const iser
 CJsonFileWriteArchive::~CJsonFileWriteArchive()
 {
 	if (m_file.isOpen()){
-		EndTag(m_rootTag);
+		if (m_rootTagEnabled){
+			EndTag(m_rootTag);
+		}
 		m_file.close();
 	}
 }

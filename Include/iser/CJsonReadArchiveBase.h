@@ -66,12 +66,8 @@ protected:
 	};
 		
 	QVector<HelperIterator> m_iterators;
-
-
-//	typedef QList<const iser::CArchiveTag*> TagsList;
-//	TagsList m_tagsStack;
 	iser::CArchiveTag m_rootTag;
-
+	bool m_rootTagEnabled;
 };
 
 

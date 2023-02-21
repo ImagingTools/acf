@@ -59,6 +59,7 @@ protected:
 
 	bool m_isSeparatorNeeded;	// idicate that separator must be added before something is outputted
 	bool m_allowAttribute;		// indicate if attribute outputting is allowed now
+	bool m_rootTagEnabled;
 
 	QList<const iser::CArchiveTag*> m_tagsStack;
 };

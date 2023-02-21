@@ -20,7 +20,8 @@ CJsonWriteArchiveBase::CJsonWriteArchiveBase(
 			QJsonDocument::JsonFormat jsonFormat)
 			:  CTextWriteArchiveBase(versionInfoPtr),
 			m_jsonFormat(jsonFormat),
-			m_rootTag("", "", iser::CArchiveTag::TT_GROUP)
+			m_rootTag("", "", iser::CArchiveTag::TT_GROUP),
+			m_rootTagEnabled(false)
 {
 
 }
@@ -41,11 +42,16 @@ bool CJsonWriteArchiveBase::BeginTag(const CArchiveTag& tag)
 	int tagType = tag.GetTagType();
 	if (tagType == iser::CArchiveTag::TT_LEAF){
 		if (m_tagsStack.isEmpty() || m_tagsStack.back()->GetTagType() == iser::CArchiveTag::TT_MULTIPLE){
+			retVal = retVal && BeginTag(m_rootTag);
+			m_rootTagEnabled = true;
+		}
 
+		if ( m_tagsStack.back()->GetTagType() == iser::CArchiveTag::TT_MULTIPLE){
 			return false;
 		}
 
-		retVal = WriteTag(tag, "");
+
+		retVal = retVal && WriteTag(tag, "");
 		m_tagsStack.push_back(&tag);
 
 		return retVal;
@@ -129,7 +135,7 @@ bool CJsonWriteArchiveBase::InitStream(bool serializeHeader)
 #endif
 	m_firstTag = true;
 
-	BeginTag(m_rootTag);
+//	BeginTag(m_rootTag);
 
 	if (serializeHeader){
 		SerializeAcfHeader();
