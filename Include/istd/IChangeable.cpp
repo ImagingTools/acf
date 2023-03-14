@@ -248,6 +248,14 @@ IChangeable::ChangeSet& IChangeable::ChangeSet::operator+=(int changeId)
 }
 
 
+IChangeable::ChangeSet& IChangeable::ChangeSet::operator+=(const QSet<int>& ids)
+{
+	m_ids += ids;
+
+	return *this;
+}
+
+
 IChangeable::ChangeSet& IChangeable::ChangeSet::operator+=(const ChangeSet& changeSet)
 {
 	m_ids += changeSet.m_ids;

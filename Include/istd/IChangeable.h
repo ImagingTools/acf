@@ -119,6 +119,11 @@ public:
 		ChangeSet& operator+=(int changeId);
 
 		/**
+			Add some change flags.
+		*/
+		ChangeSet& operator+=(const QSet<int>& ids);
+
+		/**
 			Add some change set.
 		*/
 		ChangeSet& operator+=(const ChangeSet& changeSet);
