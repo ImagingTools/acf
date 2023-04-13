@@ -1,3 +1,25 @@
+/********************************************************************************
+**
+**	Copyright (C) 2007-2017 Witold Gantzke & Kirill Lepskiy
+**
+**	This file is part of the ACF Toolkit.
+**
+**	This file may be used under the terms of the GNU Lesser
+**	General Public License version 2.1 as published by the Free Software
+**	Foundation and appearing in the file LicenseLGPL.txt included in the
+**	packaging of this file.  Please review the following information to
+**	ensure the GNU Lesser General Public License version 2.1 requirements
+**	will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+**	If you are unsure which license is appropriate for your use, please
+**	contact us at info@imagingtools.de.
+**
+** 	See http://www.ilena.org or write info@imagingtools.de for further
+** 	information about the ACF.
+**
+********************************************************************************/
+
+
 #include <iser/CJsonReadArchiveBase.h>
 
 
@@ -45,14 +67,19 @@ bool CJsonReadArchiveBase::BeginTag(const iser::CArchiveTag& tag)
 
 	if (helperIterator.isArray()){
 		if (tagType == iser::CArchiveTag::TT_LEAF){
-
-				return false;
+			HelperIterator newHelperIterator;
+			newHelperIterator.SetKey(tagId);
+			QString value = helperIterator.GetValue();
+			newHelperIterator.SetValue(value);
+			m_iterators.push_back(newHelperIterator);
 		}
-		QJsonObject jsonObject = helperIterator.GetObject();
-		HelperIterator newHelperIterator;
-		newHelperIterator.SetValue(jsonObject);
-		newHelperIterator.SetKey(tagId);
-		m_iterators.push_back(newHelperIterator);
+		else{
+			QJsonObject jsonObject = helperIterator.GetObject();
+			HelperIterator newHelperIterator;
+			newHelperIterator.SetValue(jsonObject);
+			newHelperIterator.SetKey(tagId);
+			m_iterators.push_back(newHelperIterator);
+		}
 	}
 	else {
 		QJsonObject jsonObject = helperIterator.GetObject();
@@ -243,7 +270,12 @@ QString CJsonReadArchiveBase::HelperIterator::GetValue()
 			retVal = QString::number(m_value.toDouble());
 		}
 		else{
-			retVal = m_value.toString();
+			if (m_value.isArray() && activeArrayIndex > -1 && activeArrayIndex < m_array.count()){
+				retVal = m_array[activeArrayIndex].toString();
+			}
+			else{
+				retVal = m_value.toString();
+			}
 		}
 	}
 
