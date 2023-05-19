@@ -34,8 +34,8 @@ public:
 	TGuiObserverWrap();
 
 	// pseudo-reimplemented (imod::IObserver)
-	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
-	virtual bool OnModelDetached(imod::IModel* modelPtr);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
+	virtual bool OnModelDetached(imod::IModel* modelPtr) override;
 
 protected:
 	class UpdateBlocker
@@ -92,22 +92,22 @@ protected:
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor(const istd::IChangeable::ChangeSet& changeSet);
-	virtual void UpdateModelFromEditor() const;
+	virtual void UpdateEditor(const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void UpdateModelFromEditor() const override;
 
 	// pseudo-reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiShown();
-	virtual void OnGuiHidden();
-	virtual void OnGuiRetranslate();
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiShown() override;
+	virtual void OnGuiHidden() override;
+	virtual void OnGuiRetranslate() override;
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 	// pseudo-reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// pseudo-reimplemented (imod::IModelEditor)
-	virtual bool IsReadOnly() const;
-	virtual void SetReadOnly(bool state);
+	virtual bool IsReadOnly() const override;
+	virtual void SetReadOnly(bool state) override;
 
 protected:
 	/**

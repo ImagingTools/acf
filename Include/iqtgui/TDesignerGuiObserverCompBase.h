@@ -41,14 +41,14 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
-	virtual void SetReadOnly(bool state);
+	virtual void SetReadOnly(bool state) override;
 
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
+	virtual void OnGuiCreated() override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_ATTR(bool, m_isReadOnlyAttrPtr);

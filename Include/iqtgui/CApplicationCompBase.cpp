@@ -102,7 +102,7 @@ bool CApplicationCompBase::TryShowSplashScreen()
 		splashWidgetPtr->show();
 		splashWidgetPtr->raise();
 
-        QEventLoop loop;
+		QEventLoop loop;
 #ifdef Q_OS_LINUX
 		QTimer initSplashTimer;
 		QObject::connect(&initSplashTimer, SIGNAL(timeout()), &loop, SLOT(quit()), Qt::QueuedConnection);
@@ -201,7 +201,7 @@ void CApplicationCompBase::ApplyStyleSheet()
 {
 	// Set up style sheet:
 	if (!m_styleSheetFile.isEmpty()){
-		if (!iqtgui::SetStyleSheetFromFile(*m_applicationPtr, m_styleSheetFile)){
+		if (!iqtgui::SetStyleSheetFromFile(m_applicationPtr.GetPtr(), m_styleSheetFile)){
 			qDebug("Style sheet file could not be set: %s", m_styleSheetFile.toLocal8Bit().constData());
 		}
 	}

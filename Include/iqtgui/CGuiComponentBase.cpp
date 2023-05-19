@@ -23,7 +23,7 @@ namespace iqtgui
 CGuiComponentBase::CGuiComponentBase()
 :	m_widgetPtr(NULL),
 	m_isGuiShown(false),
-	m_hasPendingDesignChanges(true)
+	m_hasPendingDesignChanges(false)
 {
 }
 
@@ -127,8 +127,12 @@ void CGuiComponentBase::OnTryClose(bool* ignoredPtr)
 
 void CGuiComponentBase::OnGuiDesignChanged()
 {
+	if (!IsGuiCreated()) {
+		return;
+	}
+
 	if (m_styleSheetPathAttrPtr.IsValid()){
-		if (!iqtgui::SetStyleSheetFromFile(*m_widgetPtr, *m_styleSheetPathAttrPtr)) {
+		if (!iqtgui::SetStyleSheetFromFile(m_widgetPtr, *m_styleSheetPathAttrPtr)) {
 			qDebug("Style sheet file could not be set: %s", (*m_styleSheetPathAttrPtr).toLocal8Bit().constData());
 		}
 	}

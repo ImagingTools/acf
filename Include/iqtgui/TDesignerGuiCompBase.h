@@ -13,6 +13,16 @@
 namespace iqtgui
 {
 
+/**
+	UI setup-class to use with TDesignerGuiCompBase in case no real GUI setup is required
+*/
+class UIDummy
+{
+public:
+	void setupUi(QWidget*) {}
+	void retranslateUi(QWidget*) {}
+};
+
 
 /**
 	Base class for all Qt GUI components, which use the Qt designer's UI.

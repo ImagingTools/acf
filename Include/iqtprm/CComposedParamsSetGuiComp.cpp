@@ -250,18 +250,18 @@ void CComposedParamsSetGuiComp::OnGuiRetranslate()
 			if (panelData.pagePtr != NULL){
 				if (guiMode == DT_TAB_WIDGET){
 					QTabWidget* tabWidgetPtr = static_cast<QTabWidget*>(m_guiContainerPtr);
-					for (int i = 0; i < tabWidgetPtr->count(); i++){
-						if (tabWidgetPtr->widget(i) == panelData.pagePtr){
-							tabWidgetPtr->setTabText(i, name);
+					for (int tabIndex = 0; tabIndex < tabWidgetPtr->count(); tabIndex++){
+						if (tabWidgetPtr->widget(tabIndex) == panelData.pagePtr){
+							tabWidgetPtr->setTabText(tabIndex, name);
 							break;
 						}
 					}
 				}
 				else if (guiMode == DT_TOOL_BOX){
 					QToolBox* toolBoxPtr = static_cast<QToolBox*>(m_guiContainerPtr);
-					for (int i = 0; i < toolBoxPtr->count(); i++){
-						if (toolBoxPtr->widget(i) == panelData.pagePtr){
-							toolBoxPtr->setItemText(i, name);
+					for (int tabIndex = 0; tabIndex < toolBoxPtr->count(); tabIndex++){
+						if (toolBoxPtr->widget(tabIndex) == panelData.pagePtr){
+							toolBoxPtr->setItemText(tabIndex, name);
 							break;
 						}
 					}
