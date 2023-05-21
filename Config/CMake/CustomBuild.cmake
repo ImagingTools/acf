@@ -39,7 +39,7 @@ if(ARXC_CONFIG AND (ARX_ENABLE_GENERATE_DEPENDENCIES_LIST OR NOT DEFINED ARX_ENA
 	
 	execute_process(
 		COMMAND
-		    ${ARXCBIN} ${ARXC_FILES} -v -mode depends -config ${ARXC_CONFIG} -conf_name ${CMAKE_BUILD_TYPE}_${TARGETNAME} -env_vars ${ENV_VARS}
+		    ${ARXCBIN} ${ARXC_FILES} -mode depends -config ${ARXC_CONFIG} -conf_name ${CMAKE_BUILD_TYPE}_${TARGETNAME} -env_vars ${ENV_VARS}
 		OUTPUT_FILE
 		    ${ARX_DEPS_FILE_PATH}
 		ERROR_FILE
