@@ -14,7 +14,7 @@ class CJsonMemReadArchive : public iser::CJsonReadArchiveBase
 public:
 	typedef CJsonReadArchiveBase BaseClass;
 
-	CJsonMemReadArchive(const QByteArray& data);
+	CJsonMemReadArchive(const QByteArray& data, bool serializeHeader = true);
 };
 
 

@@ -3,7 +3,6 @@
 
 // Qt includes
 #include <QtCore/QJsonDocument>
-#include <QtCore/QJsonObject>
 
 
 namespace iser
@@ -12,14 +11,14 @@ namespace iser
 
 // public methods
 
-
 CJsonMemWriteArchive::CJsonMemWriteArchive(
 			QByteArray &inputString,
 			const IVersionInfo* versionInfoPtr,
 			QJsonDocument::JsonFormat jsonFormat)
 	:BaseClass(versionInfoPtr)
 {
-	InitArchive(inputString);	
+	bool serializeHeader = versionInfoPtr != nullptr;
+	InitArchive(inputString, serializeHeader);
 }
 
 
