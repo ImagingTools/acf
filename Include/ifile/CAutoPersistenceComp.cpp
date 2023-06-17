@@ -158,7 +158,7 @@ void CAutoPersistenceComp::OnComponentCreated()
 	}
 
 	if (*m_restoreOnBeginAttrPtr){
-		if (m_fileLoaderCompPtr.IsValid() && m_objectCompPtr.IsValid()){
+		if (m_fileLoaderCompPtr.IsValid() && m_objectCompPtr.IsValid() && QFile::exists(filePath)){
 			LoadObject(filePath);
 		}
 	}

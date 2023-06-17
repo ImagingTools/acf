@@ -111,7 +111,7 @@ win32-msvc*{
 #		message("Using Visual Studio 2017");
 	}
 
-        greaterThan(QMAKE_MSC_VER, 1919) {
+	greaterThan(QMAKE_MSC_VER, 1919){
 		QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit- /D__STDC_LIMIT_MACROS
 		COMPILER_NAME = VC16
 		CONFIG += c++17

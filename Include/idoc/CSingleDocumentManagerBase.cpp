@@ -376,12 +376,12 @@ bool CSingleDocumentManagerBase::CloseView(istd::IPolymorphic* viewPtr, bool beQ
 
 // protected methods
 
-void CSingleDocumentManagerBase::BeforeSavingDocument(const QString& filePath)
+void CSingleDocumentManagerBase::BeforeSavingDocument(const QString& /*filePath*/)
 {
 }
 
 
-void CSingleDocumentManagerBase::AfterSavingDocument(bool saveState)
+void CSingleDocumentManagerBase::AfterSavingDocument(bool /*saveState*/)
 {
 }
 
@@ -580,7 +580,7 @@ bool CSingleDocumentManagerBase::HasDocumentPendingChanges() const
 }
 
 
-void CSingleDocumentManagerBase::OnUndoManagerUpdate(const istd::IChangeable::ChangeSet& changeSet)
+void CSingleDocumentManagerBase::OnUndoManagerUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	bool newDirty = m_undoManagerPtr->GetDocumentChangeFlag() != IDocumentStateComparator::DCF_EQUAL;
 
