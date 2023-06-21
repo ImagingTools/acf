@@ -18,7 +18,7 @@ namespace istd
 
 /**
 	Set of ranges.
-	This set is defined by initial begin state (state of minuns infinity) and list of state switch points.
+	This set is defined by initial begin state (state of minus infinity) and list of state switch points.
 	Example given, set [10, 20) is represented as begin state \c false, and two switch points: at 10 and 20.
 */
 template <typename ValueType>
@@ -405,8 +405,8 @@ void TRanges<ValueType>::Invert(const TRange<ValueType>* clipRangePtr)
 		// remove all points before
 		for (		typename SwitchPoints::const_iterator iter = m_switchPoints.begin();
 					(iter != m_switchPoints.end()) && (*iter < prevPosition);
-                    m_switchPoints.erase(iter++)){
-            state = !state;
+					m_switchPoints.erase(iter++)){
+			state = !state;
 		}
 
 		typename SwitchPoints::const_iterator iter = m_switchPoints.begin();
@@ -779,64 +779,55 @@ void TRanges<ValueType>::Dilate(ValueType leftValue, ValueType rightValue)
 		return;
 	}
 
-	ValueType absoluteSum = qAbs(leftValue + rightValue);
+	ValueType absoluteSum = std::abs(leftValue + rightValue);
 	if (absoluteSum <= 0){
 		return;	// nothing to do
 	}
 
 	bool isErosion = (leftValue + rightValue < 0);
-	ValueType leftValueCorr = qAbs(leftValue);
-	ValueType rightValueCorr = qAbs(rightValue);
-
-	bool state = m_beginState;
+	ValueType leftValueAbs = std::abs(leftValue);
+	ValueType rightValueAbs = std::abs(rightValue);
 
 	typename SwitchPoints::iterator iter = m_switchPoints.begin();
 	while (iter != m_switchPoints.end()){
 		ValueType point = *iter;
 
-		state = !state;
-
+		const bool state = std::distance(m_switchPoints.begin(), iter) % 2 > 0 ? m_beginState : !m_beginState;
 		if (!state == isErosion){
 			// move point back
 			if (iter != m_switchPoints.begin()){
-				typename SwitchPoints::iterator prevIter = iter;
-				--prevIter;
+				auto prevIter = std::prev(iter);
 
 				if (*prevIter > point - absoluteSum){
 					// previous range should be removed - is smaller than the erosion kernel
 					m_switchPoints.erase(prevIter);
-                    m_switchPoints.erase(iter++);
+					m_switchPoints.erase(iter++);
 
 					continue;
 				}
 			}
 
 			// range can be moved using kernel size
-			if (rightValueCorr > 0){
-                m_switchPoints.erase(iter++);
-				iter = m_switchPoints.insert(iter, point - rightValueCorr);
-			}
+			m_switchPoints.erase(iter++);
+			iter = m_switchPoints.insert(iter, point - rightValueAbs);
 		}
 		else{
 			// move point forward
-			typename SwitchPoints::iterator nextIter = iter;
-			++nextIter;
+			auto nextIter = std::next(iter);
 
 			if (nextIter != m_switchPoints.end()){
 				if (*nextIter < point + absoluteSum){
 					// following range should be removed - is smaller than the erosion kernel
-                    m_switchPoints.erase(iter++);
-                    m_switchPoints.erase(iter++);
+					m_switchPoints.erase(nextIter);
+					m_switchPoints.erase(iter++);
 
 					continue;
 				}
 			}
 
-			if (leftValueCorr > 0){
-				// range can be moved using kernel size
-                m_switchPoints.erase(iter++);
-				iter = m_switchPoints.insert(iter, point + leftValueCorr);
-			}
+			// range can be moved using kernel size
+			m_switchPoints.erase(iter++);
+			iter = m_switchPoints.insert(iter, point + leftValueAbs);
 		}
 
 		++iter;

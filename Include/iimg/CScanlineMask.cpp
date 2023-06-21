@@ -371,11 +371,8 @@ void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::C
 	std::vector< std::set<int> > scanVector(linesCount);
 
 	int nodesCount = recalibratedPolygon.GetNodesCount();
-	for (int i = 0; i < nodesCount; i++){
-		int nextIndex = i + 1;
-		if (nextIndex >= nodesCount){
-			nextIndex = 0;
-		}
+	for (int i = 0; i < nodesCount; ++i){
+		int nextIndex = (i + 1) % nodesCount;
 
 		i2d::CVector2d startPoint = recalibratedPolygon.GetNodePos(i);
 		i2d::CVector2d endPoint = recalibratedPolygon.GetNodePos(nextIndex);
@@ -644,20 +641,20 @@ void CScanlineMask::GetUnion(const CScanlineMask& mask, CScanlineMask& result) c
 {
 	result.m_isBoundingBoxValid = false;
 
-	result.m_firstLinePos = qMin(m_firstLinePos, mask.m_firstLinePos);
-	int endLineY = qMax(m_firstLinePos + int(m_scanlines.size()), mask.m_firstLinePos + int(mask.m_scanlines.size()));
+	result.m_firstLinePos = std::min(m_firstLinePos, mask.m_firstLinePos);
+	int endLineY = std::max(m_firstLinePos + int(m_scanlines.size()), mask.m_firstLinePos + int(mask.m_scanlines.size()));
 
-	result.m_scanlines.resize(endLineY - m_firstLinePos);
+	result.m_scanlines.resize(endLineY - result.m_firstLinePos);
 
 	for (int resultLineIndex = 0; resultLineIndex < int(result.m_scanlines.size()); ++resultLineIndex){
 		int y = resultLineIndex + result.m_firstLinePos;
 
-		const istd::CIntRanges* rangesPtr = NULL;
-		const istd::CIntRanges* maskRangesPtr = NULL;
+		const istd::CIntRanges* rangesPtr = nullptr;
+		const istd::CIntRanges* maskRangesPtr = nullptr;
 
-		int lineIndex = y - m_firstLinePos;
+		const int lineIndex = y - m_firstLinePos;
 		if ((lineIndex >= 0) && (lineIndex < int(m_scanlines.size()))){
-			int containerIndex = m_scanlines[lineIndex];
+			const int containerIndex = m_scanlines[lineIndex];
 			if (containerIndex >= 0){
 				Q_ASSERT(containerIndex < m_rangesContainer.size());
 
@@ -665,9 +662,9 @@ void CScanlineMask::GetUnion(const CScanlineMask& mask, CScanlineMask& result) c
 			}
 		}
 
-		int maskLineIndex = y - mask.m_firstLinePos;
+		const int maskLineIndex = y - mask.m_firstLinePos;
 		if ((maskLineIndex >= 0) && (maskLineIndex < int(mask.m_scanlines.size()))){
-			int containerIndex = mask.m_scanlines[maskLineIndex];
+			const int containerIndex = mask.m_scanlines[maskLineIndex];
 			if (containerIndex >= 0){
 				Q_ASSERT(containerIndex < mask.m_rangesContainer.size());
 
@@ -675,27 +672,19 @@ void CScanlineMask::GetUnion(const CScanlineMask& mask, CScanlineMask& result) c
 			}
 		}
 
-		istd::CIntRanges resultRanges;
-		if (rangesPtr != NULL){
-			if (maskRangesPtr != NULL){
-				rangesPtr->GetUnion(*maskRangesPtr, resultRanges);
-			}
-			else{
-				resultRanges = *rangesPtr;
-			}
-		}
-		else if (maskRangesPtr != NULL){
-			resultRanges = *maskRangesPtr;
-		}
-
-		if (!resultRanges.IsEmpty()){
-			result.m_rangesContainer.push_back(resultRanges);
-
-			result.m_scanlines[resultLineIndex] = result.m_rangesContainer.size() - 1;
-		}
-		else{
+		if ((!rangesPtr || rangesPtr->IsEmpty()) && (!maskRangesPtr || maskRangesPtr->IsEmpty())) {
 			result.m_scanlines[resultLineIndex] = -1;
+			continue;
 		}
+
+		result.m_rangesContainer.append(istd::CIntRanges());
+		istd::CIntRanges& resultRanges = result.m_rangesContainer.back();
+		if (rangesPtr && maskRangesPtr)
+			rangesPtr->GetUnion(*maskRangesPtr, resultRanges);
+		else
+			resultRanges = rangesPtr ? *rangesPtr : *maskRangesPtr;
+
+		result.m_scanlines[resultLineIndex] = result.m_rangesContainer.size() - 1;
 	}
 }
 
@@ -830,7 +819,6 @@ void CScanlineMask::Dilate(int leftValue, int rightValue, int topValue, int bott
 				lineIter != m_rangesContainer.end();
 				++lineIter){
 		istd::CIntRanges& lineRanges = *lineIter;
-
 		lineRanges.Dilate(leftValue, rightValue);
 	}
 
@@ -848,7 +836,7 @@ void CScanlineMask::Dilate(int leftValue, int rightValue, int topValue, int bott
 		int downCounter = 0;
 
 		for (		Scanlines::iterator iter = m_scanlines.begin();
-					iter != m_scanlines.begin();
+					iter != m_scanlines.end();
 					++iter){
 			int rangeIndex = *iter;
 			if (rangeIndex < 0){
@@ -940,6 +928,8 @@ void CScanlineMask::ResetImage()
 
 	m_boundingBox = i2d::CRect::GetEmpty();
 	m_isBoundingBoxValid = true;
+
+	m_firstLinePos = 0;
 }
 
 
