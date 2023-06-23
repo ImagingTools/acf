@@ -6,6 +6,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QAbstractScrollArea>
 #include <QtWidgets/QLayoutItem>
+#include <QtWidgets/QAbstractSlider>
 
 // Acf includes
 #include <istd/CChangeNotifier.h>
@@ -43,6 +44,13 @@ void CWidgetWheelEventBlocker::FilterWidgets(ObjectPtrList& widgetPtrsList)
 			QAbstractSpinBox* providedSpinBoxPtr = dynamic_cast<QAbstractSpinBox*>(povidedWidgetPtr);
 			if (providedSpinBoxPtr != nullptr){
 				AcquireWidget(*providedSpinBoxPtr);
+			}
+		}
+
+		if (m_processingFlags & AW_SLIDERS){
+			QAbstractSlider* providedSliderPtr = dynamic_cast<QAbstractSlider*>(povidedWidgetPtr);
+			if (providedSliderPtr != nullptr){
+				AcquireWidget(*providedSliderPtr);
 			}
 		}
 	}
@@ -83,6 +91,15 @@ bool CWidgetWheelEventBlocker::eventFilter(QObject* objectPtr, QEvent* eventPtr)
 					return true;
 				}
 			}
+
+			if (m_processingFlags & AW_SLIDERS){
+				const QAbstractSlider* sliderPtr = dynamic_cast<const QAbstractSlider*>(objectPtr);
+				if (sliderPtr != nullptr){
+					eventPtr->ignore();
+
+					return true;
+				}
+			}
 		}
 	}
 
@@ -94,6 +111,7 @@ void CWidgetWheelEventBlocker::AddSupportedChildWidgets(QWidget& parentObject)
 {
 	QComboBox* comboBoxPtr = dynamic_cast<QComboBox*>(&parentObject);
 	QAbstractSpinBox* spinBoxPtr = dynamic_cast<QAbstractSpinBox*>(&parentObject);
+	QAbstractSlider* sliderPtr = dynamic_cast<QAbstractSlider*>(&parentObject);
 	if (comboBoxPtr != nullptr){
 		if (m_processingFlags & AW_COMBO_BOXES){
 			AcquireWidget(*comboBoxPtr);
@@ -102,6 +120,11 @@ void CWidgetWheelEventBlocker::AddSupportedChildWidgets(QWidget& parentObject)
 	else if(spinBoxPtr != nullptr){
 		if (m_processingFlags & AW_SPIN_BOXES){
 			AcquireWidget(*spinBoxPtr);
+		}
+	}
+	else if(sliderPtr != nullptr){
+		if (m_processingFlags & AW_SLIDERS){
+			AcquireWidget(*sliderPtr);
 		}
 	}
 	else {
@@ -117,6 +140,12 @@ void CWidgetWheelEventBlocker::AddSupportedChildWidgets(QWidget& parentObject)
 		if (m_processingFlags & AW_SPIN_BOXES){
 			for (QAbstractSpinBox* childSpinBoxPtr : parentObject.findChildren<QAbstractSpinBox*>(QString(), Qt::FindChildrenRecursively)){
 				AcquireWidget(*childSpinBoxPtr);
+			}
+		}
+
+		if (m_processingFlags & AW_SLIDERS){
+			for (QAbstractSlider* childSliderPtr : parentObject.findChildren<QAbstractSlider*>(QString(), Qt::FindChildrenRecursively)){
+				AcquireWidget(*childSliderPtr);
 			}
 		}
 	}

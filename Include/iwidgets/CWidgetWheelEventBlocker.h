@@ -28,10 +28,14 @@ public:
 		/**
 			If set, the wheel events will be blocked for comboBoxes (QComboBox class)
 		*/
-		AW_COMBO_BOXES = 1 << 1
+		AW_COMBO_BOXES = 1 << 1,
+		/**
+			If set, the wheel events will be blocked for comboBoxes (QComboBox class)
+		*/
+		AW_SLIDERS = 1 << 2
 	};
 
-	CWidgetWheelEventBlocker(QWidget* parentPtr, int flags = AW_SPIN_BOXES | AW_COMBO_BOXES, bool setStrongFocusToAffectedWidgets = true);
+	CWidgetWheelEventBlocker(QWidget* parentPtr, int flags = AW_SPIN_BOXES | AW_COMBO_BOXES | AW_SLIDERS, bool setStrongFocusToAffectedWidgets = true);
 
 protected:
 	typedef QList<QObject*> ObjectPtrList;
