@@ -35,7 +35,7 @@ if(ARXC_CONFIG AND (ARX_ENABLE_GENERATE_DEPENDENCIES_LIST OR NOT DEFINED ARX_ENA
 	set(ARX_DEPS_FILE_PATH "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/ArxDependsList.txt")
 	set(ARX_ERRORS_FILE_PATH "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/ArxDependsList_errors.txt")
 
-	message("Collectiong ARX dependences for ${PROJECT_NAME}")
+	message("Collecting ARX dependences for ${PROJECT_NAME}")
 	
 	execute_process(
 		COMMAND
@@ -48,7 +48,7 @@ if(ARXC_CONFIG AND (ARX_ENABLE_GENERATE_DEPENDENCIES_LIST OR NOT DEFINED ARX_ENA
 		    ARX_DEPS_GENERATION_RESULT_CODE
 	)
 
-    if(NOT ARX_DEPS_GENERATION_RESULT_CODE EQUAL 0)
+	if(NOT ARX_DEPS_GENERATION_RESULT_CODE EQUAL 0)
 		message("!!! ARX Cannot to create dependens")
 
 		file(STRINGS ${ARX_DEPS_FILE_PATH} ERRORS1_ARX_DEPS_LIST)
@@ -59,11 +59,11 @@ if(ARXC_CONFIG AND (ARX_ENABLE_GENERATE_DEPENDENCIES_LIST OR NOT DEFINED ARX_ENA
 
 		execute_process(
 			COMMAND
-			    ${ARXCBIN} ${ARXC_FILES} -mode depends -config ${ARXC_CONFIG} -conf_name ${CMAKE_BUILD_TYPE}_${TARGETNAME} -v -env_vars ${ENV_VARS}
+				${ARXCBIN} ${ARXC_FILES} -mode depends -config ${ARXC_CONFIG} -conf_name ${CMAKE_BUILD_TYPE}_${TARGETNAME} -v -env_vars ${ENV_VARS}
 		)
 		message("${ARXCBIN} ${ARXC_FILES} -mode depends -config ${ARXC_CONFIG} -conf_name ${CMAKE_BUILD_TYPE}_${TARGETNAME} -env_vars ${ENV_VARS}")
 		message(FATAL_ERROR "!!! ARX finished unexpected. Error code: [${ARX_DEPS_GENERATION_RESULT_CODE}]")
-    endif()
+	endif()
 
 	file(STRINGS ${ARX_DEPS_FILE_PATH} ARX_DEPS_LIST)
 endif()

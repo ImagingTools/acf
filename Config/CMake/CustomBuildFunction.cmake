@@ -47,7 +47,7 @@ function (acf_custom_build PROJECT_BINARY_DIR ARXC_FILES ARXC_CONFIG ACF_CONVERT
 		set(ARX_DEPS_FILE_PATH "${PROJECT_BINARY_DIR}/Generated/${PROJECT_NAME}/ArxDependsList.txt")
 		set(ARX_ERRORS_FILE_PATH "${PROJECT_BINARY_DIR}/Generated/${PROJECT_NAME}/ArxDependsList_errors.txt")
 
-		message("Collectiong ARX dependences for ${PROJECT_NAME}")
+		message("Collecting ARX dependences for ${PROJECT_NAME}")
 
 		execute_process(
 			COMMAND
