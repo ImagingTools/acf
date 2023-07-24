@@ -24,7 +24,7 @@ target_sources(${PROJECT_NAME} PRIVATE ${SOURCES_FILE_AUX})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ${TARGET_EXT})
 
-set(outbindir "${AUX_INCLUDE_DIR}/../../../Bin/${CMAKE_BUILD_TYPE}${TARGETNAME}/Plugins")
+set(outbindir "${AUX_INCLUDE_DIR}/../../../Bin/${CMAKE_BUILD_TYPE}_${TARGETNAME}/Plugins")
 set(LIBRARY_OUTPUT_PATH "${outbindir}")
 
 

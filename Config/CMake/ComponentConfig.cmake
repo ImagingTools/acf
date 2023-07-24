@@ -27,5 +27,5 @@ set_target_properties( ${PROJECT_NAME}
 	POSITION_INDEPENDENT_CODE ON
 )
 
-acf_use_qt_modules()
+acf_use_qt_base_modules()
 

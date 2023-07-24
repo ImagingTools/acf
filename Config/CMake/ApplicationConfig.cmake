@@ -40,4 +40,4 @@ if(ACF_CONVERT_FILES)
 	set_target_properties( ${PROJECT_NAME} PROPERTIES LINK_FLAGS ${RC_COMPILE_FILE} )
 endif()
 
-acf_use_qt_modules()
+acf_use_qt_base_modules()
