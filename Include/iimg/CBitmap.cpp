@@ -455,7 +455,7 @@ int CBitmap::GetSupportedOperations() const
 }
 
 
-bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
+bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const iimg::IBitmap* sourcePtr = dynamic_cast<const IBitmap*>(&object);
 	if (sourcePtr != NULL){

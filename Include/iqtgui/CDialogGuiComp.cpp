@@ -190,8 +190,10 @@ void CDialogGuiComp::OnLanguageChanged()
 
 // reimplemented (iqtgui::TDesignSchemaHandlerWrap)
 
-void CDialogGuiComp::OnDesignSchemaChanged()
+void CDialogGuiComp::OnDesignSchemaChanged(const QByteArray& themeId)
 {
+	BaseClass::OnDesignSchemaChanged(themeId);
+
 	UpdateVisuals();
 }
 

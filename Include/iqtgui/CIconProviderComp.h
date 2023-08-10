@@ -5,16 +5,17 @@
 // ACF includes
 #include <icomp/CComponentBase.h>
 #include <iqtgui/IIconProvider.h>
+#include <iqtgui/TMakeIconProviderCompWrap.h>
 
 
 namespace iqtgui
 {
 
 
-class CIconProviderComp: public icomp::CComponentBase, virtual public iqtgui::IIconProvider
+class CIconProviderComp: public iqtgui::TMakeIconProviderCompWrap<icomp::CComponentBase>, virtual public iqtgui::IIconProvider
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef iqtgui::TMakeIconProviderCompWrap<icomp::CComponentBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CIconProviderComp);
 		I_REGISTER_INTERFACE(iqtgui::IIconProvider);

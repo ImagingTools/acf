@@ -25,15 +25,11 @@ namespace iqtgui
 */
 class CGuiComponentBase:
 			public QObject,
-			public TMakeIconProviderCompWrap<
-						TDesignSchemaHandlerWrap<
-									ibase::TLocalizableWrap<icomp::CComponentBase>>>,
+			public TMakeIconProviderCompWrap<ibase::TLocalizableWrap<icomp::CComponentBase>>,
 			virtual public IGuiObject
 {
 public:
-	typedef TMakeIconProviderCompWrap<
-				TDesignSchemaHandlerWrap<
-							ibase::TLocalizableWrap<icomp::CComponentBase>>> BaseClass;
+	typedef TMakeIconProviderCompWrap<ibase::TLocalizableWrap<icomp::CComponentBase>> BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CGuiComponentBase);
 		I_REGISTER_INTERFACE(IGuiObject);
@@ -54,11 +50,11 @@ public:
 	bool IsGuiShown() const;
 
 	// reimplemented (iqtgui::IGuiObject)
-	virtual bool IsGuiCreated() const;
-	virtual bool CreateGui(QWidget* parentPtr);
-	virtual bool DestroyGui();
-	virtual QWidget* GetWidget() const;
-	virtual void OnTryClose(bool* ignoredPtr = NULL);
+	virtual bool IsGuiCreated() const override;
+	virtual bool CreateGui(QWidget* parentPtr) override;
+	virtual bool DestroyGui() override;
+	virtual QWidget* GetWidget() const override;
+	virtual void OnTryClose(bool* ignoredPtr = NULL) override;
 
 #if _MSC_VER < 1500
 public:
@@ -69,8 +65,8 @@ protected:
 	{
 	public:
 		// reimplemented (iqtgui::IVisualStatus)
-		virtual QIcon GetStatusIcon() const;
-		virtual QString GetStatusText() const;
+		virtual QIcon GetStatusIcon() const override;
+		virtual QString GetStatusText() const override;
 
 		friend class CGuiComponentBase;
 
@@ -131,14 +127,14 @@ protected:
 	virtual void OnLanguageChanged();
 
 	// reimplemented (ibase::TDesignSchemaHandlerWrap)
-	virtual void OnDesignSchemaChanged();
+	virtual void OnDesignSchemaChanged(const QByteArray& themeId) override;
 
 	// reimplemented (QObject)
-	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
+	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr) override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 	// abstract methods
 	/**

@@ -10,7 +10,6 @@
 #include <iqtgui/CGuiComponentDialog.h>
 #include <iqtgui/CHierarchicalCommand.h>
 #include <iqtgui/TMakeIconProviderCompWrap.h>
-#include <iqtgui/TDesignSchemaHandlerWrap.h>
 
 
 namespace iqtgui
@@ -41,16 +40,13 @@ protected:
 */
 class CDialogGuiComp:
 			public QObject,
-			public TDesignSchemaHandlerWrap<
-						TMakeIconProviderCompWrap<
-									ibase::TLocalizableWrap<CDialogGuiCompAttr>>>,
+			public TMakeIconProviderCompWrap<
+						ibase::TLocalizableWrap<CDialogGuiCompAttr>>,
 			virtual public iqtgui::IDialog
 {
 	Q_OBJECT
 public:
-	typedef TDesignSchemaHandlerWrap<
-				TMakeIconProviderCompWrap<
-							ibase::TLocalizableWrap<CDialogGuiCompAttr>>> BaseClass;
+	typedef TMakeIconProviderCompWrap<ibase::TLocalizableWrap<CDialogGuiCompAttr>> BaseClass;
 	typedef QObject BaseClass2;
 
 	I_BEGIN_COMPONENT(CDialogGuiComp);
@@ -85,16 +81,16 @@ protected:
 	void UpdateVisuals();
 
 	// reimplemented (ibase::TLocalizableWrap)
-	virtual void OnLanguageChanged();
+	virtual void OnLanguageChanged() override;
 
 	// reimplemented (iqtgui::TDesignSchemaHandlerWrap)
-	virtual void OnDesignSchemaChanged();
+	virtual void OnDesignSchemaChanged(const QByteArray& themeId) override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 	// reimplemented (QObject)
-	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
+	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr) override;
 
 protected Q_SLOTS:
 	void OnCommandActivated();
@@ -108,7 +104,7 @@ private:
 		void SetParent(CDialogGuiComp* parentPtr);
 
 		// reimplemented (ibase::ICommandsProvider)
-		virtual const ibase::IHierarchicalCommand* GetCommands() const;
+		virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 	private:
 		CDialogGuiComp* m_parentPtr;

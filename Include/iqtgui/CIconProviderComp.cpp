@@ -23,7 +23,9 @@ QIcon CIconProviderComp::GetIcon(int iconIndex) const
 	Q_ASSERT(iconIndex >= 0);
 
 	if (iconIndex >= 0 && iconIndex < m_iconFilesAttrPtr.GetCount()){
-		return QIcon(QString(*m_iconPathAttrPtr) + QString("/") + QString(m_iconFilesAttrPtr[iconIndex]));
+		QString iconPath = QString(*m_iconPathAttrPtr) + QString("/") + QString(m_iconFilesAttrPtr[iconIndex]);
+
+		return QIcon(GetIconPath(iconPath));
 	}
 
 	return emptyIcon;
