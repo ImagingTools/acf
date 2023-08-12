@@ -122,7 +122,7 @@ void CFileNameParamGuiComp::OnGuiCreated()
 	if (!*m_readOnlyAttrPtr && *m_showBrowseButtonAttrPtr){
 		QToolButton* cdUpButton = new QToolButton(lineEdit);
 		cdUpButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
-		cdUpButton->setIcon(QIcon(":/Icons/UpDir"));
+		cdUpButton->setIcon(GetIcon(":/Icons/UpDir"));
 		connect(cdUpButton, SIGNAL(clicked()), this, SLOT(OnDirectoryUp()));
 
 		lineEdit->AddWidget(cdUpButton, Qt::AlignRight);
@@ -152,6 +152,14 @@ void CFileNameParamGuiComp::OnGuiRetranslate()
 		PathLabel->setText(*m_pathLabelAttrPtr);
 		UrlLabel->setText(*m_pathLabelAttrPtr);
 	}
+}
+
+
+void CFileNameParamGuiComp::OnGuiDesignChanged()
+{
+	BaseClass::OnGuiDesignChanged();
+
+	BrowseButton->setIcon(GetIcon(":/Icons/Open"));
 }
 
 
@@ -346,7 +354,7 @@ QIcon CFileNameParamGuiComp::GetFileIcon(const QString& filePath) const
 		return QIcon();
 	}
 
-	QIcon fileIcon = QIcon(":/Icons/Warning");
+	QIcon fileIcon = GetIcon(":/Icons/Warning");
 
 	QModelIndex index = m_directoryModel.index(istd::CSystem::GetEnrolledPath(filePath));
 	if (index.isValid()){

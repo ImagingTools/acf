@@ -92,6 +92,8 @@ void CSimpleFilePathParamGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 void CSimpleFilePathParamGuiComp::OnGuiCreated()
 {
+	BaseClass::OnGuiCreated();
+
 	DirectoryLabel->setVisible(false);
 	PathLabel->setVisible(m_pathLabelAttrPtr.IsValid());
 	UrlLabel->setVisible(false);
@@ -130,11 +132,21 @@ void CSimpleFilePathParamGuiComp::OnGuiCreated()
 
 void CSimpleFilePathParamGuiComp::OnGuiRetranslate()
 {
+	BaseClass::OnGuiRetranslate();
+
 	if (m_pathLabelAttrPtr.IsValid()){
 		DirectoryLabel->setText(*m_pathLabelAttrPtr);
 		PathLabel->setText(*m_pathLabelAttrPtr);
 		UrlLabel->setText(*m_pathLabelAttrPtr);
 	}
+}
+
+
+void CSimpleFilePathParamGuiComp::OnGuiDesignChanged()
+{
+	BaseClass::OnGuiDesignChanged();
+
+	BrowseButton->setIcon(GetIcon(":/Icons/Open"));
 }
 
 

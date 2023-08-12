@@ -70,11 +70,8 @@ public:
 
 	CLogGuiComp();
 
-	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiRetranslate();
-
 	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 protected:
 	enum MessageMode
@@ -138,12 +135,13 @@ protected:
 	virtual void ClearMessages();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
-	virtual void OnGuiDesignChanged();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
+	virtual void OnGuiRetranslate() override;
+	virtual void OnGuiDesignChanged() override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	void UpdateVisualStatus();

@@ -37,7 +37,15 @@ private:
 template <class Base>
 QByteArray TMakeIconProviderCompWrap<Base>::GetCurrentThemeId() const
 {
-	return m_themeId;
+	QByteArray currentThemeId = m_themeId;
+	if (currentThemeId.isEmpty()){
+		QCoreApplication* applicationPtr = QCoreApplication::instance();
+		if (applicationPtr != nullptr){
+			currentThemeId = QCoreApplication::instance()->property("ThemeId").toByteArray();
+		}
+	}
+
+	return currentThemeId;
 }
 
 
@@ -115,17 +123,14 @@ QString TMakeIconProviderCompWrap<Base>::GetIconPath(const QString& iconName) co
 {
 	QString retVal = iconName;
 
-	QCoreApplication* applicationPtr = QCoreApplication::instance();
-	if (applicationPtr != nullptr){
-		QByteArray currentThemeId = QCoreApplication::instance()->property("ThemeId").toByteArray();
-		if (!currentThemeId.isEmpty()) {
-			QFileInfo fileInfo(iconName);
+	QByteArray currentThemeId = GetCurrentThemeId();
+	if (!currentThemeId.isEmpty()){
+		QFileInfo fileInfo(iconName);
 
-			QString path = fileInfo.dir().path();
-			QString baseIconName = fileInfo.baseName();
+		QString path = fileInfo.dir().path();
+		QString baseIconName = fileInfo.baseName();
 
-			retVal = path + "/" + currentThemeId + "/" + baseIconName;
-		}
+		retVal = path + "/" + currentThemeId + "/" + baseIconName;
 	}
 
 	return retVal;
@@ -137,17 +142,14 @@ QString TMakeIconProviderCompWrap<Base>::GetStyleSheetPath(const QString& styleS
 {
 	QString retVal = styleSheetPath;
 
-	QCoreApplication* applicationPtr = QCoreApplication::instance();
-	if (applicationPtr != nullptr){
-		QByteArray currentThemeId = QCoreApplication::instance()->property("ThemeId").toByteArray();
-		if (!currentThemeId.isEmpty()) {
-			QFileInfo fileInfo(styleSheetPath);
+	QByteArray currentThemeId = GetCurrentThemeId();
+	if (!currentThemeId.isEmpty()){
+		QFileInfo fileInfo(styleSheetPath);
 
-			QString path = fileInfo.dir().path();
-			QString baseName = fileInfo.baseName();
+		QString path = fileInfo.dir().path();
+		QString baseName = fileInfo.baseName();
 
-			retVal = path + "/" + currentThemeId + "/" + baseName;
-		}
+		retVal = path + "/" + currentThemeId + "/" + baseName;
 	}
 
 	return retVal;

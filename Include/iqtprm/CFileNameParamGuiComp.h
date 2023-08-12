@@ -48,13 +48,14 @@ public:
 
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiRetranslate() override;
+	virtual void OnGuiDesignChanged() override;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void UpdateModel() const;
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnGuiModelAttached() override;
+	virtual void UpdateModel() const override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 protected Q_SLOTS:
 	void on_BrowseButton_clicked();
