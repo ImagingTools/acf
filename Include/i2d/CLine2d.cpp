@@ -116,17 +116,19 @@ bool CLine2d::IsParallel(const CLine2d& line) const
 
 bool CLine2d::IsIntersectedBy(const CLine2d& line) const
 {
-	CVector2d diff = GetDiffVector();
+	return Intersects(m_point1, m_point2, line.m_point1, line.m_point2);
+}
 
-	if ((diff.GetCrossProductZ(line.m_point1 - m_point1) > 0) == (diff.GetCrossProductZ(line.m_point2 - m_point1) > 0)){
-		return false;	// both points of second line lie on the same side of the first one
-	}
+bool CLine2d::Intersects(const CVector2d& lhsp1, const CVector2d& lhsp2,
+						 const CVector2d& rhsp1, const CVector2d& rhsp2)
+{
+	const CVector2d lhsDiff = lhsp2 - lhsp1;
+	if ((lhsDiff.GetCrossProductZ(rhsp1 - lhsp1) > 0) == (lhsDiff.GetCrossProductZ(rhsp2 - lhsp1) > 0))
+		return false; // both points of second line lie on the same side of the first one
 
-	CVector2d lineDiff = line.GetDiffVector();
-
-	if ((lineDiff.GetCrossProductZ(m_point1 - line.m_point1) > 0) == (lineDiff.GetCrossProductZ(m_point2 - line.m_point1) > 0)){
+	const CVector2d rhsDiff = rhsp2 - rhsp1;
+	if ((rhsDiff.GetCrossProductZ(lhsp1 - rhsp1) > 0) == (rhsDiff.GetCrossProductZ(lhsp2 - rhsp1) > 0))
 		return false;	// both points of first line lie on the same side of the second one
-	}
 
 	return true;
 }

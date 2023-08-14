@@ -64,16 +64,8 @@ double CPolyline::GetLength() const
 	}
 
 	double length = 0;
-	int nodesCount = GetNodesCount();
-	if (nodesCount > 0){
-		i2d::CLine2d segmentLine;
-		segmentLine.SetPoint2(GetNodePos(0));
-		for (int nodeIndex = 1; nodeIndex < nodesCount; ++nodeIndex){
-			segmentLine.PushEndPoint(GetNodePos(nodeIndex));
-
-			length += segmentLine.GetLength();
-		}
-	}
+	for (int nodeIndex = 1, size = GetNodesCount(); nodeIndex < size; ++nodeIndex)
+		length += (GetNodePos(nodeIndex) - GetNodePos(nodeIndex - 1)).GetLength();
 
 	return length;
 }
@@ -154,34 +146,30 @@ bool CPolyline::GetAdjacentNodeIndices(double atPositionNormalized, int& previou
 
 	const int nodesCount = GetNodesCount();
 
-	double positionOnLine = atPositionNormalized * GetLength();
+	const double positionOnLine = atPositionNormalized * GetLength();
 
 	nextIndex = 0;
 	previousIndex = 0;
+	double lenMax = 0.0;
+	double lastDistance = 0.0;
 
-	istd::CRange lengthRange(0, 0);
-	i2d::CVector2d prevNodePos, nextNodePos;
-
-	while (positionOnLine > lengthRange.GetMaxValue() - I_BIG_EPSILON){
+	while (positionOnLine - lenMax > 0){
 		previousIndex = nextIndex;
-		prevNodePos = GetNodePos(previousIndex);
-
 		nextIndex = (nextIndex + 1) % nodesCount;
 
-		nextNodePos = GetNodePos(nextIndex);
-		double lengthMax = lengthRange.GetMaxValue() + nextNodePos.GetDistance(prevNodePos);
-
-		lengthRange.SetMinValue(lengthRange.GetMaxValue());
-		lengthRange.SetMaxValue(lengthMax);
+		lastDistance = GetNodePos(nextIndex).GetDistance(GetNodePos(previousIndex));
+		lenMax += lastDistance;
 	}
 
-	alpha = (positionOnLine - lengthRange.GetMinValue()) / lengthRange.GetLength();
+	alpha = lastDistance > std::numeric_limits<double>::min() ? 1.0 - (lenMax - positionOnLine) / lastDistance : 0;
 
-	if (alpha < 0){
-		return false;
-	}
+	return alpha >= 0.0;
+}
 
-	return true;
+bool CPolyline::GetAdjacentNodeIndices(double position, int& previousIndex, int& nextIndex) const
+{
+	double alpha;
+	return GetAdjacentNodeIndices(position, previousIndex, nextIndex, alpha);
 }
 
 

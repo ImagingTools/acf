@@ -36,18 +36,18 @@ public:
 	NodeData& GetTNodeDataRef(int nodeIndex);
 
 	// reimplemented (i2d::CDataNodePolylineBase)
-	virtual const iser::ISerializable& GetNodeData(int nodeIndex) const;
-	virtual iser::ISerializable& GetNodeDataRef(int nodeIndex);
+	virtual const iser::ISerializable& GetNodeData(int nodeIndex) const override;
+	virtual iser::ISerializable& GetNodeDataRef(int nodeIndex) override;
 
 	// reimplemented (i2d::CPolypoint)
-	virtual void Clear();
-	virtual void SetNodesCount(int nodesCount);
-	virtual bool InsertNode(const i2d::CVector2d& position);
-	virtual bool InsertNode(int index, const i2d::CVector2d& position);
-	virtual bool RemoveNode(int index);
+	virtual void Clear() override;
+	virtual void SetNodesCount(int nodesCount) override;
+	virtual bool InsertNode(const i2d::CVector2d& position) override;
+	virtual bool InsertNode(int index, const i2d::CVector2d& position) override;
+	virtual bool RemoveNode(int index) override;
 
 	// reimplemented istd::IChangeable
-	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 private:
 	typedef std::vector<NodeData> NodesData;

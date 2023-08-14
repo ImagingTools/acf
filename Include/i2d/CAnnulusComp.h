@@ -31,10 +31,10 @@ public:
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 private:
 	I_ATTR(double, m_centerXAttrPtr);

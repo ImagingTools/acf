@@ -29,37 +29,37 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::IObject2d)
-	virtual CVector2d GetCenter() const;
-	virtual void MoveCenterTo(const CVector2d& position);
-	virtual CRectangle GetBoundingBox() const;
-	virtual void SetCalibration(const ICalibration2d* calibrationPtr, bool releaseFlag = false);
+	virtual CVector2d GetCenter() const override;
+	virtual void MoveCenterTo(const CVector2d& position) override;
+	virtual CRectangle GetBoundingBox() const override;
+	virtual void SetCalibration(const ICalibration2d* calibrationPtr, bool releaseFlag = false) override;
 	virtual bool Transform(
 				const ITransformation2d& transformation,
 				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL);
+				double* errorFactorPtr = NULL) override;
 	virtual bool InvTransform(
 				const ITransformation2d& transformation,
 				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL);
+				double* errorFactorPtr = NULL) override;
 	virtual bool GetTransformed(
 				const ITransformation2d& transformation,
 				IObject2d& result,
 				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL) const;
+				double* errorFactorPtr = NULL) const override;
 	virtual bool GetInvTransformed(
 				const ITransformation2d& transformation,
 				IObject2d& result,
 				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL) const;
+				double* errorFactorPtr = NULL) const override;
 
 	// reimplemented (i2d::IClibrationProvider)
-	virtual const ICalibration2d* GetCalibration() const;
+	virtual const ICalibration2d* GetCalibration() const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (istd::IChangeable)
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
 protected:
 	const i2d::IObject2d* GetObject2d() const;

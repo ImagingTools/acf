@@ -12,6 +12,10 @@ void CQuadrangleComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	if (m_defaultObjectProviderCompPtr.IsValid()) {
+		return;
+	}
+
 	Q_ASSERT(m_diag1X1AttrPtr.IsValid());
 	Q_ASSERT(m_diag1Y1AttrPtr.IsValid());
 	Q_ASSERT(m_diag1X2AttrPtr.IsValid());

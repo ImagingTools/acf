@@ -13,6 +13,10 @@ void CPosition2dComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	if (m_defaultObjectProviderCompPtr.IsValid()) {
+		return;
+	}
+
 	Q_ASSERT(m_xAttrPtr.IsValid());
 	Q_ASSERT(m_yAttrPtr.IsValid());
 

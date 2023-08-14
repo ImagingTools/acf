@@ -13,6 +13,10 @@ void CCircleComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	if (m_defaultObjectProviderCompPtr.IsValid()) {
+		return;
+	}
+
 	Q_ASSERT(m_centerXAttrPtr.IsValid());
 	Q_ASSERT(m_centerYAttrPtr.IsValid());
 	Q_ASSERT(m_radiusAttrPtr.IsValid());

@@ -44,35 +44,35 @@ public:
 	void SetTranslation(const i2d::CVector2d& translation);
 
 	// reimplemented (i2d::IObject2d)
-	virtual i2d::CVector2d GetCenter() const;
-	virtual void MoveCenterTo(const i2d::CVector2d& position);
-	virtual i2d::CRectangle GetBoundingBox() const;
+	virtual i2d::CVector2d GetCenter() const override;
+	virtual void MoveCenterTo(const i2d::CVector2d& position) override;
+	virtual i2d::CRectangle GetBoundingBox() const override;
 	virtual bool Transform(
 				const i2d::ITransformation2d& transformation,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL);
+				double* errorFactorPtr = NULL) override;
 	virtual bool InvTransform(
 				const i2d::ITransformation2d& transformation,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL);
+				double* errorFactorPtr = NULL) override;
 	virtual bool GetTransformed(
 				const i2d::ITransformation2d& transformation,
 				i2d::IObject2d& result,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL) const;
+				double* errorFactorPtr = NULL) const override;
 	virtual bool GetInvTransformed(
 				const i2d::ITransformation2d& transformation,
 				i2d::IObject2d& result,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL) const;
+				double* errorFactorPtr = NULL) const override;
 
 	// reimplemented (istd::IChangeable)
-	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	virtual i2d::CVector2d GetCenter(const i2d::CMatrix2d& deformMatrix) const;

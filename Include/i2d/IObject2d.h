@@ -14,6 +14,7 @@ namespace i2d
 
 class CVector2d;
 class CRectangle;
+class CPolygon;
 
 
 /**

@@ -13,6 +13,10 @@ void CLine2dComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	if (m_defaultObjectProviderCompPtr.IsValid()) {
+		return;
+	}
+
 	Q_ASSERT(m_x1AttrPtr.IsValid());
 	Q_ASSERT(m_y1AttrPtr.IsValid());
 	Q_ASSERT(m_x2AttrPtr.IsValid());

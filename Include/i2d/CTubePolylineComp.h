@@ -30,15 +30,15 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::CPolygon)
-	virtual bool InsertNode(const i2d::CVector2d& node);
-	virtual bool InsertNode(int index, const i2d::CVector2d& node);
+	virtual bool InsertNode(const i2d::CVector2d& node) override;
+	virtual bool InsertNode(int index, const i2d::CVector2d& node) override;
 
 protected:
 	// reimplemented (i2d::CPolygon)
-	virtual void SetNodesCount(int count);
+	virtual void SetNodesCount(int count) override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_ATTR(double, m_minTubeRangeValueAttrPtr);

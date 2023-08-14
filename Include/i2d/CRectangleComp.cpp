@@ -13,6 +13,10 @@ void CRectangleComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	if (m_defaultObjectProviderCompPtr.IsValid()){
+		return;
+	}
+
 	Q_ASSERT(m_leftAttrPtr.IsValid());
 	Q_ASSERT(m_topAttrPtr.IsValid());
 	Q_ASSERT(m_widthAttrPtr.IsValid());

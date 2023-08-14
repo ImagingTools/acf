@@ -37,15 +37,15 @@ public:
 	bool operator!=(const COrientedCircle& circle) const;
 
 	// reimplemented (i2d::CCircle)
-	virtual bool ConvertToPolygon(i2d::CPolygon& result, int segmentsCount = 0) const;
+	virtual bool ConvertToPolygon(i2d::CPolygon& result, int segmentsCount = 0) const override;
 
 	// reimplemented (istd::IChangeable)
-	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	bool m_orientedOutside;

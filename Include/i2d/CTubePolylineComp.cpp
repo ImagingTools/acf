@@ -65,6 +65,10 @@ void CTubePolylineComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	if (m_defaultObjectProviderCompPtr.IsValid()) {
+		return;
+	}
+
 	if (m_minTubeRangeValueAttrPtr.IsValid() && m_maxTubeRangeValueAttrPtr.IsValid()){
 		m_defaultTubeRange = istd::CRange(
 					qMin(*m_minTubeRangeValueAttrPtr, *m_maxTubeRangeValueAttrPtr),

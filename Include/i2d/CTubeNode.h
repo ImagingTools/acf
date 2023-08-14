@@ -44,7 +44,7 @@ public:
 	virtual void SetInterpolated(const CTubeNode& first, const CTubeNode& second, double alpha);
 
 	// reimplemented (qcom::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	istd::CRange m_tubeRange;

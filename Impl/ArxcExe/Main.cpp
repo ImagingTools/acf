@@ -10,7 +10,6 @@
 // ACF packages includes
 #include <QtPck/QtPck.h>
 #include <BasePck/BasePck.h>
-#include <QtPck/QtPck.h>
 #include <FilePck/FilePck.h>
 #include <PackagePck/PackagePck.h>
 
