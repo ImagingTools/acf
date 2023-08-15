@@ -112,20 +112,38 @@ win32-msvc*{
 	}
 
 	greaterThan(QMAKE_MSC_VER, 1919){
-		QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit- /D__STDC_LIMIT_MACROS
-		COMPILER_NAME = VC16
-		CONFIG += c++17
+		greaterThan(QMAKE_MSC_VER, 1929){
+			QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit- /D__STDC_LIMIT_MACROS
+			COMPILER_NAME = VC17
+			CONFIG += c++17
 
-		CONFIG(release, debug|release){
-			#extra optimizations
-			QMAKE_CXXFLAGS += /Ot /Oi /Ob2 /GS-
+			CONFIG(release, debug|release){
+				#extra optimizations
+				QMAKE_CXXFLAGS += /Ot /Oi /Ob2 /GS-
+			}
+
+			win32:contains(QMAKE_HOST.arch, x86_64) | *-64{
+				QMAKE_LFLAGS += /MACHINE:X64
+			}
+
+			message("Using Visual Studio 2022");
 		}
+		else{
+			QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit- /D__STDC_LIMIT_MACROS
+			COMPILER_NAME = VC16
+			CONFIG += c++17
 
-		win32:contains(QMAKE_HOST.arch, x86_64) | *-64{
-			QMAKE_LFLAGS += /MACHINE:X64
+			CONFIG(release, debug|release){
+				#extra optimizations
+				QMAKE_CXXFLAGS += /Ot /Oi /Ob2 /GS-
+			}
+
+			win32:contains(QMAKE_HOST.arch, x86_64) | *-64{
+				QMAKE_LFLAGS += /MACHINE:X64
+			}
+
+			message("Using Visual Studio 2019");
 		}
-
-#		message("Using Visual Studio 2019");
 	}
 }
 else{
