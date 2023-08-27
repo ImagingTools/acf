@@ -27,6 +27,10 @@ QPoint GetQPoint(const istd::CIndex2d& position)
 	return QPoint(position.GetX(), position.GetY());
 }
 
+QPointF GetQPoint(const i2d::CVector2d& position)
+{
+	return QPointF(position.GetX(), position.GetY());
+}
 
 istd::CIndex2d GetCIndex2d(const QPoint& position)
 {

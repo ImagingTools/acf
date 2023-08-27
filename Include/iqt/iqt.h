@@ -33,6 +33,7 @@ namespace iqt
 extern QSize GetQSize(const istd::CIndex2d& size);
 extern istd::CIndex2d GetCIndex2d(const QSize& size);
 extern QPoint GetQPoint(const istd::CIndex2d& position);
+extern QPointF GetQPoint(const i2d::CVector2d& position);
 extern istd::CIndex2d GetCIndex2d(const QPoint& position);
 extern QRectF GetQRectF(const i2d::CRectangle& rect);
 extern i2d::CRectangle GetCRectangle(const QRectF& rect);
