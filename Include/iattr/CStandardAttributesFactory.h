@@ -17,10 +17,10 @@ class CStandardAttributesFactory: virtual public iser::IObjectFactory
 {
 public:
 	// reimplemented (istd::TIFactory<iser::IObject>)
-	virtual iser::IObject* CreateInstance(const QByteArray& keyId = "") const;
+	virtual iser::IObject* CreateInstance(const QByteArray& keyId = "") const override;
 
 	// reimplemented (istd::IFactoryInfo)
-	virtual KeyList GetFactoryKeys() const;
+	virtual KeyList GetFactoryKeys() const override;
 
 	// static methods
 	static const CStandardAttributesFactory& GetInstance();

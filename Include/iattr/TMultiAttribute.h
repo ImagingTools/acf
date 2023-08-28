@@ -58,7 +58,7 @@ public:
 	QByteArray GetFactoryId() const;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// static methods
 	static QByteArray GetTypeName();

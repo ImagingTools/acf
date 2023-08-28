@@ -27,10 +27,10 @@ public:
 	void SetAttributeDefaultValue(const iser::IObject* defaultValuePtr, bool releaseFlag);
 
 	// reimplemented (iattr::IAttributeMetaInfo)
-	virtual QString GetAttributeDescription() const;
-	virtual const iser::IObject* GetAttributeDefaultValue() const;
-	virtual QByteArray GetAttributeTypeId() const;
-	virtual int GetAttributeFlags() const;
+	virtual QString GetAttributeDescription() const override;
+	virtual const iser::IObject* GetAttributeDefaultValue() const override;
+	virtual QByteArray GetAttributeTypeId() const override;
+	virtual int GetAttributeFlags() const override;
 
 private:
 	QString m_description;

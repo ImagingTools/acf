@@ -46,10 +46,10 @@ public:
 	virtual void SetValue(const Value& value);
 
 	// reimplemented (iser::IObject)
-	virtual QByteArray GetFactoryId() const;
+	virtual QByteArray GetFactoryId() const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// static methods
 	static QByteArray GetTypeName();

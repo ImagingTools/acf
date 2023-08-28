@@ -41,8 +41,8 @@ public:
 	bool HasAttributeMetaId(const QByteArray& attributeId) const;
 
 	// reimplemented (iattr::IAttributesMetaInfoProvider)
-	virtual IAttributesProvider::AttributeIds GetAttributeMetaIds() const;
-	virtual const IAttributeMetaInfo* GetAttributeMetaInfo(const QByteArray& attributeId) const;
+	virtual IAttributesProvider::AttributeIds GetAttributeMetaIds() const override;
+	virtual const IAttributeMetaInfo* GetAttributeMetaInfo(const QByteArray& attributeId) const override;
 
 private:
 	typedef istd::TOptDelPtr<IAttributeMetaInfo> AttributeMetaInfoPtr;

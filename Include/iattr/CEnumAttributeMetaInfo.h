@@ -50,10 +50,10 @@ public:
 	bool InsertOption(const QString& description, const iser::IObject* valuePtr, bool releaseFlag);
 
 	// reimplemented (iattr::IEnumAttributeMetaInfo)
-	virtual bool IsAnyValueAllowed() const;
-	virtual int GetEnumsCount() const;
-	virtual QString GetValueDescription(const iser::IObject& value) const;
-	virtual const iser::IObject& GetEnum(int index) const;
+	virtual bool IsAnyValueAllowed() const override;
+	virtual int GetEnumsCount() const override;
+	virtual QString GetValueDescription(const iser::IObject& value) const override;
+	virtual const iser::IObject& GetEnum(int index) const override;
 
 private:
 	bool m_isAnyValueAllowed;

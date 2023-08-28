@@ -38,8 +38,8 @@ public:
 	bool SetMaxAttributeValue(const iser::IObject* valuePtr, bool releaseFlag);
 
 	// reimplemented (iattr::IEnumAttributeMetaInfo)
-	virtual bool GetMinimalValue(iser::IObject& result) const;
-	virtual bool GetMaximalValue(iser::IObject& result) const;
+	virtual bool GetMinimalValue(iser::IObject& result) const override;
+	virtual bool GetMaximalValue(iser::IObject& result) const override;
 
 private:
 	istd::TOptDelPtr<const iser::IObject> m_minAttributePtr;
