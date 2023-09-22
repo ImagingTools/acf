@@ -42,7 +42,11 @@ public:
 		Create menu according to the given commands.
 	*/
 	template <class MenuType>
-	static void CreateMenu(const iqtgui::CHierarchicalCommand& command, MenuType& result);
+	static void CreateMenu(
+				const iqtgui::CHierarchicalCommand& command,
+				MenuType& result,
+				const QVector<int>& includedGroups = QVector<int>(),
+				const QVector<int>& excludedGroups = QVector<int>());
 
 	/**
 		Fill a toolbar with the commands.
@@ -50,7 +54,9 @@ public:
 	static int SetupToolbar(
 				const iqtgui::CHierarchicalCommand& command,
 				QToolBar& result,
-				int prevGroupId = ibase::ICommand::GI_NONE);
+				int prevGroupId = ibase::ICommand::GI_NONE,
+				const QVector<int>& includedGroups = QVector<int>(),
+				const QVector<int>& excludedGroups = QVector<int>());
 
 	/**
 		Fill a context menu of a widget with the commands.
@@ -58,14 +64,26 @@ public:
 	static int SetupContextMenu(
 				const iqtgui::CHierarchicalCommand& command,
 				QWidget& menuOwner,
-				int prevGroupId = ibase::ICommand::GI_NONE);
+				int prevGroupId = ibase::ICommand::GI_NONE,
+				const QVector<int>& includedGroups = QVector<int>(),
+				const QVector<int>& excludedGroups = QVector<int>());
+
+private:
+	static bool IsCommandIncluded(
+				const iqtgui::CHierarchicalCommand& command,
+				const QVector<int>& includedGroups = QVector<int>(),
+				const QVector<int>& excludedGroups = QVector<int>());
 };
 
 
 // protected template methods
 
 template <class MenuType>
-void CCommandTools::CreateMenu(const iqtgui::CHierarchicalCommand& command, MenuType& result)
+void CCommandTools::CreateMenu(
+			const iqtgui::CHierarchicalCommand& command,
+			MenuType& result,
+			const QVector<int>& includedGroups,
+			const QVector<int>& excludedGroups)
 {
 	int prevGroupId = ibase::ICommand::GI_NONE;
 
@@ -100,18 +118,20 @@ void CCommandTools::CreateMenu(const iqtgui::CHierarchicalCommand& command, Menu
 				result.addMenu(newMenuPtr);
 			}
 			else if ((flags & ibase::ICommand::CF_GLOBAL_MENU) != 0){
-				if ((flags & ibase::ICommand::CF_EXCLUSIVE) != 0){
-					QActionGroup*& groupPtr = groups[hierarchicalPtr->GetGroupId()];
-					if (groupPtr == NULL){
-						groupPtr = new QActionGroup(&result);
-						groupPtr->setExclusive(true);
+				if (IsCommandIncluded(*hierarchicalPtr, includedGroups, excludedGroups)){
+					if ((flags & ibase::ICommand::CF_EXCLUSIVE) != 0){
+						QActionGroup*& groupPtr = groups[hierarchicalPtr->GetGroupId()];
+						if (groupPtr == NULL){
+							groupPtr = new QActionGroup(&result);
+							groupPtr->setExclusive(true);
+						}
+
+						groupPtr->addAction(hierarchicalPtr);
+						hierarchicalPtr->setCheckable(true);
 					}
 
-					groupPtr->addAction(hierarchicalPtr);
-					hierarchicalPtr->setCheckable(true);
+					result.addAction(hierarchicalPtr);
 				}
-
-				result.addAction(hierarchicalPtr);
 			}
 		}
 	}

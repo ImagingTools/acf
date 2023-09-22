@@ -92,7 +92,7 @@ void CSingleDocumentWorkspaceGuiComp::UpdateTitle()
 
 QString CSingleDocumentWorkspaceGuiComp::GenerateDocumentTitle() const
 {
-	QString titleName = tr("<no name>");
+	QString titleName = *m_defaultDocumentTitleAttrPtr;
 
 	QString documentFilePath = GetCurrentDocumentFilePath();
 

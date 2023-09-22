@@ -45,6 +45,7 @@ public:
 
 	I_BEGIN_COMPONENT(CSingleDocumentWorkspaceGuiComp);
 		I_REGISTER_INTERFACE(idoc::IDocumentManager);
+		I_ASSIGN(m_defaultDocumentTitleAttrPtr, "DefaultDocumentTitle", "Name of the untitled document", true, "<no name>");
 		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate");
 		I_ASSIGN(m_rememberOpenDocumentParamPtr, "RememberOpenDocumentOnExit", "If enabled, restores open document from previous session", false, "RememberOpenDocumentOnExit");
 	I_END_COMPONENT;
@@ -97,6 +98,7 @@ protected:
 	virtual void OnRestoreSettings(const QSettings& settings);
 
 protected:
+	I_TEXTATTR(m_defaultDocumentTitleAttrPtr);
 	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
 	I_REF(iprm::IEnableableParam, m_rememberOpenDocumentParamPtr);
 
