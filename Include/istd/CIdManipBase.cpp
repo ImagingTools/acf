@@ -5,6 +5,15 @@ namespace istd
 {
 
 
+// static variables
+
+#if QT_VERSION >= 0x060000
+	QRecursiveMutex CIdManipBase::s_lock;
+#else
+	QMutex CIdManipBase::s_lock(QMutex::Recursive);
+#endif
+
+
 // static methods
 
 bool CIdManipBase::SplitId(const QByteArray& complexId, QByteArray& baseId, QByteArray& subId)

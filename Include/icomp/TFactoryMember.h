@@ -96,7 +96,6 @@ bool TFactoryMember<Interface>::IsValid() const
 }
 
 
-
 template <class Interface>
 IComponent* TFactoryMember<Interface>::CreateComponent() const
 {
@@ -124,9 +123,17 @@ IComponent* TFactoryMember<Interface>::CreateComponent() const
 template <class Interface>
 Interface* TFactoryMember<Interface>::CreateInstance(const QByteArray& /*keyId*/) const
 {
+#if QT_VERSION >= 0x060000
+	static QRecursiveMutex mutex;
+#else
+	static QMutex mutex(QMutex::Recursive);
+#endif
+
+	QMutexLocker locker(&mutex);
+
 	istd::TDelPtr<IComponent> newComponentPtr(CreateComponent());
 	if (newComponentPtr.IsValid()){
-		Interface* retVal = BaseClass2::ExtractInterface<Interface>(newComponentPtr.GetPtr());
+ 		Interface* retVal = BaseClass2::ExtractInterface<Interface>(newComponentPtr.GetPtr());
 		if (retVal != NULL){
 			newComponentPtr.PopPtr();
 
