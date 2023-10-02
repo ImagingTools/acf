@@ -84,12 +84,6 @@ IComponent* CCompositeComponent::GetSubcomponent(const QByteArray& componentId) 
 	if (m_contextPtr != NULL){
 		ComponentInfo& componentInfo = m_componentMap[componentId];
 		if (!componentInfo.isComponentInitialized){
-#ifndef QT_NO_DEBUG
-			if ((qApp != NULL) && QThread::currentThread() != qApp->thread()){
-				qWarning("Component %s initialized outside of an application thread\n", m_contextPtr->GetCompleteContextId().constData());
-			}
-#endif //QT_NO_DEBUG
-
 			componentInfo.isComponentInitialized = true;
 			componentInfo.isContextInitialized = true;
 

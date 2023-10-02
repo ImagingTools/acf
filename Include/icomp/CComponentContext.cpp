@@ -19,6 +19,9 @@ CComponentContext::CComponentContext(
 	m_staticInfo(*staticInfoPtr),
 	m_parentPtr(parentPtr),
 	m_contextId(contextId)
+#if QT_VERSION < 0x060000
+	,m_attributeMapMutex(QMutex::Recursive)
+#endif
 {
 	Q_ASSERT(elementPtr != NULL);
 	Q_ASSERT(staticInfoPtr != NULL);
@@ -66,6 +69,8 @@ const IComponentContext* CComponentContext::GetParentContext() const
 
 const iser::IObject* CComponentContext::GetAttribute(const QByteArray& attributeId, int* definitionLevelPtr) const
 {
+	QMutexLocker attributeMapLock(&m_attributeMapMutex);
+
 	AttributeMap::ConstIterator findIter = m_attributeMap.constFind(attributeId);
 	if (findIter == m_attributeMap.constEnd()){
 		AttributeInfo data;
