@@ -66,7 +66,7 @@ bool CSingleModelObserverBase::OnModelDetached(imod::IModel* modelPtr)
 	Q_ASSERT(modelPtr != NULL);
 	Q_ASSERT(m_modelPtr == modelPtr);
 
-	if (m_modelPtr == modelPtr){		
+	if (m_modelPtr == modelPtr){
 		m_modelPtr = NULL;
 
 		return true;
