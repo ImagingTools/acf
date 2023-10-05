@@ -57,7 +57,7 @@ public:
 	enum UiMode
 	{
 		/**
-			Combo box selection
+			Horizontal combo box selection
 		*/
 		UM_COMBOBOX,
 
@@ -69,7 +69,12 @@ public:
 		/**
 			Vertical radio buttons group
 		*/
-		UM_RADIOBUTTON_VERTICAL
+		UM_RADIOBUTTON_VERTICAL,
+
+		/**
+			Vertical combo box selection
+		*/
+		UM_COMBOBOX_VERTICAL
 	};
 
 	/**
@@ -100,14 +105,16 @@ public:
 		I_ASSIGN(m_infoLabelAttrPtr, "InfoLabel", "Information label for the options selector", false, "Info");
 		I_ASSIGN(m_infoIconProviderCompPtr, "InfoIconProvider", "Provider of the info icon", false, "InfoIconProvider");
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of the used icons", false, 32);
-		I_ASSIGN(m_uiModeAttrPtr, "UiMode", "Selection representation mode.\n0 - Combo box\n1 - Horizontally layouted radio button group\n2 - Vertically layouted radio button group", true, UM_COMBOBOX);
+		I_ASSIGN(m_uiModeAttrPtr, "UiMode", "Selection representation mode.\n0 - Horizontally layouted combo box group\n1 - Horizontally layouted radio button group\n2 - Vertically layouted radio button group\n3 - Vertically layouted combo box group", true, UM_COMBOBOX);
 		I_ASSIGN(m_labelPositionAttrPtr, "LabelPosition", "Selection label position.\n0 - Left from the selector,\n1 - On top of the selector", false, LP_LEFT);
 		I_ASSIGN(m_labelAlignAttrPtr, "LabelAlignment", "Selection label alignment.\n0 - Left-Top,\n1 - Center-Top,\n2 - Right-Top,\n3 - Left-Center,\n4 - Center,\n5 - Right-Center,\n6 - Left-Bottom,\n7 - Center-Bottom,\n8 - Right-Bottom", false, LA_LEFT_CENTER);
 		I_ASSIGN(m_labelWidthAttrPtr, "LabelWidth", "Fixed label width (in pixels)", false, 100);
 		I_ASSIGN(m_disableWhenEmptyAttrPtr, "DisableWhenEmpty", "Disable the control when no Option is available", true, false);
 		I_ASSIGN(m_noSelectionAllowedAttrPtr, "NoSelectionAllowed", "Allow the control to reset current index (i.e. set to -1)", true, false);
 		I_ASSIGN(m_fillWithDisabledOptionsEnabledAttrPtr, "FillWithDisabledOptionsEnabled", "Fill combo box also with disabled options, if enabled", true, false);
-		I_ASSIGN(m_useCompleterAttrPtr, "UseCompleter", "Enable completer for combo box", true, false);
+		I_ASSIGN(m_useCompleterAttrPtr, "UseCompleter", "Enable completer for combo box", true, false);		
+		I_ASSIGN_MULTI_0(m_infoLabelListAttrPtr, "InfoLabelList", "Information label for the options selectors", false);
+		I_ASSIGN_MULTI_0(m_optionsLabelListAttrPtr, "OptionsLabelList", "Command label list for the options selectors", false);
 	I_END_COMPONENT;
 
 	CSelectionParamGuiComp();
@@ -157,6 +164,8 @@ private:
 	I_ATTR(bool, m_noSelectionAllowedAttrPtr);
 	I_ATTR(bool, m_fillWithDisabledOptionsEnabledAttrPtr);
 	I_ATTR(bool, m_useCompleterAttrPtr);
+	I_MULTITEXTATTR(m_infoLabelListAttrPtr);
+	I_MULTITEXTATTR(m_optionsLabelListAttrPtr);
 
 	class RadioButtonWidget: public QFrame
 	{
@@ -182,6 +191,9 @@ private:
 	istd::TPointerVector<RadioButtonWidget> m_radioButtons;
 	istd::TPointerVector<QButtonGroup> m_radioButtonGroups;
 	istd::TDelPtr<QFrame> m_radioButtonFramePtr;
+	QList<QLabel*> m_descriptionLabelList;
+	QList<QLabel*> m_optionsLabelList;
+	QList<QLabel*> m_optionInfoLabelList;
 	QPushButton* m_resetButtonWidgetPtr;
 
 	QStandardItemModel m_completionModel;

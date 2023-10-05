@@ -66,6 +66,7 @@ void CSelectionParamGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*cha
 
 	switch (uiMode){
 		case UM_COMBOBOX:
+		case UM_COMBOBOX_VERTICAL:
 			UpdateComboBoxesView();
 			break;
 
@@ -129,6 +130,29 @@ void CSelectionParamGuiComp::OnGuiRetranslate()
 		InfoLabel->setText(*m_infoLabelAttrPtr);
 	}
 
+	/// \todo move to new method
+	if (m_optionsLabelListAttrPtr.IsValid()){
+		int optionLabelCount = m_optionsLabelList.count();
+		int labelsCount = m_optionsLabelList.count();
+		for (int optionLabelIndex = 0; optionLabelIndex < qMin(optionLabelCount, labelsCount); ++optionLabelIndex){
+			QString optionLabelText = m_optionsLabelListAttrPtr[optionLabelIndex];
+			if (!optionLabelText.isEmpty()){
+				m_optionsLabelList.at(optionLabelIndex)->setText(optionLabelText);
+			}
+		}
+	}
+
+	if (m_infoLabelListAttrPtr.IsValid()){
+		int infoLabelCount = m_infoLabelListAttrPtr.GetCount();
+		int labelsCount = m_optionInfoLabelList.count();
+		for (int infoLabelIndex = 0; infoLabelIndex < qMin(infoLabelCount, labelsCount); ++infoLabelIndex){
+			QString infoText = m_infoLabelListAttrPtr[infoLabelIndex];
+			if (!infoText.isEmpty()){
+				m_optionInfoLabelList.at(infoLabelIndex)->setText(infoText);
+			}
+		}
+	}
+
 	UpdateSelectorLabel();
 
 	UpdateDescriptionFrame();
@@ -187,6 +211,8 @@ void CSelectionParamGuiComp::OnSelectionChanged(int /*index*/)
 
 			UpdateDescriptionFrame();
 		}
+
+		UpdateComboBoxesView();
 	}
 }
 
@@ -261,9 +287,16 @@ void CSelectionParamGuiComp::OnFilterTextEdited(const QString& text)
 
 void CSelectionParamGuiComp::UpdateComboBoxesView()
 {
+	bool useVerticalLayout = (*m_uiModeAttrPtr == UM_COMBOBOX_VERTICAL);
+
 	QLayout* mainLayoutPtr = SelectionFrame->layout();
 	if (mainLayoutPtr == NULL){
-		mainLayoutPtr = new QHBoxLayout(SelectionFrame);
+		if (useVerticalLayout){
+			mainLayoutPtr = new QVBoxLayout(SelectionFrame);
+		}
+		else{
+			mainLayoutPtr = new QHBoxLayout(SelectionFrame);
+		}
 
 		mainLayoutPtr->setContentsMargins(0,0,0,0);
 	}
@@ -277,9 +310,51 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 			switchBoxPtr = m_comboBoxes.GetAt(switchIndex);
 		}
 		else{
+			QLayout* comboLayoutPtr;
+			if (m_labelPositionAttrPtr.IsValid() && *m_labelPositionAttrPtr == LP_TOP){
+				comboLayoutPtr = new QVBoxLayout(SelectionFrame);
+			}
+			else {
+				comboLayoutPtr = new QHBoxLayout(SelectionFrame);
+			}
+			comboLayoutPtr->setContentsMargins(0,0,0,0);
+
+			QString optionLabelText;
+			if (m_optionsLabelListAttrPtr.IsValid() && switchIndex < m_optionsLabelListAttrPtr.GetCount()){
+				optionLabelText = m_optionsLabelListAttrPtr[switchIndex];
+			}
+
+			QLabel* groupNameLabelPtr = new QLabel(optionLabelText, SelectionFrame);
+			m_optionsLabelList.push_back(groupNameLabelPtr);
+			if (!optionLabelText.isEmpty()){
+				comboLayoutPtr->addWidget(groupNameLabelPtr);
+			}
+
+			QVBoxLayout* comboBoxDescriptionInfoLayoutPtr = new QVBoxLayout(SelectionFrame);
 			switchBoxPtr = new QComboBox(SelectionFrame);
-			switchBoxPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);			
+			switchBoxPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 			switchBoxPtr->setView(new QListView()); // Qt bug workaround to set up the style from css
+			comboBoxDescriptionInfoLayoutPtr->addWidget(switchBoxPtr);
+
+			if (m_infoLabelListAttrPtr.IsValid() && switchIndex < m_infoLabelListAttrPtr.GetCount()){
+				QString infoText = m_infoLabelListAttrPtr[switchIndex];
+				QLabel* infoLabel = new QLabel(infoText, SelectionFrame);
+				if (!infoText.isEmpty()){
+					comboBoxDescriptionInfoLayoutPtr->addWidget(infoLabel);
+				}
+				m_optionInfoLabelList.push_back(infoLabel);
+			}
+
+			const iprm::IOptionsList* constraintsPtr = selectionPtr->GetSelectionConstraints();
+			if (constraintsPtr != nullptr && selectionPtr->GetSelectedOptionIndex() > -1){
+				QString descriptionText = constraintsPtr->GetOptionDescription(selectionPtr->GetSelectedOptionIndex());
+				QLabel* descriptionLabel = new QLabel(descriptionText, SelectionFrame);
+				if (!descriptionText.isEmpty()){
+					comboBoxDescriptionInfoLayoutPtr->addWidget(descriptionLabel);
+				}
+				m_descriptionLabelList.push_back(descriptionLabel);
+			}
+			comboLayoutPtr->addItem(comboBoxDescriptionInfoLayoutPtr);
 
 			if (*m_useCompleterAttrPtr){
 				switchBoxPtr->setEditable(true);
@@ -299,7 +374,7 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 
 			m_comboBoxes.PushBack(switchBoxPtr);
 
-			mainLayoutPtr->addWidget(switchBoxPtr);
+			mainLayoutPtr->addItem(comboLayoutPtr);
 
 			QObject::connect(switchBoxPtr, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSelectionChanged(int)));
 		}
@@ -481,7 +556,7 @@ void CSelectionParamGuiComp::UpdateSelectorLabel()
 					selectorLayoutPtr = new QHBoxLayout(SelectionFrame);
 				}
 				else{
-					selectorLayoutPtr = new QVBoxLayout(SelectionFrame);			
+					selectorLayoutPtr = new QVBoxLayout(SelectionFrame);
 				}
 			}
 
@@ -504,7 +579,7 @@ void CSelectionParamGuiComp::UpdateSelectorLabel()
 					Qt::Alignment qtAlign = Qt::Alignment(0);
 
 					switch (align){
-					case LA_LEFT_TOP:	
+					case LA_LEFT_TOP:
 						qtAlign = Qt::AlignLeft | Qt::AlignTop;
 						break;
 
