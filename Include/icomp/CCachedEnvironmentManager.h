@@ -6,6 +6,7 @@
 #include <QtCore/QMap>
 
 // ACF includes
+#include <istd/TSmartPtr.h>
 #include <iser/ISerializable.h>
 #include <iser/TCopySerializedWrap.h>
 #include <icomp/CRegistry.h>
@@ -45,7 +46,8 @@ public:
 
 private:
 	typedef iser::TCopySerializedWrap<CRegistry> Registry;
-	typedef QMap<QByteArray, Registry> RegistriesMap;
+	typedef QMap<QByteArray, istd::TSmartPtr<Registry>> RegistriesMap;
+
 	struct PackageInfo
 	{
 		istd::TDelPtr<CCompositePackageStaticInfo> staticInfoPtr;

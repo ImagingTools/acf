@@ -205,8 +205,6 @@ const ICompositeComponent* CCompositeComponent::GetParentComponent(bool ownerOnl
 
 void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, const QByteArray& subId)
 {
-	QMutexLocker lock(&m_mutex);
-
 	const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(GetComponentContext());
 	if (contextPtr == NULL){
 		qCritical("Composite component doesn't use corresponding context");
