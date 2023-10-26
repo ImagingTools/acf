@@ -354,7 +354,17 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 				}
 				m_descriptionLabelList.push_back(descriptionLabel);
 			}
-			comboLayoutPtr->addItem(comboBoxDescriptionInfoLayoutPtr);
+
+			{
+				QVBoxLayout* vLayoutPtr = dynamic_cast<QVBoxLayout*>(comboLayoutPtr);
+				QHBoxLayout* hLayoutPtr = dynamic_cast<QHBoxLayout*>(comboLayoutPtr);
+				if (vLayoutPtr != nullptr){
+					vLayoutPtr->addLayout(comboBoxDescriptionInfoLayoutPtr);
+				}
+				else{
+					hLayoutPtr->addLayout(comboBoxDescriptionInfoLayoutPtr);
+				}
+			}
 
 			if (*m_useCompleterAttrPtr){
 				switchBoxPtr->setEditable(true);
@@ -374,7 +384,16 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 
 			m_comboBoxes.PushBack(switchBoxPtr);
 
-			mainLayoutPtr->addItem(comboLayoutPtr);
+			{
+				QVBoxLayout* vLayoutPtr = dynamic_cast<QVBoxLayout*>(mainLayoutPtr);
+				QHBoxLayout* hLayoutPtr = dynamic_cast<QHBoxLayout*>(mainLayoutPtr);
+				if (vLayoutPtr != nullptr){
+					vLayoutPtr->addLayout(comboLayoutPtr);
+				}
+				else{
+					hLayoutPtr->addLayout(comboLayoutPtr);
+				}
+			}
 
 			QObject::connect(switchBoxPtr, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSelectionChanged(int)));
 		}
