@@ -6,7 +6,7 @@
         </VersionInfos>
     </AcfHeader>
     <ConfigFiles>
-        <FilePath>$(ACFDIR)/Config/AcfConfig.awc</FilePath>
+        <FilePath../../../../AcfConfig.awc</FilePath>
     </ConfigFiles>
     <PackageDirs>
 	<Dir>../../../../Partitura</Dir>
