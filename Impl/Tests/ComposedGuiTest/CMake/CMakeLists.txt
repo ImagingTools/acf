@@ -4,7 +4,7 @@ if(WIN32)
 	set(CMAKE_WIN32_EXECUTABLE "on")
 endif()
 
-set(ARXC_CONFIG "${PROJECT_SOURCE_DIR}/../Config/ComposedGuiTest.awc")
+set(ARXC_CONFIG "${PROJECT_SOURCE_DIR}/../../../../Config/AcfConfig.awc")
 set(ARXC_FILES "${PROJECT_SOURCE_DIR}/../${PROJECT_NAME}.acc")
 set(ARX_ENABLE_GENERATE_DEPENDENCIES_LIST OFF)
 

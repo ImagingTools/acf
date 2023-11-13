@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="5126" Description="ACF"/>
-            <Version Id="1" Number="2197" Description="ACF-Solutions"/>
+            <Version Id="0" Number="5127" Description="ACF"/>
+            <Version Id="1" Number="2198" Description="ACF-Solutions"/>
             <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -150,7 +150,7 @@
         <EmbeddedRegistry Id="Guis">
             <Data Description="" Keywords="">
                 <ElementsList>
-                    <Element Id="CollapsibleGroups" PackageId="ComposedGuiTestComponents" ComponentId="AllVariants">
+                    <Element Id="CollapsibleGroups" PackageId="AcfTestVoce" ComponentId="AllVariants">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -180,7 +180,7 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="MiniWidgets" PackageId="ComposedGuiTestComponents" ComponentId="AllVariants">
+                    <Element Id="MiniWidgets" PackageId="AcfTestVoce" ComponentId="AllVariants">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -210,7 +210,7 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="Simple" PackageId="ComposedGuiTestComponents" ComponentId="AllVariants">
+                    <Element Id="Simple" PackageId="AcfTestVoce" ComponentId="AllVariants">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -240,7 +240,7 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="Splitter" PackageId="ComposedGuiTestComponents" ComponentId="AllVariants">
+                    <Element Id="Splitter" PackageId="AcfTestVoce" ComponentId="AllVariants">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -270,7 +270,7 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="Stacked" PackageId="ComposedGuiTestComponents" ComponentId="Stacked">
+                    <Element Id="Stacked" PackageId="AcfTestVoce" ComponentId="Stacked">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -300,7 +300,7 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="TabBar" PackageId="ComposedGuiTestComponents" ComponentId="AllVariants">
+                    <Element Id="TabBar" PackageId="AcfTestVoce" ComponentId="AllVariants">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -330,7 +330,7 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="ToolBox" PackageId="ComposedGuiTestComponents" ComponentId="AllVariants">
+                    <Element Id="ToolBox" PackageId="AcfTestVoce" ComponentId="AllVariants">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">

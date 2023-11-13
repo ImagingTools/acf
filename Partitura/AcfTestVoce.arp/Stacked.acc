@@ -2,15 +2,15 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="5126" Description="ACF"/>
-            <Version Id="1" Number="2197" Description="ACF-Solutions"/>
+            <Version Id="0" Number="5127" Description="ACF"/>
+            <Version Id="1" Number="2198" Description="ACF-Solutions"/>
             <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
     <Keywords></Keywords>
     <ElementsList>
-        <Element Id="AutoPersistence_Lazy(-1)" PackageId="ComposedGuiTestComponents" ComponentId="AutoPersistence">
+        <Element Id="AutoPersistence_Lazy(-1)" PackageId="AcfTestVoce" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -31,7 +31,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="AutoPersistence_Lazy(0)" PackageId="ComposedGuiTestComponents" ComponentId="AutoPersistence">
+        <Element Id="AutoPersistence_Lazy(0)" PackageId="AcfTestVoce" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -52,7 +52,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="AutoPersistence_NoLazy(-1)" PackageId="ComposedGuiTestComponents" ComponentId="AutoPersistence">
+        <Element Id="AutoPersistence_NoLazy(-1)" PackageId="AcfTestVoce" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -73,7 +73,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="AutoPersistence_NoLazy(0)" PackageId="ComposedGuiTestComponents" ComponentId="AutoPersistence">
+        <Element Id="AutoPersistence_NoLazy(0)" PackageId="AcfTestVoce" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
@@ -172,7 +172,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="Lazy(-1)" PackageId="ComposedGuiTestComponents" ComponentId="StackedTemplate">
+        <Element Id="Lazy(-1)" PackageId="AcfTestVoce" ComponentId="StackedTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DesignType" Type="Integer" ExportId="DesignType">
@@ -184,7 +184,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="Lazy(-1)_AP" PackageId="ComposedGuiTestComponents" ComponentId="StackedTemplate">
+        <Element Id="Lazy(-1)_AP" PackageId="AcfTestVoce" ComponentId="StackedTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DesignType" Type="Integer" ExportId="DesignType">
@@ -196,7 +196,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="Lazy(0)" PackageId="ComposedGuiTestComponents" ComponentId="StackedTemplate">
+        <Element Id="Lazy(0)" PackageId="AcfTestVoce" ComponentId="StackedTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DefaultStartPageIndex" Type="Integer" ExportId="">
@@ -211,7 +211,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="Lazy(0)_AP" PackageId="ComposedGuiTestComponents" ComponentId="StackedTemplate">
+        <Element Id="Lazy(0)_AP" PackageId="AcfTestVoce" ComponentId="StackedTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DefaultStartPageIndex" Type="Integer" ExportId="">
@@ -268,7 +268,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="NoLazy(-1)" PackageId="ComposedGuiTestComponents" ComponentId="StackedTemplate">
+        <Element Id="NoLazy(-1)" PackageId="AcfTestVoce" ComponentId="StackedTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DesignType" Type="Integer" ExportId="DesignType">
@@ -280,7 +280,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="NoLazy(-1)_AP" PackageId="ComposedGuiTestComponents" ComponentId="StackedTemplate">
+        <Element Id="NoLazy(-1)_AP" PackageId="AcfTestVoce" ComponentId="StackedTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DesignType" Type="Integer" ExportId="DesignType">
@@ -292,7 +292,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="NoLazy(0)" PackageId="ComposedGuiTestComponents" ComponentId="StackedTemplate">
+        <Element Id="NoLazy(0)" PackageId="AcfTestVoce" ComponentId="StackedTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DefaultStartPageIndex" Type="Integer" ExportId="">
@@ -307,7 +307,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="NoLazy(0)_AP" PackageId="ComposedGuiTestComponents" ComponentId="StackedTemplate">
+        <Element Id="NoLazy(0)_AP" PackageId="AcfTestVoce" ComponentId="StackedTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DefaultStartPageIndex" Type="Integer" ExportId="">
