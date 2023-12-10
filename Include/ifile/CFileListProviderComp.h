@@ -44,7 +44,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFileListProvider)
-    virtual const QFileInfoList& GetFileList() const override;
+	virtual const QFileInfoList& GetFileList() const override;
 
 	/**
 		Creates the list of files in a root directory \c root.
@@ -74,11 +74,11 @@ public:
 				istd::ILogger* loggerPtr = NULL);
 protected:
 	// reimplemented (imod::CSingleModelObserverBase)
-    virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
-    virtual void OnComponentDestroyed() override;
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private Q_SLOTS:
 	void OnDirectoryContentChanged(const QString& directoryPath);

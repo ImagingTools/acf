@@ -27,34 +27,34 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IDocumentTypesInfo)
-    virtual bool IsFeatureSupported(int featureFlags, const QByteArray& documentTypeId) const override;
-    virtual Ids GetDocumentTypeIds() const override;
-    virtual QString GetDocumentTypeName(const QByteArray& documentTypeId) const override;
-    virtual ifile::IFileTypeInfo* GetDocumentFileTypeInfo(const QByteArray& documentTypeId) const override;
-    virtual Ids GetDocumentTypeIdsForFile(const QString& filePath) const override;
-    virtual QString GetDefaultDirectory(const QString& sugestedDir = "", const QByteArray* documentTypeIdPtr = NULL) const override;
+	virtual bool IsFeatureSupported(int featureFlags, const QByteArray& documentTypeId) const override;
+	virtual Ids GetDocumentTypeIds() const override;
+	virtual QString GetDocumentTypeName(const QByteArray& documentTypeId) const override;
+	virtual ifile::IFileTypeInfo* GetDocumentFileTypeInfo(const QByteArray& documentTypeId) const override;
+	virtual Ids GetDocumentTypeIdsForFile(const QString& filePath) const override;
+	virtual QString GetDefaultDirectory(const QString& sugestedDir = "", const QByteArray* documentTypeIdPtr = NULL) const override;
 
 	// reimplemented (idoc::IDocumentTemplate)
-    virtual Ids GetViewTypeIds(const QByteArray& documentTypeId) const override;
+	virtual Ids GetViewTypeIds(const QByteArray& documentTypeId) const override;
 	virtual QString GetViewTypeName(
 				const QByteArray& documentTypeId,
-                const QByteArray& viewTypeId) const override;
-    virtual ifile::IFilePersistence* GetFileLoader(const QByteArray& documentTypeId) const override;
+				const QByteArray& viewTypeId) const override;
+	virtual ifile::IFilePersistence* GetFileLoader(const QByteArray& documentTypeId) const override;
 	virtual istd::IChangeable* CreateDocument(
 				QByteArray& documentTypeId,
 				bool initialize = true,
 				bool beQuiet = false,
-                bool* ignoredFlagPtr = NULL) const override;
+				bool* ignoredFlagPtr = NULL) const override;
 	virtual istd::IPolymorphic* CreateView(
 				const QByteArray& documentTypeId,
 				istd::IChangeable* documentPtr,
-                const QByteArray& viewTypeId = QByteArray()) const override;
-    virtual idoc::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const override;
+				const QByteArray& viewTypeId = QByteArray()) const override;
+	virtual idoc::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
-    virtual void OnComponentDestroyed() override;
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_MULTIREF(idoc::IDocumentTemplate, m_slaveTemplatesCompPtr);

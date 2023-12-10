@@ -29,15 +29,15 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::ITextDocument)
-    virtual QString GetText() const override;
-    virtual void SetText(const QString& text) override;
+	virtual QString GetText() const override;
+	virtual void SetText(const QString& text) override;
 
 	// reimplemented (iser::ISerializable)
-    virtual bool Serialize(iser::IArchive& archive) override;
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
+	virtual void OnComponentCreated() override;
 
 private:
 	QString m_text;

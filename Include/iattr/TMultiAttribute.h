@@ -55,7 +55,7 @@ public:
 	virtual int FindValue(const Value& value) const;
 
 	// reimplemented (iser::IObject)
-    QByteArray GetFactoryId() const override;
+	QByteArray GetFactoryId() const override;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive) override;

@@ -41,17 +41,17 @@ public:
 	CSerializedUndoManagerComp();
 
 	// reimplemented (idoc::IUndoManager)
-    virtual int GetAvailableUndoSteps() const override;
-    virtual int GetAvailableRedoSteps() const override;
-    virtual QString GetUndoLevelDescription(int stepIndex) const override;
-    virtual QString GetRedoLevelDescription(int stepIndex) const override;
-    virtual void ResetUndo() override;
-    virtual bool DoUndo(int steps = 1) override;
-    virtual bool DoRedo(int steps = 1) override;
+	virtual int GetAvailableUndoSteps() const override;
+	virtual int GetAvailableRedoSteps() const override;
+	virtual QString GetUndoLevelDescription(int stepIndex) const override;
+	virtual QString GetRedoLevelDescription(int stepIndex) const override;
+	virtual void ResetUndo() override;
+	virtual bool DoUndo(int steps = 1) override;
+	virtual bool DoRedo(int steps = 1) override;
 
 	// reimplemented (imod::IObserver)
-    virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
-    virtual bool OnModelDetached(imod::IModel* modelPtr) override;
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
+	virtual bool OnModelDetached(imod::IModel* modelPtr) override;
 
 protected:
 	typedef istd::TDelPtr<iser::CMemoryWriteArchive> UndoArchivePtr;
@@ -65,20 +65,20 @@ protected:
 	bool DoListShift(int steps, UndoList& fromList, UndoList& toList);
 
 	// reimplemented (imod::TSingleModelObserverBase<iser::ISerializable>)
-    virtual iser::ISerializable* CastFromModel(imod::IModel* modelPtr) const override;
+	virtual iser::ISerializable* CastFromModel(imod::IModel* modelPtr) const override;
 
 	// reimplemented (imod::IObserver)
-    virtual void BeforeUpdate(imod::IModel* modelPtr) override;
-    virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void BeforeUpdate(imod::IModel* modelPtr) override;
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (idoc::IDocumentStateComparator)
-    virtual bool HasStoredDocumentState() const override;
-    virtual bool StoreDocumentState() override;
-    virtual bool RestoreDocumentState() override;
-    virtual DocumentChangeFlag GetDocumentChangeFlag() const override;
+	virtual bool HasStoredDocumentState() const override;
+	virtual bool StoreDocumentState() override;
+	virtual bool RestoreDocumentState() override;
+	virtual DocumentChangeFlag GetDocumentChangeFlag() const override;
 
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentDestroyed() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	qint64 GetUsedMemorySize() const;

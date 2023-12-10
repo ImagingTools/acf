@@ -33,7 +33,7 @@ public:
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
+	virtual void OnComponentCreated() override;
 
 protected:
 	I_REF(i2d::ICalibration2d, m_calibrationCompPtr);

@@ -43,13 +43,13 @@ public:
 	CComponentBase();
 
 	// reimplemented (icomp::IComponent)
-	virtual const ICompositeComponent* GetParentComponent(bool ownerOnly = false) const;
-	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const QByteArray& subId = "");
-	virtual const IComponentContext* GetComponentContext() const;
+	virtual const ICompositeComponent* GetParentComponent(bool ownerOnly = false) const override;
+	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const QByteArray& subId = "") override;
+	virtual const IComponentContext* GetComponentContext() const override;
 	virtual void SetComponentContext(
 				const icomp::IComponentContext* contextPtr,
 				const ICompositeComponent* parentPtr,
-				bool isParentOwner);
+				bool isParentOwner) override;
 
 protected:
 	/**

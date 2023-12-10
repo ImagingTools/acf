@@ -36,8 +36,8 @@ public:
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
-    virtual void OnComponentDestroyed() override;
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_REF(imod::IModel, m_defaultModelCompPtr);

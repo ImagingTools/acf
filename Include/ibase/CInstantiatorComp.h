@@ -24,7 +24,7 @@ public:
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
+	virtual void OnComponentCreated() override;
 
 private:
 	I_MULTIREF(istd::IPolymorphic, m_instancesAttrPtr);

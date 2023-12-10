@@ -114,11 +114,11 @@ protected:
 	virtual bool StoreObject(const istd::IChangeable& object);
 
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
-    virtual void OnComponentDestroyed() override;
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
-    virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) override;
 
 private Q_SLOTS:
 	/**
