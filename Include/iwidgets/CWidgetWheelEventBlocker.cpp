@@ -68,7 +68,7 @@ bool CWidgetWheelEventBlocker::eventFilter(QObject* objectPtr, QEvent* eventPtr)
 
 	if (eventType == QEvent::ChildAdded){
 		QList<QWidget*> children = objectPtr->findChildren<QWidget*>(QString(), Qt::FindChildrenRecursively);
-		for (QWidget* childPtr: qAsConst(children)){
+		for (QWidget* childPtr: std::as_const(children)){
 			AddSupportedChildWidgets(*childPtr);
 		}
 	}
