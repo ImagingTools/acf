@@ -13,13 +13,14 @@ namespace ilog
 {
 
 
-class CLogRouterComp
-	: public icomp::CComponentBase
-	, public imod::CSingleModelObserverBase
+class CLogRouterComp:
+			public icomp::CComponentBase,
+			public imod::CSingleModelObserverBase
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 	typedef imod::CSingleModelObserverBase BaseClass2;
+
 	I_BEGIN_COMPONENT(CLogRouterComp);
 		I_REGISTER_INTERFACE(imod::IObserver)
 		I_ASSIGN(m_messageContainerPtr, "InputMessageContainer", "Message container to track", true, "InputMessageContainer");
@@ -51,3 +52,5 @@ private:
 
 
 #endif // !ilog_CLogRouterComp_included
+
+

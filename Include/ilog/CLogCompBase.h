@@ -33,7 +33,7 @@ public:
 	CLogCompBase();
 
 	// reimplemented (ilog::IMessageConsumer)
-    virtual void AddMessage(const MessagePtr& messagePtr) override;
+	virtual void AddMessage(const MessagePtr& messagePtr) override;
 
 protected:
 	virtual void WriteMessageToLog(const MessagePtr& messagePtr) = 0;

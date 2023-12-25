@@ -34,14 +34,14 @@ public:
 				const QDateTime* timeStampPtr = NULL);
 
 	// reimplemented (iser::IObject)
-	virtual QByteArray GetFactoryId() const;
+	virtual QByteArray GetFactoryId() const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (iser::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_STRICT);
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_STRICT) override;
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
 	// static methods
 	static QByteArray GetTypeName();

@@ -68,30 +68,30 @@ public:
 	void SetMaxMessageCount(int maxMessageCount = -1);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (ilog::IMessageContainer)
-	virtual int GetWorstCategory() const;
-	virtual Messages GetMessages() const;
-	virtual void ClearMessages();
+	virtual int GetWorstCategory() const override;
+	virtual Messages GetMessages() const override;
+	virtual void ClearMessages() override;
 
 	// reimplemented (ilog::IMessageConsumer)
 	virtual bool IsMessageSupported(
 				int messageCategory = -1,
 				int messageId = -1,
-				const istd::IInformationProvider* messagePtr = NULL) const;
-	virtual void AddMessage(const IMessageConsumer::MessagePtr& messagePtr);
+				const istd::IInformationProvider* messagePtr = NULL) const override;
+	virtual void AddMessage(const IMessageConsumer::MessagePtr& messagePtr) override;
 
 	// reimplemented (ilog::IHierarchicalMessageContainer)
-	virtual int GetChildsCount() const;
-	virtual IHierarchicalMessageContainer* GetChild(int index) const;
+	virtual int GetChildsCount() const override;
+	virtual IHierarchicalMessageContainer* GetChild(int index) const override;
 
 	// reimplemented (istd::IChangeable)
-	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual bool IsEqual(const istd::IChangeable& object) const;
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
-	virtual bool ResetData(CompatibilityMode mode);
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual bool IsEqual(const istd::IChangeable& object) const override;
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+	virtual bool ResetData(CompatibilityMode mode) override;
 
 private:
 	typedef istd::TComposedFactory<iser::IObject> MessageFactory;

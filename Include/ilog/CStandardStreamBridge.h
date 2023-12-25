@@ -32,8 +32,8 @@ public:
 
 protected:
 	// reimplemented (std::basic_streambuf)
-	virtual std::streamsize xsputn(const char* data, std::streamsize bufferSize);
-	virtual int_type overflow(int_type v);
+	virtual std::streamsize xsputn(const char* data, std::streamsize bufferSize) override;
+	virtual int_type overflow(int_type v) override;
 
 private:
 	std::ostream& m_stream;

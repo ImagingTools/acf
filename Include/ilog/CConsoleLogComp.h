@@ -26,7 +26,7 @@ public:
 
 protected:
 	// reimplemented (CStreamLogCompBase)
-    virtual void WriteText(const QString& text, istd::IInformationProvider::InformationCategory category) override;
+	virtual void WriteText(const QString& text, istd::IInformationProvider::InformationCategory category) override;
 
 private:
 	void SetConsoleColor(istd::IInformationProvider::InformationCategory category);

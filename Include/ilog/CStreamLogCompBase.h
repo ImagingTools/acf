@@ -40,7 +40,7 @@ public:
 	virtual bool IsMessageSupported(
 				int messageCategory = -1,
 				int messageId = -1,
-                const istd::IInformationProvider* messagePtr = NULL) const override;
+				const istd::IInformationProvider* messagePtr = NULL) const override;
 
 protected:
 	/**
@@ -61,10 +61,10 @@ protected:
 	virtual void WriteText(const QString& text, istd::IInformationProvider::InformationCategory category) = 0;
 
 	// reimplemented (ilog::CLogCompBase)
-    virtual void WriteMessageToLog(const MessagePtr& messagePtr) override;
+	virtual void WriteMessageToLog(const MessagePtr& messagePtr) override;
 
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentDestroyed() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_ATTR(int, m_minPriorityAttrPtr);

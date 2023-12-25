@@ -31,8 +31,8 @@ public:
 	virtual bool IsMessageSupported(
 				int messageCategory = -1,
 				int messageId = -1,
-                const istd::IInformationProvider* messagePtr = NULL) const override;
-    virtual void AddMessage(const MessagePtr& messagePtr) override;
+				const istd::IInformationProvider* messagePtr = NULL) const override;
+	virtual void AddMessage(const MessagePtr& messagePtr) override;
 
 protected:
 	I_REF(ilog::IMessageConsumer, m_slaveMessageConsumerCompPtr);
