@@ -58,8 +58,8 @@ protected:
 	*/
 	bool IsComponentActive() const;
 
-	virtual void OnComponentCreated() override;
-	virtual void OnComponentDestroyed() override;
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 	// abstract methods
 	/**
