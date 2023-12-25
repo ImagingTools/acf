@@ -32,6 +32,8 @@ public:
 
 	virtual void Reserve(int count);
 	virtual void Resize(int count);
+	virtual void RemoveAt(int index);
+	virtual void Reset();
 
 	const ItemClass& GetAt(int index) const;
 	ItemClass& GetAt(int index);
@@ -40,8 +42,6 @@ public:
 	ItemClass& InsertAt(const ItemClass& item, int index);
 	void PopBack();
 	void PopFront();
-	void RemoveAt(int index);
-	virtual void Reset();
 
 	TContainer& operator=(const TContainer& container);
 
