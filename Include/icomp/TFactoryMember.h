@@ -60,10 +60,10 @@ public:
 	static Interface* ExtractInterface(istd::IPolymorphic* instancePtr, const QByteArray& subId = "");
 
 	// reimplemented (istd::TIFactory)
-	virtual Interface* CreateInstance(const QByteArray& keyId = "") const;
+	virtual Interface* CreateInstance(const QByteArray& keyId = "") const override;
 
 	// reimplemented (istd::IFactoryInfo)
-	virtual KeyList GetFactoryKeys() const;
+	virtual KeyList GetFactoryKeys() const override;
 
 protected:
 	TFactoryMember(const TFactoryMember& ptr);

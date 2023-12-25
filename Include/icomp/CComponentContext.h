@@ -35,11 +35,11 @@ public:
 	QByteArray GetCompleteContextId() const;
 
 	// reimplemented (icomp::IComponentContext)
-	virtual const QByteArray& GetContextId() const;
-	virtual const IRegistryElement& GetRegistryElement() const;
-	virtual const IComponentStaticInfo& GetStaticInfo() const;
-	virtual const IComponentContext* GetParentContext() const;
-	virtual const iser::IObject* GetAttribute(const QByteArray& attributeId, int* definitionLevelPtr = NULL) const;
+	virtual const QByteArray& GetContextId() const override;
+	virtual const IRegistryElement& GetRegistryElement() const override;
+	virtual const IComponentStaticInfo& GetStaticInfo() const override;
+	virtual const IComponentContext* GetParentContext() const override;
+	virtual const iser::IObject* GetAttribute(const QByteArray& attributeId, int* definitionLevelPtr = NULL) const override;
 
 	// static methods
 	/**

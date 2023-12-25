@@ -44,7 +44,7 @@ public:
 	bool operator<(const CComponentAddress& address) const;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	friend uint qHash(const CComponentAddress& address, uint seed);
 

@@ -29,17 +29,17 @@ public:
 				const istd::CClassInfo& relatedInterfaceInfo);
 
 	// reimplemented (icomp::IRealAttributeStaticInfo)
-	virtual const QByteArray& GetAttributeId() const;
-	virtual void AddRelatedMetaId(int metaGroupId, const QByteArray& id, int flags);
+	virtual const QByteArray& GetAttributeId() const override;
+	virtual void AddRelatedMetaId(int metaGroupId, const QByteArray& id, int flags) override;
 
 	// reimplemented (icomp::IAttributeStaticInfo)
-	virtual IElementStaticInfo::Ids GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const;
+	virtual IElementStaticInfo::Ids GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const override;
 
 	// reimplemented (iattr::IAttributeMetaInfo)
-	virtual QString GetAttributeDescription() const;
-	virtual const iser::IObject* GetAttributeDefaultValue() const;
-	virtual QByteArray GetAttributeTypeId() const;
-	virtual int GetAttributeFlags() const;
+	virtual QString GetAttributeDescription() const override;
+	virtual const iser::IObject* GetAttributeDefaultValue() const override;
+	virtual QByteArray GetAttributeTypeId() const override;
+	virtual int GetAttributeFlags() const override;
 
 private:
 	QByteArray m_id;

@@ -28,7 +28,7 @@ public:
 	virtual void SetComponentContext(
 				const IComponentContext* contextPtr,
 				const ICompositeComponent* parentPtr,
-				bool isParentOwner);
+				bool isParentOwner) override;
 };
 
 

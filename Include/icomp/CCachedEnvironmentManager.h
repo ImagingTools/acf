@@ -39,10 +39,10 @@ public:
 	void InitializeStaticInfo();
 
 	// reimplemented (icomp::IRegistriesManager)
-	virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr = NULL) const;
+	virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr = NULL) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	typedef iser::TCopySerializedWrap<CRegistry> Registry;

@@ -37,16 +37,16 @@ public:
 	void InitComponent();
 
 	// reimplemented (icomp::IComponentContext)
-	virtual const QByteArray& GetContextId() const;
+	virtual const QByteArray& GetContextId() const override;
 
 	// reimplemented (icomp::ICompositeComponent)
-	virtual IComponent* GetSubcomponent(const QByteArray& componentId) const;
-	virtual const IComponentContext* GetSubcomponentContext(const QByteArray& componentId) const;
-	virtual IComponent* CreateSubcomponent(const QByteArray& componentId) const;
-	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr);
+	virtual IComponent* GetSubcomponent(const QByteArray& componentId) const override;
+	virtual const IComponentContext* GetSubcomponentContext(const QByteArray& componentId) const override;
+	virtual IComponent* CreateSubcomponent(const QByteArray& componentId) const override;
+	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr) override;
 
 	// reimplemented (icomp::IComponent)
-	virtual const ICompositeComponent* GetParentComponent(bool ownerOnly = false) const;
+	virtual const ICompositeComponent* GetParentComponent(bool ownerOnly = false) const override;
 };
 
 

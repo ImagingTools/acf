@@ -32,13 +32,13 @@ public:
 	const IRegistry& GetRegistry() const;
 
 	// reimplemented (icomp::IRealComponentStaticInfo)
-	virtual IComponent* CreateComponent() const;
+	virtual IComponent* CreateComponent() const override;
 
 	//	reimplemented (icomp::IComponentStaticInfo)
-	virtual int GetComponentType() const;
-	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const;
-	virtual const QString& GetDescription() const;
-	virtual const QString& GetKeywords() const;
+	virtual int GetComponentType() const override;
+	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const override;
+	virtual const QString& GetDescription() const override;
+	virtual const QString& GetKeywords() const override;
 
 protected:
 	/**
@@ -57,13 +57,13 @@ protected:
 					const iser::IObject* defaultValuePtr);
 
 		// reimplemented (icomp::IAttributeStaticInfo)
-		virtual IElementStaticInfo::Ids GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const;
+		virtual IElementStaticInfo::Ids GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const override;
 
 		// reimplemented (iattr::IAttributeMetaInfo)
-		virtual QString GetAttributeDescription() const;
-		virtual const iser::IObject* GetAttributeDefaultValue() const;
-		virtual QByteArray GetAttributeTypeId() const;
-		virtual int GetAttributeFlags() const;
+		virtual QString GetAttributeDescription() const override;
+		virtual const iser::IObject* GetAttributeDefaultValue() const override;
+		virtual QByteArray GetAttributeTypeId() const override;
+		virtual int GetAttributeFlags() const override;
 
 	private:
 		const IAttributeStaticInfo& m_slave;

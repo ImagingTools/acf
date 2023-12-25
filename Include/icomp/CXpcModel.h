@@ -42,8 +42,8 @@ public:
 	QString GetRegistryFile(int) const;
 	void AddRegistryFile(const QString& path);
 
-	// iser::ISerializable interface
-	bool Serialize(iser::IArchive& archive);
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	QStringList m_confFiles;
