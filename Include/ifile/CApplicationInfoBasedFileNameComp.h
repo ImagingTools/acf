@@ -1,13 +1,14 @@
-#ifndef ifile_CApplicationInfoBasedFileNameComp_included
-#define ifile_CApplicationInfoBasedFileNameComp_included
+#pragma once
 
 
 // ACF includes
 #include <ifile/CRelativeFileNameParamComp.h>
 #include <ibase/IApplicationInfo.h>
 
+
 namespace ifile
 {
+
 
 class CApplicationInfoBasedFileNameComp: public ifile::CRelativeFileNameParamComp
 {
@@ -19,7 +20,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFileNameParam)
-	virtual const QString& GetPath() const;
+	virtual const QString& GetPath() const override;
 
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
@@ -38,8 +39,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CApplicationInfoBasedFileNameComp_included
 
 

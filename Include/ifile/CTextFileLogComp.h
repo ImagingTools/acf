@@ -1,5 +1,4 @@
-#ifndef ifile_CTextFileLogComp_included
-#define ifile_CTextFileLogComp_included
+#pragma once
 
 
 // Qt includes
@@ -38,11 +37,11 @@ public:
 
 protected:
 	// reimplemented (CStreamLogCompBase)
-	virtual void WriteText(const QString& text, istd::IInformationProvider::InformationCategory category);
+	virtual void WriteText(const QString& text, istd::IInformationProvider::InformationCategory category) override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	void OpenFileStream();
@@ -65,7 +64,7 @@ private:
 
 	protected:
 		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CTextFileLogComp& m_parent;
@@ -84,8 +83,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CTextFileLogComp_included
 
 

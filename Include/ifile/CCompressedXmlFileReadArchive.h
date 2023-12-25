@@ -1,5 +1,4 @@
-#ifndef ifile_CCompressedXmlFileReadArchive_included
-#define ifile_CCompressedXmlFileReadArchive_included
+#pragma once
 
 
 // Qt includes
@@ -42,7 +41,7 @@ protected:
 				int id,
 				int flags,
 				QString& message,
-				QString& messageSource) const;
+				QString& messageSource) const override;
 
 private:
 	QString m_openFileName;
@@ -51,8 +50,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CCompressedXmlFileReadArchive_included
 
 

@@ -1,12 +1,10 @@
-#ifndef ifile_CFileSerializerCompBase_included
-#define ifile_CFileSerializerCompBase_included
+#pragma once
 
 
 // Qt includes
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 #include <QtCore/QFileInfo>
-
 
 // ACF includes
 #include <ilog/TLoggerCompWrap.h>
@@ -74,8 +72,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CFileSerializerCompBase_included
 
 

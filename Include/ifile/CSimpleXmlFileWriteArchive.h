@@ -1,5 +1,4 @@
-#ifndef ifile_CSimpleXmlFileWriteArchive_included
-#define ifile_CSimpleXmlFileWriteArchive_included
+#pragma once
 
 
 // Qt includes
@@ -48,8 +47,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CSimpleXmlFileWriteArchive_included
 
 

@@ -1,5 +1,4 @@
-#ifndef ifile_CComposedFilePersistenceComp_included
-#define ifile_CComposedFilePersistenceComp_included
+#pragma once
 
 
 // ACF includes
@@ -41,22 +40,22 @@ public:
 				const istd::IChangeable* dataObjectPtr,
 				const QString* filePathPtr = NULL,
 				int flags = -1,
-				bool beQuiet = true) const;
+				bool beQuiet = true) const override;
 	virtual int LoadFromFile(
 				istd::IChangeable& data,
 				const QString& filePath = QString(),
-				ibase::IProgressManager* progressManagerPtr = NULL) const;
+				ibase::IProgressManager* progressManagerPtr = NULL) const override;
 	virtual int SaveToFile(
 				const istd::IChangeable& data,
 				const QString& filePath = QString(),
-				ibase::IProgressManager* progressManagerPtr = NULL) const;
+				ibase::IProgressManager* progressManagerPtr = NULL) const override;
 
 	// reimplemented (ifile::IFileTypeInfo)
-	virtual bool GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr = NULL, int flags = -1, bool doAppend = false) const;
-	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
+	virtual bool GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr = NULL, int flags = -1, bool doAppend = false) const override;
+	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const override;
 
 	// reimplemented (ifile::IFilePersistenceInfo)
-	virtual QString GetLastFilePath(OperationType operationType = OT_UNKNOWN, PathType pathType = PT_COMPLETE) const;
+	virtual QString GetLastFilePath(OperationType operationType = OT_UNKNOWN, PathType pathType = PT_COMPLETE) const override;
 
 protected:
 	QString GetPathForType(const QFileInfo& fileInfo, PathType pathType) const;
@@ -71,8 +70,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CComposedFilePersistenceComp_included
 
 

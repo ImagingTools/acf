@@ -1,5 +1,4 @@
-#ifndef ifile_CFileListProviderComp_included
-#define ifile_CFileListProviderComp_included
+#pragma once
 
 
 // Qt includes
@@ -107,8 +106,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif //!ifile_CFileListProviderComp_included
 
 

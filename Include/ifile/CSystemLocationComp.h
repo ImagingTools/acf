@@ -1,5 +1,4 @@
-#ifndef ifile_CSystemLocationComp_included
-#define ifile_CSystemLocationComp_included
+#pragma once
 
 
 // ACF includes
@@ -68,16 +67,16 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFileNameParam)
-    virtual int GetPathType() const override;
-    virtual const QString& GetPath() const override;
-    virtual void SetPath(const QString& path) override;
+	virtual int GetPathType() const override;
+	virtual const QString& GetPath() const override;
+	virtual void SetPath(const QString& path) override;
 
 	// reimplemented (iser::ISerializable)
-    virtual bool Serialize(iser::IArchive& archive) override;
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
+	virtual void OnComponentCreated() override;
 
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
@@ -89,8 +88,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CSystemLocationComp_included
 
 

@@ -1,5 +1,4 @@
-#ifndef ifile_CRelativeFileNameParamComp_included
-#define ifile_CRelativeFileNameParamComp_included
+#pragma once
 
 
 // ACF includes
@@ -28,19 +27,19 @@ public:
 	CRelativeFileNameParamComp();
 
 	// reimplemented (ifile::IRelativeFilePath)
-    virtual QString GetBasePath() const override;
+	virtual QString GetBasePath() const override;
 
 	// reimplemented (ifile::IFileNameParam)
-    virtual const QString& GetPath() const override;
-    virtual void SetPath(const QString& path) override;
+	virtual const QString& GetPath() const override;
+	virtual void SetPath(const QString& path) override;
 
 	// reimplemented (iser::ISerializable)
-    virtual bool Serialize(iser::IArchive& archive) override;
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
-    virtual void OnComponentDestroyed() override;
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_REF(ifile::IFileNameParam, m_relativeToCompPtr);
@@ -53,8 +52,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CRelativeFileNameParamComp_included
 
 

@@ -1,7 +1,7 @@
-#ifndef ifile_CCompressedXmlFileWriteArchive_included
-#define ifile_CCompressedXmlFileWriteArchive_included
+#pragma once
 
 
+// Qt includes
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomNode>
 #include <QtCore/QFile>
@@ -50,8 +50,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CCompressedXmlFileWriteArchive_included
 
 

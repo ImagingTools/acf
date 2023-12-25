@@ -1,5 +1,4 @@
-#ifndef ifile_CFileSystemInfoProviderComp_included
-#define ifile_CFileSystemInfoProviderComp_included
+#pragma once
 
 
 // Qt includes
@@ -45,27 +44,27 @@ public:
 	CFileSystemInfoProviderComp();
 
 	// reimplemented (ifile::IFileSystemInfoProvider)
-    virtual const iprm::IOptionsList& GetDriveList() const override;
-    virtual const istd::CSystem::FileDriveInfo* GetFileDriveInfo(int driveIndex = -1) const override;
+	virtual const iprm::IOptionsList& GetDriveList() const override;
+	virtual const istd::CSystem::FileDriveInfo* GetFileDriveInfo(int driveIndex = -1) const override;
 
 	// reimplemented (iprm::IOptionsList)
-    virtual int GetOptionsFlags() const override;
-    virtual int GetOptionsCount() const override;
-    virtual QString GetOptionName(int index) const override;
-    virtual QString GetOptionDescription(int index) const override;
-    virtual QByteArray GetOptionId(int index) const override;
-    virtual bool IsOptionEnabled(int index) const override;
+	virtual int GetOptionsFlags() const override;
+	virtual int GetOptionsCount() const override;
+	virtual QString GetOptionName(int index) const override;
+	virtual QString GetOptionDescription(int index) const override;
+	virtual QByteArray GetOptionId(int index) const override;
+	virtual bool IsOptionEnabled(int index) const override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-    virtual void OnComponentCreated() override;
-    virtual void OnComponentDestroyed() override;
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
-    virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (QThread)
-    virtual void run() override;
+	virtual void run() override;
 
 protected:
 	typedef std::vector<istd::CSystem::FileDriveDescriptor> DriveInfos;
@@ -97,8 +96,5 @@ private:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CFileSystemInfoProviderComp_included
 
 

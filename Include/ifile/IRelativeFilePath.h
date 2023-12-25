@@ -1,5 +1,4 @@
-#ifndef ifile_IRelativeFilePath_included
-#define ifile_IRelativeFilePath_included
+#pragma once
 
 
 // ACF includes
@@ -18,8 +17,5 @@ public:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_IRelativeFilePath_included
 
 

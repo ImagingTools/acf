@@ -1,5 +1,4 @@
-#ifndef ifile_CFileArchiveInfo_included
-#define ifile_CFileArchiveInfo_included
+#pragma once
 
 
 // ACF includes
@@ -21,7 +20,7 @@ public:
 	explicit CFileArchiveInfo(const QString& filePath);
 
 	// reimplemented (ifile::IFileArchiveInfo)
-	virtual const QString& GetCurrentFilePath() const;
+	virtual const QString& GetCurrentFilePath() const override;
 
 protected:
 	QString m_filePath;
@@ -29,8 +28,5 @@ protected:
 
 
 } // namespace ifile
-
-
-#endif // !ifile_CFileArchiveInfo_included
 
 

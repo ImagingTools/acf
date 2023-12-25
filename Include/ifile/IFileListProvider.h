@@ -1,5 +1,4 @@
-#ifndef ifile_IFileListProvider_included
-#define ifile_IFileListProvider_included
+#pragma once
 
 
 // Qt includes
@@ -27,8 +26,5 @@ public:
 
 
 } // namespace ifile
-
-
-#endif //!ifile_IFileListProvider_included
 
 
