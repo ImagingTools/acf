@@ -13,13 +13,14 @@
 #include <i2d/CPolyline.h>
 #include <i2d/CPolygon.h>
 #include <i2d/CPosition2d.h>
-
+#include <i2d/CLabel.h>
 
 namespace i2d
 {
 
 
 static QByteArray s_line2dTypeId = CLine2d::GetTypeName();
+static QByteArray s_label2dTypeId = CLine2d::GetTypeName();
 static QByteArray s_circle2dTypeId = CCircle::GetTypeName();
 static QByteArray s_ring2dTypeId = CAnnulus::GetTypeName();
 static QByteArray s_ringSegment2dTypeId = CAnnulusSegment::GetTypeName();
@@ -36,6 +37,9 @@ iser::IObject* CObject2dFactory::CreateInstance(const QByteArray& keyId) const
 {
 	if (keyId == s_line2dTypeId){
 		return new imod::TModelWrap<CLine2d>();
+	}
+	else if (keyId == s_label2dTypeId){
+		return new imod::TModelWrap<CLabel>();
 	}
 	else if (keyId == s_position2dTypeId){
 		return new imod::TModelWrap<CPosition2d>();
