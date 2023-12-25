@@ -56,7 +56,7 @@ protected:
 	virtual void OnApplicationShutdown();
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentDestroyed() override;
 
 Q_SIGNALS:
 	void EmitEventLoopStarted();
