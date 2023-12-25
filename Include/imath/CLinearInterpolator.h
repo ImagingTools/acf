@@ -29,8 +29,8 @@ public:
 	void SetNodes(double* positions, double* values, int nodesCount);
 
 	// reimplemented (imath::TIMathFunction<double, double>)
-	virtual bool GetValueAt(const double& argument, double& result) const;
-	virtual double GetValueAt(const double& argument) const;
+	virtual bool GetValueAt(const double& argument, double& result) const override;
+	virtual double GetValueAt(const double& argument) const override;
 
 private:
 	typedef QMap<double, double> Nodes;

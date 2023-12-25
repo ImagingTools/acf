@@ -31,8 +31,8 @@ public:
 	typedef Degree DerivativeDegreeType;
 
 	// reimplemented (imath::TIMathFunction<Argument, Result>)
-	virtual bool GetValueAt(const Argument& argument, Result& result) const;
-	virtual Result GetValueAt(const Argument& argument) const;
+	virtual bool GetValueAt(const Argument& argument, Result& result) const override;
+	virtual Result GetValueAt(const Argument& argument) const override;
 
 protected:
 	/**

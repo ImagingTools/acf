@@ -37,15 +37,15 @@ public:
 	void SetOffset(double value);
 
 	// overloaded (imath::CFixedPointManip)
-	void SetPrecision(int precision);
+	void SetPrecision(int precision) override;
 
 	// reimplemented (imath::TIValueManip)
-	virtual QString GetString(const double& value) const;
-	virtual bool GetParsed(const QString& text, double& result) const;
+	virtual QString GetString(const double& value) const override;
+	virtual bool GetParsed(const QString& text, double& result) const override;
 
 protected:
 	// reimplemented (imath::TIValueManip)
-	virtual qint32 GetInternalValue(double value) const;
+	virtual qint32 GetInternalValue(double value) const override;
 
 private:
 	double m_scaleFactor;

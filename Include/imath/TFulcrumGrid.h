@@ -120,7 +120,7 @@ public:
 	virtual void RemoveLayer(int dimension, int layerIndex);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// operators
 	bool operator==(const TFulcrumGrid<Position, Fulcrums>& value) const;

@@ -47,7 +47,7 @@ public:
 	virtual ResultType GetValueAt(const ArgumentType& argument) const;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// static public methods
 	/**

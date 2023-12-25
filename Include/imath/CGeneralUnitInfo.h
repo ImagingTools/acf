@@ -32,14 +32,14 @@ public:
 	void SetValueRange(const istd::CRange& range);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	//	reimplemented (imath::IUnitInfo)
-	virtual int GetUnitType() const;
-	virtual QString GetUnitName() const;
-	virtual double GetDisplayMultiplicationFactor() const;
-	virtual istd::CRange GetValueRange() const;
-	virtual const imath::IDoubleManip& GetValueManip() const;
+	virtual int GetUnitType() const override;
+	virtual QString GetUnitName() const override;
+	virtual double GetDisplayMultiplicationFactor() const override;
+	virtual istd::CRange GetValueRange() const override;
+	virtual const imath::IDoubleManip& GetValueManip() const override;
 
 private:
 	int m_type;
