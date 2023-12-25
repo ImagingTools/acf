@@ -42,10 +42,10 @@ public:
 	istd::IChangeable::ChangeSet GetCumulatedChanges() const;
 
 	// reimplemented (imod::IModel)
-	virtual bool AttachObserver(imod::IObserver* observerPtr);
-	virtual void DetachObserver(imod::IObserver* observerPtr);
-	virtual void DetachAllObservers();
-	virtual bool IsAttached(const imod::IObserver* observerPtr) const;
+	virtual bool AttachObserver(imod::IObserver* observerPtr) override;
+	virtual void DetachObserver(imod::IObserver* observerPtr) override;
+	virtual void DetachAllObservers() override;
+	virtual bool IsAttached(const imod::IObserver* observerPtr) const override;
 
 protected:
 	/**

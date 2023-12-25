@@ -67,7 +67,7 @@ protected:
 		ObserverProxy(CMultiModelDispatcherBase* parentPtr, int modelId, const istd::IChangeable::ChangeSet& relevantFlags);
 
 		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CMultiModelDispatcherBase& m_parent;

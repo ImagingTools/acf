@@ -63,11 +63,11 @@ public:
 	void EnsureModelsDetached();
 
 	// reimplemented (imod::IObserver)
-	virtual bool IsModelAttached(const imod::IModel* modelPtr) const;
-	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
-	virtual bool OnModelDetached(imod::IModel* modelPtr);
-	virtual void BeforeUpdate(imod::IModel* modelPtr);
-	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+	virtual bool IsModelAttached(const imod::IModel* modelPtr) const override;
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
+	virtual bool OnModelDetached(imod::IModel* modelPtr) override;
+	virtual void BeforeUpdate(imod::IModel* modelPtr) override;
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 private:
 	bool IsAttached(const imod::IModel* modelPtr) const;
