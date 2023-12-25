@@ -34,11 +34,11 @@ public:
 	typedef TGuiComponentBase<WidgetType> BaseClass;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual QWidget* CreateQtWidget(QWidget* parentPtr);
+	virtual QWidget* CreateQtWidget(QWidget* parentPtr) override;
 
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiRetranslate() override;
 };
 
 
