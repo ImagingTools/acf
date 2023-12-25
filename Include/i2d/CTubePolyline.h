@@ -23,7 +23,7 @@ public:
 	virtual bool Transform(
 				const ITransformation2d& transformation,
 				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL);
+				double* errorFactorPtr = NULL) override;
 };
 
 

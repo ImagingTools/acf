@@ -29,7 +29,7 @@ public:
 	virtual iser::ISerializable& GetNodeDataRef(int nodeIndex) = 0;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 };
 
 

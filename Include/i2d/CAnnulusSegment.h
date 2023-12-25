@@ -39,13 +39,13 @@ public:
 	// reimplemented (i2d::IObject2d)
 	virtual CRectangle GetBoundingBox() const override;
 	virtual bool Transform(
-		const ITransformation2d& transformation,
-		ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
-		double* errorFactorPtr = NULL) override;
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) override;
 	virtual bool InvTransform(
-		const ITransformation2d& transformation,
-		ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
-		double* errorFactorPtr = NULL) override;
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) override;
 
 	// reimplemented (istd::IChangeable)
 	virtual int GetSupportedOperations() const override;
