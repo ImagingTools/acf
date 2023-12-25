@@ -17,24 +17,16 @@ namespace ifile
 
 // public methods
 
-#if QT_VERSION >= 0x060000
 CTextFileLogComp:: CTextFileLogComp()
-:	m_outputFile(),
+	:m_outputFile(),
 	m_outputFileStream(&m_outputFile),
 	m_filePathObserver(*this)
-{
-	m_lastDay = QDate::currentDate().day();
-}
-#else
-CTextFileLogComp::CTextFileLogComp()
-	: m_outputFile(),
-	m_outputFileStream(&m_outputFile),
-	m_filePathObserver(*this),
-	m_mutex(QMutex::Recursive)
-{
-	m_lastDay = QDate::currentDate().day();
-}
+#if QT_VERSION < 0x060000
+	,m_mutex(QMutex::Recursive)
 #endif
+{
+	m_lastDay = QDate::currentDate().day();
+}
 
 
 // protected methods
@@ -43,18 +35,29 @@ CTextFileLogComp::CTextFileLogComp()
 
 void CTextFileLogComp::WriteText(const QString& text, istd::IInformationProvider::InformationCategory /*category*/)
 {
+	static const int s_oneMinute = 60000;
+
 	QMutexLocker lock(&m_mutex);
 
 	// check the day overlap
 	int day = QDate::currentDate().day();
-	if (m_lastDay != day) {
+	if (m_lastDay != day){
 		m_lastDay = day;
-		OpenFileStream();
+		bool ok = OpenFileStream();
+		if (!ok){
+			m_tryTimer.start(5 * s_oneMinute);
+		}
 	}
 
 	if (m_outputFile.isOpen()){
-		m_outputFileStream << text;
-		m_outputFileStream.flush();
+		try{
+			m_outputFileStream << text;
+			m_outputFileStream.flush();
+		}
+		catch(...){
+			m_outputFileStream.reset();
+			m_outputFile.close();
+		}
 	}
 }
 
@@ -68,13 +71,17 @@ void CTextFileLogComp::OnComponentCreated()
 	if (m_fileNameCompPtr.IsValid() && m_fileNameModelCompPtr.IsValid()){
 		m_fileNameModelCompPtr->AttachObserver(&m_filePathObserver);
 	}
-	
+
+	connect(&m_tryTimer, SIGNAL(timeout()), this, SLOT(OnTryTimer()));
+
 	OpenFileStream();
 }
 
 
 void CTextFileLogComp::OnComponentDestroyed()
 {
+	m_tryTimer.stop();
+
 	if (m_fileNameModelCompPtr.IsValid() && m_fileNameModelCompPtr->IsAttached(&m_filePathObserver)){
 		m_fileNameModelCompPtr->DetachObserver(&m_filePathObserver);
 	}
@@ -85,9 +92,13 @@ void CTextFileLogComp::OnComponentDestroyed()
 }
 
 
-void CTextFileLogComp::OpenFileStream()
+// private methods
+
+bool CTextFileLogComp::OpenFileStream()
 {
 	QMutexLocker lock(&m_mutex);
+
+	bool success = false;
 
 	if (m_outputFile.isOpen()){
 		m_outputFile.flush();
@@ -99,7 +110,7 @@ void CTextFileLogComp::OpenFileStream()
 		QString logFilePath = m_fileNameCompPtr->GetPath();
 
 		if (logFilePath.isEmpty()){
-			return;
+			return false;
 		}
 
 		QIODevice::OpenMode openMode = QIODevice::Text | QIODevice::WriteOnly;
@@ -113,8 +124,10 @@ void CTextFileLogComp::OpenFileStream()
 		istd::CSystem::EnsurePathExists(fileInfo.absolutePath());
 
 		m_outputFile.setFileName(logFilePath);
-		m_outputFile.open(openMode);
+		success = m_outputFile.open(openMode);
 	}
+
+	return success;
 }
 
 
@@ -123,6 +136,14 @@ void CTextFileLogComp::CloseFileStream()
 	QMutexLocker lock(&m_mutex);
 
 	m_outputFile.close();
+}
+
+
+// private slots
+
+void CTextFileLogComp::OnTryTimer()
+{
+	OpenFileStream();
 }
 
 
@@ -139,7 +160,7 @@ CTextFileLogComp::FilePathObserver::FilePathObserver(CTextFileLogComp& parent)
 // protected methods
 
 // reimplemented (imod::CSingleModelObserverBase)
-	
+
 void CTextFileLogComp::FilePathObserver::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	m_parent.OpenFileStream();

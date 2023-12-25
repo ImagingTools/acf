@@ -5,6 +5,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
 #include <QtCore/QMutex>
+#include <QtCore/QTimer>
 
 // ACF includes
 #include <imod/IModel.h>
@@ -44,8 +45,11 @@ protected:
 	virtual void OnComponentDestroyed() override;
 
 private:
-	void OpenFileStream();
+	bool OpenFileStream();
 	void CloseFileStream();
+
+private Q_SLOT:
+	void OnTryTimer();
 
 private:
 	I_REF(ifile::IFileNameParam, m_fileNameCompPtr);
@@ -54,6 +58,7 @@ private:
 
 	QFile m_outputFile;
 	QTextStream m_outputFileStream;
+	QTimer m_tryTimer;
 
 	class FilePathObserver: public imod::CSingleModelObserverBase
 	{
@@ -73,7 +78,6 @@ private:
 	FilePathObserver m_filePathObserver;
 
 	int m_lastDay;
-
 #if QT_VERSION >= 0x060000
 	mutable QRecursiveMutex m_mutex;
 #else
