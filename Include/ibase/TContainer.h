@@ -46,12 +46,12 @@ public:
 	TContainer& operator=(const TContainer& container);
 
 	// reimplemented (istd::IContainerInfo)
-	virtual int GetItemsCount() const;
-	virtual bool IsEmpty() const;
-	virtual bool IsIndexValid(int index) const;
+	virtual int GetItemsCount() const override;
+	virtual bool IsEmpty() const override;
+	virtual bool IsIndexValid(int index) const override;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 protected:
 	static const ChangeSet s_elementAddChange;

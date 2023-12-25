@@ -189,26 +189,26 @@ public:
 	void Dilate(int leftValue, int rightValue, int topValue, int bottomValue);
 
 	// reimplemented (i2d::IObject2d)
-	virtual i2d::CVector2d GetCenter() const;
-	virtual void MoveCenterTo(const i2d::CVector2d& position);
-	virtual i2d::CRectangle GetBoundingBox() const;
+	virtual i2d::CVector2d GetCenter() const override;
+	virtual void MoveCenterTo(const i2d::CVector2d& position) override;
+	virtual i2d::CRectangle GetBoundingBox() const override;
 
 	// reimplemented (iimg::IRasterImage)
-	virtual bool IsEmpty() const;
-	virtual void ResetImage();
-	virtual void ClearImage();
-	virtual istd::CIndex2d GetImageSize() const;
-	virtual int GetComponentsCount() const;
-	virtual icmm::CVarColor GetColorAt(const istd::CIndex2d& position) const;
-	virtual bool SetColorAt(const istd::CIndex2d& position, const icmm::CVarColor& color);
+	virtual bool IsEmpty() const override;
+	virtual void ResetImage() override;
+	virtual void ClearImage() override;
+	virtual istd::CIndex2d GetImageSize() const override;
+	virtual int GetComponentsCount() const override;
+	virtual icmm::CVarColor GetColorAt(const istd::CIndex2d& position) const override;
+	virtual bool SetColorAt(const istd::CIndex2d& position, const icmm::CVarColor& color) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (istd::IChangeable)
-	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 	bool operator==(const CScanlineMask& mask) const;
 	bool operator!=(const CScanlineMask& mask) const;

@@ -27,30 +27,30 @@ public:
 	virtual istd::IChangeable* InsertPage(
 				const idoc::IDocumentMetaInfo* pageMetaInfoPtr = NULL,
 				const iprm::IParamsSet* pageParameterPtr = NULL,
-				int position = -1);
+				int position = -1) override;
 
 	// reimplemented (iimg::IMultiBitmapProvider)
-	virtual const iprm::IOptionsList* GetBitmapListInfo() const;
-	virtual int GetBitmapsCount() const;
-	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
+	virtual const iprm::IOptionsList* GetBitmapListInfo() const override;
+	virtual int GetBitmapsCount() const override;
+	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const override;
 
 	// reimplemented (iimg::IMultiPageBitmapController)
 	virtual iimg::IBitmap* InsertBitmap(
 				iimg::IBitmap::PixelFormat pixelFormat,
 				const istd::CIndex2d& size,
-				const idoc::IDocumentMetaInfo* metaInfoPtr = NULL);
+				const idoc::IDocumentMetaInfo* metaInfoPtr = NULL) override;
 	virtual iimg::IBitmap* InsertBitmap(
 				iimg::IBitmap::PixelFormat pixelFormat,
 				const istd::CIndex2d& size,
 				void* dataPtr,
 				bool releaseFlag,
 				int linesDifference = 0,
-				const idoc::IDocumentMetaInfo* metaInfoPtr = NULL);
-	virtual void RemoveBitmap(int index);
+				const idoc::IDocumentMetaInfo* metaInfoPtr = NULL) override;
+	virtual void RemoveBitmap(int index) override;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 protected:
 	// abstract methods

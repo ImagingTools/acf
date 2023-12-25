@@ -40,21 +40,21 @@ public:
 	CMultiObserverBinderComp();
 
 	// reimplemented (imod::IObserver)
-	virtual bool IsModelAttached(const imod::IModel* modelPtr = NULL) const;
-	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
-	virtual bool OnModelDetached(imod::IModel* modelPtr);
-	virtual void BeforeUpdate(imod::IModel* modelPtr);
-	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+	virtual bool IsModelAttached(const imod::IModel* modelPtr = NULL) const override;
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
+	virtual bool OnModelDetached(imod::IModel* modelPtr) override;
+	virtual void BeforeUpdate(imod::IModel* modelPtr) override;
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor(const istd::IChangeable::ChangeSet& changeSet);
-	virtual void UpdateModelFromEditor() const;
-	virtual bool IsReadOnly() const;
-	virtual void SetReadOnly(bool state);
+	virtual void UpdateEditor(const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void UpdateModelFromEditor() const override;
+	virtual bool IsReadOnly() const override;
+	virtual void SetReadOnly(bool state) override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentDestroyed() override;
 
 private:
 	void EnsureModelDetached();

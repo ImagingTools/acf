@@ -38,7 +38,7 @@ private:
 
 	protected:
 		// reimplemented (QObject)
-		bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
+		bool eventFilter(QObject* sourcePtr, QEvent* eventPtr) override;
 
 	private:
 		TLocalizableWrap& m_parent;

@@ -32,34 +32,34 @@ public:
 	CBitmap(const CBitmap& bitmap);
 	CBitmap(const QImage& image);
 
-    QImage& GetQImageRef();
+	QImage& GetQImageRef();
 
 	// reimplemented (iimg::IQImageProvider)
-    virtual const QImage& GetQImage() const override;
-    virtual bool CopyImageFrom(const QImage& image) override;
+	virtual const QImage& GetQImage() const override;
+	virtual bool CopyImageFrom(const QImage& image) override;
 
 	// reimplemented (iimg::IBitmap)
-    virtual bool IsFormatSupported(PixelFormat pixelFormat) const override;
-    virtual PixelFormat GetPixelFormat() const override;
-    virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, int pixelBitsCount = 0, int componentsCount = 0) override;
-    virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0) override;
-    virtual int GetLinesDifference() const override;
-    virtual int GetPixelsDifference() const override;
-    virtual const void* GetLinePtr(int positionY) const override;
-    virtual void* GetLinePtr(int positionY) override;
+	virtual bool IsFormatSupported(PixelFormat pixelFormat) const override;
+	virtual PixelFormat GetPixelFormat() const override;
+	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, int pixelBitsCount = 0, int componentsCount = 0) override;
+	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0) override;
+	virtual int GetLinesDifference() const override;
+	virtual int GetPixelsDifference() const override;
+	virtual const void* GetLinePtr(int positionY) const override;
+	virtual void* GetLinePtr(int positionY) override;
 
 	// reimplemented (iimg::IRasterImage)
-    virtual void ResetImage() override;
-    virtual void ClearImage() override;
-    virtual istd::CIndex2d GetImageSize() const override;
+	virtual void ResetImage() override;
+	virtual void ClearImage() override;
+	virtual istd::CIndex2d GetImageSize() const override;
 
 	// reimplemented (iser::IObject)
-    virtual QByteArray GetFactoryId() const override;
+	virtual QByteArray GetFactoryId() const override;
 
 	// reimplemented (istd::IChangeable)
-    virtual int GetSupportedOperations() const override;
-    virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
-    virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
 protected:
 	QImage::Format CalcQtFormat(PixelFormat pixelFormat) const;

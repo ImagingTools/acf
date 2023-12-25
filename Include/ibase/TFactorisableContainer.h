@@ -64,14 +64,14 @@ public:
 	void RegisterItemFactory(istd::TIFactory<InterfaceClass>* itemFactoryPtr);
 
 	// reimplemented (iser::ISerializable)
-	bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	virtual InterfaceClass* CreateElement(const QByteArray& itemKey);
 	virtual void OnElementCreated(InterfaceClass* elementPtr);
 
 	// reimplemented (ibase::TSerializableContainer)
-	virtual bool SerializeItem(ItemClass& item, iser::IArchive& archive, iser::CArchiveTag* parentTagPtr = NULL);
+	virtual bool SerializeItem(ItemClass& item, iser::IArchive& archive, iser::CArchiveTag* parentTagPtr = NULL) override;
 
 protected:
 	istd::TIFactory<InterfaceClass>* m_itemFactoryPtr;

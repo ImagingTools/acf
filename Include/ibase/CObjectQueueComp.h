@@ -34,31 +34,31 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::IObjectQueue)
-	virtual int GetObjectsCount(const QByteArray* typeIdPtr = NULL) const;
-	virtual void ClearQueue();
-	virtual istd::IChangeable* CreateFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
-	virtual istd::IChangeable* CreateBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
-	virtual void RemoveFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
-	virtual void RemoveBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
-	virtual istd::IChangeable* GetFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) const;
-	virtual istd::IChangeable* GetBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) const;
+	virtual int GetObjectsCount(const QByteArray* typeIdPtr = NULL) const override;
+	virtual void ClearQueue() override;
+	virtual istd::IChangeable* CreateFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual istd::IChangeable* CreateBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual void RemoveFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual void RemoveBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual istd::IChangeable* GetFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) const override;
+	virtual istd::IChangeable* GetBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) const override;
 	virtual void SelectObjects(
 				ObjectList& result,
 				bool doAppend = false,
 				int offsetPos = 0,
-				const QByteArray* typeIdPtr = NULL) const;
-	virtual istd::IChangeable* PopFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
-	virtual istd::IChangeable* PopBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
+				const QByteArray* typeIdPtr = NULL) const override;
+	virtual istd::IChangeable* PopFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual istd::IChangeable* PopBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	istd::IChangeable* CreateObject();
 	void TryReductReserve();
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_FACT(istd::IChangeable, m_objectFactoryFactPtr);
