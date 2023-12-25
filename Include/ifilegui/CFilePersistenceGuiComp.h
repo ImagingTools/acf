@@ -34,7 +34,7 @@ protected Q_SLOTS:
 
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
-	void OnGuiCreated();
+	virtual void OnGuiCreated() override;
 
 private:
 	I_REF(istd::IChangeable, m_objectCompPtr);

@@ -57,17 +57,17 @@ public:
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnGuiModelAttached() override;
+	virtual void OnGuiModelDetached() override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
+	virtual void OnGuiRetranslate() override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private Q_SLOTS:
 	void UpdateFilePreview();
@@ -88,7 +88,7 @@ protected:
 
 	protected:
 		// reimplemented (QWidget)
-		void resizeEvent(QResizeEvent* eventPtr);
+		void resizeEvent(QResizeEvent* eventPtr) override;
 	};
 
 protected:

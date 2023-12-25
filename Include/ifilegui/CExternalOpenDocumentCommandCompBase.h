@@ -28,10 +28,10 @@ protected:
 	virtual const istd::IChangeable* GetDocumentPtr() const = 0;
 
 	// reimplemented (iqtgui::CProcessStartCommandComp)
-	virtual bool StartProcess(const QStringList& arguments);
+	virtual bool StartProcess(const QStringList& arguments) override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 protected:	
 	I_REF(ifile::IFilePersistence, m_documentPersistenceCompPtr);
