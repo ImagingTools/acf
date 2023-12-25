@@ -63,7 +63,7 @@ protected:
 	virtual void OnCancelable(bool cancelState);
 
 	// reimplemented (istd::IChangeable)
-	virtual void OnEndChanges(const ChangeSet& changeSet);
+	virtual void OnEndChanges(const ChangeSet& changeSet) override;
 
 private:
 	struct ProgressInfo
