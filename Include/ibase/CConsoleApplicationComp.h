@@ -58,6 +58,9 @@ protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentDestroyed();
 
+Q_SIGNALS:
+	void EmitEventLoopStarted();
+
 private Q_SLOTS:
 	void OnKeyPressed(char ch);
 	void OnEventLoopStarted();
