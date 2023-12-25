@@ -18,8 +18,8 @@ class CRgbToXyzTransformation: public icmm::IColorTransformation
 {
 public:
 	// reimplemented (icmm::IColorTransformation)
-	virtual bool GetValueAt(const icmm::CVarColor& argument, icmm::CVarColor& result) const;
-	virtual icmm::CVarColor GetValueAt(const icmm::CVarColor& argument) const;
+	virtual bool GetValueAt(const icmm::CVarColor& argument, icmm::CVarColor& result) const override;
+	virtual icmm::CVarColor GetValueAt(const icmm::CVarColor& argument) const override;
 };
 
 

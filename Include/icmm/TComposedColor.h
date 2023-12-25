@@ -91,7 +91,7 @@ public:
 	const TComposedColor<Size>& operator/=(double value);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 };
 
 
