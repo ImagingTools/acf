@@ -37,7 +37,7 @@ public:
 	void SetOffset(double value);
 
 	// overloaded (imath::CFixedPointManip)
-	void SetPrecision(int precision) override;
+	void SetPrecision(int precision);
 
 	// reimplemented (imath::TIValueManip)
 	virtual QString GetString(const double& value) const override;
