@@ -36,8 +36,8 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iprm::IParamsSet)
-	virtual Ids GetParamIds(bool editableOnly = false) const;
-	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
+	virtual Ids GetParamIds(bool editableOnly = false) const override;
+	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
 
 	// reimplemented (istd::IHierarchical)
 	virtual int GetHierarchicalFlags() const;
@@ -46,16 +46,16 @@ public:
 	virtual istd::IPolymorphic* GetParent() const;
 
 	// reimplemented (istd::IChangeable)
-	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual bool IsEqual(const IChangeable& object) const;
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual bool IsEqual(const IChangeable& object) const override;
 
 protected:
 	iprm::IParamsSet* GetSlaveParamsSet(int index) const;
 	int GetSlaveParamsSetCount() const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_MULTIREF(IParamsSet, m_slaveParamsCompPtr);

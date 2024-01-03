@@ -35,8 +35,8 @@ public:
 	virtual bool AssignTypeId(const QByteArray& typeId);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-	virtual quint32 GetMinimalVersion(int versionId) const;
+	virtual bool Serialize(iser::IArchive& archive) override;
+	virtual quint32 GetMinimalVersion(int versionId) const override;
 
 private:
 	I_MULTIFACT(iser::ISerializable, m_factoriesFact);

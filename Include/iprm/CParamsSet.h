@@ -74,17 +74,17 @@ public:
 	virtual QByteArray GetFactoryId() const;
 
 	// reimplemented (iprm::IParamsSet)
-	virtual Ids GetParamIds(bool editableOnly = false) const;
-	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
-	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
+	virtual Ids GetParamIds(bool editableOnly = false) const override;
+	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
+	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-	virtual quint32 GetMinimalVersion(int versionId) const;
+	virtual bool Serialize(iser::IArchive& archive) override;
+	virtual quint32 GetMinimalVersion(int versionId) const override;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 protected:
 	const ParameterInfo* FindParameterInfo(const QByteArray& parameterId) const;

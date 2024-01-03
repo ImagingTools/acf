@@ -41,17 +41,17 @@ public:
 	CSelectableParamsSetComp();
 
 	// reimplemented (iprm::IParamsSet)
-	virtual Ids GetParamIds(bool editableOnly = false) const;
-	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
-	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
+	virtual Ids GetParamIds(bool editableOnly = false) const override;
+	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
+	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_ATTR(QByteArray, m_selectionParamIdAttrPtr);

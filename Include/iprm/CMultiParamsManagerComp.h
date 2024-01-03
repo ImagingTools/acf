@@ -46,6 +46,9 @@ public:
 	virtual bool SetOptionName(int optionIndex, const QString& optionName);
 	virtual bool SetOptionDescription(int optionIndex, const QString& optionDescription);
 
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS);
+
 protected:
 	struct TypeInfo
 	{
@@ -85,6 +88,7 @@ protected:
 	virtual bool IsParameterCreationSupported() const;
 	virtual int GetCreatedParamsSetsCount() const;
 	virtual iprm::IParamsSet* CreateParamsSetInstance(int typeIndex = -1) const;
+	virtual QString CalculateNewDefaultName(int typeIndex) const override;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

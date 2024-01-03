@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtCore/QObject>
+#include <QtCore/QUuid>
 
 // ACF includes
 #include <istd/CChangeGroup.h>
@@ -49,7 +50,11 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 
 	QByteArray selectedId;
 	if (m_selectedIndex >= 0){
-		selectedId = GetOptionId(m_selectedIndex);
+		if (m_selectedIndex < GetParamsSetsCount())
+			selectedId = GetOptionId(m_selectedIndex);
+		else if (isStoring) {
+			m_selectedIndex = -1;
+		}
 	}
 
 	istd::CChangeNotifier notifier(isStoring? NULL: this, &GetAllChanges());
@@ -254,7 +259,70 @@ bool CMultiParamsManagerComp::SetOptionDescription(int /*optionIndex*/, const QS
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CMultiParamsManagerComp::CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode /*mode*/ /*= CM_WITHOUT_REFS*/)
+{
+	const CMultiParamsManagerComp* sourcePtr = dynamic_cast<const CMultiParamsManagerComp*>(&object);
+	if (sourcePtr == NULL) {
+		return false;
+	}
+
+	istd::CChangeNotifier notifier(this, &istd::IChangeable::GetAllChanges());
+
+	if (!CopyByArchive(object, *this)) {
+		return false;
+	}
+
+	// update UUID of the paramsets
+	int paramsCount = m_paramSets.size();
+
+	for (int i = 0; i < paramsCount; ++i) {
+
+		if (i >= m_fixedParamSetsCompPtr.GetCount()) {
+			int paramIndex = i - m_fixedParamSetsCompPtr.GetCount();
+
+			Q_ASSERT(paramIndex < m_paramSets.count());
+			Q_ASSERT(m_paramSets[paramIndex].IsValid());
+
+			m_paramSets[paramIndex]->uuid = QUuid::createUuid().toByteArray();
+		}
+	}
+
+	return true;
+}
+
+
 // protected methods
+
+QString CMultiParamsManagerComp::CalculateNewDefaultName(int typeIndex) const
+{
+	if (typeIndex < 0 || typeIndex >= m_factoryNameNameAttrPtr.GetCount()) {
+		return BaseClass::CalculateNewDefaultName(typeIndex);
+	}
+
+	QString defaultSetName = *m_defaultSetNameAttrPtr;
+
+	if (defaultSetName.contains("%0")) {
+		QString factoryName = m_factoryNameNameAttrPtr[typeIndex];
+		defaultSetName = defaultSetName.replace("%0", factoryName);
+	}
+
+	if (defaultSetName.contains("%1")) {
+		QString tmpName;
+		for (int suffixIndex = 1; suffixIndex < 1000; ++suffixIndex) {
+			tmpName = defaultSetName;
+			tmpName.replace(QString("%1"), QString::number(suffixIndex));
+			if (FindParamSetIndex(tmpName) < 0 && FindFixedParamSetIndex(tmpName) < 0) {
+				defaultSetName = tmpName;
+				break;
+			}
+		}
+	}
+
+	return defaultSetName;
+}
+
 
 bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& typeId, const QString& name, const QByteArray& uuid, bool isEnabled)
 {
@@ -344,12 +412,13 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		ParamSetPtr paramsSetPtr(new imod::TModelWrap<ParamSet>());
 
 		paramsSetPtr->paramSetPtr.SetPtr(newParamsSetPtr);
-		paramsSetPtr->name = name.isEmpty() ? CalculateNewDefaultName() : name;
+		paramsSetPtr->name = name.isEmpty() ? CalculateNewDefaultName(typeInfo.factoryIndex) : name;
 		paramsSetPtr->uuid = uuid;
 		paramsSetPtr->isEnabled = isEnabled;
 		paramsSetPtr->parentPtr = this;
 
-		m_paramSets.push_back(paramsSetPtr);
+		m_paramSets.push_back(ParamSetPtr());
+		m_paramSets.back().TakeOver(paramsSetPtr);
 
 		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
 		if (paramsModelPtr != NULL){
