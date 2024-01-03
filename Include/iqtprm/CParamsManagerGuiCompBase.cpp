@@ -607,7 +607,7 @@ void CParamsManagerGuiCompBase::UpdateComboBox()
 			int flags = objectPtr->GetIndexOperationFlags(paramSetIndex);
 			bool isOptionEnabled = (paramsListPtr == NULL) ? true : paramsListPtr->IsOptionEnabled(paramSetIndex);
 
-			Qt::ItemFlags itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+			int itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 			if ((*m_supportRenameAttrPtr) && (flags & iprm::IParamsManager::MF_SUPPORT_RENAME) != 0){
 				itemFlags |= Qt::ItemIsEditable;
 			}
@@ -643,7 +643,7 @@ void CParamsManagerGuiCompBase::UpdateComboBox()
 			if (itemModelPtr != NULL){
 				QStandardItem* newItemPtr = itemModelPtr->item(ParamsComboBox->count() - 1);
 
-				newItemPtr->setFlags(itemFlags);
+				newItemPtr->setFlags(Qt::ItemFlags(itemFlags));
 			}
 		}
 	}
