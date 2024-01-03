@@ -44,7 +44,7 @@ public:
 		I_ASSIGN(m_supportRenameAttrPtr, "SupportRename", "Allow change parameters name", true, true);
 		I_ASSIGN(m_comboBoxViewAttrPtr, "CompactView", "Shows parameters list as a combo box", true, false);
 		I_ASSIGN(m_comboBoxEditableAttrPtr, "CompactViewComboEditable", "Combo box in compact mode is editable", true, true);
-        I_ASSIGN(m_comboBoxHiddenAttrPtr, "CompactViewComboHidden", "Combo box in compact mode is hidden - basically disables user to change selection", true, false);
+		I_ASSIGN(m_comboBoxHiddenAttrPtr, "CompactViewComboHidden", "Combo box in compact mode is hidden - basically disables user to change selection", true, false);
 		I_ASSIGN(m_iconProviderCompPtr, "IconProvider", "Icons for drop-down types menu", false, "IconProvider");
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loader for the parameter set", false, "ParamsLoader");
 		I_ASSIGN(m_supplementaryLabelTextAttrPtr, "CopyPasteInfoLabelText", "Text of info Label", false, "");
@@ -70,7 +70,7 @@ protected Q_SLOTS:
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
 	void OnAddMenuOptionClicked(QAction* action);
-	void hideInfoLabel();
+	void HideInfoLabel();
 
 protected:
 	// abstract methods
@@ -134,11 +134,13 @@ protected:
 	bool CopyParamsSetToClipboard(iser::ISerializable* objectPtr, const char* type) const;
 	bool PasteParamsSetFromClipboard(iser::ISerializable* objectPtr, const char* type);
 
-
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+
+	// reimplemented (ibase::TDesignSchemaHandlerWrap)
+	virtual void OnDesignSchemaChanged(const QByteArray& themeId) override;
 
 	// reimplemented (iqtgui::CComponentBase)
 	virtual void OnGuiCreated();
@@ -149,6 +151,7 @@ protected:
 private:
 	void AttachCurrentExtender();
 	void DetachCurrentExtender();
+	void UpdateIcons();
 
 private:
 	I_ATTR(bool, m_allowAddRemoveAttrPtr);

@@ -43,7 +43,7 @@ CParamsManagerGuiCompBase::CParamsManagerGuiCompBase()
 	QObject::connect(&m_startVariableMenus, SIGNAL(triggered(QAction*)), this, SLOT(OnAddMenuOptionClicked(QAction*)));
 
 	m_hideInfoLabelTimer.setSingleShot(true);
-	QObject::connect(&m_hideInfoLabelTimer, SIGNAL(timeout()), this, SLOT(hideInfoLabel()));
+	QObject::connect(&m_hideInfoLabelTimer, SIGNAL(timeout()), this, SLOT(HideInfoLabel()));
 }
 
 
@@ -338,11 +338,11 @@ void CParamsManagerGuiCompBase::OnAddMenuOptionClicked(QAction* action)
 }
 
 
-// protected SLOTS
+// protected slots
 
-void CParamsManagerGuiCompBase::hideInfoLabel()
+void CParamsManagerGuiCompBase::HideInfoLabel()
 {
-	if (IsGuiCreated()) {
+	if (IsGuiCreated()){
 		SupplementaryLabel->hide();
 		SupplementaryLabel->clear();
 	}
@@ -935,6 +935,16 @@ void CParamsManagerGuiCompBase::UpdateGui(const istd::IChangeable::ChangeSet& /*
 }
 
 
+// reimplemented (ibase::TDesignSchemaHandlerWrap)
+
+void CParamsManagerGuiCompBase::OnDesignSchemaChanged(const QByteArray& themeId)
+{
+	BaseClass::OnDesignSchemaChanged(themeId);
+
+	UpdateIcons();
+}
+
+
 // reimplemented (iqtgui::CComponentBase)
 
 void CParamsManagerGuiCompBase::OnGuiCreated()
@@ -979,6 +989,8 @@ void CParamsManagerGuiCompBase::OnGuiCreated()
 
 	LoadParamsButton->setVisible(isLoadAvailable);
 	SaveParamsButton->setVisible(isSaveAvailable);
+
+	UpdateIcons();
 }
 
 
@@ -1024,6 +1036,20 @@ void CParamsManagerGuiCompBase::DetachCurrentExtender()
 
 			extenderPtr->RemoveItemsFromScene(providerPtr);
 		}
+	}
+}
+
+void CParamsManagerGuiCompBase::UpdateIcons()
+{
+	if (IsGuiCreated()){
+		AddButton->setIcon(GetIcon(":/Icons/Add"));
+		RemoveButton->setIcon(GetIcon(":/Icons/Delete"));
+		CopyButton->setIcon(GetIcon(":/Icons/Copy"));
+		PasteButton->setIcon(GetIcon(":/Icons/Paste"));
+		UpButton->setIcon(GetIcon(":/Icons/Up"));
+		DownButton->setIcon(GetIcon(":/Icons/Down"));
+		LoadParamsButton->setIcon(GetIcon(":/Icons/Open"));
+		SaveParamsButton->setIcon(GetIcon(":/Icons/Save"));
 	}
 }
 
