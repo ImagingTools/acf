@@ -3,6 +3,8 @@
 
 // Qt includes
 #include <QtGui/QStandardItemModel>
+#include <QtGui/QClipboard>
+#include <QtCore/QMimeData>
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
@@ -12,17 +14,22 @@
 #include <iwidgets/CWidgetUpdateBlocker.h>
 #include <iview/IShapeView.h>
 #include <iqt2d/IViewProvider.h>
+#include <iser/CCompactXmlMemWriteArchive.h>
+#include <iser/CCompactXmlMemReadArchive.h>
 
 
 namespace iqtprm
 {
+	static const char ParamsSetMimeType[] = "acf/iqtprm::CParamsManager";
+	QString CParamsManagerGuiCompBase::m_copyParamsSetName = QString();
+	int CParamsManagerGuiCompBase::m_pasteIndex = 0;
 
 
 // public methods
 
 CParamsManagerGuiCompBase::CParamsManagerGuiCompBase()
-:	m_lastConnectedModelPtr(NULL),
-	m_lastObserverPtr(NULL)
+:	m_lastConnectedModelPtr(nullptr),
+	m_lastObserverPtr(nullptr)
 {
 	static const istd::IChangeable::ChangeSet changeMask(
 				iprm::ISelectionParam::CF_SELECTION_CHANGED,
@@ -34,6 +41,9 @@ CParamsManagerGuiCompBase::CParamsManagerGuiCompBase()
 	SetObservedIds(changeMask);
 
 	QObject::connect(&m_startVariableMenus, SIGNAL(triggered(QAction*)), this, SLOT(OnAddMenuOptionClicked(QAction*)));
+
+	m_hideInfoLabelTimer.setSingleShot(true);
+	QObject::connect(&m_hideInfoLabelTimer, SIGNAL(timeout()), this, SLOT(hideInfoLabel()));
 }
 
 
@@ -136,6 +146,48 @@ void CParamsManagerGuiCompBase::on_DownButton_clicked()
 		objectPtr->SwapParamsSet(selectedIndex, selectedIndex + 1);
 		objectPtr->SetSelectedOptionIndex(selectedIndex + 1);
 	}
+}
+
+
+void CParamsManagerGuiCompBase::on_CopyButton_clicked()
+{
+	UpdateBlocker updateBlocker(this);
+
+	iprm::IParamsManager* objectPtr = GetObservedObject();
+	if (objectPtr == nullptr){
+		return;
+	}
+
+	int selectedIndex = objectPtr->GetSelectedOptionIndex();
+	if ((selectedIndex > -1) && (selectedIndex < objectPtr->GetParamsSetsCount())){
+
+		CopyParamsSet(selectedIndex);
+	}
+}
+
+
+void CParamsManagerGuiCompBase::on_PasteButton_clicked()
+{
+	UpdateBlocker updateBlocker(this);
+	
+	iprm::IParamsManager* objectPtr = GetObservedObject();
+	if (objectPtr == nullptr){
+		return;
+	}
+
+	const int selectedIndex = objectPtr->GetSelectedOptionIndex();
+	const int paramSetsCount = objectPtr->GetParamsSetsCount();
+
+	PasteParamsSet(selectedIndex);
+
+	if (paramSetsCount < objectPtr->GetParamsSetsCount()){
+		if (m_supplementaryLabelTextAttrPtr.IsValid() && (*m_supplementaryLabelTextAttrPtr).size()){
+			SupplementaryLabel->setText(*m_supplementaryLabelTextAttrPtr);
+			SupplementaryLabel->show();
+			m_hideInfoLabelTimer.start(15000);
+		}
+	}
+
 }
 
 
@@ -286,6 +338,19 @@ void CParamsManagerGuiCompBase::OnAddMenuOptionClicked(QAction* action)
 }
 
 
+// protected SLOTS
+
+void CParamsManagerGuiCompBase::hideInfoLabel()
+{
+	if (IsGuiCreated()) {
+		SupplementaryLabel->hide();
+		SupplementaryLabel->clear();
+	}
+}
+
+
+// protected methods
+
 iqt2d::IViewExtender* CParamsManagerGuiCompBase::GetCurrentViewExtenderPtr() const
 {
 	iprm::IParamsManager* objectPtr = GetObservedObject();
@@ -318,6 +383,102 @@ void CParamsManagerGuiCompBase::OnParameterSelectionChanged()
 {
 	DetachCurrentExtender();
 	AttachCurrentExtender();
+}
+
+
+void CParamsManagerGuiCompBase::CopyParamsSet(const int index)
+{
+	iprm::IParamsManager* objectPtr = GetObservedObject();
+	if (objectPtr == nullptr){
+		return;
+	}
+
+	if ((index > -1) && (index < objectPtr->GetParamsSetsCount())){
+		iprm::IParamsSet* paramsPtr = objectPtr->GetParamsSet(index);
+
+		// #10946
+		QByteArray mimeType(ParamsSetMimeType);
+
+		if (const iprm::IOptionsList* typeInfos = objectPtr->GetParamsTypeConstraints()) {
+			// search for available mime format
+			auto factoryId = paramsPtr->GetFactoryId();
+			if (factoryId.size())
+				mimeType += ":" + factoryId;
+		}
+
+		CopyParamsSetToClipboard(paramsPtr, mimeType);
+
+		m_copyParamsSetName = objectPtr->GetParamsSetName(index);
+		m_pasteIndex = 0;
+	}
+}
+
+
+void CParamsManagerGuiCompBase::PasteParamsSet(const int index)
+{
+	iprm::IParamsManager* objectPtr = GetObservedObject();
+	if (objectPtr == nullptr){
+		return;
+	}
+
+	int newIndex = index;
+	if ((index < 0) && (index > objectPtr->GetParamsSetsCount() - 1)){
+		newIndex = objectPtr->GetParamsSetsCount();
+	}
+
+	// #10946
+	int factoryIndex = -1;	// default
+	QByteArray mimeType(ParamsSetMimeType);
+
+	QClipboard* clipboardPtr = QApplication::clipboard();
+	if (!clipboardPtr)
+		return;
+	auto mimeDataPtr = clipboardPtr->mimeData();
+	if (!mimeDataPtr)
+		return;	// cannot paste if nothing is in the clipboard
+
+	if (const iprm::IOptionsList* typeInfos = objectPtr->GetParamsTypeConstraints()) {
+		// search for available mime format
+		//QStringList mimeFormats = mimeDataPtr->formats();
+		for (int i = 0; i < typeInfos->GetOptionsCount(); i++) {
+			QByteArray tempType(QByteArray(ParamsSetMimeType) + ':' + typeInfos->GetOptionId(i));
+			if (mimeDataPtr->hasFormat(tempType)) {
+				factoryIndex = i;
+				mimeType = tempType;
+				break;
+			}
+		}
+	}
+
+	iprm::IParamsSet* pasteParamsPtr = objectPtr->CreateParameterSet(factoryIndex);	// do not forget to delete!
+	if (PasteParamsSetFromClipboard(pasteParamsPtr, mimeType)){
+		istd::CChangeNotifier notifier(objectPtr);
+		Q_UNUSED(notifier);
+
+		newIndex = objectPtr->InsertParamsSet(factoryIndex, -1);
+		if (newIndex > -1){
+			iprm::IParamsSet* newParamsPtr = objectPtr->GetParamsSet(newIndex);
+			if (newParamsPtr != nullptr){
+				if (newParamsPtr->CopyFrom(*pasteParamsPtr)){
+					QString name;
+					if (m_pasteIndex == 0){
+						name = QString("Copy of ") + m_copyParamsSetName;
+					}
+					else {
+						name = QString("Copy_%1 of ").arg(m_pasteIndex) + m_copyParamsSetName;
+					}
+
+					objectPtr->SetParamsSetName(newIndex, name);
+					m_pasteIndex++;
+
+					objectPtr->SetSelectedOptionIndex(newIndex);
+					UpdateGui(istd::IChangeable::GetAllChanges());
+				}
+			}
+		}
+	}
+
+	delete pasteParamsPtr;
 }
 
 
@@ -378,7 +539,7 @@ void CParamsManagerGuiCompBase::UpdateTree()
 			bool isOptionEnabled = (paramsListPtr == NULL) ? true : paramsListPtr->IsOptionEnabled(paramSetIndex);
 
 			Qt::ItemFlags itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
-			if ((flags & iprm::IParamsManager::MF_SUPPORT_RENAME) != 0){
+			if ((*m_supportRenameAttrPtr) && ((flags & iprm::IParamsManager::MF_SUPPORT_RENAME) != 0)){
 				itemFlags |= Qt::ItemIsEditable;
 			}
 
@@ -392,7 +553,7 @@ void CParamsManagerGuiCompBase::UpdateTree()
 
 			// for inactive items, no operations are allowed
 			if (flags & iprm::IParamsManager::MF_INACTIVE){
-				itemFlags = Qt::ItemFlags(0);
+				itemFlags = 0;
 			}
 
 			QString name = objectPtr->GetParamsSetName(paramSetIndex);
@@ -418,6 +579,8 @@ void CParamsManagerGuiCompBase::UpdateTree()
 			ParamsTree->addTopLevelItem(paramsSetItemPtr);
 
 			paramsSetItemPtr->setSelected(paramSetIndex == selectedIndex);
+
+			OnTreeItemAdded(objectPtr, paramSetIndex, paramsSetPtr, paramsSetItemPtr);
 		}
 	}
 
@@ -445,13 +608,17 @@ void CParamsManagerGuiCompBase::UpdateComboBox()
 			bool isOptionEnabled = (paramsListPtr == NULL) ? true : paramsListPtr->IsOptionEnabled(paramSetIndex);
 
 			Qt::ItemFlags itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
-			if ((flags & iprm::IParamsManager::MF_SUPPORT_RENAME) != 0){
+			if ((*m_supportRenameAttrPtr) && (flags & iprm::IParamsManager::MF_SUPPORT_RENAME) != 0){
 				itemFlags |= Qt::ItemIsEditable;
+			}
+
+			if (!isOptionEnabled){
+				itemFlags &= ~Qt::ItemIsEnabled;
 			}
 
 			// for inactive items, no operations are allowed
 			if (flags & iprm::IParamsManager::MF_INACTIVE){
-				itemFlags = Qt::ItemFlags(0);
+				itemFlags = 0;
 			}
 
 			QString name = objectPtr->GetParamsSetName(paramSetIndex);
@@ -545,6 +712,8 @@ void CParamsManagerGuiCompBase::UpdateParamsView(int selectedIndex)
 int CParamsManagerGuiCompBase::GetSelectedIndex() const
 {
 	Q_ASSERT(IsGuiCreated());
+	if (!IsGuiCreated())
+		return -1;
 
 	int retVal = -1;
 
@@ -623,6 +792,56 @@ void CParamsManagerGuiCompBase::InsertNewParamsSet(int typeIndex)
 			objectPtr->SetSelectedOptionIndex(newIndex);
 		}
 	}
+}
+
+
+bool CParamsManagerGuiCompBase::CopyParamsSetToClipboard(iser::ISerializable* objectPtr, const char* type) const
+{
+	QClipboard* clipboardPtr = QApplication::clipboard();
+	Q_ASSERT(clipboardPtr != nullptr);
+	Q_ASSERT(objectPtr != nullptr);
+
+	iser::CCompactXmlMemWriteArchive archive;
+	if (objectPtr->Serialize(archive)){
+		QMimeData* mimeDataPtr = new QMimeData;
+		mimeDataPtr->setData(type, archive.GetString());
+		clipboardPtr->setMimeData(mimeDataPtr);
+
+		//clipboardPtr->setText(archive.GetString());	//fallback option
+
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CParamsManagerGuiCompBase::PasteParamsSetFromClipboard(iser::ISerializable* objectPtr, const char* type)
+{
+	QClipboard* clipboardPtr = QApplication::clipboard();
+	Q_ASSERT(clipboardPtr != nullptr);
+	Q_ASSERT(objectPtr != nullptr);
+
+	const QMimeData* mimeDataPtr = clipboardPtr->mimeData();
+	if (mimeDataPtr != nullptr){
+		if ((type != nullptr) && (mimeDataPtr->hasFormat(type))){
+			iser::CCompactXmlMemReadArchive archive(mimeDataPtr->data(type));
+			if (objectPtr->Serialize(archive)){
+				UpdateGui(istd::IChangeable::GetAllChanges());
+				return true;
+			}
+		}
+	}
+
+	// fallback: try through plaintext
+	QByteArray objectData = clipboardPtr->text().toUtf8();
+	iser::CCompactXmlMemReadArchive archive(objectData);
+	if (objectPtr->Serialize(archive)){
+		UpdateGui(istd::IChangeable::GetAllChanges());
+		return true;
+	}
+
+	return false;
 }
 
 
@@ -724,6 +943,8 @@ void CParamsManagerGuiCompBase::OnGuiCreated()
 
 	BaseClass::OnGuiCreated();
 
+	SupplementaryLabel->hide();
+
 	if (*m_comboBoxViewAttrPtr){
 		ParamsTree->hide();
 
@@ -733,7 +954,8 @@ void CParamsManagerGuiCompBase::OnGuiCreated()
 		AddButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 		RemoveButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 	}
-	else{
+
+	if (!(*m_comboBoxViewAttrPtr) || *m_comboBoxHiddenAttrPtr) {
 		ParamsComboBox->hide();
 	}
 

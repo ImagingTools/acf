@@ -61,25 +61,25 @@ public:
 	virtual void UpdateEditor(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
+	virtual void OnGuiRetranslate() override;
 
 	// reimplemented (iqt2d::IViewExtender)
 	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
 	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 	// reimplemented (iview::IShapeFactory)
-	virtual iview::IShape* CreateShape(const istd::IChangeable* objectPtr, bool connectToModel = false) const;
+	virtual iview::IShape* CreateShape(const istd::IChangeable* objectPtr, bool connectToModel = false) const override;
 
 protected:
 	void AttachToScene(iqt2d::IViewProvider* providerPtr, int flags);
 	void DetachFromScene(iqt2d::IViewProvider* providerPtr);
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
-	virtual void UpdateModel() const;
+	virtual void OnGuiModelAttached() override;
+	virtual void OnGuiModelDetached() override;
+	virtual void UpdateModel() const override;
 
 	QList<imod::IModelEditor*> GetModelEditors() const;
 	QList<QByteArray> GetIds() const;

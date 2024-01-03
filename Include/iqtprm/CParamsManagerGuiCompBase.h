@@ -3,6 +3,7 @@
 
 
 //Qt includes
+#include <QtCore/QTimer>
 #include <QtCore/QtGlobal>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QMenu>
@@ -40,10 +41,13 @@ public:
 		I_ASSIGN(m_allowAddRemoveAttrPtr, "AllowAddRemove", "If it is false, 'Add' and 'Remove' buttons will be always hidden", true, true);
 		I_ASSIGN(m_allowUpDownAttrPtr, "AllowUpDown", "If it is false, 'Up' and 'Down' buttons will be always hidden", true, true);
 		I_ASSIGN(m_supportEnablingAttrPtr, "AllowEnable", "If this option is activated, the single parameter sets can be enabled/disabled in the list", true, false);
+		I_ASSIGN(m_supportRenameAttrPtr, "SupportRename", "Allow change parameters name", true, true);
 		I_ASSIGN(m_comboBoxViewAttrPtr, "CompactView", "Shows parameters list as a combo box", true, false);
 		I_ASSIGN(m_comboBoxEditableAttrPtr, "CompactViewComboEditable", "Combo box in compact mode is editable", true, true);
+        I_ASSIGN(m_comboBoxHiddenAttrPtr, "CompactViewComboHidden", "Combo box in compact mode is hidden - basically disables user to change selection", true, false);
 		I_ASSIGN(m_iconProviderCompPtr, "IconProvider", "Icons for drop-down types menu", false, "IconProvider");
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loader for the parameter set", false, "ParamsLoader");
+		I_ASSIGN(m_supplementaryLabelTextAttrPtr, "CopyPasteInfoLabelText", "Text of info Label", false, "");
 	I_END_COMPONENT;
 
 	CParamsManagerGuiCompBase();
@@ -57,6 +61,8 @@ protected Q_SLOTS:
 	void on_RemoveButton_clicked();
 	void on_UpButton_clicked();
 	void on_DownButton_clicked();
+	void on_CopyButton_clicked();
+	void on_PasteButton_clicked();
 	void on_ParamsTree_itemSelectionChanged();
 	void on_ParamsTree_itemChanged(QTreeWidgetItem* item, int column);
 	void on_ParamsComboBox_currentIndexChanged(int index);
@@ -64,6 +70,7 @@ protected Q_SLOTS:
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
 	void OnAddMenuOptionClicked(QAction* action);
+	void hideInfoLabel();
 
 protected:
 	// abstract methods
@@ -88,6 +95,33 @@ protected:
 	*/
 	virtual void OnParameterSelectionChanged();
 
+	/**
+	*	Callback for item decoration
+	*/
+	virtual void OnTreeItemAdded(iprm::IParamsManager* managerPtr, 
+		const int paramSetIndex, 
+		const iprm::IParamsSet* paramsSetPtr,
+		QTreeWidgetItem* paramsSetItemPtr) 
+	{
+		Q_UNUSED(managerPtr);
+		Q_UNUSED(paramSetIndex);
+		Q_UNUSED(paramsSetPtr);
+		Q_UNUSED(paramsSetItemPtr);
+	}
+
+	/**
+		Copy ParamsSet (index) to Clipboard. If index = -1, copy all
+		When reimplemented in MultiParamsManager, the paramsSetType should be retrieved
+	*/
+	virtual void CopyParamsSet(const int index);
+
+	/**
+		Paste ParamsSet from Clipboard
+		When reimplemented in MultiParamsManager, the paramsSetType should be retrieved
+	*/
+	virtual void PasteParamsSet(const int index = -1);
+
+
 	void UpdateActions();
 	void UpdateTree();
 	void UpdateComboBox();
@@ -96,6 +130,10 @@ protected:
 	void EnsureParamsGuiDetached();
 	QByteArray GetSelectedParamsSetTypeId() const;
 	void InsertNewParamsSet(int typeIndex = -1);
+
+	bool CopyParamsSetToClipboard(iser::ISerializable* objectPtr, const char* type) const;
+	bool PasteParamsSetFromClipboard(iser::ISerializable* objectPtr, const char* type);
+
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
@@ -116,10 +154,13 @@ private:
 	I_ATTR(bool, m_allowAddRemoveAttrPtr);
 	I_ATTR(bool, m_allowUpDownAttrPtr);
 	I_ATTR(bool, m_supportEnablingAttrPtr);
+	I_ATTR(bool, m_supportRenameAttrPtr);
 	I_ATTR(bool, m_comboBoxViewAttrPtr);
 	I_ATTR(bool, m_comboBoxEditableAttrPtr);
+    I_ATTR(bool, m_comboBoxHiddenAttrPtr);
 	I_REF(iqtgui::IIconProvider, m_iconProviderCompPtr);
 	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
+	I_ATTR(QByteArray, m_supplementaryLabelTextAttrPtr);
 
 	typedef QMap<int, QIcon> StateIconsMap;
 
@@ -131,6 +172,11 @@ private:
 
 	typedef QMap<iqt2d::IViewProvider*, int> ConnectedSceneFlags; // maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;
+
+	static QString m_copyParamsSetName;
+	static int m_pasteIndex;
+
+	QTimer m_hideInfoLabelTimer;
 };
 
 

@@ -46,8 +46,8 @@ public:
 	virtual void SetReadOnly(bool state);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 	// reimplemented (iqt2d::IViewExtender)
 	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
@@ -62,9 +62,9 @@ protected:
 	virtual void OnPageChanged(int widgetIndex);
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
-	virtual void UpdateModel() const;
+	virtual void OnGuiModelAttached() override;
+	virtual void OnGuiModelDetached() override;
+	virtual void UpdateModel() const override;
 
 private:
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);

@@ -51,9 +51,9 @@ public:
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnGuiModelAttached() override;
+	virtual void OnGuiModelDetached() override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 protected Q_SLOTS:
 	void OnButtonClicked(int index);

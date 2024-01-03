@@ -42,8 +42,8 @@ protected:
 	virtual iqt2d::IViewExtender* GetCurrentViewExtenderPtr() const;
 
 	// reimplemented (iqtgui::CComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 private:
 	I_MULTIREF(iqtgui::IGuiObject, m_paramsGuiCompPtr);

@@ -30,8 +30,8 @@ protected:
 	virtual iqtgui::IGuiObject* GetEditorGuiPtr(const iprm::IParamsSet* paramsSetPtr) const;
 	
 	// reimplemented (iqtgui::CComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 private:
 	I_REF(iqtgui::IGuiObject, m_paramsGuiCompPtr);

@@ -33,8 +33,8 @@ protected Q_SLOTS:
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateModel() const;
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateModel() const override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 private:
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
