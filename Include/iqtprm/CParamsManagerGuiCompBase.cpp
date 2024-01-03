@@ -538,7 +538,7 @@ void CParamsManagerGuiCompBase::UpdateTree()
 
 			bool isOptionEnabled = (paramsListPtr == NULL) ? true : paramsListPtr->IsOptionEnabled(paramSetIndex);
 
-			Qt::ItemFlags itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+			int itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 			if ((*m_supportRenameAttrPtr) && ((flags & iprm::IParamsManager::MF_SUPPORT_RENAME) != 0)){
 				itemFlags |= Qt::ItemIsEditable;
 			}
@@ -558,7 +558,7 @@ void CParamsManagerGuiCompBase::UpdateTree()
 
 			QString name = objectPtr->GetParamsSetName(paramSetIndex);
 			QTreeWidgetItem* paramsSetItemPtr = new QTreeWidgetItem();
-			paramsSetItemPtr->setFlags(itemFlags);
+			paramsSetItemPtr->setFlags(Qt::ItemFlags(itemFlags));
 
 			paramsSetItemPtr->setText(0, name);
 			paramsSetItemPtr->setData(0, Qt::UserRole, paramSetIndex);

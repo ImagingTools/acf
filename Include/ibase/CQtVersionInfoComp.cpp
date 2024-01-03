@@ -76,8 +76,8 @@ quint32 CQtVersionInfoComp::GetRuntimeVersion()
 	int minorVersionSeparatorIndex = qtVersionString.indexOf(".", majorVersionSeparatorIndex + 1);
 
 	QString majorVersionString = qtVersionString.mid(0, majorVersionSeparatorIndex);
-	QString minorVersionString = qtVersionString.mid(majorVersionSeparatorIndex + 1, minorVersionSeparatorIndex - (majorVersionString.count() + 1));
-	QString fixVersionString = qtVersionString.right(qtVersionString.count() - minorVersionSeparatorIndex - 1);
+	QString minorVersionString = qtVersionString.mid(majorVersionSeparatorIndex + 1, minorVersionSeparatorIndex - (majorVersionString.length() + 1));
+	QString fixVersionString = qtVersionString.right(qtVersionString.length() - minorVersionSeparatorIndex - 1);
 
 	int major = majorVersionString.toInt();
 	int minor = minorVersionString.toInt();
