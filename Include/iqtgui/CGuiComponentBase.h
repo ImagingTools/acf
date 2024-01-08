@@ -124,7 +124,7 @@ protected:
 	void SetStatusText(const QString& text);
 
 	// reimplemented (ibase::TLocalizableWrap)
-    virtual void OnLanguageChanged() override;
+	virtual void OnLanguageChanged() override;
 
 	// reimplemented (ibase::TDesignSchemaHandlerWrap)
 	virtual void OnDesignSchemaChanged(const QByteArray& themeId) override;
