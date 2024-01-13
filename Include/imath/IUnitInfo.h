@@ -1,5 +1,4 @@
-#ifndef imath_IUnitInfo_included
-#define imath_IUnitInfo_included
+#pragma once
 
 
 // Qt includes
@@ -77,8 +76,5 @@ public:
 
 
 } // namespace imath
-
-
-#endif // !imath_IUnitInfo_included
 
 

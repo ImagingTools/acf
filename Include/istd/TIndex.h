@@ -38,7 +38,7 @@ public:
 	/**
 		Copy constructor.
 	*/
-    TIndex(const TIndex& index);
+	TIndex(const TIndex& index);
 
 	/**
 		Check if this index is valid.

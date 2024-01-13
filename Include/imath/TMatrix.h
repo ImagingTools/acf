@@ -1,12 +1,10 @@
-#ifndef imath_TMatrix_included
-#define imath_TMatrix_included
+#pragma once
 
 
+// ACF includes
 #include <istd/TArray.h>
 #include <istd/CIndex2d.h>
-
 #include <iser/CArchiveTag.h>
-
 #include <imath/TVector.h>
 
 
@@ -1071,8 +1069,5 @@ typename TMatrix<Width, Height, Element>::ElementType& TMatrix<Width, Height, El
 
 
 } // namespace imath
-
-
-#endif // !imath_TMatrix_included
 
 

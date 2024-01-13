@@ -1,5 +1,4 @@
-#ifndef imath_CGeneralUnitInfo_included
-#define imath_CGeneralUnitInfo_included
+#pragma once
 
 
 // ACF includes
@@ -51,8 +50,5 @@ private:
 
 
 } // namespace imath
-
-
-#endif // !imath_CGeneralUnitInfo_included
 
 

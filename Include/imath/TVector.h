@@ -1,5 +1,4 @@
-#ifndef imath_TVector_included
-#define imath_TVector_included
+#pragma once
 
 
 // Qt includes
@@ -12,7 +11,6 @@
 
 // ACF includes
 #include <iser/IArchive.h>
-
 #include <imath/imath.h>
 
 
@@ -716,8 +714,5 @@ TVector<Size, Element> TVector<Size, Element>::s_zero(Element(0));
 
 
 } // namespace imath
-
-
-#endif // !imath_TVector_included
 
 

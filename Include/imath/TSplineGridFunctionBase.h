@@ -1,5 +1,4 @@
-#ifndef imath_TSplineGridFunctionBase_included
-#define imath_TSplineGridFunctionBase_included
+#pragma once
 
 
 // ACF includes
@@ -252,8 +251,5 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CumulateRecurs
 
 
 } // namespace imath
-
-
-#endif // !imath_TSplineGridFunctionBase_included
 
 

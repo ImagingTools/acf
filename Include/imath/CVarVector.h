@@ -1,5 +1,4 @@
-#ifndef imath_CVarVector_included
-#define imath_CVarVector_included
+#pragma once
 
 
 // STL includes
@@ -681,8 +680,5 @@ CVarVector::CVarVector(const TVector<Size, double>& vector)
 
 
 } // namespace imath
-
-
-#endif // !imath_CVarVector_included
 
 

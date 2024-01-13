@@ -1,5 +1,4 @@
-#ifndef imath_TFulcrumGrid_included
-#define imath_TFulcrumGrid_included
+#pragma once
 
 
 // Qt includes
@@ -557,8 +556,5 @@ const istd::IChangeable::ChangeSet TFulcrumGrid<Position, Fulcrums>::s_fulcrumPo
 
 
 } // namespace imath
-
-
-#endif // !imath_TFulcrumGrid_included
 
 

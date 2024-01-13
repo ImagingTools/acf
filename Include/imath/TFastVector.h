@@ -1,5 +1,4 @@
-#ifndef imath_TFastVector_included
-#define imath_TFastVector_included
+#pragma once
 
 
 // STL includes
@@ -8,7 +7,6 @@
 // ACF includes
 #include <iser/IArchive.h>
 #include <iser/CArchiveTag.h>
-
 #include <imath/TVector.h>
 
 
@@ -817,9 +815,5 @@ inline uint qHash(const TFastVector<MaxSize, Element>& v, uint seed = 0)
 
 
 } // namespace imath
-
-
-
-#endif // !imath_TFastVector_included
 
 

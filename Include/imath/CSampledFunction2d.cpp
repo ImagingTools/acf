@@ -101,6 +101,12 @@ int CSampledFunction2d::GetGridSize(int dimensionIndex) const
 }
 
 
+double CSampledFunction2d::GetSampleAt(const SampleIndex& index) const
+{
+	return m_samplesContainer.GetAt(index);
+}
+
+
 istd::CRange CSampledFunction2d::GetResultValueRange(int /*dimensionIndex*/, int /*resultDimension*/) const
 {
 	return istd::CRange(0, 1.0);

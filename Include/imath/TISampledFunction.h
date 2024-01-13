@@ -1,17 +1,17 @@
-#ifndef imath_TISampledFunction_included
-#define imath_TISampledFunction_included
+#pragma once
 
 
+// ACF includes
 #include <istd/IChangeable.h>
 #include <istd/TIndex.h>
 #include <istd/TRange.h>
-
 #include <imath/TIMathFunction.h>
 #include <imath/TVector.h>
 
 
 namespace imath
 {
+
 
 /**
 	Interface for a resampled function with a regular grid design.
@@ -28,6 +28,8 @@ public:
 				istd::TIndex<ArgumentDimensions>, 
 				imath::TVector<ResultDimensions> > BaseClass;
 	typedef typename BaseClass::ArgumentType ArgumentType;
+	typedef typename BaseClass::ResultType ResultType;
+	typedef istd::TIndex<ArgumentDimensions> SampleIndex;
 
 	/**
 		Create function from input data.
@@ -45,13 +47,18 @@ public:
 	virtual int GetGridSize(int dimensionIndex) const = 0;
 
 	/**
-		Get logical grid position range for specified dimension.
-		Logical position describes 
+		Get sample value at the given index.
+	*/
+	virtual double GetSampleAt(const SampleIndex& index) const = 0;
+
+	/**
+		Get logical range for the specified dimension.
+		Logical range defines boundaries of the function domain in the given dimension.
 	*/
 	virtual istd::CRange GetLogicalRange(int dimensionIndex) const = 0;
 
 	/**
-		Get range of result value for the given axis.
+		Get the range (boundary) of possible result values for the given axis.
 		Optionally some result dimension can be also specified.
 		\param	dimensionIndex	index of argument dimension.
 		\param	resultDimension	optional index of result dimension, it can be negative if all dimensions are meaned.
@@ -92,8 +99,5 @@ typedef TISampledFunction<2, 1> ISampledFunction2d;
 
 
 } // namespace imath
-
-
-#endif // !imath_TISampledFunction_included
 
 

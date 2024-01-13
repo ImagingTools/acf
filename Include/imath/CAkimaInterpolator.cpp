@@ -98,6 +98,32 @@ void CAkimaInterpolator::SetNodes(double* positions, double* values, int nodesCo
 }
 
 
+bool CAkimaInterpolator::InitFromFunction(const ISampledFunction& function)
+{
+	m_nodes.clear();
+
+	istd::CRange logicalRange = function.GetLogicalRange(0);
+	istd::CIntRange sampleRange = istd::CIntRange(0, function.GetTotalSamplesCount());
+
+	std::vector<double> positions;
+	std::vector<double> values;
+
+	for (int i = 0; i < function.GetTotalSamplesCount(); i++) {
+		double sampleAlpha = sampleRange.GetAlphaFromValue(i);
+
+		double position = logicalRange.GetValueFromAlpha(sampleAlpha);
+		double value = function.GetSampleAt(istd::TIndex<1>(i));
+
+		positions.push_back(position);
+		values.push_back(value);
+	}
+
+	SetNodes(&positions[0], &values[0], int(positions.size()));
+
+	return true;
+}
+
+
 // reimplemented (imath::TIMathFunction<double, double>)
 
 bool CAkimaInterpolator::GetValueAt(const double& argument, double& result) const
@@ -112,7 +138,7 @@ bool CAkimaInterpolator::GetValueAt(const double& argument, double& result) cons
 
 			if (nextIter != m_nodes.constBegin()){
 				// interpolation in segment
-				Nodes::ConstIterator prevIter = nextIter - 1;
+				Nodes::ConstIterator prevIter = std::prev(nextIter);
 
 				double prevPosition = prevIter.key();
 				Q_ASSERT(prevPosition <= argument);
@@ -142,7 +168,7 @@ bool CAkimaInterpolator::GetValueAt(const double& argument, double& result) cons
 		}
 		else{
 			// extrapolation at the end
-			Nodes::ConstIterator lastIter = m_nodes.constEnd() - 1;
+			Nodes::ConstIterator lastIter = std::prev(m_nodes.constEnd());
 			double lastPosition = lastIter.key();
 			Q_ASSERT(lastPosition <= argument);
 			const Node& lastNode = lastIter.value();

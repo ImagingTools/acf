@@ -1,5 +1,4 @@
-#ifndef imath_CComplexDoubleManip_included
-#define imath_CComplexDoubleManip_included
+#pragma once
 
 
 // STL includes
@@ -107,8 +106,5 @@ inline void CComplexDoubleManip::SetPrecision(int precision)
 
 
 } // namespace imath
-
-
-#endif // !imath_CComplexDoubleManip_included
 
 

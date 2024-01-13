@@ -1,5 +1,4 @@
-#ifndef istd_CDouble_included
-#define istd_CDouble_included
+#pragma once
 
 
 // Qt includes
@@ -7,7 +6,6 @@
 
 // ACF includes
 #include <iser/IArchive.h>
-
 #include <imath/TVector.h>
 
 
@@ -313,8 +311,5 @@ inline bool CDouble::IsSimiliar(double value1, double value2, double tolerance)
 
 
 } // namespace imath
-
-
-#endif // !istd_CDouble_included
 
 
