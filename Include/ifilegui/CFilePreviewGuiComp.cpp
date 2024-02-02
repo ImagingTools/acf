@@ -130,6 +130,11 @@ void CFilePreviewGuiComp::OnGuiCreated()
 
 void CFilePreviewGuiComp::OnGuiDestroyed()
 {
+	// disconnect signals to avoid preview update when GUI is about to be destroyed
+	disconnect(&m_timer, SIGNAL(timeout()), this, SLOT(UpdateFilePreview()));
+	disconnect(&m_fileSystemObserver, SIGNAL(fileChanged(const QString&)), this, SLOT(UpdateFilePreview()));
+	disconnect(&m_previewGenerationWatcher, SIGNAL(finished()), this, SLOT(OnPreviewGenerationFinished()));
+
 	m_previewGenerationWatcher.waitForFinished();
 
 	if (m_objectGuiCompPtr.IsValid()){
