@@ -618,6 +618,9 @@ void CSelectionParamGuiComp::ResetWidgets()
 	m_radioButtonGroups.Reset();
 	m_radioButtonFramePtr.Reset();
 	m_selectorLabelPtr.Reset();
+	m_descriptionLabelList.clear();
+	m_optionsLabelList.clear();
+	m_optionInfoLabelList.clear();
 }
 
 
