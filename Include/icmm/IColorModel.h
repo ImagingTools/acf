@@ -22,6 +22,7 @@ public:
 		MI_YUV,
 		MI_YCBCR,
 		MT_RGB,
+
 		/**
 			Substractive color model based on generic list of colorants.
 			This includes CMYK, CMY, combinations with spot colors and ECG.
