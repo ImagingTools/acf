@@ -2,8 +2,8 @@
 
 
 // ACF includes
-#include <icmm/IColorTransformation.h>
 #include <imath/IUnitInfo.h>
+#include <icmm/IColorTransformation.h>
 
 
 namespace icmm
@@ -22,10 +22,18 @@ public:
 		MI_YUV,
 		MI_YCBCR,
 		MT_RGB,
+		/**
+			Substractive color model based on generic list of colorants.
+			This includes CMYK, CMY, combinations with spot colors and ECG.
+		*/
 		MT_COLORANTS,
 		MT_LUV,
 		MT_LAB,
 		MT_XYZ,
+
+		/**
+			Color model is defined by a set of spectral values.
+		*/
 		MI_SPECTRAL
 	};
 

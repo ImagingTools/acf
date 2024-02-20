@@ -9,7 +9,7 @@ namespace icmm
 {
 
 
-class CCmyColorModel : public CSubstractiveColorModel
+class CCmyColorModel: public CSubstractiveColorModel
 {
 public:
 	// reimplemented (icmm::IColorantList)
@@ -41,7 +41,7 @@ QString CCmyColorModel::GetColorantName(const QByteArray& colorantId) const
 }
 
 
-icmm::IColorantList::ColorantType CCmyColorModel::GetColorantType(const QByteArray& colorantId) const
+icmm::ColorantType CCmyColorModel::GetColorantType(const QByteArray& colorantId) const
 {
 	Q_ASSERT(GetColorantIds().contains(colorantId));
 
@@ -49,7 +49,7 @@ icmm::IColorantList::ColorantType CCmyColorModel::GetColorantType(const QByteArr
 }
 
 
-icmm::IColorantList::ProcessColorantUsage CCmyColorModel::GetProcessColorantUsage(const QByteArray& colorantId) const
+icmm::ProcessColorantUsage CCmyColorModel::GetProcessColorantUsage(const QByteArray& colorantId) const
 {
 	Q_ASSERT(GetColorantIds().contains(colorantId));
 

@@ -9,7 +9,7 @@ namespace icmm
 {
 
 
-class CRgbaColorModel : public CRgbColorModel
+class CRgbaColorModel: public CRgbColorModel
 {
 public:
 	typedef CRgbColorModel BaseClass;

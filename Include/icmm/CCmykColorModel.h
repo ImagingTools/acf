@@ -9,7 +9,7 @@ namespace icmm
 {
 
 
-class CCmykColorModel : public CCmyColorModel
+class CCmykColorModel: public CCmyColorModel
 {
 public:
 	// reimplemented (icmm::IColorantList)
@@ -21,7 +21,7 @@ public:
 
 // reimplemented (icmm::IColorantList)
 
-QByteArrayList CCmykColorModel::GetColorantIds() const
+inline QByteArrayList CCmykColorModel::GetColorantIds() const
 {
 	return {"Cyan", "Magenta", "Yellow", "Black"};
 }

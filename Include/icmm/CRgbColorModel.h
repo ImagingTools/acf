@@ -10,7 +10,7 @@ namespace icmm
 {
 
 
-class CRgbColorModel : virtual public IColorModel
+class CRgbColorModel: virtual public IColorModel
 {
 public:
 	CRgbColorModel();

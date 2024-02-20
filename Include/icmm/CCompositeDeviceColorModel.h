@@ -9,7 +9,7 @@ namespace icmm
 {
 
 
-class CCompositeDeviceColorModel : public CSubstractiveColorModel
+class CCompositeDeviceColorModel: public CSubstractiveColorModel
 {
 public:
 	// reimplemented (icmm::IColorantList)
