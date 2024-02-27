@@ -11,22 +11,19 @@ namespace imath
 
 
 CSampledFunction::CSampledFunction()
-	:m_interpolatorPtr(nullptr)
 {
 }
 
 
 CSampledFunction::CSampledFunction(const CSampledFunction& function)
 	:m_samplesContainer(function.m_samplesContainer),
-	m_logicalRange(function.GetLogicalRange(0)),
-	m_interpolatorPtr(function.m_interpolatorPtr)
+	m_logicalRange(function.GetLogicalRange(0))
 {
 }
 
 
 CSampledFunction::CSampledFunction(const imath::ISampledFunction& function)
-	:m_logicalRange(function.GetLogicalRange(0)),
-	m_interpolatorPtr(nullptr)
+	:m_logicalRange(function.GetLogicalRange(0))
 {
 	Q_ASSERT(function.GetArgumentDimensionality() == 1);
 	Q_ASSERT(function.GetResultDimensionality() == 1);
@@ -52,7 +49,6 @@ bool CSampledFunction::operator==(const CSampledFunction& other) const
 {
 	bool retVal = m_samplesContainer == other.m_samplesContainer;
 	retVal = retVal && m_logicalRange == other.m_logicalRange;
-	retVal = retVal && m_interpolatorPtr == other.m_interpolatorPtr;
 
 	return retVal;
 }
@@ -60,12 +56,18 @@ bool CSampledFunction::operator==(const CSampledFunction& other) const
 
 void CSampledFunction::Reset()
 {
-	m_samplesContainer.clear();
+	if (!m_samplesContainer.empty()){
+		istd::CChangeNotifier notifier(this);
+
+		m_samplesContainer.clear();
+	}
 }
 
 
 bool CSampledFunction::Initialize(int size, double defaultValue)
 {
+	istd::CChangeNotifier notifier(this);
+
 	m_samplesContainer.resize(size);
 	
 	for (int i = 0; i < m_samplesContainer.size(); ++i){
@@ -76,20 +78,12 @@ bool CSampledFunction::Initialize(int size, double defaultValue)
 }
 
 
-void CSampledFunction::SetInterpolator(ISampledFunctionInterpolator* interpolatorPtr)
-{
-	m_interpolatorPtr = interpolatorPtr;
-
-	if (m_interpolatorPtr != nullptr){
-		m_interpolatorPtr->InitFromFunction(*this);
-	}
-}
-
-
 // reimplemented (imath::ISampledFunction)
 
 bool CSampledFunction::CreateFunction(double* dataPtr, const ArgumentType& sizes)
-{;
+{
+	istd::CChangeNotifier notifier(this);
+
 	Initialize(sizes[0]);
 
 	SamplesContainer::iterator beginIter = m_samplesContainer.begin();
@@ -145,18 +139,6 @@ bool CSampledFunction::GetValueAt(const ArgumentType& argument, ResultType& resu
 		return false;
 	}
 
-	if (m_interpolatorPtr != nullptr){
-		double resultValue = 0;
-		bool retVal = m_interpolatorPtr->GetValueAt(x, resultValue);
-		if (retVal){
-			result.SetElement(0, resultValue);
-
-			return true;
-		}
-
-		return false;
-	}
-
 	istd::CIntRange sampleRange(0, int(m_samplesContainer.size()));
 
 	int sampleIndex = sampleRange.GetValueFromAlpha(m_logicalRange.GetAlphaFromValue(x));
@@ -194,6 +176,8 @@ bool CSampledFunction::CopyFrom(const IChangeable& object, CompatibilityMode /*m
 	const CSampledFunction* objectPtr = dynamic_cast<const CSampledFunction*>(&object);
 
 	if (objectPtr != nullptr){
+		istd::CChangeNotifier notifier(this);
+
 		*this = *objectPtr;
 
 		return true;
@@ -227,11 +211,9 @@ istd::IChangeable* CSampledFunction::CloneMe(CompatibilityMode /*mode*/) const
 }
 
 
-bool CSampledFunction::ResetData(CompatibilityMode mode)
+bool CSampledFunction::ResetData(CompatibilityMode /*mode*/)
 {
-	m_samplesContainer.clear();
-	m_logicalRange.Reset();
-	m_interpolatorPtr = nullptr;
+	Reset();
 
 	return true;
 }

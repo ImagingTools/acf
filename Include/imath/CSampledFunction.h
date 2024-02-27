@@ -5,7 +5,6 @@
 #include <istd/TArray.h>
 #include <istd/TIndex.h>
 #include <imath/TISampledFunction.h>
-#include <imath/ISampledFunctionInterpolator.h>
 
 
 namespace imath
@@ -32,7 +31,6 @@ public:
 	double GetSampleValue(int index) const;
 	void SetSampleValue(int index, double value);
 	void SetLogicalRange(const istd::CRange& logicalRange);
-	void SetInterpolator(ISampledFunctionInterpolator* interpolatorPtr);
 	
 	// reimplemented (imath::ISampledFunction)
 	virtual bool CreateFunction(double* dataPtr, const ArgumentType& sizes) override;
@@ -57,8 +55,6 @@ private:
 	typedef std::vector<double> SamplesContainer;
 	SamplesContainer m_samplesContainer;
 	istd::CRange m_logicalRange;
-
-	ISampledFunctionInterpolator* m_interpolatorPtr;
 };
 
 
