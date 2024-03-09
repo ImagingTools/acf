@@ -266,6 +266,30 @@ void CLogGuiComp::SetCommandsVisuals()
 	m_clearCommand->SetVisuals(tr("Clear"), tr("Clear"), tr("Remove all messages"), clearIcon);
 	m_exportCommand->SetVisuals(tr("Export..."), tr("Export..."), tr("Export log to file"), exportIcon);
 	m_diagnosticCommand->SetVisuals(tr("Diagnostic Mode"), tr("Switch to Diagnostic Mode"), tr("Import existing file into the collection"), diagnosticModeIcon);
+
+	if (m_infoActionPtr != nullptr) {
+		m_infoActionPtr->setText(tr("Info"));
+	}
+
+	if (m_warningActionPtr != nullptr) {
+		m_warningActionPtr->setText(tr("Warning"));
+	}
+
+	if (m_errorActionPtr != nullptr) {
+		m_errorActionPtr->setText(tr("Error"));
+	}
+
+	if (m_clearActionPtr != nullptr) {
+		m_clearActionPtr->setText(tr("Clear"));
+	}
+
+	if (m_exportActionPtr != nullptr) {
+		m_exportActionPtr->setText(tr("Export..."));
+	}
+
+	if (m_diagnosticModeActionPtr != nullptr) {
+		m_diagnosticModeActionPtr->setText(tr("Diagnostic Mode"));
+	}
 }
 
 
