@@ -100,7 +100,7 @@ void CTranslationManagerComp::SwitchLanguage(int languageIndex)
 	}
 
 	if (languageIndex >= 0 && languageIndex < m_translatorsList.count()){
-		if (!m_installTranslator.IsValid() ||  *m_installTranslator){
+		if (!m_installTranslatorAttrPtr.IsValid() ||  *m_installTranslatorAttrPtr){
 			QCoreApplication::installTranslator(m_translatorsList[languageIndex].translatorPtr.GetPtr());
 		}
 
