@@ -4,27 +4,101 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+39"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/AcfLoc/CAcfLoc.cpp" line="+29"/>
         <source>ACF</source>
         <translation>ACF</translation>
     </message>
     <message>
+        <location line="+2"/>
+        <location line="+20"/>
+        <source>NoLazy(-1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <location line="+20"/>
+        <source>NoLazy(-1)_AP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <location line="+20"/>
+        <source>NoLazy(0)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <location line="+20"/>
+        <source>NoLazy(0)_AP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <location line="+20"/>
+        <source>Lazy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <location line="+20"/>
+        <source>NoLazy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <location line="+20"/>
+        <source>Lazy(-1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <location line="+20"/>
+        <source>Lazy(-1)_AP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <location line="+20"/>
+        <source>Lazy(0)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <location line="+20"/>
+        <source>Lazy(0)_AP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+4"/>
+        <location line="+4"/>
+        <source>Page1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="-6"/>
+        <location line="+4"/>
+        <location line="+4"/>
+        <source>Page2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>File Selector</source>
         <translation>ファイルセレクター</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+4"/>
         <source>Log</source>
         <translation>ログ</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-2"/>
         <source>Log XML file</source>
         <translation>ログXMLファイル</translation>
     </message>
     <message>
-        <location line="-8"/>
+        <location line="-6"/>
         <source>About</source>
         <translation>詳細</translation>
     </message>
@@ -51,13 +125,13 @@
     <name>CAboutWidgetGuiComp</name>
     <message>
         <location filename="../../../Include/iqtgui/CAboutWidgetGuiComp.ui" line="+14"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+196"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+192"/>
         <source>About...</source>
         <translation>詳細...</translation>
     </message>
     <message>
         <location line="+169"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CAboutWidgetGuiComp.h" line="+1"/>
         <source>Version</source>
         <translation>バージョン</translation>
     </message>
@@ -66,31 +140,31 @@
     <name>CAffineTransformationParamsGui</name>
     <message>
         <location filename="../../../Include/iqt2d/CAffineTransformationParamsGui.ui" line="+17"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+91"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+91"/>
         <source>Translation</source>
         <translation>平行移動</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+1"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
         <source>Set to no transformation (zero translation and rotation angle and 1:1 scale)</source>
         <translation>変形なしに設定 (平行移動および回転角度ゼロ、1:1スケール)</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAffineTransformationParamsGui.h" line="+2"/>
         <source>Reset</source>
         <translation>リセット</translation>
     </message>
@@ -99,13 +173,13 @@
     <name>CAnnulusParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqt2d/CAnnulusParamsGuiComp.ui" line="+35"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+112"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+112"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
         <location line="+46"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAnnulusParamsGuiComp.h" line="+2"/>
         <source>Radii</source>
         <translation>半径</translation>
     </message>
@@ -114,25 +188,25 @@
     <name>CAnnulusSegmentParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqt2d/CAnnulusSegmentParamsGuiComp.ui" line="+35"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+144"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+144"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
         <location line="+46"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
         <source>Radii</source>
         <translation>半径</translation>
     </message>
     <message>
         <location line="+46"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+2"/>
         <source>Angles</source>
         <translation>角度</translation>
     </message>
     <message>
         <location line="+33"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CAnnulusSegmentParamsGuiComp.h" line="+1"/>
         <source>°</source>
         <translation>°</translation>
     </message>
@@ -141,32 +215,32 @@
     <name>CArcParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqt2d/CArcParamsGuiComp.ui" line="+26"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+138"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+138"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
         <location line="+58"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
         <source>Radius</source>
         <translation>半径</translation>
     </message>
     <message>
         <location line="+36"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+2"/>
         <source>Start Angle</source>
         <translation>開始角度</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
         <source>End Angle</source>
         <translation>終了角度</translation>
     </message>
     <message>
         <location line="+7"/>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CArcParamsGuiComp.h" line="+1"/>
         <location line="+1"/>
         <source>°</source>
         <translation>°</translation>
@@ -176,19 +250,19 @@
     <name>CCircleParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqt2d/CCircleParamsGuiComp.ui" line="+35"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+128"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+128"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
         <location line="+94"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="+4"/>
         <source>Tools</source>
         <translation>ツール</translation>
     </message>
     <message>
         <location line="-48"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CCircleParamsGuiComp.h" line="-2"/>
         <source>Radius</source>
         <translation>半径</translation>
     </message>
@@ -197,7 +271,7 @@
     <name>CCollapsiblePage</name>
     <message>
         <location filename="../../../Include/iwidgets/CCollapsiblePage.ui" line="+89"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iwidgets/ui_CCollapsiblePage.h" line="+107"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iwidgets/ui_CCollapsiblePage.h" line="+107"/>
         <source>Page</source>
         <translation>ページ</translation>
     </message>
@@ -206,13 +280,13 @@
     <name>CComposedParamsSetGuiComp</name>
     <message>
         <location filename="../../../Include/iqtprm/CComposedParamsSetGuiComp.ui" line="+44"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="+94"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="+94"/>
         <source>Load...</source>
         <translation>読み込み...</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h" line="+1"/>
         <source>Save...</source>
         <translation>保存...</translation>
     </message>
@@ -221,21 +295,21 @@
     <name>CDoubleRangeSpinEdit</name>
     <message>
         <location filename="../../../Include/iwidgets/CDoubleRangeSpinEdit.ui" line="+26"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+99"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+99"/>
         <source>from</source>
         <translation>から</translation>
     </message>
     <message>
         <location line="+26"/>
         <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="+1"/>
         <location line="+2"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
         <location line="-26"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iwidgets/ui_CDoubleRangeSpinEdit.h" line="-1"/>
         <source>to</source>
         <translation>へ</translation>
     </message>
@@ -244,19 +318,19 @@
     <name>CElementEditorGui</name>
     <message>
         <location filename="../../../Include/iqtprm/CElementEditorGui.ui" line="+14"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+114"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+115"/>
         <source>Element Properties</source>
         <translation>要素のプロパティ</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
         <source>Element name</source>
         <translation>要素の名称</translation>
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CElementEditorGui.h" line="+1"/>
         <source>Element description</source>
         <translation>要素の説明</translation>
     </message>
@@ -265,7 +339,7 @@
     <name>CEnableableParamGuiComp</name>
     <message>
         <location filename="../../../Include/iqtprm/CEnableableParamGuiComp.ui" line="+26"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CEnableableParamGuiComp.h" line="+53"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CEnableableParamGuiComp.h" line="+53"/>
         <source>Enabled</source>
         <translation>有効</translation>
     </message>
@@ -274,73 +348,73 @@
     <name>CExtParamsManagerGuiComp</name>
     <message>
         <location filename="../../../Include/iqtprm/CExtParamsManagerGuiComp.ui" line="+95"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+146"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+146"/>
         <source>Add</source>
         <translation>追加</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
         <source>Ins</source>
         <translation>Ins</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
         <source>Add new element</source>
         <translation>新要素を追加</translation>
     </message>
     <message>
         <location line="+42"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+6"/>
         <source>Clone</source>
         <translation>クローン</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
         <source>Ctrl+Ins</source>
         <translation>Ctrl+Ins</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
         <source>Duplicate selected element</source>
         <translation>選択した要素をコピー</translation>
     </message>
     <message>
         <location line="-45"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="-9"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="-9"/>
         <source>Edit</source>
         <translation>編集</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
         <source>Return</source>
         <translation>Enter</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
         <source>Change properties of the selected element</source>
         <translation>選択した要素のプロパティを変更</translation>
     </message>
     <message>
         <location line="+42"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+6"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
         <source>Del</source>
         <translation>Del</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CExtParamsManagerGuiComp.h" line="+2"/>
         <source>Delete selected element</source>
         <translation>選択した要素を削除</translation>
     </message>
@@ -349,7 +423,7 @@
     <name>CFileListProviderGuiComp</name>
     <message>
         <location filename="../../../Include/ifilegui/CFileListProviderGuiComp.ui" line="+33"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileListProviderGuiComp.h" line="+50"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileListProviderGuiComp.h" line="+50"/>
         <source>File</source>
         <translation>ファイル</translation>
     </message>
@@ -358,25 +432,25 @@
     <name>CFileNameParamGuiComp</name>
     <message>
         <location filename="../../../Include/iqtprm/CFileNameParamGuiComp.ui" line="+38"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+90"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+90"/>
         <source>Directory</source>
         <translation>ディレクトリ</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
         <source>Path</source>
         <translation>パス</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h" line="+1"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -385,13 +459,13 @@
     <name>CFilePersistenceGuiComp</name>
     <message>
         <location filename="../../../Include/ifilegui/CFilePersistenceGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+53"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+53"/>
         <source>Load</source>
         <translation>読み込み</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFilePersistenceGuiComp.h" line="+1"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -400,7 +474,7 @@
     <name>CFilePreviewGuiComp</name>
     <message>
         <location filename="../../../Include/ifilegui/CFilePreviewGuiComp.ui" line="+64"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFilePreviewGuiComp.h" line="+104"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFilePreviewGuiComp.h" line="+104"/>
         <source>No Preview Available</source>
         <translation>使用可能なプレビューがありません</translation>
     </message>
@@ -409,19 +483,19 @@
     <name>CFileTreeViewGuiComp</name>
     <message>
         <location filename="../../../Include/ifilegui/CFileTreeViewGuiComp.ui" line="+86"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+206"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+206"/>
         <source>Wildcards * and ? are allowed</source>
         <translation>ワイルドカード*および?を利用できます</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <source>Type filter text here...</source>
         <translation>ここにフィルタテキストを入力します...</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <source>Reset filter</source>
         <translation>フィルタをリセット</translation>
     </message>
@@ -430,7 +504,7 @@
         <location line="+36"/>
         <location line="+14"/>
         <location line="+65"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <location line="+4"/>
         <location line="+4"/>
         <location line="+5"/>
@@ -439,31 +513,31 @@
     </message>
     <message>
         <location line="-82"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="-11"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="-11"/>
         <source>Expand all items</source>
         <translation>すべての項目を展開</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+4"/>
         <source>Collapse all items</source>
         <translation>すべての項目を折り畳む</translation>
     </message>
     <message>
         <location line="+51"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+3"/>
         <source>Update in progress...</source>
         <translation>更新中です...</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+2"/>
         <source>Refresh view</source>
         <translation>ビューの更新</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h" line="+4"/>
         <source>F5</source>
         <translation>F5</translation>
     </message>
@@ -472,19 +546,19 @@
     <name>CImagePropertyGuiComp</name>
     <message>
         <location filename="../../../Include/iqtgui/CImagePropertyGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+51"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+51"/>
         <source>Display navigation bar</source>
         <translation>ナビゲーションバーの表示</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="+4"/>
         <source>Property</source>
         <translation>プロパティ</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CImagePropertyGuiComp.h" line="-1"/>
         <source>Value</source>
         <translation>値</translation>
     </message>
@@ -493,13 +567,13 @@
     <name>CLine2dParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqt2d/CLine2dParamsGuiComp.ui" line="+27"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+111"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+111"/>
         <source>First point</source>
         <translation>最初の点</translation>
     </message>
     <message>
         <location line="+46"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CLine2dParamsGuiComp.h" line="+2"/>
         <source>Second point</source>
         <translation>第2の点</translation>
     </message>
@@ -508,31 +582,31 @@
     <name>CLogGuiComp</name>
     <message>
         <location filename="../../../Include/iloggui/CLogGuiComp.ui" line="+112"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+114"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+114"/>
         <source>Search</source>
         <translation>検索</translation>
     </message>
     <message>
         <location line="+47"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="+5"/>
         <source>State</source>
         <translation>ステータス</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
         <source>Time</source>
         <translation>時間</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
         <source>Source</source>
         <translation>ソース</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CLogGuiComp.h" line="-1"/>
         <source>Message</source>
         <translation>メッセージ</translation>
     </message>
@@ -541,7 +615,7 @@
     <name>CMiniWidgetPage</name>
     <message>
         <location filename="../../../Include/iwidgets/CMiniWidgetPage.ui" line="+119"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iwidgets/ui_CMiniWidgetPage.h" line="+120"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iwidgets/ui_CMiniWidgetPage.h" line="+120"/>
         <source>Page</source>
         <translation>ページ</translation>
     </message>
@@ -550,49 +624,49 @@
     <name>COptionsManagerEditorComp</name>
     <message>
         <location filename="../../../Include/iqtprm/COptionsManagerEditorComp.ui" line="+75"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+155"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+155"/>
         <source>Insert new item</source>
         <translation>新しい項目の挿入</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
         <source>Add</source>
         <translation>追加</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
         <source>Remove selected item</source>
         <translation>選択した項目を削除</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
         <location line="+42"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+2"/>
         <source>Move selected item up</source>
         <translation>選択した項目を上に移動</translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+6"/>
         <source>Load all parameters from file</source>
         <translation>すべてのパラメーターをファイルから読み込む</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="+3"/>
         <source>Save all parameters to file</source>
         <translation>すべてのパラメーターをファイルに保存</translation>
     </message>
     <message>
         <location line="-25"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="-6"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_COptionsManagerEditorComp.h" line="-6"/>
         <source>Move selected item down</source>
         <translation>選択した項目を下に移動</translation>
     </message>
@@ -601,67 +675,67 @@
     <name>CParamsManagerGuiCompBase</name>
     <message>
         <location filename="../../../Include/iqtprm/CParamsManagerGuiCompBase.ui" line="+65"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+267"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+267"/>
         <source>List</source>
         <translation>リスト</translation>
     </message>
     <message>
         <location line="+68"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Insert new item</source>
         <translation>新しい項目を挿入</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Add</source>
         <translation>追加</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Remove selected item</source>
         <translation>選択した項目を削除</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
         <location line="+57"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+2"/>
         <source>Copy</source>
         <translation type="unfinished">コピー</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+4"/>
         <source>Paste</source>
         <translation type="unfinished">ペースト</translation>
     </message>
     <message>
         <location line="+32"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+4"/>
         <source>Move selected item up</source>
         <translation>選択した項目を上に移動</translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+6"/>
         <source>Load all parameters from file</source>
         <translation>すべてのパラメーターをファイルから読み込む</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="+3"/>
         <source>Save all parameters to file</source>
         <translation>すべてのパラメーターをファイルに保存</translation>
     </message>
     <message>
         <location line="-25"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="-6"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CParamsManagerGuiCompBase.h" line="-6"/>
         <source>Move selected item down</source>
         <translation>選択した項目を下に移動</translation>
     </message>
@@ -670,79 +744,79 @@
     <name>CPolygonParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="+53"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+119"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+119"/>
         <source>Add new point</source>
         <translation>新しい点の追加</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Append</source>
         <translation>追加</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Ctrl+Ins</source>
         <translation>Ctrl+Ins</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
         <source>Remove current point</source>
         <translation>現在の点を削除</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Shift+Del</source>
         <translation>Shift+Del</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
         <source>Copy parameters to clipboard</source>
         <translation>パラメーターをクリップボードにコピー</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Copy</source>
         <translation>コピー</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+3"/>
         <source>Paste parameters from clipboard</source>
         <translation>クリップボードからパラメーターをペースト</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Paste</source>
         <translation>ペースト</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPolygonParamsGuiComp.h" line="+2"/>
         <source>Tools</source>
         <translation>ツール</translation>
     </message>
@@ -751,7 +825,7 @@
     <name>CPosition2dParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqt2d/CPosition2dParamsGuiComp.ui" line="+94"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CPosition2dParamsGuiComp.h" line="+107"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CPosition2dParamsGuiComp.h" line="+107"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
@@ -760,13 +834,13 @@
     <name>CProgressManagerGuiComp</name>
     <message>
         <location filename="../../../Include/iqtgui/CProgressManagerGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+65"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+65"/>
         <source>Progress</source>
         <translation>進捗</translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CProgressManagerGuiComp.h" line="+1"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
@@ -775,14 +849,14 @@
     <name>CQuadrangleParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqt2d/CQuadrangleParamsGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+212"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+212"/>
         <source>First Diagonal</source>
         <translation>最初の斜線</translation>
     </message>
     <message>
         <location line="+12"/>
         <location line="+125"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="+1"/>
         <location line="+5"/>
         <source>First point</source>
         <translation>最初の点</translation>
@@ -790,14 +864,14 @@
     <message>
         <location line="-67"/>
         <location line="+125"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
         <location line="+5"/>
         <source>Second point</source>
         <translation>第2の点</translation>
     </message>
     <message>
         <location line="-70"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CQuadrangleParamsGuiComp.h" line="-3"/>
         <source>Second Diagonal</source>
         <translation>第2の斜線</translation>
     </message>
@@ -805,32 +879,26 @@
 <context>
     <name>CRectangleParamsGuiComp</name>
     <message>
-        <location filename="../../../Include/iqt2d/CRectangleParamsGuiComp.ui" line="+51"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+152"/>
+        <location filename="../../../Include/iqt2d/CRectangleParamsGuiComp.ui" line="+104"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+134"/>
         <source>Left</source>
         <translation>左</translation>
     </message>
     <message>
-        <location line="-26"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="-2"/>
+        <location line="+26"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+2"/>
         <source>Right</source>
         <translation>右</translation>
     </message>
     <message>
-        <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+3"/>
+        <location line="-13"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="-1"/>
         <source>Top</source>
         <translation>上</translation>
     </message>
     <message>
-        <location line="+75"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="+3"/>
-        <source>Move to center</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-101"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="-5"/>
+        <location line="-62"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqt2d/ui_CRectangleParamsGuiComp.h" line="-4"/>
         <source>Bottom</source>
         <translation>下</translation>
     </message>
@@ -839,7 +907,7 @@
     <name>CSelectableGuiComp</name>
     <message>
         <location filename="../../../Include/iqtprm/CSelectableGuiComp.ui" line="+49"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CSelectableGuiComp.h" line="+91"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CSelectableGuiComp.h" line="+91"/>
         <source>No selection</source>
         <translation>選択なし</translation>
     </message>
@@ -847,23 +915,21 @@
 <context>
     <name>CSelectionParamGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtprm/CSelectionParamGuiComp.ui" line="+98"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CSelectionParamGuiComp.h" line="+113"/>
+        <location filename="../../../Include/iqtprm/CSelectionParamGuiComp.ui" line="+83"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CSelectionParamGuiComp.h" line="+88"/>
         <source>InfoLabel</source>
         <translation>情報ラベル</translation>
     </message>
     <message>
-        <location line="+37"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CSelectionParamGuiComp.h" line="+1"/>
         <source>OptionDescriptionLabel</source>
-        <translation>OptionDescriptionLabel</translation>
+        <translation type="vanished">OptionDescriptionLabel</translation>
     </message>
 </context>
 <context>
     <name>CSelectionParamIndexGuiComp</name>
     <message>
         <location filename="../../../Include/iqtprm/CSelectionParamIndexGuiComp.ui" line="+19"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtprm/ui_CSelectionParamIndexGuiComp.h" line="+70"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtprm/ui_CSelectionParamIndexGuiComp.h" line="+70"/>
         <source>Iterations</source>
         <translation>反復</translation>
     </message>
@@ -872,25 +938,25 @@
     <name>CSimpleFilePathParamGuiComp</name>
     <message>
         <location filename="../../../Include/ifilegui/CSimpleFilePathParamGuiComp.ui" line="+38"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+84"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+84"/>
         <source>Directory</source>
         <translation>ディレクトリ</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
         <source>Path</source>
         <translation>パス</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/ifilegui/ui_CSimpleFilePathParamGuiComp.h" line="+1"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -899,13 +965,13 @@
     <name>CSplashScreenGuiComp</name>
     <message>
         <location filename="../../../Include/iqtgui/CSplashScreenGuiComp.ui" line="+384"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+220"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+216"/>
         <source>Version</source>
         <translation>バージョン</translation>
     </message>
     <message>
         <location line="+222"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CSplashScreenGuiComp.h" line="+2"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -913,7 +979,7 @@
 <context>
     <name>CTextEditorComp</name>
     <message>
-        <location filename="../../../Docs/Tutorial/Impl/DocView/CTextEditorComp.cpp" line="+163"/>
+        <location filename="../../../Docs/Tutorial/Impl/DocView/CTextEditorComp.cpp" line="+141"/>
         <source>To &amp;Lowercase</source>
         <translation>小文字にする (L)</translation>
     </message>
@@ -947,43 +1013,43 @@
     <name>CTextLogGuiComp</name>
     <message>
         <location filename="../../../Include/iloggui/CTextLogGuiComp.ui" line="+72"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+156"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+156"/>
         <source>Severity</source>
         <translation>厳しさ</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Any</source>
         <translation>任意</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Info</source>
         <translation>情報</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+1"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
         <source>Source</source>
         <translation>ソース</translation>
     </message>
     <message>
         <location line="+82"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iloggui/ui_CTextLogGuiComp.h" line="+2"/>
         <source>Search</source>
         <translation>検索</translation>
     </message>
@@ -992,13 +1058,13 @@
     <name>CVersionInfoGuiComp</name>
     <message>
         <location filename="../../../Include/iqtgui/CVersionInfoGuiComp.ui" line="+36"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="+55"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="+55"/>
         <source>Module</source>
         <translation>モジュール</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt6_VC17_x64/GeneratedFiles/iqtgui/ui_CVersionInfoGuiComp.h" line="-1"/>
         <source>Version</source>
         <translation>バージョン</translation>
     </message>
@@ -1006,21 +1072,19 @@
 <context>
     <name>CVersionInfoSplashScreenGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtgui/CVersionInfoSplashScreenGuiComp.ui" line="+264"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtgui/ui_CVersionInfoSplashScreenGuiComp.h" line="+167"/>
         <source>Version</source>
-        <translation>バージョン</translation>
+        <translation type="vanished">バージョン</translation>
     </message>
 </context>
 <context>
     <name>QCoreApplication</name>
     <message>
-        <location filename="../../../Include/iqtdoc/CExternalOpenDocumentCommandComp.cpp" line="+73"/>
+        <location filename="../../../Include/iqtdoc/CExternalOpenDocumentCommandComp.cpp" line="+51"/>
         <source>File</source>
         <translation>ファイル</translation>
     </message>
     <message>
-        <location filename="../../../Include/iqtgui/CProcessStartCommandComp.cpp" line="+91"/>
+        <location filename="../../../Include/iqtgui/CProcessStartCommandComp.cpp" line="+69"/>
         <source>Executable file &apos;%1&apos; doesn&apos;t exist</source>
         <translation>実行ファイル&apos;%1&apos;が存在しません</translation>
     </message>
@@ -1028,17 +1092,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../Include/ibase/CQtVersionInfoComp.cpp" line="+85"/>
+        <location filename="../../../Include/ibase/CQtVersionInfoComp.cpp" line="+63"/>
         <source>The runtime version of Qt framework doesn&apos;t match the version used by creation of ACF</source>
         <translation>QtフレームワークのランタイムバージョンがACFの作成に使用されているバージョンと一致しません</translation>
     </message>
     <message>
-        <location filename="../../../Include/idoc/CStandardDocumentMetaInfo.cpp" line="+41"/>
+        <location filename="../../../Include/idoc/CStandardDocumentMetaInfo.cpp" line="+19"/>
         <source>Change document information</source>
         <translation>ドキュメント情報を変更</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+100"/>
         <source>Title</source>
         <translation>タイトル</translation>
     </message>
@@ -1128,8 +1192,7 @@
         <translation>ドキュメント内容のチェックサム</translation>
     </message>
     <message>
-        <location filename="../../../Include/ifile/CFileSerializerCompBase.cpp" line="+49"/>
-        <location filename="../../../Include/iqt/CSettingsSerializerComp.cpp" line="+46"/>
+        <location filename="../../../Include/ifile/CFileSerializerCompBase.cpp" line="+27"/>
         <source>Object is not serializable</source>
         <translation>オブジェクトが直列可能ではありません</translation>
     </message>
@@ -1139,7 +1202,7 @@
         <translation>ファイル拡張子がサポートされていません</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+47"/>
         <source>File %1 does not exist</source>
         <translation>ファイル%1が存在しません</translation>
     </message>
@@ -1149,13 +1212,13 @@
         <translation>保存先ディレクトリ%1が存在しません</translation>
     </message>
     <message>
-        <location filename="../../../Include/ifile/CGeneratedFileNameParamComp.cpp" line="+78"/>
+        <location filename="../../../Include/ifile/CGeneratedFileNameParamComp.cpp" line="+56"/>
         <source>Directory %1 could not be created</source>
         <translation>ディレクトリ%1を作成できませんでした</translation>
     </message>
     <message>
-        <location filename="../../../Include/ifile/TFileSerializerComp.h" line="+205"/>
-        <location filename="../../../Include/ifile/TXmlFileSerializerComp.h" line="+217"/>
+        <location filename="../../../Include/ifile/TFileSerializerComp.h" line="+182"/>
+        <location filename="../../../Include/ifile/TXmlFileSerializerComp.h" line="+206"/>
         <source>Cannot create path to file</source>
         <translation>ファイルへのパスを作成できません</translation>
     </message>
@@ -1173,19 +1236,19 @@
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../Include/ifile/TXmlFileSerializerComp.h" line="+13"/>
+        <location filename="../../../Include/ifile/TXmlFileSerializerComp.h" line="+16"/>
         <source>Cannot load object from file </source>
         <translation>ファイルからオブジェクトを読み込めません</translation>
     </message>
     <message>
-        <location filename="../../../Include/ipackage/CPackagesLoaderComp.cpp" line="+272"/>
+        <location filename="../../../Include/ipackage/CPackagesLoaderComp.cpp" line="+250"/>
         <location line="+33"/>
         <source>Packages conflict: %1 - %2</source>
         <translation>パッケージ競合: %1 - %2</translation>
     </message>
     <message>
         <location line="-9"/>
-        <location filename="../../../Include/ipackage/CRegistriesManagerComp.cpp" line="+271"/>
+        <location filename="../../../Include/ipackage/CRegistriesManagerComp.cpp" line="+249"/>
         <source>Second real package definition was ignored %1 (previous: %2)</source>
         <translation>第2のリアルパッケージ定義は無視されました%1 (前: %2)</translation>
     </message>
@@ -1227,7 +1290,7 @@
         <translation>構成ファイルを開けません: %1</translation>
     </message>
     <message>
-        <location filename="../../../Include/ipackage/CRegistryCodeSaverComp.cpp" line="+200"/>
+        <location filename="../../../Include/ipackage/CRegistryCodeSaverComp.cpp" line="+178"/>
         <source>dependency file</source>
         <translation>依存関係ファイル</translation>
     </message>
@@ -1263,7 +1326,7 @@
         <translation>不明な属性タイプ: %1</translation>
     </message>
     <message>
-        <location filename="../../../Include/iprm/CParamsManagerCompBase.cpp" line="+43"/>
+        <location filename="../../../Include/iprm/CParamsManagerCompBase.cpp" line="+21"/>
         <source>Remove parameter</source>
         <translation>パラメーターを削除</translation>
     </message>
@@ -1288,28 +1351,28 @@
         <translation>有効/無効</translation>
     </message>
     <message>
-        <location line="+327"/>
+        <location line="+328"/>
         <source>%1_%2</source>
         <translation>%1_%2</translation>
     </message>
     <message>
-        <location filename="../../../Include/iqtgui/CApplicationCompBase.cpp" line="+192"/>
+        <location filename="../../../Include/iqtgui/CApplicationCompBase.cpp" line="+170"/>
         <source>ACF application</source>
         <translation>ACFアプリケーション</translation>
     </message>
     <message>
-        <location filename="../../../Include/iser/CBinaryReadArchiveBase.cpp" line="+53"/>
+        <location filename="../../../Include/iser/CBinaryReadArchiveBase.cpp" line="+31"/>
         <location line="+26"/>
         <source>Bad tag begin code, is %1, should be %2 (tag &apos;%3&apos;)</source>
         <translation>コードの最初のタグに誤りがあります。%1ではなく%2とする必要があります (タグ&apos;%3&apos;)</translation>
     </message>
     <message>
-        <location filename="../../../Include/iser/CXmlReadArchiveBase.cpp" line="+368"/>
+        <location filename="../../../Include/iser/CXmlReadArchiveBase.cpp" line="+346"/>
         <source>Cannot find root tag &apos;%1&apos;</source>
         <translation>ルートタグ&apos;%1&apos;が見つかりません</translation>
     </message>
     <message>
-        <location filename="../../../Include/iview/CImageShape.cpp" line="+222"/>
+        <location filename="../../../Include/iview/CImageShape.cpp" line="+187"/>
         <source>[%1, %2] px</source>
         <translation>[%1, %2] px</translation>
     </message>
@@ -1319,13 +1382,13 @@
         <translation>灰色の値%1% (%2)</translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+56"/>
         <source>Value %1</source>
         <translation>値%1</translation>
     </message>
     <message>
-        <location filename="../../../Include/i2d/CObject2dBase.cpp" line="+36"/>
-        <location filename="../../../Include/iview/CInteractiveShapeBase.cpp" line="+42"/>
+        <location filename="../../../Include/i2d/CObject2dBase.cpp" line="+14"/>
+        <location filename="../../../Include/iview/CInteractiveShapeBase.cpp" line="+20"/>
         <source>Move object</source>
         <translation>オブジェクトを移動</translation>
     </message>
@@ -1335,7 +1398,7 @@
         <translation>オブジェクトを修正</translation>
     </message>
     <message>
-        <location filename="../../../Include/i2d/CPolypoint.cpp" line="+387"/>
+        <location filename="../../../Include/i2d/CPolypoint.cpp" line="+365"/>
         <source>Clear all nodes</source>
         <translation>すべてのノードをクリア</translation>
     </message>
@@ -1355,7 +1418,7 @@
         <translation>ノードを削除</translation>
     </message>
     <message>
-        <location filename="../../../Include/i2d/CPolygon.cpp" line="+42"/>
+        <location filename="../../../Include/i2d/CPolygon.cpp" line="+19"/>
         <source>Flip</source>
         <translation>はじく</translation>
     </message>
@@ -1370,12 +1433,12 @@
         <translation>ノードを反転</translation>
     </message>
     <message>
-        <location filename="../../../Include/i2d/CQuadrangle.cpp" line="+41"/>
+        <location filename="../../../Include/i2d/CQuadrangle.cpp" line="+19"/>
         <source>Set diagnal</source>
         <translation>斜線を設定</translation>
     </message>
     <message>
-        <location filename="../../../Include/i2d/CRectangle.cpp" line="+45"/>
+        <location filename="../../../Include/i2d/CRectangle.cpp" line="+23"/>
         <source>Reset rectangle</source>
         <translation>長方形をリセット</translation>
     </message>
@@ -1435,7 +1498,7 @@
         <translation>別の長方形と交差</translation>
     </message>
     <message>
-        <location filename="../../../Include/iattr/CAttributesManager.cpp" line="+41"/>
+        <location filename="../../../Include/iattr/CAttributesManager.cpp" line="+19"/>
         <source>Remove all attributes</source>
         <translation>すべての属性を削除</translation>
     </message>
@@ -1455,7 +1518,7 @@
         <translation>属性を挿入</translation>
     </message>
     <message>
-        <location filename="../../../Include/icomp/CRegistry.cpp" line="+47"/>
+        <location filename="../../../Include/icomp/CRegistry.cpp" line="+25"/>
         <source>Rename element</source>
         <translation>要素の名前変更</translation>
     </message>
@@ -1470,18 +1533,18 @@
         <translation>要素を削除</translation>
     </message>
     <message>
-        <location filename="../../../Include/ifile/CCompactXmlFileReadArchive.cpp" line="+87"/>
+        <location filename="../../../Include/ifile/CCompactXmlFileReadArchive.cpp" line="+65"/>
         <source>%2(%3) : %1</source>
         <translation>%2(%3) : %1</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../Include/ifile/CCompressedXmlFileReadArchive.cpp" line="+88"/>
+        <location filename="../../../Include/ifile/CCompressedXmlFileReadArchive.cpp" line="+66"/>
         <source>%2 : %1</source>
         <translation>%2 : %1</translation>
     </message>
     <message>
-        <location filename="../../../Include/iprm/CMultiParamsManagerComp.cpp" line="+42"/>
+        <location filename="../../../Include/iprm/CMultiParamsManagerComp.cpp" line="+21"/>
         <source>Enable/disable option</source>
         <translation>オプションの有効/無効</translation>
     </message>
@@ -1497,17 +1560,17 @@
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../Include/iprm/CParamsManagerCompBase.cpp" line="-333"/>
+        <location filename="../../../Include/iprm/CParamsManagerCompBase.cpp" line="-334"/>
         <source>Insert parameter</source>
         <translation>パラメーターを挿入</translation>
     </message>
     <message>
-        <location filename="../../../Include/iprm/CNameParam.cpp" line="+41"/>
+        <location filename="../../../Include/iprm/CNameParam.cpp" line="+19"/>
         <source>Change name</source>
         <translation>名前を変更</translation>
     </message>
     <message>
-        <location filename="../../../Include/iprm/COptionsManager.cpp" line="+40"/>
+        <location filename="../../../Include/iprm/COptionsManager.cpp" line="+18"/>
         <source>Enable option</source>
         <translation>オプションを有効化</translation>
     </message>
@@ -1543,22 +1606,22 @@
         <translation>説明を変更</translation>
     </message>
     <message>
-        <location filename="../../../Include/iqtgui/CSimpleMainWindowGuiComp.cpp" line="+486"/>
+        <location filename="../../../Include/iqtgui/CSimpleMainWindowGuiComp.cpp" line="+464"/>
         <source>Initializing User Interface...</source>
         <translation>ユーザーインターフェイスを初期化しています...</translation>
     </message>
     <message>
-        <location filename="../../../Include/iser/CCompactXmlMemReadArchive.cpp" line="+67"/>
+        <location filename="../../../Include/iser/CCompactXmlMemReadArchive.cpp" line="+45"/>
         <source>%1 (Line: %2)</source>
         <translation>%1 (ライン: %2)</translation>
     </message>
     <message>
-        <location filename="../../../Include/iser/CCompactXmlReadArchiveBase.cpp" line="+312"/>
+        <location filename="../../../Include/iser/CCompactXmlReadArchiveBase.cpp" line="+269"/>
         <source>%1 (node: %2)</source>
         <translation>%1 (ノード: %2)</translation>
     </message>
     <message>
-        <location filename="../../../Include/iview/CPolygonShape.cpp" line="+43"/>
+        <location filename="../../../Include/iview/CPolygonShape.cpp" line="+21"/>
         <source>Move node</source>
         <translation>ノードを移動</translation>
     </message>
@@ -1573,12 +1636,12 @@
         <translation>左クリック: 選択したノードを削除する</translation>
     </message>
     <message>
-        <location filename="../../../Include/iview/CPolylineShape.cpp" line="+320"/>
+        <location filename="../../../Include/iview/CPolylineShape.cpp" line="+298"/>
         <source>Left click: remove selected node, right click: break at the selected node</source>
         <translation>左クリック: 選択したノードを削除する。右クリック: 選択したノードを中断する</translation>
     </message>
     <message>
-        <location filename="../../../Docs/Tutorial/Impl/ModelObserver/CAbComp.cpp" line="+33"/>
+        <location filename="../../../Docs/Tutorial/Impl/ModelObserver/CAbComp.cpp" line="+11"/>
         <source>Change A</source>
         <translation>変更A</translation>
     </message>
@@ -1588,7 +1651,7 @@
         <translation>変更B</translation>
     </message>
     <message>
-        <location filename="../../../Include/iimg/CPixelFormatList.cpp" line="+81"/>
+        <location filename="../../../Include/iimg/CPixelFormatList.cpp" line="+59"/>
         <source>Automatic</source>
         <translation>自動</translation>
     </message>
@@ -1638,7 +1701,7 @@
         <translation>不明</translation>
     </message>
     <message>
-        <location filename="../../../Include/iview/CDistanceToolShape.cpp" line="+263"/>
+        <location filename="../../../Include/iview/CDistanceToolShape.cpp" line="+241"/>
         <source>%1 mm</source>
         <translation>%1 mm</translation>
     </message>
@@ -1648,57 +1711,31 @@
         <translation>%1 px</translation>
     </message>
     <message>
-        <location filename="../../../Include/iqt/CSettingsSerializerComp.cpp" line="+42"/>
         <source>Cannot serialize object from file</source>
-        <translation>オブジェクトをファイルから直列化できません</translation>
+        <translation type="vanished">オブジェクトをファイルから直列化できません</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location line="+41"/>
         <source>No application info found, it is needed to save to settings</source>
-        <translation>アプリケーション情報が見つかりません。設定に保存する必要があります</translation>
+        <translation type="vanished">アプリケーション情報が見つかりません。設定に保存する必要があります</translation>
     </message>
     <message>
-        <location line="-4"/>
         <source>Cannot serialize object to file</source>
-        <translation>ファイルに対してオブジェクトを直列化できません</translation>
+        <translation type="vanished">ファイルに対してオブジェクトを直列化できません</translation>
     </message>
     <message>
-        <location filename="../../../Include/iqt/CTranslationManagerComp.cpp" line="+221"/>
         <source>Please, restart the application to update language settings</source>
-        <translation>言語設定を更新するにはアプリケーションを再起動してください</translation>
+        <translation type="vanished">言語設定を更新するにはアプリケーションを再起動してください</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Translation Manager</source>
-        <translation>
+        <translation type="vanished">
 翻訳マネージャー</translation>
-    </message>
-    <message>
-        <location filename="../../../Include/i2d/CLineList.cpp" line="+387"/>
-        <source>Clear all lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Create lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Insert line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Remove line</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ifile::CAutoPersistenceComp</name>
     <message>
-        <location filename="../../../Include/ifile/CAutoPersistenceComp.cpp" line="+70"/>
+        <location filename="../../../Include/ifile/CAutoPersistenceComp.cpp" line="+66"/>
         <source>Load data from file %1</source>
         <translation>ファイル%1からデータを読み込む</translation>
     </message>
@@ -1708,12 +1745,12 @@
         <translation>%1のロックに失敗しました (読み込み)</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+20"/>
         <source>Save data to file %1</source>
         <translation>データをファイル%1に保存する</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+24"/>
         <source>File could not be moved to the target location &apos;%1&apos;</source>
         <translation>ファイルを目的の場所&apos;%1&apos;へ移動できませんでした</translation>
     </message>
@@ -1723,7 +1760,7 @@
         <translation>%1のロックに失敗しました (保存)</translation>
     </message>
     <message>
-        <location line="+185"/>
+        <location line="+195"/>
         <source>Detected change of file %1</source>
         <translation>ファイル%1の変更が検出</translation>
     </message>
@@ -1733,7 +1770,7 @@
         <translation>%1のロックに失敗しました (セキュアな読み込み)</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+44"/>
         <source>Possible deadlock conditions: %1</source>
         <translation>デッドロック状態の可能性があります: %1</translation>
     </message>
@@ -1741,7 +1778,7 @@
 <context>
     <name>ifile::CFileListProviderComp</name>
     <message>
-        <location filename="../../../Include/ifile/CFileListProviderComp.cpp" line="+112"/>
+        <location filename="../../../Include/ifile/CFileListProviderComp.cpp" line="+90"/>
         <source>Specified path &apos;%1&apos; is not a directory</source>
         <translation>指定されたパス&apos;%1&apos;はディレクトリではありません</translation>
     </message>
@@ -1754,7 +1791,7 @@
 <context>
     <name>ifilegui::CFileDialogLoaderComp</name>
     <message>
-        <location filename="../../../Include/ifilegui/CFileDialogLoaderComp.cpp" line="+190"/>
+        <location filename="../../../Include/ifilegui/CFileDialogLoaderComp.cpp" line="+168"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -1777,7 +1814,7 @@
 <context>
     <name>ifilegui::CFileSystemExplorerGuiComp</name>
     <message>
-        <location filename="../../../Include/ifilegui/CFileSystemExplorerGuiComp.cpp" line="+182"/>
+        <location filename="../../../Include/ifilegui/CFileSystemExplorerGuiComp.cpp" line="+160"/>
         <source>Enter text to filter file items</source>
         <translation>ファイル項目をフィルタするためのテキストを入力</translation>
     </message>
@@ -1785,7 +1822,7 @@
 <context>
     <name>ifilegui::CFileTreeViewGuiComp</name>
     <message>
-        <location filename="../../../Include/ifilegui/CFileTreeViewGuiComp.cpp" line="+278"/>
+        <location filename="../../../Include/ifilegui/CFileTreeViewGuiComp.cpp" line="+256"/>
         <source>File</source>
         <translation>ファイル</translation>
     </message>
@@ -1793,12 +1830,12 @@
 <context>
     <name>ifilegui::CSimpleFilePathParamGuiComp</name>
     <message>
-        <location filename="../../../Include/ifilegui/CSimpleFilePathParamGuiComp.cpp" line="+178"/>
+        <location filename="../../../Include/ifilegui/CSimpleFilePathParamGuiComp.cpp" line="+169"/>
         <source>Select directory</source>
         <translation>ディレクトリを選択</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+27"/>
         <source>All supported files (%1)</source>
         <translation>サポートされているすべてのファイル (%1)</translation>
     </message>
@@ -1816,7 +1853,7 @@
 <context>
     <name>iimg::CBitmapLoaderComp</name>
     <message>
-        <location filename="../../../Include/iimg/CBitmapLoaderComp.cpp" line="+54"/>
+        <location filename="../../../Include/iimg/CBitmapLoaderComp.cpp" line="+32"/>
         <source>Object is not Qt image</source>
         <translation>オブジェクトはQt画像ではありません</translation>
     </message>
@@ -1934,7 +1971,7 @@
 <context>
     <name>iloggui::CLogGuiComp</name>
     <message>
-        <location filename="../../../Include/iloggui/CLogGuiComp.cpp" line="+217"/>
+        <location filename="../../../Include/iloggui/CLogGuiComp.cpp" line="+193"/>
         <source>New informations available</source>
         <translation>新しい情報が利用できます</translation>
     </message>
@@ -1954,49 +1991,54 @@
         <translation>深刻なエラーがあります!</translation>
     </message>
     <message>
-        <location line="-129"/>
-        <location line="+190"/>
-        <location line="+85"/>
+        <location line="+61"/>
+        <location line="+8"/>
+        <location line="+140"/>
         <source>Info</source>
         <translation>情報</translation>
     </message>
     <message>
-        <location line="-274"/>
-        <location line="+190"/>
-        <location line="+94"/>
+        <location line="-147"/>
+        <location line="+11"/>
+        <location line="+146"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location line="-283"/>
-        <location line="+190"/>
-        <location line="+103"/>
+        <location line="-156"/>
+        <location line="+14"/>
+        <location line="+152"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location line="-292"/>
-        <location line="+190"/>
-        <location line="+112"/>
+        <location line="-165"/>
+        <location line="+17"/>
+        <location line="+158"/>
         <source>Clear</source>
         <translation>クリア</translation>
     </message>
     <message>
-        <location line="-301"/>
-        <location line="+190"/>
-        <location line="+125"/>
+        <location line="-174"/>
+        <location line="+20"/>
+        <location line="+168"/>
         <source>Export...</source>
         <translation>エクスポート...</translation>
     </message>
     <message>
-        <location line="-314"/>
-        <location line="+190"/>
-        <location line="+133"/>
+        <location line="-187"/>
+        <location line="+23"/>
+        <location line="+173"/>
         <source>Diagnostic Mode</source>
         <translation>診断モード</translation>
     </message>
     <message>
-        <location line="-138"/>
+        <location line="-196"/>
+        <source>Enable diagnostic mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-5"/>
         <source>Show all messages</source>
         <translation>すべてのメッセージを表示</translation>
     </message>
@@ -2026,15 +2068,14 @@
         <translation>診断モードに切り替える</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Import existing file into the collection</source>
-        <translation>既存ファイルをコレクションにインポートします</translation>
+        <translation type="vanished">既存ファイルをコレクションにインポートします</translation>
     </message>
 </context>
 <context>
     <name>iloggui::CTextLogGuiComp</name>
     <message>
-        <location filename="../../../Include/iloggui/CTextLogGuiComp.cpp" line="+104"/>
+        <location filename="../../../Include/iloggui/CTextLogGuiComp.cpp" line="+82"/>
         <source>Any</source>
         <translation>任意</translation>
     </message>
@@ -2066,7 +2107,7 @@
 <context>
     <name>iqt2d</name>
     <message>
-        <location filename="../../../Include/iqt2d/TPolygonBasedParamsGuiComp.h" line="+414"/>
+        <location filename="../../../Include/iqt2d/TPolygonBasedParamsGuiComp.h" line="+388"/>
         <source>Flip horizontally</source>
         <translation>水平方向にはじく</translation>
     </message>
@@ -2091,7 +2132,7 @@
         <translation>ラインを反転</translation>
     </message>
     <message>
-        <location filename="../../../Include/iqt2d/COrientedCircleEditorComp.cpp" line="+62"/>
+        <location filename="../../../Include/iqt2d/COrientedCircleEditorComp.cpp" line="+40"/>
         <source>Reverse orientation</source>
         <translation>方向を反転</translation>
     </message>
@@ -2099,7 +2140,7 @@
 <context>
     <name>iqt2d::CPolylineParamsGuiComp</name>
     <message>
-        <location filename="../../../Include/iqt2d/CPolylineParamsGuiComp.cpp" line="+68"/>
+        <location filename="../../../Include/iqt2d/CPolylineParamsGuiComp.cpp" line="+46"/>
         <source>Open/close line</source>
         <translation>オープン/クローズライン</translation>
     </message>
@@ -2107,7 +2148,7 @@
 <context>
     <name>iqt2d::CTubePolylineParamsGuiComp</name>
     <message>
-        <location filename="../../../Include/iqt2d/CTubePolylineParamsGuiComp.cpp" line="+127"/>
+        <location filename="../../../Include/iqt2d/CTubePolylineParamsGuiComp.cpp" line="+105"/>
         <source>Left</source>
         <translation>左</translation>
     </message>
@@ -2120,7 +2161,7 @@
 <context>
     <name>iqtdoc::CMainWindowGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="+139"/>
+        <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="+117"/>
         <source>Recent %1 Files</source>
         <translation>最新の%1ファイル</translation>
     </message>
@@ -2130,9 +2171,13 @@
         <translation>最新のファイル</translation>
     </message>
     <message>
-        <location line="+67"/>
         <source>Loading the document...</source>
-        <translation>ドキュメントを読み込んでいます...</translation>
+        <translation type="vanished">ドキュメントを読み込んでいます...</translation>
+    </message>
+    <message>
+        <location line="+67"/>
+        <source>Loading &apos;%1&apos;...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+17"/>
@@ -2175,7 +2220,7 @@
         <translation>リストをクリア</translation>
     </message>
     <message>
-        <location line="+215"/>
+        <location line="+218"/>
         <source>&amp;File</source>
         <translation>ファイル (F)</translation>
     </message>
@@ -2236,12 +2281,12 @@
     </message>
     <message>
         <location line="+0"/>
-        <location line="+174"/>
+        <location line="+182"/>
         <source>Save As</source>
         <translation>名前を付けて保存</translation>
     </message>
     <message>
-        <location line="-174"/>
+        <location line="-182"/>
         <source>Saves document into selected file</source>
         <translation>選択したファイルにドキュメントを保存します</translation>
     </message>
@@ -2321,7 +2366,7 @@
         <translation>ドキュメントのあるフォルダを開きます</translation>
     </message>
     <message>
-        <location line="+165"/>
+        <location line="+173"/>
         <location line="+20"/>
         <source>Save file</source>
         <translation>ファイルを保存</translation>
@@ -2347,8 +2392,8 @@
         <translation>ファイル%1を上書きできません。十分な権限がない可能性があります</translation>
     </message>
     <message>
-        <location line="-753"/>
-        <location line="+778"/>
+        <location line="-764"/>
+        <location line="+789"/>
         <source>File could not be saved!</source>
         <translation>ファイルを保存できませんでした!</translation>
     </message>
@@ -2356,7 +2401,7 @@
 <context>
     <name>iqtdoc::CMultiDocumentWorkspaceGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtdoc/CMultiDocumentWorkspaceGuiComp.cpp" line="+156"/>
+        <location filename="../../../Include/iqtdoc/CMultiDocumentWorkspaceGuiComp.cpp" line="+154"/>
         <location line="+532"/>
         <source>&lt;no name&gt;</source>
         <translation>&lt;名前なし&gt;</translation>
@@ -2401,12 +2446,11 @@
 <context>
     <name>iqtdoc::CSingleDocumentWorkspaceGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="+117"/>
         <source>&lt;no name&gt;</source>
-        <translation>&lt;名前なし&gt;</translation>
+        <translation type="vanished">&lt;名前なし&gt;</translation>
     </message>
     <message>
-        <location line="+90"/>
+        <location filename="../../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="+195"/>
         <source>Close document</source>
         <translation>ドキュメントを閉じる</translation>
     </message>
@@ -2420,7 +2464,7 @@
 <context>
     <name>iqtdoc::CUndoManagerCommandsProviderComp</name>
     <message>
-        <location filename="../../../Include/iqtdoc/CUndoManagerCommandsProviderComp.cpp" line="+43"/>
+        <location filename="../../../Include/iqtdoc/CUndoManagerCommandsProviderComp.cpp" line="+21"/>
         <source>&amp;Undo</source>
         <translation>取り消し (U)</translation>
     </message>
@@ -2453,7 +2497,7 @@
 <context>
     <name>iqtdoc::Gui</name>
     <message>
-        <location filename="../../../Include/iqtdoc/TQtDocumentManagerWrap.h" line="+118"/>
+        <location filename="../../../Include/iqtdoc/TQtDocumentManagerWrap.h" line="+94"/>
         <source>Save...</source>
         <translation>保存...</translation>
     </message>
@@ -2471,7 +2515,7 @@
 <context>
     <name>iqtgui::CGuiApplicationComp</name>
     <message>
-        <location filename="../../../Include/iqtgui/CGuiApplicationComp.cpp" line="+172"/>
+        <location filename="../../../Include/iqtgui/CGuiApplicationComp.cpp" line="+155"/>
         <source>Quit</source>
         <translation>終了</translation>
     </message>
@@ -2479,7 +2523,7 @@
 <context>
     <name>iqtgui::CImagePropertiesFrameComp</name>
     <message>
-        <location filename="../../../Include/iqtgui/CImagePropertiesFrameComp.cpp" line="+60"/>
+        <location filename="../../../Include/iqtgui/CImagePropertiesFrameComp.cpp" line="+38"/>
         <source>%1 px/mm</source>
         <translation>%1 px/mm</translation>
     </message>
@@ -2487,7 +2531,7 @@
 <context>
     <name>iqtgui::CImagePropertyGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtgui/CImagePropertyGuiComp.cpp" line="+43"/>
+        <location filename="../../../Include/iqtgui/CImagePropertyGuiComp.cpp" line="+21"/>
         <source>Width</source>
         <translation>幅</translation>
     </message>
@@ -2613,7 +2657,7 @@
 <context>
     <name>iqtprm::CExtParamsManagerGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtprm/CExtParamsManagerGuiComp.cpp" line="+301"/>
+        <location filename="../../../Include/iqtprm/CExtParamsManagerGuiComp.cpp" line="+279"/>
         <source>Edit Parameters</source>
         <translation>パラメーターを編集</translation>
     </message>
@@ -2651,12 +2695,12 @@
 <context>
     <name>iqtprm::CFileNameParamGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtprm/CFileNameParamGuiComp.cpp" line="+127"/>
+        <location filename="../../../Include/iqtprm/CFileNameParamGuiComp.cpp" line="+105"/>
         <source>&lt;Enter path&gt;</source>
         <translation>&lt;パスを入力&gt;</translation>
     </message>
     <message>
-        <location line="+76"/>
+        <location line="+77"/>
         <source>Select directory</source>
         <translation>ディレクトリを選択</translation>
     </message>
@@ -2674,22 +2718,16 @@
 <context>
     <name>iqtprm::CSelectionParamGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtprm/CSelectionParamGuiComp.cpp" line="+364"/>
-        <location line="+84"/>
+        <location filename="../../../Include/iqtprm/CSelectionParamGuiComp.cpp" line="+414"/>
+        <location line="+90"/>
         <source>Reset</source>
         <translation>リセット</translation>
-    </message>
-    <message>
-        <location line="-83"/>
-        <location line="+84"/>
-        <source>Reset current selection</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iview::CConsoleGui</name>
     <message>
-        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+657"/>
+        <location filename="../../../Include/iview/CConsoleGui.cpp" line="+635"/>
         <source>Zoom In</source>
         <translation>ズームイン</translation>
     </message>
@@ -2848,7 +2886,7 @@
 <context>
     <name>iview::CViewport</name>
     <message>
-        <location filename="../../../Include/iview/CViewport.cpp" line="+193"/>
+        <location filename="../../../Include/iview/CViewport.cpp" line="+177"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
@@ -2866,7 +2904,7 @@
 <context>
     <name>iwidgets::CCheckableComboBox</name>
     <message>
-        <location filename="../../../Include/iwidgets/CCheckableComboBox.cpp" line="+112"/>
+        <location filename="../../../Include/iwidgets/CCheckableComboBox.cpp" line="+90"/>
         <source>None</source>
         <translation>なし</translation>
     </message>
