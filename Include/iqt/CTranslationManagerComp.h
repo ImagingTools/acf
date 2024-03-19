@@ -6,6 +6,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QTranslator>
+#include <QtCore/QReadWriteLock>
 
 // ACF includes
 #include <istd/TSmartPtr.h>
@@ -27,10 +28,12 @@ namespace iqt
 	Translation manager based on using a set of Qt translation files.
 */
 class CTranslationManagerComp:
+			public QObject,
 			public ilog::CLoggerComponentBase,
 			virtual public iqt::ITranslationManager,
 			virtual public iprm::IOptionsList
 {
+	Q_OBJECT
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 
@@ -76,6 +79,12 @@ public:
 protected:
 	virtual void LoadTranslations();
 
+Q_SIGNALS:
+	void EmitInstallTranslator(int languageIndex);
+
+protected	Q_SLOTS:
+	void InstallTranslator(int languageIndex);
+
 protected:
 	/**
 		\internal
@@ -119,6 +128,8 @@ protected:
 	LanguageSelectionObserver m_selectionObserver;
 
 	int m_currentLanguageIndex;
+
+	mutable QReadWriteLock m_mutex;
 };
 
 

@@ -4,6 +4,8 @@
 // Qt includes
 #include <QtCore/QLocale>
 #include <QtCore/QDir>
+#include <QtCore/QWriteLocker>
+#include <QtCore/QReadLocker>
 #include <QtGui/QIcon>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QApplication>
@@ -37,6 +39,8 @@ void CTranslationManagerComp::OnComponentCreated()
 
 	LoadTranslations();
 
+	connect(this, &CTranslationManagerComp::EmitInstallTranslator, this, &CTranslationManagerComp::InstallTranslator, Qt::QueuedConnection);
+
 	if (m_languageSelectionModelCompPtr.IsValid() && m_languageSelectionCompPtr.IsValid()){
 		m_languageSelectionModelCompPtr->AttachObserver(&m_selectionObserver);
 
@@ -52,6 +56,8 @@ void CTranslationManagerComp::OnComponentCreated()
 
 void CTranslationManagerComp::OnComponentDestroyed()
 {
+	QWriteLocker lock(&m_mutex);
+
 	m_selectionObserver.EnsureModelDetached();
 
 	m_translatorsList.clear();
@@ -76,6 +82,7 @@ int CTranslationManagerComp::GetCurrentLanguageIndex() const
 
 const QTranslator* CTranslationManagerComp::GetLanguageTranslator(int languageIndex) const
 {
+	QReadLocker lock(&m_mutex);
 	Q_ASSERT(languageIndex >= 0);
 	Q_ASSERT(languageIndex < m_translatorsList.count());
 
@@ -85,12 +92,16 @@ const QTranslator* CTranslationManagerComp::GetLanguageTranslator(int languageIn
 
 const ITranslationManager* CTranslationManagerComp::GetSlaveTranslationManager() const
 {
+	QReadLocker lock(&m_mutex);
+
 	return m_slaveTranslationManagerCompPtr.GetPtr();
 }
 
 
 void CTranslationManagerComp::SwitchLanguage(int languageIndex)
 {
+	QWriteLocker lock(&m_mutex);
+
 	if (m_currentLanguageIndex == languageIndex){
 		return;
 	}
@@ -101,11 +112,13 @@ void CTranslationManagerComp::SwitchLanguage(int languageIndex)
 
 	if (languageIndex >= 0 && languageIndex < m_translatorsList.count()){
 		if (!m_installTranslatorAttrPtr.IsValid() ||  *m_installTranslatorAttrPtr){
-			QCoreApplication::installTranslator(m_translatorsList[languageIndex].translatorPtr.GetPtr());
+			EmitInstallTranslator(languageIndex);
 		}
 
 		m_currentLanguageIndex = languageIndex;
 	}
+
+	lock.unlock();
 
 	if (m_slaveTranslationManagerCompPtr.IsValid()){
 		m_slaveTranslationManagerCompPtr->SwitchLanguage(languageIndex);
@@ -138,12 +151,16 @@ int CTranslationManagerComp::GetOptionsFlags() const
 
 int CTranslationManagerComp::GetOptionsCount() const
 {
+	QReadLocker lock(&m_mutex);
+
 	return m_translatorsList.count();
 }
 
 
 QString CTranslationManagerComp::GetOptionName(int index) const
 {
+	QReadLocker lock(&m_mutex);
+
 	Q_ASSERT(index >= 0);
 	Q_ASSERT(index < m_translatorsList.count());
 
@@ -159,6 +176,8 @@ QString CTranslationManagerComp::GetOptionDescription(int /*index*/) const
 
 QByteArray CTranslationManagerComp::GetOptionId(int index) const
 {
+	QReadLocker lock(&m_mutex);
+
 	Q_ASSERT(index >= 0);
 	Q_ASSERT(index < m_translatorsList.count());
 
@@ -172,11 +191,26 @@ bool CTranslationManagerComp::IsOptionEnabled(int /*index*/) const
 }
 
 
+void CTranslationManagerComp::InstallTranslator(int languageIndex)
+{
+	if (languageIndex < 0 || languageIndex > m_translatorsList.count() - 1){
+		return;
+	}
+
+	QTranslator* translatorPtr = m_translatorsList[languageIndex].translatorPtr.GetPtr();
+	if (translatorPtr != nullptr){
+		QCoreApplication::installTranslator(translatorPtr);
+	}
+}
+
+
 // protected methods
 
 void CTranslationManagerComp::LoadTranslations()
 {
 	if (m_languagesAttrPtr.IsValid() && m_translationFilePrefixAttrPtr.IsValid()){
+		QWriteLocker lock(&m_mutex);
+
 		int languagesCount = m_languagesAttrPtr.GetCount();
 
 		QString translationsPath = *m_translationFilePathAttrPtr;
