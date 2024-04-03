@@ -47,6 +47,7 @@ public:
 		I_ASSIGN(m_settingsKeyAttrPtr, "SettingsKey", "Key for saving/restoring of the layout information in the registry", false, "SettingsKey");
 		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0);
 		I_ASSIGN(m_flatViewAttrPtr, "FlatView", "Tries to apply flat view to the design if possible (Group Box: without frame; Tab Bar: triangular tabs; Slider: transparent grip)", true, false);
+		I_ASSIGN(m_defaultPageSelectionCompPtr, "DefaultStartPageSelection", "If connected, it overrides DefaultStartPageIndex", false, "");
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::CMultiPageGuiCompBase)
@@ -62,6 +63,7 @@ protected:
 
 	// reimplemented (iqtgui::CMultiPageGuiCompBase)
 	virtual int GetDesignType() const;
+	virtual void CreatePages() override;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -74,6 +76,7 @@ private:
 
 private:
 	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
+	I_REF(iprm::ISelectionParam, m_defaultPageSelectionCompPtr);
 	I_ATTR(int, m_designTypeAttrPtr);
 	I_ATTR(QString, m_settingsKeyAttrPtr);
 	I_ATTR(int, m_tabOrientationAttrPtr);
