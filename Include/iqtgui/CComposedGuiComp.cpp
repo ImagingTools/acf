@@ -94,22 +94,6 @@ int CComposedGuiComp::GetDesignType() const
 }
 
 
-void CComposedGuiComp::CreatePages()
-{
-	BaseClass::CreatePages();
-
-	if (m_defaultPageSelectionCompPtr.IsValid()){
-		int index = m_defaultPageSelectionCompPtr->GetSelectedOptionIndex();
-		if (index >= 0 && index < m_pageModel.GetOptionsCount()){
-			m_pageModel.SetSelectedOptionIndex(index);
-		}
-		else{
-			m_pageModel.SetSelectedOptionIndex(-1);
-		}
-	}
-}
-
-
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CComposedGuiComp::OnGuiCreated()

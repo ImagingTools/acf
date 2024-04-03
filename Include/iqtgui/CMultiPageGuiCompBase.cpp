@@ -221,6 +221,13 @@ void CMultiPageGuiCompBase::CreatePages()
 		}
 	}
 
+	if (m_defaultPageSelectionCompPtr.IsValid()){
+		int index = m_defaultPageSelectionCompPtr->GetSelectedOptionIndex();
+		if (index >= 0 && index < m_pageModel.GetOptionsCount()){
+			intialPageIndex = index;
+		}
+	}
+
 	m_pageModel.SetSelectedOptionIndex(intialPageIndex);
 
 	UpdateVisualElements();

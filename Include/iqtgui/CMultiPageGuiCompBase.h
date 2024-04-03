@@ -83,6 +83,7 @@ public:
 		I_ASSIGN_TO(m_pageActivatorsModelCompPtr, m_pageActivatorsCompPtr, false);
 		I_ASSIGN_MULTI_0(m_pageVisibilityActivatorsCompPtr, "PageVisibilityActivators", "Optional visibility activators for each page (show/hide)", false);
 		I_ASSIGN_TO(m_pageVisibilityActivatorsModelCompPtr, m_pageVisibilityActivatorsCompPtr, false);
+		I_ASSIGN(m_defaultPageSelectionCompPtr, "DefaultStartPageSelection", "If connected, it overrides DefaultStartPageIndex", false, "");
 	I_END_COMPONENT;
 
 	CMultiPageGuiCompBase();
@@ -215,6 +216,7 @@ protected:
 	I_MULTIREF(imod::IModel, m_pageActivatorsModelCompPtr);
 	I_MULTIREF(iprm::IEnableableParam, m_pageVisibilityActivatorsCompPtr);
 	I_MULTIREF(imod::IModel, m_pageVisibilityActivatorsModelCompPtr);
+	I_REF(iprm::ISelectionParam, m_defaultPageSelectionCompPtr);
 
 	imod::TModelWrap<PageModel> m_pageModel;
 
