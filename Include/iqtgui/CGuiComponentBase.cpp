@@ -2,9 +2,10 @@
 
 
 // Qt includes
-#include <QtCore/QCoreApplication>
+#include <QtWidgets/QApplication>
 #include <QtCore/QEvent>
 #include <QtCore/QMetaMethod>
+#include <QtWidgets/QStyle>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QLayout>
 #else
@@ -132,10 +133,19 @@ void CGuiComponentBase::OnGuiDesignChanged()
 	}
 
 	if (m_styleSheetPathAttrPtr.IsValid()){
+		Q_ASSERT(qApp != nullptr);
+
+		QStyle* stylePtr = qApp->style();
+		Q_ASSERT(stylePtr != nullptr);
+
+		stylePtr->unpolish(qApp);
+
 		QString styleSheetPath = GetStyleSheetPath(*m_styleSheetPathAttrPtr);
 		if (!iqtgui::SetStyleSheetFromFile(m_widgetPtr, styleSheetPath)){
 			qDebug("Style sheet file could not be set: %s", styleSheetPath.toLocal8Bit().constData());
 		}
+
+		stylePtr->polish(qApp);
 	}
 }
 
