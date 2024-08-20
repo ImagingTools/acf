@@ -25,13 +25,13 @@ public:
 
 // reimplemented (icmm::IColorModel)
 
-int CRgbaColorModel::GetColorSpaceDimensionality() const
+inline int CRgbaColorModel::GetColorSpaceDimensionality() const
 {
 	return 4;
 }
 
 
-const imath::IUnitInfo* CRgbaColorModel::GetColorSpaceComponentInfo(int componentIndex) const
+inline const imath::IUnitInfo* CRgbaColorModel::GetColorSpaceComponentInfo(int componentIndex) const
 {
 	Q_UNUSED(componentIndex);
 	Q_ASSERT(componentIndex >= 0);
@@ -41,7 +41,7 @@ const imath::IUnitInfo* CRgbaColorModel::GetColorSpaceComponentInfo(int componen
 }
 
 
-QString CRgbaColorModel::GetColorSpaceComponentName(int componentIndex) const
+inline QString CRgbaColorModel::GetColorSpaceComponentName(int componentIndex) const
 {
 	if (componentIndex == 3){
 		return "A";

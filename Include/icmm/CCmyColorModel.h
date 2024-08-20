@@ -32,7 +32,7 @@ QByteArrayList CCmyColorModel::GetColorantIds() const
 QString CCmyColorModel::GetColorantName(const QByteArray& colorantId) const
 {
 	QByteArrayList colorantIds = CCmyColorModel::GetColorantIds();
-	if (colorantIds.contains(colorantId)) {
+	if (colorantIds.contains(colorantId)){
 		return QString(colorantId);
 	}
 
@@ -43,6 +43,16 @@ QString CCmyColorModel::GetColorantName(const QByteArray& colorantId) const
 icmm::ColorantUsage CCmyColorModel::GetColorantUsage(const QByteArray& colorantId) const
 {
 	Q_ASSERT(GetColorantIds().contains(colorantId));
+
+	if (colorantId == "Cyan"){
+		return CU_CYAN;
+	}
+	else if (colorantId == "Magenta"){
+		return CU_MAGENTA;
+	}
+	else if (colorantId == "Yellow"){
+		return CU_YELLOW;
+	}
 
 	return CU_NONE;
 }
