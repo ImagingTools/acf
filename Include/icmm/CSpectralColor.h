@@ -2,22 +2,19 @@
 
 
 // ACF includes
-#include <icmm/ICieLabColor.h>
-#include <icmm/ITristimulusSpecification.h>
+#include <icmm/IColorObject.h>
+#include <icmm/ISpectralColorSpecification.h>
 
 
 namespace icmm
 {
 
 
-class CCieLabColor: virtual public ICieLabColor
+class CSpectralColor: virtual public IColorObject
 {
 public:
-	CCieLabColor(ColorModelPtr modelPtr = ColorModelPtr());
-	CCieLabColor(const icmm::CLab& lab, const ITristimulusSpecification& spec);
-
-	// reimplemented (icmm::ICieLabColor)
-	virtual const icmm::CLab& GetLab() const override;
+	CSpectralColor(ColorModelPtr modelPtr = ColorModelPtr());
+	CSpectralColor(const icmm::CVarColor& values, const ISpectralColorSpecification& spec);
 
 	// reimplemented (icmm::IColorObject)
 	virtual icmm::CVarColor GetColor() const override;
@@ -27,7 +24,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
-	icmm::CLab m_lab;
+	icmm::CVarColor m_spectrumValues;
 	std::shared_ptr<IColorModel> m_modelPtr;
 };
 

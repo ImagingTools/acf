@@ -3,14 +3,14 @@
 
 // ACF includes
 #include <icmm/IColorSpecification.h>
-#include <icmm/ISpectrumInfo.h>
+#include <icmm/ISpectrumInfoProvider.h>
 
 
 namespace icmm
 {
 
 
-class ISpectralColorSpecification: virtual public IColorSpecification, virtual public ISpectrumInfo
+class ISpectralColorSpecification: virtual public IColorSpecification, virtual public ISpectrumInfoProvider
 {
 protected:
 	// reimplemented (IColorSpecification)

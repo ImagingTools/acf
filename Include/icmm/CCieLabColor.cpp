@@ -1,12 +1,17 @@
 #include <icmm/CCieLabColor.h>
 
 
+// ACF includes
+#include <icmm/CCieLabColorModel.h>
+
+
 namespace icmm
 {
 
 
-CCieLabColor::CCieLabColor()
+CCieLabColor::CCieLabColor(ColorModelPtr modelPtr)
 {
+	m_modelPtr = modelPtr;
 }
 
 

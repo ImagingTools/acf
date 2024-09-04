@@ -3,8 +3,6 @@
 
 // ACF includes
 #include <imath/TISampledFunction.h>
-
-// GmgCore includes
 #include <icmm/ISpectrumInfoProvider.h>
 
 
@@ -22,11 +20,14 @@ namespace icmm
 	Function range is normally [0, 1],
 	but can also be acquired by \c GetResultValueRange method of imath::TISampledFunction.
 */
-class ISpectrum: virtual public imath::ISampledFunction,
-				  virtual public ISpectrumInfoProvider,
-				  virtual public iser::ISerializable
+class ISpectrum:
+			virtual public imath::ISampledFunction,
+			virtual public ISpectrumInfoProvider,
+			virtual public iser::ISerializable
 {
 };
 
 
 } // namespace icmm
+
+
