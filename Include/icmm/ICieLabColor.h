@@ -14,6 +14,8 @@ class ICieLabColor: virtual public IColorObject
 {
 public:
 	virtual const icmm::CLab& GetLab() const = 0;
+
+	virtual IColorSpecification::ConstColorSpecPtr GetSpecification() const = 0;
 };
 
 

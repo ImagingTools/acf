@@ -12,6 +12,17 @@ namespace icmm
 
 class ISpectralColorSpecification: virtual public IColorSpecification, virtual public ISpectrumInfoProvider
 {
+public:
+	enum SpectrumType
+	{
+		Reflective = 1,
+		Emissive,
+		Transmissive,
+		TotalTransmissive
+	};
+
+	virtual SpectrumType GetSpectrumType() const = 0;
+
 protected:
 	// reimplemented (IColorSpecification)
 	virtual SpecType GetSpecificationType() const override;

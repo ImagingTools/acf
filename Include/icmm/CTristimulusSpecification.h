@@ -15,23 +15,26 @@ class CTristimulusSpecification: virtual public ITristimulusSpecification
 {
 public:
 	CTristimulusSpecification(
-				ObserverType observerType = ObserverType::TwoDegree,
-				AstmTableType method = AstmTableType::Unknown,
-				const IIlluminant* illuminantPtr = nullptr,
-				std::shared_ptr<ISpectralColorSpecification> baseSpec = std::shared_ptr<ISpectralColorSpecification>());
+				ObserverType observerType,
+				AstmTableType method,
+				std::shared_ptr<IIlluminant> illuminantPtr,
+				std::shared_ptr<ISpectralColorSpecification> baseSpec = nullptr);
 
-	CTristimulusSpecification(const CTristimulusSpecification& other);
+	CTristimulusSpecification(const ITristimulusSpecification& other);
 
 	// reimplemented (ITristimulusSpecification)
-	virtual const IIlluminant& GetIlluminant() const override;
+	virtual std::shared_ptr<IIlluminant> GetIlluminant() const override;
 	virtual ObserverType GetObserverType() const override;
 	virtual AstmTableType GetMethod() const override;
 	virtual std::shared_ptr<ISpectralColorSpecification> GetBaseSpecification() const override;
 
+	// reimplemented (istd::IChangeable)
+	virtual bool IsEqual(const istd::IChangeable& other) const override;
+
 private:
-	ObserverType m_observerType = ObserverType::TwoDegree;
-	AstmTableType m_method = AstmTableType::Unknown;
-	CIlluminant m_illuminant;
+	ObserverType m_observerType;
+	AstmTableType m_method;
+	std::shared_ptr<IIlluminant> m_illuminant;
 	std::shared_ptr<ISpectralColorSpecification> m_baseSpec;
 };
 

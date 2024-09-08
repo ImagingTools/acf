@@ -7,14 +7,9 @@ namespace icmm
 
 // public methods
 
-CCieLabColorModel::CCieLabColorModel()
-{
-}
-
-
 CCieLabColorModel::CCieLabColorModel(const ITristimulusSpecification& spec)
+	:m_spec(spec)
 {
-	m_spec.CopyFrom(spec);
 }
 
 

@@ -13,11 +13,13 @@ namespace icmm
 class CSpectralColor: virtual public IColorObject
 {
 public:
-	CSpectralColor(ColorModelPtr modelPtr = ColorModelPtr());
-	CSpectralColor(const icmm::CVarColor& values, const ISpectralColorSpecification& spec);
+	CSpectralColor(ColorModelPtr modelPtr);
+	CSpectralColor(const ISpectralColorSpecification& spec);
+
+	bool SetColor(const icmm::CVarColor& values);
 
 	// reimplemented (icmm::IColorObject)
-	virtual icmm::CVarColor GetColor() const override;
+	virtual icmm::CVarColor GetColor() const override;	
 	virtual ConstColorModelPtr GetColorModel() const override;
 
 	// reimplemented (iser::IObject)

@@ -13,7 +13,6 @@ namespace icmm
 class CCieLabColorModel: virtual public icmm::IColorModel
 {
 public:
-	CCieLabColorModel();
 	CCieLabColorModel(const ITristimulusSpecification& spec);
 
 	// reimplemented (icmm::IColorModel)

@@ -8,30 +8,28 @@ namespace icmm
 CTristimulusSpecification::CTristimulusSpecification(
 			ObserverType observerType,
 			AstmTableType method,
-			const IIlluminant* illuminantPtr,
+			std::shared_ptr<IIlluminant> illuminantPtr,
 			std::shared_ptr<ISpectralColorSpecification> baseSpec)
-	:m_observerType(observerType),
-	m_method(method)
+:	m_observerType(observerType),
+	m_method(method),
+	m_illuminant(illuminantPtr),
+	m_baseSpec(baseSpec)
 {
-	m_baseSpec = baseSpec;
-
-	if (illuminantPtr != nullptr){
-		m_illuminant.CopyFrom(*illuminantPtr);
-	}
 }
 
 
-CTristimulusSpecification::CTristimulusSpecification(const CTristimulusSpecification& other)
-	:m_illuminant(other.m_illuminant),
-	m_method(other.m_method),
-	m_observerType(other.m_observerType)
+CTristimulusSpecification::CTristimulusSpecification(const ITristimulusSpecification& other)
+:	m_observerType(other.GetObserverType()),
+	m_method(other.GetMethod()),
+	m_illuminant(other.GetIlluminant()),
+	m_baseSpec(other.GetBaseSpecification())
 {
 }
 
 
 // reimplemented (ITristimulusSpecification)
 
-const IIlluminant& icmm::CTristimulusSpecification::GetIlluminant() const
+std::shared_ptr<IIlluminant> icmm::CTristimulusSpecification::GetIlluminant() const
 {
 	return m_illuminant;
 }
@@ -54,6 +52,18 @@ std::shared_ptr<ISpectralColorSpecification> CTristimulusSpecification::GetBaseS
 	return m_baseSpec;
 }
 
+bool CTristimulusSpecification::IsEqual(const IChangeable& other) const
+{
+	const CTristimulusSpecification* objectPtr = dynamic_cast<const CTristimulusSpecification*>(&other);
+
+	if (objectPtr == nullptr) {
+		return false;
+	}
+
+	return m_observerType == objectPtr->GetObserverType() &&
+		   m_method == objectPtr->GetMethod() &&
+		   m_illuminant->IsEqual(*objectPtr->GetIlluminant());
+}
 
 } // namespace icmm
 

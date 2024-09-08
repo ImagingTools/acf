@@ -79,6 +79,18 @@ void CIlluminant::SetIllumninantType(const StandardIlluminant& illuminantType)
 	}
 }
 
+bool CIlluminant::IsEqual(const IChangeable& other) const
+{
+	const IIlluminant* objectPtr = dynamic_cast<const IIlluminant*>(&other);
+
+	if (objectPtr == nullptr) {
+		return false;
+	}
+
+	return m_illuminantType == objectPtr->GetIllumninantType() &&
+		   m_illuminantName == objectPtr->GetIllumninantName() &&
+		   m_whitePoint == objectPtr->GetWhitePoint();
+}
 
 } // namespace icmm
 

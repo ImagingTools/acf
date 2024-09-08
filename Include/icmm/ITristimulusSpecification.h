@@ -13,7 +13,7 @@ namespace icmm
 class ITristimulusSpecification: virtual public IColorSpecification
 {
 public:
-	virtual const IIlluminant& GetIlluminant() const = 0;
+	virtual std::shared_ptr<IIlluminant> GetIlluminant() const = 0;
 	virtual ObserverType GetObserverType() const = 0;
 	virtual AstmTableType GetMethod() const = 0;
 

@@ -21,10 +21,7 @@ namespace ibase
 class SubTaskManager: public CCumulatedProgressManagerBase::TaskBase, public CCumulatedProgressManagerBase
 {
 public:
-	SubTaskManager(CCumulatedProgressManagerBase* parentPtr, const TaskInfo& taskInfo, double weight, bool isCancelable)
-		:CCumulatedProgressManagerBase::TaskBase(parentPtr, taskInfo, weight, isCancelable)
-		{
-		}
+	SubTaskManager(CCumulatedProgressManagerBase* parentPtr, const TaskInfo& taskInfo, double weight, bool isCancelable) : CCumulatedProgressManagerBase::TaskBase(parentPtr, taskInfo, weight, isCancelable)	{}
 
 protected:
 	// reimplemented (ibase::CCumulatedProgressManagerBase)

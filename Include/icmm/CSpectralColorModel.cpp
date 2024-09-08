@@ -7,14 +7,9 @@ namespace icmm
 
 // public methods
 
-CSpectralColorModel::CSpectralColorModel()
-{
-}
-
-
 CSpectralColorModel::CSpectralColorModel(const ISpectralColorSpecification& spec)
 {
-	m_spec.CopyFrom(spec);
+	m_spec->CopyFrom(spec);
 }
 
 
@@ -42,7 +37,7 @@ int CSpectralColorModel::GetColorSpaceDimensionality() const
 {
 	int componentCount = 0;
 
-	const ISpectrumInfo* infoPtr = m_spec.GetSpectrumInfo();
+	const ISpectrumInfo* infoPtr = m_spec->GetSpectrumInfo();
 	if (infoPtr != nullptr){
 		int step = infoPtr->GetStep();
 		if (step > 0) {
@@ -78,7 +73,7 @@ const icmm::IColorTransformation* CSpectralColorModel::CreateColorTranformation(
 
 IColorSpecification::ConstColorSpecPtr CSpectralColorModel::GetSpecification() const
 {
-	return std::make_shared<CSpectralColorSpecification>(m_spec);
+	return m_spec;
 }
 
 
