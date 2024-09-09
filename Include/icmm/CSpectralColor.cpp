@@ -24,7 +24,7 @@ CSpectralColor::CSpectralColor(const ISpectralColorSpecification& spec)
 
 bool CSpectralColor::SetColor(const CVarColor& otherSpectrals)
 {
-	if(m_modelPtr->GetColorSpaceDimensionality() != otherSpectrals.GetElementsCount()) {
+	if(m_modelPtr->GetColorSpaceDimensionality() != otherSpectrals.GetElementsCount()){
 		return false;
 	}
 
