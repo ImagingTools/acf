@@ -13,6 +13,9 @@ namespace icmm
 class ISpectralColorSpecification: virtual public IColorSpecification, virtual public ISpectrumInfoProvider
 {
 public:
+	typedef std::shared_ptr<const ISpectralColorSpecification> ConstSpectralColorSpecPtr;
+	typedef std::shared_ptr<ISpectralColorSpecification> SpectralColorSpecPtr;
+
 	enum SpectrumType
 	{
 		Reflective = 1,

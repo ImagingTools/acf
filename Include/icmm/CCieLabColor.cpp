@@ -53,6 +53,10 @@ ConstColorModelPtr CCieLabColor::GetColorModel() const
 	return m_modelPtr;
 }
 
+std::unique_ptr<IColorObject> CCieLabColor::CloneIntoUniquePtr() const
+{
+	return std::make_unique<CCieLabColor>(*this);
+}
 
 bool CCieLabColor::Serialize(iser::IArchive& /*archive*/)
 {

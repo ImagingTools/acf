@@ -60,9 +60,16 @@ bool CTristimulusSpecification::IsEqual(const IChangeable& other) const
 		return false;
 	}
 
+	auto otherBaseSpec = objectPtr->GetBaseSpecification();
+	bool isBaseSpecSame = this->m_baseSpec == nullptr && otherBaseSpec == nullptr;
+	if (!isBaseSpecSame && this->m_baseSpec && otherBaseSpec) {
+		isBaseSpecSame = this->m_baseSpec->IsEqual(*otherBaseSpec);
+	}
+
 	return m_observerType == objectPtr->GetObserverType() &&
 		   m_method == objectPtr->GetMethod() &&
-		   m_illuminant->IsEqual(*objectPtr->GetIlluminant());
+		   m_illuminant->IsEqual(*objectPtr->GetIlluminant()) &&
+		   isBaseSpecSame;
 }
 
 } // namespace icmm

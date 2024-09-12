@@ -28,9 +28,9 @@ CSpectrum::CSpectrum(const CSpectrum& other)
 
 
 CSpectrum::CSpectrum(int startWavelength, int endWavelength, int step, const std::vector<double>& spectrumSamples)
-	: CSampledFunction(spectrumSamples.size())
+	: CSampledFunction(int(spectrumSamples.size()))
 {
-	int count = spectrumSamples.size();
+	int count = int(spectrumSamples.size());
 	for (int i = 0; i < count; i++){
 		SetSampleValue(i, spectrumSamples[i]);
 	}
@@ -43,9 +43,9 @@ CSpectrum::CSpectrum(int startWavelength, int endWavelength, int step, const std
 
 
 CSpectrum::CSpectrum(const istd::CIntRange& wavelengthRange, int step, const std::vector<double>& spectrumSamples)
-	: CSampledFunction(spectrumSamples.size())
+	: CSampledFunction(int(spectrumSamples.size()))
 {
-	int count = spectrumSamples.size();
+	int count = int(spectrumSamples.size());
 	for (int i = 0; i < count; i++){
 		SetSampleValue(i, spectrumSamples[i]);
 	}
@@ -140,7 +140,7 @@ int CSpectrum::GetSupportedOperations() const
 }
 
 
-bool CSpectrum::CopyFrom(const IChangeable& object, CompatibilityMode mode)
+bool CSpectrum::CopyFrom(const IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const CSpectrum* objectPtr = dynamic_cast<const CSpectrum*>(&object);
 
@@ -172,7 +172,7 @@ bool CSpectrum::IsEqual(const IChangeable& object) const
 }
 
 
-istd::IChangeable* CSpectrum::CloneMe(CompatibilityMode mode) const
+istd::IChangeable* CSpectrum::CloneMe(CompatibilityMode /*mode*/) const
 {
 	istd::TDelPtr<CSpectrum> clonePtr(new CSpectrum());
 
@@ -184,7 +184,7 @@ istd::IChangeable* CSpectrum::CloneMe(CompatibilityMode mode) const
 }
 
 
-bool CSpectrum::ResetData(CompatibilityMode mode)
+bool CSpectrum::ResetData(CompatibilityMode /*mode*/)
 {
 	istd::CChangeNotifier notifier(this);
 

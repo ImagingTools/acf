@@ -12,13 +12,12 @@ namespace icmm
 
 class CSpectralColorSpecification: virtual public ISpectralColorSpecification
 {
-public:	
+public:
 	CSpectralColorSpecification(const ISpectrumInfo& spectrumInfo);
 	CSpectralColorSpecification(istd::CIntRange range, int step);
 
 	// reimplemented (ISpectrumInfoProvider)
 	virtual const ISpectrumInfo* GetSpectrumInfo() const override;
-
 
 private:
 	CSpectrumInfo m_info;

@@ -33,6 +33,8 @@ inline IColorSpecification::SpecType ITristimulusSpecification::GetSpecification
 	return SpecType::Tristimulus;
 }
 
+typedef std::shared_ptr<ITristimulusSpecification> TristimulusPtr;
+typedef std::shared_ptr<const ITristimulusSpecification> ConstTristimulusPtr;
 
 } // namespace icmm
 

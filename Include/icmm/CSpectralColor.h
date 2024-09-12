@@ -14,13 +14,15 @@ class CSpectralColor: virtual public IColorObject
 {
 public:
 	CSpectralColor(ColorModelPtr modelPtr);
-	CSpectralColor(const ISpectralColorSpecification& spec);
+	CSpectralColor(std::shared_ptr<ISpectralColorSpecification> spec);
 
 	bool SetColor(const icmm::CVarColor& values);
+	ISpectralColorSpecification::ConstSpectralColorSpecPtr GetSpecification() const;
 
 	// reimplemented (icmm::IColorObject)
 	virtual icmm::CVarColor GetColor() const override;	
 	virtual ConstColorModelPtr GetColorModel() const override;
+	virtual std::unique_ptr<IColorObject> CloneIntoUniquePtr() const override;
 
 	// reimplemented (iser::IObject)
 	virtual bool Serialize(iser::IArchive& archive) override;

@@ -15,10 +15,16 @@ namespace icmm
 // public methods
 
 CRgbColorModel::CRgbColorModel()
-	:m_unitInfo(0, "", 1.0, istd::CRange(0, 1.0))
+    :m_unitInfo(0, "", 1.0, istd::CRange(0, 1.0)),
+    m_spec(ObserverType::TwoDegree, AstmTableType::E308Table5, std::make_shared<CIlluminant>(StandardIlluminant::D50, "D50"))
 {
 }
 
+CRgbColorModel::CRgbColorModel(const ITristimulusSpecification &spec)
+    :m_unitInfo(0, "", 1.0, istd::CRange(0, 1.0)),
+    m_spec(spec)
+{
+}
 
 // reimplemented (IColorModel)
 
@@ -92,6 +98,10 @@ const icmm::IColorTransformation* CRgbColorModel::CreateColorTranformation(const
 	return nullptr;
 }
 
+IColorSpecification::ConstColorSpecPtr CRgbColorModel::GetSpecification() const
+{
+    return std::make_shared<CTristimulusSpecification>(m_spec);
+}
 
 } // namespace icmm
 

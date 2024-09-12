@@ -23,6 +23,11 @@ public:
 		Get related color model.
 	*/
 	virtual ConstColorModelPtr GetColorModel() const = 0;
+
+	/**
+		Get a generic color value.
+	*/
+	virtual std::unique_ptr<IColorObject> CloneIntoUniquePtr() const = 0;
 };
 
 

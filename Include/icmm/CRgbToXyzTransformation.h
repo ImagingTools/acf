@@ -11,7 +11,7 @@ namespace icmm
 
 /**
 	Implementation of RGB-to-XYZ color transformation.
-	2° Observer and D65-illumination are used.
+	2-degree Observer and D65-illumination are used.
 */
 class CRgbToXyzTransformation: public icmm::IColorTransformation
 {

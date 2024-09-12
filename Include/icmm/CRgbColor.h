@@ -2,7 +2,9 @@
 
 
 // ACF includes
-#include <icmm/ICieLabColor.h>
+#include <icmm/CRgb.h>
+#include <icmm/IColorModel.h>
+#include <icmm/IRgbColor.h>
 #include <icmm/ITristimulusSpecification.h>
 
 
@@ -10,14 +12,23 @@ namespace icmm
 {
 
 
-class CCieLabColor: virtual public ICieLabColor
+class CRgbColor: virtual public IRgbColor
 {
 public:
-	CCieLabColor(ColorModelPtr modelPtr);
-	CCieLabColor(const icmm::CLab& lab, const ITristimulusSpecification& spec);
+	/**
+		Takes a ColorModel (if you want to get particular about the color specification)
+	*/
+	CRgbColor(const icmm::CRgb& rgb, ColorModelPtr modelPtr);
 
-	// reimplemented (icmm::ICieLabColor)
-	virtual const icmm::CLab& GetLab() const override;
+	/**
+		Just pass RGB-values; defaults the ColorModel to D50/2°
+	*/
+	CRgbColor(const icmm::CRgb& rgb);
+
+	void SetSpecification(const ITristimulusSpecification& spec);
+
+	// reimplemented (icmm::IRgbColor)
+	virtual const icmm::CRgb& GetRgb() const override;
 	virtual IColorSpecification::ConstColorSpecPtr GetSpecification() const override;
 
 	// reimplemented (icmm::IColorObject)
@@ -29,7 +40,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
-	icmm::CLab m_lab;
+	icmm::CRgb m_rgb;
 	std::shared_ptr<IColorModel> m_modelPtr;
 };
 

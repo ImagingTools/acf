@@ -52,7 +52,6 @@ icmm::ColorantUsage CCmykColorModel::GetColorantUsage(const QByteArray& colorant
 }
 
 
-
 } // namespace icmm
 
 
