@@ -14,6 +14,8 @@ include("${ACFDIR}/Config/CMake/ProjectRoot.cmake")
 set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
 
+set(BUILD_TESTING ON CACHE BOOL "Configures projects for testing")
+
 message(${INCLUDE_DIR})
 
 subdirlist(INCLUDE_DIRS ${INCLUDE_DIR})
@@ -81,3 +83,6 @@ add_subdirectory("${IMPL_DIR}/Tests/ComposedGuiTest/CMake" "${AUX_INCLUDE_DIR}/C
 add_dependencies(ComposedGuiTest Acf)
 endif()
 
+if (${BUILD_TESTING})
+	add_subdirectory("${INCLUDE_DIR}/iprm/Test/CMake" "${AUX_INCLUDE_DIR}/iprm/Test")
+endif()
