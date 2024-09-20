@@ -9,7 +9,7 @@ void CIdParamTest::initTestCase()
 
 void CIdParamTest::cleanupTestCase()
 {
-
+	QFAIL("");
 }
 
 
