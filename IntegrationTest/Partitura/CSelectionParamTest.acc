@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5244" Description="ACF"/>
+            <Version Id="1" Number="2216" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="Selection" PackageId="BasePck" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="SelectionConstraints" PackageId="BasePck" ComponentId="OptionsManager">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="SelectionWithConstraints" PackageId="BasePck" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SelectionConstraints"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces/>
+    <ExportedComponents>
+        <Component ExportedId="Selection" ComponentId="Selection"/>
+        <Component ExportedId="SelectionConstraints" ComponentId="SelectionConstraints"/>
+        <Component ExportedId="SelectionWithConstraints" ComponentId="SelectionWithConstraints"/>
+    </ExportedComponents>
+</Acf>

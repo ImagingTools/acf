@@ -85,4 +85,5 @@ endif()
 
 if (${BUILD_TESTING})
 	add_subdirectory("${INCLUDE_DIR}/iprm/Test/CMake" "${AUX_INCLUDE_DIR}/iprm/Test")
+	add_subdirectory("../../IntegrationTest/CMake" "${AUX_INCLUDE_DIR}/IntegrationTest")
 endif()
