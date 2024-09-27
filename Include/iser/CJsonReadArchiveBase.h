@@ -5,7 +5,7 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonArray>
-#include <QtCore/QVector>
+#include <QtCore/QList>
 
 // ACF includes
 #include <iser/CTextReadArchiveBase.h>
@@ -64,8 +64,9 @@ protected:
 		QString m_key;
 		int activeArrayIndex;
 	};
-		
-	QVector<HelperIterator> m_iterators;
+
+	QList<HelperIterator> m_iterators;
+	QList<const iser::CArchiveTag*> m_tags;
 	iser::CArchiveTag m_rootTag;
 	bool m_rootTagEnabled;
 };
