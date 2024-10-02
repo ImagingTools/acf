@@ -316,10 +316,10 @@ bool CPrimitiveTypesSerializer::SerializeAssociativeContainer(
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag parametersTag(containerTagName, containerComment, iser::CArchiveTag::TT_MULTIPLE);
-	static iser::CArchiveTag parameterTag(elementTagName, "Single element", iser::CArchiveTag::TT_GROUP, &parametersTag, true);
-	static iser::CArchiveTag parameterKeyTag(keyTagId, "Key of parameter", iser::CArchiveTag::TT_LEAF, &parameterTag);
-	static iser::CArchiveTag parameterValueTag(valueTagId, "Value of parameter", iser::CArchiveTag::TT_WEAK, &parameterTag, true);
+	iser::CArchiveTag parametersTag(containerTagName, containerComment, iser::CArchiveTag::TT_MULTIPLE);
+	iser::CArchiveTag parameterTag(elementTagName, "Single element", iser::CArchiveTag::TT_GROUP, &parametersTag, true);
+	iser::CArchiveTag parameterKeyTag(keyTagId, "Key of parameter", iser::CArchiveTag::TT_LEAF, &parameterTag);
+	iser::CArchiveTag parameterValueTag(valueTagId, "Value of parameter", iser::CArchiveTag::TT_WEAK, &parameterTag, true);
 
 	if (archive.IsStoring()){
 		int paramsCount = container.count();
