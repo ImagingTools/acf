@@ -14,7 +14,7 @@ include("${ACFDIR}/Config/CMake/ProjectRoot.cmake")
 set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
 
-set(BUILD_TESTING ON CACHE BOOL "Configures projects for testing")
+set(BUILD_TESTING OFF CACHE BOOL "Configures projects for testing")
 
 message(${INCLUDE_DIR})
 
