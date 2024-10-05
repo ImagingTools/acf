@@ -1,4 +1,4 @@
-#include "CIdParamTest.h"
+#include <iprm/Test/CIdParamTest.h>
 
 
 // ACF includes
@@ -61,7 +61,6 @@ void CIdParamTest::CopyFromTest()
 	QVERIFY(param.CopyFrom(m_param));
 
 	QVERIFY(param.GetId() == m_id);
-
 }
 
 
@@ -92,3 +91,5 @@ void CIdParamTest::cleanupTestCase()
 
 
 I_ADD_TEST(CIdParamTest);
+
+

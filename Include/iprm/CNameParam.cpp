@@ -63,6 +63,12 @@ bool CNameParam::Serialize(iser::IArchive& archive)
 
 // reimplemented (istd::IChangeable)
 
+int CNameParam::GetSupportedOperations() const
+{
+	return SO_CLONE | SO_COPY | SO_COMPARE | SO_RESET;
+}
+
+
 bool CNameParam::CopyFrom(const IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const INameParam* sourcePtr = dynamic_cast<const INameParam*>(&object);
@@ -84,6 +90,30 @@ istd::IChangeable* CNameParam::CloneMe(istd::IChangeable::CompatibilityMode mode
 	}
 
 	return NULL;
+}
+
+
+bool CNameParam::ResetData(CompatibilityMode /*mode*/)
+{
+	if (!m_name.isEmpty()){
+		istd::CChangeNotifier notifier(this);
+		Q_UNUSED(notifier);
+
+		m_name.clear();
+	}
+
+	return true;
+}
+
+
+bool CNameParam::IsEqual(const IChangeable& object) const
+{
+	const INameParam* sourcePtr = dynamic_cast<const INameParam*>(&object);
+	if (sourcePtr != NULL) {
+		return sourcePtr->GetName() == m_name;
+	}
+
+	return false;
 }
 
 
