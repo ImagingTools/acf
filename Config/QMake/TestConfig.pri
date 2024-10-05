@@ -3,9 +3,9 @@ include(GeneralConfig.pri)
 
 TEMPLATE = app
 
-QT = widgets testlib
+QT = testlib
 CONFIG += testcase
-
+CONFIG += console
 
 # For non-shadow build use lib directory inside source tree:
 isEmpty(ACFDIRBUILD){
@@ -20,8 +20,9 @@ isEmpty(ACFDIRBUILD){
 
 LIBS += -liser -listd -litest
 
-DESTDIR = $$OUT_PWD/../../../Bin/$$COMPILER_DIR/Tests
-SOURCES += $$_PRO_FILE_PWD_/../*.cpp
+DESTDIR = $$OUT_PWD/../../../../Bin/$$COMPILER_DIR/Tests
+HEADERS += $$files($$_PRO_FILE_PWD_/../*.h, false)
+SOURCES += $$files($$_PRO_FILE_PWD_/../*.cpp, false)
 
 isEqual(DEBUG_INFO_ENABLED_FOR_RELEASE, true){
 	include($$(ACFCONFIGDIR)/QMake/MsvcEnableDebugInfo.pri)

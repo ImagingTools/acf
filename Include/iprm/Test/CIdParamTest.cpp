@@ -88,7 +88,6 @@ void CIdParamTest::IsEqualTest()
 
 void CIdParamTest::cleanupTestCase()
 {
-	QFAIL("FAIL test");
 }
 
 

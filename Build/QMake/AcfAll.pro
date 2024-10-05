@@ -127,8 +127,6 @@ SUBDIRS += AcfLoc
 AcfLoc.file = ../../Impl/AcfLoc/QMake/AcfLoc.pro
 
 # Tests
+SUBDIRS += iprmTest
+iprmTest.file = ../../Include/iprm/Test/QMake/iprmTest.pro
 
-CONFIG(BUILD_TESTING){
-	SUBDIRS += iprmTest
-	iprmTest.file = ../../Include/iprm/Test/QMake/iprmTest.pro
-}
