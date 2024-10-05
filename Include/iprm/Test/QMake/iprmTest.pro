@@ -3,5 +3,5 @@ TARGET = iprmTest
 include(../../../../Config/QMake/TestConfig.pri)
 include(../../../../Config/QMake/QtBaseConfig.pri)
 
-LIBS += -liprm
+LIBS += -liprm -limod -libase -liqt -lifile -lidoc -liser
 
