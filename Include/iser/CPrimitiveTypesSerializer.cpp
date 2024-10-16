@@ -5,6 +5,7 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QIODevice>
+#include <QtCore/QDataStream>
 
 
 namespace iser
