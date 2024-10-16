@@ -4,6 +4,8 @@
 // Qt includes
 #include <QtCore/QString>
 #include <QtCore/QStringList>
+#include <QtCore/QIODevice>
+
 
 namespace iser
 {
@@ -267,6 +269,47 @@ bool CPrimitiveTypesSerializer::SerializeQPointF(iser::IArchive& archive, QPoint
 
 	if (!archive.IsStoring()){
 		point = QPointF(x, y);
+	}
+
+	return retVal;
+}
+
+
+bool CPrimitiveTypesSerializer::SerializeQVariant(iser::IArchive& archive, QVariant& variant)
+{
+	bool retVal = true;
+
+	static iser::CArchiveTag valueTag("Value", "Value of the meta information", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag sizeTag("Size", "Size of the data block", iser::CArchiveTag::TT_LEAF);
+
+	QByteArray variantData;
+	QDataStream variantStream(&variantData, QIODevice::ReadWrite);
+	int dataSize = variantData.size();
+
+	if (archive.IsStoring()){
+		variantStream << variant;
+
+		retVal = retVal && archive.BeginTag(sizeTag);
+		retVal = retVal && archive.Process(dataSize);
+		retVal = retVal && archive.EndTag(sizeTag);
+
+		retVal = retVal && archive.BeginTag(valueTag);
+		retVal = retVal && archive.ProcessData(variantData.data(), dataSize);
+		retVal = retVal && archive.EndTag(valueTag);
+	}
+	else{
+		retVal = retVal && archive.BeginTag(sizeTag);
+		retVal = retVal && archive.Process(dataSize);
+		retVal = retVal && archive.EndTag(sizeTag);
+
+		variantData.resize(dataSize);
+		retVal = retVal && archive.BeginTag(valueTag);
+		retVal = retVal && archive.ProcessData(variantData.data(), dataSize);
+		retVal = retVal && archive.EndTag(valueTag);
+
+		QVariant variantValue;
+		QDataStream variantStream(variantData);
+		variantStream >> variant;
 	}
 
 	return retVal;

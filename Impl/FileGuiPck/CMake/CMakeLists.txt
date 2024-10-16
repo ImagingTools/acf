@@ -9,6 +9,6 @@ include(${ACFDIR}/Config/CMake/WindeployQt.cmake)
 acf_use_qt_graphics_modules()
 
 if(WIN32)
-	set(files  \"${ACFDIR}/Bin/${CMAKE_BUILD_TYPE}_${TARGETNAME}/${PROJECT_NAME}.arp\")
+	set(files  \"${AUX_INCLUDE_DIR}/../../../Bin/${CMAKE_BUILD_TYPE}_${TARGETNAME}/${PROJECT_NAME}.arp\")
 	windeploy(${PROJECT_NAME} "" "${files}")
 endif()

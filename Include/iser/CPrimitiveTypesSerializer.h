@@ -71,6 +71,11 @@ public:
 	static bool SerializeQPointF(iser::IArchive& archive, QPointF& point);
 
 	/**
+		Serialize a QVariant object.
+	*/
+	static bool SerializeQVariant(iser::IArchive& archive, QVariant& variant);
+
+	/**
 		Serialize a QStringList object.
 	*/
 	static bool SerializeQStringList(
