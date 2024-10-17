@@ -12,3 +12,10 @@ if(WIN32)
 	windeploy(${PROJECT_NAME} "" "${listFiles}")
 	unset(listFiles)
 endif()
+
+mac_deploy_qt(
+	REMOVE_DEBUGSYM
+	TARGET ${PROJECT_NAME}
+	TARGET_FILE_NAME ${PROJECT_NAME}
+)
+
