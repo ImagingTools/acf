@@ -193,7 +193,7 @@ else{
 }
 
 *-clang* | *-llvm*{
-	CONFIG += c++11
+	CONFIG += c++17
 	COMPILER_NAME = Clang
 	QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-variable
 	QMAKE_CXXFLAGS_WARN_ON += -Wno-overloaded-virtual
@@ -223,7 +223,7 @@ win32{
 # Additional defines for CSystem
 macx{
 	COMPILER_NAME=ClangOSX
-	contains(QMAKE_TARGET.arch, x86_64) {
+	contains(QMAKE_APPLE_DEVICE_ARCHS, x86_64) {
 		PLATFORM_CODE = x64
 	}
 	else{
