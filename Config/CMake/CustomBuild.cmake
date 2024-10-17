@@ -13,6 +13,11 @@ else()
 	set(QMAKE_LRELEASE "lrelease")
 endif()
 
+if (APPLE)
+	set(ARX_COMPILER "Arxc.app/Contents/MacOS/Arxc")
+	set(ACF_TOOL "Acf.app/Contents/MacOS/Acf")
+endif()
+
 set(PROJECT_BINARY_DIR ${AUX_INCLUDE_DIR}/${PROJECT_NAME})
 
 if(NOT DEFINED ACFDIR_BUILD)
