@@ -91,6 +91,13 @@ public:
 				const QByteArray& containerTagName,
 				const QByteArray& elementTagName);
 
+	template <typename ContainterType>
+	static bool SerializeObjectContainer(
+				iser::IArchive& archive,
+				ContainterType& container,
+				const QByteArray& containerTagName,
+				const QByteArray& elementTagName);
+
 	/**
 		Method for serialization of the enumerated value using ACF's meta information extensions for the C++ enums.
 		This implementation supports both methods for serialization of the enumerator - as integer value or in textual form.
@@ -118,6 +125,16 @@ public:
 	 */
 	template <typename ContainerType>
 	static bool SerializeAssociativeContainer(
+				iser::IArchive& archive,
+				ContainerType& container,
+				const QByteArray& containerTagName,
+				const QByteArray& elementTagName = "Element",
+				const QByteArray& keyTagId = "Key",
+				const QByteArray& valueTagId = "Value",
+				const QByteArray& containerComment = "List of elements");
+
+	template <typename ContainerType>
+	static bool SerializeAssociativeObjectContainer(
 				iser::IArchive& archive,
 				ContainerType& container,
 				const QByteArray& containerTagName,
@@ -177,8 +194,60 @@ bool CPrimitiveTypesSerializer::SerializeContainer(
 
 		for (int i = 0; i < elementsCount; ++i){
 			typename ContainerType::value_type element = typename ContainerType::value_type();
+
 			retVal = retVal && archive.BeginTag(elementTag);
 			retVal = retVal && archive.Process(element);
+			retVal = retVal && archive.EndTag(elementTag);
+
+			if (retVal){
+				container.push_back(element);
+			}
+		}
+	}
+
+	retVal = retVal && archive.EndTag(elementsTag);
+
+	return retVal;
+}
+
+
+template <typename ContainerType>
+bool CPrimitiveTypesSerializer::SerializeObjectContainer(
+	iser::IArchive& archive,
+	ContainerType& container,
+	const QByteArray& containerTagName,
+	const QByteArray& elementTagName)
+{
+	iser::CArchiveTag elementsTag(containerTagName, "List of elements", iser::CArchiveTag::TT_MULTIPLE);
+	iser::CArchiveTag elementTag(elementTagName, "Single element", iser::CArchiveTag::TT_GROUP, &elementsTag);
+
+	bool retVal = true;
+
+	bool isStoring = archive.IsStoring();
+	int elementsCount = container.count();
+
+	retVal = retVal && archive.BeginMultiTag(elementsTag, elementTag, elementsCount);
+	if (!retVal){
+		return false;
+	}
+
+	if (isStoring){
+		for (int i = 0; i < elementsCount; ++i){
+			typename ContainerType::value_type element = container[i];
+
+			retVal = retVal && archive.BeginTag(elementTag);
+			retVal = retVal && element.Serialize(archive);
+			retVal = retVal && archive.EndTag(elementTag);
+		}
+	}
+	else{
+		container.clear();
+
+		for (int i = 0; i < elementsCount; ++i){
+			typename ContainerType::value_type element = typename ContainerType::value_type();
+
+			retVal = retVal && archive.BeginTag(elementTag);
+			retVal = retVal && element.Serialize(archive);
 			retVal = retVal && archive.EndTag(elementTag);
 
 			if (retVal){
@@ -308,7 +377,6 @@ bool CPrimitiveTypesSerializer::SerializeEnum(
 }
 
 
-
 template<typename ContainerType>
 bool CPrimitiveTypesSerializer::SerializeAssociativeContainer(
 			IArchive& archive,
@@ -374,6 +442,85 @@ bool CPrimitiveTypesSerializer::SerializeAssociativeContainer(
 			typename ContainerType::mapped_type value;
 			retVal = retVal && archive.BeginTag(parameterValueTag);
 			retVal = retVal && archive.Process(value);
+			retVal = retVal && archive.EndTag(parameterValueTag);
+
+			retVal = retVal && archive.EndTag(parameterTag);
+
+			container.insert(key, value);
+		}
+
+		retVal = retVal && archive.EndTag(parametersTag);
+	}
+
+	return retVal;
+}
+
+
+template<typename ContainerType>
+bool CPrimitiveTypesSerializer::SerializeAssociativeObjectContainer(
+	IArchive& archive,
+	ContainerType& container,
+	const QByteArray& containerTagName,
+	const QByteArray& elementTagName,
+	const QByteArray& keyTagId,
+	const QByteArray& valueTagId,
+	const QByteArray& containerComment)
+{
+	bool retVal = true;
+
+	iser::CArchiveTag parametersTag(containerTagName, containerComment, iser::CArchiveTag::TT_MULTIPLE);
+	iser::CArchiveTag parameterTag(elementTagName, "Single element", iser::CArchiveTag::TT_GROUP, &parametersTag, true);
+	iser::CArchiveTag parameterKeyTag(keyTagId, "Key of parameter", iser::CArchiveTag::TT_LEAF, &parameterTag);
+	iser::CArchiveTag parameterValueTag(valueTagId, "Value of parameter", iser::CArchiveTag::TT_GROUP, &parameterTag, true);
+
+	if (archive.IsStoring()){
+		int paramsCount = container.count();
+
+		retVal = retVal && archive.BeginMultiTag(parametersTag, parameterTag, paramsCount);
+
+		for (typename ContainerType::iterator iterator = container.begin(); iterator != container.end(); ++iterator){
+			retVal = retVal && archive.BeginTag(parameterTag);
+
+			typename ContainerType::key_type key = iterator.key();
+			retVal = retVal && archive.BeginTag(parameterKeyTag);
+			retVal = retVal && archive.Process(key);
+			retVal = retVal && archive.EndTag(parameterKeyTag);
+
+			typename ContainerType::mapped_type value = iterator.value();
+			retVal = retVal && archive.BeginTag(parameterValueTag);
+			retVal = retVal && value.Serialize(archive);
+			retVal = retVal && archive.EndTag(parameterValueTag);
+
+			retVal = retVal && archive.EndTag(parameterTag);
+		}
+
+		retVal = retVal && archive.EndTag(parametersTag);
+	}
+	else{
+		int paramsCount = 0;
+		container.clear();
+
+		retVal = retVal && archive.BeginMultiTag(parametersTag, parameterTag, paramsCount);
+
+		if (!retVal){
+			return false;
+		}
+
+		for (int i = 0; i < paramsCount; ++i){
+			retVal = retVal && archive.BeginTag(parameterTag);
+
+			typename ContainerType::key_type key;
+			retVal = retVal && archive.BeginTag(parameterKeyTag);
+			retVal = retVal && archive.Process(key);
+			retVal = retVal && archive.EndTag(parameterKeyTag);
+
+			if (!retVal){
+				return false;
+			}
+
+			typename ContainerType::mapped_type value;
+			retVal = retVal && archive.BeginTag(parameterValueTag);
+			retVal = retVal && value.Serialize(archive);
 			retVal = retVal && archive.EndTag(parameterValueTag);
 
 			retVal = retVal && archive.EndTag(parameterTag);
