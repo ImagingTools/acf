@@ -142,6 +142,12 @@ public:
 				const QByteArray& keyTagId = "Key",
 				const QByteArray& valueTagId = "Value",
 				const QByteArray& containerComment = "List of elements");
+
+	template <typename ObjectType>
+	static bool SerializeOptionalObject(
+		iser::IArchive& archive,
+		std::shared_ptr<ObjectType>& objectPtrRef,
+		const QByteArray& tagName);
 };
 
 
@@ -529,6 +535,39 @@ bool CPrimitiveTypesSerializer::SerializeAssociativeObjectContainer(
 		}
 
 		retVal = retVal && archive.EndTag(parametersTag);
+	}
+
+	return retVal;
+}
+
+
+template <typename ObjectType>
+static bool CPrimitiveTypesSerializer::SerializeOptionalObject(
+	iser::IArchive& archive,
+	std::shared_ptr<ObjectType>& objectPtrRef,
+	const QByteArray& tagName)
+{
+	QByteArray isPresentTagId = QString("Is%1Present").arg(tagName).toLatin1();
+
+	bool isPresent = objectPtrRef != nullptr;
+
+	iser::CArchiveTag isPresentTag(isPresentTagId, "", iser::CArchiveTag::TT_LEAF);
+	bool retVal = archive.BeginTag(isPresentTag);
+	retVal = retVal && archive.Process(isPresent);
+	retVal = retVal && archive.EndTag(isPresentTag);
+
+	if (isPresent){
+		if (objectPtrRef == nullptr){
+			objectPtrRef.reset(new ObjectType());
+		}
+
+		iser::CArchiveTag objectTag(tagName, "", iser::CArchiveTag::TT_GROUP);
+		retVal = retVal && archive.BeginTag(objectTag);
+		retVal = retVal && objectPtrRef->Serialize(archive);
+		retVal = retVal && archive.EndTag(objectTag);
+	}
+	else{
+		objectPtrRef.reset();
 	}
 
 	return retVal;
