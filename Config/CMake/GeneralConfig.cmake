@@ -148,7 +148,7 @@ function (mac_deploy_qt)
 
 	if (NOT ARG_REMOVE_DEBUGSYM)
 		if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-			list(APPEND DEPLOY_OPTIONS "--no-strip")
+			list(APPEND DEPLOY_OPTIONS "-no-strip")
 		endif()
 	endif()
 
