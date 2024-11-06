@@ -71,7 +71,8 @@ CLogGuiComp::CLogGuiComp()
 	m_exportActionPtr(NULL),
 	m_diagnosticModeActionPtr(NULL),
 	m_currentMessageMode(MM_ALL),
-	m_statusCategory(istd::IInformationProvider::IC_NONE)
+	m_statusCategory(istd::IInformationProvider::IC_NONE),
+	m_diagnosticStateObserver(*this)
 {
 	m_diagnosticState.SetEnabled(false);
 
@@ -251,6 +252,7 @@ void CLogGuiComp::SetupCommands()
 	}
 }
 
+
 void CLogGuiComp::SetCommandsVisuals()
 {
 	const QIcon& infoIcon = GetCategoryIcon(istd::IInformationProvider::IC_INFO);
@@ -261,7 +263,7 @@ void CLogGuiComp::SetCommandsVisuals()
 	const QIcon& diagnosticModeIcon = GetActionIcon(AT_DIAGNOSTICS);
 
 	m_infoCommand->SetVisuals(tr("Info"), tr("Info"), tr("Show all messages"), infoIcon);
-	m_warningCommand->SetVisuals(tr("Warning"), tr("Warning"), tr("Show warinig and error messages"), warningIcon);
+	m_warningCommand->SetVisuals(tr("Warning"), tr("Warning"), tr("Show warning and error messages"), warningIcon);
 	m_errorCommand->SetVisuals(tr("Error"), tr("Error"), tr("Show only error messages"), errorIcon);
 	m_clearCommand->SetVisuals(tr("Clear"), tr("Clear"), tr("Remove all messages"), clearIcon);
 	m_exportCommand->SetVisuals(tr("Export..."), tr("Export..."), tr("Export log to file"), exportIcon);
@@ -486,12 +488,16 @@ void CLogGuiComp::OnGuiCreated()
 	m_removeMessagesTimer.start(5000);
 
 	GenerateMessageList();
+
+	m_diagnosticState.AttachObserver(&m_diagnosticStateObserver);
 }
 
 
 void CLogGuiComp::OnGuiDestroyed()
 {
 	m_removeMessagesTimer.stop();
+
+	m_diagnosticState.DetachObserver(&m_diagnosticStateObserver);
 
 	BaseClass::OnGuiDestroyed();
 }
@@ -529,11 +535,11 @@ void CLogGuiComp::OnComponentCreated()
 void CLogGuiComp::UpdateVisualStatus()
 {
 	if (*m_autoUpdateVisualStatusAttrPtr){
-	istd::CChangeNotifier visualStatusNotifier(&m_visualStatus);
-
-	SetStatusIcon(GetCategoryIcon(m_statusCategory));
-	SetStatusText(GetCategoryText(m_statusCategory));
-}
+		istd::CChangeNotifier visualStatusNotifier(&m_visualStatus);
+	
+		SetStatusIcon(GetCategoryIcon(m_statusCategory));
+		SetStatusText(GetCategoryText(m_statusCategory));
+	}
 }
 
 
@@ -688,6 +694,35 @@ void CLogGuiComp::on_FilterText_textChanged(const QString& filterText)
 		Q_ASSERT(itemPtr != NULL);
 
 		UpdateItemVisibility(itemPtr, filterText);
+	}
+}
+
+
+// public methods of the embedded class DiagnosticStateObserver
+
+CLogGuiComp::DiagnosticStateObserver::DiagnosticStateObserver(CLogGuiComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// protected methods of the embedded class DiagnosticStateObserver
+
+// reimplemented (imod::TSingleModelObserverBase)
+
+void CLogGuiComp::DiagnosticStateObserver::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	iprm::IEnableableParam* enablerPtr = GetObservedObject();
+	Q_ASSERT(enablerPtr != nullptr);
+
+	bool isEnabled = enablerPtr->IsEnabled();
+
+	if (m_parent.m_diagnosticCommand.IsValid()){
+		m_parent.m_diagnosticCommand->setChecked(isEnabled);
+	}
+
+	if (m_parent.m_diagnosticModeActionPtr != nullptr) {
+		m_parent.m_diagnosticModeActionPtr->setChecked(isEnabled);
 	}
 }
 

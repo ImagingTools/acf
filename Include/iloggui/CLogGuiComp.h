@@ -217,6 +217,21 @@ private:
 	QTimer m_removeMessagesTimer;
 
 	imod::TModelWrap<iprm::CEnableableParam> m_diagnosticState;
+
+	class DiagnosticStateObserver: public imod::TSingleModelObserverBase<iprm::IEnableableParam>
+	{
+	public:
+		DiagnosticStateObserver(CLogGuiComp& parent);
+
+	protected:
+		// reimplemented (imod::TSingleModelObserverBase)
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
+
+	private:
+		CLogGuiComp& m_parent;
+	};
+
+	DiagnosticStateObserver m_diagnosticStateObserver;
 };
 
 
