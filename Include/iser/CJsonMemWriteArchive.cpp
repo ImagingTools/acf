@@ -1,10 +1,6 @@
 #include <iser/CJsonMemWriteArchive.h>
 
 
-// Qt includes
-#include <QtCore/QJsonDocument>
-
-
 namespace iser
 {
 
@@ -12,20 +8,22 @@ namespace iser
 // public methods
 
 CJsonMemWriteArchive::CJsonMemWriteArchive(
-			QByteArray &inputString,
-			const IVersionInfo* versionInfoPtr,
-			QJsonDocument::JsonFormat /*jsonFormat*/)
-	:BaseClass(versionInfoPtr)
+			const iser::IVersionInfo* versionInfoPtr,
+			bool serializeHeader,
+			const iser::CArchiveTag& rootTag)
+	:BaseClass(versionInfoPtr, serializeHeader, rootTag)
 {
-	bool serializeHeader = versionInfoPtr != nullptr;
-
-	InitArchive(inputString, serializeHeader);
+	if (m_textBuffer.open(QIODevice::WriteOnly | QIODevice::Text)){
+		InitArchive(&m_textBuffer);
+	}
 }
 
 
-CJsonMemWriteArchive::~CJsonMemWriteArchive()
+const QByteArray& CJsonMemWriteArchive::GetData() const
 {
-	Flush();
+	const_cast<CJsonMemWriteArchive*>(this)->Flush();
+
+	return m_textBuffer.buffer();
 }
 
 

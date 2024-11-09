@@ -8,8 +8,11 @@ namespace iser
 // public methods
 
 CJsonMemReadArchive::CJsonMemReadArchive(const QByteArray& data, bool serializeHeader)
+	:BaseClass(serializeHeader)
 {
-	InitArchive(data, serializeHeader);
+	m_buffer.setData(data);
+
+	SetContent(&m_buffer);
 }
 
 

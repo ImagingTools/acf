@@ -1,10 +1,9 @@
-#ifndef FilePck_included
-#define FilePck_included
+#pragma once
 
 
+// ACF includes
 #include <icomp/TModelCompWrap.h>
 #include <icomp/TMakeComponentWrap.h>
-
 #include <ifile/CFileNameParamComp.h>
 #include <ifile/CRelativeFileNameParamComp.h>
 #include <ifile/CSystemLocationComp.h>
@@ -32,6 +31,11 @@
 #include <ifile/CTempFileManagerComp.h>
 #include <ifile/CJsonFileReadArchive.h>
 #include <ifile/CJsonFileWriteArchive.h>
+#include <ifile/CCompactXmlDeviceReadArchive.h>
+#include <ifile/CCompactXmlDeviceWriteArchive.h>
+#include <ifile/CJsonDeviceReadArchive.h>
+#include <ifile/CJsonDeviceWriteArchive.h>
+#include <ifile/TDeviceBasedSerializerComp.h>
 
 
 /**
@@ -62,11 +66,10 @@ typedef ifile::CTextFileLogComp TextFileLog;
 typedef ifile::CTextFileLogStreamerComp TextFileLogStreamer;
 typedef ifile::CTempFileManagerComp TempFileManager;
 typedef ifile::TFileSerializerComp<ifile::CJsonFileReadArchive, ifile::CJsonFileWriteArchive> JsonFileSerializer;
+typedef ifile::TDeviceBasedSerializerComp<ifile::CCompactXmlDeviceReadArchive, ifile::CCompactXmlDeviceWriteArchive> CompactXmlDeviceSerializer;
+typedef ifile::TDeviceBasedSerializerComp<ifile::CJsonDeviceReadArchive, ifile::CJsonDeviceWriteArchive> JsonDeviceSerializer;
 
 
 } // namespace FilePck
-
-
-#endif // !FilePck_included
 
 

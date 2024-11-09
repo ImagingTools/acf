@@ -1,10 +1,6 @@
 #include <ifile/CJsonFileReadArchive.h>
 
 
-// Qt inclides
-#include <QtCore/QFile>
-
-
 namespace ifile
 {
 
@@ -12,22 +8,26 @@ namespace ifile
 // public methods
 
 CJsonFileReadArchive::CJsonFileReadArchive(const QString& filePath, bool serializeHeader)
-	:BaseClass()
+	:BaseClass(serializeHeader)
 {
-	OpenFile(filePath, serializeHeader);
+	OpenFile(filePath);
 }
 
 
-bool CJsonFileReadArchive::OpenFile(const QString &filePath, bool serializeHeader)
+bool CJsonFileReadArchive::OpenFile(const QString &filePath)
 {
 	QFile file(filePath);
-	if (!file.open(QIODevice::ReadOnly)){
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
 		return false;
 	}
 
-	QByteArray inputString = file.readAll();
+	if (!BaseClass::SetContent(&file)){
+		file.close();
 
-	return InitArchive(inputString, serializeHeader);
+		return false;
+	}
+
+	return true;
 }
 
 

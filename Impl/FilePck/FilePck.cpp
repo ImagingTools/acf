@@ -1,6 +1,7 @@
 #include "FilePck.h"
 
 
+// ACF includes
 #include <icomp/export.h>
 
 
@@ -112,6 +113,16 @@ I_EXPORT_COMPONENT(
 			JsonFileSerializer,
 			"Stores and loads objects to/from files  using JSON format",
 			"Save Serializer Archive Format JSON Attributes" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("JSON Loader File"));
+
+I_EXPORT_COMPONENT(
+			CompactXmlDeviceSerializer,
+			"Writes and read objects to/from an abstract I/O device using XML format",
+			"Serializer Archive Format XML" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader Persistence Stream I/O Device"));
+
+I_EXPORT_COMPONENT(
+			JsonDeviceSerializer,
+			"Writes and read objects to/from an abstract I/O device using JSON format",
+			"Serializer Archive Format JSON" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("JSON Loader Persistence Stream I/O Device"));
 
 
 } // namespace FilePck

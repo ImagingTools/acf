@@ -19,12 +19,18 @@ namespace ifile
 class CJsonFileWriteArchive: public iser::CJsonWriteArchiveBase
 {
 public:
-	CJsonFileWriteArchive(const QString& filePath = "", const iser::IVersionInfo* infoPtr = nullptr);
+	typedef iser::CJsonWriteArchiveBase BaseClass;
+
+	CJsonFileWriteArchive(
+				const QString& filePath,
+				const iser::IVersionInfo* versionInfoPtr = NULL,
+				bool serializeHeader = true,
+				const iser::CArchiveTag& rootTag = s_acfRootTag);
 	~CJsonFileWriteArchive();
-	bool OpenFile(const QString& filePath, bool serializeHeader);
+
+	bool OpenFile(const QString& filePath);
 
 private:
-	QBuffer m_buffer;
 	QFile m_file;
 };
 

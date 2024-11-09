@@ -12,11 +12,15 @@ namespace ifile
 
 // public methods
 
-CJsonFileWriteArchive::CJsonFileWriteArchive(const QString& filePath, const iser::IVersionInfo* infoPtr)
-		: CJsonWriteArchiveBase(infoPtr)
+CJsonFileWriteArchive::CJsonFileWriteArchive(const QString& filePath,
+			const iser::IVersionInfo* versionInfoPtr,
+			bool serializeHeader,
+			const iser::CArchiveTag& rootTag)
+	:BaseClass(versionInfoPtr, serializeHeader, rootTag)
 {
-	bool serializeHeader = infoPtr != nullptr;
-	OpenFile(filePath, serializeHeader);
+	if (!filePath.isEmpty()) {
+		OpenFile(filePath);
+	}
 }
 
 CJsonFileWriteArchive::~CJsonFileWriteArchive()
@@ -29,12 +33,12 @@ CJsonFileWriteArchive::~CJsonFileWriteArchive()
 }
 
 
-bool CJsonFileWriteArchive::OpenFile(const QString &filePath, bool serializeHeader)
+bool CJsonFileWriteArchive::OpenFile(const QString &filePath)
 {
 	m_file.setFileName(filePath);
 
 	if (m_file.open(QIODevice::WriteOnly)){
-		InitArchive(&m_file, serializeHeader);
+		InitArchive(&m_file);
 
 		return true;
 	}

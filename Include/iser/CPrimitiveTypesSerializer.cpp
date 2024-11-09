@@ -309,8 +309,8 @@ bool CPrimitiveTypesSerializer::SerializeQVariant(iser::IArchive& archive, QVari
 		retVal = retVal && archive.EndTag(valueTag);
 
 		QVariant variantValue;
-		QDataStream variantStream(variantData);
-		variantStream >> variant;
+		QDataStream variantValueStream(variantData);
+		variantValueStream >> variant;
 	}
 
 	return retVal;

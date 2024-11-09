@@ -1,6 +1,9 @@
 #pragma once
 
 
+// Qt inclides
+#include <QtCore/QFile>
+
 // ACF includes
 #include <iser/CJsonReadArchiveBase.h>
 
@@ -16,7 +19,10 @@ public:
 
 	CJsonFileReadArchive(const QString& filePath = "", bool serializeHeader = true);
 
-	bool OpenFile(const QString& filePath, bool serializeHeader);
+	bool OpenFile(const QString& filePath);
+
+private:
+	QFile m_file;
 };
 
 

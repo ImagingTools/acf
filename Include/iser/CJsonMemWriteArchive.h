@@ -18,10 +18,17 @@ public:
 	typedef CJsonWriteArchiveBase BaseClass;
 
 	CJsonMemWriteArchive(
-				QByteArray& inputString,
 				const iser::IVersionInfo* versionInfoPtr = NULL,
-				QJsonDocument::JsonFormat jsonFormat = QJsonDocument::Compact);
-	~CJsonMemWriteArchive();
+				bool serializeHeader = true,
+				const iser::CArchiveTag& rootTag = s_acfRootTag);
+
+	/**
+		Close the archive and get the created JSON string.
+	*/
+	const QByteArray& GetData() const;
+
+private:
+	QBuffer m_textBuffer;
 };
 
 

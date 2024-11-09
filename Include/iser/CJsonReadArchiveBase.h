@@ -6,6 +6,7 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonArray>
 #include <QtCore/QList>
+#include <QtCore/QIODevice>
 
 // ACF includes
 #include <iser/CTextReadArchiveBase.h>
@@ -27,7 +28,9 @@ class CJsonReadArchiveBase : public iser::CTextReadArchiveBase
 public:
 	typedef CTextReadArchiveBase BaseClass;
 
-	CJsonReadArchiveBase();
+	CJsonReadArchiveBase(
+				bool serializeHeader = true,
+				const iser::CArchiveTag& rootTag = s_acfRootTag);
 
 	// reimplemented (iser::IArchive)
 	virtual bool BeginTag(const iser::CArchiveTag& tag) override;
@@ -36,7 +39,8 @@ public:
 	virtual bool Process(QString& value) override;
 
 protected:
-	bool InitArchive(const QByteArray& inputString, bool serializeHeader = false);
+	bool SetContent(QIODevice* devicePtr);
+
 	bool ReadStringNode(QString& text);
 
 	// reimplemented (iser::CTextReadArchiveBase)
@@ -69,6 +73,7 @@ protected:
 	QList<const iser::CArchiveTag*> m_tags;
 	iser::CArchiveTag m_rootTag;
 	bool m_rootTagEnabled;
+	bool m_serializeHeader;
 };
 
 

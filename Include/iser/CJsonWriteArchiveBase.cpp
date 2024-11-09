@@ -13,20 +13,30 @@ namespace iser
 {
 
 
-// public methods
+// protected methods
 
 CJsonWriteArchiveBase::CJsonWriteArchiveBase(
-			const IVersionInfo *versionInfoPtr,
-			QJsonDocument::JsonFormat jsonFormat)
-			:  CTextWriteArchiveBase(versionInfoPtr),
-			m_jsonFormat(jsonFormat),
-			m_rootTag("", "", iser::CArchiveTag::TT_GROUP)
+			const iser::IVersionInfo* versionInfoPtr,
+			bool serializeHeader,
+			const iser::CArchiveTag& /*rootTag*/)
+	:BaseClass(versionInfoPtr),
+	m_serializeHeader(serializeHeader),
+	m_jsonFormat(QJsonDocument::Compact),
+	m_rootTag("", "", iser::CArchiveTag::TT_GROUP)
 {
 }
 
 
+// public methods
+
 CJsonWriteArchiveBase::~CJsonWriteArchiveBase()
 {
+}
+
+
+void CJsonWriteArchiveBase::SetFormat(QJsonDocument::JsonFormat jsonFormat)
+{
+	m_jsonFormat = jsonFormat;
 }
 
 
@@ -158,22 +168,22 @@ bool CJsonWriteArchiveBase::InitStream(bool serializeHeader)
 }
 
 
-bool CJsonWriteArchiveBase::InitArchive(QIODevice *devicePtr, bool serializeHeader)
+bool CJsonWriteArchiveBase::InitArchive(QIODevice* devicePtr)
 {
 	m_stream.setDevice(devicePtr);
 	
-	return InitStream(serializeHeader);
+	return InitStream(m_serializeHeader);
 }
 
 
-bool CJsonWriteArchiveBase::InitArchive(QByteArray &inputString, bool serializeHeader)
+bool CJsonWriteArchiveBase::InitArchive(QByteArray& inputString)
 {
 	m_buffer.setBuffer(&inputString);
 	if (m_buffer.open(QIODevice::WriteOnly | QIODevice::Text)){
 		m_stream.setDevice(&m_buffer);
 	}
 	
-	return InitStream(serializeHeader);
+	return InitStream(m_serializeHeader);
 }
 
 

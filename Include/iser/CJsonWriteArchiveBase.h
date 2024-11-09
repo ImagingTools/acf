@@ -26,11 +26,9 @@ class CJsonWriteArchiveBase: public iser::CTextWriteArchiveBase
 public:
 	typedef iser::CTextWriteArchiveBase BaseClass;
 
-	CJsonWriteArchiveBase(
-				const iser::IVersionInfo* versionInfoPtr = NULL,
-				QJsonDocument::JsonFormat jsonFormat = QJsonDocument::Compact);
-
 	~CJsonWriteArchiveBase();
+
+	void SetFormat(QJsonDocument::JsonFormat jsonFormat);
 
 	// reimplemented (iser::IArchive)
 	virtual bool IsTagSkippingSupported() const;
@@ -44,9 +42,14 @@ public:
 	using BaseClass::Process;
 
 protected:
+	CJsonWriteArchiveBase(
+				const iser::IVersionInfo* versionInfoPtr,
+				bool serializeHeader,
+				const iser::CArchiveTag& rootTag);
+
 	bool InitStream(bool serializeHeader);
-	bool InitArchive(QIODevice* devicePtr, bool serializeHeader = false);
-	bool InitArchive(QByteArray& inputString, bool serializeHeader = false);
+	bool InitArchive(QIODevice* devicePtr);
+	bool InitArchive(QByteArray& inputString);
 	bool WriteTag(const iser::CArchiveTag& tag, QString separator);
 	bool WriteJsonHeader();
 	bool Flush();

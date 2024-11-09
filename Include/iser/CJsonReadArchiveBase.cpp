@@ -7,12 +7,13 @@ namespace iser
 
 // public methods
 
-CJsonReadArchiveBase::CJsonReadArchiveBase()
-			: CTextReadArchiveBase(),
-			m_rootTag("", "", iser::CArchiveTag::TT_GROUP),
-			m_rootTagEnabled(false)
+CJsonReadArchiveBase::CJsonReadArchiveBase(
+			bool serializeHeader,
+			const iser::CArchiveTag& /*rootTag*/)
+	:m_rootTag("", "", iser::CArchiveTag::TT_GROUP),
+	m_rootTagEnabled(false),
+	m_serializeHeader(serializeHeader)
 {
-
 }
 
 
@@ -132,9 +133,7 @@ bool CJsonReadArchiveBase::BeginMultiTag(const iser::CArchiveTag& tag, const ise
 
 bool CJsonReadArchiveBase::EndTag(const iser::CArchiveTag& tag)
 {
-
 	if (m_iterators.isEmpty()){
-
 		return false;
 	}
 
@@ -169,25 +168,27 @@ bool CJsonReadArchiveBase::Process(QString& value)
 
 // protected methods
 
-bool CJsonReadArchiveBase::InitArchive(const QByteArray &inputString, bool serializeHeader)
+bool CJsonReadArchiveBase::SetContent(QIODevice* devicePtr)
 {
-	QJsonParseError error;
-	m_document = QJsonDocument::fromJson(inputString, &error);
+	Q_ASSERT(devicePtr != nullptr);
 
-	if (error.error != QJsonParseError::NoError && IsLogConsumed()){
+	QByteArray jsonData = devicePtr->readAll();
+
+	QJsonParseError error;
+	m_document = QJsonDocument::fromJson(jsonData, &error);
+
+	if (error.error != QJsonParseError::NoError && IsLogConsumed()) {
 		SendLogMessage(
-					istd::IInformationProvider::IC_ERROR,
-					MI_TAG_ERROR,
-					error.errorString(),
-					"CJsonStringReadArchive",
-					istd::IInformationProvider::ITF_SYSTEM);
+			istd::IInformationProvider::IC_ERROR,
+			MI_TAG_ERROR,
+			error.errorString(),
+			"CJsonReadArchiveBase",
+			istd::IInformationProvider::ITF_SYSTEM);
 
 		return false;
 	}
 
-//	BeginTag(m_rootTag);
-
-	if (serializeHeader){
+	if (m_serializeHeader){
 		SerializeAcfHeader();
 	}
 
