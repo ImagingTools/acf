@@ -23,10 +23,9 @@ void CJsonMemoryWriteArchiveTest::initTestCase()
 
 void CJsonMemoryWriteArchiveTest::WriteTest()
 {
-	{
-		iser::CJsonMemWriteArchive writeArchive;
-		QVERIFY(m_metaInfo.Serialize(writeArchive));
-	}
+	iser::CJsonMemWriteArchive writeArchive;
+	QVERIFY(m_metaInfo.Serialize(writeArchive));
+	m_buffer = writeArchive.GetData();
 }
 
 void CJsonMemoryWriteArchiveTest::ReadTest()
@@ -55,14 +54,12 @@ void CJsonMemoryWriteArchiveTest::ParamsSetSerializeTest()
 	idParam.SetId("{GV5-E4YTGO5IY6T0EG45-45-TG54-G-F}");
 	params.SetEditableParameter("ID", &idParam);
 
-	QByteArray buffer;
-	{
-		iser::CJsonMemWriteArchive writeArchive;
+	iser::CJsonMemWriteArchive writeArchive;
 
-		// serialize
-		const bool written = params.Serialize(writeArchive);
-		QVERIFY2(written, "Unable to save params");
-	}
+	// serialize
+	const bool written = params.Serialize(writeArchive);
+	QVERIFY2(written, "Unable to save params");
+	QByteArray buffer = writeArchive.GetData();
 
 	QJsonParseError jsonParserror;
 	QJsonObject jsonObject = QJsonDocument::fromJson(buffer, &jsonParserror).object();
@@ -79,24 +76,13 @@ void CJsonMemoryWriteArchiveTest::ParamsSetSerializeTest()
 	iprm::CIdParam newIdParam;
 	newParams.SetEditableParameter("ID", &newIdParam);
 
-
 	iser::CJsonMemReadArchive readArchive(buffer);
 	// restore serialized data in iew params
 	const bool restored = newParams.Serialize(readArchive);
 	QVERIFY2(restored, "Unable to load params");
 
-	QByteArray newBuffer;
-	{
-		iser::CJsonMemWriteArchive writeArchive;
-
-		// serialize
-		const bool written = newParams.Serialize(writeArchive);
-		QVERIFY2(written, "Unable to save new params");
-	}
-
 	// compare saved and restored
-	// bool isEqual = newParams.IsEqual(params);
-	bool isEqual = (buffer == newBuffer);
+	bool isEqual = newParams.IsEqual(params);
 	QVERIFY2(isEqual, "Restored params is not equal to original");
 }
 
@@ -112,6 +98,7 @@ void CJsonMemoryWriteArchiveTest::_Test()
 	{
 		iser::CJsonMemWriteArchive writeArchive;
 		QVERIFY(model.Serialize(writeArchive));
+		m_buffer = writeArchive.GetData();
 	}
 
 	model.value = 0;
