@@ -73,7 +73,9 @@ void CCompactXmlDeviceArchiveTest::DoMemoryTest()
 void CCompactXmlDeviceArchiveTest::DoPersistenceComponentTest()
 {
 	typedef icomp::TSimComponentWrap<
-				ifile::TDeviceBasedSerializerComp<ifile::CCompactXmlDeviceReadArchive, ifile::CCompactXmlDeviceWriteArchive>> CompactXmlDeviceSerializer;
+				ifile::TDeviceBasedSerializerComp<
+							ifile::CCompactXmlDeviceReadArchive,
+							ifile::CCompactXmlDeviceWriteArchive>> CompactXmlDeviceSerializer;
 
 	CompactXmlDeviceSerializer component;
 	component.InitComponent();
@@ -92,6 +94,7 @@ void CCompactXmlDeviceArchiveTest::DoPersistenceComponentTest()
 	int state = component.ReadFromDevice(filePathParam2, file);
 	QVERIFY(state == ifile::IDeviceBasedPersistence::Successful);
 	QVERIFY(filePathParam2.IsEqual(filePathParam));
+	QVERIFY(filePathParam2.GetPath() == path);
 
 	file.remove();
 }

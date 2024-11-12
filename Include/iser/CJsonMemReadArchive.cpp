@@ -17,6 +17,12 @@ CJsonMemReadArchive::CJsonMemReadArchive(const QByteArray& data, bool serializeH
 }
 
 
+CJsonMemReadArchive::~CJsonMemReadArchive()
+{
+	m_buffer.close();
+}
+
+
 } // namespace iser
 
 
