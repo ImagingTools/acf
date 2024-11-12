@@ -135,3 +135,4 @@ ifileTest.file = ../../Include/ifile/Test/QMake/ifileTest.pro
 
 SUBDIRS += AcfTests
 AcfTests.file = ../../Tests/QMake/AcfTests.pro
+AcfTests.depends = Arxc
