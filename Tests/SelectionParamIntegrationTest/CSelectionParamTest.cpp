@@ -11,14 +11,11 @@
 
 void CSelectionParamTest::initTestCase()
 {
-	BaseClass::initTestCase();
+	m_testPartituraInstanceCompPtr.reset(new CSelectionParamIntegrationTest);
 
-	ipackage::CComponentAccessor* accessorPtr = GetComponentAccessor();
-	QVERIFY(accessorPtr != nullptr);
-
-	m_selectionPtr = accessorPtr->GetComponentInterface<iprm::ISelectionParam>("Selection");
-	m_selectionWithConstraintsPtr = accessorPtr->GetComponentInterface<iprm::ISelectionParam>("SelectionWithConstraints");
-	m_selectionConstraintsPtr = accessorPtr->GetComponentInterface<iprm::IOptionsManager>("SelectionConstraints");
+	m_selectionPtr = m_testPartituraInstanceCompPtr->GetInterface<iprm::ISelectionParam>("Selection");
+	m_selectionWithConstraintsPtr = m_testPartituraInstanceCompPtr->GetInterface<iprm::ISelectionParam>("SelectionWithConstraints");
+	m_selectionConstraintsPtr = m_testPartituraInstanceCompPtr->GetInterface<iprm::IOptionsManager>("SelectionConstraints");
 
 	QVERIFY(m_selectionPtr != nullptr);
 	QVERIFY(m_selectionWithConstraintsPtr != nullptr);
@@ -40,7 +37,7 @@ void CSelectionParamTest::ResetDataTest()
 {
 	QVERIFY(m_selectionPtr->SetSelectedOptionIndex(10));
 
-	QVERIFY(m_selectionPtr->ResetData());
+	QVERIFY(m_selectionPtr->SetSelectedOptionIndex(-1));
 
 	QVERIFY(m_selectionPtr->GetSelectedOptionIndex() < 0);
 }
@@ -78,8 +75,7 @@ void CSelectionParamTest::SerializeTest()
 
 	QVERIFY(m_selectionPtr->Serialize(writeArchive));
 
-	QVERIFY(m_selectionPtr->ResetData());
-	QVERIFY(m_selectionPtr->GetSelectedOptionIndex() < 0);
+	QVERIFY(m_selectionPtr->SetSelectedOptionIndex(-1));
 
 	iser::CMemoryReadArchive readArchive(writeArchive);
 	QVERIFY(m_selectionPtr->Serialize(readArchive));
@@ -115,7 +111,7 @@ void CSelectionParamTest::SerializeWithConstraintsTest()
 
 void CSelectionParamTest::cleanupTestCase()
 {
-	BaseClass::cleanupTestCase();
+	m_testPartituraInstanceCompPtr.reset();
 }
 
 

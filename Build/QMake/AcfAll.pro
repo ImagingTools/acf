@@ -133,3 +133,5 @@ iprmTest.file = ../../Include/iprm/Test/QMake/iprmTest.pro
 SUBDIRS += ifileTest
 ifileTest.file = ../../Include/ifile/Test/QMake/ifileTest.pro
 
+SUBDIRS += AcfTests
+AcfTests.file = ../../Tests/QMake/AcfTests.pro
