@@ -27,7 +27,7 @@ bool CConsoleApplicationComp::InitializeApplication(int argc, char** argv)
 	for (int argIndex = 0; argIndex < argc; argIndex++){
 		QByteArray arg = argv[argIndex];
 
-		m_applicationArguments << QString::fromLocal8Bit(argv[argIndex]);
+		m_applicationArguments << QString::fromLocal8Bit(arg);
 	}
 
 	if (!m_applicationPtr.IsValid()){
@@ -58,6 +58,14 @@ bool CConsoleApplicationComp::InitializeApplication(int argc, char** argv)
 	if (m_applicationInfoCompPtr.IsValid()){
 		QCoreApplication::setOrganizationName(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME));
 		QCoreApplication::setApplicationName(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME));
+
+		const iser::IVersionInfo& applicationVersion = m_applicationInfoCompPtr->GetVersionInfo();
+		quint32 versionNumber = 0;
+		bool versionSet = applicationVersion.GetVersionNumber(m_applicationInfoCompPtr->GetMainVersionId(), versionNumber);
+		if (versionSet){
+			QString appilcationVersionName = applicationVersion.GetEncodedVersionName(m_applicationInfoCompPtr->GetMainVersionId(), versionNumber);
+			QCoreApplication::setApplicationVersion(appilcationVersionName);
+		}
 	}
 
 	return true;
