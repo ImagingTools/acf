@@ -54,7 +54,8 @@ private:
 
 	typedef QVector<Interface*> Components;
 	mutable Components m_components;
-	mutable bool m_isInitialized;
+
+	mutable std::atomic<bool> m_isInitialized;
 };
 
 
