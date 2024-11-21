@@ -230,7 +230,7 @@ bool CJsonReadArchiveBase::ReadTextNode(QByteArray &text)
 	QString stringText;
 
 	if (ReadStringNode(stringText)){
-		text = stringText.toLocal8Bit();
+		text = stringText.toUtf8();
 
 		return true;
 	}
