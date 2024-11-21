@@ -13,6 +13,7 @@
 
 // ACF includes
 #include <istd/TRange.h>
+#include <istd/TIFactory.h>
 #include <istd/TRanges.h>
 #include <istd/TIndex.h>
 #include <iser/IArchive.h>
@@ -146,7 +147,14 @@ public:
 	template <typename ObjectType>
 	static bool SerializeOptionalObject(
 		iser::IArchive& archive,
-		std::shared_ptr<ObjectType>& objectPtrRef,
+		std::unique_ptr<ObjectType>& objectPtrRef,
+		const QByteArray& tagName);
+
+	template <typename ObjectInterface>
+	static bool SerializeOptionalObject(
+		iser::IArchive& archive,
+		std::unique_ptr<ObjectInterface>& objectPtrRef,
+		istd::TIFactory<ObjectInterface>& objectFactoryPtr,
 		const QByteArray& tagName);
 };
 
@@ -544,7 +552,7 @@ bool CPrimitiveTypesSerializer::SerializeAssociativeObjectContainer(
 template <typename ObjectType>
 bool CPrimitiveTypesSerializer::SerializeOptionalObject(
 	iser::IArchive& archive,
-	std::shared_ptr<ObjectType>& objectPtrRef,
+	std::unique_ptr<ObjectType>& objectPtrRef,
 	const QByteArray& tagName)
 {
 	QByteArray isPresentTagId = QString("Is%1Present").arg(tagName).toLatin1();
@@ -573,6 +581,42 @@ bool CPrimitiveTypesSerializer::SerializeOptionalObject(
 	return retVal;
 }
 
+
+template <typename ObjectInterface>
+static bool SerializeOptionalObject(
+	iser::IArchive& archive,
+	std::unique_ptr<ObjectInterface>& objectPtrRef,
+	istd::TIFactory<ObjectInterface>& objectFactoryPtr,
+	const QByteArray& tagName)
+{
+	QByteArray isPresentTagId = QString("Is%1Present").arg(tagName).toLatin1();
+
+	bool isPresent = objectPtrRef != nullptr;
+
+	iser::CArchiveTag isPresentTag(isPresentTagId, "", iser::CArchiveTag::TT_LEAF);
+	bool retVal = archive.BeginTag(isPresentTag);
+	retVal = retVal && archive.Process(isPresent);
+	retVal = retVal && archive.EndTag(isPresentTag);
+
+	if (isPresent){
+		if (objectPtrRef == nullptr){
+			objectPtrRef.reset(objectFactoryPtr.CreateInstance());
+			if (objectPtrRef == nullptr){
+				return false;
+			}
+		}
+
+		iser::CArchiveTag objectTag(tagName, "", iser::CArchiveTag::TT_GROUP);
+		retVal = retVal && archive.BeginTag(objectTag);
+		retVal = retVal && objectPtrRef->Serialize(archive);
+		retVal = retVal && archive.EndTag(objectTag);
+	}
+	else{
+		objectPtrRef.reset();
+	}
+
+	return retVal;
+}
 
 #define I_SERIALIZE_FLAG(Enum, archive, flag) iser::CPrimitiveTypesSerializer::SerializeEnum<int, Enum##ToString, Enum##FromString>(archive, flag);
 #define I_SERIALIZE_ENUM(Enum, archive, enumValue) iser::CPrimitiveTypesSerializer::SerializeEnum<Enum, ToString, FromString>(archive, enumValue);
