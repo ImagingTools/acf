@@ -583,7 +583,7 @@ bool CPrimitiveTypesSerializer::SerializeOptionalObject(
 
 
 template <typename ObjectInterface>
-static bool CPrimitiveTypesSerializer::SerializeOptionalObject(
+bool CPrimitiveTypesSerializer::SerializeOptionalObject(
 	iser::IArchive& archive,
 	std::unique_ptr<ObjectInterface>& objectPtrRef,
 	istd::TIFactory<ObjectInterface>& objectFactoryPtr,
