@@ -10,7 +10,7 @@ namespace icmm
 {
 
 
-class CSubstractiveColorModel: virtual public icmm::IColorModel, virtual public icmm::IColorantList
+class CSubstractiveColorModelBase: virtual public icmm::IColorModel, virtual public icmm::IColorantList
 {
 public:
 	// reimplemented (icmm::IColorModel)

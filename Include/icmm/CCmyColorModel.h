@@ -2,14 +2,14 @@
 
 
 // ACF includes
-#include <icmm/CSubstractiveColorModel.h>
+#include <icmm/CSubstractiveColorModelBase.h>
 
 
 namespace icmm
 {
 
 
-class CCmyColorModel: public CSubstractiveColorModel
+class CCmyColorModel: public CSubstractiveColorModelBase
 {
 public:
 	// reimplemented (icmm::IColorantList)
