@@ -57,6 +57,11 @@ public:
 	virtual bool HasSpot() const;
 
 	/**
+		Get the list of process colors in this color model.
+	*/
+	virtual ColorantIds GetProcessColorants() const;
+
+	/**
 		Get the list of ECG colorants in this color model.
 	*/
 	virtual ColorantIds GetEcgColorants() const;

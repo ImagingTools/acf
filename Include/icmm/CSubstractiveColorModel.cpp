@@ -142,6 +142,20 @@ bool CSubstractiveColorModel::HasSpot() const
 }
 
 
+IColorantList::ColorantIds CSubstractiveColorModel::GetProcessColorants() const
+{
+	ColorantIds processColorants;
+
+	for (const ColorantInfo& colorant : m_colorants){
+		if ((colorant.usage != icmm::CU_ECG) && (colorant.usage != icmm::CU_SPOT)){
+			processColorants.push_back(colorant.id);
+		}
+	}
+
+	return processColorants;
+}
+
+
 IColorantList::ColorantIds CSubstractiveColorModel::GetEcgColorants() const
 {
 	ColorantIds ecgColorants;
