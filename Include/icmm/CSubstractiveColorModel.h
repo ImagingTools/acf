@@ -25,6 +25,14 @@ public:
 	CSubstractiveColorModel(const CSubstractiveColorModel& other);
 	CSubstractiveColorModel(const ISubstractiveColorModel& other);
 
+	bool operator==(const CSubstractiveColorModel& ref) const;
+	bool operator!=(const CSubstractiveColorModel& ref) const;
+
+	/**
+		Returns \c true if the colorant with the given ID exists in the color model.
+	*/
+	virtual bool ContainsColorant(const ColorantId& colorantId) const;
+
 	/**
 		Insert a new colorant at the given position.
 		If a colorant with the same colorant-ID already exists, the method will fail.
@@ -87,6 +95,16 @@ protected:
 	{
 		ColorantId id;
 		ColorantUsage usage = CU_NONE;
+
+		inline bool operator==(const ColorantInfo& ref) const
+		{
+			return (ref.id == id) && (ref.usage == usage);
+		}
+
+		inline bool operator!=(const ColorantInfo& ref)  const
+		{
+			return !operator==(ref);
+		}
 	};
 
 	typedef QVector<ColorantInfo> ColorantInfoList;

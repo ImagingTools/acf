@@ -45,6 +45,24 @@ CSubstractiveColorModel::CSubstractiveColorModel(const ISubstractiveColorModel& 
 }
 
 
+bool CSubstractiveColorModel::operator==(const CSubstractiveColorModel& ref) const
+{
+	return m_colorants == ref.m_colorants;
+}
+
+
+bool CSubstractiveColorModel::operator!=(const CSubstractiveColorModel& ref) const
+{
+	return !operator==(ref);
+}
+
+
+bool CSubstractiveColorModel::ContainsColorant(const ColorantId& colorantId) const
+{
+	return FindColorantIndex(colorantId) >= 0;
+}
+
+
 bool CSubstractiveColorModel::InsertColorant(const ColorantId & colorantId, ColorantUsage usage, int index)
 {
 	int existingIndex = FindColorantIndex(colorantId);
@@ -82,15 +100,17 @@ bool CSubstractiveColorModel::RemoveColorant(const ColorantId & colorantId)
 
 bool CSubstractiveColorModel::AppendColorModel(const ISubstractiveColorModel& other)
 {
+	CSubstractiveColorModel temp(*this);
+	
 	ColorantIds otherColorantIds = other.GetColorantIds();
 	for (const ColorantId& otherColorantId : otherColorantIds){
 		ColorantUsage otherUsage = other.GetColorantUsage(otherColorantId);
 
 		// Check if the current model contains the colorant from the other model:
-		int existingIndex = FindColorantIndex(otherColorantId);
+		int existingIndex = temp.FindColorantIndex(otherColorantId);
 		if (existingIndex >= 0){
 			// If yes, check the corresponding colorant usage:
-			ColorantUsage myUsage = GetColorantUsage(otherColorantId);
+			ColorantUsage myUsage = temp.GetColorantUsage(otherColorantId);
 			
 			// If colorant usages are not the same, the color model cannot be merged:
 			if (myUsage != otherUsage){
@@ -101,7 +121,13 @@ bool CSubstractiveColorModel::AppendColorModel(const ISubstractiveColorModel& ot
 			}
 		}
 
-		m_colorants.push_back({ otherColorantId, otherUsage });
+		temp.m_colorants.push_back({ otherColorantId, otherUsage });
+	}
+
+	if (m_colorants != temp.m_colorants){
+		istd::CChangeNotifier changeNotifier(this);
+
+		m_colorants = temp.m_colorants;
 	}
 
 	return true;
