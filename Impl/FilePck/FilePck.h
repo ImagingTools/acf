@@ -39,7 +39,6 @@
 #include <ifile/CFileReadSecureArchive.h>
 #include <ifile/CFileWriteSecureArchive.h>
 
-
 /**
 	Package for file system primitives management.
 */

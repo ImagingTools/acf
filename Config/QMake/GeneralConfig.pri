@@ -1,4 +1,4 @@
-#General base configuration should be included from all ACF-based projects
+# General base configuration should be included from all ACF-based projects
 
 CONFIG += stl
 CONFIG -= exceptions
