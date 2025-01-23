@@ -15,6 +15,9 @@ class CCieLabColorModel: virtual public icmm::IColorModel
 public:
 	CCieLabColorModel(const ITristimulusSpecification& spec);
 
+	void SetTristimulusSpecification(const ITristimulusSpecification& spec);
+	const ITristimulusSpecification& GetTristimulusSpecification() const;
+
 	// reimplemented (icmm::IColorModel)
 	virtual ModelType GetModelType() const override;
 	virtual ModelClass GetModelClass() const override;

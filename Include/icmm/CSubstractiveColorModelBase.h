@@ -3,15 +3,25 @@
 
 // ACF includes
 #include <icmm/ISubstractiveColorModel.h>
+#include <icmm/CCieLabColor.h>
+#include <icmm/CTristimulusSpecification.h>
 
 
 namespace icmm
 {
 
 
+class CCieLabColor;
+
+
 class CSubstractiveColorModelBase: virtual public icmm::ISubstractiveColorModel
 {
 public:
+	CSubstractiveColorModelBase();
+
+	void SetPreviewSpec(const ITristimulusSpecification& previewSpec);
+	void SetColorantPreview(const QByteArray& colorantId, const icmm::CLab& preview);
+
 	// reimplemented (icmm::IColorModel)
 	virtual ModelType GetModelType() const override;
 	virtual ModelClass GetModelClass() const override;
@@ -22,6 +32,21 @@ public:
 	virtual const icmm::IColorTransformation* CreateColorTranformation(
 				const IColorModel& otherColorModel,
 				const QByteArray& transformationId = QByteArray()) const override;
+
+	// reimplemented (icmm::ISubstractiveColorModel)
+	virtual bool GetColorantVisualInfo(const QByteArray& colorantId, icmm::ICieLabColor& preview) const override;
+
+private:
+	/**
+		Tristimulus specification used for all colorants in the color model.
+	*/
+	icmm::CTristimulusSpecification m_previewSpec;
+
+	/**
+		Mapping between a colorant and corresponding Lab value for its solid value.
+	*/
+	typedef QMap<QByteArray, icmm::CLab> ColorantPreviewMap;
+	ColorantPreviewMap m_colorantPreviewMap;
 };
 
 

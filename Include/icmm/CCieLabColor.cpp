@@ -9,9 +9,11 @@ namespace icmm
 {
 
 
-CCieLabColor::CCieLabColor(ColorModelPtr modelPtr)
+CCieLabColor::CCieLabColor(const CCieLabColorModel* modelPtr)
 {
-	m_modelPtr = modelPtr;
+	if (m_modelPtr != nullptr) {
+		m_modelPtr = std::make_shared<CCieLabColorModel>(modelPtr->GetTristimulusSpecification());
+	}
 }
 
 
@@ -22,12 +24,30 @@ CCieLabColor::CCieLabColor(const icmm::CLab& lab, const ITristimulusSpecificatio
 }
 
 
+CCieLabColor::CCieLabColor(const CCieLabColor& color)
+{
+	m_modelPtr = color.m_modelPtr;
+	m_lab = color.m_lab;
+}
+
+
 // reimplemented (icmm::ICieLabColor)
+
+bool CCieLabColor::Initialize(const icmm::CLab& value, const ITristimulusSpecification& spec)
+{
+	m_lab = value;
+
+	m_modelPtr->SetTristimulusSpecification(spec);
+
+	return true;
+}
+
 
 const icmm::CLab& CCieLabColor::GetLab() const
 {
 	return m_lab;
 }
+
 
 IColorSpecification::ConstColorSpecPtr CCieLabColor::GetSpecification() const
 {

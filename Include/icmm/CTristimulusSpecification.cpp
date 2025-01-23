@@ -52,6 +52,7 @@ std::shared_ptr<ISpectralColorSpecification> CTristimulusSpecification::GetBaseS
 	return m_baseSpec;
 }
 
+
 bool CTristimulusSpecification::IsEqual(const IChangeable& other) const
 {
 	const CTristimulusSpecification* objectPtr = dynamic_cast<const CTristimulusSpecification*>(&other);
@@ -66,10 +67,11 @@ bool CTristimulusSpecification::IsEqual(const IChangeable& other) const
 		isBaseSpecSame = this->m_baseSpec->IsEqual(*otherBaseSpec);
 	}
 
-	return m_observerType == objectPtr->GetObserverType() &&
-		   m_method == objectPtr->GetMethod() &&
-		   m_illuminant->IsEqual(*objectPtr->GetIlluminant()) &&
-		   isBaseSpecSame;
+	return
+				m_observerType == objectPtr->GetObserverType() &&
+				m_method == objectPtr->GetMethod() &&
+				m_illuminant->IsEqual(*objectPtr->GetIlluminant()) &&
+				isBaseSpecSame;
 }
 
 } // namespace icmm

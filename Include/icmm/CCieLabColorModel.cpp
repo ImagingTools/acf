@@ -1,6 +1,10 @@
 #include <icmm/CCieLabColorModel.h>
 
 
+// ACF includes
+#include <istd/CChangeNotifier.h>
+
+
 namespace icmm
 {
 
@@ -10,6 +14,20 @@ namespace icmm
 CCieLabColorModel::CCieLabColorModel(const ITristimulusSpecification& spec)
 	:m_spec(spec)
 {
+}
+
+
+void CCieLabColorModel::SetTristimulusSpecification(const ITristimulusSpecification& spec)
+{
+	istd::CChangeNotifier changeNotifier(this);
+
+	m_spec = spec;
+}
+
+
+const ITristimulusSpecification& CCieLabColorModel::GetTristimulusSpecification() const
+{
+	return m_spec;
 }
 
 

@@ -6,6 +6,27 @@ namespace icmm
 
 
 // public methods
+CSubstractiveColorModelBase::CSubstractiveColorModelBase()
+	:m_previewSpec(ObserverType::TwoDegree, AstmTableType::Unknown, std::make_shared<CIlluminant>())
+{
+}
+
+
+void CSubstractiveColorModelBase::SetPreviewSpec(const ITristimulusSpecification& previewSpec)
+{
+	istd::CChangeNotifier changeNotifier(this);
+
+	m_previewSpec = icmm::CTristimulusSpecification(previewSpec);
+}
+
+
+void CSubstractiveColorModelBase::SetColorantPreview(const QByteArray& colorantId, const icmm::CLab& preview)
+{
+	istd::CChangeNotifier changeNotifier(this);
+
+	m_colorantPreviewMap[colorantId] = preview;
+}
+
 
 // reimplemented (icmm::IColorModel)
 
@@ -55,6 +76,16 @@ const icmm::IColorTransformation* CSubstractiveColorModelBase::CreateColorTranfo
 	const QByteArray& /*transformationId*/) const
 {
 	return nullptr;
+}
+
+
+bool CSubstractiveColorModelBase::GetColorantVisualInfo(const QByteArray& colorantId, icmm::ICieLabColor& preview) const
+{
+	if (m_colorantPreviewMap.contains(colorantId)){
+		return preview.Initialize(m_colorantPreviewMap[colorantId], m_previewSpec);
+	}
+
+	return false;
 }
 
 
