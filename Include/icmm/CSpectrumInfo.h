@@ -3,8 +3,6 @@
 
 // ACF includes
 #include <iser/ISerializable.h>
-
-// GmgCore includes
 #include <icmm/ISpectrumInfo.h>
 
 
@@ -46,3 +44,5 @@ private:
 
 
 } // namespace icmm
+
+

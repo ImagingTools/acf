@@ -4,8 +4,6 @@
 // ACF includes
 #include <imath/CSampledFunction.h>
 #include <iser/ISerializable.h>
-
-// GmgCore includes
 #include <icmm/ISpectrum.h>
 #include <icmm/ISpectrumInfo.h>
 
