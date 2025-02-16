@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
 
-message("CMAKE_VERSION " ${CMAKE_VERSION})
-
 if(NOT DEFINED QTDIR)
 	set(QTDIR "$ENV{QTDIR}")
 endif()
@@ -40,4 +38,4 @@ include_directories("${ACFDIR}/Impl")
 
 link_directories(${ACFDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME})
 
-message("Acf link_directories ${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
+message(VERBOSE "Acf link_directories ${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}")

@@ -1,9 +1,9 @@
 #General base configuration should be included from all ACF-based projects
 
-message("PROJECT_NAME " ${PROJECT_NAME})
-message("CMAKE_CURRENT_LIST_DIR " ${CMAKE_CURRENT_LIST_DIR})
-message("PROJECT_SOURCE_DIR " ${PROJECT_SOURCE_DIR})
-message("BINARY_DIR " ${BINARY_DIR})
+message(VERBOSE "PROJECT_NAME " ${PROJECT_NAME})
+message(VERBOSE "CMAKE_CURRENT_LIST_DIR " ${CMAKE_CURRENT_LIST_DIR})
+message(VERBOSE "PROJECT_SOURCE_DIR " ${PROJECT_SOURCE_DIR})
+message(VERBOSE "BINARY_DIR " ${BINARY_DIR})
 
 set(COMPILER_NAME "CLang")
 

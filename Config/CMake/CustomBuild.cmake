@@ -32,7 +32,7 @@ if(NOT DEFINED ACFDIR_BUILD)
 	endif()
 endif()
 
-message("ACFDIR_BUILD ${ACFDIR_BUILD}")
+message(VERBOSE "ACFDIR_BUILD ${ACFDIR_BUILD}")
 
 get_filename_component(ARXC_FILES_NAME "${ARXC_FILES}" NAME_WE)
 
@@ -56,7 +56,7 @@ if(ARXC_CONFIG AND (ARX_ENABLE_GENERATE_DEPENDENCIES_LIST OR NOT DEFINED ARX_ENA
 	set(ARX_DEPS_FILE_PATH "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/ArxDependsList.txt")
 	set(ARX_ERRORS_FILE_PATH "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/ArxDependsList_errors.txt")
 
-	message("Collecting ARX dependences for ${PROJECT_NAME}")
+	message(STAUTS "Collecting ARX dependences for ${PROJECT_NAME}")
 	
 	execute_process(
 		COMMAND
