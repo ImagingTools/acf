@@ -56,7 +56,7 @@ if(ARXC_CONFIG AND (ARX_ENABLE_GENERATE_DEPENDENCIES_LIST OR NOT DEFINED ARX_ENA
 	set(ARX_DEPS_FILE_PATH "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/ArxDependsList.txt")
 	set(ARX_ERRORS_FILE_PATH "${AUX_INCLUDE_DIR}/${PROJECT_NAME}/ArxDependsList_errors.txt")
 
-	message(STAUTS "Collecting ARX dependences for ${PROJECT_NAME}")
+	message(STATUS "Collecting ARX dependences for ${PROJECT_NAME}")
 	
 	execute_process(
 		COMMAND
