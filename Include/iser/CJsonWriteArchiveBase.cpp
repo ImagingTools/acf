@@ -194,17 +194,9 @@ bool CJsonWriteArchiveBase::WriteTag(const CArchiveTag &tag, QString separator)
 	}
 
 	bool isWritePrefix = true;
-	int tagType = tag.GetTagType();
 
-	if (
-				(tagType == iser::CArchiveTag::TT_UNKNOWN
-				|| tagType == iser::CArchiveTag::TT_GROUP
-				|| tagType == iser::CArchiveTag::TT_LEAF
-				|| tagType == iser::CArchiveTag::TT_WEAK)
-				&& !m_tagsStack.isEmpty()){
-		if (m_tagsStack.last().m_isMultiTag){
-			isWritePrefix = false;
-		}
+	if (!m_tagsStack.isEmpty() && m_tagsStack.last().m_isMultiTag){
+		isWritePrefix = false;
 	}
 
 	if (m_tagsStack.isEmpty()){

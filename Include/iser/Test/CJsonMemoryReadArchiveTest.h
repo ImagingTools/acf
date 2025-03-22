@@ -18,6 +18,7 @@ class CJsonMemoryReadArchiveTest: public QObject
 
 private Q_SLOTS:
 	void DoTest();
+	void DoArrayTest();
 
 private:
 	class Model: virtual public iser::ISerializable
@@ -35,6 +36,61 @@ private:
 
 		int value = 42;
 	};
+
+	class NestedArray : public iser::ISerializable
+	{
+	public:
+		NestedArray() = default;
+
+		NestedArray(QList<QList<double>> data)
+			: m_data(data)
+		{
+		}
+
+		bool Serialize(iser::IArchive& archive)
+		{
+			static iser::CArchiveTag outerListTag("Data", "DataDesc", iser::CArchiveTag::TT_MULTIPLE);
+			static iser::CArchiveTag innerListTag("Element", "ElementDesc1", iser::CArchiveTag::TT_MULTIPLE, &outerListTag);
+			static iser::CArchiveTag elementTag("Element1", "ElementDesc2", iser::CArchiveTag::TT_LEAF, &innerListTag);
+
+			bool retVal = true;
+
+			int outerCount = m_data.size();
+			retVal = retVal && archive.BeginMultiTag(outerListTag, innerListTag, outerCount);
+			if (!archive.IsStoring()) {
+				m_data.resize(outerCount);
+			}
+
+			for (qsizetype i = 0; i < m_data.size(); ++i) {
+				int innerCount = m_data[i].size();
+				retVal = retVal && archive.BeginMultiTag(innerListTag, elementTag, innerCount);
+				if (!archive.IsStoring()) {
+					m_data[i].resize(innerCount);
+				}
+
+				for (qsizetype j = 0; j < m_data[i].size(); ++j) {
+					retVal = retVal && archive.BeginTag(elementTag);
+					retVal = retVal && archive.Process(m_data[i][j]);
+					retVal = retVal && archive.EndTag(elementTag);
+				}
+
+				retVal = retVal && archive.EndTag(innerListTag);
+			}
+
+			retVal = retVal && archive.EndTag(outerListTag);
+
+			return retVal;
+		}
+
+		bool operator==(const NestedArray& other) const
+		{
+			return m_data == other.m_data;
+		}
+
+	private:
+		QList<QList<double>> m_data;
+	};
+
 };
 
 

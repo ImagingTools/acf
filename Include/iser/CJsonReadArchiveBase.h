@@ -57,6 +57,8 @@ protected:
 		const QString GetKey();
 		QString GetValue();
 		QJsonObject GetObject();
+		QJsonValue GetJsonValue();
+		QJsonArray GetArray();
 		bool NextElementArray();
 		void SetValue(const QJsonValue value);
 		bool isObject();
