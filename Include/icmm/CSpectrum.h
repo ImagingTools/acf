@@ -26,8 +26,19 @@ public:
 
 	CSpectrum();
 	CSpectrum(const CSpectrum& other);
-	CSpectrum(int startWavelength, int endWavelength, int step, const std::vector<double>& spectrumSamples);
-	CSpectrum(const istd::CIntRange& wavelengthRange, int step, const std::vector<double>& spectrumSamples);
+
+	/**
+		Initialize with given samples
+		First sample is at the start of the range, last sample is at the end
+	*/
+	CSpectrum(int startWavelength, int endWavelength, const std::vector<double>& spectrumSamples);
+	CSpectrum(const istd::CIntRange& wavelengthRange, const std::vector<double>& spectrumSamples);
+
+	/**
+		Zero initialize samples to fill range with given step
+	 */
+	CSpectrum(int startWavelength, int endWavelength, int step);
+	CSpectrum(const istd::CIntRange& wavelengthRange, int step);
 
 	// reimplemented (icmm::ISpectrumInfoProvider)
 	virtual const ISpectrumInfo* GetSpectrumInfo() const override;
@@ -35,6 +46,7 @@ public:
 	// reimplemented (icmm::ISpectrumInfo)
 	virtual istd::CIntRange GetSpectralRange() const override;
 	virtual int GetStep() const override;
+	virtual int GetSamplesCount() const override;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive) override;
@@ -46,8 +58,6 @@ public:
 	virtual IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
-private:
-	int m_step;
 };
 
 

@@ -1,6 +1,9 @@
 #include <icmm/CSpectrum.h>
 
 
+// Qt includes
+#include <QtCore/QDebug>
+
 // ACF includes
 #include <iser/CArchiveTag.h>
 #include <iser/CPrimitiveTypesSerializer.h>
@@ -20,37 +23,49 @@ CSpectrum::CSpectrum()
 
 
 CSpectrum::CSpectrum(const CSpectrum& other)
-	:CSampledFunction(other),
-	m_step(0)
+	:CSampledFunction(other)
 {
-	SetLogicalRange(other.GetLogicalRange(0));
 }
 
 
-CSpectrum::CSpectrum(int startWavelength, int endWavelength, int step, const std::vector<double>& spectrumSamples)
+CSpectrum::CSpectrum(int startWavelength, int endWavelength, const std::vector<double>& spectrumSamples)
+	:CSpectrum(istd::CIntRange(startWavelength, endWavelength), spectrumSamples)
+{
+}
+
+
+CSpectrum::CSpectrum(const istd::CIntRange& wavelengthRange, const std::vector<double>& spectrumSamples)
 	:CSampledFunction(int(spectrumSamples.size()))
 {
+	if (wavelengthRange.GetLength() % GetStep() != 0) {
+		qWarning() << "wavelengthRange" << wavelengthRange.GetLength() << "can not be sampled with" << spectrumSamples.size() << "samples";
+		return;
+	}
+
 	int count = int(spectrumSamples.size());
 	for (int i = 0; i < count; i++){
 		SetSampleValue(i, spectrumSamples[i]);
 	}
 
-	SetLogicalRange(istd::CRange(startWavelength, endWavelength));
-	m_step = step;
-
-	SetLogicalRange(istd::CRange(startWavelength, endWavelength));
+	SetLogicalRange(istd::CRange(wavelengthRange.GetMinValue(), wavelengthRange.GetMaxValue()));
 }
 
 
-CSpectrum::CSpectrum(const istd::CIntRange& wavelengthRange, int step, const std::vector<double>& spectrumSamples)
-	: CSampledFunction(int(spectrumSamples.size()))
+CSpectrum::CSpectrum(int startWavelength, int endWavelength, int step)
+	:CSpectrum(istd::CIntRange(startWavelength, endWavelength), step)
 {
-	int count = int(spectrumSamples.size());
-	for (int i = 0; i < count; i++){
-		SetSampleValue(i, spectrumSamples[i]);
+}
+
+
+CSpectrum::CSpectrum(const istd::CIntRange& wavelengthRange, int step)
+	:CSampledFunction()
+{
+	if (wavelengthRange.GetLength() % step != 0) {
+		qWarning() << "wavelengthRange" << wavelengthRange.GetLength() << "is incompatible with step" << step;
+		return;
 	}
 
-	m_step = step;
+	static_cast<BaseClass&>(*this) = CSampledFunction(wavelengthRange.GetLength() / step + 1);
 
 	SetLogicalRange(istd::CRange(wavelengthRange.GetMinValue(), wavelengthRange.GetMaxValue()));
 }
@@ -76,7 +91,13 @@ istd::CIntRange CSpectrum::GetSpectralRange() const
 
 int CSpectrum::GetStep() const
 {
-	return m_step;
+	return int(GetSamplingStep());
+}
+
+
+int CSpectrum::GetSamplesCount() const
+{
+	return GetTotalSamplesCount();
 }
 
 
@@ -123,11 +144,6 @@ bool CSpectrum::Serialize(iser::IArchive& archive)
 	}
 	retVal = retVal && archive.EndTag(logicalRangeTag);
 
-	static iser::CArchiveTag spectrumInfoTag("Step", "Step in nm between spectral values", iser::CArchiveTag::TT_LEAF);
-	retVal = retVal && archive.BeginTag(spectrumInfoTag);
-	retVal = retVal && archive.Process(m_step);
-	retVal = retVal && archive.EndTag(spectrumInfoTag);
-
 	return retVal;
 }
 
@@ -148,7 +164,6 @@ bool CSpectrum::CopyFrom(const IChangeable& object, CompatibilityMode /*mode*/)
 		istd::CChangeNotifier notifier(this);
 
 		bool retVal = BaseClass::CopyFrom(*objectPtr);
-		m_step = objectPtr->m_step;
 
 		return retVal;
 	}
@@ -163,7 +178,6 @@ bool CSpectrum::IsEqual(const IChangeable& object) const
 
 	if (objectPtr != nullptr){
 		bool retVal = BaseClass::IsEqual(*objectPtr);
-		retVal = retVal && (m_step == objectPtr->m_step);
 
 		return retVal;
 	}
@@ -189,8 +203,6 @@ bool CSpectrum::ResetData(CompatibilityMode /*mode*/)
 	istd::CChangeNotifier notifier(this);
 
 	BaseClass::ResetData();
-
-	m_step = 0;
 
 	return true;
 }

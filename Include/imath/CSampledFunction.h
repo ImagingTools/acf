@@ -31,6 +31,8 @@ public:
 	double GetSampleValue(int index) const;
 	void SetSampleValue(int index, double value);
 	void SetLogicalRange(const istd::CRange& logicalRange);
+	double GetSamplingStep() const;
+	double GetSampleCoordinate(int index) const;
 	
 	// reimplemented (imath::ISampledFunction)
 	virtual bool CreateFunction(double* dataPtr, const ArgumentType& sizes) override;
@@ -79,6 +81,26 @@ inline void CSampledFunction::SetSampleValue(int index, double value)
 inline void CSampledFunction::SetLogicalRange(const istd::CRange& logicalRange)
 {
 	m_logicalRange = logicalRange;
+}
+
+
+inline double CSampledFunction::GetSamplingStep() const
+{
+	if (m_samplesContainer.size() >= 2){
+		return m_logicalRange.GetLength() / (m_samplesContainer.size() - 1);
+	}
+
+	return 0;
+}
+
+
+inline double CSampledFunction::GetSampleCoordinate(int index) const
+{
+	Q_ASSERT(m_samplesContainer.size() > 0);
+	Q_ASSERT(0 <= index);
+	Q_ASSERT(index < m_samplesContainer.size());
+
+	return m_logicalRange.GetValueFromAlpha(double(index) / double(m_samplesContainer.size()));
 }
 
 

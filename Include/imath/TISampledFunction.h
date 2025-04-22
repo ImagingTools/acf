@@ -94,7 +94,14 @@ inline int TISampledFunction<ArgumentDimensions, ResultDimensions>::GetResultDim
 
 // standard templatization
 
-typedef TISampledFunction<1, 1> ISampledFunction;
+class ISampledFunction : public TISampledFunction<1, 1>
+{
+public:
+	double operator[](int index) const{
+		return GetSampleAt(istd::TIndex<1>(index));
+	}
+};
+
 typedef TISampledFunction<2, 1> ISampledFunction2d;
 
 

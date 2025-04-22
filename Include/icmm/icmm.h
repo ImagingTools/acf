@@ -70,7 +70,11 @@ enum class ObserverType
 	TenDegree
 };
 
-enum class DensityFileType
+
+/**
+	Density filter type as defined by CxF standard
+ */
+enum class DensityFilterType
 {
 	Visual,
 	Cyan,
@@ -97,8 +101,26 @@ enum class SpectrumType
 };
 
 
+/**
+	Density status type as defined by CxF standard
+*/
 enum class DensityStatusType
 { 
+	A,
+	E,
+	I,
+	M,
+	T,
+	SpectralX,
+	Spectral,
+	HiFi,
+	Hex,
+	Txp,
+	Ex,
+	DIN,
+	DIN_NB,
+	PD,
+	APD
 };
 
 

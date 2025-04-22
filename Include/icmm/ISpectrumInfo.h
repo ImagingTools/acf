@@ -26,6 +26,11 @@ public:
 		We assume that we have regular sampling grid.
 	*/
 	virtual int GetStep() const = 0;
+
+	/**
+		Return number of samples
+	 */
+	virtual int GetSamplesCount() const = 0;
 };
 
 

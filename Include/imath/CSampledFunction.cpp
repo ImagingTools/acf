@@ -17,7 +17,7 @@ CSampledFunction::CSampledFunction()
 
 CSampledFunction::CSampledFunction(const CSampledFunction& function)
 	:m_samplesContainer(function.m_samplesContainer),
-	m_logicalRange(function.GetLogicalRange(0))
+	m_logicalRange(function.m_logicalRange)
 {
 }
 

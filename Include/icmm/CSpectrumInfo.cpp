@@ -1,4 +1,4 @@
-#include "CSpectrumInfo.h"
+#include <icmm/CSpectrumInfo.h>
 
 
 // ACF includes
@@ -21,6 +21,10 @@ CSpectrumInfo::CSpectrumInfo()
 
 bool CSpectrumInfo::SetRange(const istd::CIntRange& range)
 {
+	if (m_step != 0 && range.GetLength() % m_step != 0){
+		return false;
+	}
+
 	if (m_range != range){
 		istd::CChangeNotifier notifier(this);
 
@@ -33,6 +37,10 @@ bool CSpectrumInfo::SetRange(const istd::CIntRange& range)
 
 bool CSpectrumInfo::SetStep(int step)
 {
+	if (m_range.GetLength() % step != 0){
+		return false;
+	}
+
 	if (m_step != step){
 		istd::CChangeNotifier notifier(this);
 
@@ -63,6 +71,15 @@ istd::CIntRange CSpectrumInfo::GetSpectralRange() const
 int CSpectrumInfo::GetStep() const
 {
 	return m_step;
+}
+
+int CSpectrumInfo::GetSamplesCount() const
+{
+	if (m_step == 0){ 
+		return 0; 
+	}
+	
+	return m_range.GetLength() / m_step + 1;
 }
 
 
