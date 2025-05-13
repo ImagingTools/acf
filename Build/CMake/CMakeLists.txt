@@ -84,6 +84,8 @@ add_dependencies(ComposedGuiTest Acf)
 endif()
 
 if (BUILD_TESTING)
+	add_subdirectory("${INCLUDE_DIR}/ibase/Test/CMake" "${AUX_INCLUDE_DIR}/ibase/Test")
+	add_dependencies(ibaseTest ibase)
 	add_subdirectory("${INCLUDE_DIR}/iprm/Test/CMake" "${AUX_INCLUDE_DIR}/iprm/Test")
 	add_dependencies(iprmTest iprm)
 	add_subdirectory("${INCLUDE_DIR}/iser/Test/CMake" "${AUX_INCLUDE_DIR}/iser/Test")
