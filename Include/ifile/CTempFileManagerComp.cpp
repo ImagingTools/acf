@@ -5,6 +5,7 @@
 #include <QtCore/QUuid>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
+#include <QtCore/QMutexLocker>
 
 // ACF includes
 #include <istd/CSystem.h>
@@ -20,6 +21,8 @@ namespace ifile
 
 QByteArray CTempFileManagerComp::BeginSession(const QString& subPath, const QByteArray& proposedSessionId)
 {
+	QMutexLocker locker(&m_mutex);
+
 	for (		SessionMap::ConstIterator iter = m_sessionsMap.constBegin();
 				iter != m_sessionsMap.constEnd();
 				++iter){
@@ -83,6 +86,8 @@ QByteArray CTempFileManagerComp::AddFileItem(
 		return QByteArray();
 	}
 
+	QMutexLocker locker(&m_mutex);
+
 	if (m_sessionsMap.contains(sessionId)){
 		Session& session = m_sessionsMap[sessionId];
 
@@ -112,6 +117,8 @@ QByteArray CTempFileManagerComp::AddFileItem(
 
 QString CTempFileManagerComp::GetPath(const QByteArray& sessionId, const QByteArray& id) const
 {
+	QMutexLocker locker(&m_mutex);
+
 	if (m_sessionsMap.contains(sessionId)){
 		const Session& session = m_sessionsMap[sessionId];
 
@@ -130,6 +137,8 @@ QString CTempFileManagerComp::GetPath(const QByteArray& sessionId, const QByteAr
 
 bool CTempFileManagerComp::RemoveFileItem(const QByteArray& sessionId, const QByteArray& id)
 {
+	QMutexLocker locker(&m_mutex);
+
 	if (m_sessionsMap.contains(sessionId)){
 		const Session& session = m_sessionsMap[sessionId];
 
@@ -148,6 +157,8 @@ bool CTempFileManagerComp::RemoveFileItem(const QByteArray& sessionId, const QBy
 
 void CTempFileManagerComp::FinishSession(const QByteArray& sessionId)
 {
+	QMutexLocker locker(&m_mutex);
+
 	if (m_sessionsMap.contains(sessionId)){
 		istd::CSystem::RemoveDirectory(m_sessionsMap[sessionId].basePath);
 
@@ -158,6 +169,8 @@ void CTempFileManagerComp::FinishSession(const QByteArray& sessionId)
 
 void CTempFileManagerComp::ResetAllSessions()
 {
+	QMutexLocker locker(&m_mutex);
+
 	for (		SessionMap::ConstIterator iter = m_sessionsMap.constBegin();
 				iter != m_sessionsMap.constEnd();
 				++iter){
