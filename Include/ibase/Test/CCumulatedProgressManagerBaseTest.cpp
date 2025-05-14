@@ -18,7 +18,7 @@ void CCumulatedProgressManagerBaseTest::DoOverflowTest1()
 
 	double cumulatedProgress = progress.GetCumulatedProgress();
 
-	//QVERIFY(cumulatedProgress < 1 || qFuzzyCompare(cumulatedProgress, 1.0));
+	QVERIFY(qFuzzyCompare(cumulatedProgress, 1.5));
 }
 
 
