@@ -57,9 +57,13 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	m_isViewMaximized(false),
 	m_uiResourcesManager(*this)
 {
+	setFocusPolicy(Qt::WheelFocus);
+
 	m_viewWidget = new QWidget(this);
+	m_viewWidget->setFocusPolicy(Qt::WheelFocus);
 
 	m_viewPtr = new iview::CViewport(this, m_viewWidget);
+	m_viewPtr->setFocusPolicy(Qt::WheelFocus);
 
 	m_mainLayoutPtr = new QVBoxLayout(m_viewWidget);
 	m_centerLayoutPtr = new QGridLayout(m_viewWidget);
@@ -85,10 +89,9 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 
 	m_viewPtr->setSizePolicy(expandingPolicy);
 
-	//	languageChange();
-	resize(QSize(604, 480).expandedTo(minimumSizeHint()));
+	resize(QSize(640, 480).expandedTo(minimumSizeHint()));
 
-	UpdateEditModeButtons();
+	UpdateEditModeButtons(m_viewPtr->GetEditMode());
 	UpdateButtonsState();
 	UpdateComponentsPosition();
 	UpdateCommands();
@@ -103,6 +106,12 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	vLayout->setContentsMargins(0,0,0,0);
 	m_viewWidget->setParent(this);
 	vLayout->addWidget(m_viewWidget);
+}
+
+
+void CConsoleGui::SetExtraEditModeButtons(iview::IEditModeButtons* otherModeButtonsPtr)
+{
+	m_otherModeButtonsPtr = otherModeButtonsPtr;
 }
 
 
@@ -297,12 +306,14 @@ void CConsoleGui::OnActivateDistanceMeasureTool(bool state)
 	UpdateButtonsState();
 }
 
+
 void CConsoleGui::OnActivatePointMeasureTool(bool state)
 {
 	SetPointMeasureToolActive(state);
 
 	UpdateButtonsState();
 }
+
 
 void CConsoleGui::OnShowGridInMm(bool state)
 {
@@ -454,8 +465,8 @@ void CConsoleGui::UpdateScrollbarsValues()
 			m_verticalScrollbarPtr->setPageStep(1);
 		}
 
-		//Set scrollbar visibility in full screen mode
-		if(IsFullScreenMode()){
+		// Set scrollbar visibility in full screen mode
+		if (IsFullScreenMode()){
 			m_horizontalScrollbarPtr->setVisible(m_horizontalScrollbarPtr->isEnabled());
 			m_verticalScrollbarPtr->setVisible(m_verticalScrollbarPtr->isEnabled());
 		}
@@ -463,11 +474,80 @@ void CConsoleGui::UpdateScrollbarsValues()
 }
 
 
+bool CConsoleGui::OnKeyPressed(int key, Qt::KeyboardModifiers modifiers)
+{
+	// exit full screen on escape
+	if (key == Qt::Key_Escape) {
+		if (IsFullScreenMode()) {
+			SetFullScreenMode(false);
+
+			return true;
+		}
+	}
+
+	// move shape or view
+	if (key == Qt::Key_Left || key == Qt::Key_Right ||
+		key == Qt::Key_Up || key == Qt::Key_Down)
+	{
+		int xdiff = 0, ydiff = 0;
+		
+		if (key == Qt::Key_Left) {
+			xdiff = -20;
+		}
+		else if (key == Qt::Key_Right) {
+			xdiff = 20;
+		}
+		else if (key == Qt::Key_Up) {
+			ydiff = -20;
+		}
+		else if (key == Qt::Key_Down) {
+			ydiff = 20;
+		}
+
+		int selectedShapesCount = GetView().GetSelectedShapesCount();
+		if (selectedShapesCount) {
+			// move shapes
+			int layerIndex = GetView().GetActiveLayerIndex();
+			iview::ISelectableLayer& layer = dynamic_cast<iview::ISelectableLayer&> (GetViewRef().GetLayer(layerIndex));
+			bool consumed = layer.OnKeyPress(key, modifiers);
+			if (consumed) {
+				return true;
+			}
+		}
+		
+		if (m_viewPtr) {
+			// move canvas
+			return m_viewPtr->MoveViewBy(xdiff, ydiff);
+		}
+	}
+
+	return false;
+}
+
+
+// events
+
 bool CConsoleGui::OnWheelEvent(QWheelEvent* eventPtr)
 {
 	if ((m_viewPtr == NULL) || IsZoomToFit()){
 		return true;
 	}
+
+	// QVIV-I-4: check for horizontal scroll (by Control key)
+
+	if (eventPtr->modifiers() & Qt::ControlModifier) {
+		m_viewPtr->MoveViewBy(-eventPtr->angleDelta().y() / 2, 0);
+		return true;
+	}
+
+	// QVIV-I-4: check for vertical scroll (by Shift key)
+
+	if (eventPtr->modifiers() & Qt::ShiftModifier) {
+		m_viewPtr->MoveViewBy(0, -eventPtr->angleDelta().y() / 2);
+		return true;
+	}
+
+	// else zoon in/out
 
 	static const double mouseWheelZoomStep = 0.25;
 	static const double minZoomScale = 0.01;
@@ -516,33 +596,27 @@ bool CConsoleGui::OnMouseDoubleClickEvent(QEvent* /*eventPtr*/)
 
 bool CConsoleGui::OnKeyPressEvent(QKeyEvent* eventPtr)
 {
-	switch(eventPtr->key()){
-
-	case Qt::Key_Escape:
-		if (IsFullScreenMode()){
-			SetFullScreenMode(false);
-
-			return true;
-		}
-		break;
-	}
-
-	return false;
+	// call handler
+	return OnKeyPressed(eventPtr->key(), eventPtr->modifiers());
 }
 
 
-// reimplemented (iview::CConsoleBase)
+// reimplemented (iview::IEditModeButtons)
 
-void CConsoleGui::UpdateEditModeButtons()
+void CConsoleGui::UpdateEditModeButtons(int mode)
 {
-	int mode = m_viewPtr->GetEditMode();
-
 	m_pointsSelectCommand.setChecked(mode == iview::ISelectable::EM_NONE);
 	m_pointsMoveCommand.setChecked(mode == iview::ISelectable::EM_MOVE);
 	m_pointsAddCommand.setChecked(mode == iview::ISelectable::EM_ADD);
 	m_pointsSubCommand.setChecked(mode == iview::ISelectable::EM_REMOVE);
+
+	if (m_otherModeButtonsPtr){
+		m_otherModeButtonsPtr->UpdateEditModeButtons(mode);
+	}
 }
 
+
+// reimplemented (iview::CConsoleBase)
 
 void CConsoleGui::UpdateButtonsState()
 {
@@ -701,7 +775,11 @@ void CConsoleGui::UpdateCommands()
 }
 
 
-bool CConsoleGui::OnSelectChange(const iview::IShapeView& view, const istd::CIndex2d& position, const iview::IInteractiveShape& shape, bool state)
+bool CConsoleGui::OnSelectChange(
+			const iview::IShapeView& view, 
+			const istd::CIndex2d& position, 
+			const iview::IInteractiveShape& shape, 
+			bool state)
 {
 	Q_EMIT selectionChanged(view, position, shape, state);
 
@@ -764,9 +842,9 @@ bool CConsoleGui::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 	{
 		if (IsFullScreenMode()){
 			eventPtr->accept();
-	
-			QTimer::singleShot(0, this, SLOT(OnStopFullScreen()));
-			
+
+			emit OnCloseSignal();
+
 			return true;
 		}
 		break;
