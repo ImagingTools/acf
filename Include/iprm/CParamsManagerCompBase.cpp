@@ -178,7 +178,7 @@ IParamsSet* CParamsManagerCompBase::GetParamsSet(int index) const
 
 IParamsSet* CParamsManagerCompBase::CreateParameterSet(int typeIndex, int index) const
 {
-	IParamsSet* sourceParamsSetPtr = NULL;;
+	IParamsSet* sourceParamsSetPtr = NULL;
 	if ((index >= 0)){
 		sourceParamsSetPtr = GetParamsSet(index);
 	}

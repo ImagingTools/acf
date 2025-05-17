@@ -40,10 +40,10 @@ public:
 	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
 
 	// reimplemented (istd::IHierarchical)
-	virtual int GetHierarchicalFlags() const;
-	virtual int GetChildsCount() const;
-	virtual istd::IPolymorphic* GetChild(int index) const;
-	virtual istd::IPolymorphic* GetParent() const;
+	virtual int GetHierarchicalFlags() const override;
+	virtual int GetChildsCount() const override;
+	virtual istd::IPolymorphic* GetChild(int index) const override;
+	virtual istd::IPolymorphic* GetParent() const override;
 
 	// reimplemented (istd::IChangeable)
 	virtual int GetSupportedOperations() const override;
