@@ -24,7 +24,7 @@ CLabelShape::CLabelShape(TextAlign align, const istd::CIndex2d& offset)
 	m_drawOffset(offset)
 {
 	m_isPositionVisible = true;
-	m_isBackgroundTransparent = true;
+	m_isBackgroundTransparent = false;
 	m_isEditableOffset = true;
 	m_editMode = EM_NONE;
 	m_isAlignFixed = false;
@@ -101,6 +101,7 @@ bool CLabelShape::OnMouseMove(istd::CIndex2d position)
 				Invalidate();
 			}
 			break;
+
 		default:
 			return true;
 		}

@@ -18,6 +18,9 @@ namespace iview
 {
 
 
+class IViewEventObserver;
+
+
 /**
 	Common interface for a general shape view implementations.
 */
@@ -29,6 +32,12 @@ public:
 	typedef IShapeObserver BaseClass;
 
 	/**
+		Add/remove external event observers.
+	*/
+	virtual void AddViewEventObserver(iview::IViewEventObserver* listenerPtr) = 0;
+	virtual void RemoveViewEventObserver(iview::IViewEventObserver* listenerPtr) = 0;
+
+	/**
 		Set area used for fitting of the view contents.
 	*/
 	virtual void SetFitArea(const i2d::CRectangle& area) = 0;
@@ -38,17 +47,17 @@ public:
 		\sa	GetTransform()
 	*/
 	virtual void SetTransform(const i2d::CAffine2d& transform) = 0;
-	
-	/**
-		Updates all invalidates shapes.
-	*/
-	virtual void Update() = 0;
-	
+
 	/**
 		Changes the edit mode.
 	*/
 	virtual void SetEditMode(int mode) = 0;
 	
+	/**
+		Changes the display mode.
+	*/
+	virtual void SetDisplayMode(int mode) = 0;
+
 	/**
 		Check if is draggable mode.
 		If this function return true, user can move a view by dragging.
@@ -59,6 +68,11 @@ public:
 		Check, if it is possible to select more than one shape.
 	*/
 	virtual bool IsMultiselectable() const = 0;
+
+	/**
+		Updates all invalidates shapes.
+	*/
+	virtual void Update() = 0;
 
 	/**	
 		Update mouse pointer.

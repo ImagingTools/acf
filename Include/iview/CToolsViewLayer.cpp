@@ -151,6 +151,14 @@ int CToolsViewLayer::GetEditMode() const
 	return viewPtr->GetEditMode();
 }
 
+int CToolsViewLayer::GetDisplayMode() const
+{
+	const IShapeView* viewPtr = GetViewPtr();
+	Q_ASSERT(viewPtr != NULL);
+
+	return viewPtr->GetDisplayMode();
+}
+
 
 void CToolsViewLayer::OnShapeFocused(IInteractiveShape* shapePtr)
 {

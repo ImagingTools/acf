@@ -22,7 +22,8 @@ namespace iview
 // public methods
 
 CImageShape::CImageShape(const icmm::IColorTransformation* colorTransformationPtr)
-:	m_colorTransformationPtr(colorTransformationPtr)
+	:m_colorTransformationPtr(colorTransformationPtr),
+	m_ignoreTransformation(false)
 {
 }
 
@@ -67,6 +68,7 @@ void CImageShape::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::C
 {
 	const iimg::IQImageProvider* providerPtr = dynamic_cast<const iimg::IQImageProvider*>(modelPtr);
 	istd::TDelPtr<iimg::CBitmap> qtBitmapPtr;
+	m_ignoreTransformation = false;
 
 	if (providerPtr == NULL){
 		qtBitmapPtr.SetPtr(new iimg::CBitmap);
@@ -82,6 +84,11 @@ void CImageShape::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::C
 
 	if (m_colorTransformationPtr != NULL){
 		QImage image = providerPtr->GetQImage().copy();
+
+		if (!image.text("Error").isEmpty()) {
+			m_ignoreTransformation = true;
+		}
+
 		SetLookupTableToImage(image, *m_colorTransformationPtr);
 		if (!image.isNull()){
 			m_pixmap = QPixmap::fromImage(image, Qt::AutoColor);
@@ -92,6 +99,11 @@ void CImageShape::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::C
 	}
 	else{
 		const QImage& image = providerPtr->GetQImage();
+
+		if (!image.text("Error").isEmpty()) {
+			m_ignoreTransformation = true;
+		}
+
 		if (!image.isNull()){
 			m_pixmap = QPixmap::fromImage(image, Qt::AutoColor);
 		}
@@ -110,25 +122,27 @@ i2d::CRect CImageShape::CalcBoundingBox() const
 {
 	i2d::CRect boundingBox = i2d::CRect::GetEmpty();
 
-	const imod::IModel* modelPtr = GetObservedModel();
-	if (modelPtr != NULL){
-		const iimg::IBitmap& model = *dynamic_cast<const iimg::IBitmap*>(modelPtr);
-		Q_ASSERT(&model != NULL);
+	ibase::CSize size(m_pixmap.width(), m_pixmap.height());
 
-		ibase::CSize size = model.GetImageSize();
+	istd::CIndex2d corners[4];
 
-		istd::CIndex2d corners[4];
-
+	if (m_ignoreTransformation) {
+		corners[0] = i2d::CVector2d(m_pixmapOffset.x(), m_pixmapOffset.y()).ToIndex2d();
+		corners[1] = i2d::CVector2d(size.GetX() + m_pixmapOffset.x(), m_pixmapOffset.y()).ToIndex2d();
+		corners[2] = i2d::CVector2d(m_pixmapOffset.x(), size.GetY() + m_pixmapOffset.y()).ToIndex2d();
+		corners[3] = i2d::CVector2d(size.GetX() + m_pixmapOffset.x(), size.GetY() + m_pixmapOffset.y()).ToIndex2d();
+	}
+	else {
 		corners[0] = GetScreenPosition(i2d::CVector2d(m_pixmapOffset.x(), m_pixmapOffset.y())).ToIndex2d();
 		corners[1] = GetScreenPosition(i2d::CVector2d(size.GetX() + m_pixmapOffset.x(), m_pixmapOffset.y())).ToIndex2d();
 		corners[2] = GetScreenPosition(i2d::CVector2d(m_pixmapOffset.x(), size.GetY() + m_pixmapOffset.y())).ToIndex2d();
 		corners[3] = GetScreenPosition(i2d::CVector2d(size.GetX() + m_pixmapOffset.x(), size.GetY() + m_pixmapOffset.y())).ToIndex2d();
-
-		boundingBox = i2d::CRect(corners[0], corners[0]);
-		boundingBox.Union(corners[1]);
-		boundingBox.Union(corners[2]);
-		boundingBox.Union(corners[3]);
 	}
+
+	boundingBox = i2d::CRect(corners[0], corners[0]);
+	boundingBox.Union(corners[1]);
+	boundingBox.Union(corners[2]);
+	boundingBox.Union(corners[3]);
 
 	return boundingBox;
 }
@@ -193,6 +207,30 @@ QString CImageShape::GetShapeDescriptionAt(istd::CIndex2d position) const
 			case iimg::IBitmap::PF_GRAY:
 				pixelValueInfo = QObject::tr("Gray value %1% (%2)").arg(int(pixelValue[0] * 100)).arg(int(pixelValue[0] * 255));
 				break;
+
+			case iimg::IBitmap::PF_RGB24:
+			{
+				icmm::CRgbToHsvTranformation rgbToHsvTransformation;
+				icmm::CRgb rgb(pixelValue[0], pixelValue[1], pixelValue[2]);
+				icmm::CHsv hsv;
+
+				icmm::CVarColor rgbColor(rgb);
+				icmm::CVarColor hsvColor(hsv.GetElementsCount());
+				rgbToHsvTransformation.GetValueAt(rgbColor, hsvColor);
+				hsv = hsvColor;
+
+				pixelValueInfo = QString("[RGB=(%1%,%3%,%5%)=(%2,%4,%6), HSV=(%7,%8,%9)]")
+					.arg(int(rgb.GetElement(icmm::CRgb::CI_RED) * 100))
+					.arg(int(rgb.GetElement(icmm::CRgb::CI_RED) * 255))
+					.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN) * 100))
+					.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN) * 255))
+					.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE) * 100))
+					.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE) * 255))
+					.arg(int(hsv.GetElement(icmm::CHsv::CI_HUE)))
+					.arg(int(hsv.GetElement(icmm::CHsv::CI_SATURATION) * 255))
+					.arg(int(hsv.GetElement(icmm::CHsv::CI_VALUE) * 255));
+			}
+			break;
 
 			case iimg::IBitmap::PF_RGB:
 				{
@@ -282,28 +320,35 @@ void CImageShape::DrawPixmap(
 			const i2d::CRect& bitmapArea,
 			const i2d::CAffine2d& destTransform) const
 {
-	const i2d::CMatrix2d& deform = destTransform.GetDeformMatrix();
-	const i2d::CVector2d& pos = destTransform.GetTranslation();
+	if (m_ignoreTransformation) {
+		i2d::CRect clientRect = GetClientRect();
+		painter.drawPixmap(clientRect.GetCenter().GetX() - m_pixmap.width()/2, clientRect.GetCenter().GetY() - m_pixmap.height() / 2, m_pixmap);
+	}
+	else
+	{
+		const i2d::CMatrix2d& deform = destTransform.GetDeformMatrix();
+		const i2d::CVector2d& pos = destTransform.GetTranslation();
 
-	QTransform transform(	deform.GetAt(0, 0) / double(bitmapArea.GetWidth()),
-					deform.GetAt(1, 0) / double(bitmapArea.GetWidth()),
-					deform.GetAt(0, 1) / double(bitmapArea.GetHeight()),
-					deform.GetAt(1, 1) / double(bitmapArea.GetHeight()),
-					pos.GetX(),
-					pos.GetY());
+		QTransform transform(deform.GetAt(0, 0) / double(bitmapArea.GetWidth()),
+			deform.GetAt(1, 0) / double(bitmapArea.GetWidth()),
+			deform.GetAt(0, 1) / double(bitmapArea.GetHeight()),
+			deform.GetAt(1, 1) / double(bitmapArea.GetHeight()),
+			pos.GetX(),
+			pos.GetY());
 
-	painter.setTransform(transform);
+		painter.setTransform(transform);
 
-	painter.drawPixmap(
-				0,
-				0,
-				pixmap,
-				bitmapArea.GetLeft(),
-				bitmapArea.GetTop(),
-				bitmapArea.GetRight(),
-				bitmapArea.GetBottom());
+		painter.drawPixmap(
+			0,
+			0,
+			pixmap,
+			bitmapArea.GetLeft(),
+			bitmapArea.GetTop(),
+			bitmapArea.GetRight(),
+			bitmapArea.GetBottom());
 
-	painter.resetTransform();
+		painter.resetTransform();
+	}
 }
 
 

@@ -1,5 +1,4 @@
-#ifndef iview_CConsoleWidget_included
-#define iview_CConsoleWidget_included
+#pragma once
 
 
 // Qt includes
@@ -14,9 +13,7 @@
 
 // ACF includes
 #include <iimg/IBitmap.h>
-
 #include <imath/CFixedPointManip.h>
-
 #include <iview/IViewEventObserver.h>
 #include <iview/CConsoleBase.h>
 #include <iview/CCalibratedViewBase.h>
@@ -45,13 +42,16 @@ public:
 
 	void UpdateFitTransform();
 
-	virtual void SetEditMode(int mode) override;
+	bool MoveViewBy(int dx, int dy);
 
 	void SetShowInfoText(bool on);
+
+	virtual void SetEditMode(int mode);
 
 	// reimplemented (iview::IShapeView)
 	virtual void SetFitArea(const i2d::CRectangle& area) override;
 	virtual i2d::CRect GetClientRect() const override;
+	virtual void Update() override;
 
 	// reimplemented (iview::IViewEventObserver)
 	virtual bool OnSelectChange(
@@ -82,13 +82,14 @@ Q_SIGNALS:
 	void ShapesChanged();
 
 protected:
-	virtual void SetBackgroundBufferValid(bool state = true) override;
-	virtual void OnResize() override;
-	virtual bool CanBeMoved() const override;
+	virtual void SetBackgroundBufferValid(bool state = true);
+	virtual void OnResize();
+	virtual bool CanBeMoved() const;
 
 	// reimplemented (QWidget)
 	virtual void paintEvent(QPaintEvent* event) override;
 	virtual void resizeEvent (QResizeEvent* event) override;
+	virtual void keyPressEvent(QKeyEvent* event) override;
 	virtual void mousePressEvent(QMouseEvent* event) override;
 	virtual void mouseReleaseEvent(QMouseEvent* event) override;
 	virtual void mouseMoveEvent(QMouseEvent* event) override;
@@ -119,8 +120,5 @@ private:
 
 
 } // namespace iview
-
-
-#endif // !iview_CConsoleWidget_included
 
 

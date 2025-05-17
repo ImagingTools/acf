@@ -125,7 +125,7 @@ void CRectangleShape::Draw(QPainter& drawContext) const
 
 		drawContext.drawPath(painterPatch);
 
-		if (IsSelected()){
+		if (IsSelected() && IsEditablePosition()){
 			colorSchema.DrawTicker(drawContext, m_corners[0].ToIndex2d(), IColorSchema::TT_MOVE);
 			colorSchema.DrawTicker(drawContext, m_corners[1].ToIndex2d(), IColorSchema::TT_MOVE);
 			colorSchema.DrawTicker(drawContext, m_corners[2].ToIndex2d(), IColorSchema::TT_MOVE);
@@ -153,7 +153,11 @@ bool CRectangleShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton but
 {
 	Q_ASSERT(IsDisplayConnected());
 
-	BaseClass::OnMouseButton(position, buttonType, downFlag);
+	bool done = BaseClass::OnMouseButton(position, buttonType, downFlag);
+
+	if (!IsEditablePosition()){
+		return done;
+	}
 
 	const i2d::CRectangle* framePtr = dynamic_cast<const i2d::CRectangle*>(GetObservedModel());
 	if (framePtr != NULL){

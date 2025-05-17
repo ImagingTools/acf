@@ -15,6 +15,7 @@
 #include <i2d/CRectangle.h>
 
 #include <iview/IViewEventObserver.h>
+#include <iview/IEditModeButtons.h>
 #include <iview/CScreenTransform.h>
 
 
@@ -25,7 +26,7 @@ namespace iview
 class CViewport;
 
 
-class CConsoleBase: public QWidget
+class CConsoleBase: public QWidget, virtual public IEditModeButtons
 {
 public:
 	/**
@@ -145,14 +146,6 @@ public:
 	virtual CViewport& GetViewRef() = 0;
 
 	/**
-		Update state of edit mode buttons.
-		Edit mode buttons controls the mode of interaction with objects.
-		For example for polyline nodes: select, move, insert, remove.
-		\sa iview::ISelectable::EditMode
-	*/
-	virtual void UpdateEditModeButtons() = 0;
-
-	/**
 		Recalculates enabling flags for buttons.
 	*/
 	virtual void UpdateButtonsState() = 0;
@@ -167,7 +160,6 @@ public:
 	*/
 	virtual void UpdateCommands() = 0;
 
-	// abstract methods
 	virtual void UpdateCursorInfo(const QString& infoText) = 0;
 
 protected:

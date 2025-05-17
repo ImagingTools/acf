@@ -11,7 +11,34 @@ namespace iview
 {
 
 
-// helper template for shapes
+// helper template for point shapes
+
+template<class Object, class Shape>
+struct TPointVisualObject : public Shape
+{
+	typedef Shape BaseClass;
+
+	TPointVisualObject(bool editable = false);
+
+	typedef imod::TModelWrap<Object> PositionModel;
+
+	istd::TDelPtr<PositionModel> model;
+};
+
+
+template<class Object, class Shape>
+TPointVisualObject<Object, Shape>::TPointVisualObject(bool editable)
+{
+	model.SetPtr(new PositionModel);
+
+	BaseClass::SetEditablePosition(editable);
+
+	model->AttachObserver(this);
+}
+
+
+
+// helper template for circle shapes
 
 template<class Object, class Shape>
 struct TVisualObject: public Shape

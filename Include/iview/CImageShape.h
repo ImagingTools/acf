@@ -50,8 +50,9 @@ private:
 private:
 	QPixmap m_pixmap;
 	QPoint m_pixmapOffset;
+	bool m_ignoreTransformation = false;
 
-	const icmm::IColorTransformation* m_colorTransformationPtr;
+	const icmm::IColorTransformation* m_colorTransformationPtr = nullptr;
 };
 
 

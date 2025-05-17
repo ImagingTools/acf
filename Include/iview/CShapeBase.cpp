@@ -148,6 +148,18 @@ void CShapeBase::SetDefaultDescription(const QString& description)
 }
 
 
+void CShapeBase::SetToolTip(const QString& toolTip)
+{
+	m_defaultToolTip = toolTip;
+}
+
+
+bool CShapeBase::IsInside(const istd::CIndex2d& screenPosition) const
+{
+	return GetBoundingBox().IsInside(screenPosition);
+}
+
+
 // reimplemented (iview::IVisualizable)
 
 bool CShapeBase::IsVisible() const
@@ -207,6 +219,12 @@ QString CShapeBase::GetShapeDescriptionAt(istd::CIndex2d /*position*/) const
 	}
 
 	return m_defaultDescription;
+}
+
+
+QString CShapeBase::GetToolTipAt(istd::CIndex2d /*position*/) const
+{
+	return m_defaultToolTip;
 }
 
 

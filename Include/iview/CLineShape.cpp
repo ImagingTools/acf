@@ -324,8 +324,14 @@ void CLineShape::SetLogDragPosition(const i2d::CVector2d& position)
 			i2d::CLine2d& line = *dynamic_cast<i2d::CLine2d*>(modelPtr);
 			Q_ASSERT(&line != NULL);
 
-			line.SetPoint1(line.GetPoint1() + position - m_referencePosition);
-			line.SetPoint2(line.GetPoint2() + position - m_referencePosition);
+			if (m_referencePosition.IsNull()) {
+				m_referencePosition = position;
+			}
+
+			i2d::CVector2d delta = position - m_referencePosition;
+
+			line.SetPoint1(line.GetPoint1() + delta);
+			line.SetPoint2(line.GetPoint2() + delta);
 			m_referencePosition = position;
 
 			UpdateModelChanges();

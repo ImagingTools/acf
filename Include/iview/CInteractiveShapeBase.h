@@ -71,6 +71,12 @@ protected:
 	int GetEditMode() const;
 
 	/**
+		Get actual display mode.
+		Note, that display must be connected to use this method.
+	*/
+	int GetDisplayMode() const;
+
+	/**
 		Draw text on a given position.
 	*/
 	void DrawText(QPainter& drawContext, istd::CIndex2d point, const QString& text) const;
@@ -130,11 +136,23 @@ inline int CInteractiveShapeBase::GetEditMode() const
 }
 
 
+inline int CInteractiveShapeBase::GetDisplayMode() const
+{
+	ISelectable* selectablePtr = dynamic_cast<ISelectable*>(GetDisplayPtr());
+	if (selectablePtr != NULL) {
+		return selectablePtr->GetDisplayMode();
+	}
+	else {
+		return ISelectable::EM_NONE;
+	}
+}
+
+
 // reimplemented (iview::CShapeBase)
 
 inline bool CInteractiveShapeBase::IsDisplayChangeImportant(const istd::IChangeable::ChangeSet& changeSet)
 {
-	return BaseClass::IsDisplayChangeImportant(changeSet) || changeSet.Contains(IDisplay::CF_EDIT_MODE);
+	return BaseClass::IsDisplayChangeImportant(changeSet) || changeSet.Contains(IDisplay::CF_EDIT_MODE) || changeSet.Contains(IDisplay::CF_DISPLAY_MODE);
 }
 
 

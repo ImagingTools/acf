@@ -44,6 +44,12 @@ public:
 	virtual void DrawFocusedShape(QPainter& drawContext) = 0;
 
 	/**
+		Called, when key has been pressed.
+		\return	true, if this event was consumed.
+	*/
+	virtual bool OnKeyPress(int key, Qt::KeyboardModifiers modifiers) = 0;
+
+	/**
 		Called, when mouse button was pushed down or up.
 		\return	true, if this event was consumed.
 	*/

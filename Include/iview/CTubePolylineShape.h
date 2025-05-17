@@ -20,30 +20,6 @@ public:
 
 	CTubePolylineShape();
 
-	/**
-		Check if orientation of polyline is visible.
-		Orientation is shown as small arrow at the end of polyline.
-	*/
-	virtual bool IsOrientationVisible() const;
-	
-	/**
-		Set the orientation to be visible or not.
-		@param	state	if true, orientation will be visible.
-	*/
-	virtual void SetOrientationVisible(bool state = true);
-
-	/**
-		Check if in all edit modes is this shape draggable.
-		Normally it is possible to drag this object only in EM_NONE mode.
-	*/
-	virtual bool IsAlwaysMovable() const override;
-
-	/**
-		Set flag if in all edit modes is this shape draggable.
-		\sa IsAlwaysMovable()
-	 */
-	virtual void SetAlwaysMovable(bool state = true) override;
-
 	// reimplemented (iview::CShapeBase)
 	virtual i2d::CRect CalcBoundingBox() const override;
 
@@ -72,42 +48,9 @@ protected:
 		EM_RIGHT
 	};
 
-	bool m_isAlwaysDraggable;
-	bool m_isOrientationVisible;
-
 	int m_editMode;
 	int m_editedNodeIndex;
 };
-
-
-// inline methods
-
-inline bool CTubePolylineShape::IsOrientationVisible() const
-{
-	return m_isOrientationVisible;
-}
-
-
-inline void CTubePolylineShape::SetOrientationVisible(bool state)
-{
-	if (m_isOrientationVisible != state){
-		m_isOrientationVisible = state;
-
-		Invalidate();
-	}
-}
-
-
-inline bool CTubePolylineShape::IsAlwaysMovable() const
-{
-	return m_isAlwaysDraggable;
-}
-
-
-inline void CTubePolylineShape::SetAlwaysMovable(bool state)
-{
-	m_isAlwaysDraggable = state;
-}
 
 
 } // namespace qto

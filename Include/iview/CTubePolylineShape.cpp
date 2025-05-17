@@ -15,8 +15,6 @@ namespace iview
 
 CTubePolylineShape::CTubePolylineShape()
 {
-	m_isOrientationVisible = false;
-	m_isAlwaysDraggable = false;
 	m_editedNodeIndex = -1;
 	m_editMode = EM_NONE;
 }

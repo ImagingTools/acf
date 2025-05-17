@@ -13,7 +13,7 @@ namespace iview
 // public methods
 
 CViewport::CViewport(CConsoleBase* framePtr, QWidget* parent)
-	:BaseClass2(parent),
+	: BaseClass2(parent),
 	m_pixelPositionFormatter(0),
 	m_logicalPositionFormatter(2),
 	m_framePtr(framePtr)
@@ -48,6 +48,9 @@ CConsoleBase* CViewport::GetFramePtr() const
 
 void CViewport::UpdateFitTransform()
 {
+	if (!m_framePtr)
+		return;
+
 	if (m_framePtr->m_isZoomToFit){
 		switch (m_framePtr->m_fitMode){
 			case CConsoleBase::FM_RESET:
@@ -80,13 +83,35 @@ void CViewport::UpdateFitTransform()
 }
 
 
+bool CViewport::MoveViewBy(int dx, int dy)
+{
+	if (!CanBeMoved()){
+		return false;
+	}
+
+	i2d::CRect bbox = GetBoundingBox();
+	i2d::CRect clientRect = GetClientRect();
+	i2d::CRect wholeRect = bbox.GetUnion(clientRect);
+	i2d::CAffine2d transform = GetTransform();
+	i2d::CVector2d position = transform.GetTranslation();
+	if (dx) position.SetX(position.GetX() + dx);
+	if (dy) position.SetY(position.GetY() + dy);
+	transform.SetTranslation(position);
+	SetTransform(transform);
+	Update();
+
+	return true;
+}
+
+
 void CViewport::SetEditMode(int mode)
 {
-	if (mode != GetEditMode()){
+	if (BaseClass::GetEditMode() != mode) {
 		BaseClass::SetEditMode(mode);
-
-		m_framePtr->UpdateEditModeButtons(mode);
 	}
+
+	if (m_framePtr)
+		m_framePtr->UpdateEditModeButtons(GetEditMode());
 }
 
 
@@ -317,6 +342,12 @@ void CViewport::resizeEvent(QResizeEvent* /*eventPtr*/)
 }
 
 
+void CViewport::keyPressEvent(QKeyEvent* eventPtr)
+{
+	Q_ASSERT(eventPtr != NULL);
+}
+
+
 void CViewport::mousePressEvent(QMouseEvent* eventPtr)
 {
 	Q_ASSERT(eventPtr != NULL);
@@ -381,6 +412,15 @@ void CViewport::SetMousePointer(MousePointerMode mode)
 }
 
 
+void CViewport::Update()
+{
+	BaseClass::Update();
+
+	if (m_framePtr)
+		m_framePtr->UpdateEditModeButtons(GetEditMode());
+}
+
+
 void CViewport::UpdateRectArea(const i2d::CRect& rect)
 {
 	QRect qrect(iqt::GetQRect(rect));
@@ -410,22 +450,18 @@ int CViewport::GetMouseKeysState(const QMouseEvent& mouseEvent)
 		retVal |= Qt::LeftButton;
 	}
 
-#if QT_VERSION < 0x060000
-	if ((buttons & Qt::MidButton) != 0){
-		retVal |= Qt::MidButton;
-	}
-#else
 	if ((buttons & Qt::MiddleButton) != 0){
 		retVal |= Qt::MiddleButton;
 	}
-#endif
 
 	if ((buttons & Qt::RightButton) != 0){
 		retVal |= Qt::RightButton;
 	}
+
 	if ((modifiers & Qt::ShiftModifier) != 0){
 		retVal |= Qt::ShiftModifier;
 	}
+
 	if ((modifiers & Qt::ControlModifier) != 0){
 		retVal |= Qt::ControlModifier;
 	}

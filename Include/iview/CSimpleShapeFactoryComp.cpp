@@ -109,6 +109,10 @@ CShapeBase* CSimpleShapeFactoryComp::CreateShapeInstance(const istd::IChangeable
 	const i2d::CTubePolyline* tubePolylinePtr = dynamic_cast<const i2d::CTubePolyline*>(&object);
 	if (tubePolylinePtr != NULL){
 		iview::CTubePolylineShape* objectShapePtr = new iview::CTubePolylineShape();
+		objectShapePtr->SetEditableNodes(*m_useInteractiveShapesAttrPtr);
+		objectShapePtr->SetEditableRotation(*m_useInteractiveShapesAttrPtr);
+		objectShapePtr->SetEditableHeight(*m_useInteractiveShapesAttrPtr);
+		objectShapePtr->SetEditableWidth(*m_useInteractiveShapesAttrPtr);
 
 		return objectShapePtr;
 	}
@@ -116,6 +120,7 @@ CShapeBase* CSimpleShapeFactoryComp::CreateShapeInstance(const istd::IChangeable
 	const i2d::CPolyline* polylinePtr = dynamic_cast<const i2d::CPolyline*>(&object);
 	if (polylinePtr != NULL){
 		iview::CPolylineShape* objectShapePtr = new iview::CPolylineShape();
+		objectShapePtr->SetEditableNodes(*m_useInteractiveShapesAttrPtr);
 		objectShapePtr->SetEditableRotation(*m_useInteractiveShapesAttrPtr);
 		objectShapePtr->SetEditableHeight(*m_useInteractiveShapesAttrPtr);
 		objectShapePtr->SetEditableWidth(*m_useInteractiveShapesAttrPtr);
@@ -126,6 +131,7 @@ CShapeBase* CSimpleShapeFactoryComp::CreateShapeInstance(const istd::IChangeable
 	const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(&object);
 	if (polygonPtr != NULL){
 		iview::CPolygonShape* objectShapePtr = new iview::CPolygonShape();
+		objectShapePtr->SetEditableNodes(*m_useInteractiveShapesAttrPtr);
 		objectShapePtr->SetEditableRotation(*m_useInteractiveShapesAttrPtr);
 		objectShapePtr->SetEditableHeight(*m_useInteractiveShapesAttrPtr);
 		objectShapePtr->SetEditableWidth(*m_useInteractiveShapesAttrPtr);
@@ -144,7 +150,6 @@ CShapeBase* CSimpleShapeFactoryComp::CreateShapeInstance(const istd::IChangeable
 	if (labelPtr != NULL){
 		iview::CLabelShape* objectShapePtr = new iview::CLabelShape();
 		objectShapePtr->SetEditableOffset(*m_useInteractiveShapesAttrPtr);
-		objectShapePtr->SetEditablePosition(*m_useInteractiveShapesAttrPtr);
 
 		return objectShapePtr;
 	}

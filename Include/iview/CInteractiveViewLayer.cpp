@@ -6,6 +6,7 @@
 
 // ACF includes
 #include <iqt/iqt.h>
+#include <imod/CSingleModelObserverBase.h>
 
 #include <iview/IInteractiveShape.h>
 #include <iview/IShapeView.h>
@@ -29,21 +30,6 @@ CInteractiveViewLayer::CInteractiveViewLayer()
 CInteractiveViewLayer::~CInteractiveViewLayer()
 {
 	DisconnectAllShapes();
-}
-
-
-IInteractiveShape* CInteractiveViewLayer::GetFirstActiveShape() const
-{
-	if (!m_activeShapes.isEmpty()){
-		ShapeList::const_iterator iter;
-		for (iter = m_activeShapes.constBegin(); iter != m_activeShapes.constEnd(); ++iter){
-			iview::IInteractiveShape* shapePtr = dynamic_cast<iview::IInteractiveShape*>(iter->shapePtr);
-			if (shapePtr != NULL)
-				return shapePtr;
-		}
-	}
-
-	return NULL;
 }
 
 
@@ -133,6 +119,42 @@ void CInteractiveViewLayer::DrawFocusedShape(QPainter& drawContext)
 }
 
 
+bool CInteractiveViewLayer::OnKeyPress(int key, Qt::KeyboardModifiers modifiers)
+{
+	int xdiff = 0, ydiff = 0;
+
+	if (key == Qt::Key_Left) {
+		xdiff = -1;
+	}
+	else if (key == Qt::Key_Right) {
+		xdiff = 1;
+	}
+	else if (key == Qt::Key_Up) {
+		ydiff = -1;
+	}
+	else if (key == Qt::Key_Down) {
+		ydiff = 1;
+	}
+
+	bool done = false;
+
+	for (auto& it : m_activeShapes) {
+		// check if the shape can be moved
+		if (auto hasModelPtr = dynamic_cast<imod::CSingleModelObserverBase*>(it.shapePtr)) {
+			if (it.shapePtr->IsVisible()) {
+				if (auto objectPtr = dynamic_cast<i2d::IObject2d*>(hasModelPtr->GetObservedModel())) {
+					auto center = objectPtr->GetCenter();
+					objectPtr->MoveCenterTo(center + i2d::CVector2d(xdiff, ydiff));
+					done = true;
+				}
+			}
+		}
+	}
+
+	return done;
+}
+
+
 bool CInteractiveViewLayer::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
 	IShapeView* viewPtr = GetViewPtr();
@@ -211,12 +233,13 @@ bool CInteractiveViewLayer::OnMouseButton(istd::CIndex2d position, Qt::MouseButt
 					viewPtr->UpdateMousePointer();
 
 					if (touchState == IInteractiveShape::TS_DRAGGABLE){
-						IDraggable*  draggablePtr = dynamic_cast<IDraggable*>(viewPtr);
+						IDraggable* draggablePtr = dynamic_cast<IDraggable*>(viewPtr);
 						if ((draggablePtr != NULL) && draggablePtr->IsDraggable()){
 							draggablePtr->BeginDrag(position);
 						}
 					}
 				}
+
 				return consumed;
 			}
 		}
@@ -598,6 +621,25 @@ QString CInteractiveViewLayer::GetShapeDescriptionAt(istd::CIndex2d position) co
 	}
 
 	return BaseClass::GetShapeDescriptionAt(position);
+}
+
+
+QString CInteractiveViewLayer::GetToolTipAt(istd::CIndex2d position) const
+{
+	if (IsVisible()) {
+		for (ShapeList::const_iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter) {
+			const iview::IShape* shapePtr = iter->shapePtr;
+			const i2d::CRect& boundingBox = iter->box;
+			if (boundingBox.IsInside(position) && shapePtr->IsVisible()) {
+				ITouchable::TouchState touchState = shapePtr->IsTouched(position);
+				if (touchState > ITouchable::TS_NONE) {
+					return shapePtr->GetToolTipAt(position);
+				}
+			}
+		}
+	}
+
+	return BaseClass::GetToolTipAt(position);
 }
 
 

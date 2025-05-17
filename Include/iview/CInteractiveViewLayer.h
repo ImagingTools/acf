@@ -21,8 +21,6 @@ public:
 	CInteractiveViewLayer();
 	virtual ~CInteractiveViewLayer();
 
-	IInteractiveShape* GetFirstActiveShape() const;
-
 	// reimplemented (iview::CViewLayer)
 	virtual i2d::CRect RecalcAllShapes(const istd::IChangeable::ChangeSet& changeSet) override;
 	virtual i2d::CRect CalcBoundingBox() const override;
@@ -31,6 +29,7 @@ public:
 	virtual bool ConnectInteractiveShape(IInteractiveShape* shapePtr) override;
 	virtual int GetUnselectedShapesCount() const override;
 	virtual void DrawFocusedShape(QPainter& drawContext) override;
+	virtual bool OnKeyPress(int key, Qt::KeyboardModifiers modifiers) override;
 	virtual bool OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag) override;
 	virtual bool OnFocusedMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag) override;
 	virtual bool OnFocusedMouseMove(istd::CIndex2d position) override;
@@ -42,6 +41,7 @@ public:
 	virtual void DeselectAllShapes() override;
 	virtual int GetKeysState() const override;
 	virtual int GetEditMode() const override;
+	virtual int GetDisplayMode() const override;
 	virtual void OnShapeFocused(IInteractiveShape* shapePtr) override;
 	virtual void OnShapeDefocused(IInteractiveShape* shapePtr) override;
 	virtual void OnShapeSelected(IInteractiveShape& shape, bool state = true) override;
@@ -60,6 +60,7 @@ public:
 	// reimplemented (iview::ITouchable)
 	virtual TouchState IsTouched(istd::CIndex2d position) const override;
 	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const override;
+	virtual QString GetToolTipAt(istd::CIndex2d position) const override;
 
 	// reimplemented (iview::IDraggable)
 	virtual void BeginDrag(const istd::CIndex2d& reference) override;
@@ -94,6 +95,15 @@ inline int CInteractiveViewLayer::GetEditMode() const
 	Q_ASSERT(viewPtr != NULL);
 
 	return viewPtr->GetEditMode();
+}
+
+
+inline int CInteractiveViewLayer::GetDisplayMode() const
+{
+	const IShapeView* viewPtr = GetViewPtr();
+	Q_ASSERT(viewPtr != NULL);
+
+	return viewPtr->GetDisplayMode();
 }
 
 

@@ -10,6 +10,7 @@
 #include <iview/CScreenTransform.h>
 #include <iview/CViewLayer.h>
 #include <iview/CInteractiveViewLayer.h>
+#include <istd/TSmartPtr.h>
 
 
 class QPainter;
@@ -44,67 +45,13 @@ public:
 	CViewBase();
 	virtual ~CViewBase();
 
-	/**
-		Set zoom.
-	*/
-	virtual void SetZoom(ZoomMode zoom);
-	
-	/**	
-		Set edit mode.
-	*/
-	virtual void SetEditMode(int mode) override;
-	
-	/**
-		Inform all shapes about changes.
-	*/
-	virtual void UpdateAllShapes(const istd::IChangeable::ChangeSet& changeSet);
-	
-	/**
-		It sets position to become transformation of client point to specified screen position.
-	*/
-	virtual void SetScreenPosition(const i2d::CVector2d& client, istd::CIndex2d screen);
-	
-	/**
-		Get area will be used to automatic fit the zoom to view size.
-		\sa	SetZoom(ZoomMode)
-	*/
-	virtual const i2d::CRectangle& GetFitArea() const;
+
+	void SetExternalScreenTransform(const istd::TSmartPtr<iview::CScreenTransform>& screenTransformPtr);
 
 	/**
-		Set area will be used to fit in some zoom modes.
-		\sa	SetZoom(ZoomMode)
+		Zooms the view to the given shape.
 	*/
-	virtual void SetFitArea(const i2d::CRectangle& area) override;
-	
-	/**
-		Turn on/off possibility to move whole view transform.
-	*/
-	virtual void SetViewDraggable(bool state = true);
-	
-	/**
-		Turn on/off possibility to select more shapes using control keys.
-	*/
-	virtual void SetMultiselectable(bool state = true);
-	
-	/**
-		Turn on/off possibility to move more selected shapes, when one is moved.
-	*/
-	virtual void SetDraggable(bool state = true);
-	
-	/**
-		Adds handler to catch view events.
-	*/
-	virtual void AddViewEventObserver(iview::IViewEventObserver* listenerPtr);
-	
-	/**	
-		Removes handler to catch view events.
-	*/
-	virtual void RemoveViewEventObserver(iview::IViewEventObserver* listenerPtr);
-	
-	/**
-		Insert default layers, when there is no one user layer.
-	*/
-	virtual void InsertDefaultLayers();
+	void CenterTo(const iview::IShape& shape);
 
 	/**
 		Get index of default background layer.
@@ -121,16 +68,21 @@ public:
 	*/
 	int GetActiveLayerIndex() const;
 
-	/**
-		Get shape under mouse pointer.
-		\return	shape under mouse pointer, or NULL if there is no shape.
-	*/
-	IInteractiveShape* GetMouseShapePtr() const;
-	
-	IInteractiveShape* GetFirstActiveShape() const;
-
 	// reimplemented (iview::IShapeView)
+	virtual void AddViewEventObserver(iview::IViewEventObserver* listenerPtr);
+	virtual void RemoveViewEventObserver(iview::IViewEventObserver* listenerPtr);
+	virtual void SetZoom(ZoomMode zoom);
+	virtual void SetEditMode(int mode);
+	virtual void SetDisplayMode(int mode);
 	virtual void Update() override;
+	virtual void UpdateAllShapes(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void SetScreenPosition(const i2d::CVector2d& client, istd::CIndex2d screen);
+	virtual const i2d::CRectangle& GetFitArea() const;
+	virtual void SetFitArea(const i2d::CRectangle& area);
+	virtual void SetViewDraggable(bool state = true);
+	virtual void SetMultiselectable(bool state = true);
+	virtual void SetDraggable(bool state = true);
+	virtual void InsertDefaultLayers();
 	virtual bool IsViewDraggable() const override;
 	virtual bool IsMultiselectable() const override;
 	virtual int InsertLayer(IViewLayer* layerPtr, int index = -1, int layerType = IViewLayer::LT_NONE) override;
@@ -151,12 +103,14 @@ public:
 	virtual void DeselectAllShapes() override;
 	virtual int GetKeysState() const override;
 	virtual int GetEditMode() const override;
-	void OnShapeFocused(IInteractiveShape* /*shapePtr*/) override	{}
-	void OnShapeDefocused(IInteractiveShape* /*shapePtr*/) override	{}
+	virtual int GetDisplayMode() const override;
+	virtual void OnShapeFocused(IInteractiveShape* /*shapePtr*/) override {}
+	virtual void OnShapeDefocused(IInteractiveShape* /*shapePtr*/) override {}
 
 	// reimplemented (iview::ITouchable)
 	virtual TouchState IsTouched(istd::CIndex2d position) const override;
 	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const override;
+	virtual QString GetToolTipAt(istd::CIndex2d) const override;
 
 	// reimplemented (iview::IShapeView)
 	virtual void SetTransform(const i2d::CAffine2d& transform) override;
@@ -201,7 +155,7 @@ protected:
 	/**
 		Get last background layer index.
 	*/
-	int GetLastBackgroundLayerIndex();
+	int GetLastBackgroundLayerIndex() const;
 	void SetLastBackgroundLayerIndex(int index);
 	
 	/**
@@ -226,6 +180,7 @@ protected:
 		Invalidate bounding box.
 	*/
 	virtual void InvalidateBoundingBox();
+
 	/**
 		Calculate bounding box if it was invalid.
 		\return	true, if the new bounding box was calculated.
@@ -237,22 +192,16 @@ protected:
 		It doesn't update current bounding box.
 	*/
 	virtual i2d::CRect CalcBoundingBox() const;
+
 	/**
 		Called when bounding box has been changed.
 	*/
 	virtual void OnBoundingBoxChanged();
 
+	/**
+		Calc mouse pointer for the given position.
+	*/
 	virtual MousePointerMode CalcMousePointer(istd::CIndex2d position) const;
-
-	/**
-		Invalidate stored shape under mouse pointer.
-	*/
-	virtual void InvalidateMouseShape();
-
-	/**
-		Calc shape under mouse pointer.
-	*/
-	virtual void CalcMouseShape() const;
 
 	/**
 		Check if background buffer is valid.
@@ -295,7 +244,9 @@ protected:
 		You have to implement it in your iview::CViewBase implementations.
 	*/
 	virtual void SetMousePointer(MousePointerMode mode) = 0;
-	/**	Start updating specified rectangle area.
+
+	/**	
+		Start updating specified rectangle area.
 	*/
 	virtual void UpdateRectArea(const i2d::CRect& rect) = 0;
 
@@ -309,10 +260,11 @@ private:
 
 	bool m_isBackgroundBufferValid;
 
-	iview::CScreenTransform m_transform;
+	istd::TSmartPtr<iview::CScreenTransform> m_transformPtr;
 
 	ViewMode m_viewMode;
 	int m_editMode;
+	int m_displayMode;
 	i2d::CVector2d m_moveReference;
 
 	bool m_isMultiselectable;
@@ -329,14 +281,16 @@ private:
 	i2d::CRect m_invalidatedBox;
 	i2d::CRectangle m_fitArea;
 
-	Layers m_layers;
-
 	int m_lastBackgroundLayerIndex;
+
+	iview::IMouseActionObserver* m_mouseActionObserverPtr = nullptr;
 
 	// default layers
 	iview::CViewLayer m_backgroundLayer;
 	iview::CViewLayer m_inactiveLayer;
 	iview::CInteractiveViewLayer m_activeLayer;
+
+	Layers m_layers;
 
 	// help objects
 	bool m_isLastMouseButtonDown;
@@ -347,14 +301,25 @@ private:
 	i2d::CRect m_boundingBox;
 	bool m_isBoundingBoxValid;
 
-	mutable IInteractiveShape* m_mouseShapePtr;
-	mutable bool m_isMouseShapeValid;
-
 	mutable bool m_blockBBoxEvent;
 };
 
 
 // inline methods
+
+inline iview::ISelectableLayer* CViewBase::GetFocusedLayerPtr() const
+{
+	return m_focusedLayerPtr;
+}
+
+
+inline void CViewBase::SetExternalScreenTransform(const istd::TSmartPtr<iview::CScreenTransform>& screenTransformPtr)
+{
+	m_transformPtr = screenTransformPtr;
+}
+
+
+// reimplemented (iview::IShapeView)
 
 inline const i2d::CRectangle& CViewBase::GetFitArea() const
 {
@@ -385,19 +350,6 @@ inline void CViewBase::SetDraggable(bool state)
 	m_isDraggable = state;
 }
 
-
-inline IInteractiveShape* CViewBase::GetMouseShapePtr() const
-{
-	if (!m_isMouseShapeValid){
-		CalcMouseShape();
-		m_isMouseShapeValid = true;
-	}
-	
-	return m_mouseShapePtr;
-}
-
-
-// reimplemented (iview::IShapeView)
 
 inline bool CViewBase::IsViewDraggable() const
 {
@@ -443,7 +395,7 @@ inline IDisplay* CViewBase::GetParentDisplayPtr() const
 
 inline const iview::CScreenTransform& CViewBase::GetTransform() const
 {
-	return m_transform;
+	return *m_transformPtr.GetPtr();
 }
 
 
@@ -479,7 +431,7 @@ inline bool CViewBase::IsDraggable() const
 
 // protected methods
 
-inline int CViewBase::GetLastBackgroundLayerIndex()
+inline int CViewBase::GetLastBackgroundLayerIndex() const
 {
 	return m_lastBackgroundLayerIndex;
 }

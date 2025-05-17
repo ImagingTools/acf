@@ -9,6 +9,7 @@
 #include <iview/IDisplay.h>
 #include <iview/CScreenTransform.h>
 
+
 namespace iview
 {
 
@@ -73,6 +74,16 @@ public:
 	*/
 	void SetTransformMode(ShapeTransformMode mode);
 
+	/**
+		Get screen position based on logical position.
+	*/
+	i2d::CVector2d GetScreenPosition(const i2d::CVector2d& logPosition) const;
+
+	/**
+		Get logical position based on screen position.
+	*/
+	i2d::CVector2d GetLogPosition(const i2d::CVector2d& screenPosition) const;
+
 	// reimplemented (iview::IShape)
 	virtual int GetLayerType() const override;
 	virtual i2d::CRect GetBoundingBox() const override;
@@ -80,6 +91,8 @@ public:
 	virtual const IColorSchema* GetUserColorSchema() const override;
 	virtual void SetUserColorSchema(const IColorSchema* schemaPtr) override;
 	virtual void SetDefaultDescription(const QString& description) override;
+	virtual void SetToolTip(const QString& toolTip) override;
+	virtual bool IsInside(const istd::CIndex2d& screenPosition) const override;
 
 	// reimplemented (iview::IVisualizable)
 	virtual bool IsVisible() const override;
@@ -91,6 +104,7 @@ public:
 	// reimplemented (iview::ITouchable)
 	virtual ITouchable::TouchState IsTouched(istd::CIndex2d position) const override;
 	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const override;
+	virtual QString GetToolTipAt(istd::CIndex2d position) const override;
 
 	// reimplemented (imod::IObserver)
 	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
@@ -98,14 +112,6 @@ public:
 	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 protected:
-	/**
-		Get screen position based on logical position.
-	*/
-	i2d::CVector2d GetScreenPosition(const i2d::CVector2d& logPosition) const;
-	/**
-		Get logical position based on screen position.
-	*/
-	i2d::CVector2d GetLogPosition(const i2d::CVector2d& screenPosition) const;
 	/**
 		Get line with (in logical coordinates) for single screen position.
 	*/
@@ -169,27 +175,28 @@ private:
 		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
-		CShapeBase* m_parentPtr;
+		CShapeBase* m_parentPtr = nullptr;
 	};
 
-	IDisplay* m_displayPtr;
+	IDisplay* m_displayPtr = nullptr;
 
 	// calibration management
 	CalibrationObserver m_calibrationObserver;
 
 	// display meta information
-	const IColorSchema* m_userColorSchemaPtr;
+	const IColorSchema* m_userColorSchemaPtr = nullptr;
 
 	// managemant of bounding box
-	mutable bool m_isBoundingBoxValid;
+	mutable bool m_isBoundingBoxValid = false;
 	mutable i2d::CRect m_boundingBox;
 
 	// attributes
-	bool m_isVisible;
-	int m_layerType;
+	bool m_isVisible = true;
+	int m_layerType = 0;
 	ShapeTransformMode m_shapeTransformMode;
 
 	QString m_defaultDescription;
+	QString m_defaultToolTip;
 };
 
 

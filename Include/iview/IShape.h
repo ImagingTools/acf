@@ -70,6 +70,15 @@ public:
 		Set default description will be used to display on console.
 	*/
 	virtual void SetDefaultDescription(const QString& description) = 0;
+
+	virtual void SetToolTip(const QString& toolTip) = 0;
+
+	virtual bool IsInside(const istd::CIndex2d& screenPosition) const = 0;
+
+	virtual i2d::CVector2d GetLogPosition(const i2d::CVector2d& screenPosition) const = 0;
+
+	virtual bool IsAreaTouchAllowed() const { return false; }
+	virtual void SetAreaTouchAllowed(bool /*state*/ = true) { }
 };
 
 

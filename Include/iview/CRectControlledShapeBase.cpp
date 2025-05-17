@@ -277,7 +277,7 @@ void CRectControlledShapeBase::DrawTickers(QPainter& drawContext) const
 
 		if (IsSelected() && IsEditablePosition()){
 			drawContext.save();
-			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_SELECTED));
+			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_IMPORTANT));
 			if (m_isEditableRotation){
 				drawContext.drawLine(m_screenNodes[EN_CENTER], m_screenNodes[EN_ROTATION1]);
 				drawContext.drawLine(m_screenNodes[EN_CENTER], m_screenNodes[EN_ROTATION2]);
@@ -319,7 +319,7 @@ void CRectControlledShapeBase::DrawFigure(QPainter& drawContext) const
 
 		if (IsSelected()){
 			drawContext.save();
-			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_SELECTED));
+			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_IMPORTANT));
 		}
 		else{
 			drawContext.save();

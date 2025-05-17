@@ -135,6 +135,13 @@ void CInteractiveShapeBase::SetDragPosition(const istd::CIndex2d& position)
 
 void CInteractiveShapeBase::EndDrag()
 {
+	UpdateModelChanges();
+
+	ISelectable* controllerPtr = dynamic_cast<ISelectable*>(GetDisplayPtr());
+	if (controllerPtr != NULL){
+		controllerPtr->OnShapeDefocused(this);
+	}
+
 	m_dragNotifierPtr.Reset();
 }
 
@@ -155,14 +162,7 @@ void CInteractiveShapeBase::BeginTickerDrag()
 
 void CInteractiveShapeBase::EndTickerDrag()
 {
-	UpdateModelChanges();
-
-	ISelectable* controllerPtr = dynamic_cast<ISelectable*>(GetDisplayPtr());
-	if (controllerPtr != NULL){
-		controllerPtr->OnShapeDefocused(this);
-	}
-
-	m_dragNotifierPtr.Reset();
+	EndDrag();
 }
 
 

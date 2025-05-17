@@ -22,18 +22,18 @@ namespace iview
 CViewBase::CViewBase()
 :	m_isSelectEventActive(false)
 {
-	m_transform.Reset();
+	m_transformPtr.SetPtr(new iview::CScreenTransform());
+	m_transformPtr->Reset();
 
 	m_invalidatedBox.Reset();
 	m_isBackgroundBufferValid = false;
 	m_boundingBox = i2d::CRect::GetInvalid();
 	m_isBoundingBoxValid = false;
-	m_mouseShapePtr = NULL;
-	m_isMouseShapeValid = false;
 	m_lastBackgroundLayerIndex = -1;
 
 	m_viewMode = VM_NONE;
 	m_editMode = EM_NONE;
+	m_displayMode = 0;
 	
 	m_isMultiselectable = true;
 	m_isViewDraggable = false;
@@ -67,11 +67,22 @@ CViewBase::~CViewBase()
 
 // public methods
 
+void CViewBase::CenterTo(const iview::IShape& shape)
+{
+	auto shapeCenterPix = shape.GetBoundingBox().GetCenter();
+	auto viewCenterPix = GetClientRect().GetCenter();
+	auto shapeCenterLog = shape.GetLogPosition(shapeCenterPix);
+	SetScreenPosition(shapeCenterLog, viewCenterPix);
+}
+
+
+// reimplemented (iview::IShapeView)
+
 void CViewBase::SetZoom(ZoomMode zoom)
 {
 	i2d::CRect clientRect = GetClientRect();
 	istd::CIndex2d screenCenter((clientRect.GetLeft() + clientRect.GetRight()) / 2, (clientRect.GetTop() + clientRect.GetBottom()) / 2);
-	i2d::CVector2d center = m_transform.GetClientPosition(screenCenter);
+	i2d::CVector2d center = m_transformPtr->GetClientPosition(screenCenter);
 
 	switch (zoom){
 	case ZM_FIT:
@@ -90,13 +101,13 @@ void CViewBase::SetZoom(ZoomMode zoom)
 					scale = scaleX;
 					deltaPos.SetX(-m_fitArea.GetLeft() * scale);
 					istd::CIndex2d clientCenter = clientRect.GetCenter();
-					i2d::CVector2d prevCenter = m_transform.GetClientPosition(clientCenter);
+					i2d::CVector2d prevCenter = m_transformPtr->GetClientPosition(clientCenter);
 					deltaPos.SetY(clientCenter.GetY() - prevCenter.GetY() * scale);
 				}
 				else if (zoom == ZM_FIT_V){
 					scale = scaleY;
 					istd::CIndex2d clientCenter = clientRect.GetCenter();
-					i2d::CVector2d prevCenter = m_transform.GetClientPosition(clientCenter);
+					i2d::CVector2d prevCenter = m_transformPtr->GetClientPosition(clientCenter);
 					deltaPos.SetX(clientCenter.GetX() - prevCenter.GetX() * scale);
 					deltaPos.SetY(-m_fitArea.GetTop() * scale);
 				}
@@ -124,7 +135,7 @@ void CViewBase::SetZoom(ZoomMode zoom)
 						deltaPos.SetY(-m_fitArea.GetTop() * scale);
 					}
 				}
-				m_transform.Reset(deltaPos, 0, i2d::CVector2d(scale, scale));
+				m_transformPtr->Reset(deltaPos, 0, i2d::CVector2d(scale, scale));
 			}
 		}
 		break;
@@ -137,18 +148,18 @@ void CViewBase::SetZoom(ZoomMode zoom)
 				double scaleX = clientSize.GetX() / fitSize.GetX();
 				double scaleY = clientSize.GetY() / fitSize.GetY();
 				i2d::CVector2d deltaPos(-m_fitArea.GetLeft() * scaleX, -m_fitArea.GetTop() * scaleY);
-				m_transform.Reset(deltaPos, 0, i2d::CVector2d(scaleX, scaleY));
+				m_transformPtr->Reset(deltaPos, 0, i2d::CVector2d(scaleX, scaleY));
 			}
 		}
 		break;
 
 	case ZM_RESET:
-		m_transform.Reset();
+		m_transformPtr->Reset();
 		break;
 
 	default:
 		{
-			double actualScale = m_transform.GetDeformMatrix().GetFrobeniusNorm() / ::sqrt(2.0);
+			double actualScale = m_transformPtr->GetDeformMatrix().GetFrobeniusNorm() / ::sqrt(2.0);
 			double scale = 1.0;
 			if (zoom == ZM_ZOOM_IN){
 				if (actualScale < 100){
@@ -162,7 +173,7 @@ void CViewBase::SetZoom(ZoomMode zoom)
 			}
 			i2d::CAffine2d zoomTransform;
 			zoomTransform.Reset(i2d::CVector2d(0, 0), 0, scale);
-			m_transform.Apply(zoomTransform);
+			m_transformPtr->Apply(zoomTransform);
 			SetScreenPosition(center, screenCenter);
 		}
 		return;
@@ -178,6 +189,15 @@ void CViewBase::SetEditMode(int mode)
 	m_editMode = mode;
 
 	static const istd::IChangeable::ChangeSet changeSet(CF_EDIT_MODE);
+	UpdateAllShapes(changeSet);
+}
+
+
+void CViewBase::SetDisplayMode(int mode)
+{
+	m_displayMode = mode;
+
+	static const istd::IChangeable::ChangeSet changeSet(CF_DISPLAY_MODE);
 	UpdateAllShapes(changeSet);
 }
 
@@ -209,8 +229,8 @@ void CViewBase::UpdateAllShapes(const istd::IChangeable::ChangeSet& changeSet)
 
 void CViewBase::SetScreenPosition(const i2d::CVector2d& client, istd::CIndex2d screen)
 {
-	const i2d::CAffine2d& invert = m_transform.GetInverted();
-	const i2d::CVector2d& cp = m_transform.GetClientPosition(screen);
+	const i2d::CAffine2d& invert = m_transformPtr->GetInverted();
+	const i2d::CVector2d& cp = m_transformPtr->GetClientPosition(screen);
 	iview::CScreenTransform transform = i2d::CAffine2d(invert.GetDeformMatrix(), invert.GetTranslation() + client - cp);
 	SetTransform(transform.GetInverted());
 }
@@ -241,23 +261,6 @@ void CViewBase::InsertDefaultLayers()
 	InsertLayer(&m_activeLayer, -1, IViewLayer::LT_ACTIVE);
 }
 
-
-IInteractiveShape* CViewBase::GetFirstActiveShape() const
-{
-	for (Layers::const_iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
-		const CInteractiveViewLayer* layerPtr = dynamic_cast<const CInteractiveViewLayer*>(*iter);
-		if (layerPtr != NULL){
-			IInteractiveShape* shapePtr = layerPtr->GetFirstActiveShape();
-			if (shapePtr != NULL)
-				return shapePtr;
-		}
-	}
-
-	return NULL;
-}
-
-
-// reimplemented (iview::IShapeView)
 
 void CViewBase::Update()
 {
@@ -443,12 +446,6 @@ bool CViewBase::ConnectShape(IShape* shapePtr)
 }
 
 
-ISelectableLayer* CViewBase::GetFocusedLayerPtr() const
-{
-	return m_focusedLayerPtr;
-}
-
-
 void CViewBase::OnLayerShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr)
 {
 	Q_ASSERT(layerPtr != NULL);
@@ -517,6 +514,12 @@ int CViewBase::GetEditMode() const
 }
 
 
+int CViewBase::GetDisplayMode() const
+{
+	return m_displayMode;
+}
+
+
 // reimplemented (iview::ITouchable)
 
 ITouchable::TouchState CViewBase::IsTouched(istd::CIndex2d position) const
@@ -553,12 +556,29 @@ QString CViewBase::GetShapeDescriptionAt(istd::CIndex2d position) const
 }
 
 
+QString CViewBase::GetToolTipAt(istd::CIndex2d position) const
+{
+	int layersCont = m_layers.size();
+	for (int i = layersCont - 1; i >= 0; --i) {
+		const IViewLayer* layerPtr = m_layers[i];
+		if (layerPtr != NULL) {
+			TouchState touchState = layerPtr->IsTouched(position);
+			if (touchState != TS_NONE) {
+				return layerPtr->GetToolTipAt(position);
+			}
+		}
+	}
+
+	return "";
+}
+
+
 // reimplemented (iview::IShapeView)
 
 void CViewBase::SetTransform(const i2d::CAffine2d& transform)
 {
-	if (m_transform != transform){
-		m_transform = transform;
+	if (*(m_transformPtr.GetPtr()) != transform){
+		*(m_transformPtr.GetPtr()) = transform;
 
 		static const istd::IChangeable::ChangeSet changeSet(CF_TRANSFORM);
 		UpdateAllShapes(changeSet);
@@ -610,8 +630,6 @@ void CViewBase::OnAreaInvalidated(const i2d::CRect& beforeBox, const i2d::CRect&
 	}
 
 	m_invalidatedBox.Union(beforeBox);
-
-	InvalidateMouseShape();
 }
 
 
@@ -799,31 +817,6 @@ i2d::CRect CViewBase::CalcBoundingBox() const
 }
 
 
-void CViewBase::InvalidateMouseShape()
-{
-	CViewBase::m_isMouseShapeValid = false;
-}
-
-
-void CViewBase::CalcMouseShape() const
-{
-	m_mouseShapePtr = NULL;
-
-	int layersCont = m_layers.size();
-	for (int i = layersCont - 1; i >= 0; --i){
-		ISelectableLayer* layerPtr = dynamic_cast<ISelectableLayer*>(m_layers[i]);
-		if (layerPtr != NULL){
-			IInteractiveShape* shapePtr;
-			ITouchable::TouchState touchState = layerPtr->IsTouched(m_lastMousePosition, &shapePtr);
-			if (touchState != TS_NONE){
-				m_mouseShapePtr = shapePtr;
-				return;
-			}
-		}
-	}
-}
-
-
 bool CViewBase::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
 	if (m_isLastMouseButtonDown != downFlag){
@@ -864,6 +857,11 @@ bool CViewBase::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonTyp
 			}
 		}
 
+		// if observer was set -> call it (and dont care what it does)
+		for (auto& observerPtr: m_viewListeners){
+			observerPtr->OnViewMouseButton(*this, position, buttonType, downFlag, nullptr);
+		}
+
 		if (downFlag && (buttonType == Qt::LeftButton)){
 			if ((m_keysState & Qt::ControlModifier) == 0){
 				DeselectAllShapes();
@@ -876,7 +874,7 @@ bool CViewBase::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonTyp
 			else{
 				m_viewMode = VM_NONE;
 			}
-			m_moveReference = m_transform.GetClientPosition(position);
+			m_moveReference = m_transformPtr->GetClientPosition(position);
 
 			m_isSelectEventActive = false;
 			return true;
@@ -892,7 +890,6 @@ bool CViewBase::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonTyp
 bool CViewBase::OnMouseMove(istd::CIndex2d position)
 {
 	m_lastMousePosition = position;
-	InvalidateMouseShape();
 
 	bool result = false;
 
@@ -913,13 +910,6 @@ bool CViewBase::OnMouseMove(istd::CIndex2d position)
 	}
 
 	UpdateMousePointer();
-
-	for (iview::IViewEventObserver* listenerPtr : m_viewListeners){
-		bool accepted = listenerPtr->OnViewMouseMove(*this, position);
-		if (accepted){
-			break;
-		}
-	}
 
 	return result;
 }
@@ -955,6 +945,10 @@ ISelectable::MousePointerMode CViewBase::CalcMousePointer(istd::CIndex2d positio
 
 				case iview::IInteractiveShape::TS_DRAGGABLE:
 					result = MPM_DRAG;
+					break;
+					
+				case iview::IInteractiveShape::TS_AREA:
+					result = MPM_SCREEN_MOVE;
 					break;
 
 				default:

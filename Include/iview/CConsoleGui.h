@@ -64,6 +64,8 @@ public:
 
 	explicit CConsoleGui(QWidget* parent = NULL);
 
+	void SetExtraEditModeButtons(iview::IEditModeButtons* otherModeButtonsPtr);
+
 	/**
 		Set status info object for the console shapes.
 	*/
@@ -107,18 +109,24 @@ public Q_SLOTS:
 Q_SIGNALS:
 	bool selectionChanged(const iview::IShapeView& view, const istd::CIndex2d& position, const iview::IInteractiveShape& shape, bool state);
 	bool mouseClicked(const iview::IShapeView& view, const istd::CIndex2d& position, Qt::MouseButton buttonType, bool state, const iview::IInteractiveShape* shapePtr);
+	
+	void OnCloseSignal();
 
 protected:
 	void UpdateZoomInOutState();
 	void UpdateScrollbarsValues();
+
+	virtual bool OnKeyPressed(int key, Qt::KeyboardModifiers modifiers);
 
 	// events
 	virtual bool OnWheelEvent(QWheelEvent* eventPtr);
 	virtual bool OnMouseDoubleClickEvent(QEvent* eventPtr);
 	virtual bool OnKeyPressEvent(QKeyEvent* eventPtr);
 
+	// reimplemented (iview::IEditModeButtons)
+	virtual void UpdateEditModeButtons(int mode) override;
+
 	// reimplemented (iview::CConsoleBase)
-	virtual void UpdateEditModeButtons() override;
 	virtual void UpdateButtonsState() override;
 	virtual void UpdateComponentsPosition() override;
 	virtual void UpdateCommands() override;
@@ -128,8 +136,6 @@ protected:
 	
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr) override;
-
-	iview::CViewport* m_viewPtr;
 
 protected:
 	class UiResourcesManager: public iqtgui::TMakeIconProviderCompWrap<QObject>
@@ -142,6 +148,8 @@ protected:
 
 		CConsoleGui& m_parent;
 	};
+
+	iview::CViewport* m_viewPtr = nullptr;
 
 private:
 	bool ConnectSignalSlots();
@@ -174,6 +182,8 @@ private:
 	iqtgui::CHierarchicalCommand m_pointsSubCommand;
 
 	IShapeStatusInfo* m_shapeStatusInfoPtr = nullptr;
+
+	IEditModeButtons* m_otherModeButtonsPtr = nullptr;
 
 	bool m_isFullScreenMode;
 	bool m_isViewMaximized;
