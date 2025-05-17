@@ -443,6 +443,8 @@ int CBitmapBase::GetPixelBitsCount(IBitmap::PixelFormat format)
 			return 32;
 
 		case PF_RGB48:
+			return 48;
+
 		case PF_RGBA64:
 		case PF_FLOAT64:
 		case PF_XY32:
