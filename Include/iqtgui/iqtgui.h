@@ -1,11 +1,12 @@
-#ifndef iqtgui_included
-#define iqtgui_included
+#pragma once
 
 
 // Qt includes
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
 #include <QtCore/QTextStream>
+#include <QtGui/QIcon>
+#include <QtGui/QPixmap>
 
 #if QT_VERSION > 0x050000
 #include <QtWidgets/QWidget>
@@ -24,6 +25,10 @@
 */
 namespace iqtgui
 {
+
+
+QIcon GetIconFromCache(const QString& iconName);
+void AddIconToCache(const QString& iconName, const QIcon& icon);
 
 
 /**
@@ -65,8 +70,5 @@ static bool SetStyleSheetFromFile(StyleSheetConsumer* styleSheetConsumer, const 
 
 
 } // namespace iqtgui
-
-
-#endif // !iqtgui_included
 
 

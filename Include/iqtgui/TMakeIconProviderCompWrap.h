@@ -7,6 +7,7 @@
 #include <QtGui/QIcon>
 
 // ACF includes
+#include <iqtgui/iqtgui.h>
 #include <iqtgui/TDesignSchemaHandlerWrap.h>
 
 
@@ -45,7 +46,7 @@ QByteArray TMakeIconProviderCompWrap<Base>::GetCurrentThemeId() const
 	if (currentThemeId.isEmpty()){
 		QCoreApplication* applicationPtr = QCoreApplication::instance();
 		if (applicationPtr != nullptr){
-			currentThemeId = QCoreApplication::instance()->property("ThemeId").toByteArray();
+			currentThemeId = applicationPtr->property("ThemeId").toByteArray();
 		}
 	}
 
@@ -58,16 +59,18 @@ QIcon TMakeIconProviderCompWrap<Base>::GetIcon(const QString& iconName) const
 {
 	QString themeIconName = GetIconPath(iconName);
 
-	if (!m_iconCache.contains(themeIconName)){
-		QIcon icon = CreateIcon(themeIconName);
+	QIcon icon = GetIconFromCache(themeIconName);
+	if (icon.isNull()){
+		icon = CreateIcon(themeIconName);
 		if (icon.isNull()){
 			qDebug(qPrintable(QString("Icon was not found: '%1'").arg(themeIconName)));
 		}
-
-		m_iconCache[themeIconName] = icon;
+		else{
+			AddIconToCache(themeIconName, icon);
+		}
 	}
 
-	return m_iconCache[themeIconName];
+	return icon;
 }
 
 

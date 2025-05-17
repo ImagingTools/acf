@@ -78,6 +78,12 @@ bool CMultiPageGuiCompBase::CreatePage(int pageIndex)
 	iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(pageIndex);
 	if (guiPtr != NULL){
 		PageInfo& pageInfo = m_pageIndexToInfoMap[pageIndex];
+		
+		if (pageInfo.pageTitle.isEmpty()) {
+			if (pageIndex < m_pageNamesAttrPtr.GetCount()) {
+				pageInfo.pageTitle = m_pageNamesAttrPtr[pageIndex];
+			}
+		}
 
 		if (pageInfo.widgetPtr == NULL){
 			pageInfo.widgetPtr = new QWidget(GetWidget());
@@ -178,6 +184,7 @@ void CMultiPageGuiCompBase::UpdateVisualElements()
 				}
 			}
 
+			multiPageWidgetPtr->SetPageTitle(pageInfo.widgetIndex, pageInfo.pageTitle);
 			multiPageWidgetPtr->SetPageIcon(pageInfo.widgetIndex, pageIcon);
 			multiPageWidgetPtr->SetPageToolTip(pageInfo.widgetIndex, pageToolTip);
 		}
@@ -259,6 +266,8 @@ void CMultiPageGuiCompBase::ResetPages()
 			pageInfo.widgetPtr = NULL;
 		}
 	}
+
+	m_pageIndexToInfoMap.clear();
 
 	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
 	Q_ASSERT(multiPageWidgetPtr != NULL);

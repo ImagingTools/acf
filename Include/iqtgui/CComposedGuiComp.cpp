@@ -86,6 +86,8 @@ void CComposedGuiComp::OnSaveSettings(QSettings& settings) const
 }
 
 
+// protected methods
+
 // reimplemented (iqtgui::CMultiPageGuiCompBase)
 
 int CComposedGuiComp::GetDesignType() const

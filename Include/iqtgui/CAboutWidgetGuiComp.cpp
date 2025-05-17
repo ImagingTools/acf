@@ -141,6 +141,9 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 		MainVersionFrame->setVisible(false);
 	}
 
+	legalCopyright = legalCopyright.replace("(C)", "&copy;");
+
+	CopyrightLabel->setTextFormat(Qt::RichText);
 	CopyrightLabel->setText(legalCopyright);
 	CopyrightLabel->setVisible(!legalCopyright.isEmpty());
 }
