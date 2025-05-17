@@ -42,7 +42,12 @@ public:
 			Draggable element is touched.
 		*/
 		TS_DRAGGABLE,
-		
+
+		/**
+			Area is touched.
+		*/
+		TS_AREA,
+
 		/**
 			Other element is touched.
 		*/
@@ -65,6 +70,11 @@ public:
 		Get description to shape at specified position.
 	*/
 	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const = 0;
+
+	/**
+		Get tooltip at specified position.
+	*/
+	virtual QString GetToolTipAt(istd::CIndex2d position) const = 0;
 };
 
 

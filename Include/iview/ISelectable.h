@@ -37,7 +37,7 @@ public:
 		MPM_HAND,
 		MPM_DRAG,
 		MPM_SCREEN_MOVE,
-		MPM_LAST = MPM_SCREEN_MOVE
+		MPM_LAST
 	};
 
 	/**
@@ -48,7 +48,16 @@ public:
 		EM_NONE = 0,
 		EM_MOVE = 1,
 		EM_ADD = 2,
-		EM_REMOVE = 3
+		EM_REMOVE = 3,
+		EM_LAST = 100
+	};
+
+	/**
+		Describes standard display modes.
+	*/
+	enum DisplayMode
+	{
+		DM_DEFAULT = 0
 	};
 
 	/**
@@ -76,6 +85,11 @@ public:
 	*/
 	virtual int GetEditMode() const = 0;
 	
+	/**
+		Get actual display mode.
+	*/
+	virtual int GetDisplayMode() const = 0;
+
 	/**
 		Called when shape get focus.
 		\internal

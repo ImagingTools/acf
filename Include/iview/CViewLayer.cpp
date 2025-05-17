@@ -308,6 +308,26 @@ QString CViewLayer::GetShapeDescriptionAt(istd::CIndex2d position) const
 }
 
 
+QString CViewLayer::GetToolTipAt(istd::CIndex2d position) const
+{
+	if (IsVisible()) {
+		for (ShapeList::const_iterator iter = m_shapes.begin(); iter != m_shapes.end(); ++iter) {
+			const iview::IShape* shapePtr = iter->shapePtr;
+			const i2d::CRect& boundingBox = iter->box;
+			if (boundingBox.IsInside(position) && shapePtr->IsVisible()) {
+				if (shapePtr->IsInside(position)) {
+					auto toolTip = shapePtr->GetToolTipAt(position);
+					if (toolTip.size())
+						return toolTip;
+				}
+			}
+		}
+	}
+
+	return "";
+}
+
+
 // protected methods
 
 bool CViewLayer::OnChangeShapeElement(ShapeList::Iterator elementIter)

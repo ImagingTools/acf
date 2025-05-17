@@ -47,6 +47,8 @@ public:
 
 	virtual void SetEditMode(int mode) override;
 
+	void SetShowInfoText(bool on);
+
 	// reimplemented (iview::IShapeView)
 	virtual void SetFitArea(const i2d::CRectangle& area) override;
 	virtual i2d::CRect GetClientRect() const override;
@@ -103,11 +105,14 @@ protected:
 	int GetMouseKeysState(const QMouseEvent& event);
 
 private:
-	QCursor m_mousePointerModes[MPM_LAST + 1];
+	QCursor m_mousePointerModes[MPM_LAST];
 
 	imath::CFixedPointManip m_pixelPositionFormatter;
 	imath::CFixedPointManip m_logicalPositionFormatter;
-	CConsoleBase* m_framePtr;
+	CConsoleBase* m_framePtr = nullptr;
+
+	bool m_showInfoText = false;
+	QString m_infoText;
 
 	friend class CConsoleBase;
 };

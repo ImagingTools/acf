@@ -42,6 +42,12 @@ public:
 			Edit mode is changed.
 		*/
 		CF_EDIT_MODE,
+
+		/**
+			Display mode is changed.
+		*/
+		CF_DISPLAY_MODE,
+
 		/**	
 			Indicate, that changes come from display console shapes.
 		*/

@@ -53,6 +53,7 @@ public:
 	// reimplemented (iview::ITouchable)
 	virtual TouchState IsTouched(istd::CIndex2d position) const override;
 	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const override;
+	virtual QString GetToolTipAt(istd::CIndex2d position) const override;
 
 protected:
 	struct ShapeWithBoundingBox

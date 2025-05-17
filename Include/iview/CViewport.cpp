@@ -13,7 +13,7 @@ namespace iview
 // public methods
 
 CViewport::CViewport(CConsoleBase* framePtr, QWidget* parent)
-:	BaseClass2(parent),
+	:BaseClass2(parent),
 	m_pixelPositionFormatter(0),
 	m_logicalPositionFormatter(2),
 	m_framePtr(framePtr)
@@ -85,8 +85,14 @@ void CViewport::SetEditMode(int mode)
 	if (mode != GetEditMode()){
 		BaseClass::SetEditMode(mode);
 
-		m_framePtr->UpdateEditModeButtons();
+		m_framePtr->UpdateEditModeButtons(mode);
 	}
+}
+
+
+void CViewport::SetShowInfoText(bool on)
+{
+	m_showInfoText = on;
 }
 
 
@@ -156,12 +162,12 @@ bool CViewport::OnMouseMove(istd::CIndex2d position)
 {
 	bool retVal = BaseClass::OnMouseMove(position);
 
-	// info text
-	QString infoText;
+	// info text & tooltip text
+	QString infoText, toolTip;
 
 	// pixel position
 	const iview::CScreenTransform& transform = GetTransform();
-	i2d::CVector2d  pixelPosition = transform.GetClientPosition(position);
+	i2d::CVector2d pixelPosition = transform.GetClientPosition(position);
 
 	// logical position
 	const i2d::ICalibration2d* calibrationPtr = GetCalibration();
@@ -172,24 +178,37 @@ bool CViewport::OnMouseMove(istd::CIndex2d position)
 
 			QString textX = QString::number(logPosition.GetX(), 'f', 2);
 			QString textY = QString::number(logPosition.GetY(), 'f', 2);
-			QString logicalUnitName = (logicalUnitInfoPtr != NULL)?
+			QString logicalUnitName = (logicalUnitInfoPtr != NULL) ?
 						logicalUnitInfoPtr->GetUnitName():
 						tr("mm");
 			infoText += tr("[%1, %2] %3").arg(textX, 6).arg(textY, 6).arg(logicalUnitName);
 		}
 	}
 
+	// Get texts
 	for (int i = 0; i < GetLayersCount(); i++){
 		QString infoPart = GetLayer(i).GetShapeDescriptionAt(position);
 		if (!infoPart.isEmpty()){
 			if (!infoText.isEmpty()){
-				infoText += tr(", ");
+				infoText += "\n";
 			}
 			infoText += infoPart;
 		}
+
+		QString toolTipPart = GetLayer(i).GetToolTipAt(position);
+		if (!toolTipPart.isEmpty())
+			toolTip = toolTipPart;
 	}
 
 	m_framePtr->UpdateCursorInfo(infoText);
+
+	m_framePtr->setToolTip(toolTip.isEmpty() ? infoText : toolTip);
+
+	if (m_infoText != infoText) {
+		m_infoText = infoText;
+		if (m_showInfoText)
+			update();
+	}
 
 	return retVal;
 }
@@ -263,6 +282,32 @@ void CViewport::paintEvent(QPaintEvent* eventPtr)
 	Q_ASSERT(eventPtr != NULL);
 
 	DrawBuffers(*this, iqt::GetCRect(eventPtr->rect()));
+
+	// draw borders
+	QPainter p(this);
+	p.setOpacity(0.85);
+	p.setPen(Qt::gray);
+	auto portRct = rect();
+	p.drawRect(portRct.adjusted(0,0,-1,-1));
+
+	// draw info text
+	if (m_showInfoText && m_infoText.size()) 
+	{
+		QFont f("verdana", 7);
+		auto fm = QFontMetricsF(f);
+		auto rct = fm.size(Qt::AlignCenter | Qt::AlignRight, m_infoText);
+
+		QRect textRect(portRct.width() - rct.width(), portRct.height() - rct.height(), rct.width(), rct.height());
+		QRect shareRect = textRect.adjusted(-25, -25, -5, -5);
+
+		p.setFont(f);
+		p.setBrush(QColor("#335777"));
+		p.drawRoundedRect(shareRect, 4, 4);
+		p.setPen(Qt::white);
+		p.drawText(shareRect.adjusted(0,0,-10,0),
+			Qt::AlignCenter | Qt::AlignRight | Qt::TextWordWrap,
+			m_infoText);
+	}
 }
 
 
@@ -340,7 +385,7 @@ void CViewport::UpdateRectArea(const i2d::CRect& rect)
 {
 	QRect qrect(iqt::GetQRect(rect));
 
-	Q_EMIT update(qrect);
+	update(qrect);
 }
 
 
