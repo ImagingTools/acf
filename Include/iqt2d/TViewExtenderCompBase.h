@@ -33,8 +33,8 @@ public:
 	TViewExtenderCompBase();
 
 	// reimplemented (iqt2d::IViewExtender)
-	virtual void AddItemsToScene(IViewProvider* providerPtr, int flags);
-	virtual void RemoveItemsFromScene(IViewProvider* providerPtr);
+	virtual void AddItemsToScene(IViewProvider* providerPtr, int flags) override;
+	virtual void RemoveItemsFromScene(IViewProvider* providerPtr) override;
 
 protected:
 	enum ExtenderMode

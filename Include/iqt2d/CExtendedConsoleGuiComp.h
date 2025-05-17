@@ -28,11 +28,11 @@ public:
 
 protected:
 	// reimplemented (CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 	// reimplemented (QObject)
-	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
+	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr) override;
 
 private:
 	I_REF(iqtgui::IGuiObject, m_viewProviderGuiCompPtr);

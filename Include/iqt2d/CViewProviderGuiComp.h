@@ -101,27 +101,27 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 	// reimplemented (iqt2d::IViewProvider)
-	virtual int GetViewId() const;
-	virtual iview::IShapeView* GetView() const;
+	virtual int GetViewId() const override;
+	virtual iview::IShapeView* GetView() const override;
 
 protected:
 	virtual void SetupBackground();
 
 	// reimplemented (CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
+	virtual void OnGuiRetranslate() override;
 	virtual void OnGuiDesignChanged();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
-	void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
+	void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_REF(iview::IShapeStatusInfo, m_shapeStatusInfoCompPtr);

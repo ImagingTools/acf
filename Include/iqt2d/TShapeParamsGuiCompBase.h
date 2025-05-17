@@ -53,11 +53,11 @@ public:
 	TShapeParamsGuiCompBase();
 
 	// reimplemented (imod::IObserver)
-	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
-	virtual bool OnModelDetached(imod::IModel* modelPtr);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
+	virtual bool OnModelDetached(imod::IModel* modelPtr) override;
 
 	// reimplemented (iview::IShapeFactory)
-	virtual iview::IShape* CreateShape(const istd::IChangeable* objectPtr, bool connectToModel = false) const;
+	virtual iview::IShape* CreateShape(const istd::IChangeable* objectPtr, bool connectToModel = false) const override;
 
 protected:
 	typedef typename BaseClass::Shapes Shapes;

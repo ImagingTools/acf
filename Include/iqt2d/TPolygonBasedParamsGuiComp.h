@@ -114,15 +114,15 @@ protected:
 	virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiRetranslate() override;
 
 	// reimplemented (iqt2d::TShapeParamsGuiCompBase)
-	virtual bool PopulateActions(QWidget& host, imod::IModel* modelPtr);
-	virtual void OnActionTriggered(QAction* actionPtr);
+	virtual bool PopulateActions(QWidget& host, imod::IModel* modelPtr) override;
+	virtual void OnActionTriggered(QAction* actionPtr) override;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	static bool SetValue(const QVariant& variant, double& result);
 	static QVariant GetValue(double value, int round = 2);
