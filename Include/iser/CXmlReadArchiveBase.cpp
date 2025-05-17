@@ -20,7 +20,7 @@ bool CXmlReadArchiveBase::BeginTag(const CArchiveTag& tag)
 	QByteArray tagText;
 
 	retVal = retVal && ReadToDelimeter("<", tagText);
-	retVal = retVal && ReadToDelimeter(">",  tagText);
+	retVal = retVal && ReadToDelimeter(">", tagText);
 
 	if (!retVal){
 		if (IsLogConsumed()){
