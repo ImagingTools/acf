@@ -48,7 +48,7 @@ private:
 	bool OpenFileStream();
 	void CloseFileStream();
 
-private Q_SLOT:
+private Q_SLOTS:
 	void OnTryTimer();
 
 private:

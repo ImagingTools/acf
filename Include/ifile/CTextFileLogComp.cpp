@@ -25,6 +25,13 @@ CTextFileLogComp:: CTextFileLogComp()
 	,m_mutex(QMutex::Recursive)
 #endif
 {
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+	m_outputFileStream.setCodec("UTF-8");
+#else
+	m_outputFileStream.setEncoding(QStringConverter::Utf8);
+#endif
+
 	m_lastDay = QDate::currentDate().day();
 }
 
