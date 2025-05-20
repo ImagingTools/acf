@@ -38,6 +38,10 @@ public:
 };
 
 
+typedef istd::TUniqueInterfacePtr<IMultiBitmapProvider> IMultiBitmapProviderUniquePtr;
+typedef istd::TSharedInterfacePtr<IMultiBitmapProvider> IMultiBitmapProviderSharedPtr;
+
+
 } // namespace iimg
 
 

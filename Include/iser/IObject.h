@@ -39,6 +39,8 @@ inline QByteArray IObject::GetFactoryId() const
 // public typedefs
 
 typedef istd::TIFactory<IObject> IObjectFactory;
+typedef istd::TUniqueInterfacePtr<iser::IObject> IObjectUniquePtr;
+typedef istd::TSharedInterfacePtr<iser::IObject> IObjectSharedPtr;
 
 
 } // namespace iser

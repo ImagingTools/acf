@@ -27,7 +27,7 @@ ifile::IFilePersistence* CSingleDocumentTemplateComp::GetFileLoader(const QByteA
 }
 
 
-istd::IChangeable* CSingleDocumentTemplateComp::CreateDocument(
+istd::IChangeableUniquePtr CSingleDocumentTemplateComp::CreateDocument(
 			QByteArray& documentTypeId,
 			bool /*initialize*/,
 			bool /*beQuiet*/,
@@ -49,7 +49,7 @@ istd::IChangeable* CSingleDocumentTemplateComp::CreateDocument(
 }
 
 
-istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(
+idoc::IDocumentTemplate::ViewUniquePtr CSingleDocumentTemplateComp::CreateView(
 			const QByteArray& documentTypeId,
 			istd::IChangeable* documentPtr,
 			const QByteArray& viewTypeId) const
@@ -62,17 +62,15 @@ istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(
 				m_viewCompFact.IsValid() &&
 				IsDocumentTypeSupported(documentTypeId) &&
 				IsViewTypeSupported(viewTypeId)){
-		istd::TDelPtr<icomp::IComponent> componentPtr(m_viewCompFact.CreateComponent());
+		std::unique_ptr<icomp::IComponent> componentPtr(m_viewCompFact.CreateComponent());
 
-		imod::IObserver* observerPtr = m_viewCompFact.ExtractInterface(componentPtr.GetPtr());
-		istd::IPolymorphic* viewPtr = ExtractViewInterface(componentPtr.GetPtr());
+		imod::IObserver* observerPtr = m_viewCompFact.ExtractInterface(componentPtr.get());
+		ViewUniquePtr viewPtr = ExtractViewInterface(componentPtr);
 
-		if (		(viewPtr != NULL) &&
+		if (		(viewPtr.IsValid()) &&
 					(observerPtr != NULL) &&
 					modelPtr->AttachObserver(observerPtr)){
-			componentPtr.PopPtr();
-
-			return viewPtr;
+			return std::move(viewPtr);
 		}
 	}
 
@@ -80,7 +78,7 @@ istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(
 }
 
 
-idoc::IUndoManager* CSingleDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
+idoc::IUndoManagerUniquePtr CSingleDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
 {
 	if (IsDocumentTypeSupported(documentTypeId)){
 		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(documentPtr);
@@ -91,25 +89,34 @@ idoc::IUndoManager* CSingleDocumentTemplateComp::CreateUndoManager(const QByteAr
 		}
 
 		if ((serializablePtr != NULL) && (modelPtr != NULL)){
-			istd::TDelPtr< idoc::IUndoManager > undoManagerModelPtr(m_undoManagerCompFact.CreateInstance());
+			IUndoManagerUniquePtr undoManagerModelPtr(m_undoManagerCompFact.CreateInstance());
 			if (undoManagerModelPtr.IsValid()){
 				imod::IObserver* observerPtr = m_undoManagerObserverCompFact.ExtractInterface(undoManagerModelPtr.GetPtr());
 				if ((observerPtr != NULL) && modelPtr->AttachObserver(observerPtr)){
-					return undoManagerModelPtr.PopPtr();
+					return std::move(undoManagerModelPtr);
 				}
 			}
 		}
 	}
 
-	return NULL;
+	return idoc::IUndoManagerUniquePtr();
 }
 
 
 // protected methods
 
-istd::IPolymorphic* CSingleDocumentTemplateComp::ExtractViewInterface(icomp::IComponent* componentPtr) const
+idoc::IDocumentTemplate::ViewUniquePtr CSingleDocumentTemplateComp::ExtractViewInterface(std::unique_ptr<icomp::IComponent>& componentPtr) const
 {
-	return m_viewCompFact.ExtractInterface(componentPtr);
+	ViewUniquePtr viewPtr(componentPtr.get(), [&componentPtr, this]()
+	{
+		imod::IObserver* observerPtr = m_viewCompFact.ExtractInterface(componentPtr.get());
+
+		return observerPtr;
+	});
+
+	componentPtr.release();
+
+	return viewPtr;
 }
 
 

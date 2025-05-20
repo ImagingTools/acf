@@ -32,7 +32,7 @@ bool CTextFileLoaderComp::IsOperationSupported(
 }
 
 
-int CTextFileLoaderComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CTextFileLoaderComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -41,7 +41,7 @@ int CTextFileLoaderComp::LoadFromFile(
 		return OS_FAILED;
 	}
 
-	int retVal = OS_FAILED;
+	ifile::IFilePersistence::OperationState retVal = OS_FAILED;
 
 	idoc::ITextDocument* documentPtr = dynamic_cast<idoc::ITextDocument*>(&data);
 	if (documentPtr != NULL){
@@ -64,7 +64,7 @@ int CTextFileLoaderComp::LoadFromFile(
 }
 
 
-int CTextFileLoaderComp::SaveToFile(
+ifile::IFilePersistence::OperationState CTextFileLoaderComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -73,7 +73,7 @@ int CTextFileLoaderComp::SaveToFile(
 		return OS_FAILED;
 	}
 
-	int retVal = OS_FAILED;
+	ifile::IFilePersistence::OperationState retVal = OS_FAILED;
 
 	const idoc::ITextDocument* documentPtr = dynamic_cast<const idoc::ITextDocument*>(&data);
 	if (documentPtr != NULL){

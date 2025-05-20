@@ -29,7 +29,7 @@ bool CBitmapLoaderComp::IsOperationSupported(
 {
 	if ((dataObjectPtr != NULL) && (dynamic_cast<const iimg::IQImageProvider*>(dataObjectPtr) == NULL)){
 		if (!beQuiet){
-			SendInfoMessage(MI_BAD_OBJECT_TYPE, tr("Object is not Qt image"));
+			SendErrorMessage(MI_BAD_OBJECT_TYPE, QT_TR_NOOP("Object is not Qt image"));
 		}
 
 		return false;
@@ -44,7 +44,7 @@ bool CBitmapLoaderComp::IsOperationSupported(
 
 			if (!extensionsList.contains(info.suffix(), Qt::CaseInsensitive)){
 				if (!beQuiet){
-					SendInfoMessage(MI_BAD_EXTENSION, tr("Bad image file extension %1").arg(info.suffix()));
+					SendErrorMessage(MI_BAD_EXTENSION, QT_TR_NOOP(QString("Bad image file extension %1").arg(info.suffix())));
 				}
 
 				return false;
@@ -54,7 +54,7 @@ bool CBitmapLoaderComp::IsOperationSupported(
 		if ((flags & QF_LOAD) != 0){
 			if (!info.exists()){
 				if (!beQuiet){
-					SendInfoMessage(MI_FILE_NOT_EXIST, tr("Image file %1 not exist").arg(*filePathPtr));
+					SendErrorMessage(MI_FILE_NOT_EXIST, QT_TR_NOOP(QString("Image file %1 not exist").arg(*filePathPtr)));
 				}
 
 				return false;
@@ -64,7 +64,7 @@ bool CBitmapLoaderComp::IsOperationSupported(
 
 			if (format.isEmpty()){
 				if (!beQuiet){
-					SendInfoMessage(MI_BAD_FORMAT, tr("Bad image format"));
+					SendErrorMessage(MI_BAD_FORMAT, QT_TR_NOOP("Bad image format"));
 				}
 				return false;
 			}
@@ -79,24 +79,25 @@ bool CBitmapLoaderComp::IsOperationSupported(
 }
 
 
-int CBitmapLoaderComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CBitmapLoaderComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	istd::CChangeNotifier notifier(&data);
 
-	QImage image;
-	if (!image.load(filePath)){
-		SendInfoMessage(MI_CANNOT_LOAD, tr("Cannot load file %1").arg(filePath));
+	QImageReader reader(filePath);
+	reader.setAutoTransform(true);
+	QImage image = reader.read();
+	if (image.isNull()) {
+		SendErrorMessage(MI_CANNOT_LOAD, QT_TR_NOOP(QString("Cannot load file %1: %2").arg(filePath).arg(reader.errorString())));
 		return OS_FAILED;
 	}
 
 	bool isOk = false;
 
-	CBitmap* qtBitmapPtr = dynamic_cast<CBitmap*>(&data);
-	if (qtBitmapPtr != NULL){
-		isOk = qtBitmapPtr->CopyImageFrom(image);
+	if (CBitmap* qtBitmapPtr = dynamic_cast<CBitmap*>(&data)){
+		isOk = qtBitmapPtr->TakeImage(std::move(image));
 	}
 	else{
 		CBitmap tempQtBitmap(image);
@@ -104,15 +105,13 @@ int CBitmapLoaderComp::LoadFromFile(
 		isOk = data.CopyFrom(tempQtBitmap);
 	}
 
-		if (isOk){
-		return OS_OK;
-}
-	SendInfoMessage(MI_BAD_OBJECT_TYPE, tr("Cannot set the loaded data to the end-point object"));
+	if (isOk) return OS_OK;
+	SendErrorMessage(MI_BAD_OBJECT_TYPE, QT_TR_NOOP("Cannot set the loaded data to the end-point object"));
 	return OS_FAILED;
 }
 
 
-int CBitmapLoaderComp::SaveToFile(
+ifile::IFilePersistence::OperationState CBitmapLoaderComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -125,7 +124,7 @@ int CBitmapLoaderComp::SaveToFile(
 			imageProviderPtr = &qtBitmap;
 		}
 		else{
-			SendInfoMessage(MI_BAD_OBJECT_TYPE, tr("Object is not supported image"));
+			SendErrorMessage(MI_BAD_OBJECT_TYPE, QT_TR_NOOP("Object is not supported image"));
 
 			return OS_FAILED;
 		}
@@ -138,7 +137,7 @@ int CBitmapLoaderComp::SaveToFile(
 		return OS_OK;
 	}
 	else{
-		SendInfoMessage(MI_CANNOT_SAVE, tr("Cannot save file %1").arg(filePath));
+		SendErrorMessage(MI_CANNOT_SAVE, QT_TR_NOOP(QString("Cannot save file %1").arg(filePath)));
 	}
 
 	return OS_FAILED;

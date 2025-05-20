@@ -47,6 +47,10 @@ public:
 };
 
 
+typedef istd::TUniqueInterfacePtr<iprm::IParamsSet> IParamsSetUniquePtr;
+typedef istd::TSharedInterfacePtr<iprm::IParamsSet> IParamsSetSharedPtr;
+
+
 } // namespace iprm
 
 

@@ -43,7 +43,7 @@ private:
 	I_MULTIATTR(QString, m_factoryIdsAttrPtr);
 
 	QByteArray m_paramTypeId;
-	istd::TDelPtr<iser::ISerializable> m_paramPtr;
+	iser::ISerializableUniquePtr m_paramPtr;
 
 	imod::CModelUpdateBridge m_updateBridge;
 };

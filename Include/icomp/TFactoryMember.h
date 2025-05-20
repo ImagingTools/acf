@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include <istd/TIFactory.h>
+#include <istd/TInterfaceFactory.h>
 #include <istd/TDelPtr.h>
 
 #include <icomp/TAttributeMember.h>
@@ -23,7 +23,7 @@ template <class Interface>
 class TFactoryMember:
 			public TAttributeMember<CFactoryAttribute>,
 			public CInterfaceManipBase,
-			virtual public istd::TIFactory<Interface>
+			virtual public istd::TInterfaceFactory<Interface>
 {
 public:
 	typedef TAttributeMember<CFactoryAttribute> BaseClass;
@@ -59,8 +59,8 @@ public:
 	*/
 	static Interface* ExtractInterface(istd::IPolymorphic* instancePtr, const QByteArray& subId = "");
 
-	// reimplemented (istd::TIFactory)
-	virtual Interface* CreateInstance(const QByteArray& keyId = "") const override;
+	// reimplemented (TInterfaceFactory)
+	virtual istd::TUniqueInterfacePtr<Interface> CreateInstance(const QByteArray& typeId = QByteArray()) const override;
 
 	// reimplemented (istd::IFactoryInfo)
 	virtual KeyList GetFactoryKeys() const override;
@@ -122,19 +122,17 @@ IComponent* TFactoryMember<Interface>::CreateComponent() const
 
 
 template <class Interface>
-Interface* TFactoryMember<Interface>::CreateInstance(const QByteArray& /*keyId*/) const
+istd::TUniqueInterfacePtr<Interface> TFactoryMember<Interface>::CreateInstance(const QByteArray& /*typeId*/) const
 {
-	istd::TDelPtr<IComponent> newComponentPtr(CreateComponent());
-	if (newComponentPtr.IsValid()){
-		Interface* retVal = BaseClass2::ExtractInterface<Interface>(newComponentPtr.GetPtr());
-		if (retVal != NULL){
-			newComponentPtr.PopPtr();
+	icomp::IComponent* newComponentPtr = CreateComponent();
 
-			return retVal;
-		}
-	}
+	return istd::TUniqueInterfacePtr<Interface>(newComponentPtr, [newComponentPtr](){
+		Interface* retVal = BaseClass2::ExtractInterface<Interface>(newComponentPtr);
+		
+		return retVal;
+	});
 
-	return NULL;
+	return istd::TUniqueInterfacePtr<Interface>();
 }
 
 

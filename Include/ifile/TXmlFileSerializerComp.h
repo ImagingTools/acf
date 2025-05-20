@@ -34,11 +34,11 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFilePersistence)
-	virtual int LoadFromFile(
+	virtual ifile::IFilePersistence::OperationState LoadFromFile(
 				istd::IChangeable& data,
 				const QString& filePath = QString(),
 				ibase::IProgressManager* progressManagerPtr = nullptr) const override;
-	virtual int SaveToFile(
+	virtual ifile::IFilePersistence::OperationState SaveToFile(
 				const istd::IChangeable& data,
 				const QString& filePath = QString(),
 				ibase::IProgressManager* progressManagerPtr = nullptr) const override;
@@ -159,7 +159,7 @@ protected:
 // reimplemented (ifile::IFilePersistence)
 
 template <class ReadArchive, class WriteArchive>
-int TXmlFileSerializerComp<ReadArchive, WriteArchive>::LoadFromFile(
+ifile::IFilePersistence::OperationState TXmlFileSerializerComp<ReadArchive, WriteArchive>::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -194,7 +194,7 @@ int TXmlFileSerializerComp<ReadArchive, WriteArchive>::LoadFromFile(
 
 
 template <class ReadArchive, class WriteArchive>
-int TXmlFileSerializerComp<ReadArchive, WriteArchive>::SaveToFile(
+ifile::IFilePersistence::OperationState TXmlFileSerializerComp<ReadArchive, WriteArchive>::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const

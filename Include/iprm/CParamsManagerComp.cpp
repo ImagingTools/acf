@@ -49,18 +49,18 @@ bool CParamsManagerComp::SetSetsCount(int count)
 
 		if (count > actualSetsCount){
 			for (int i = actualSetsCount; i < count; ++i){
-				IParamsSet* newParamsSetPtr = m_paramSetsFactPtr.CreateInstance();
-				if (newParamsSetPtr == NULL){
+				IParamsSetUniquePtr newParamsSetPtr = m_paramSetsFactPtr.CreateInstance();
+				if (!newParamsSetPtr.IsValid()){
 					return false;
 				}
 
 				ParamSetPtr paramsSetPtr(new imod::TModelWrap<ParamSet>());
 
-				paramsSetPtr->paramSetPtr.SetPtr(newParamsSetPtr);
+				paramsSetPtr->paramSetPtr.FromUnique(newParamsSetPtr);
 				paramsSetPtr->name = CalculateNewDefaultName();
 				paramsSetPtr->parentPtr = this;
 
-				imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
+				imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr->paramSetPtr.GetPtr());
 				if (paramsModelPtr != NULL){
 					paramsModelPtr->AttachObserver(&paramsSetPtr->updateBridge);
 					paramsModelPtr->AttachObserver(&m_updateBridge);
@@ -382,7 +382,7 @@ int CParamsManagerComp::GetCreatedParamsSetsCount() const
 }
 
 
-iprm::IParamsSet* CParamsManagerComp::CreateParamsSetInstance(int /*typeIndex*/) const
+iprm::IParamsSetUniquePtr CParamsManagerComp::CreateParamsSetInstance(int /*typeIndex*/) const
 {
 	if (m_paramSetsFactPtr.IsValid()){
 		return m_paramSetsFactPtr.CreateInstance();

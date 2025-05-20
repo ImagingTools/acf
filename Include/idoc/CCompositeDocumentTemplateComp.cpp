@@ -156,7 +156,7 @@ ifile::IFilePersistence* CCompositeDocumentTemplateComp::GetFileLoader(const QBy
 }
 
 
-istd::IChangeable* CCompositeDocumentTemplateComp::CreateDocument(
+istd::IChangeableUniquePtr CCompositeDocumentTemplateComp::CreateDocument(
 			QByteArray& documentTypeId,
 			bool initialize,
 			bool beQuiet,
@@ -189,7 +189,7 @@ istd::IChangeable* CCompositeDocumentTemplateComp::CreateDocument(
 }
 
 
-istd::IPolymorphic* CCompositeDocumentTemplateComp::CreateView(
+idoc::IDocumentTemplate::ViewUniquePtr CCompositeDocumentTemplateComp::CreateView(
 			const QByteArray& documentTypeId,
 			istd::IChangeable* documentPtr,
 			const QByteArray& viewTypeId) const
@@ -206,7 +206,7 @@ istd::IPolymorphic* CCompositeDocumentTemplateComp::CreateView(
 }
 
 
-idoc::IUndoManager* CCompositeDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
+idoc::IUndoManagerUniquePtr CCompositeDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
 {
 	IdToTemplateMap::ConstIterator iter = m_idToTemplateMap.constFind(documentTypeId);
 	if (iter != m_idToTemplateMap.constEnd()){

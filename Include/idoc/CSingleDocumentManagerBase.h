@@ -10,6 +10,7 @@
 #include <istd/TDelPtr.h>
 #include <iser/IArchive.h>
 #include <imod/CSingleModelObserverBase.h>
+#include <idoc/IDocumentTemplate.h>
 #include <idoc/CTmplBasedDocumentManagerBase.h>
 
 
@@ -180,9 +181,9 @@ private:
 	QString m_filePath;
 	QByteArray m_documentTypeId;
 	QByteArray m_viewTypeId;
-	istd::TDelPtr<istd::IChangeable> m_documentPtr;
-	istd::TDelPtr<idoc::IUndoManager> m_undoManagerPtr;
-	istd::TDelPtr<istd::IPolymorphic> m_viewPtr;
+	istd::IChangeableSharedPtr m_documentPtr;
+	idoc::IUndoManagerSharedPtr m_undoManagerPtr;
+	idoc::IDocumentTemplate::ViewSharedPtr m_viewPtr;
 	UndoManagerObserver m_undoManagerObserver;
 
 	bool m_isDirty;

@@ -31,7 +31,7 @@ public:
 
 protected:
 	// reimplemented (CMultiPageBitmapBase)
-	virtual IBitmap* CreateBitmap() const override;
+	virtual IBitmapUniquePtr CreateBitmap() const override;
 };
 
 
@@ -56,7 +56,7 @@ istd::IChangeable* TMultiPageBitmap<BitmapImpl>::CloneMe(CompatibilityMode mode)
 // reimplemented (CMultiPageBitmapBase)
 
 template <class BitmapImpl>
-IBitmap* TMultiPageBitmap<BitmapImpl>::CreateBitmap() const
+IBitmapUniquePtr TMultiPageBitmap<BitmapImpl>::CreateBitmap() const
 {
 	return new BitmapImpl;
 }

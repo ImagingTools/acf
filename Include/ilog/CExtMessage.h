@@ -78,7 +78,7 @@ protected:
 		QString description;
 	};
 
-private:
+protected:
 	const iser::IObjectFactory* m_factoryPtr;
 	QList<AttachedObject> m_attachedObjects;
 };

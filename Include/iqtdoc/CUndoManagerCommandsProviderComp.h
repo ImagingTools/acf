@@ -11,6 +11,7 @@
 #include <imod/CSingleModelObserverBase.h>
 #include <idoc/IUndoManager.h>
 #include <imod/IModel.h>
+#include <iqtgui/TMakeIconProviderCompWrap.h>
 #include <iqtgui/CHierarchicalCommand.h>
 
 
@@ -20,14 +21,14 @@ namespace iqtdoc
 
 class CUndoManagerCommandsProviderComp:
 			public QObject,
-			public icomp::CComponentBase,
+			public iqtgui::TMakeIconProviderCompWrap<icomp::CComponentBase>,
 			protected imod::CSingleModelObserverBase,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef iqtgui::TMakeIconProviderCompWrap<icomp::CComponentBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CUndoManagerCommandsProviderComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);

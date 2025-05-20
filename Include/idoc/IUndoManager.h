@@ -51,6 +51,10 @@ public:
 };
 
 
+typedef istd::TUniqueInterfacePtr<idoc::IUndoManager> IUndoManagerUniquePtr;
+typedef istd::TSharedInterfacePtr<idoc::IUndoManager> IUndoManagerSharedPtr;
+
+
 } // namespace idoc
 
 

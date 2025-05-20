@@ -22,12 +22,12 @@ istd::IChangeable* CMultiPageBitmapBase::InsertPage(
 		}
 	}
 
-	IBitmap* bitmapPtr = CreateBitmap();
-	if (bitmapPtr == NULL){
+	IBitmapUniquePtr bitmapPtr = CreateBitmap();
+	if (!bitmapPtr.IsValid()){
 		return NULL;
 	}
 
-	newPage.pagePtr.SetPtr(bitmapPtr);
+	newPage.pagePtr.MoveCastedPtr(bitmapPtr);
 
 	istd::CChangeNotifier changePtr(this);
 
@@ -40,7 +40,7 @@ istd::IChangeable* CMultiPageBitmapBase::InsertPage(
 		m_documentPages.insert(position, newPage);
 	}
 
-	return bitmapPtr;
+	return bitmapPtr.GetPtr();
 }
 
 

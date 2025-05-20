@@ -33,7 +33,7 @@ CSingleDocumentManagerBase::CSingleDocumentManagerBase()
 idoc::IUndoManager* CSingleDocumentManagerBase::GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const
 {
 	if (documentPtr == m_documentPtr.GetPtr()){
-		return m_undoManagerPtr.GetPtr();
+		return const_cast<idoc::IUndoManager*>(m_undoManagerPtr.GetPtr());
 	}
 
 	return NULL;
@@ -58,7 +58,7 @@ istd::IChangeable& CSingleDocumentManagerBase::GetDocumentFromIndex(int I_IF_DEB
 		documentInfoPtr->isDirty = m_isDirty;
 	}
 
-	return *m_documentPtr;
+	return const_cast<istd::IChangeable&>(*m_documentPtr);
 }
 
 
@@ -77,13 +77,13 @@ istd::IPolymorphic* CSingleDocumentManagerBase::GetViewFromIndex(int I_IF_DEBUG(
 	I_IF_DEBUG(Q_ASSERT(documentIndex < GetDocumentsCount()));
 	I_IF_DEBUG(Q_ASSERT(viewIndex < GetViewsCount(documentIndex)));
 
-	return m_viewPtr.GetPtr();
+	return const_cast<istd::IPolymorphic*>(m_viewPtr.GetPtr());
 }
 
 
 istd::IPolymorphic* CSingleDocumentManagerBase::GetActiveView() const
 {
-	return m_viewPtr.GetPtr();
+	return const_cast<istd::IPolymorphic*>(m_viewPtr.GetPtr());
 }
 
 
@@ -96,7 +96,7 @@ istd::IChangeable* CSingleDocumentManagerBase::GetDocumentFromView(const istd::I
 			documentInfoPtr->isDirty = m_isDirty;
 		}
 
-		return m_documentPtr.GetPtr();
+		return const_cast<istd::IChangeable*>(m_documentPtr.GetPtr());
 	}
 
 	return NULL;
@@ -110,19 +110,19 @@ istd::IPolymorphic* CSingleDocumentManagerBase::AddViewToDocument(const istd::IC
 		if (m_documentPtr.IsValid() && m_documentPtr.GetPtr() == &document){
 			EnsureViewRemoved();
 
-			istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
+			idoc::IDocumentTemplate::ViewUniquePtr viewPtr = documentTemplatePtr->CreateView(
 						m_documentTypeId,
 						m_documentPtr.GetPtr(),
 						viewTypeId);
-			if (viewPtr != NULL){
-				m_viewPtr.SetPtr(viewPtr);
+			if (viewPtr.IsValid()){
+				m_viewPtr.FromUnique(viewPtr);
 
 				m_viewTypeId = viewTypeId;
 
-				OnViewRegistered(viewPtr);
+				OnViewRegistered(m_viewPtr.GetPtr());
 			}
 
-			return viewPtr;
+			return m_viewPtr.GetPtr();
 		}
 	}
 
@@ -411,14 +411,14 @@ bool CSingleDocumentManagerBase::OpenSingleDocument(
 			EnsureViewRemoved();
 
 			if (createView){
-				istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
+				idoc::IDocumentTemplate::ViewUniquePtr viewPtr = documentTemplatePtr->CreateView(
 							m_documentTypeId,
 							m_documentPtr.GetPtr(),
 							viewTypeId);
-				if (viewPtr != NULL){
-					m_viewPtr.SetPtr(viewPtr);
+				if (viewPtr.IsValid()){
+					m_viewPtr.FromUnique(viewPtr);
 
-					OnViewRegistered(viewPtr);
+					OnViewRegistered(viewPtr.GetPtr());
 
 					m_viewTypeId = viewTypeId;
 				}
@@ -492,26 +492,25 @@ bool CSingleDocumentManagerBase::NewDocument(
 	if (documentTemplatePtr != NULL){
 		QByteArray realDocumentTypeId = documentTypeId;
 
-		istd::TDelPtr<istd::IChangeable> documentPtr(documentTemplatePtr->CreateDocument(realDocumentTypeId, initialize, beQuiet, ignoredPtr));
-
+		istd::IChangeableUniquePtr documentPtr(documentTemplatePtr->CreateDocument(realDocumentTypeId, initialize, beQuiet, ignoredPtr));
 		if (documentPtr.IsValid()){
 			EnsureViewRemoved();
 
 			if (createView){
-				istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
+				idoc::IDocumentTemplate::ViewUniquePtr viewPtr = documentTemplatePtr->CreateView(
 							realDocumentTypeId,
 							documentPtr.GetPtr(),
 							viewTypeId);
-				if (viewPtr == NULL){
+				if (!viewPtr.IsValid()){
 					return false;
 				}
 
-				m_viewPtr.SetPtr(viewPtr);
+				m_viewPtr.FromUnique(viewPtr);
 
 				m_viewTypeId = viewTypeId;
 			}
 
-			m_documentPtr.TakeOver(documentPtr);
+			m_documentPtr.FromUnique(documentPtr);
 
 			m_documentTypeId = realDocumentTypeId;
 
@@ -533,7 +532,9 @@ bool CSingleDocumentManagerBase::RegisterDocument()
 
 	const IDocumentTemplate* documentTemplatePtr = GetDocumentTemplate();
 	if (documentTemplatePtr != NULL){
-		m_undoManagerPtr.SetPtr(documentTemplatePtr->CreateUndoManager(m_documentTypeId, m_documentPtr.GetPtr()));
+		idoc::IUndoManagerUniquePtr undoManagerPtr = documentTemplatePtr->CreateUndoManager(m_documentTypeId, m_documentPtr.GetPtr());
+
+		m_undoManagerPtr.FromUnique(undoManagerPtr);
 
 		if (m_undoManagerPtr.IsValid()){
 			m_undoManagerPtr->StoreDocumentState();

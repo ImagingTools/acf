@@ -26,6 +26,9 @@ namespace idoc
 class IDocumentTemplate: virtual public IDocumentTypesInfo
 {
 public:
+	typedef istd::TUniqueInterfacePtr<istd::IPolymorphic> ViewUniquePtr;
+	typedef istd::TSharedInterfacePtr<istd::IPolymorphic> ViewSharedPtr;
+
 	/**
 		Return supported view type IDs for specified document type.
 		\param	documentTypeId	ID of document type.
@@ -53,7 +56,7 @@ public:
 								otherwise initialization is not needed (e.g. for document loading - filling of data will be done by loader).
 		\param	ignoredFlagPtr	optional output flag indicating that the user canceled this operation.
 	*/
-	virtual istd::IChangeable* CreateDocument(
+	virtual istd::IChangeableUniquePtr CreateDocument(
 				QByteArray& documentTypeId,
 				bool initialize = true,
 				bool beQuiet = false,
@@ -65,7 +68,7 @@ public:
 		\param	documentPtr		pointer to document object.
 		\param	viewTypeId		optional ID specifying view type if more view types are supported.
 	*/
-	virtual istd::IPolymorphic* CreateView(
+	virtual ViewUniquePtr CreateView(
 				const QByteArray& documentTypeId,
 				istd::IChangeable* documentPtr,
 				const QByteArray& viewTypeId = QByteArray()) const = 0;
@@ -76,7 +79,7 @@ public:
 		\param	documentPtr	pointer to document object.
 		\return	pointer to created instance of undo manager or NULL, if creating of undo manager was impossible.
 	*/
-	virtual idoc::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const = 0;
+	virtual idoc::IUndoManagerUniquePtr CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const = 0;
 };
 
 

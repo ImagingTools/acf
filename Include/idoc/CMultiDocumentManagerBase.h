@@ -10,6 +10,7 @@
 #include <istd/TDelPtr.h>
 #include <imod/CMultiModelDispatcherBase.h>
 #include <idoc/IUndoManager.h>
+#include <idoc/IDocumentTemplate.h>
 #include <idoc/CTmplBasedDocumentManagerBase.h>
 #include <iser/IArchive.h>
 
@@ -75,9 +76,9 @@ public:
 	virtual bool CloseView(istd::IPolymorphic* viewPtr = NULL, bool beQuiet = false, bool* ignoredPtr = NULL) override;
 
 protected:
-	typedef istd::TDelPtr<istd::IChangeable> DocumentPtr;
-	typedef istd::TDelPtr<idoc::IUndoManager> UndoManagerPtr;
-	typedef istd::TDelPtr<istd::IPolymorphic> ViewPtr;
+	typedef istd::IChangeableSharedPtr DocumentPtr;
+	typedef idoc::IUndoManagerSharedPtr UndoManagerPtr;
+	typedef idoc::IDocumentTemplate::ViewSharedPtr ViewPtr;
 	struct ViewInfo
 	{
 		ViewPtr viewPtr;
@@ -94,7 +95,7 @@ protected:
 		SingleDocumentData(
 					CMultiDocumentManagerBase* parentPtr,
 					const QByteArray& documentTypeId,
-					istd::IChangeable* documentPtr);
+					DocumentPtr& documentPtr);
 
 		virtual ~SingleDocumentData();
 

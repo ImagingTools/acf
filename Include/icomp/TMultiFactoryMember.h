@@ -46,7 +46,7 @@ public:
 		This is combination of the methods \c CreateComponent and \c ExtractInterface
 		provided for convinience, if only one interface is asked in factorisied objects.
 	*/
-	Interface* CreateInstance(int index) const;
+	istd::TUniqueInterfacePtr<Interface> CreateInstance(int index) const;
 
 	/**
 		Extract interface from some component.
@@ -117,19 +117,18 @@ IComponent* TMultiFactoryMember<Interface>::CreateComponent(int index) const
 
 
 template <class Interface>
-Interface* TMultiFactoryMember<Interface>::CreateInstance(int index) const
+istd::TUniqueInterfacePtr<Interface> TMultiFactoryMember<Interface>::CreateInstance(int index) const
 {
-	istd::TDelPtr<IComponent> newComponentPtr(CreateComponent(index));
-	if (newComponentPtr.IsValid()){
-		Interface* retVal = BaseClass2::ExtractInterface<Interface>(newComponentPtr.GetPtr());
-		if (retVal != NULL){
-			newComponentPtr.PopPtr();
+	icomp::IComponent* newComponentPtr = CreateComponent(index);
+	if (newComponentPtr != nullptr){
+		return istd::TUniqueInterfacePtr<Interface>(newComponentPtr, [newComponentPtr](){
+			Interface* retVal = BaseClass2::ExtractInterface<Interface>(newComponentPtr);
 
 			return retVal;
-		}
+		});
 	}
 
-	return NULL;
+	return istd::TUniqueInterfacePtr<Interface>();
 }
 
 

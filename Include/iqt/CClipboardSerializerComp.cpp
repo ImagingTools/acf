@@ -50,7 +50,7 @@ bool CClipboardSerializerComp::IsOperationSupported(
 }
 
 
-int CClipboardSerializerComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CClipboardSerializerComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& /*filePath*/,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -85,7 +85,7 @@ int CClipboardSerializerComp::LoadFromFile(
 }
 
 
-int CClipboardSerializerComp::SaveToFile(
+ifile::IFilePersistence::OperationState CClipboardSerializerComp::SaveToFile(
 			const istd::IChangeable& data, 
 			const QString& /*filePath*/,
 			ibase::IProgressManager* /*progressManagerPtr*/) const

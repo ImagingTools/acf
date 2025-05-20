@@ -1,5 +1,4 @@
-#ifndef iqtgui_CStatusGuiComp_included
-#define iqtgui_CStatusGuiComp_included
+#pragma once
 
 
 // Qt includes
@@ -15,6 +14,7 @@
 #include <imod/TSingleModelObserverBase.h>
 #include <iqtgui/TGuiComponentBase.h>
 #include <iqtgui/TGuiObserverWrap.h>
+#include <iqtgui/TMakeStateIconWrapper.h>
 
 
 namespace iqtgui
@@ -22,14 +22,16 @@ namespace iqtgui
 
 
 class CStatusGuiComp:
-			public iqtgui::TGuiObserverWrap<
+			public iqtgui::StateIconWrapper< 
+				iqtgui::TGuiObserverWrap<
 						iqtgui::TGuiComponentBase<QLabel>,
-						imod::TSingleModelObserverBase<istd::IInformationProvider> >
+						imod::TSingleModelObserverBase<istd::IInformationProvider> > >
 {
 public:
-	typedef iqtgui::TGuiObserverWrap<
+	typedef iqtgui::StateIconWrapper< 
+		iqtgui::TGuiObserverWrap<
 				iqtgui::TGuiComponentBase<QLabel>,
-				imod::TSingleModelObserverBase<istd::IInformationProvider> > BaseClass;
+				imod::TSingleModelObserverBase<istd::IInformationProvider> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CStatusGuiComp);
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of status icon", true, 64);
@@ -49,6 +51,4 @@ private:
 
 } // namespace iqtgui
 
-
-#endif // !iqtgui_CStatusGuiComp_included
 

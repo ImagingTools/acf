@@ -9,7 +9,7 @@ namespace iimg
 
 // reimplemented (CMultiPageBitmapBase)
 
-IBitmap* CMultiPageBitmapComp::CreateBitmap() const
+IBitmapUniquePtr CMultiPageBitmapComp::CreateBitmap() const
 {
 	if (m_bitmapFactoryCompPtr.IsValid()){
 		return m_bitmapFactoryCompPtr.CreateInstance();

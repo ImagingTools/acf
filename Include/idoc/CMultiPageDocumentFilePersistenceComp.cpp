@@ -42,7 +42,7 @@ bool CMultiPageDocumentFilePersistenceComp::IsOperationSupported(
 }
 
 
-int CMultiPageDocumentFilePersistenceComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CMultiPageDocumentFilePersistenceComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -114,7 +114,7 @@ int CMultiPageDocumentFilePersistenceComp::LoadFromFile(
 }
 
 
-int CMultiPageDocumentFilePersistenceComp::SaveToFile(
+ifile::IFilePersistence::OperationState CMultiPageDocumentFilePersistenceComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const

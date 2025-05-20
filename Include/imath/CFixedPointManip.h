@@ -54,7 +54,7 @@ public:
 
 	// reimplemented (imath::TIValueManip)
 	virtual double GetRounded(const double& value) const override;
-	virtual bool IsEqual(const double& value1, const double& value2) const override;
+	virtual bool AreValuesEqual(const double& value1, const double& value2) const override;
 	virtual bool IsSmaller(const double& value1, const double& value2) const override;
 	virtual bool IsSmallerEqual(const double& value1, const double& value2) const override;
 	virtual double GetSmallerValue(const double& value) const override;
@@ -96,7 +96,7 @@ inline double CFixedPointManip::GetRounded(const double& value) const
 }
 
 
-inline bool CFixedPointManip::IsEqual(const double& value1, const double& value2) const
+inline bool CFixedPointManip::AreValuesEqual(const double& value1, const double& value2) const
 {
 	return GetInternalValue(value1) == GetInternalValue(value2);
 }

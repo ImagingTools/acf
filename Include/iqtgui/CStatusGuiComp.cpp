@@ -24,39 +24,14 @@ namespace iqtgui
 
 void CStatusGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
-	static QIcon stateUnknownIcon(":/Icons/StateUnknown");
-	static QIcon stateOkIcon(":/Icons/StateOk");
-	static QIcon stateWarningIcon(":/Icons/StateWarning");
-	static QIcon stateInvalidIcon(":/Icons/StateInvalid");
-
 	QIcon icon;
 
 	istd::IInformationProvider* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
-		switch (objectPtr->GetInformationCategory()){
-		case istd::IInformationProvider::IC_INFO:
-			icon = stateOkIcon;
-			break;
-
-		case istd::IInformationProvider::IC_WARNING:
-			icon = stateWarningIcon;
-			break;
-
-		case istd::IInformationProvider::IC_ERROR:
-			icon = stateInvalidIcon;
-			break;
-
-		case istd::IInformationProvider::IC_CRITICAL:
-			icon = stateInvalidIcon;
-			break;
-
-		default:
-			icon = stateUnknownIcon;
-			break;
-		}
+		icon = GetCategoryIcon(objectPtr->GetInformationCategory());
 	}
 	else{
-		icon = stateUnknownIcon;
+		icon = GetCategoryIcon(istd::IInformationProvider::IC_NONE);
 	}
 
 	QLabel* labelPtr = GetQtWidget();

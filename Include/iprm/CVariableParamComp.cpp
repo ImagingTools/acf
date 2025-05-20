@@ -63,18 +63,18 @@ bool CVariableParamComp::AssignTypeId(const QByteArray& typeId)
 	int typesCount = qMin(m_factoryIdsAttrPtr.GetCount(), m_factoriesFact.GetCount());
 	for (int i = 0; i < typesCount; ++i){
 		if (m_factoryIdsAttrPtr[i].toLocal8Bit() == typeId){
-			iser::ISerializable* newParamPtr = m_factoriesFact.CreateInstance(i);
-			if (newParamPtr != NULL){
+			iser::ISerializableUniquePtr newParamPtr = m_factoriesFact.CreateInstance(i);
+			if (newParamPtr.IsValid()){
 				if (m_paramPtr.IsValid()){
 					newParamPtr->CopyFrom(*m_paramPtr, CM_CONVERT);
 				}
 
-				imod::IModel* newParamModelPtr = dynamic_cast<imod::IModel*>(newParamPtr);
+				imod::IModel* newParamModelPtr = dynamic_cast<imod::IModel*>(newParamPtr.GetPtr());
 				if (newParamModelPtr != NULL){
 					newParamModelPtr->AttachObserver(&m_updateBridge);
 				}
 
-				m_paramPtr.SetPtr(newParamPtr);
+				m_paramPtr.TakeOver(newParamPtr);
 				m_paramTypeId = typeId;
 
 				return true;

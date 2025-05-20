@@ -47,7 +47,7 @@ private:
 
 	IChangeable* m_changeablePtr = nullptr;
 
-	const IChangeable::ChangeSet& m_changeSet;
+	const IChangeable::ChangeSet m_changeSet;
 };
 
 

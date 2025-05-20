@@ -52,6 +52,10 @@ public:
 };
 
 
+typedef istd::TUniqueInterfacePtr<IGuiObject> IGuiObjectUniquePtr;
+typedef istd::TSharedInterfacePtr<IGuiObject> IGuiObjectSharedPtr;
+
+
 } // namespace iqtgui
 
 

@@ -74,6 +74,9 @@ public:
 };
 
 
+typedef istd::TUniqueInterfacePtr<IMultiPageDocument> IMultiPageDocumentPtr;
+
+
 } // namespace idoc
 
 

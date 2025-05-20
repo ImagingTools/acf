@@ -124,7 +124,7 @@ public:
 		This function loads data \c data from file \c filePath
 		\returns File loading state. \sa OperationState
 	*/
-	virtual int LoadFromFile(
+	virtual OperationState LoadFromFile(
 				istd::IChangeable& data,
 				const QString& filePath = QString(),
 				ibase::IProgressManager* progressManagerPtr = NULL) const = 0;
@@ -133,7 +133,7 @@ public:
 		This function saves data \c data to file \c filePath
 		\returns File saving state. \sa OperationState
 	*/
-	virtual int SaveToFile(
+	virtual OperationState SaveToFile(
 				const istd::IChangeable& data,
 				const QString& filePath = QString(),
 				ibase::IProgressManager* progressManagerPtr = NULL) const = 0;

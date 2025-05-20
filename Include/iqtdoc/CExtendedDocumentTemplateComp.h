@@ -27,7 +27,7 @@ public:
 
 protected:
 	// reimplemented (idoc::CSingleDocumentTemplateComp)
-	virtual istd::IPolymorphic* ExtractViewInterface(icomp::IComponent* componentPtr) const override;
+	virtual idoc::IDocumentTemplate::ViewUniquePtr ExtractViewInterface(std::unique_ptr<icomp::IComponent>& componentPtr) const override;
 
 private:
 	I_FACT(iqtgui::IGuiObject, m_viewGuiCompFact);

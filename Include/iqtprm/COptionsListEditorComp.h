@@ -45,7 +45,6 @@ protected Q_SLOTS:
 protected:
 	void UpdateList();
 	int GetSelectedListOption() const;
-	QByteArray GetSelectedParamsSetTypeId() const;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached() override;

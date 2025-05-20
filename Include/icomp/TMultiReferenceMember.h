@@ -94,31 +94,33 @@ bool TMultiReferenceMember<Interface>::IsValid() const
 template <class Interface>
 bool TMultiReferenceMember<Interface>::EnsureInitialized() const
 {
-	QMutexLocker lock(&m_mutex);
+	if (!m_isInitialized){
+		QMutexLocker lock(&m_mutex);
 
-	if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
-		const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
-		if (parentPtr != NULL){
-			int attributesCount = BaseClass::GetCount();
+		if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
+			const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
+			if (parentPtr != NULL){
+				int attributesCount = BaseClass::GetCount();
 
-			m_components.resize(attributesCount);
+				m_components.resize(attributesCount);
 
-			for (int i = 0; i < attributesCount; ++i){
-				const QByteArray& componentId = BaseClass::operator[](i);
+				for (int i = 0; i < attributesCount; ++i){
+					const QByteArray& componentId = BaseClass::operator[](i);
 
-				QByteArray baseId;
-				QByteArray subId;
-				BaseClass2::SplitId(componentId, baseId, subId);
+					QByteArray baseId;
+					QByteArray subId;
+					BaseClass2::SplitId(componentId, baseId, subId);
 
-				IComponent* componentPtr = parentPtr->GetSubcomponent(baseId);
+					IComponent* componentPtr = parentPtr->GetSubcomponent(baseId);
 
-				m_components[i] = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
+					m_components[i] = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
+				}
+
+				m_isInitialized = true;
 			}
-
-			m_isInitialized = true;
-		}
-		else{
-			qCritical("Components are is defined, but definition component has no parent");
+			else{
+				qCritical("Components are is defined, but definition component has no parent");
+			}
 		}
 	}
 

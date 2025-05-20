@@ -2,7 +2,7 @@
 #define iqtprm_CParamsManagerGuiCompBase_included
 
 
-//Qt includes
+// Qt includes
 #include <QtCore/QTimer>
 #include <QtCore/QtGlobal>
 #if QT_VERSION >= 0x050000
@@ -73,8 +73,9 @@ protected Q_SLOTS:
 	void HideInfoLabel();
 
 protected:
-	// abstract methods
+	int GetIndexByName(const QString& itemName) const;
 
+	// abstract methods
 	/**
 		Get the observer for a given parameter set.
 	*/

@@ -56,16 +56,6 @@ public:
 		PF_RGB24,
 
 		/**
-			48-bit RGB-bitmap packed bitmap (16-16-16).
-		*/
-		PF_RGB48,
-
-		/**
-			64-bit RGBA-bitmap packed bitmap (16-16-16-16).
-		*/
-		PF_RGBA64,
-
-		/**
 			16-bit grayscale bitmap.
 		*/
 		PF_GRAY16,
@@ -96,6 +86,16 @@ public:
 			In this mode the bitmap represents 2D calibration from pixel to mm.
 		*/
 		PF_XY32,
+
+		/**
+			48-bit RGB-bitmap packed bitmap (16-16-16).
+		*/
+		PF_RGB48,
+
+		/**
+			64-bit RGBA-bitmap packed bitmap (16-16-16-16).
+		*/
+		PF_RGBA64,
 
 		/**
 			32-bit CMYK-bitmap.
@@ -181,6 +181,10 @@ public:
 	*/
 	virtual void* GetLinePtr(int positionY) = 0;
 };
+
+
+typedef istd::TUniqueInterfacePtr<iimg::IBitmap> IBitmapUniquePtr;
+typedef istd::TSharedInterfacePtr<iimg::IBitmap> IBitmapSharedPtr;
 
 
 } // namespace iimg

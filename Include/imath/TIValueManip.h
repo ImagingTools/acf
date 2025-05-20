@@ -29,7 +29,7 @@ public:
 		\param	value1	first value.
 		\param	value2	second value.
 	 */
-	virtual bool IsEqual(const ValueType& value1, const ValueType& value2) const = 0;
+	virtual bool AreValuesEqual(const ValueType& value1, const ValueType& value2) const = 0;
 	/**
 		Compare two values and check, if first one is smaller as the second.
 		\param	value1	first value.

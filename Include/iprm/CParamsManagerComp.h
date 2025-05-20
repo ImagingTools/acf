@@ -63,7 +63,7 @@ protected:
 	// reimplemented (CParamsManagerCompBase)
 	virtual bool IsParameterCreationSupported() const;
 	virtual int GetCreatedParamsSetsCount() const;
-	virtual iprm::IParamsSet* CreateParamsSetInstance(int typeIndex = -1) const;
+	virtual IParamsSetUniquePtr CreateParamsSetInstance(int typeIndex = -1) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

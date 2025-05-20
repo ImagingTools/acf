@@ -68,7 +68,7 @@ bool CFastColor::IsRoundedEqual(const CFastColor& color, const imath::IDoubleMan
 {
 	int elementsCount = GetElementsCount();
 	for (int i = 0; i < elementsCount; ++i){
-		if (!manipulator.IsEqual(m_elements[i], color.m_elements[i])){
+		if (!manipulator.AreValuesEqual(m_elements[i], color.m_elements[i])){
 			return false;
 		}
 	}

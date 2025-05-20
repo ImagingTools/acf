@@ -45,6 +45,10 @@ inline quint32 ISerializable::GetMinimalVersion(int /*versionId*/) const
 }
 
 
+typedef istd::TUniqueInterfacePtr<iser::ISerializable> ISerializableUniquePtr;
+typedef istd::TSharedInterfacePtr<iser::ISerializable> ISerializableSharedPtr;
+
+
 } // namespace iser
 
 

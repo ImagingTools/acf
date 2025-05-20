@@ -21,7 +21,7 @@ bool CSettingsSerializerComp::IsOperationSupported(
 {
 	if ((dataObjectPtr != NULL) && (dynamic_cast<const iser::ISerializable*>(dataObjectPtr) == NULL)){
 		if (!beQuiet){
-			SendInfoMessage(MI_BAD_OBJECT_TYPE, "Object is not serializable");
+			SendInfoMessage(MI_BAD_OBJECT_TYPE, QT_TR_NOOP("Object is not serializable"));
 		}
 
 		return false;
@@ -35,7 +35,7 @@ bool CSettingsSerializerComp::IsOperationSupported(
 }
 
 
-int CSettingsSerializerComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CSettingsSerializerComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& /*filePath*/,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -63,11 +63,11 @@ int CSettingsSerializerComp::LoadFromFile(
 				return OS_OK;
 			}
 			else{
-				SendInfoMessage(MI_CANNOT_LOAD, "Cannot serialize object from file");
+				SendInfoMessage(MI_CANNOT_LOAD, QT_TR_NOOP("Cannot serialize object from file"));
 			}
 		}
 		else{
-			SendInfoMessage(MI_CANNOT_LOAD, "No application info found, it is needed to save to settings");
+			SendInfoMessage(MI_CANNOT_LOAD, QT_TR_NOOP("No application info found, it is needed to save to settings"));
 		}
 	}
 
@@ -75,7 +75,7 @@ int CSettingsSerializerComp::LoadFromFile(
 }
 
 
-int CSettingsSerializerComp::SaveToFile(
+ifile::IFilePersistence::OperationState CSettingsSerializerComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& /*filePath*/,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -104,11 +104,11 @@ int CSettingsSerializerComp::SaveToFile(
 				return OS_OK;
 			}
 			else{
-				SendInfoMessage(MI_CANNOT_SAVE, "Cannot serialize object to file");
+				SendInfoMessage(MI_CANNOT_SAVE, QT_TR_NOOP("Cannot serialize object to file"));
 			}
 		}
 		else{
-			SendInfoMessage(MI_CANNOT_LOAD, "No application info found, it is needed to save to settings");
+			SendInfoMessage(MI_CANNOT_LOAD, QT_TR_NOOP("No application info found, it is needed to save to settings"));
 		}
 	}
 

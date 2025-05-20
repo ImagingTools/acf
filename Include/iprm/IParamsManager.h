@@ -7,14 +7,12 @@
 #include <QtCore/QByteArray>
 
 // ACF includes
+#include <iprm/IParamsSet.h>
 #include <iprm/ISelectionParam.h>
 
 
 namespace iprm
 {
-
-
-class IParamsSet;
 
 
 /**
@@ -148,7 +146,7 @@ public:
 		\param	index		If \c index is not negative, the parameter set data at the given position will be copied to the created instance.
 		\note The caller is responsible for the memory mangement of the created parameter set.
 	*/
-	virtual IParamsSet* CreateParameterSet(int typeIndex = -1, int index = -1) const = 0;
+	virtual iprm::IParamsSetUniquePtr CreateParameterSet(int typeIndex = -1, int index = -1) const = 0;
 
 	/**
 		Get name of specified parameter set.
@@ -170,6 +168,10 @@ public:
 	*/
 	virtual void SetParamsSetDescription(int index, const QString& description) = 0;
 };
+
+
+typedef istd::TUniqueInterfacePtr<IParamsManager> IParamsManagerUniquePtr;
+typedef istd::TSharedInterfacePtr<IParamsManager> IParamsManagerSharedPtr;
 
 
 } // namespace iprm

@@ -87,7 +87,7 @@ protected:
 	// reimplemented (CParamsManagerCompBase)
 	virtual bool IsParameterCreationSupported() const override;
 	virtual int GetCreatedParamsSetsCount() const override;
-	virtual iprm::IParamsSet* CreateParamsSetInstance(int typeIndex = -1) const override;
+	virtual iprm::IParamsSetUniquePtr CreateParamsSetInstance(int typeIndex = -1) const override;
 	virtual QString CalculateNewDefaultName(int typeIndex) const override;
 
 	// reimplemented (icomp::CComponentBase)

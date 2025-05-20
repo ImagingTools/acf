@@ -36,19 +36,19 @@ public:
 				const istd::IChangeable* dataObjectPtr,
 				const QString* filePathPtr = NULL,
 				int flags = -1,
-				bool beQuiet = true) const;
-	virtual int LoadFromFile(
+				bool beQuiet = true) const override;
+	virtual ifile::IFilePersistence::OperationState LoadFromFile(
 				istd::IChangeable& data,
 				const QString& filePath = QString(),
-				ibase::IProgressManager* progressManagerPtr = NULL) const;
-	virtual int SaveToFile(
+				ibase::IProgressManager* progressManagerPtr = NULL) const override;
+	virtual ifile::IFilePersistence::OperationState SaveToFile(
 				const istd::IChangeable& data,
 				const QString& filePath = QString(),
-				ibase::IProgressManager* progressManagerPtr = NULL) const;
+				ibase::IProgressManager* progressManagerPtr = NULL) const override;
 
 	// reimplemented (ifile::IFileTypeInfo)
-	virtual bool GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr = NULL, int flags = -1, bool doAppend = false) const;
-	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
+	virtual bool GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr = NULL, int flags = -1, bool doAppend = false) const override;
+	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const override;
 
 private:
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);

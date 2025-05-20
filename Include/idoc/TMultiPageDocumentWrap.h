@@ -60,7 +60,7 @@ protected:
 	struct Page
 	{
 		idoc::CStandardDocumentMetaInfo pageMetaInfo;
-		istd::TSmartPtr<istd::IChangeable> pagePtr;
+		istd::IChangeableSharedPtr pagePtr;
 	};
 
 protected:

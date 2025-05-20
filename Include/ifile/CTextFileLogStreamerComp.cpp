@@ -46,7 +46,7 @@ bool CTextFileLogStreamerComp::IsOperationSupported(
 }
 
 
-int CTextFileLogStreamerComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CTextFileLogStreamerComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -55,7 +55,7 @@ int CTextFileLogStreamerComp::LoadFromFile(
 		return OS_FAILED;
 	}
 
-	int retVal = OS_FAILED;
+	ifile::IFilePersistence::OperationState retVal = OS_FAILED;
 
 	ilog::IMessageContainer* resetContainerPtr = dynamic_cast<ilog::IMessageContainer*>(&data);
 	if (resetContainerPtr){
@@ -106,9 +106,7 @@ int CTextFileLogStreamerComp::LoadFromFile(
 						}
 
 						containerPtr->AddMessage(
-							istd::TSmartPtr<const istd::IInformationProvider>
-								(new ilog::CMessage(severtity, id, text, severityText, 0, &timeStamp))
-							);
+							ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(severtity, id, text, severityText, "ifile::CTextFileLogStreamerComp", 0, &timeStamp)));
 					}
 				}
 			}
@@ -119,7 +117,7 @@ int CTextFileLogStreamerComp::LoadFromFile(
 }
 
 
-int CTextFileLogStreamerComp::SaveToFile(
+ifile::IFilePersistence::OperationState CTextFileLogStreamerComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -128,7 +126,7 @@ int CTextFileLogStreamerComp::SaveToFile(
 		return OS_FAILED;
 	}
 
-	int retVal = OS_FAILED;
+	ifile::IFilePersistence::OperationState retVal = OS_FAILED;
 
 	const ilog::IMessageContainer* containerPtr = dynamic_cast<const ilog::IMessageContainer*>(&data);
 	if (containerPtr != NULL){
@@ -137,8 +135,8 @@ int CTextFileLogStreamerComp::SaveToFile(
 		}
 
 		const ilog::IMessageContainer::Messages messages = containerPtr->GetMessages();
-		for (int i = 0; i < messages.count(); i++){
-			const_cast<CTextFileLogStreamerComp*>(this)->AddMessage(messages.at(i));
+		for (ilog::IMessageContainer::Messages::const_iterator it = messages.begin(); it != messages.end(); it++) {
+			const_cast<CTextFileLogStreamerComp*>(this)->AddMessage(*it);
 		}
 
 		const_cast<CTextFileLogStreamerComp*>(this)->CloseFileStream();

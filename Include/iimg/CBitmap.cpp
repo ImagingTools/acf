@@ -1,6 +1,8 @@
 #include <iimg/CBitmap.h>
 
 
+#include <cstring>// include std::memcpy
+
 // Qt includes
 #include <QtCore/QVector>
 #include <QtCore/QMutexLocker>
@@ -16,6 +18,7 @@
 namespace iimg
 {
 
+
 // global functions
 
 template <typename PixelType, typename WorkingType>
@@ -29,8 +32,8 @@ bool ConvertToGrayImage(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 			return true;
 		}
 
-		PixelType minValue = *(const PixelType*)inputBitmap.GetLinePtr(0);
-		PixelType maxValue = minValue;
+		PixelType minValue = std::numeric_limits<PixelType>::max();
+		PixelType maxValue = std::numeric_limits<PixelType>::lowest();
 
 		for (int y = 0; y < size.GetY(); ++y){
 			const PixelType* inputLinePtr = (const PixelType*)inputBitmap.GetLinePtr(y);
@@ -38,12 +41,12 @@ bool ConvertToGrayImage(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 			for (int x = 0; x < size.GetX(); ++x){
 				PixelType value = inputLinePtr[x];
 
-				if (!qIsNaN(double(value))){
-					if (value < minValue || qIsNaN(double(minValue))){
+				if (!std::isnan(double(value))){
+					if (value < minValue){
 						minValue = value;
 					}
 
-					if (value > maxValue || qIsNaN(double(maxValue))){
+					if (value > maxValue){
 						maxValue = value;
 					}
 				}
@@ -53,12 +56,12 @@ bool ConvertToGrayImage(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 		if (maxValue > minValue){
 			for (int y = 0; y < size.GetY(); ++y){
 				const PixelType* inputLinePtr = (const PixelType*)inputBitmap.GetLinePtr(y);
-				quint8* outputLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
+				uint8_t* outputLinePtr = (uint8_t*)outputBitmap.GetLinePtr(y);
 
 				for (int x = 0; x < size.GetX(); ++x){
 					WorkingType value = inputLinePtr[x];
 
-					outputLinePtr[x] = quint8(255 * (value - minValue) / (maxValue - minValue));
+					outputLinePtr[x] = uint8_t(255 * (value - minValue) / (maxValue - minValue));
 				}
 			}
 		}
@@ -243,6 +246,7 @@ bool ConvertXyzToRgb(const IBitmap& inputBitmap, CBitmap& outputBitmap)
 	return false;
 }
 
+
 // public static methods
 
 QByteArray CBitmap::GetTypeName()
@@ -259,7 +263,7 @@ CBitmap::CBitmap()
 
 
 CBitmap::CBitmap(const CBitmap& bitmap)
-:	BaseClass(bitmap),
+	:BaseClass(bitmap),
 	m_image(bitmap.m_image.copy()),
 	m_externalBuffer(NULL)
 {

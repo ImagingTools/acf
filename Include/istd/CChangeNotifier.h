@@ -40,6 +40,7 @@ public:
 		Call update on attached object and detach it.
 	*/
 	void Reset();
+	
 	/**
 		Similar like method Reset(), but it tries to avoid the update.
 		It should be used only if you are sure, that no changes was done, or result will be ignored.
@@ -50,8 +51,8 @@ private:
 	// blocked copy constructor
 	CChangeNotifier(const CChangeNotifier& notifier);
 
-	IChangeable* m_changeablePtr;
-	const IChangeable::ChangeSet& m_changeSet;
+	IChangeable* m_changeablePtr = nullptr;
+	const IChangeable::ChangeSet m_changeSet;
 };
 
 

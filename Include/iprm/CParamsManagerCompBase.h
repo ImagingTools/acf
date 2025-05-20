@@ -93,7 +93,7 @@ public:
 	virtual bool RemoveParamsSet(int index);
 	virtual bool SwapParamsSet(int index1, int index2);
 	virtual IParamsSet* GetParamsSet(int index) const;
-	virtual IParamsSet* CreateParameterSet(int typeIndex = -1, int index = -1) const;
+	virtual iprm::IParamsSetUniquePtr CreateParameterSet(int typeIndex = -1, int index = -1) const;
 	virtual int GetIndexOperationFlags(int index = -1) const;
 	virtual bool SetIndexOperationFlags(int index, int flags);
 	virtual int GetParamsSetsCount() const;
@@ -139,7 +139,7 @@ protected:
 	/**
 		Create a new instance of the parameter set.
 	*/
-	virtual iprm::IParamsSet* CreateParamsSetInstance(int typeIndex = -1) const = 0;
+	virtual iprm::IParamsSetUniquePtr CreateParamsSetInstance(int typeIndex = -1) const = 0;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -200,7 +200,7 @@ protected:
 		// reimplemented (istd::IChangeable)
 		virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
-		istd::TDelPtr<IParamsSet> paramSetPtr;
+		iprm::IParamsSetSharedPtr paramSetPtr;
 		QByteArray uuid;
 		QString name;
 		iprm::CNameParam description;

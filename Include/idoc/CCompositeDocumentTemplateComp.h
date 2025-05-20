@@ -40,16 +40,16 @@ public:
 				const QByteArray& documentTypeId,
 				const QByteArray& viewTypeId) const override;
 	virtual ifile::IFilePersistence* GetFileLoader(const QByteArray& documentTypeId) const override;
-	virtual istd::IChangeable* CreateDocument(
+	virtual istd::IChangeableUniquePtr CreateDocument(
 				QByteArray& documentTypeId,
 				bool initialize = true,
 				bool beQuiet = false,
 				bool* ignoredFlagPtr = NULL) const override;
-	virtual istd::IPolymorphic* CreateView(
+	virtual ViewUniquePtr CreateView(
 				const QByteArray& documentTypeId,
 				istd::IChangeable* documentPtr,
 				const QByteArray& viewTypeId = QByteArray()) const override;
-	virtual idoc::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const override;
+	virtual idoc::IUndoManagerUniquePtr CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)

@@ -56,7 +56,7 @@ bool CFileDialogLoaderComp::IsOperationSupported(
 }
 
 
-int CFileDialogLoaderComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CFileDialogLoaderComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -76,7 +76,7 @@ int CFileDialogLoaderComp::LoadFromFile(
 }
 
 
-int CFileDialogLoaderComp::SaveToFile(
+ifile::IFilePersistence::OperationState CFileDialogLoaderComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const

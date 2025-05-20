@@ -18,8 +18,8 @@ CUndoManagerCommandsProviderComp::CUndoManagerCommandsProviderComp()
 	connect(&m_undoCommand, SIGNAL(triggered()), this, SLOT(OnUndoCommand()));
 	connect(&m_redoCommand, SIGNAL(triggered()), this, SLOT(OnRedoCommand()));
 
-	m_undoCommand.SetVisuals(tr("&Undo"), tr("Undo"), tr("Undo last document changes"), QIcon(":/Icons/Undo"));
-	m_redoCommand.SetVisuals(tr("&Redo"), tr("Redo"), tr("Redo last document changes"), QIcon(":/Icons/Redo"));
+	m_undoCommand.SetVisuals(tr("&Undo"), tr("Undo"), tr("Undo last document changes"), GetIcon(":/Icons/Undo"));
+	m_redoCommand.SetVisuals(tr("&Redo"), tr("Redo"), tr("Redo last document changes"), GetIcon(":/Icons/Redo"));
 
 	m_undoCommand.setShortcut(Qt::CTRL + Qt::Key_Z);
 	m_redoCommand.setShortcut(int(Qt::CTRL) + int(Qt::SHIFT) + Qt::Key_Z);

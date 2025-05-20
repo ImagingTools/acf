@@ -49,9 +49,18 @@ idoc::IDocumentTemplate::Ids CExtendedDocumentTemplateComp::GetDocumentTypeIdsFo
 
 // reimplemented (idoc::CSingleDocumentTemplateComp)
 
-istd::IPolymorphic* CExtendedDocumentTemplateComp::ExtractViewInterface(icomp::IComponent* componentPtr) const
+idoc::IDocumentTemplate::ViewUniquePtr CExtendedDocumentTemplateComp::ExtractViewInterface(std::unique_ptr<icomp::IComponent>& componentPtr) const
 {
-	return m_viewGuiCompFact.ExtractInterface(componentPtr);
+	ViewUniquePtr viewPtr(componentPtr.get(), [&componentPtr, this]()
+	{
+		iqtgui::IGuiObject* guiPtr = m_viewGuiCompFact.ExtractInterface(componentPtr.get());
+
+		return guiPtr;
+	});
+
+	componentPtr.release();
+
+	return viewPtr;
 }
 
 

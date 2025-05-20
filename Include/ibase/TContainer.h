@@ -70,7 +70,7 @@ public:
 		auto changes = ElementAddChanges(index);
 		istd::CChangeNotifier notifier(this, &changes);
 
-		return m_items.insert(index, item);
+		return m_items.insert(m_items.begin() + index, item);
 	}
 
 
@@ -79,24 +79,32 @@ public:
 		auto changes = ElementAddChanges(index);
 		istd::CChangeNotifier notifier(this, &changes);
 
-		return m_items.insert(index, std::move(item));
+		return m_items.insert(m_items.begin() + index, std::move(item));
 	}
 
 	// remove of multiple elements is not implemented yet
 	void remove(qsizetype i)
 	{
+		Q_UNUSED(i);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 		auto changes = ElementRemoveChanges(i);
 		istd::CChangeNotifier notifier(this, &changes);
 
 		m_items.remove(i);
+#endif
 	}
 
 
 	void resize(qsizetype size)
 	{
+		Q_UNUSED(size);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 		istd::CChangeNotifier notifier(this, &s_resetChange);
 
 		m_items.resize(size);
+#endif
 	}
 
 

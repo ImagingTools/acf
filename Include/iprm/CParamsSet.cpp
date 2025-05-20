@@ -28,9 +28,36 @@ bool CParamsSet::SetEditableParameter(const QByteArray& id, iser::ISerializable*
 	if (!id.isEmpty()){
 		const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
 		if (parameterInfoPtr == NULL){
-			m_params.PushBack(new ParameterInfo(id, parameterPtr, releaseFlag));
+			if (releaseFlag){
+				iser::ISerializableUniquePtr ptr(parameterPtr);
+
+				m_params.PushBack(new ParameterInfo(id, ptr));
+			}
+			else{
+				m_params.PushBack(new ParameterInfo(id, parameterPtr));
+			}
 
 			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(parameterPtr);
+			if ((modelPtr != NULL) && !modelPtr->IsAttached(&m_updateBridge)){
+				modelPtr->AttachObserver(&m_updateBridge);
+			}
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+bool CParamsSet::SetEditableParameter(const QByteArray& id, iser::ISerializableUniquePtr& parameterPtr)
+{
+	if (!id.isEmpty()){
+		const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
+		if (parameterInfoPtr == NULL){
+			m_params.PushBack(new ParameterInfo(id, parameterPtr));
+
+			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(parameterPtr.GetPtr());
 			if ((modelPtr != NULL) && !modelPtr->IsAttached(&m_updateBridge)){
 				modelPtr->AttachObserver(&m_updateBridge);
 			}
@@ -321,10 +348,10 @@ bool CParamsSet::ResetData(CompatibilityMode /*mode*/)
 
 // protected methods
 
-const CParamsSet::ParameterInfo* CParamsSet::FindParameterInfo(const QByteArray& parameterId) const
+CParamsSet::ParameterInfo* CParamsSet::FindParameterInfo(const QByteArray& parameterId) const
 {
 	for (int parameterIndex = 0; parameterIndex < m_params.GetCount(); parameterIndex++){
-		const ParameterInfo* parameterPtr = m_params.GetAt(parameterIndex);
+		ParameterInfo* parameterPtr = m_params.GetAt(parameterIndex);
 		Q_ASSERT(parameterPtr != NULL);
 
 		if (parameterPtr->parameterId == parameterId){

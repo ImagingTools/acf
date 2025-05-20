@@ -49,7 +49,7 @@ bool CVarColor::IsRoundedEqual(const CVarColor& color, const imath::IDoubleManip
 {
 	int elementsCount = GetElementsCount();
 	for (int i = 0; i < elementsCount; ++i){
-		if (!manipulator.IsEqual(GetElement(i), color[i])){
+		if (!manipulator.AreValuesEqual(GetElement(i), color[i])){
 			return false;
 		}
 	}

@@ -48,8 +48,8 @@ idoc::IUndoManager* CMultiDocumentManagerBase::GetUndoManagerForDocument(const i
 	for (int documentIndex = 0; documentIndex < documentsCount; ++documentIndex){
 		const SingleDocumentData& info = GetSingleDocumentData(documentIndex);
 
-		if (info.documentPtr == documentPtr){
-			return info.undoManagerPtr.GetPtr();
+		if (info.documentPtr.GetPtr() == documentPtr){
+			return const_cast<idoc::IUndoManager*>(info.undoManagerPtr.GetPtr());
 		}
 	}
 
@@ -103,7 +103,7 @@ istd::IPolymorphic* CMultiDocumentManagerBase::GetViewFromIndex(int documentInde
 
 	const ViewInfo& viewInfo = infoPtr->views.at(viewIndex);
 
-	return viewInfo.viewPtr.GetPtr();
+	return const_cast<istd::IPolymorphic*>(viewInfo.viewPtr.GetPtr());
 }
 
 
@@ -135,10 +135,10 @@ istd::IChangeable* CMultiDocumentManagerBase::GetDocumentFromView(const istd::IP
 			*documentInfoPtr = *infoPtr;
 		}
 
-		return infoPtr->documentPtr.GetPtr();
+		return const_cast<istd::IChangeable*>(infoPtr->documentPtr.GetPtr());
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -153,12 +153,12 @@ istd::IPolymorphic* CMultiDocumentManagerBase::AddViewToDocument(const istd::ICh
 	for (int documentIndex = 0; documentIndex < documentsCount; ++documentIndex){
 		SingleDocumentData& info = GetSingleDocumentData(documentIndex);
 
-		if (info.documentPtr == &document){
-			istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
+		if (info.documentPtr.GetPtr() == &document){
+			idoc::IDocumentTemplate::ViewUniquePtr viewPtr = documentTemplatePtr->CreateView(
 				info.documentTypeId,
 				info.documentPtr.GetPtr(),
 				viewTypeId);
-			if (viewPtr == NULL){
+			if (!viewPtr.IsValid()){
 				return NULL;
 			}
 
@@ -166,12 +166,12 @@ istd::IPolymorphic* CMultiDocumentManagerBase::AddViewToDocument(const istd::ICh
 			info.views.push_back(ViewInfo());
 
 			ViewInfo& newViewInfo = info.views.back();
-			newViewInfo.viewPtr.SetPtr(viewPtr);
+			newViewInfo.viewPtr.FromUnique(viewPtr);
 			newViewInfo.viewTypeId = viewTypeId;
 
-			OnViewRegistered(viewPtr, info);
+			OnViewRegistered(newViewInfo.viewPtr.GetPtr(), info);
 
-			return viewPtr;
+			return newViewInfo.viewPtr.GetPtr();
 		}
 	}
 
@@ -186,7 +186,7 @@ QByteArray CMultiDocumentManagerBase::GetDocumentTypeId(const istd::IChangeable&
 	for (int documentIndex = 0; documentIndex < documentsCount; ++documentIndex){
 		SingleDocumentData& info = GetSingleDocumentData(documentIndex);
 
-		if (info.documentPtr == &document){
+		if (info.documentPtr.GetPtr() == &document){
 			return info.documentTypeId;
 		}
 	}
@@ -397,7 +397,7 @@ bool CMultiDocumentManagerBase::SaveDirtyDocuments(bool beQuiet, bool* ignoredPt
 				if (!infoPtr->views.isEmpty() && (infoPtr != GetActiveDocumentInfo())){
 					const ViewInfo& firstViewInfo = infoPtr->views.front();
 
-					SetActiveView(firstViewInfo.viewPtr.GetPtr());
+					SetActiveView(const_cast<istd::IPolymorphic*>(firstViewInfo.viewPtr.GetPtr()));
 				}
 			}
 
@@ -431,7 +431,7 @@ bool CMultiDocumentManagerBase::CloseDocument(int documentIndex, bool beQuiet, b
 				const ViewInfo& viewInfo = *viewIter;
 				Q_ASSERT(viewInfo.viewPtr.IsValid());
 
-				if (viewInfo.viewPtr == m_activeViewPtr){
+				if (viewInfo.viewPtr.GetPtr() == m_activeViewPtr){
 					documentIndex = i;
 					break;
 				}
@@ -449,7 +449,7 @@ bool CMultiDocumentManagerBase::CloseDocument(int documentIndex, bool beQuiet, b
 			if (!infoPtr->views.isEmpty() && (infoPtr != GetActiveDocumentInfo())){
 				const ViewInfo& firstViewInfo = infoPtr->views.front();
 
-				SetActiveView(firstViewInfo.viewPtr.GetPtr());
+				SetActiveView(const_cast<istd::IPolymorphic*>(firstViewInfo.viewPtr.GetPtr()));
 			}
 		}
 
@@ -470,9 +470,9 @@ bool CMultiDocumentManagerBase::CloseDocument(int documentIndex, bool beQuiet, b
 		const ViewInfo& viewInfo = *viewIter;
 		Q_ASSERT(viewInfo.viewPtr.IsValid());
 
-		OnViewRemoved(viewInfo.viewPtr.GetPtr());
+		OnViewRemoved(const_cast<istd::IPolymorphic*>(viewInfo.viewPtr.GetPtr()));
 
-		if (viewInfo.viewPtr == m_activeViewPtr){
+		if (viewInfo.viewPtr.GetPtr() == m_activeViewPtr){
 			m_activeViewPtr = NULL;
 		}
 
@@ -512,7 +512,7 @@ bool CMultiDocumentManagerBase::CloseView(istd::IPolymorphic* viewPtr, bool beQu
 			ViewInfo& viewInfo = *viewIter;
 			Q_ASSERT(viewInfo.viewPtr.IsValid());
 
-			if (viewInfo.viewPtr == viewPtr){
+			if (viewInfo.viewPtr.GetPtr() == viewPtr){
 				if (infoPtr->views.size() == 1){	// is it the last view? If yes then simple close document
 					return CloseDocument(documentIndex, beQuiet, ignoredPtr);
 				}
@@ -560,18 +560,18 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenSingleDocument(
 		Q_ASSERT(existingInfoPtr->documentPtr.IsValid());
 
 		if (createView){
-			istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
+			idoc::IDocumentTemplate::ViewUniquePtr viewPtr = documentTemplatePtr->CreateView(
 						existingInfoPtr->documentTypeId,
 						existingInfoPtr->documentPtr.GetPtr(),
 						viewTypeId);
-			if (viewPtr != NULL){
+			if (viewPtr.IsValid()){
 				existingInfoPtr->views.push_back(ViewInfo());
 
 				ViewInfo& newViewInfo = existingInfoPtr->views.back();
-				newViewInfo.viewPtr.SetPtr(viewPtr);
+				newViewInfo.viewPtr.FromUnique(viewPtr);
 				newViewInfo.viewTypeId = viewTypeId;
 
-				OnViewRegistered(viewPtr, *existingInfoPtr);
+				OnViewRegistered(viewPtr.GetPtr(), *existingInfoPtr);
 			}
 		}
 		else{
@@ -580,7 +580,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenSingleDocument(
 				const ViewInfo& firstViewInfo = existingInfoPtr->views.front();
 				Q_ASSERT(firstViewInfo.viewPtr.IsValid());
 
-				SetActiveView(firstViewInfo.viewPtr.GetPtr());
+				SetActiveView(const_cast<istd::IPolymorphic*>(firstViewInfo.viewPtr.GetPtr()));
 			}
 		}
 
@@ -668,7 +668,7 @@ CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::GetDoc
 					viewIter != info.views.end();
 					++viewIter){
 			const ViewInfo& viewInfo = *viewIter;
-			if (viewInfo.viewPtr == &view){
+			if (viewInfo.viewPtr.GetPtr() == &view){
 				return &info;
 			}
 		}
@@ -724,7 +724,9 @@ CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::Create
 	if (documentTemplatePtr != NULL){
 		QByteArray realDocumentTypeId = documentTypeId;
 
-		istd::IChangeable* documentPtr = documentTemplatePtr->CreateDocument(realDocumentTypeId, initialize, beQuiet, ignoredPtr);
+		istd::IChangeableUniquePtr documentInstancePtr = documentTemplatePtr->CreateDocument(realDocumentTypeId, initialize, beQuiet, ignoredPtr);
+		DocumentPtr documentPtr;
+		documentPtr.FromUnique(documentInstancePtr);
 
 		istd::TDelPtr<SingleDocumentData> infoPtr(new SingleDocumentData(
 					const_cast<CMultiDocumentManagerBase*>(this),
@@ -732,24 +734,24 @@ CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::Create
 					documentPtr));
 
 		if (infoPtr->documentPtr.IsValid()){
-			imod::IModel* documentModelPtr = CompCastPtr<imod::IModel>(documentPtr);
+			imod::IModel* documentModelPtr = CompCastPtr<imod::IModel>(documentPtr.GetPtr());
 			if (documentModelPtr != NULL){
 				infoPtr->RegisterModel(documentModelPtr, MI_DOCUMENT);
 			}
 
 			if (createView){
-				istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
+				idoc::IDocumentTemplate::ViewUniquePtr viewPtr = documentTemplatePtr->CreateView(
 							realDocumentTypeId,
 							infoPtr->documentPtr.GetPtr(),
 							viewTypeId);
-				if (viewPtr == NULL){
+				if (!viewPtr.IsValid()){
 					return NULL;
 				}
 
 				infoPtr->views.push_back(ViewInfo());
 
 				ViewInfo& newViewInfo = infoPtr->views.back();
-				newViewInfo.viewPtr.SetPtr(viewPtr);
+				newViewInfo.viewPtr.FromUnique(viewPtr);
 				newViewInfo.viewTypeId = viewTypeId;
 			}
 
@@ -773,7 +775,9 @@ bool CMultiDocumentManagerBase::RegisterDocument(SingleDocumentData* infoPtr)
 	// create and connect undo manager
 	const IDocumentTemplate* documentTemplatePtr = GetDocumentTemplate();
 	if (documentTemplatePtr != NULL){
-		infoPtr->undoManagerPtr.SetPtr(documentTemplatePtr->CreateUndoManager(infoPtr->documentTypeId, infoPtr->documentPtr.GetPtr()));
+		idoc::IUndoManagerUniquePtr undoManagerPtr = documentTemplatePtr->CreateUndoManager(infoPtr->documentTypeId, infoPtr->documentPtr.GetPtr());
+
+		infoPtr->undoManagerPtr.FromUnique(undoManagerPtr);
 
 		if (infoPtr->undoManagerPtr.IsValid()){
 			// connect undo manager to single document descriptor to provide general dirty flag
@@ -832,7 +836,7 @@ bool CMultiDocumentManagerBase::SerializeOpenDocumentList(iser::IArchive& archiv
 				retVal = retVal && archive.Process(viewInfo.viewTypeId);
 				retVal = retVal && archive.EndTag(s_viewTypeIdTag);
 
-				bool isActive = (viewInfo.viewPtr == m_activeViewPtr);
+				bool isActive = (viewInfo.viewPtr.GetPtr() == m_activeViewPtr);
 				retVal = retVal && archive.BeginTag(s_viewIsActiveTag);
 				retVal = retVal && archive.Process(isActive);
 				retVal = retVal && archive.EndTag(s_viewIsActiveTag);
@@ -925,11 +929,11 @@ void CMultiDocumentManagerBase::OnDocumentSaved()
 CMultiDocumentManagerBase::SingleDocumentData::SingleDocumentData(
 			CMultiDocumentManagerBase* parentPtr,
 			const QByteArray& documentTypeId,
-			istd::IChangeable* documentPtr)
+			DocumentPtr& documentPtr)
 {
 	this->parentPtr = parentPtr;
 	this->documentTypeId = documentTypeId;
-	this->documentPtr.SetPtr(documentPtr);
+	this->documentPtr = documentPtr;
 	isDirty = false;
 }
 
@@ -939,8 +943,6 @@ CMultiDocumentManagerBase::SingleDocumentData::~SingleDocumentData()
 	UnregisterAllModels();
 
 	// enforce the correct destruction order
-	undoManagerPtr.Reset();
-	documentPtr.Reset();
 	views.clear();
 }
 

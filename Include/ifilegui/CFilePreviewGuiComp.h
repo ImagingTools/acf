@@ -108,8 +108,8 @@ protected:
 
 	QFutureWatcher<void> m_previewGenerationWatcher;
 
-	istd::TDelPtr<istd::IChangeable> m_previewObjectPtr;
-	istd::TDelPtr<istd::IChangeable> m_workingObjectPtr;
+	istd::IChangeableUniquePtr m_previewObjectPtr;
+	istd::IChangeableUniquePtr m_workingObjectPtr;
 
 	QMutex m_mutex;
 

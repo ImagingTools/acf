@@ -57,7 +57,7 @@ public:
 
 protected:
 	// abstract methods
-	virtual IBitmap* CreateBitmap() const = 0;
+	virtual IBitmapUniquePtr CreateBitmap() const = 0;
 };
 
 

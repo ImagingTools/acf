@@ -323,7 +323,7 @@ template <int Size>
 bool TComposedColor<Size>::IsRoundedEqual(const TComposedColor<Size>& color, const imath::IDoubleManip& manipulator) const
 {
 	for (int i = 0; i < Size; ++i){
-		if (!manipulator.IsEqual(BaseClass::GetElement(i), color[i])){
+		if (!manipulator.AreValuesEqual(BaseClass::GetElement(i), color[i])){
 			return false;
 		}
 	}

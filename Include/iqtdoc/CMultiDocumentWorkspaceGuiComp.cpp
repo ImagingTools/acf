@@ -20,10 +20,23 @@
 #include <idoc/IDocumentTemplate.h>
 #include <iqt/CSettingsWriteArchive.h>
 #include <iqt/CSettingsReadArchive.h>
+#include <istd/CSystem.h>
 
 
 namespace iqtdoc
 {
+
+
+// static
+
+static QString GetOpenDocumentListKey()
+{
+	QString configNameVar = istd::CSystem::GetVariableValue("ConfigurationName", false, true);
+	QString key = "OpenDocumentList";
+	if (configNameVar.size())
+		key += "_" + configNameVar;
+	return key;
+}
 
 
 // public methods
@@ -98,7 +111,7 @@ void CMultiDocumentWorkspaceGuiComp::OnTryClose(bool* ignoredPtr)
 			iqt::CSettingsWriteArchive archive(
 							m_organizationName,
 							m_applicationName,
-							"OpenDocumentList",
+							GetOpenDocumentListKey(),
 							QSettings::UserScope);
 
 			SerializeOpenDocumentList(archive);
@@ -327,7 +340,7 @@ void CMultiDocumentWorkspaceGuiComp::OnRestoreSettings(const QSettings& settings
 		iqt::CSettingsReadArchive archive(
 					m_organizationName,
 					m_applicationName,
-					"OpenDocumentList");
+					GetOpenDocumentListKey());
 
 		SerializeOpenDocumentList(archive);
 	}

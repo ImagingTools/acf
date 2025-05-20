@@ -171,8 +171,8 @@ void CFilePreviewGuiComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_objectFactoryCompPtr.IsValid()){
-		m_previewObjectPtr.SetPtr(m_objectFactoryCompPtr.CreateInstance());
-		m_workingObjectPtr.SetPtr(m_objectFactoryCompPtr.CreateInstance());
+		m_previewObjectPtr = m_objectFactoryCompPtr.CreateInstance();
+		m_workingObjectPtr = m_objectFactoryCompPtr.CreateInstance();
 	}
 }
 

@@ -39,16 +39,16 @@ public:
 
 	// reimplemented (idoc::IDocumentTemplate)
 	virtual ifile::IFilePersistence* GetFileLoader(const QByteArray& documentTypeId) const override;
-	virtual istd::IChangeable* CreateDocument(
+	virtual istd::IChangeableUniquePtr CreateDocument(
 				QByteArray& documentTypeId,
 				bool initialize = true,
 				bool beQuiet = false,
 				bool* ignoredFlagPtr = NULL) const override;
-	virtual istd::IPolymorphic* CreateView(
+	virtual ViewUniquePtr CreateView(
 				const QByteArray& documentTypeId,
 				istd::IChangeable* documentPtr,
 				const QByteArray& viewTypeId = QByteArray()) const override;
-	virtual idoc::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const override;
+	virtual idoc::IUndoManagerUniquePtr CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const override;
 
 protected:
 	/**
@@ -58,7 +58,7 @@ protected:
 		Default is instance of interface imod::IObserver extracted, but for
 		composite components it can be inaccurate for some cases.
 	*/
-	virtual istd::IPolymorphic* ExtractViewInterface(icomp::IComponent* componentPtr) const;
+	virtual ViewUniquePtr ExtractViewInterface(std::unique_ptr<icomp::IComponent>& componentPtr) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated() override;

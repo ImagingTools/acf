@@ -6,7 +6,7 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include <istd/TOptDelPtr.h>
+#include <istd/TOptInterfacePtr.h>
 #include <istd/TPointerVector.h>
 #include <imod/CModelUpdateBridge.h>
 #include <iprm/IParamsSet.h>
@@ -24,14 +24,20 @@ class CParamsSet: virtual public IParamsSet
 public:
 	struct ParameterInfo
 	{
-		ParameterInfo(const QByteArray& parameterId, iser::ISerializable* parameterPtr, bool releaseFlag = false)
+		ParameterInfo(const QByteArray& parameterId, iser::ISerializable* parameterPtr)
 		{
-			this->parameterPtr.SetPtr(parameterPtr, releaseFlag);
+			this->parameterPtr.SetOptionalPtr(parameterPtr);
+			this->parameterId = parameterId;
+		}
+
+		ParameterInfo(const QByteArray& parameterId, iser::ISerializableUniquePtr& parameterPtr)
+		{
+			this->parameterPtr.SetPtr(parameterPtr);
 			this->parameterId = parameterId;
 		}
 
 		QByteArray parameterId;
-		istd::TOptDelPtr<iser::ISerializable> parameterPtr;
+		istd::TOptInterfacePtr<iser::ISerializable> parameterPtr;
 	};
 	typedef istd::TPointerVector<ParameterInfo> ParameterInfos;
 
@@ -55,6 +61,12 @@ public:
 		Editable parameters are stored in set directly, the non editable in slave sets.
 	*/
 	virtual bool SetEditableParameter(const QByteArray& id, iser::ISerializable* parameterPtr, bool releaseFlag = false);
+
+	/**
+		Set editable parameter in this set.
+		Editable parameters are stored in set directly, the non editable in slave sets.
+	*/
+	virtual bool SetEditableParameter(const QByteArray& id, iser::ISerializableUniquePtr& parameterPtr);
 
 	/**
 		Get access to all parameters.
@@ -87,9 +99,8 @@ public:
 	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 protected:
-	const ParameterInfo* FindParameterInfo(const QByteArray& parameterId) const;
+	ParameterInfo* FindParameterInfo(const QByteArray& parameterId) const;
 
-private:
 	ParameterInfos m_params;
 
 	QByteArray m_paramsTypeId;

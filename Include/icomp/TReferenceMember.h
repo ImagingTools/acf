@@ -100,26 +100,28 @@ bool TReferenceMember<Interface>::IsValid() const
 template <class Interface>
 bool TReferenceMember<Interface>::EnsureInitialized() const
 {
-	QMutexLocker lock(&m_mutex);
+	if (!m_isInitialized){
+		QMutexLocker lock(&m_mutex);
 
-	if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
-		const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
-		if (parentPtr != NULL){
-			const QByteArray& componentId = BaseClass::operator*();
+		if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
+			const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
+			if (parentPtr != NULL){
+				const QByteArray& componentId = BaseClass::operator*();
 
-			QByteArray baseId;
-			QByteArray subId;
-			BaseClass2::SplitId(componentId, baseId, subId);
+				QByteArray baseId;
+				QByteArray subId;
+				BaseClass2::SplitId(componentId, baseId, subId);
 
-			IComponent* componentPtr = parentPtr->GetSubcomponent(baseId);
-			if (componentPtr != NULL){
-				m_componentPtr = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
+				IComponent* componentPtr = parentPtr->GetSubcomponent(baseId);
+				if (componentPtr != NULL){
+					m_componentPtr = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
+				}
+
+				m_isInitialized = true;
 			}
-
-			m_isInitialized = true;
-		}
-		else{
-			qCritical("Component %s is defined, but definition component has no parent", BaseClass::operator*().constData());
+			else{
+				qCritical("Component %s is defined, but definition component has no parent", BaseClass::operator*().constData());
+			}
 		}
 	}
 

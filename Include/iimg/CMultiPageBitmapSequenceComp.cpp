@@ -14,7 +14,7 @@ istd::IChangeable* CMultiPageBitmapSequenceComp::InsertPage(
 			const iprm::IParamsSet* /*pageParameterPtr*/,
 			int position)
 {
-	istd::TDelPtr<iimg::IMultiBitmapProvider> multiBitmapPtr(m_multiBitmapFactoryCompPtr.CreateInstance());
+	istd::TUniqueInterfacePtr<iimg::IMultiBitmapProvider> multiBitmapPtr(m_multiBitmapFactoryCompPtr.CreateInstance());
 	if (multiBitmapPtr.IsValid()){
 		Page newPage;
 			
@@ -22,7 +22,7 @@ istd::IChangeable* CMultiPageBitmapSequenceComp::InsertPage(
 			newPage.pageMetaInfo.CopyFrom(*pageMetaInfoPtr);
 		}
 
-		newPage.pagePtr.SetPtr(multiBitmapPtr.PopPtr());
+		newPage.pagePtr.MoveCastedPtr(multiBitmapPtr);
 
 		m_documentPages.insert(position, newPage);
 

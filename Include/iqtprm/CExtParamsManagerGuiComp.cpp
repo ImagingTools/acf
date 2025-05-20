@@ -258,7 +258,7 @@ void CExtParamsManagerGuiComp::on_EditButton_clicked()
 		iprm::IParamsSet* paramsSetPtr = objectPtr->GetParamsSet(paramSetIndex);
 		if (paramsSetPtr != NULL){
 			// Create working instance of the Parameter set parameters:
-			istd::TDelPtr<iprm::IParamsSet> workingParametersPtr(objectPtr->CreateParameterSet(-1, paramSetIndex));
+			iprm::IParamsSetUniquePtr workingParametersPtr(objectPtr->CreateParameterSet(-1, paramSetIndex));
 			if (workingParametersPtr.IsValid()){
 				imod::IModel* paramsSetModelPtr = dynamic_cast<imod::IModel*>(workingParametersPtr.GetPtr());
 				if (paramsSetModelPtr == NULL){

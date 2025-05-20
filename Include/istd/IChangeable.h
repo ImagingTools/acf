@@ -10,6 +10,7 @@
 
 // ACF includes
 #include <istd/IPolymorphic.h>
+#include <istd/TInterfacePtr.h>
 
 
 namespace istd
@@ -437,6 +438,10 @@ inline void IChangeable::OnBeginChanges()
 inline void IChangeable::OnEndChanges(const ChangeSet& /*changeSet*/)
 {
 }
+
+
+typedef istd::TUniqueInterfacePtr<istd::IChangeable> IChangeableUniquePtr;
+typedef istd::TSharedInterfacePtr<istd::IChangeable> IChangeableSharedPtr;
 
 
 } // namespace istd
