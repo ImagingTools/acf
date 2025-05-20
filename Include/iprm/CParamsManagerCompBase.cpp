@@ -35,6 +35,32 @@ CParamsManagerCompBase::CParamsManagerCompBase()
 }
 
 
+
+bool CParamsManagerCompBase::IsNameUnique(const QString& name) const
+{
+	bool unique = true;
+
+	for (const ParamSetPtr& oneSetPtr : m_paramSets){
+		if (oneSetPtr->GetName() == name){
+			unique = false;
+			return unique;
+		}
+	}
+
+	int fixedParamsCount = m_fixedParamSetsCompPtr.GetCount();
+	int fixedNamesCount = m_fixedSetNamesAttrPtr.GetCount();
+	int maxIdx = qMin(fixedNamesCount, fixedParamsCount);
+
+	for (int index = 0; index < maxIdx; index++){
+		if (QString(m_fixedSetNamesAttrPtr[index]) == name){
+			unique = false;
+			return unique;
+		}
+	}
+
+	return unique;
+}
+
 // reimplemented (iprm::IParamsManager)
 
 int CParamsManagerCompBase::InsertParamsSet(int typeIndex, int index)
@@ -45,8 +71,8 @@ int CParamsManagerCompBase::InsertParamsSet(int typeIndex, int index)
 		index = -1;
 	}
 
-	IParamsSet* newParamsSetPtr = CreateParamsSetInstance(typeIndex);
-	if (newParamsSetPtr == NULL){
+	IParamsSetUniquePtr newParamsSetPtr = CreateParamsSetInstance(typeIndex);
+	if (!newParamsSetPtr.IsValid()){
 		return -1;
 	}
 
@@ -55,7 +81,7 @@ int CParamsManagerCompBase::InsertParamsSet(int typeIndex, int index)
 
 	ParamSetPtr paramsSetPtr(new imod::TModelWrap<ParamSet>());
 
-	paramsSetPtr->paramSetPtr.SetPtr(newParamsSetPtr);
+	paramsSetPtr->paramSetPtr.FromUnique(newParamsSetPtr);
 	paramsSetPtr->name = CalculateNewDefaultName(typeIndex);
 #if QT_VERSION >= 0x050000
 	paramsSetPtr->uuid = QUuid::createUuid().toByteArray();
@@ -65,7 +91,7 @@ int CParamsManagerCompBase::InsertParamsSet(int typeIndex, int index)
 
 	paramsSetPtr->parentPtr = this;
 
-	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
+	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr->paramSetPtr.GetPtr());
 	if (paramsModelPtr != NULL){
 		paramsModelPtr->AttachObserver(&paramsSetPtr->updateBridge);
 		paramsModelPtr->AttachObserver(&m_updateBridge);
@@ -140,7 +166,7 @@ bool CParamsManagerCompBase::SwapParamsSet(int index1, int index2)
 	ParamSet& paramsSet1 = *m_paramSets[index1 - fixedParamsCount];
 	ParamSet& paramsSet2 = *m_paramSets[index2 - fixedParamsCount];
 
-	paramsSet1.paramSetPtr.Swap(paramsSet2.paramSetPtr);
+	std::swap(paramsSet1.paramSetPtr, paramsSet2.paramSetPtr);
 	qSwap(paramsSet1.name, paramsSet2.name);
 	qSwap(paramsSet1.isEnabled, paramsSet2.isEnabled);
 	qSwap(paramsSet1.uuid, paramsSet2.uuid);
@@ -176,7 +202,7 @@ IParamsSet* CParamsManagerCompBase::GetParamsSet(int index) const
 }
 
 
-IParamsSet* CParamsManagerCompBase::CreateParameterSet(int typeIndex, int index) const
+iprm::IParamsSetUniquePtr CParamsManagerCompBase::CreateParameterSet(int typeIndex, int index) const
 {
 	IParamsSet* sourceParamsSetPtr = NULL;
 	if ((index >= 0)){
@@ -197,13 +223,13 @@ IParamsSet* CParamsManagerCompBase::CreateParameterSet(int typeIndex, int index)
 		}
 	}
 
-	IParamsSet* newParamsSetPtr = CreateParamsSetInstance(typeIndex);
-	if (newParamsSetPtr == NULL){
-		return NULL;
+	IParamsSetUniquePtr newParamsSetPtr = CreateParamsSetInstance(typeIndex);
+	if (!newParamsSetPtr.IsValid()){
+		return nullptr;
 	}
 
 	ParamSet* retVal = new imod::TModelWrap<ParamSet>();
-	retVal->paramSetPtr.SetPtr(newParamsSetPtr);
+	retVal->paramSetPtr.FromUnique(newParamsSetPtr);
 	retVal->isEnabled = true;
 #if QT_VERSION >= 0x050000
 	retVal->uuid = QUuid::createUuid().toByteArray();
@@ -214,7 +240,7 @@ IParamsSet* CParamsManagerCompBase::CreateParameterSet(int typeIndex, int index)
 	if (sourceParamsSetPtr != NULL){
 		ParamSet* sourceParamsSetImplPtr = dynamic_cast<ParamSet*>(sourceParamsSetPtr);
 		if (sourceParamsSetImplPtr != NULL){
-			newParamsSetPtr->CopyFrom(*sourceParamsSetImplPtr->paramSetPtr.GetPtr());
+			retVal->paramSetPtr->CopyFrom(*sourceParamsSetImplPtr->paramSetPtr.GetPtr());
 
 			retVal->isEnabled = sourceParamsSetImplPtr->isEnabled;
 			retVal->name = sourceParamsSetImplPtr->name;
@@ -222,7 +248,7 @@ IParamsSet* CParamsManagerCompBase::CreateParameterSet(int typeIndex, int index)
 			retVal->uuid = sourceParamsSetImplPtr->uuid;
 		}
 		else{
-			newParamsSetPtr->CopyFrom(*sourceParamsSetPtr);
+			retVal->paramSetPtr->CopyFrom(*sourceParamsSetPtr);
 		}
 	}
 
@@ -368,7 +394,12 @@ bool CParamsManagerCompBase::SetParamsSetName(int index, const QString& name)
 		return false;
 	}
 
-	if (m_paramSets[index - fixedSetsCount]->name != name){
+	bool unique = IsNameUnique(name);
+	if (!unique){
+		return false;
+	}
+
+	if ((m_paramSets[index - fixedSetsCount]->name != name)){
 		istd::CChangeNotifier notifier(this, &s_renameChangeSet);
 		Q_UNUSED(notifier);
 
@@ -427,12 +458,18 @@ const IOptionsList* CParamsManagerCompBase::GetSelectionConstraints() const
 
 int CParamsManagerCompBase::GetSelectedOptionIndex() const
 {
+	if (m_parentSelectionCompPtr.IsValid())
+		return m_parentSelectionCompPtr->GetSelectedOptionIndex();
+
 	return m_selectedIndex;
 }
 
 
 bool CParamsManagerCompBase::SetSelectedOptionIndex(int index)
 {
+	if (m_parentSelectionCompPtr.IsValid())
+		return false;
+
 	if (index < GetOptionsCount()){
 		if (index != m_selectedIndex){
 			istd::CChangeNotifier notifier(this, &s_selectChangeSet);
@@ -510,11 +547,22 @@ bool CParamsManagerCompBase::IsOptionEnabled(int index) const
 	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
 	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
-	if (!*m_allowDisabledAttrPtr || (index < fixedSetsCount)){
+	if (!*m_allowDisabledAttrPtr){
 		return true;
 	}
 
+	if (index < fixedSetsCount){
+		QByteArray oneId = QByteArray();
+
+		iprm::IParamsSet::Ids ids = m_fixedParamSetsCompPtr[index]->GetParamIds();
+		if (ids.count() > 0){
+			oneId = ids.values()[0];
+		}
+		return m_fixedParamSetsCompPtr[index]->IsParameterEnable(oneId);
+	}
+
 	return m_paramSets[index - fixedSetsCount]->isEnabled;
+
 }
 
 

@@ -84,9 +84,13 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE(SelectedParams, iser::ISerializable, ExtractCurrentParams);
 		I_REGISTER_SUBELEMENT_INTERFACE(SelectedParams, istd::IChangeable, ExtractCurrentParams);
 		I_REGISTER_SUBELEMENT_INTERFACE(SelectedParams, imod::IModel, ExtractCurrentParams);
+
+		I_ASSIGN(m_parentSelectionCompPtr, "ParentSelection", "Parent selection component", false, "ParentSelection");
 	I_END_COMPONENT;
 
 	CParamsManagerCompBase();
+
+	bool IsNameUnique(const QString& name) const;
 
 	// reimplemented (iprm::IParamsManager)
 	virtual int InsertParamsSet(int typeIndex = -1, int index = -1);
@@ -249,6 +253,8 @@ private:
 	}
 
 	imod::TModelWrap<SelectedParams> m_selectedParams;
+
+	I_REF(ISelectionParam, m_parentSelectionCompPtr);
 };
 
 

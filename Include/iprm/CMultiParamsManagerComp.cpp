@@ -358,8 +358,8 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 			Q_ASSERT(typeInfo.factoryIndex >= 0);
 			Q_ASSERT(typeInfo.factoryIndex < m_paramSetsFactoriesPtr.GetCount());
 
-			IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
-			if (newParamsSetPtr == NULL){
+			IParamsSetUniquePtr newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
+			if (!newParamsSetPtr.IsValid()){
 				return false;
 			}
 
@@ -368,9 +368,9 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 			istd::CChangeNotifier notifier(this, &s_optionTypeChangeSet);
 			Q_UNUSED(notifier);
 
-			paramSet.paramSetPtr.SetPtr(newParamsSetPtr);
+			paramSet.paramSetPtr.FromUnique(newParamsSetPtr);
 
-			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
+			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(paramSet.paramSetPtr.GetPtr());
 			if (modelPtr != NULL){
 				modelPtr->AttachObserver(&m_updateBridge);
 			}
@@ -399,8 +399,8 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		Q_ASSERT(typeInfo.factoryIndex >= 0);
 		Q_ASSERT(typeInfo.factoryIndex < m_paramSetsFactoriesPtr.GetCount());
 
-		IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
-		if (newParamsSetPtr == NULL){
+		IParamsSetUniquePtr newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
+		if (!newParamsSetPtr.IsValid()){
 			return false;
 		}
 		
@@ -411,7 +411,7 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 
 		ParamSetPtr paramsSetPtr(new imod::TModelWrap<ParamSet>());
 
-		paramsSetPtr->paramSetPtr.SetPtr(newParamsSetPtr);
+		paramsSetPtr->paramSetPtr.FromUnique(newParamsSetPtr);
 		paramsSetPtr->name = name.isEmpty() ? CalculateNewDefaultName(typeInfo.factoryIndex) : name;
 		paramsSetPtr->uuid = uuid;
 		paramsSetPtr->isEnabled = isEnabled;
@@ -420,12 +420,11 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		m_paramSets.push_back(ParamSetPtr());
 		m_paramSets.back().TakeOver(paramsSetPtr);
 
-		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
+		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr->paramSetPtr.GetPtr());
 		if (paramsModelPtr != NULL){
 			paramsModelPtr->AttachObserver(&m_paramSets.back()->updateBridge);
 			paramsModelPtr->AttachObserver(&m_updateBridge);
 		}
-
 	}
 
 	return true;
@@ -446,17 +445,17 @@ int CMultiParamsManagerComp::GetCreatedParamsSetsCount() const
 }
 
 
-iprm::IParamsSet* CMultiParamsManagerComp::CreateParamsSetInstance(int typeIndex) const
+IParamsSetUniquePtr CMultiParamsManagerComp::CreateParamsSetInstance(int typeIndex) const
 {
 	if (typeIndex >= m_typeInfoList.typeInfos.size()){
-		return NULL;
+		return nullptr;
 	}
 
 	const TypeInfo& info = (typeIndex >= 0)? m_typeInfoList.typeInfos[typeIndex]: m_typeInfoList.typeInfos[0];
 
-	IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(info.factoryIndex);
-	if (newParamsSetPtr == NULL){
-		return NULL;
+	IParamsSetUniquePtr newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(info.factoryIndex);
+	if (!newParamsSetPtr.IsValid()){
+		return nullptr;
 	}
 
 	Q_ASSERT(newParamsSetPtr->GetFactoryId() == info.id);
@@ -480,7 +479,7 @@ void CMultiParamsManagerComp::OnComponentCreated()
 
 	// Obtaining factory ids
 	for (int factoryIndex = 0; factoryIndex < m_paramSetsFactoriesPtr.GetCount(); factoryIndex++){		
-		istd::TDelPtr<IParamsSet> paramsSetPtr(m_paramSetsFactoriesPtr.CreateInstance(factoryIndex));
+		iprm::IParamsSetUniquePtr paramsSetPtr(m_paramSetsFactoriesPtr.CreateInstance(factoryIndex));
 		
 		if (paramsSetPtr.IsValid()){
 			QByteArray factoryId = paramsSetPtr->GetFactoryId();
