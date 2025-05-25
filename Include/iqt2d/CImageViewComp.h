@@ -2,6 +2,9 @@
 #define iqt2d_CImageViewComp_included
 
 
+// Qt includes
+#include <QtCore/QScopedPointer>
+
 // ACF includes
 #include <icomp/CComponentBase.h>
 #include <i2d/ICalibration2d.h>
@@ -22,7 +25,6 @@ namespace iqt2d
 */
 class CImageViewComp:
 			public iqtgui::TGuiObserverWrap<CViewProviderGuiComp, iview::CImageShape>
-
 {
 public:
 	typedef iqtgui::TGuiObserverWrap<CViewProviderGuiComp, iview::CImageShape> BaseClass;
@@ -37,8 +39,11 @@ protected:
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
+
+private:
+	QScopedPointer<const i2d::ICalibration2d> m_oldCalibrationPtr;
 };
 
 

@@ -32,6 +32,15 @@ void CPolygonParamsGuiComp::on_InsertButton_clicked()
 
 void CPolygonParamsGuiComp::on_RemoveButton_clicked()
 {
+	auto polygonPtr = GetObservedObject();
+	Q_ASSERT(polygonPtr != nullptr);
+
+	if (!polygonPtr)
+		return;
+
+	if (polygonPtr->GetNodesCount() <= polygonPtr->GetMinimumPointsAllowed())
+		return;
+
 	OnRemoveNode();
 }
 

@@ -1,4 +1,4 @@
-#ifndef iqt2d_TPolygonBasedParamsGuiComp_included
+﻿#ifndef iqt2d_TPolygonBasedParamsGuiComp_included
 #define iqt2d_TPolygonBasedParamsGuiComp_included
 
 
@@ -116,6 +116,7 @@ protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated() override;
 	virtual void OnGuiRetranslate() override;
+	virtual void OnGuiDesignChanged() override;
 
 	// reimplemented (iqt2d::TShapeParamsGuiCompBase)
 	virtual bool PopulateActions(QWidget& host, imod::IModel* modelPtr) override;
@@ -299,13 +300,17 @@ QVariant TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::data(
 template <class PolygonBasedShape, class PolygonBasedModel>
 bool TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-	if (role == Qt::EditRole){
-		i2d::CPolygon* objectPtr = GetObservedObject();
-		if ((objectPtr != NULL) && (index.column() <= 1) && (index.column() >= 0)){
-			i2d::CVector2d& pos = objectPtr->GetNodePosRef(index.row());
-			
-			return SetValue(value, pos[index.column()]);
-		}
+	if (role != Qt::EditRole || index.column() < 0 || index.column() > 1 || index.row() < 0)
+		return false;
+
+	i2d::CPolygon* objectPtr = GetObservedObject();
+	if (!objectPtr || index.row() >= objectPtr->GetNodesCount())
+		return false;
+
+	i2d::CVector2d pos = objectPtr->GetNodePos(index.row());
+	if (SetValue(value, pos[index.column()])) {
+		objectPtr->SetNodePos(index.row(), pos); // explicitly set node position to call all the necessary callbacks
+		return true;
 	}
 
 	return false;
@@ -393,6 +398,19 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiRetr
 }
 
 
+template <class PolygonBasedShape, class PolygonBasedModel>
+void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiDesignChanged()
+{
+	BaseClass::OnGuiDesignChanged();
+
+	CopyButton->setIcon(this->GetIcon(":/Icons/Copy"));
+	PasteButton->setIcon(this->GetIcon(":/Icons/Paste"));
+	InsertButton->setIcon(this->GetIcon(":/Icons/Add"));
+	RemoveButton->setIcon(this->GetIcon(":/Icons/Delete"));
+	ToolsButton->setIcon(this->GetIcon(":/Icons/Tools"));
+}
+
+
 // reimplemented (iqt2d::TShapeParamsGuiCompBase)
 
 template <class PolygonBasedShape, class PolygonBasedModel>
@@ -402,9 +420,8 @@ bool TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::PopulateA
 		return false;
 	}
 
-	i2d::CPolyline* polylinePtr = dynamic_cast<i2d::CPolyline*>(modelPtr);
 	i2d::CPolygon* polygonPtr = dynamic_cast<i2d::CPolygon*>(modelPtr);
-	if (polygonPtr == NULL && polylinePtr == NULL){
+	if (polygonPtr == nullptr){
 		return false;
 	}
 
@@ -413,7 +430,7 @@ bool TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::PopulateA
 	host.addAction(&m_rotateCwAction);
 	host.addAction(&m_rotateCcwAction);
 
-	if (polylinePtr != NULL){
+	if (i2d::CPolyline* polylinePtr = dynamic_cast<i2d::CPolyline*>(modelPtr)){
 		host.addAction(&m_reversePolarityAction);
 	}
 

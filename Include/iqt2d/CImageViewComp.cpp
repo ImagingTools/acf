@@ -25,16 +25,29 @@ void CImageViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/
 		consolePtr->GetViewRef().SetFitArea(areaRect);
 	}
 
+	SetTransformMode(STM_VIEW);
+
+	iview::CCalibratedViewBase* calibratableViewPtr = dynamic_cast<iview::CCalibratedViewBase*>(GetView());
+	if (calibratableViewPtr != nullptr){
+		auto imageCalibrationPtr = imagePtr ? imagePtr->GetCalibration() : nullptr;
+		if (imageCalibrationPtr) {
+			imageCalibrationPtr = dynamic_cast<i2d::ICalibration2d*>(imageCalibrationPtr->CloneMe());
+		}
+
+		calibratableViewPtr->SetDisplayCalibration(imageCalibrationPtr);
+
+		// this is supposed to die after the next clone
+		m_oldCalibrationPtr.reset(imageCalibrationPtr);
+	}
+
 	consolePtr->UpdateView();
 }
 
 
 // reimplemented (iqtui::CComponentBase)
 
-void CImageViewComp::OnGuiCreated()
+void CImageViewComp::OnGuiModelAttached()
 {
-	BaseClass::OnGuiCreated();
-
 	iview::CConsoleGui* consolePtr = GetQtWidget();
 	Q_ASSERT(consolePtr != NULL);
 
@@ -44,10 +57,12 @@ void CImageViewComp::OnGuiCreated()
 	AssignToLayer(iview::IViewLayer::LT_BACKGROUND);
 
 	view.ConnectShape(this);
+
+	BaseClass::OnGuiModelAttached();
 }
 
 
-void CImageViewComp::OnGuiDestroyed()
+void CImageViewComp::OnGuiModelDetached()
 {
 	iview::CConsoleGui* consolePtr = GetQtWidget();
 	Q_ASSERT(consolePtr != NULL);
@@ -56,7 +71,7 @@ void CImageViewComp::OnGuiDestroyed()
 
 	view.DisconnectShape(this);
 
-	BaseClass::OnGuiDestroyed();
+	BaseClass::OnGuiModelDetached();
 }
 
 

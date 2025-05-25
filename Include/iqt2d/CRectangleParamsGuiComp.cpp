@@ -3,6 +3,7 @@
 
 // ACF includes
 #include <istd/CChangeGroup.h>
+#include <i2d/CPosition2d.h>
 
 
 namespace iqt2d
@@ -89,11 +90,49 @@ void CRectangleParamsGuiComp::OnGuiRetranslate()
 }
 
 
+void CRectangleParamsGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	MoveToCenterButton->setVisible(m_centerScreenPointProviderCompPtr.IsValid());
+
+	if (!*m_showSpacerAttr) {
+		verticalSpacer->changeSize(0, 0);
+	}
+}
+
+
 // protected slots
 
 void CRectangleParamsGuiComp::OnParamsChanged(double /*value*/)
 {
 	DoUpdateModel();
+}
+
+
+void CRectangleParamsGuiComp::on_MoveToCenterButton_clicked(bool)
+{
+	i2d::CRectangle* objectPtr = GetObservedObject();
+	if (objectPtr != NULL && m_centerScreenPointProviderCompPtr.IsValid()) {
+		i2d::CRectangle screenRect;
+		screenRect.CopyFrom(*objectPtr, istd::IChangeable::CompatibilityMode::CM_CONVERT);
+		const i2d::CPosition2d* centerPtr = dynamic_cast<const i2d::CPosition2d*>(m_centerScreenPointProviderCompPtr->GetObject2d());
+		if (centerPtr != NULL) {
+			screenRect.MoveCenterTo(centerPtr->GetCenter());
+		}
+
+		const i2d::ICalibration2d* calibrationPtr = objectPtr->GetCalibration();
+		if (calibrationPtr != NULL) {
+			i2d::CRectangle centerRect;
+			screenRect.GetInvTransformed(*calibrationPtr, centerRect);
+			objectPtr->SetHorizontalRange(centerRect.GetHorizontalRange());
+			objectPtr->SetVerticalRange(centerRect.GetVerticalRange());
+		}
+		else {
+			objectPtr->SetHorizontalRange(screenRect.GetHorizontalRange());
+			objectPtr->SetVerticalRange(screenRect.GetVerticalRange());
+		}
+	}
 }
 
 

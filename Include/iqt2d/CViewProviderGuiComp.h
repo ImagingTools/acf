@@ -4,11 +4,15 @@
 
 // ACF includes
 #include <ibase/ICommandsProvider.h>
+#include <ibase/ICommandsDisplayer.h>
 #include <imod/CMultiModelDispatcherBase.h>
 #include <iqtgui/TGuiComponentBase.h>
+#include <iqt2d/IViewProvider.h>
+#include <iqt2d/IViewActivationHandler.h>
 #include <iview/IColorSchema.h>
 #include <iview/CConsoleGui.h>
-#include <iqt2d/IViewProvider.h>
+#include <iview/IScreenTransformationProvider.h>
+#include <iview/IEditModeButtons.h>
 
 
 namespace iqt2d
@@ -50,6 +54,7 @@ public:
 	I_BEGIN_COMPONENT(CViewProviderGuiCompAttr);
 		I_ASSIGN(m_viewIdAttrPtr, "ViewId", "ID allowing identifying this view", true, 0);
 		I_ASSIGN(m_useAntialiasingAttrPtr, "UseAntialiasing", "Enables using of antialiasing", false, false);
+		I_ASSIGN(m_infoTextEnabledAttrPtr, "InfoTextEnabled", "Draws InfoText as overlay", true, false);
 		I_ASSIGN(m_zoomToFitEnabledAttrPtr, "ZoomToFitEnabled", "If true, the shapes will be fit to the view according to the defined fitting mode", false, false);
 		I_ASSIGN(m_useShapeEditCommandsAttrPtr, "UseShapeEditCommands", "If true, the commands for shape editing are available", false, false);
 		I_ASSIGN(m_useGridCommandsAttrPtr, "UseGridCommands", "If true, the commands for grid management are available", false, false);
@@ -62,6 +67,7 @@ public:
 protected:
 	I_ATTR(int, m_viewIdAttrPtr);
 	I_ATTR(bool, m_useAntialiasingAttrPtr);
+	I_ATTR(bool, m_infoTextEnabledAttrPtr);
 	I_ATTR(bool, m_useShapeEditCommandsAttrPtr);
 	I_ATTR(bool, m_useGridCommandsAttrPtr);
 	I_ATTR(bool, m_useScollBarCommandsAttrPtr);
@@ -81,6 +87,8 @@ class CViewProviderGuiComp:
 			public CViewProviderGuiCompAttr,
 			virtual public ibase::ICommandsProvider,
 			virtual public IViewProvider,
+			virtual public i2d::ICalibrationProvider,
+			virtual public ibase::ICommandsDisplayer,
 			protected imod::CMultiModelDispatcherBase
 {
 public:
@@ -89,6 +97,7 @@ public:
 
 	I_BEGIN_COMPONENT(CViewProviderGuiComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
+		I_REGISTER_INTERFACE(ibase::ICommandsDisplayer);
 		I_REGISTER_INTERFACE(IViewProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_shapeStatusInfoCompPtr, "ShapeStatusInfo", "Shape status info consumer", false, "ShapeStatusInfo");
@@ -98,14 +107,22 @@ public:
 		I_ASSIGN(m_calibrationShapeCompPtr, "CalibrationShape", "Calibration shape displaying calibration grid, if not choosen default affine calibration shape will be used", false, "CalibrationShape");
 		I_ASSIGN(m_distanceMeasureShapeCompPtr, "DistanceMeasureShape", "Distance measurement shape", false, "DistanceMeasureShape");
 		I_ASSIGN(m_pointMeasureShapeCompPtr, "PointMeasureShape", "Point measurement shape", false, "PointMeasureShape");
+		I_ASSIGN_MULTI_0(m_viewActivationHandlerCompPtr, "ViewActivationHandler", "Handler for observation the visual status of the view provider", false);
+		I_ASSIGN(m_screenTransformationProvider, "ScreenTransformationProvider", "Gets object which contains current screen transformation", false, "ScreenTransformationProvider");
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
+	// reimplemented (ibase::ICommandsDisplayer)
+	virtual void ShowCommands(const ibase::ICommandsProvider* commandsProvider) override;
+
 	// reimplemented (iqt2d::IViewProvider)
 	virtual int GetViewId() const override;
 	virtual iview::IShapeView* GetView() const override;
+
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ICalibration2d* GetCalibration() const override;
 
 protected:
 	virtual void SetupBackground();
@@ -114,6 +131,8 @@ protected:
 	virtual void OnGuiCreated() override;
 	virtual void OnGuiDestroyed() override;
 	virtual void OnGuiRetranslate() override;
+	virtual void OnGuiShown() override;
+	virtual void OnGuiHidden() override;
 	virtual void OnGuiDesignChanged();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
@@ -131,6 +150,8 @@ private:
 	I_REF(iview::IShape, m_calibrationShapeCompPtr);
 	I_REF(iview::IShape, m_distanceMeasureShapeCompPtr);
 	I_REF(iview::IShape, m_pointMeasureShapeCompPtr);
+	I_MULTIREF(IViewActivationHandler, m_viewActivationHandlerCompPtr);
+	I_REF(iview::IScreenTransformationProvider, m_screenTransformationProvider);
 };
 
 
