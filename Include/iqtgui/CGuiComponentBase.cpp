@@ -350,7 +350,7 @@ void CGuiComponentBase::MakeAutoSlotConnection()
 			const QMetaObject *smo = co->metaObject();
 			int sigIndex = smo->indexOfMethod(slot + len + 4);
 			if (sigIndex < 0){ // search for compatible signals
-				int slotlen = qstrlen(slot + len + 4) - 1;
+				int slotlen = int(qstrlen(slot + len + 4) - 1);
 				for (int k = 0; k < co->metaObject()->methodCount(); ++k){
 					if (smo->method(k).methodType() != QMetaMethod::Signal)
 						continue;

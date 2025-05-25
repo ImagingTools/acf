@@ -2,8 +2,8 @@
 #define iqt2d_CImageViewComp_included
 
 
-// Qt includes
-#include <QtCore/QScopedPointer>
+// Qt
+#include <QScopedPointer>
 
 // ACF includes
 #include <icomp/CComponentBase.h>

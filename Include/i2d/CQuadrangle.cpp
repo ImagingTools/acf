@@ -16,7 +16,7 @@ namespace i2d
 {
 
 
-static const istd::IChangeable::ChangeSet s_setDiagonalChange(CQuadrangle::CF_OBJECT_POSITION, QObject::tr("Set diagnal"));
+static const istd::IChangeable::ChangeSet s_setDiagonalChange(CQuadrangle::CF_OBJECT_POSITION, QObject::tr("Set diagonal"));
 
 
 // public methods
