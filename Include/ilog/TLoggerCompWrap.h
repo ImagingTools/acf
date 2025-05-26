@@ -38,12 +38,12 @@ protected:
 	/**
 		Check if verbose messages are enabled.
 	*/
-	bool IsVerboseEnabled() const;
+	bool IsVerboseEnabled(int tracingLevel = 0) const;
 
 	/**
 		Send verbose message. If \c m_verboseEnabledAttrPtr is not enabled, the function does nothing.
 	*/
-	void SendVerboseMessage(const QString& message, const QString& messageSource = QString()) const;
+	void SendVerboseMessage(const QString& message, const QString& messageSource = QString(), int tracingLevel = 0) const;
 
 	// reimplemented (istd::ILogger)
 	virtual void DecorateMessage(
@@ -68,14 +68,14 @@ private:
 // protected methods
 	
 template <class Base>
-bool TLoggerCompWrap<Base>::IsVerboseEnabled() const
+bool TLoggerCompWrap<Base>::IsVerboseEnabled(int tracingLevel) const
 {
 	static const istd::IInformationProvider::InformationCategory categoryNone = istd::IInformationProvider::IC_NONE;
 
 	bool retVal = *m_verboseEnabledAttrPtr;;
 
 	if (m_tracingConfigurationCompPtr.IsValid()){
-		retVal = m_tracingConfigurationCompPtr->GetTracingLevel() > -1;
+		retVal = m_tracingConfigurationCompPtr->GetTracingLevel() >= tracingLevel;
 	}
 
 	retVal = retVal && BaseClass2::IsLogConsumed(&categoryNone);
@@ -85,9 +85,9 @@ bool TLoggerCompWrap<Base>::IsVerboseEnabled() const
 
 
 template <class Base>
-void TLoggerCompWrap<Base>::SendVerboseMessage(const QString& message, const QString& messageSource) const
+void TLoggerCompWrap<Base>::SendVerboseMessage(const QString& message, const QString& messageSource, int tracingLevel) const
 {
-	if (IsVerboseEnabled()){
+	if (IsVerboseEnabled(tracingLevel)){
 		BaseClass2::SendLogMessage(istd::IInformationProvider::IC_NONE, 0, message, messageSource);
 	}
 }

@@ -88,15 +88,15 @@ public:
 	static bool SerializeContainer(
 				iser::IArchive& archive,
 				ContainterType& container,
-				const QByteArray& containerTagName,
-				const QByteArray& elementTagName);
+				const QByteArray& containerTagName = "Elements",
+				const QByteArray& elementTagName = "Element");
 
 	template <typename ContainterType>
 	static bool SerializeObjectContainer(
 				iser::IArchive& archive,
 				ContainterType& container,
-				const QByteArray& containerTagName,
-				const QByteArray& elementTagName);
+				const QByteArray& containerTagName = "Elements",
+				const QByteArray& elementTagName = "Element");
 
 	/**
 		Method for serialization of the enumerated value using ACF's meta information extensions for the C++ enums.
