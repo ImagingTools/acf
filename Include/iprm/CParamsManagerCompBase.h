@@ -93,32 +93,32 @@ public:
 	bool IsNameUnique(const QString& name) const;
 
 	// reimplemented (iprm::IParamsManager)
-	virtual int InsertParamsSet(int typeIndex = -1, int index = -1);
-	virtual bool RemoveParamsSet(int index);
-	virtual bool SwapParamsSet(int index1, int index2);
-	virtual IParamsSet* GetParamsSet(int index) const;
-	virtual iprm::IParamsSetUniquePtr CreateParameterSet(int typeIndex = -1, int index = -1) const;
-	virtual int GetIndexOperationFlags(int index = -1) const;
-	virtual bool SetIndexOperationFlags(int index, int flags);
-	virtual int GetParamsSetsCount() const;
-	virtual QString GetParamsSetName(int index) const;
-	virtual bool SetParamsSetName(int index, const QString& name);
-	virtual QString GetParamsSetDescription(int index) const;
-	virtual void SetParamsSetDescription(int index, const QString& description);
+	virtual int InsertParamsSet(int typeIndex = -1, int index = -1) override;
+	virtual bool RemoveParamsSet(int index) override;
+	virtual bool SwapParamsSet(int index1, int index2) override;
+	virtual IParamsSet* GetParamsSet(int index) const override;
+	virtual iprm::IParamsSetUniquePtr CreateParameterSet(int typeIndex = -1, int index = -1) const override;
+	virtual int GetIndexOperationFlags(int index = -1) const override;
+	virtual bool SetIndexOperationFlags(int index, int flags) override;
+	virtual int GetParamsSetsCount() const override;
+	virtual QString GetParamsSetName(int index) const override;
+	virtual bool SetParamsSetName(int index, const QString& name) override;
+	virtual QString GetParamsSetDescription(int index) const override;
+	virtual void SetParamsSetDescription(int index, const QString& description) override;
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual const IOptionsList* GetSelectionConstraints() const;
-	virtual int GetSelectedOptionIndex() const;
-	virtual bool SetSelectedOptionIndex(int index);
-	virtual ISelectionParam* GetSubselection(int index) const;
+	virtual const IOptionsList* GetSelectionConstraints() const override;
+	virtual int GetSelectedOptionIndex() const override;
+	virtual bool SetSelectedOptionIndex(int index) override;
+	virtual ISelectionParam* GetSubselection(int index) const override;
 
 	// reimplemented (iprm::IOptionsList)
-	virtual int GetOptionsFlags() const;
-	virtual int GetOptionsCount() const;
-	virtual QString GetOptionName(int index) const;
-	virtual QString GetOptionDescription(int index) const;
-	virtual QByteArray GetOptionId(int index) const;
-	virtual bool IsOptionEnabled(int index) const;
+	virtual int GetOptionsFlags() const override;
+	virtual int GetOptionsCount() const override;
+	virtual QString GetOptionName(int index) const override;
+	virtual QString GetOptionDescription(int index) const override;
+	virtual QByteArray GetOptionId(int index) const override;
+	virtual bool IsOptionEnabled(int index) const override;
 
 protected:
 	void EnsureParamsSetModelDetached(iprm::IParamsSet* paramsSetPtr) const;
@@ -146,7 +146,7 @@ protected:
 	virtual iprm::IParamsSetUniquePtr CreateParamsSetInstance(int typeIndex = -1) const = 0;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 protected:
 	int m_selectedIndex;
