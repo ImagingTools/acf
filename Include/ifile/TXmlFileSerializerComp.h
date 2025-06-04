@@ -164,7 +164,7 @@ ifile::IFilePersistence::OperationState TXmlFileSerializerComp<ReadArchive, Writ
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
-	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
+	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, *m_beQuiteOnLoadAttrPtr)){
 		iser::CArchiveTag rootTag(*m_rootTagAttrPtr, "Root of document", iser::CArchiveTag::TT_GROUP);
 
 		ReadArchiveEx archive(filePath, *m_serializeAcfHeaderAttrPtr, rootTag, this);

@@ -67,6 +67,9 @@
                     <AttributeInfo Id="AutoCreatePath" Type="Boolean" ExportId="AutoCreatePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="BeQuiteOnLoad" Type="Boolean" ExportId="BeQuiteOnLoad">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>

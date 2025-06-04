@@ -32,6 +32,7 @@ public:
 	I_BEGIN_BASE_COMPONENT(CFileSerializerCompBase);
 		I_REGISTER_INTERFACE(ifile::IFileTypeInfo);
 		I_REGISTER_INTERFACE(ifile::IFilePersistence);
+		I_ASSIGN(m_beQuiteOnLoadAttrPtr, "BeQuiteOnLoad", "Do not log message when loading if file is missing", true, false);
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions", false, "VersionInfo");
 	I_END_COMPONENT;
 
@@ -65,6 +66,9 @@ protected:
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated() override;
+
+protected:
+	I_ATTR(bool, m_beQuiteOnLoadAttrPtr);
 
 private:
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);

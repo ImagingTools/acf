@@ -142,7 +142,7 @@ ifile::IFilePersistence::OperationState TFileSerializerComp<ReadArchive, WriteAr
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
-	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
+	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, *m_beQuiteOnLoadAttrPtr)){
 		ReadArchiveEx archive(filePath, this);
 
 		Q_ASSERT(!archive.IsStoring());
