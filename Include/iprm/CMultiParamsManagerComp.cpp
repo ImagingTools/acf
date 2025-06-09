@@ -420,7 +420,7 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		m_paramSets.push_back(ParamSetPtr());
 		m_paramSets.back().TakeOver(paramsSetPtr);
 
-		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr->paramSetPtr.GetPtr());
+		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(m_paramSets.back()->paramSetPtr.GetPtr());
 		if (paramsModelPtr != NULL){
 			paramsModelPtr->AttachObserver(&m_paramSets.back()->updateBridge);
 			paramsModelPtr->AttachObserver(&m_updateBridge);

@@ -67,13 +67,25 @@ public:
 		m_taskPtr.Reset();
 	}
 
-	Interface* GetPtr() const
+	template<typename InterfaceCast = InterfaceType>
+	InterfaceCast* GetPtr() const
 	{
+		Interface* retVal = nullptr;
 		if (m_ptr != nullptr){
-			return m_ptr;
+			retVal = m_ptr;
 		}
 		else if (m_taskPtr.IsValid()){
-			return m_taskPtr.GetPtr();
+			retVal = m_taskPtr.GetPtr();
+		}
+		else {
+			return nullptr;
+		}
+
+		if constexpr (std::is_same_v<InterfaceCast, InterfaceType>){
+			return static_cast<InterfaceCast*>(retVal);
+		}
+		else{
+			return dynamic_cast<InterfaceCast*>(retVal);
 		}
 
 		return nullptr;
