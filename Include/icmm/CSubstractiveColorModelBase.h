@@ -19,6 +19,7 @@ class CSubstractiveColorModelBase: virtual public icmm::ISubstractiveColorModel
 public:
 	CSubstractiveColorModelBase();
 
+	const icmm::CTristimulusSpecification& GetPreviewSpec() const { return m_previewSpec; }
 	void SetPreviewSpec(const ITristimulusSpecification& previewSpec);
 	void SetColorantPreview(const ColorantId& colorantId, const icmm::CLab& preview);
 
