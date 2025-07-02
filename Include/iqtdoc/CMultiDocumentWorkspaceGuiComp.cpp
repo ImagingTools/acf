@@ -302,7 +302,7 @@ istd::IChangeable* CMultiDocumentWorkspaceGuiComp::OpenSingleDocument(
 
 bool CMultiDocumentWorkspaceGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
-	if (!m_forceQuietClose && (eventPtr->type() == QEvent::Close)){
+	if ((eventPtr->type() == QEvent::Close)){
 		const QWidget* widgetPtr = dynamic_cast<const QWidget*>(sourcePtr);
 		if (widgetPtr != NULL){
 			int documentIndex = GetDocumentIndexFromWidget(*widgetPtr);

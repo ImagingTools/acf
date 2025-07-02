@@ -169,6 +169,11 @@ bool CSubstractiveColorModel::AppendColorModel(const ISubstractiveColorModel& ot
 		}
 
 		temp.m_colorants.push_back({ otherColorantId, otherUsage });
+
+		icmm::CCieLabColor cieLab(nullptr);
+		if (other.GetColorantVisualInfo(otherColorantId, cieLab)) {
+			temp.SetColorantPreview(otherColorantId, cieLab.GetLab());
+		}
 	}
 
 	if (m_colorants != temp.m_colorants){
