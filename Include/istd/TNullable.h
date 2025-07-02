@@ -131,7 +131,6 @@ public:
 	// set operators
 	TNullable& operator=( std::nullptr_t );
 	TNullable& operator=(const TNullable& other);
-	TNullable& operator=(TNullable&& other);
 
 	explicit operator bool() const;
 	bool has_value() const;
@@ -420,31 +419,6 @@ TNullable<T>& TNullable<T>::operator=(const TNullable& other)
 	m_hasValue = other.m_hasValue;
 	m_isNull = other.m_isNull;
 	m_isValid = other.m_isValid;
-
-	return *this;
-}
-
-
-template<class T>
-TNullable<T>& TNullable<T>::operator=(TNullable&& other)
-{
-	if (m_dataPtr != nullptr){
-		delete m_dataPtr;
-	}
-	if (other.m_dataPtr != nullptr){
-		m_dataPtr = std::move(other.m_dataPtr);
-	}
-	else {
-		m_dataPtr = nullptr;
-	}
-	m_hasValue = other.m_hasValue;
-	m_isNull = other.m_isNull;
-	m_isValid = other.m_isValid;
-
-	other.m_hasValue = false;
-	other.m_isNull = false;
-	other.m_isValid = false;
-	other.m_dataPtr = nullptr;
 
 	return *this;
 }
