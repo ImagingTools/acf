@@ -55,6 +55,11 @@ public:
 	*/
 	CFastColor(const CFastColor& color);
 
+	/**
+		Initializer list constructor.
+	*/
+	CFastColor(std::initializer_list<double> values);
+
 	template <int Size>
 	CFastColor(const imath::TVector<Size>& vector)
 	:	BaseClass(vector)
@@ -174,6 +179,26 @@ inline CFastColor::CFastColor(const CFastColor& color)
 
 	for (int i = 0; i < COLOR_COMPONENTS_COUNT; ++i){
 		m_elements[i] = color.m_elements[i];
+	}
+#endif // COLOR_COMPONENTS_COUNT
+}
+
+
+inline CFastColor::CFastColor(std::initializer_list<double> values)
+#ifndef COLOR_COMPONENTS_COUNT
+:	BaseClass(values)
+#endif // !COLOR_COMPONENTS_COUNT
+{
+#ifdef COLOR_COMPONENTS_COUNT
+	m_elementsCount = qMin(COLOR_COMPONENTS_COUNT, static_cast<int>(values.size()));
+	Q_ASSERT(values.size() <= COLOR_COMPONENTS_COUNT);
+
+	for (int i = 0; i < m_elementsCount; ++i){
+		m_elements[i] = *(values.begin() + i);
+	}
+
+	for (int i = m_elementsCount; i < COLOR_COMPONENTS_COUNT; ++i){
+		m_elements[i] = 0.0;
 	}
 #endif // COLOR_COMPONENTS_COUNT
 }

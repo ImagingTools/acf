@@ -9,6 +9,8 @@
 #include <QtCore/qmath.h>
 #endif
 
+#include <initializer_list>
+
 // ACF includes
 #include <iser/IArchive.h>
 #include <imath/imath.h>
@@ -36,6 +38,11 @@ public:
 		Copy constructor.
 	 */
 	TVector(const TVector<Size, Element>& vector);
+
+	/**
+		Initializer list constructor.
+	 */
+	TVector(std::initializer_list<Element> values);
 
 	/**
 		Get element at specified i.
@@ -227,6 +234,22 @@ inline TVector<Size, Element>::TVector(const TVector<Size, Element>& vector)
 {
 	for (int i = 0; i < Size; ++i){
 		m_elements[i] = vector.m_elements[i];
+	}
+}
+
+
+template <int Size, class Element>
+inline TVector<Size, Element>::TVector(std::initializer_list<Element> values)
+{
+	int count = static_cast<int>(values.size());
+	Q_ASSERT(count <= Size);
+
+	for (int i = 0; i < count; ++i){
+		m_elements[i] = *(values.begin() + i);
+	}
+
+	for (int i = count; i < Size; ++i){
+		m_elements[i] = 0;
 	}
 }
 

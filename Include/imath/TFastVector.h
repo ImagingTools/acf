@@ -3,6 +3,7 @@
 
 // STL includes
 #include <cstring>
+#include <initializer_list>
 
 // ACF includes
 #include <iser/IArchive.h>
@@ -41,6 +42,11 @@ public:
 		Copy constructor.
 	 */
 	TFastVector(const TFastVector<MaxSize, Element>& vector);
+
+	/**
+		Initializer list constructor.
+	 */
+	TFastVector(std::initializer_list<Element> values);
 
 	template <int Size>
 	TFastVector(const imath::TVector<Size, Element>& vector)
@@ -239,6 +245,18 @@ inline TFastVector<MaxSize, Element>::TFastVector(const TFastVector<MaxSize, Ele
 	Q_ASSERT(m_elementsCount <= MaxSize);
 
 	std::memcpy(m_elements, vector.m_elements, sizeof(Element) * m_elementsCount);
+}
+
+
+template <int MaxSize, class Element>
+inline TFastVector<MaxSize, Element>::TFastVector(std::initializer_list<Element> values)
+:	m_elementsCount(qMin(MaxSize, static_cast<int>(values.size())))
+{
+	Q_ASSERT(values.size() <= MaxSize);
+
+	for (int i = 0; i < m_elementsCount; ++i){
+		m_elements[i] = *(values.begin() + i);
+	}
 }
 
 
