@@ -31,6 +31,14 @@ const ibase::IHierarchicalCommand* CCommandBasedSelectionControllerComp::GetComm
 
 // protected methods
 
+// reimplemented (iqtgui::TDesignSchemaHandlerWrap)
+
+void CCommandBasedSelectionControllerComp::OnDesignSchemaChanged(const QByteArray& /*themeId*/)
+{
+	BuildCommands();
+}
+
+
 // reimplemented (ibase::TLocalizableWrap)
 
 void CCommandBasedSelectionControllerComp::OnLanguageChanged()

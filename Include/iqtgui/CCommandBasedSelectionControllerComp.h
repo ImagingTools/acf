@@ -1,5 +1,4 @@
-#ifndef iqtgui_CCommandBasedSelectionControllerComp_included
-#define iqtgui_CCommandBasedSelectionControllerComp_included
+#pragma once
 
 
 // ACF includes
@@ -10,6 +9,7 @@
 #include <iprm/ISelectionParam.h>
 #include <iqtgui/IIconProvider.h>
 #include <iqtgui/CHierarchicalCommand.h>
+#include <iqtgui/TDesignSchemaHandlerWrap.h>
 
 
 namespace iqtgui
@@ -22,13 +22,13 @@ namespace iqtgui
 */
 class CCommandBasedSelectionControllerComp:
 			public QObject,
-			public ibase::TLocalizableWrap<icomp::CComponentBase>,
+			public iqtgui::TDesignSchemaHandlerWrap<ibase::TLocalizableWrap<icomp::CComponentBase>>,
 			protected imod::TSingleModelObserverBase<iprm::ISelectionParam>,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 public:
-	typedef ibase::TLocalizableWrap<icomp::CComponentBase> BaseClass;
+	typedef iqtgui::TDesignSchemaHandlerWrap<ibase::TLocalizableWrap<icomp::CComponentBase>> BaseClass;
 	typedef imod::TSingleModelObserverBase<iprm::ISelectionParam> BaseClass2;
 	
 	I_BEGIN_COMPONENT(CCommandBasedSelectionControllerComp);
@@ -47,18 +47,21 @@ public:
 	CCommandBasedSelectionControllerComp();
 
 	// reimpemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 protected:
+	// reimplemented (iqtgui::TDesignSchemaHandlerWrap)
+	virtual void OnDesignSchemaChanged(const QByteArray& themeId) override;
+
 	// reimplemented (ibase::TLocalizableWrap)
-	virtual void OnLanguageChanged();
+	virtual void OnLanguageChanged() override;
 
 	// reimpemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimpemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private Q_SLOTS:
 	void OnCommandActivated();
@@ -84,8 +87,5 @@ protected:
 
 
 } // namespace iqtgui
-
-
-#endif // !iqtgui_CCommandBasedSelectionControllerComp_included
 
 
