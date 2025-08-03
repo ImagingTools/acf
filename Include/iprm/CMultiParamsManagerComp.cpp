@@ -406,7 +406,7 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		
 		Q_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
 
-		istd::CChangeNotifier notifier(this, &s_insertChangeSet);	
+		istd::CChangeNotifier notifier(this, &s_insertChangeSet);
 		Q_UNUSED(notifier);
 
 		ParamSetPtr paramsSetPtr(new imod::TModelWrap<ParamSet>());
