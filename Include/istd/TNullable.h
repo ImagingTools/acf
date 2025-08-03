@@ -1,5 +1,4 @@
-#ifndef istd_TNullable_included
-#define istd_TNullable_included
+#pragma once
 
 
 // STL includes
@@ -582,10 +581,5 @@ bool TNullable<T>::operator!=(const T& value) const
 
 
 } // namespace istd
-
-
-
-#endif // !istd_TNullable_included
-
 
 

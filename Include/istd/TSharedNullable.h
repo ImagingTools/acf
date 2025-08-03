@@ -1,5 +1,4 @@
-#ifndef istd_TSharedNullable_included
-#define istd_TSharedNullable_included
+#pragma once
 
 
 // STL includes
@@ -13,8 +12,10 @@
 namespace istd
 {
 
+
 /**
-	This is a comfort wrap for \c TNullable that allows several \c TSharedNullable objects to own the same object. In other words this is equivalent for \c std::shared_ptr<TNullable<T>>
+	This is a comfort wrap for \c TNullable that allows several \c TSharedNullable objects to own the same object.
+	In other words this is equivalent for \c std::shared_ptr<TNullable<T>>
 */
 template <class T>
 class TSharedNullable
@@ -388,10 +389,5 @@ bool TSharedNullable<T>::operator!=(const T& value) const
 
 
 } // namespace istd
-
-
-
-#endif // !istd_TSharedNullable_included
-
 
 
