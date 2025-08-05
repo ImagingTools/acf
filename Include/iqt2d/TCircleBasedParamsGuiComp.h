@@ -37,6 +37,7 @@ protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated() override;
 	virtual void OnGuiRetranslate() override;
+	virtual void OnGuiDesignChanged() override;
 
 protected:
 	using BaseClass::GetObservedObject;
@@ -148,6 +149,15 @@ void TCircleBasedParamsGuiComp<CircleBasedShape, CircleBasedModel, CircleBasedGu
 		PositionUnitLabel->setVisible(false);
 		RadiusUnitLabel->setVisible(false);
 	}
+}
+
+
+template<class CircleBasedShape, class CircleBasedModel, class CircleBasedGui>
+inline void TCircleBasedParamsGuiComp<CircleBasedShape, CircleBasedModel, CircleBasedGui>::OnGuiDesignChanged()
+{
+	BaseClass::OnGuiDesignChanged();
+
+	ToolsButton->setIcon(this->GetIcon(":/Icons/Tools"));
 }
 
 
