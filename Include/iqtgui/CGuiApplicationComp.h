@@ -44,7 +44,6 @@ namespace iqtgui
 	Supported operation systems are: iOS, Unix, OSX and Windows. \sa istd::CSystem::GetOperationSystemName
 */
 class CGuiApplicationComp:
-			public QObject,
 			public CApplicationCompBase,
 			protected imod::TSingleModelObserverBase<iprm::IEnableableParam>,
 			virtual public iqtgui::IGuiApplication
@@ -113,10 +112,14 @@ protected:
 private:
 	void UpdateMainWidgetDecorations();
 	void ShowWindow();
+	void ShowFullScreen();
 
 private Q_SLOTS:
 	void OnQuit();
 	void OnEventLoopStarted();
+
+Q_SIGNALS:
+	void OnEventLoopStartedSignal();
 
 protected:
 	I_REF(IGuiObject, m_mainGuiCompPtr);

@@ -86,6 +86,10 @@ bool CGuiComponentBase::CreateGui(QWidget* parentPtr)
 			if (m_fixedHeightAttrPtr.IsValid()){
 				m_widgetPtr->setMinimumHeight(*m_fixedHeightAttrPtr);
 				m_widgetPtr->setSizePolicy(m_widgetPtr->sizePolicy().horizontalPolicy(), QSizePolicy::Maximum);
+
+				if (*m_fixedHeightAttrPtr <= 0){
+					m_widgetPtr->hide();
+				}
 			}
 
 			OnGuiCreated();

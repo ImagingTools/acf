@@ -3,7 +3,6 @@
 
 // Qt includes
 #include <QtCore/QString>
-#include <QtCore/QTimer>
 #include <QtCore/QEventLoop>
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
@@ -107,16 +106,14 @@ bool CApplicationCompBase::TryShowSplashScreen()
 		splashWidgetPtr->raise();
 
 		QEventLoop loop;
-#ifdef Q_OS_LINUX
-		QTimer initSplashTimer;
-		QObject::connect(&initSplashTimer, SIGNAL(timeout()), &loop, SLOT(quit()), Qt::QueuedConnection);
-		Q_EMIT initSplashTimer.start(1000);
-		loop.exec(QEventLoop::ExcludeUserInputEvents);
-#else
 		m_applicationPtr->processEvents(QEventLoop::ExcludeUserInputEvents);
-#endif
-		QTimer::singleShot(*m_splashTimeAttrPtr * 1000, &loop, SLOT(quit()));
+		m_splashTimer.setSingleShot(true);
+		connect(&m_splashTimer, SIGNAL(timeout()), &loop, SLOT(quit()), Qt::QueuedConnection);
+		m_splashTimer.start(*m_splashTimeAttrPtr * 1000);
+
 		loop.exec();
+
+		disconnect(&m_splashTimer, SIGNAL(timeout()), &loop, SLOT(quit()));
 
 		return true;
 	}

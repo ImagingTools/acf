@@ -6,6 +6,7 @@
 #include <QtCore/QTimer>
 #include <QtCore/QtGlobal>
 #include <QtGui/QIcon>
+#include <QtGui/QWindow>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QVBoxLayout>
@@ -15,7 +16,8 @@
 #endif
 
 #if defined (Q_OS_WIN)
-	#if QT_VERSION >= 0x050500 && QT_VERSION < 0x060000
+#include <Windows.h>
+#if QT_VERSION >= 0x050500 && QT_VERSION < 0x060000
 	#include <QtPlatformHeaders/QWindowsWindowFunctions>
 	#endif
 #endif
@@ -60,13 +62,10 @@ const iqtgui::IGuiObject* CGuiApplicationComp::GetApplicationGui() const
 
 bool CGuiApplicationComp::InitializeApplication(int argc, char** argv)
 {
-#if QT_VERSION > 0x050000
+#if QT_VERSION > 0x050000 && QT_VERSION < 0x060000
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 	qputenv("QT_HIDPI_AWARE", "1");
 	qputenv("QT_HIGHDPI_AWARE", "1");
-#endif
-
-#if QT_VERSION > 0x050600
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
@@ -85,6 +84,8 @@ bool CGuiApplicationComp::InitializeApplication(int argc, char** argv)
 
 int CGuiApplicationComp::Execute(int argc, char** argv)
 {
+	QObject::connect(this, SIGNAL(OnEventLoopStartedSignal()), SLOT(OnEventLoopStarted()), Qt::QueuedConnection);
+
 	int retVal = -1;
 
 	if (BaseClass::InitializeApplication(argc, argv)){
@@ -162,13 +163,15 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 		if (m_mainWidgetPtr.IsValid()){
 			m_defaultWidgetFlags = m_mainWidgetPtr->windowFlags();
 
+			m_mainWidgetPtr->installEventFilter(this);
+
 			UpdateMainWidgetDecorations();
 
 			ShowWindow();
 
 			m_lastWidgetGeometry = m_mainWidgetPtr->geometry();
 
-			QTimer::singleShot(0, this, &CGuiApplicationComp::OnEventLoopStarted);
+			emit OnEventLoopStartedSignal();
 
 			// Start application loop:
 			retVal = QApplication::exec();
@@ -182,7 +185,7 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 		}
 		else{
 			if (m_trayIconPtr.IsValid()){
-				QTimer::singleShot(0, this, &CGuiApplicationComp::OnEventLoopStarted);
+				emit OnEventLoopStartedSignal();
 
 				// Start application loop:
 				retVal = QApplication::exec();
@@ -258,6 +261,32 @@ void CGuiApplicationComp::OnComponentDestroyed()
 }
 
 
+// reimplemented (QObject)
+
+bool CGuiApplicationComp::eventFilter(QObject* obj, QEvent* event)
+{
+#if QT_VERSION >= 0x060000
+#if defined(Q_OS_WIN)
+	Q_ASSERT(m_mainWidgetPtr.IsValid());
+	if (event->type() == QEvent::WindowStateChange){
+		const Qt::WindowStates windowStates = m_mainWidgetPtr->windowState();
+		if (windowStates.testFlag(Qt::WindowState::WindowFullScreen)){
+			QWindow* windowHandle = m_mainWidgetPtr->windowHandle();
+			if (windowHandle != nullptr){
+				HWND handle = reinterpret_cast<HWND>(windowHandle->winId());
+				Q_ASSERT(handle != nullptr);
+
+				SetWindowLongPtr(handle, GWL_STYLE, GetWindowLongPtr(handle, GWL_STYLE) | WS_BORDER);
+			}
+		}
+	}
+#endif
+#endif
+
+	return QObject::eventFilter(obj, event);
+}
+
+
 // private methods
 
 void CGuiApplicationComp::UpdateMainWidgetDecorations()
@@ -285,32 +314,9 @@ void CGuiApplicationComp::ShowWindow()
 		uiStartMode = *m_uiStartModeAttrPtr;
 	}
 
-	bool usedFullscreenBorder = false;
-
-#if defined (Q_OS_WIN)
-	#if QT_VERSION >= 0x050500
-		usedFullscreenBorder = *m_useFullScreenBorderOnWindowsAttrPtr;
-	#endif
-#endif
-	QWindow* windowHandle = NULL;
-	Q_UNUSED(windowHandle)
-
 	switch (uiStartMode){
 		case 1:
-#if QT_VERSION >= 0x050000
-			// workaround to go full screen after start (Windows, Qt 5.6 - 5.10)
-			m_mainWidgetPtr->showMaximized();
-			QApplication::processEvents();
-#endif
-#if QT_VERSION >= 0x050500 && QT_VERSION < 0x060000
-			windowHandle = m_mainWidgetPtr->windowHandle();
-#if defined (Q_OS_WIN)
-			if (windowHandle != NULL){
-				QWindowsWindowFunctions::setHasBorderInFullScreen(windowHandle, usedFullscreenBorder);
-			}
-#endif
-#endif
-			m_mainWidgetPtr->showFullScreen();
+			ShowFullScreen();
 			break;
 
 		case 2:
@@ -324,6 +330,47 @@ void CGuiApplicationComp::ShowWindow()
 		default:
 			m_mainWidgetPtr->show();
 	}
+}
+
+
+void CGuiApplicationComp::ShowFullScreen()
+{
+	m_mainWidgetPtr->showMaximized();
+	QApplication::processEvents();
+
+	bool usedFullscreenBorder = false;
+
+#if defined (Q_OS_WIN)
+#if QT_VERSION >= 0x050500
+	usedFullscreenBorder = *m_useFullScreenBorderOnWindowsAttrPtr;
+#endif
+#endif
+	QWindow* windowHandle = NULL;
+	Q_UNUSED(windowHandle)
+
+#if QT_VERSION >= 0x050000 && QT_VERSION < 0x050500
+	// workaround to go full screen after start (Windows, Qt 5.6 - 5.10)
+	m_mainWidgetPtr->showMaximized();
+	QApplication::processEvents();
+#endif
+#if QT_VERSION >= 0x050500 && QT_VERSION < 0x060000
+	windowHandle = m_mainWidgetPtr->windowHandle();
+#if defined (Q_OS_WIN)
+	if (windowHandle != NULL){
+		QWindowsWindowFunctions::setHasBorderInFullScreen(windowHandle, usedFullscreenBorder);
+	}
+#endif
+#endif
+#if QT_VERSION >= 0x060000
+	windowHandle = m_mainWidgetPtr->windowHandle();
+#if defined (Q_OS_WIN)
+	if (windowHandle != NULL){
+		HWND handle = reinterpret_cast<HWND>(windowHandle->winId());
+		SetWindowLongPtr(handle, GWL_STYLE, GetWindowLongPtr(handle, GWL_STYLE) | WS_BORDER);
+	}
+#endif
+#endif
+	m_mainWidgetPtr->showFullScreen();
 }
 
 
