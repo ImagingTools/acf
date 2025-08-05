@@ -84,7 +84,7 @@ private:
 	double m_sleepInterval;
 	bool m_threadTerminationRequested;
 
-	mutable QMutex m_lock;
+	mutable QRecursiveMutex m_lock;
 	mutable QMutex m_pollingMutex;
 	mutable QWaitCondition m_pollingWait;
 
