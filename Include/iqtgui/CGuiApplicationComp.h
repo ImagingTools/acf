@@ -86,6 +86,9 @@ protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentDestroyed() override;
 
+	// reimplemented (QObject)
+	virtual bool eventFilter(QObject* obj, QEvent* ev) override;
+
 protected:
 	template <class InterfaceType>
 	static InterfaceType* ExtractTrayMessages(CGuiApplicationComp& component)

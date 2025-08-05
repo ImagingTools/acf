@@ -4,6 +4,7 @@
 
 // Qt includes
 #include <QtCore/QtGlobal>
+#include <QtCore/QTimer>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QApplication>
 #else
@@ -31,9 +32,11 @@ namespace iqtgui
 	you can define the splash screen and set some information about your application.
 */
 class CApplicationCompBase:
+			public QObject,
 			public icomp::CComponentBase,
 			virtual public ibase::IApplication
 {
+	Q_OBJECT
 public:
 	typedef icomp::CComponentBase BaseClass;
 
@@ -116,6 +119,8 @@ private:
 
 	QByteArray m_appStyle;
 	QString m_styleSheetFile;
+
+	QTimer m_splashTimer;
 };
 
 
