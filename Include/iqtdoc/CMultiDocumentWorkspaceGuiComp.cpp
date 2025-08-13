@@ -275,7 +275,7 @@ void CMultiDocumentWorkspaceGuiComp::OnViewsCountChanged()
 
 // reimplemented (idoc::CMultiDocumentManagerBase)
 
-istd::IChangeable* CMultiDocumentWorkspaceGuiComp::OpenSingleDocument(
+istd::IChangeableSharedPtr CMultiDocumentWorkspaceGuiComp::OpenSingleDocument(
 			const QString& filePath,
 			bool createView,
 			const QByteArray& viewTypeId,

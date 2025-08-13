@@ -114,7 +114,7 @@ protected:
 	void OnViewsCountChanged();
 
 	// reimplemented (idoc::CMultiDocumentManagerBase)
-	virtual istd::IChangeable* OpenSingleDocument(
+	virtual istd::IChangeableSharedPtr OpenSingleDocument(
 				const QString& filePath,
 				bool createView,
 				const QByteArray& viewTypeId,

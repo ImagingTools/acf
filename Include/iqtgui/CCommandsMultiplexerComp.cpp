@@ -34,6 +34,26 @@ const ibase::IHierarchicalCommand* CCommandsMultiplexerComp::GetCommands() const
 
 // protected methods
 
+// reimplemented (iqtgui::TDesignSchemaHandlerWrap)
+
+void CCommandsMultiplexerComp::OnDesignSchemaChanged(const QByteArray& /*themeId*/)
+{
+	static const istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
+	istd::CChangeNotifier commandsNotifier(this, &commandsChangeSet);
+	Q_UNUSED(commandsNotifier);
+}
+
+
+// reimplemented (ibase::TLocalizableWrap)
+
+void CCommandsMultiplexerComp::OnLanguageChanged()
+{
+	static const istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
+	istd::CChangeNotifier commandsNotifier(this, &commandsChangeSet);
+	Q_UNUSED(commandsNotifier);
+}
+
+
 // reimplemented (imod::IObserver)
 
 void CCommandsMultiplexerComp::BeforeUpdate(imod::IModel* I_IF_DEBUG(modelPtr))

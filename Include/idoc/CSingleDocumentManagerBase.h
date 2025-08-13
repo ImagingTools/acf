@@ -1,5 +1,4 @@
-#ifndef idoc_CSingleDocumentManagerBase_included
-#define idoc_CSingleDocumentManagerBase_included
+#pragma once
 
 
 // Qt includes
@@ -42,7 +41,7 @@ public:
 				const QByteArray& documentTypeId,
 				bool createView = true,
 				const QByteArray& viewTypeId = "",
-				istd::IChangeable** newDocumentPtr = NULL,
+				istd::IChangeableSharedPtr* newDocumentPtr = nullptr,
 				bool beQuiet = false,
 				bool* ignoredPtr = NULL) override;
 	virtual bool OpenDocument(
@@ -50,7 +49,7 @@ public:
 				const QString* fileNamePtr = NULL,
 				bool createView = true,
 				const QByteArray& viewTypeId = "",
-				istd::IChangeable** documentPtr = NULL,
+				istd::IChangeableSharedPtr* documentPtr = nullptr,
 				FileToTypeMap* loadedMapPtr = NULL,
 				bool beQuiet = false,
 				bool* ignoredPtr = NULL,
@@ -191,8 +190,5 @@ private:
 
 
 } // namespace idoc
-
-
-#endif // idoc_CSingleDocumentManagerBase_included
 
 

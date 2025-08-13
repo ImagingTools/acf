@@ -82,10 +82,10 @@ void CDocumentImportExportCommandComp::OnComponentDestroyed()
 void CDocumentImportExportCommandComp::OnImport()
 {
 	if (m_documentPersistenceCompPtr.IsValid() && m_documentManagerCompPtr.IsValid()){
-		istd::IChangeable* documentPtr = NULL;
+		istd::IChangeableSharedPtr documentPtr;
 
 		if (m_documentManagerCompPtr->InsertNewDocument(*m_documentTypeIdAttrPtr, false, "", &documentPtr)){
-			Q_ASSERT(documentPtr != NULL);
+			Q_ASSERT(documentPtr.IsValid());
 
 			if (m_documentPersistenceCompPtr->LoadFromFile(*documentPtr) == ifile::IFilePersistence::OS_OK){
 				m_documentManagerCompPtr->AddViewToDocument(*documentPtr);
@@ -93,7 +93,7 @@ void CDocumentImportExportCommandComp::OnImport()
 			else{
 				int documentsCount = m_documentManagerCompPtr->GetDocumentsCount();
 				for (int documentIndex = 0; documentIndex < documentsCount; ++documentIndex){
-					if (&m_documentManagerCompPtr->GetDocumentFromIndex(documentIndex) == documentPtr){
+					if (&m_documentManagerCompPtr->GetDocumentFromIndex(documentIndex) == documentPtr.GetPtr()){
 						m_documentManagerCompPtr->CloseDocument(documentIndex, true);
 					}
 				}

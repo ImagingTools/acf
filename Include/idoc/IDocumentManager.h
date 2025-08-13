@@ -1,5 +1,4 @@
-#ifndef idoc_IDocumentManager_included
-#define idoc_IDocumentManager_included
+#pragma once
 
 
 // Qt includes
@@ -148,7 +147,7 @@ public:
 				const QByteArray& documentTypeId, 
 				bool createView = true, 
 				const QByteArray& viewTypeId = "",
-				istd::IChangeable** newDocumentPtr = NULL,
+				istd::IChangeableSharedPtr* newDocumentPtr = nullptr,
 				bool beQuiet = false,
 				bool* ignoredPtr = NULL) = 0;
 
@@ -167,7 +166,7 @@ public:
 				const QString* fileNamePtr = NULL,
 				bool createView = true,
 				const QByteArray& viewTypeId = "",
-				istd::IChangeable** documentPtr = NULL,
+				istd::IChangeableSharedPtr* documentPtr = nullptr,
 				FileToTypeMap* loadedMapPtr = NULL,
 				bool beQuiet = false,
 				bool* ignoredPtr = NULL,
@@ -219,8 +218,5 @@ public:
 
 
 } // namespace idoc
-
-
-#endif // !idoc_IDocumentManager_included
 
 

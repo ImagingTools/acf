@@ -6,7 +6,10 @@
 #include <imod/CModelUpdateBridge.h>
 #include <icomp/CComponentBase.h>
 #include <ibase/ICommandsProvider.h>
+#include <ibase/TLocalizableWrap.h>
 #include <iprm/ISelectionParam.h>
+#include <iqtgui/CHierarchicalCommand.h>
+#include <iqtgui/TDesignSchemaHandlerWrap.h>
 
 
 namespace iqtgui
@@ -18,12 +21,12 @@ namespace iqtgui
 */
 class CCommandsMultiplexerComp:
 			public QObject,
-			public icomp::CComponentBase,
+			public iqtgui::TDesignSchemaHandlerWrap<ibase::TLocalizableWrap<icomp::CComponentBase>>,
 			protected imod::CModelUpdateBridge,
 			virtual public ibase::ICommandsProvider
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef iqtgui::TDesignSchemaHandlerWrap<ibase::TLocalizableWrap<icomp::CComponentBase>> BaseClass;
 	typedef imod::CModelUpdateBridge BaseClass2;
 	
 	I_BEGIN_COMPONENT(CCommandsMultiplexerComp);
@@ -40,6 +43,12 @@ public:
 	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 protected:
+	// reimplemented (iqtgui::TDesignSchemaHandlerWrap)
+	virtual void OnDesignSchemaChanged(const QByteArray& themeId) override;
+
+	// reimplemented (ibase::TLocalizableWrap)
+	virtual void OnLanguageChanged() override;
+
 	// reimplemented (imod::IObserver)
 	virtual void BeforeUpdate(imod::IModel* modelPtr);
 	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
