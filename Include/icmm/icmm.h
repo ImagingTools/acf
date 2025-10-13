@@ -19,6 +19,9 @@ namespace icmm
 {
 
 
+Q_NAMESPACE
+
+
 enum class AstmTableType
 {
 	E308Table5,
@@ -62,6 +65,7 @@ enum class StandardIlluminant
 	UL50,
 	Custom
 };
+Q_ENUM_NS(StandardIlluminant)
 
 
 enum class ObserverType
@@ -69,6 +73,7 @@ enum class ObserverType
 	TwoDegree,
 	TenDegree
 };
+Q_ENUM_NS(ObserverType)
 
 
 /**
