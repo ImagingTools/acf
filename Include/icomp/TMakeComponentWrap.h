@@ -1,5 +1,4 @@
-#ifndef icomp_TMakeComponentWrap_included
-#define icomp_TMakeComponentWrap_included
+#pragma once
 
 
 // ACF includes
@@ -48,8 +47,5 @@ public:
 
 
 } // namespace icomp
-
-
-#endif // !icomp_TMakeComponentWrap_included
 
 

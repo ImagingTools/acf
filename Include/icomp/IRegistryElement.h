@@ -1,5 +1,4 @@
-#ifndef icomp_IRegistryElement_included
-#define icomp_IRegistryElement_included
+#pragma once
 
 
 // Qt includes
@@ -100,8 +99,5 @@ public:
 
 
 } // namespace icomp
-
-
-#endif // !icomp_IRegistryElement_included
 
 

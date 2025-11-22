@@ -1,5 +1,4 @@
-#ifndef icomp_included
-#define icomp_included
+#pragma once
 
 
 #include <iser/iser.h>
@@ -20,8 +19,5 @@ namespace icomp
 
 
 } // namespace icomp
-
-
-#endif // !icomp_included
 
 

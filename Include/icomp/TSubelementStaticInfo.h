@@ -1,5 +1,4 @@
-#ifndef icomp_TSubelementStaticInfo_included
-#define icomp_TSubelementStaticInfo_included
+#pragma once
 
 
 // Qt includes
@@ -105,7 +104,7 @@ IElementStaticInfo::Ids TSubelementStaticInfo<ComponentType>::GetMetaIds(int met
 template <class ComponentType>
 const IElementStaticInfo* TSubelementStaticInfo<ComponentType>::GetSubelementInfo(const QByteArray& /*subcomponentId*/) const
 {
-	return NULL;
+	return nullptr;
 }
 
 
@@ -118,7 +117,7 @@ void* TSubelementStaticInfo<ComponentType>::GetComponentInterface(
 			const QByteArray& subId) const
 {
 	ComponentType* nativeTypePtr = dynamic_cast<ComponentType*>(&component);
-	if ((nativeTypePtr != NULL) && subId.isEmpty()){
+	if ((nativeTypePtr != nullptr) && subId.isEmpty()){
 		if (!interfaceType.IsValid() || interfaceType.IsVoid() || (interfaceType == CBaseComponentStaticInfo::s_compInterfaceType)){
 			return &component;
 		}
@@ -142,13 +141,10 @@ void* TSubelementStaticInfo<ComponentType>::GetComponentInterface(
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
 } // namespace icomp
-
-
-#endif // !icomp_TSubelementStaticInfo_included
 
 

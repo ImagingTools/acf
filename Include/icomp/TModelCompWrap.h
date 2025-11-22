@@ -1,11 +1,9 @@
-#ifndef imod_TModelCompWrap_included
-#define imod_TModelCompWrap_included
+#pragma once
 
 
+// ACF includes
 #include <istd/IChangeable.h>
-
 #include <imod/TModelWrap.h>
-
 #include <icomp/TComponentCloneWrap.h>
 #include <icomp/CComponentBase.h>
 
@@ -51,8 +49,5 @@ void TModelCompWrap<Base>::OnComponentDestroyed()
 
 
 } // namespace icomp
-
-
-#endif // !imod_TModelCompWrap_included
 
 

@@ -1,5 +1,4 @@
-#ifndef icomp_CComponentContext_included
-#define icomp_CComponentContext_included
+#pragma once
 
 
 // Qt includes
@@ -76,8 +75,5 @@ private:
 
 
 } // namespace icomp
-
-
-#endif // !icomp_CComponentContext_included
 
 

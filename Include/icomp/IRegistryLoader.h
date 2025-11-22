@@ -1,5 +1,4 @@
-#ifndef icomp_IRegistryLoader_included
-#define icomp_IRegistryLoader_included
+#pragma once
 
 
 // Qt includes
@@ -31,8 +30,5 @@ public:
 	
 
 } // namespace icomp
-
-
-#endif // !icomp_IRegistryLoader_included
 
 
