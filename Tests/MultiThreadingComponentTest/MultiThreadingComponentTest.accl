@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5431" Description="ACF"/>
+            <Version Id="1" Number="2254" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="395266" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="CompactXmlFilePersistence" X="475" Y="100" Note=""/>
+        <Element ComponentName="ConsoleLog" X="175" Y="250" Note=""/>
+        <Element ComponentName="Selection" X="450" Y="250" Note=""/>
+        <Element ComponentName="SelectionConstraints" X="1050" Y="375" Note=""/>
+        <Element ComponentName="SelectionWithConstraints" X="800" Y="250" Note=""/>
+        <Element ComponentName="Selection_1" X="450" Y="500" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5431" Description="ACF"/>
+            <Version Id="1" Number="2254" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="395266" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="CompactXmlFilePersistence" PackageId="AcfVoce" ComponentId="CompactXmlFilePersistence">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AutoCreatePath" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ConsoleLog"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Selection"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RestoreOnBegin" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="StoreOnEnd" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ConsoleLog" PackageId="BasePck" ComponentId="ConsoleLog">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="Selection" PackageId="BasePck" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Subselection" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Selection_1"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SelectionConstraints" PackageId="BasePck" ComponentId="OptionsManager">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="SelectionWithConstraints" PackageId="BasePck" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SelectionConstraints"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Selection_1" PackageId="BasePck" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SelectionConstraints"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Subselection" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SelectionWithConstraints"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces/>
+    <ExportedComponents>
+        <Component ExportedId="Selection" ComponentId="Selection"/>
+        <Component ExportedId="SelectionConstraints" ComponentId="SelectionConstraints"/>
+        <Component ExportedId="SelectionWithConstraints" ComponentId="SelectionWithConstraints"/>
+    </ExportedComponents>
+</Acf>
