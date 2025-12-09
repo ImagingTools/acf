@@ -76,7 +76,7 @@ public:
 	std::vector<TaskProgressInfo> GetProcessedTasks(bool preferSorted = false, int maxCount = -1) const;
 
 	bool IsCancelable() const;
-	bool IsCanceled() const;
+	virtual bool IsCanceled() const;
 	void SetCanceled(bool state = true);
 
 	// reimplemented (ibase::IProgressManager)

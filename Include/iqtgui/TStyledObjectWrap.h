@@ -4,9 +4,11 @@
 // ACF includes
 #include <iqtgui/iqtgui.h>
 #include <iqtgui/CIconProvider.h>
+#include <iqt/CDesignThemeEvent.h>
 
 // Qt includes
 #include <QtWidgets/QWidget>
+#include <QtCore/QCoreApplication>
 
 
 namespace iqtgui

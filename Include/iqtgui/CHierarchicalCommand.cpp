@@ -125,6 +125,7 @@ void CHierarchicalCommand::SetVisuals(const QString& name, const QString& shortN
 	BaseClass::setStatusTip(description);
 	BaseClass::setToolTip(description);
 	BaseClass::setIcon(icon);
+	BaseClass::setIconVisibleInMenu(icon.isNull() == false);
 }
 
 

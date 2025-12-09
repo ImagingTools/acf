@@ -43,6 +43,12 @@ protected:
 			}
 		}
 	}
+
+	virtual bool IsCanceled() const override
+	{
+		return m_isCanceled || (m_parentPtr && m_parentPtr->IsCanceled());
+	}
+
 };
 
 

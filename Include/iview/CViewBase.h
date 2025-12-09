@@ -250,7 +250,7 @@ protected:
 	*/
 	virtual void UpdateRectArea(const i2d::CRect& rect) = 0;
 
-private:
+protected:
 	enum ViewMode
 	{
 		VM_NONE,
