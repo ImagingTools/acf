@@ -224,10 +224,10 @@ iqtgui::IGuiObject* CMultiDocumentWorkspaceGuiComp::GetViewFromWidget(const QWid
 					++viewIter){
 			const ViewInfo& viewInfo = *viewIter;
 
-			iqtgui::IGuiObject* guiObjectPtr = CompCastPtr<iqtgui::IGuiObject>(viewInfo.viewPtr.GetPtr());
+			const iqtgui::IGuiObject* guiObjectPtr = CompCastPtr<iqtgui::IGuiObject>(viewInfo.viewPtr.GetPtr());
 			if (guiObjectPtr != NULL){
 				if (guiObjectPtr->GetWidget() == &widget){
-					return guiObjectPtr;
+					return const_cast<iqtgui::IGuiObject*>(guiObjectPtr);
 				}
 			}
 		}
@@ -248,7 +248,7 @@ int CMultiDocumentWorkspaceGuiComp::GetDocumentIndexFromWidget(const QWidget& wi
 					++viewIter){
 			const ViewInfo& viewInfo = *viewIter;
 
-			iqtgui::IGuiObject* guiObjectPtr = CompCastPtr<iqtgui::IGuiObject>(viewInfo.viewPtr.GetPtr());
+			const iqtgui::IGuiObject* guiObjectPtr = CompCastPtr<iqtgui::IGuiObject>(viewInfo.viewPtr.GetPtr());
 			if (guiObjectPtr != NULL){
 				if (guiObjectPtr->GetWidget() == &widget){
 					return documentIndex;

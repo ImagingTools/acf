@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 // STL includes
@@ -20,54 +20,64 @@ public:
 	typedef PolymorphicPointerImpl RootObjectPtr;
 	typedef std::function<InterfaceType* ()> ExtractInterfaceFunc;
 
-	bool IsValid() const
+	bool IsValid() const noexcept
 	{
 		return m_interfacePtr != nullptr;
 	}
 
 	template<typename Interface = InterfaceType>
-	Interface* GetPtr() const
+	Interface* GetPtr()
 	{
 		if constexpr (std::is_same_v<Interface, InterfaceType>){
-			return static_cast<Interface*>(m_interfacePtr);
+			return m_interfacePtr;
 		}
 		else{
 			return dynamic_cast<Interface*>(m_interfacePtr);
 		}
 	}
 
-	const InterfaceType* operator->() const
+	template<typename Interface = InterfaceType>
+	const Interface* GetPtr() const
+	{
+		if constexpr (std::is_same_v<Interface, InterfaceType>){
+			return m_interfacePtr;
+		}
+		else{
+			return dynamic_cast<const Interface*>(m_interfacePtr);
+		}
+	}
+
+	const InterfaceType* operator->() const noexcept
 	{
 		Q_ASSERT(m_interfacePtr != nullptr);
 
 		return m_interfacePtr;
 	}
 
-	InterfaceType* operator->()
+	InterfaceType* operator->() noexcept
 	{
 		Q_ASSERT(m_interfacePtr != nullptr);
 
-		return const_cast<InterfaceType*>(m_interfacePtr);
+		return m_interfacePtr;
 	}
 
-	const InterfaceType& operator*() const
-	{
-		Q_ASSERT(m_interfacePtr != nullptr);
-
-		return *m_interfacePtr;
-	}
-
-	InterfaceType& operator*()
+	const InterfaceType& operator*() const noexcept
 	{
 		Q_ASSERT(m_interfacePtr != nullptr);
 
 		return *m_interfacePtr;
 	}
 
-	void Reset()
+	InterfaceType& operator*() noexcept
+	{
+		Q_ASSERT(m_interfacePtr != nullptr);
+
+		return *m_interfacePtr;
+	}
+
+	void Reset() noexcept
 	{
 		m_rootPtr.reset();
-
 		m_interfacePtr = nullptr;
 	}
 
@@ -100,7 +110,34 @@ public:
 		return m_rootPtr;
 	}
 
+	// STL support
+	template <class T>
+	T* dynamicCast()
+	{
+		return GetPtr<T>();
+	}
+
+	template <class T>
+	const T* dynamicCast() const
+	{
+		return GetPtr<const T>();
+	}
+
+	operator bool() const noexcept
+	{
+		return IsValid();
+	}
+
+	TInterfacePtr& operator=(std::nullptr_t) noexcept
+	{
+		Reset();
+		return *this;
+	}
+
 protected:
+	TInterfacePtr(const TInterfacePtr&) = delete;
+	TInterfacePtr& operator=(const TInterfacePtr&) = delete;
+
 	TInterfacePtr()
 		:m_interfacePtr(nullptr)
 	{
@@ -112,59 +149,38 @@ protected:
 		m_rootPtr.reset(interfacePtr);
 	}
 
-	TInterfacePtr(istd::IPolymorphic* rootPtr, const ExtractInterfaceFunc& extractInterface)
+	TInterfacePtr(std::nullptr_t) noexcept
+		:m_rootPtr(),
+		m_interfacePtr(nullptr)
+	{
+	}
+
+	explicit TInterfacePtr(istd::IPolymorphic* rootPtr, const ExtractInterfaceFunc& extractInterface)
 	{
 		SetPtr(rootPtr, extractInterface);
 	}
 
-	TInterfacePtr(istd::IPolymorphic* rootPtr, InterfaceType* interfacePtr)
+	explicit TInterfacePtr(istd::IPolymorphic* rootPtr, InterfaceType* interfacePtr)
 	{
 		SetPtr(rootPtr, interfacePtr);
 	}
 
-	/**
-		Copy constructor.
-		This implementation has no function and is provided only for compatibility with STL.
-		The source pointer must be invalid (NULL).
-	*/
-	TInterfacePtr(const TInterfacePtr& ptr)
-	{
-		I_IF_DEBUG(Q_ASSERT(ptr.GetPtr() == NULL));
-	}
-
-	/**
-		Move constructor.
-	*/
-	TInterfacePtr(TInterfacePtr&& ptr)
+	 // Move constructor
+	TInterfacePtr(TInterfacePtr&& ptr) noexcept
 	{
 		m_rootPtr = std::move(ptr.m_rootPtr);
-
 		m_interfacePtr = ptr.m_interfacePtr;
+		ptr.m_interfacePtr = nullptr;
 	}
 
-	/**
-		Assign operator.
-		This implementation has no function and is provided only for compatibility with STL.
-		The source pointer must be invalid (NULL).
-	*/
-	TInterfacePtr& operator=(const TInterfacePtr& ptr)
+	// Move assignment
+	TInterfacePtr& operator=(TInterfacePtr&& ptr) noexcept
 	{
-		I_IF_DEBUG(Q_ASSERT(ptr.GetPtr() == NULL));
-
-		Reset();
-
-		return *this;
-	}
-
-	/**
-		Move operator.
-	*/
-	TInterfacePtr& operator=(TInterfacePtr&& ptr)
-	{
-		m_rootPtr = std::move(ptr.m_rootPtr);
-
-		m_interfacePtr = ptr.m_interfacePtr;
-
+		if (this != &ptr){
+			m_rootPtr = std::move(ptr.m_rootPtr);
+			m_interfacePtr = ptr.m_interfacePtr;
+			ptr.m_interfacePtr = nullptr;
+		}
 		return *this;
 	}
 
@@ -192,12 +208,19 @@ public:
 	{
 	}
 
-	TUniqueInterfacePtr(RootIntefaceType* rootPtr, const ExtractInterfaceFunc& extractInterface)
+	TUniqueInterfacePtr& operator=(std::nullptr_t) noexcept
+	{
+		BaseClass::Reset();
+	
+		return *this;
+	}
+
+	explicit TUniqueInterfacePtr(RootIntefaceType* rootPtr, const ExtractInterfaceFunc& extractInterface)
 		:BaseClass(rootPtr, extractInterface)
 	{
 	}
 
-	TUniqueInterfacePtr(RootIntefaceType* rootPtr, InterfaceType* interfacePtr)
+	explicit TUniqueInterfacePtr(RootIntefaceType* rootPtr, InterfaceType* interfacePtr)
 		:BaseClass(rootPtr, interfacePtr)
 	{
 	}
@@ -212,10 +235,11 @@ public:
 	/**
 		Move constructor.
 	*/
-	TUniqueInterfacePtr(TUniqueInterfacePtr&& ptr)
+	TUniqueInterfacePtr(TUniqueInterfacePtr&& ptr) noexcept
 	{
 		BaseClass::m_rootPtr = std::move(ptr.m_rootPtr);
 		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
+		ptr.m_interfacePtr = nullptr;
 	}
 
 	/**
@@ -232,12 +256,13 @@ public:
 	{
 		BaseClass::m_rootPtr = std::move(ptr.m_rootPtr);
 		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
+		ptr.m_interfacePtr = nullptr;
 
 		return *this;
 	}
 
 
-	istd::IPolymorphic* PopPtr()
+	istd::IPolymorphic* PopPtr() noexcept
 	{
 		BaseClass::m_interfacePtr = nullptr;
 
@@ -245,7 +270,7 @@ public:
 	}
 
 
-	InterfaceType* PopInterfacePtr()
+	InterfaceType* PopInterfacePtr() noexcept
 	{
 		InterfaceType* retVal = BaseClass::m_interfacePtr;
 
@@ -269,10 +294,12 @@ public:
 	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>& source)
 	{
 		InterfaceType* targetPtr = dynamic_cast<InterfaceType*>(source.GetPtr());
-		if (targetPtr != nullptr) {
+		if (targetPtr != nullptr){
 			BaseClass::m_rootPtr = std::move(source.GetBasePtr());
 
 			BaseClass::m_interfacePtr = targetPtr;
+
+			source.Reset();
 
 			return true;
 		}
@@ -285,10 +312,12 @@ public:
 	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>&& source)
 	{
 		InterfaceType* targetPtr = dynamic_cast<InterfaceType*>(source.GetPtr());
-		if (targetPtr != nullptr) {
+		if (targetPtr != nullptr){
 			BaseClass::m_rootPtr = std::move(source.GetBasePtr());
 
 			BaseClass::m_interfacePtr = targetPtr;
+
+			source.Reset();
 
 			return true;
 		}
@@ -417,7 +446,7 @@ public:
 		TSharedInterfacePtr<InterfaceType> retVal;
 
 		InterfaceType* interfacePtr = dynamic_cast<InterfaceType*>(uniquePtr.GetPtr());
-		if (interfacePtr != nullptr) {
+		if (interfacePtr != nullptr){
 			retVal.SetPtr(uniquePtr.GetBasePtr().get(), interfacePtr);
 
 			uniquePtr.PopPtr();
@@ -448,7 +477,7 @@ public:
 	template<class SourceInterfaceType>
 	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>& source)
 	{
-		if (!source.IsValid()) {
+		if (!source.IsValid()){
 			Reset();
 
 			return true;
@@ -469,14 +498,14 @@ public:
 	template<class SourceInterfaceType>
 	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>&& source)
 	{
-		if (!source.IsValid()) {
+		if (!source.IsValid()){
 			Reset();
 
 			return true;
 		}
 		
 		InterfaceType* targetPtr = dynamic_cast<InterfaceType*>(source.GetPtr());
-		if (targetPtr != nullptr) {
+		if (targetPtr != nullptr){
 			BaseClass::m_rootPtr = std::move(source.GetBasePtr());
 
 			BaseClass::m_interfacePtr = targetPtr;
@@ -489,16 +518,16 @@ public:
 
 
 	template<class SourceInterfaceType>
-	bool SetCastedPtr(const TSharedInterfacePtr<SourceInterfaceType>& source)
+	bool SetCastedPtr(TSharedInterfacePtr<SourceInterfaceType>& source)
 	{
-		if (!source.IsValid()) {
+		if (!source.IsValid()){
 			Reset();
 
 			return true;
 		}
 
 		InterfaceType* targetPtr = dynamic_cast<InterfaceType*>(source.GetPtr());
-		if (targetPtr != nullptr) {
+		if (targetPtr != nullptr){
 			BaseClass::m_rootPtr = source.GetBasePtr();
 
 			BaseClass::m_interfacePtr = targetPtr;
