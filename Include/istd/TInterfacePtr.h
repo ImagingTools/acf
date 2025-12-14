@@ -362,22 +362,20 @@ public:
 	{
 	}
 
-	/**
-		Copy constructor.
-		This implementation has no function and is provided only for compatibility with STL.
-		The source pointer must be invalid (NULL).
-	*/
 	TSharedInterfacePtr(const TSharedInterfacePtr& ptr)
 	{
 		BaseClass::m_rootPtr = ptr.m_rootPtr;
 		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
 	}
 
-	/**
-		Copy constructor.
-		This implementation has no function and is provided only for compatibility with STL.
-		The source pointer must be invalid (NULL).
-	*/
+	template <typename U>
+	TSharedInterfacePtr(const TSharedInterfacePtr<U>& other)
+	{
+		BaseClass::m_rootPtr = other.GetBasePtr();
+
+		BaseClass::m_interfacePtr = static_cast<InterfaceType*>(other.GetPtr());
+	}
+
 	TSharedInterfacePtr(const std::shared_ptr<RootIntefaceType>& ptr)
 	{
 		BaseClass::m_rootPtr = ptr;
@@ -393,20 +391,27 @@ public:
 		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
 	}
 
+	/**
+		Move constructor from unique.
+	*/
 	TSharedInterfacePtr(TUniqueInterfacePtr<InterfaceType>&& ptr)
 	{
 		*this = CreateFromUnique(ptr);
 	}
 
-	/**
-		Assign operator.
-		This implementation has no function and is provided only for compatibility with STL.
-		The source pointer must be invalid (NULL).
-	*/
 	TSharedInterfacePtr& operator=(const TSharedInterfacePtr& ptr)
 	{
 		BaseClass::m_rootPtr = ptr.m_rootPtr;
 		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
+
+		return *this;
+	}
+
+	template <typename U>
+	TSharedInterfacePtr& operator=(const TSharedInterfacePtr<U>& ptr)
+	{
+		BaseClass::m_rootPtr = ptr.GetBasePtr();
+		BaseClass::m_interfacePtr = ptr.GetPtr();
 
 		return *this;
 	}

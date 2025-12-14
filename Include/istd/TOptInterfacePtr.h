@@ -241,7 +241,7 @@ public:
 		}
 
 		if constexpr (std::is_same_v<InterfaceCast, InterfaceType>){
-			return static_cast<const InterfaceCast*>(retVal);
+			return retVal;
 		}
 		else{
 			return dynamic_cast<const InterfaceCast*>(retVal);
@@ -266,7 +266,7 @@ public:
 		}
 
 		if constexpr (std::is_same_v<InterfaceCast, InterfaceType>) {
-			return static_cast<InterfaceCast*>(retVal);
+			return retVal;
 		}
 		else {
 			return dynamic_cast<InterfaceCast*>(retVal);
