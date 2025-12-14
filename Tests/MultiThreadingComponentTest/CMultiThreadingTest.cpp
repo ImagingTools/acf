@@ -107,11 +107,11 @@ void CMultiThreadingTest::CloneTest()
 	istd::IChangeableUniquePtr ptr1 = paramsSetPtr->CloneMe(istd::IChangeable::CM_WITH_REFS);
 	QVERIFY(ptr1.IsValid());
 
-	iser::CMemoryWriteArchive archive1;
-	QVERIFY(ptr1.GetPtr<iser::ISerializable>()->Serialize(archive1));
-
 	istd::IChangeableUniquePtr ptr2 = ptr1->CloneMe(istd::IChangeable::CM_WITH_REFS);
 	QVERIFY(ptr2.IsValid());
+
+	iser::CMemoryWriteArchive archive1;
+	QVERIFY(ptr1.GetPtr<iser::ISerializable>()->Serialize(archive1));
 
 	iser::CMemoryWriteArchive archive2;
 	QVERIFY(ptr2.GetPtr<iser::ISerializable>()->Serialize(archive2));
@@ -119,6 +119,19 @@ void CMultiThreadingTest::CloneTest()
 	QByteArray data1((const char*)archive1.GetBuffer(), archive1.GetBufferSize());
 	QByteArray data2((const char*)archive2.GetBuffer(), archive2.GetBufferSize());
 	QVERIFY(data1 == data2);
+
+	ptr1 = paramsSetPtr->CloneMe();
+	QVERIFY(ptr1.IsValid());
+
+	ptr2 = ptr1->CloneMe();
+	QVERIFY(ptr2.IsValid());
+
+	QVERIFY(ptr1.GetPtr<iser::ISerializable>()->Serialize(archive1));
+	QVERIFY(ptr2.GetPtr<iser::ISerializable>()->Serialize(archive2));
+
+	QByteArray data3((const char*)archive1.GetBuffer(), archive1.GetBufferSize());
+	QByteArray data4((const char*)archive2.GetBuffer(), archive2.GetBufferSize());
+	QVERIFY(data3 == data4);
 }
 
 

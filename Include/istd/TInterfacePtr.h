@@ -4,6 +4,10 @@
 // STL includes
 #include <memory>
 #include <utility>
+#include <functional>
+
+// Qt includes
+#include <QtCore/QDebug>
 
 // ACF includes
 #include <istd/IPolymorphic.h>
@@ -13,6 +17,14 @@ namespace istd
 {
 
 
+/**
+	Specialized polymorphic pointer that manages the allocated root object
+	(m_rootPtr) and simultaneously provides a pointer to the actual interface implementation (m_interfacePtr).
+	The interface instance is "derived" from the root object using the provided
+	extractor (ExtractInterfaceFunc) or an alternative extraction mechanism.
+	Ownership and lifetime are tied to m_rootPtr; m_interfacePtr is a non-owning
+	view into the interface and may point to a different (sub)object than m_rootPtr.
+*/
 template <class InterfaceType, class PolymorphicPointerImpl>
 class TInterfacePtr
 {
@@ -26,7 +38,7 @@ public:
 	}
 
 	template<typename Interface = InterfaceType>
-	Interface* GetPtr()
+	Interface* GetPtr() noexcept
 	{
 		if constexpr (std::is_same_v<Interface, InterfaceType>){
 			return m_interfacePtr;
@@ -37,7 +49,7 @@ public:
 	}
 
 	template<typename Interface = InterfaceType>
-	const Interface* GetPtr() const
+	const Interface* GetPtr() const noexcept
 	{
 		if constexpr (std::is_same_v<Interface, InterfaceType>){
 			return m_interfacePtr;
@@ -81,8 +93,14 @@ public:
 		m_interfacePtr = nullptr;
 	}
 
+	/**
+		\note This overload assumes the provided interfacePtr actually points to
+		an object whose dynamic type is compatible with RootObjectPtr::element_type.
+		Prefer SetPtr(root, extract) when possible.
+	*/
 	void SetPtr(InterfaceType* interfacePtr)
 	{
+		// Reset root with the raw pointer. This is only safe if the pointer types match.
 		m_rootPtr.reset(interfacePtr);
 
 		m_interfacePtr = interfacePtr;
@@ -91,39 +109,41 @@ public:
 	void SetPtr(istd::IPolymorphic* rootPtr, const ExtractInterfaceFunc& extractInterface)
 	{
 		m_rootPtr.reset(rootPtr);
+
 		m_interfacePtr = extractInterface();
 	}
 
-	void SetPtr(istd::IPolymorphic* rootPtr, InterfaceType* interfacePtr)
+	void SetPtr(istd::IPolymorphic* rootPtr, InterfaceType* interfacePtr) noexcept
 	{
 		m_rootPtr.reset(rootPtr);
+
 		m_interfacePtr = interfacePtr;
 	}
 
-	RootObjectPtr& GetBasePtr()
+	RootObjectPtr& GetBasePtr() noexcept
 	{
 		return m_rootPtr;
 	}
 
-	const RootObjectPtr& GetBasePtr() const
+	const RootObjectPtr& GetBasePtr() const noexcept
 	{
 		return m_rootPtr;
 	}
 
-	// STL support
+	// STL-like support
 	template <class T>
-	T* dynamicCast()
+	T* dynamicCast() noexcept
 	{
 		return GetPtr<T>();
 	}
 
 	template <class T>
-	const T* dynamicCast() const
+	const T* dynamicCast() const noexcept
 	{
 		return GetPtr<const T>();
 	}
 
-	operator bool() const noexcept
+	explicit operator bool() const noexcept
 	{
 		return IsValid();
 	}
@@ -131,6 +151,7 @@ public:
 	TInterfacePtr& operator=(std::nullptr_t) noexcept
 	{
 		Reset();
+
 		return *this;
 	}
 
@@ -138,12 +159,12 @@ protected:
 	TInterfacePtr(const TInterfacePtr&) = delete;
 	TInterfacePtr& operator=(const TInterfacePtr&) = delete;
 
-	TInterfacePtr()
+	TInterfacePtr() noexcept
 		:m_interfacePtr(nullptr)
 	{
 	}
 
-	TInterfacePtr(InterfaceType* interfacePtr)
+	TInterfacePtr(InterfaceType* interfacePtr) noexcept
 		:m_interfacePtr(interfacePtr)
 	{
 		m_rootPtr.reset(interfacePtr);
@@ -155,22 +176,21 @@ protected:
 	{
 	}
 
-	explicit TInterfacePtr(istd::IPolymorphic* rootPtr, const ExtractInterfaceFunc& extractInterface)
+	TInterfacePtr(istd::IPolymorphic* rootPtr, const ExtractInterfaceFunc& extractInterface) noexcept
 	{
 		SetPtr(rootPtr, extractInterface);
 	}
 
-	explicit TInterfacePtr(istd::IPolymorphic* rootPtr, InterfaceType* interfacePtr)
+	TInterfacePtr(istd::IPolymorphic* rootPtr, InterfaceType* interfacePtr) noexcept
 	{
 		SetPtr(rootPtr, interfacePtr);
 	}
 
-	 // Move constructor
+	// Move constructor
 	TInterfacePtr(TInterfacePtr&& ptr) noexcept
+		:m_rootPtr(std::move(ptr.m_rootPtr)),
+		m_interfacePtr(std::exchange(ptr.m_interfacePtr, nullptr))
 	{
-		m_rootPtr = std::move(ptr.m_rootPtr);
-		m_interfacePtr = ptr.m_interfacePtr;
-		ptr.m_interfacePtr = nullptr;
 	}
 
 	// Move assignment
@@ -178,8 +198,7 @@ protected:
 	{
 		if (this != &ptr){
 			m_rootPtr = std::move(ptr.m_rootPtr);
-			m_interfacePtr = ptr.m_interfacePtr;
-			ptr.m_interfacePtr = nullptr;
+			m_interfacePtr = std::exchange(ptr.m_interfacePtr, nullptr);
 		}
 		return *this;
 	}
@@ -197,78 +216,76 @@ public:
 	typedef TInterfacePtr<InterfaceType, std::unique_ptr<RootIntefaceType>> BaseClass;
 	typedef typename BaseClass::ExtractInterfaceFunc ExtractInterfaceFunc;
 
-	TUniqueInterfacePtr()
+	static_assert(std::is_base_of_v<istd::IPolymorphic, RootIntefaceType>,
+		"RootIntefaceType must derive from istd::IPolymorphic");
+	static_assert(std::has_virtual_destructor_v<RootIntefaceType>,
+		"RootIntefaceType must have a virtual destructor");
+
+	TUniqueInterfacePtr() noexcept
 		:BaseClass()
 	{
 	}
 
-
-	TUniqueInterfacePtr(InterfaceType* interfacePtr)
+	TUniqueInterfacePtr(InterfaceType* interfacePtr) noexcept
 		:BaseClass(interfacePtr)
 	{
 	}
 
+	template <typename T>
+	TUniqueInterfacePtr(std::unique_ptr<T>&& ptr) noexcept
+	{
+		BaseClass::m_interfacePtr = ptr.get();
+
+		BaseClass::m_rootPtr = std::move(ptr);
+	}
+	
 	TUniqueInterfacePtr& operator=(std::nullptr_t) noexcept
 	{
 		BaseClass::Reset();
-	
+
 		return *this;
 	}
 
-	explicit TUniqueInterfacePtr(RootIntefaceType* rootPtr, const ExtractInterfaceFunc& extractInterface)
+
+	explicit TUniqueInterfacePtr(RootIntefaceType* rootPtr, const ExtractInterfaceFunc& extractInterface) noexcept
 		:BaseClass(rootPtr, extractInterface)
 	{
 	}
 
-	explicit TUniqueInterfacePtr(RootIntefaceType* rootPtr, InterfaceType* interfacePtr)
+	explicit TUniqueInterfacePtr(RootIntefaceType* rootPtr, InterfaceType* interfacePtr) noexcept
 		:BaseClass(rootPtr, interfacePtr)
 	{
 	}
 
-	/**
-		Copy constructor.
-		This implementation has no function and is provided only for compatibility with STL.
-		The source pointer must be invalid (NULL).
-	*/
 	TUniqueInterfacePtr(const TUniqueInterfacePtr& ptr) = delete;
+	TUniqueInterfacePtr& operator=(const TUniqueInterfacePtr& ptr) = delete;
 
-	/**
-		Move constructor.
-	*/
+	// Move constructor
 	TUniqueInterfacePtr(TUniqueInterfacePtr&& ptr) noexcept
 	{
 		BaseClass::m_rootPtr = std::move(ptr.m_rootPtr);
-		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
-		ptr.m_interfacePtr = nullptr;
+		BaseClass::m_interfacePtr = std::exchange(ptr.m_interfacePtr, nullptr);
 	}
 
-	/**
-		Assign operator.
-		This implementation has no function and is provided only for compatibility with STL.
-		The source pointer must be invalid (NULL).
-	*/
-	TUniqueInterfacePtr& operator=(const TUniqueInterfacePtr& ptr) = delete;
-
-	/**
-		Move operator.
-	*/
-	TUniqueInterfacePtr& operator=(TUniqueInterfacePtr&& ptr)
+	// Move assignment
+	TUniqueInterfacePtr& operator=(TUniqueInterfacePtr&& ptr) noexcept
 	{
-		BaseClass::m_rootPtr = std::move(ptr.m_rootPtr);
-		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
-		ptr.m_interfacePtr = nullptr;
-
+		if (this != &ptr){
+			BaseClass::m_rootPtr = std::move(ptr.m_rootPtr);
+			BaseClass::m_interfacePtr = std::exchange(ptr.m_interfacePtr, nullptr);
+		}
 		return *this;
 	}
 
-
-	istd::IPolymorphic* PopPtr() noexcept
+	/**
+		Pop the root pointer.Caller takes ownership of the raw pointer.
+	*/
+	RootIntefaceType* PopPtr() noexcept
 	{
 		BaseClass::m_interfacePtr = nullptr;
 
-		return BaseClass::m_rootPtr.release();
+		return BaseClass::m_rootPtr.release(); // caller owns returned pointer
 	}
-
 
 	InterfaceType* PopInterfacePtr() noexcept
 	{
@@ -281,48 +298,33 @@ public:
 		return retVal;
 	}
 
-
-	void TakeOver(TUniqueInterfacePtr<InterfaceType>& from)
+	/**
+		Transfer ownership from another unique ptr(take over raw ownership)
+	*/
+	void TakeOver(TUniqueInterfacePtr<InterfaceType>& from) noexcept
 	{
 		BaseClass::m_interfacePtr = from.m_interfacePtr;
 
 		BaseClass::m_rootPtr.reset(from.PopPtr());
 	}
 
-	
 	template<class SourceInterfaceType>
-	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>& source)
+	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>& source) noexcept
 	{
 		InterfaceType* targetPtr = dynamic_cast<InterfaceType*>(source.GetPtr());
 		if (targetPtr != nullptr){
 			BaseClass::m_rootPtr = std::move(source.GetBasePtr());
-
 			BaseClass::m_interfacePtr = targetPtr;
-
 			source.Reset();
-
 			return true;
 		}
-
 		return false;
 	}
 
-	
 	template<class SourceInterfaceType>
-	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>&& source)
+	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>&& source) noexcept
 	{
-		InterfaceType* targetPtr = dynamic_cast<InterfaceType*>(source.GetPtr());
-		if (targetPtr != nullptr){
-			BaseClass::m_rootPtr = std::move(source.GetBasePtr());
-
-			BaseClass::m_interfacePtr = targetPtr;
-
-			source.Reset();
-
-			return true;
-		}
-
-		return false;
+		return MoveCastedPtr(source);
 	}
 };
 
@@ -334,9 +336,56 @@ public:
 	typedef TInterfacePtr<InterfaceType, std::shared_ptr<RootIntefaceType>> BaseClass;
 	typedef typename BaseClass::ExtractInterfaceFunc ExtractInterfaceFunc;
 
-	TSharedInterfacePtr()
+	static_assert(std::is_base_of_v<istd::IPolymorphic, RootIntefaceType>, "RootIntefaceType must derive from istd::IPolymorphic");
+	static_assert(std::has_virtual_destructor_v<RootIntefaceType>, "RootIntefaceType must have a virtual destructor");
+
+	TSharedInterfacePtr() noexcept
 		:BaseClass()
 	{
+	}
+
+	TSharedInterfacePtr(InterfaceType* interfacePtr) noexcept
+		:BaseClass(interfacePtr)
+	{
+	}
+
+	TSharedInterfacePtr(RootIntefaceType* rootPtr, const ExtractInterfaceFunc& extractInterface) noexcept
+		:BaseClass(rootPtr, extractInterface)
+	{
+	}
+
+	TSharedInterfacePtr(const TSharedInterfacePtr& ptr) noexcept
+	{
+		BaseClass::m_rootPtr = ptr.m_rootPtr;
+		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
+	}
+
+	template <typename U>
+	TSharedInterfacePtr(const TSharedInterfacePtr<U>& other) noexcept
+	{
+		BaseClass::m_rootPtr = other.GetBasePtr();
+		BaseClass::m_interfacePtr = static_cast<InterfaceType*>(other.GetPtr());
+	}
+
+	explicit TSharedInterfacePtr(const std::shared_ptr<RootIntefaceType>& ptr) noexcept
+	{
+		BaseClass::m_rootPtr = ptr;
+		BaseClass::m_interfacePtr = dynamic_cast<InterfaceType*>(ptr.get());
+	}
+
+	// Move constructor
+	TSharedInterfacePtr(TSharedInterfacePtr&& ptr) noexcept
+	{
+		BaseClass::m_rootPtr = std::move(ptr.m_rootPtr);
+		BaseClass::m_interfacePtr = std::exchange(ptr.m_interfacePtr, nullptr);
+	}
+
+	/**
+		Construct from unique by transferring ownership into shared_ptr.
+	*/
+	TSharedInterfacePtr(TUniqueInterfacePtr<InterfaceType>&& ptr) noexcept
+	{
+		*this = CreateFromUnique(ptr);
 	}
 
 	~TSharedInterfacePtr()
@@ -344,156 +393,119 @@ public:
 		Reset();
 	}
 
-	void Reset()
+	void Reset() noexcept
 	{
 		BaseClass::m_rootPtr.reset();
-
 		BaseClass::m_interfacePtr = nullptr;
 	}
 
-
-	TSharedInterfacePtr(InterfaceType* interfacePtr)
-		:BaseClass(interfacePtr)
-	{
-	}
-
-	TSharedInterfacePtr(RootIntefaceType* rootPtr, const ExtractInterfaceFunc& extractInterface)
-		:BaseClass(rootPtr, extractInterface)
-	{
-	}
-
-	TSharedInterfacePtr(const TSharedInterfacePtr& ptr)
+	TSharedInterfacePtr& operator=(const TSharedInterfacePtr& ptr) noexcept
 	{
 		BaseClass::m_rootPtr = ptr.m_rootPtr;
 		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
+		return *this;
 	}
 
-	template <typename U>
-	TSharedInterfacePtr(const TSharedInterfacePtr<U>& other)
+	TSharedInterfacePtr& operator=(const std::shared_ptr<istd::IPolymorphic>& ptr) noexcept
 	{
-		BaseClass::m_rootPtr = other.GetBasePtr();
+		InterfaceType* interfacePtr = dynamic_cast<InterfaceType*>(ptr.get());
+		if (interfacePtr != nullptr){
+			BaseClass::m_rootPtr = ptr;
 
-		BaseClass::m_interfacePtr = static_cast<InterfaceType*>(other.GetPtr());
-	}
-
-	TSharedInterfacePtr(const std::shared_ptr<RootIntefaceType>& ptr)
-	{
-		BaseClass::m_rootPtr = ptr;
-		BaseClass::m_interfacePtr = dynamic_cast<InterfaceType*>(ptr.get());
-	}
-
-	/**
-		Move constructor.
-	*/
-	TSharedInterfacePtr(TSharedInterfacePtr&& ptr)
-	{
-		BaseClass::m_rootPtr = std::move(ptr.m_rootPtr);
-		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
-	}
-
-	/**
-		Move constructor from unique.
-	*/
-	TSharedInterfacePtr(TUniqueInterfacePtr<InterfaceType>&& ptr)
-	{
-		*this = CreateFromUnique(ptr);
-	}
-
-	TSharedInterfacePtr& operator=(const TSharedInterfacePtr& ptr)
-	{
-		BaseClass::m_rootPtr = ptr.m_rootPtr;
-		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
+			BaseClass::m_interfacePtr = interfacePtr;
+		}
 
 		return *this;
 	}
 
 	template <typename U>
-	TSharedInterfacePtr& operator=(const TSharedInterfacePtr<U>& ptr)
+	TSharedInterfacePtr& operator=(const TSharedInterfacePtr<U>& ptr) noexcept
 	{
 		BaseClass::m_rootPtr = ptr.GetBasePtr();
 		BaseClass::m_interfacePtr = ptr.GetPtr();
+		return *this;
+	}
+
+	TSharedInterfacePtr& operator=(TSharedInterfacePtr&& ptr) noexcept
+	{
+		BaseClass::m_rootPtr = std::move(ptr.m_rootPtr);
+		BaseClass::m_interfacePtr = std::exchange(ptr.m_interfacePtr, nullptr);
+		return *this;
+	}
+
+	// Convert from unique to shared. After this call, uniquePtr no longer owns the object.
+	TSharedInterfacePtr& FromUnique(TUniqueInterfacePtr<InterfaceType>& uniquePtr) noexcept
+	{
+		if (!uniquePtr.IsValid()){
+			Reset();
+			return *this;
+		}
+
+		// Acquire raw pointer in one step and assign to shared_ptr to avoid leaks on exceptions.
+		RootIntefaceType* rawRoot = uniquePtr.PopPtr(); // caller (this function) now owns rawRoot
+		if (rawRoot == nullptr){
+			Reset();
+			return *this;
+		}
+
+		// Create shared_ptr from raw pointer (shared_ptr now owns it)
+		BaseClass::m_rootPtr = std::shared_ptr<RootIntefaceType>(rawRoot);
+		BaseClass::m_interfacePtr = dynamic_cast<InterfaceType*>(BaseClass::m_rootPtr.get());
 
 		return *this;
 	}
 
-	/**
-		Move operator.
-	*/
-	TSharedInterfacePtr& operator=(TSharedInterfacePtr&& ptr)
+	TSharedInterfacePtr& FromUnique(TUniqueInterfacePtr<InterfaceType>&& uniquePtr) noexcept
 	{
-		BaseClass::m_rootPtr = ptr.m_rootPtr;
-		BaseClass::m_interfacePtr = ptr.m_interfacePtr;
-
-		return *this;
-	}
-
-	TSharedInterfacePtr<InterfaceType>& FromUnique(TUniqueInterfacePtr<InterfaceType>& uniquePtr)
-	{
-		BaseClass::SetPtr(uniquePtr.GetBasePtr().get(), uniquePtr.GetPtr());
-
-		uniquePtr.PopPtr();
-
-		return *this;
-	}
-
-	TSharedInterfacePtr<InterfaceType>& FromUnique(TUniqueInterfacePtr<InterfaceType>&& uniquePtr)
-	{
-		BaseClass::SetPtr(uniquePtr.GetBasePtr().get(), uniquePtr.GetPtr());
-
-		uniquePtr.PopPtr();
-
-		return *this;
+		return FromUnique(uniquePtr);
 	}
 
 	template <typename OtherInterface>
-	static TSharedInterfacePtr<InterfaceType> CreateFromUnique(TUniqueInterfacePtr<OtherInterface>& uniquePtr)
+	static TSharedInterfacePtr CreateFromUnique(TUniqueInterfacePtr<OtherInterface>& uniquePtr) noexcept
 	{
-		TSharedInterfacePtr<InterfaceType> retVal;
+		TSharedInterfacePtr retVal;
+		if (!uniquePtr.IsValid()){
+			return retVal;
+		}
 
+		// Try dynamic cast on the raw pointer before transferring ownership
 		InterfaceType* interfacePtr = dynamic_cast<InterfaceType*>(uniquePtr.GetPtr());
 		if (interfacePtr != nullptr){
-			retVal.SetPtr(uniquePtr.GetBasePtr().get(), interfacePtr);
-
-			uniquePtr.PopPtr();
+			RootIntefaceType* rawRoot = uniquePtr.PopPtr();
+			retVal.BaseClass::m_rootPtr = std::shared_ptr<RootIntefaceType>(rawRoot);
+			retVal.BaseClass::m_interfacePtr = interfacePtr;
 		}
 
 		return retVal;
 	}
 
-
-	static TSharedInterfacePtr<InterfaceType> CreateFromUnique(TUniqueInterfacePtr<InterfaceType>& uniquePtr)
+	static TSharedInterfacePtr CreateFromUnique(TUniqueInterfacePtr<InterfaceType>& uniquePtr) noexcept
 	{
-		TSharedInterfacePtr<InterfaceType> retVal;
-
+		TSharedInterfacePtr retVal;
 		retVal.FromUnique(uniquePtr);
-
 		return retVal;
 	}
 
-	static TSharedInterfacePtr<InterfaceType> CreateFromUnique(TUniqueInterfacePtr<InterfaceType>&& uniquePtr)
+	static TSharedInterfacePtr CreateFromUnique(TUniqueInterfacePtr<InterfaceType>&& uniquePtr) noexcept
 	{
-		TSharedInterfacePtr<InterfaceType> retVal;
-
-		retVal.FromUnique(uniquePtr);
-
-		return retVal;
+		return CreateFromUnique(uniquePtr);
 	}
 
+	// Move-cast from unique: transfer ownership if dynamic_cast succeeds
 	template<class SourceInterfaceType>
-	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>& source)
+	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>& source) noexcept
 	{
 		if (!source.IsValid()){
 			Reset();
-
 			return true;
 		}
 
 		InterfaceType* targetPtr = dynamic_cast<InterfaceType*>(source.GetPtr());
 		if (targetPtr != nullptr){
-			BaseClass::m_rootPtr = std::move(source.GetBasePtr());
-
+			// Transfer ownership of the unique_ptr into shared_ptr safely
+			RootIntefaceType* rawRoot = source.PopPtr();
+			BaseClass::m_rootPtr = std::shared_ptr<RootIntefaceType>(rawRoot);
 			BaseClass::m_interfacePtr = targetPtr;
-
 			return true;
 		}
 
@@ -501,99 +513,31 @@ public:
 	}
 
 	template<class SourceInterfaceType>
-	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>&& source)
+	bool MoveCastedPtr(TUniqueInterfacePtr<SourceInterfaceType>&& source) noexcept
 	{
-		if (!source.IsValid()){
-			Reset();
-
-			return true;
-		}
-		
-		InterfaceType* targetPtr = dynamic_cast<InterfaceType*>(source.GetPtr());
-		if (targetPtr != nullptr){
-			BaseClass::m_rootPtr = std::move(source.GetBasePtr());
-
-			BaseClass::m_interfacePtr = targetPtr;
-
-			return true;
-		}
-
-		return false;
+		return MoveCastedPtr(source);
 	}
 
-
+	/**
+		Set from another shared pointer if dynamic_cast succeeds.
+	*/
 	template<class SourceInterfaceType>
-	bool SetCastedPtr(TSharedInterfacePtr<SourceInterfaceType>& source)
+	bool SetCastedPtr(TSharedInterfacePtr<SourceInterfaceType>& source) noexcept
 	{
 		if (!source.IsValid()){
 			Reset();
-
 			return true;
 		}
 
 		InterfaceType* targetPtr = dynamic_cast<InterfaceType*>(source.GetPtr());
 		if (targetPtr != nullptr){
 			BaseClass::m_rootPtr = source.GetBasePtr();
-
 			BaseClass::m_interfacePtr = targetPtr;
-
 			return true;
 		}
 
 		return false;
 	}
-};
-
-
-template <class InterfaceType, class ImplPtr>
-class TInterfaceAggregator: virtual public InterfaceType
-{
-public:
-	TInterfaceAggregator(ImplPtr& implPtr)
-		:m_implPtr(std::move(implPtr))
-	{
-	}
-
-	TInterfaceAggregator(ImplPtr&& implPtr)
-		:m_implPtr(std::move(implPtr))
-	{
-	}
-
-	bool IsValid() const
-	{
-		return m_implPtr.IsValid();
-	}
-
-	const InterfaceType* operator->() const
-	{
-		Q_ASSERT(m_implPtr.IsValid());
-
-		return dynamic_cast<const InterfaceType*>(m_implPtr.operator->());
-	}
-
-	InterfaceType* operator->()
-	{
-		Q_ASSERT(m_implPtr.IsValid());
-
-		return dynamic_cast<InterfaceType*>(m_implPtr.operator->());
-	}
-
-	const InterfaceType& operator*() const
-	{
-		Q_ASSERT(m_implPtr.IsValid());
-
-		return *dynamic_cast<const InterfaceType*>(m_implPtr.operator->());
-	}
-
-	InterfaceType& operator*()
-	{
-		Q_ASSERT(m_implPtr.IsValid());
-
-		return *dynamic_cast<InterfaceType*>(m_implPtr.operator->());
-	}
-
-protected:
-	ImplPtr m_implPtr;
 };
 
 

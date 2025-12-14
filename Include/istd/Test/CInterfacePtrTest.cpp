@@ -43,8 +43,13 @@ void CInterfacePtrTest::DoSharedInterfaceTest()
 	istd::TSharedInterfacePtr<const IInterface1> sharedConstPtr;
 	sharedConstPtr = sharedPtr;
 	QVERIFY(sharedConstPtr.IsValid());
-
 	sharedConstPtr = std::make_shared<T1>();
+	QVERIFY(sharedConstPtr.IsValid());
+	QVERIFY(sharedConstPtr);
+
+	istd::TSharedInterfacePtr<const IInterface1> sharedConstPtr2;
+	sharedConstPtr2 = std::make_unique<T1>();
+	QVERIFY(sharedConstPtr2.IsValid());
 
 	sharedPtr.Reset();
 	QVERIFY(!sharedPtr.IsValid());
@@ -56,6 +61,21 @@ void CInterfacePtrTest::DoSharedInterfaceTest()
 
 void CInterfacePtrTest::DoUniqueInterfaceTest()
 {
+	istd::TUniqueInterfacePtr<IInterface1> ptr1(new T1);
+	QVERIFY(ptr1.IsValid());
+
+	istd::TSharedInterfacePtr<IInterface1> sharedPtr = istd::TSharedInterfacePtr<IInterface1>::CreateFromUnique(ptr1);
+	QVERIFY(sharedPtr.IsValid());
+	QVERIFY(!ptr1.IsValid());
+
+	istd::TUniqueInterfacePtr<IInterface1> ptr2(std::make_unique<T1>());
+	QVERIFY(ptr2.IsValid());
+
+	istd::TUniqueInterfacePtr<IInterface2> ptr3(std::make_unique<T22>());
+	QVERIFY(ptr3.IsValid());
+
+	istd::TUniqueInterfacePtr<const IInterface1> ptr4(std::make_unique<T1>());
+	QVERIFY(ptr4.IsValid());
 }
 
 
