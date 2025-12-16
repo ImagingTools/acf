@@ -28,6 +28,7 @@ private slots:
 	void CopyWithConstraintsTest();
 	void CloneWithConstraintsTest();
 	void SerializeWithConstraintsTest();
+	void TestParamsManager();
 
 	void cleanupTestCase();
 

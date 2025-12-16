@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include <iprm/IParamsManager.h>
 #include <iprm/CSelectionParam.h>
 #include <iser/CMemoryReadArchive.h>
 #include <iser/CMemoryWriteArchive.h>
@@ -106,6 +107,30 @@ void CSelectionParamTest::CloneWithConstraintsTest()
 
 void CSelectionParamTest::SerializeWithConstraintsTest()
 {
+}
+
+
+void CSelectionParamTest::TestParamsManager()
+{
+	iprm::IParamsManager* paramsManagerPtr = m_testPartituraInstanceCompPtr->GetInterface<iprm::IParamsManager>("ParamsManager");
+	QVERIFY(paramsManagerPtr != nullptr);
+
+	const iprm::IParamsSet* fixedParamsSetPtr = paramsManagerPtr->GetParamsSet(0);
+	QVERIFY(fixedParamsSetPtr != nullptr);
+
+	int newIndex = paramsManagerPtr->InsertParamsSet();
+	QVERIFY(newIndex == 1);
+
+	const iprm::IParamsSet* paramsSetPtr = paramsManagerPtr->GetParamsSet(newIndex);
+	QVERIFY(paramsSetPtr != nullptr);
+
+	istd::TUniqueInterfacePtr<iprm::IParamsSet> paramsSetClonePtr;
+	paramsSetClonePtr.MoveCastedPtr(paramsSetPtr->CloneMe());
+	QVERIFY(paramsSetClonePtr.IsValid());
+
+	paramsManagerPtr->RemoveParamsSet(1);
+	Q_ASSERT(paramsManagerPtr->GetParamsSetsCount() == 1);
+	QVERIFY(paramsSetClonePtr.IsValid());
 }
 
 
