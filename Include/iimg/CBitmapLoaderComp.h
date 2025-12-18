@@ -1,5 +1,4 @@
-#ifndef iimg_CBitmapLoaderComp_included
-#define iimg_CBitmapLoaderComp_included
+#pragma once
 
 
 // Qt includes
@@ -82,8 +81,5 @@ private:
 
 
 } // namespace iimg
-
-
-#endif // !iimg_CBitmapLoaderComp_included
 
 
