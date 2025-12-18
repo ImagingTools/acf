@@ -1,5 +1,4 @@
-#ifndef iloggui_CTextLogGuiComp_included
-#define iloggui_CTextLogGuiComp_included
+#pragma once
 
 
 // Qt includes
@@ -62,6 +61,4 @@ private:
 
 } // namespace iloggui
 
-
-#endif // !iloggui_CTextLogGuiComp_included
 
