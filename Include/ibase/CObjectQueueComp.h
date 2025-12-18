@@ -1,0 +1,79 @@
+#ifndef ibase_CObjectQueueComp_included
+#define ibase_CObjectQueueComp_included
+
+
+// Qt includes
+#include <QtCore/QList>
+
+// ACF includes
+#include <iser/ISerializable.h>
+#include <icomp/CComponentBase.h>
+#include <ibase/IObjectQueue.h>
+
+
+namespace ibase
+{
+
+
+/**
+	Implementation of ibase::IObjectQueue including some smart optimizations.
+*/
+class CObjectQueueComp:
+			public icomp::CComponentBase,
+			virtual public IObjectQueue,
+			virtual public iser::ISerializable
+{
+public:
+	typedef icomp::CComponentBase BaseClass;
+
+	I_BEGIN_COMPONENT(CObjectQueueComp);
+		I_REGISTER_INTERFACE(IObjectQueue);
+		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_ASSIGN(m_objectFactoryFactPtr, "ObjectFactory", "Object factory used to create queue instancies", true, "ObjectFactory");
+		I_ASSIGN(m_maxReserveObjectsAttrPtr, "MaxReserveObjects", "Maximal number of reserve objects used to avoid cretion and removing of objects from heap", true, 10);
+	I_END_COMPONENT;
+
+	// reimplemented (ibase::IObjectQueue)
+	virtual int GetObjectsCount(const QByteArray* typeIdPtr = NULL) const override;
+	virtual void ClearQueue() override;
+	virtual istd::IChangeable* CreateFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual istd::IChangeable* CreateBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual void RemoveFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual void RemoveBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual istd::IChangeable* GetFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) const override;
+	virtual istd::IChangeable* GetBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) const override;
+	virtual void SelectObjects(
+				ObjectList& result,
+				bool doAppend = false,
+				int offsetPos = 0,
+				const QByteArray* typeIdPtr = NULL) const override;
+	virtual istd::IChangeable* PopFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+	virtual istd::IChangeable* PopBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) override;
+
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive) override;
+
+protected:
+	istd::IChangeable* CreateObject();
+	void TryReductReserve();
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentDestroyed() override;
+
+private:
+	I_FACT(istd::IChangeable, m_objectFactoryFactPtr);
+	I_ATTR(int, m_maxReserveObjectsAttrPtr);
+
+	typedef QList<istd::IChangeable*> ObjectQueue;
+
+	ObjectQueue m_objectsQueue;
+	ObjectQueue m_objectsReserve;
+};
+
+
+} // namespace ibase
+
+
+#endif // !ibase_CObjectQueueComp_included
+
+

@@ -1,0 +1,64 @@
+#ifndef iser_CWriteArchiveBase_included
+#define iser_CWriteArchiveBase_included
+
+
+// ACF includes
+#include <iser/IVersionInfo.h>
+#include <iser/CArchiveBase.h>
+
+
+namespace iser
+{
+
+
+/**
+	Basic implementation of an abstract archive for data writting.
+
+	\ingroup Persistence
+*/
+class CWriteArchiveBase: public CArchiveBase
+{
+public:
+	// reimplemented (iser::IArchive)
+	virtual bool IsStoring() const override;
+	virtual const IVersionInfo& GetVersionInfo() const override;
+	virtual bool ProcessBits(void* dataPtr, int bitsCount, int bytesCount) override;
+
+protected:
+	/**
+		Constructor.
+		\note Please note no header will be serialized during contruction.
+		You have to explicite call method SerializeAcfHeader in your derrived implementation.
+	*/
+	explicit CWriteArchiveBase(const IVersionInfo* versionInfoPtr);
+
+	/**
+		Serialize standard header.
+		During serialization of header list of known versions will be loaded.
+	*/
+	bool SerializeAcfHeader();
+
+	class EmptyVersionInfo: virtual public IVersionInfo
+	{
+	public:
+		// reimplemented (iser::IVersionInfo)
+		virtual bool GetVersionNumber(int versionId, quint32& result) const override;
+		virtual QString GetVersionIdDescription(int versionId) const override;
+		virtual VersionIds GetVersionIds() const override;
+		virtual QString GetEncodedVersionName(int versionId, quint32 versionNumber) const override;
+	};
+
+private:
+	const IVersionInfo* m_versionInfoPtr;
+
+	// static attributes
+	static EmptyVersionInfo s_emptyVersionInfo;
+};
+
+
+} // namespace iser
+
+
+#endif // !iser_CWriteArchiveBase_included
+
+

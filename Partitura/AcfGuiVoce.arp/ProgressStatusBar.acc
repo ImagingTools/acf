@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5345" Description="ACF"/>
+            <Version Id="1" Number="2235" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Progress manager GUI integrated in status bar</Description>
+    <Keywords>Progress Status Main Window GUI</Keywords>
+    <ElementsList>
+        <Element Id="ProgressManagerGui" PackageId="QtGuiPck" ComponentId="ProgressManagerGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AutomaticHide" Type="Boolean" ExportId="AutomaticHide">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Description" Type="Text" ExportId="Description">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowCancel" Type="Boolean" ExportId="ShowCancel">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ProgressStatus" PackageId="QtGuiPck" ComponentId="StatusBarWidget">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="StatusBarWidgets" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>ProgressManagerGui</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SuppressWidgetFrame" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IProgressManager" ComponentId="ProgressManagerGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ProgressManagerGui"/>
+        <Interface InterfaceId="iqtgui::IMainWindowComponent" ComponentId="ProgressStatus"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

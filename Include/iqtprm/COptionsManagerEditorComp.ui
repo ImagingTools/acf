@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>COptionsManagerEditorComp</class>
+ <widget class="QWidget" name="COptionsManagerEditorComp">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>656</width>
+    <height>513</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QListWidget" name="OptionsList">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="ButtonsFrame" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="AddRemoveButtonsFrame" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="AddButton">
+           <property name="toolTip">
+            <string>Insert new item</string>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../iqtgui/iqtgui.qrc">
+             <normaloff>:/Icons/Add</normaloff>:/Icons/Add</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="RemoveButton">
+           <property name="toolTip">
+            <string>Remove selected item</string>
+           </property>
+           <property name="text">
+            <string>Remove</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../iqtgui/iqtgui.qrc">
+             <normaloff>:/Icons/Delete</normaloff>:/Icons/Delete</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>329</width>
+          <height>17</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QWidget" name="UpDownButtonsFrame" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QToolButton" name="UpButton">
+           <property name="toolTip">
+            <string>Move selected item up</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../iqtgui/iqtgui.qrc">
+             <normaloff>:/Icons/Up</normaloff>:/Icons/Up</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="DownButton">
+           <property name="toolTip">
+            <string>Move selected item down</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../iqtgui/iqtgui.qrc">
+             <normaloff>:/Icons/Down</normaloff>:/Icons/Down</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="LoadParamsButton">
+        <property name="toolTip">
+         <string>Load all parameters from file</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../iqtgui/iqtgui.qrc">
+          <normaloff>:/Icons/Open</normaloff>:/Icons/Open</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="SaveParamsButton">
+        <property name="toolTip">
+         <string>Save all parameters to file</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../iqtgui/iqtgui.qrc">
+          <normaloff>:/Icons/Save</normaloff>:/Icons/Save</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>OptionsList</tabstop>
+  <tabstop>AddButton</tabstop>
+  <tabstop>RemoveButton</tabstop>
+  <tabstop>UpButton</tabstop>
+  <tabstop>DownButton</tabstop>
+  <tabstop>LoadParamsButton</tabstop>
+  <tabstop>SaveParamsButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../iqtgui/iqtgui.qrc"/>
+ </resources>
+ <connections/>
+</ui>

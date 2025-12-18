@@ -1,0 +1,272 @@
+#include <i2d/CPolygon.h>
+
+
+// Qt includes
+#include <QtCore/QObject>
+
+// ACF includes
+#include <istd/TDelPtr.h>
+#include <istd/CClassInfo.h>
+#include <istd/CChangeNotifier.h>
+#include <i2d/CLine2d.h>
+#include <i2d/CAffineTransformation2d.h>
+
+
+namespace i2d
+{
+
+
+static const istd::IChangeable::ChangeSet s_flipPolygonChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Flip"));
+static const istd::IChangeable::ChangeSet s_rotatePolygonChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Rotate"));
+static const istd::IChangeable::ChangeSet s_reversePolygonChange(CPolygon::CF_OBJECT_POSITION, CPolygon::CF_ALL_DATA, QObject::tr("Reverse nodes"));
+
+
+// public static methods
+
+QByteArray CPolygon::GetTypeName()
+{
+	return istd::CClassInfo::GetName<CPolygon>();
+}
+
+
+// public methods
+
+CPolygon::CPolygon(const QPolygonF& qpolygon)
+{
+	for (int i = 0; i < qpolygon.size(); ++i){
+		InsertNode(qpolygon.at(i));
+	}
+}
+
+
+CPolygon::operator QPolygonF() const
+{
+	QPolygonF p;
+
+	for (int i = 0; i < GetNodesCount(); ++i){
+		p << QPointF(GetNodePos(i));
+	}
+
+	return p;
+}
+
+
+bool CPolygon::Contains(const i2d::CVector2d& point) const
+{
+	int nodesCount = GetNodesCount();
+
+	if (GetNodesCount() < 3){
+		return false;
+	}
+
+	i2d::CLine2d extreme(point, i2d::CVector2d(std::numeric_limits<int>::max(), point.GetY()));
+
+	int count = 0;
+	int i = 0;
+
+	do{
+		int next = (i + 1) % nodesCount;
+		i2d::CLine2d line(GetNodePos(i), GetNodePos(next));
+
+		if (line.IsIntersectedBy(extreme)){
+			count++;
+		}
+
+		i = next;
+
+	} while (i != 0);
+
+	return count & 1;
+}
+
+
+// public methods
+
+double CPolygon::GetOutlineLength() const
+{
+	double length = 0;
+	int nodesCount = GetNodesCount();
+	if (nodesCount > 0){
+		i2d::CLine2d segmentLine;
+		segmentLine.SetPoint2(GetNodePos(nodesCount - 1));
+		for (int nodeIndex = 0; nodeIndex < nodesCount; ++nodeIndex){
+			segmentLine.PushEndPoint(GetNodePos(nodeIndex));
+			length += segmentLine.GetLength();
+		}
+	}
+
+	return length;
+}
+
+
+void CPolygon::FlipByX()
+{
+	int count = GetNodesCount();
+	if (count){
+		istd::CChangeNotifier changeNotifier(this, &s_flipPolygonChange);
+		Q_UNUSED(changeNotifier);
+
+		i2d::CVector2d center = GetCenter();
+
+		for (int i = 0; i < count; i++){
+			i2d::CVector2d& position = GetNodePosRef(i);
+
+			position.SetX(center.GetX() + (center.GetX() - position.GetX()));
+		}
+	}
+}
+
+
+void CPolygon::FlipByY()
+{
+	int count = GetNodesCount();
+	if (count){
+		istd::CChangeNotifier changeNotifier(this, &s_flipPolygonChange);
+		Q_UNUSED(changeNotifier);
+
+		i2d::CVector2d center = GetCenter();
+
+		for (int i = 0; i < count; i++){
+			i2d::CVector2d& position = GetNodePosRef(i);
+
+			position.SetY(center.GetY() + (center.GetY() - position.GetY()));
+		}
+	}
+}
+
+
+void CPolygon::Rotate(double radians)
+{
+	int count = GetNodesCount();
+	if (count){
+		istd::CChangeNotifier changeNotifier(this, &s_rotatePolygonChange);
+		Q_UNUSED(changeNotifier);
+
+		i2d::CVector2d center = GetCenter();
+
+		i2d::CAffineTransformation2d translateTo00;
+		translateTo00.Reset(-center);
+		i2d::CAffineTransformation2d rotate;
+		rotate.Reset(i2d::CVector2d(0, 0), radians);
+		i2d::CAffineTransformation2d translateBackToCenter;
+		translateBackToCenter.Reset(center);
+
+		Transform(translateTo00);
+		Transform(rotate);
+		Transform(translateBackToCenter);
+	}
+}
+
+
+void CPolygon::ReverseNodes()
+{
+	int count = GetNodesCount();
+	if (count){
+		istd::CChangeNotifier changeNotifier(this, &s_reversePolygonChange);
+		Q_UNUSED(changeNotifier);
+
+		for (int i = 0; i < count / 2; i++){
+			i2d::CVector2d node1 = GetNodePos(i);
+			i2d::CVector2d node2 = GetNodePos(count - 1 - i);
+
+			SetNodePos(i, node2);
+			SetNodePos(count - 1 - i, node1);
+		}
+	}
+}
+
+
+// reimplemented (istd::IChangeable)
+
+bool CPolygon::CopyFrom(const IChangeable& object, CompatibilityMode mode)
+{
+	const CRectangle* rectanglePtr = dynamic_cast<const CRectangle*>(&object);
+	if (rectanglePtr != NULL){		
+		istd::CChangeNotifier changeNotifier(this);
+		Q_UNUSED(changeNotifier);
+
+		BaseClass::SetNodesCount(4);
+		BaseClass::SetNodePos(0, rectanglePtr->GetLeftTop());
+		BaseClass::SetNodePos(1, rectanglePtr->GetRightTop());
+		BaseClass::SetNodePos(2, rectanglePtr->GetRightBottom());
+		BaseClass::SetNodePos(3, rectanglePtr->GetLeftBottom());
+
+		return CObject2dBase::CopyFrom(object, mode);
+	}
+
+	return BaseClass::CopyFrom(object, mode);
+}
+
+
+istd::IChangeableUniquePtr CPolygon::CloneMe(CompatibilityMode mode) const
+{
+	istd::IChangeableUniquePtr clonePtr(new CPolygon);
+
+	if (clonePtr->CopyFrom(*this, mode)){
+		return clonePtr;
+	}
+
+	return istd::IChangeableUniquePtr();
+}
+
+
+
+// reimplemented (iser::IObject)
+
+QByteArray CPolygon::GetFactoryId() const
+{
+	return GetTypeName();
+}
+
+
+double CPolygon::GetArea(bool oriented) const
+{
+	const int nodesCount = GetNodesCount();
+	if (nodesCount < 3){
+		return 0;
+	}
+
+	double result = 0;
+
+	for (int i = 1; i < nodesCount; ++i){
+		result += GetNodePos(i - 1).GetX() * GetNodePos(i).GetY();
+	}
+
+	result += GetNodePos(nodesCount - 1).GetX() * GetNodePos(0).GetY();
+
+	for (int i = 1; i < nodesCount; ++i){
+		result -= GetNodePos(i).GetX() * GetNodePos(i - 1).GetY();
+	}
+
+	result -= GetNodePos(0).GetX() * GetNodePos(nodesCount - 1).GetY();
+
+	result *= 0.5;
+
+	return oriented ? result : qAbs(result);
+}
+
+
+double CPolygon::GetPerimeter() const
+{
+	const int nodesCount = GetNodesCount();
+	if (nodesCount < 2){
+		return 0;
+	}
+
+	double result = 0;
+	for (int i = 1; i < nodesCount; ++i){
+		result += GetNodePos(i).GetDistance(GetNodePos(i - 1));
+	}
+
+	result += GetNodePos(nodesCount - 1).GetDistance(GetNodePos(0));
+
+	return result;
+}
+
+
+
+
+
+} // namespace i2d
+
+

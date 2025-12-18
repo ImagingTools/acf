@@ -1,0 +1,484 @@
+#include <iwidgets/CMultiPageWidget.h>
+
+
+// Qt includes
+#include <QtCore/QtGlobal>
+#include <QtCore/QVariant>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QToolBox>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QSplitter>
+#else
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QToolBox>
+#include <QtGui/QTabWidget>
+#include <QtGui/QGroupBox>
+#include <QtGui/QSplitter>
+#endif
+
+// ACF includes
+#include <iwidgets/CTabWidgetDelegate.h>
+#include <iwidgets/CToolBoxDelegate.h>
+#include <iwidgets/CSplitterDelegate.h>
+#include <iwidgets/CSimpleGuiContainerDelegate.h>
+#include <iwidgets/CStackWidgetDelegate.h>
+#include <iwidgets/CCollapsibleGroupWidgetDelegate.h>
+#include <iwidgets/CMiniWidgetDelegate.h>
+
+
+namespace iwidgets
+{
+
+
+// public methods
+
+CMultiPageWidget::CMultiPageWidget(
+			QWidget* parentWidgetPtr,
+			int designMode,
+			int containerGuiFlags,
+			Qt::Orientation orientation)
+	:BaseClass(parentWidgetPtr),
+	m_designMode(designMode),
+	m_containerGuiFlags(containerGuiFlags),
+	m_orientation(orientation),
+	m_pageSwitchingBlocked(false)
+{
+	// Register default delegates:
+	RegisterMultiPageWidgetDelegate<CSimpleGuiContainerDelegate>(DT_SIMPLE);
+	RegisterMultiPageWidgetDelegate<CTabWidgetDelegate>(DT_TAB_WIDGET);
+	RegisterMultiPageWidgetDelegate<CToolBoxDelegate>(DT_TOOL_BOX);
+	RegisterMultiPageWidgetDelegate<CSplitterDelegate>(DT_SPLITTER);
+	RegisterMultiPageWidgetDelegate<CStackWidgetDelegate>(DT_STACK);
+	RegisterMultiPageWidgetDelegate<CCollapsibleGroupWidgetDelegate>(DT_COLLAPSIBLE_GROUPS);
+	RegisterMultiPageWidgetDelegate<CMiniWidgetDelegate>(DT_MINI_WIDGETS);
+
+	CreateContainerGui();
+}
+
+
+QWidget* CMultiPageWidget::GetContainerWidgetPtr() const
+{
+	return m_guiContainerPtr.GetPtr();
+}
+
+
+void CMultiPageWidget::SetDesignMode(int designMode)
+{
+	if (GetPagesCount() > 0){
+		// TODO: reparent all pages and add to the new container.
+	}
+	else{
+		m_guiContainerPtr.Reset();
+		m_designMode = designMode;
+
+		CreateContainerGui();
+	}
+}
+
+
+void CMultiPageWidget::SetContainerGuiFlags(int containerGuiFlags)
+{
+	if (GetPagesCount() > 0){
+		// TODO: reparent all pages and add to the new container.
+	}
+	else{
+		m_guiContainerPtr.Reset();
+		m_containerGuiFlags = containerGuiFlags;
+
+		CreateContainerGui();
+	}
+}
+
+
+void CMultiPageWidget::SetLayoutOrientation(Qt::Orientation orientation)
+{
+	if (GetPagesCount() > 0){
+		// TODO: reparent all pages and add to the new container.
+	}
+	else{
+		m_guiContainerPtr.Reset();
+		m_orientation = orientation;
+
+		CreateContainerGui();
+	}
+}
+
+
+void CMultiPageWidget::ResetPages()
+{
+	if (m_guiContainerPtr.IsValid()){
+		m_pageSwitchingBlocked = true;
+
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			delegatePtr->ResetPages(*m_guiContainerPtr);
+		}
+
+		m_pageSwitchingBlocked = false;
+
+		int pagesCount = delegatePtr->GetPagesCount(*m_guiContainerPtr);
+
+		Q_EMIT EmitPageIndexChanged((pagesCount == 0) ? -1 : 0);
+	}
+}
+
+
+void CMultiPageWidget::SetPageHeaderPosition(PageHeaderPosition pageHeaderPosition)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			delegatePtr->SetPageHeaderPosition(*m_guiContainerPtr, pageHeaderPosition);
+		}
+	}
+}
+
+
+int CMultiPageWidget::InsertPage(
+			QWidget* pageWidgetPtr,
+			const QString& pageTitle,
+			int pageIndex)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->InsertPage(*m_guiContainerPtr, pageWidgetPtr, pageTitle, pageIndex);
+		}
+	}
+
+	return -1;
+}
+
+
+void CMultiPageWidget::RemovePage(int pageIndex)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			delegatePtr->RemovePage(*m_guiContainerPtr, pageIndex);
+		}
+	}
+}
+
+
+int CMultiPageWidget::GetPagesCount() const
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->GetPagesCount(*m_guiContainerPtr);
+		}
+	}
+
+	return 0;
+}
+
+
+QWidget* CMultiPageWidget::GetPageWidgetPtr(int pageIndex) const
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->GetPageWidgetPtr(*m_guiContainerPtr, pageIndex);
+		}
+	}
+
+	return NULL;
+}
+
+
+int CMultiPageWidget::GetCurrentPage() const
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->GetCurrentPage(*m_guiContainerPtr);
+		}
+	}
+
+	return -1;
+}
+
+
+bool CMultiPageWidget::SetCurrentPage(int pageIndex)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->SetCurrentPage(*m_guiContainerPtr, pageIndex);
+		}
+	}
+
+	return false;
+}
+
+
+QString CMultiPageWidget::GetPageTitle(int pageIndex) const
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->GetPageTitle(*m_guiContainerPtr, pageIndex);
+		}
+	}
+
+	return QString();
+}
+
+
+void CMultiPageWidget::SetPageTitle(int pageIndex, const QString& pageTitle)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			delegatePtr->SetPageTitle(*m_guiContainerPtr, pageIndex, pageTitle);
+		}
+	}
+}
+
+
+QIcon CMultiPageWidget::GetPageIcon(int pageIndex) const
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->GetPageIcon(*m_guiContainerPtr, pageIndex);
+		}
+	}
+
+	return QIcon();
+}
+
+
+void CMultiPageWidget::SetPageIcon(int pageIndex, const QIcon& pageIcon)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			delegatePtr->SetPageIcon(*m_guiContainerPtr, pageIndex, pageIcon);
+		}
+	}
+}
+
+
+QString CMultiPageWidget::GetPageToolTip(int pageIndex) const
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->GetPageToolTip(*m_guiContainerPtr, pageIndex);
+		}
+	}
+
+	return QString();
+}
+
+
+void CMultiPageWidget::SetPageToolTip(int pageIndex, const QString& pageToolTip)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			delegatePtr->SetPageToolTip(*m_guiContainerPtr, pageIndex, pageToolTip);
+		}
+	}
+}
+
+
+bool CMultiPageWidget::IsPageEnabled(int pageIndex) const
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->IsPageEnabled(*m_guiContainerPtr, pageIndex);
+		}
+	}
+
+	return false;
+}
+
+
+bool CMultiPageWidget::SetPageEnabled(int pageIndex, bool isEnabled)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->SetPageEnabled(*m_guiContainerPtr, pageIndex, isEnabled);
+		}
+	}
+
+	return false;
+}
+
+
+bool CMultiPageWidget::IsPageVisible(int pageIndex) const
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->IsPageVisible(*m_guiContainerPtr, pageIndex);
+		}
+	}
+
+	return false;
+}
+
+
+bool CMultiPageWidget::SetPageVisible(int pageIndex, bool isVisible)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->SetPageVisible(*m_guiContainerPtr, pageIndex, isVisible);
+		}
+	}
+
+	return false;
+}
+
+
+QSize CMultiPageWidget::GetPageIconSize() const
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->GetPageIconSize(*m_guiContainerPtr);
+		}
+	}
+
+	return QSize();
+}
+
+
+bool CMultiPageWidget::SetPageIconSize(const QSize& pageIconSize)
+{
+	if (m_guiContainerPtr.IsValid()){
+		MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+		if (delegatePtr.IsValid()){
+			return delegatePtr->SetPageIconSize(*m_guiContainerPtr, pageIconSize);
+		}
+	}
+
+	return false;
+}
+
+
+// static public methods
+
+bool CMultiPageWidget::IsPageIndexChangeSupported(int designMode)
+{
+	switch (designMode){
+	case DT_TAB_WIDGET:
+	case DT_TOOL_BOX:
+	case DT_SPLITTER:
+	case DT_STACK:
+		return true;
+
+	default:
+		return false;
+	}
+}
+
+
+// protected slots
+
+void CMultiPageWidget::OnPageIndexChanged(int pageIndex)
+{
+	if (!m_pageSwitchingBlocked){
+		Q_EMIT EmitPageIndexChanged(pageIndex);
+	}
+}
+
+
+// private methods
+
+bool CMultiPageWidget::CreateContainerGui()
+{
+	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
+		qWarning("No container delegate registered for the current UI mode");
+
+		return false;
+	}
+
+	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
+	Q_ASSERT(delegatePtr.IsValid());
+
+	// initialize the GUI container
+	QLayout* layoutPtr = layout();
+	if (layoutPtr == NULL){
+		layoutPtr = new QVBoxLayout(this);
+	}
+
+	layoutPtr->setContentsMargins(0,0,0,0);
+
+	m_guiContainerPtr.SetPtr(delegatePtr->CreateContainerWidget(this, m_containerGuiFlags, m_orientation));
+	if (!m_guiContainerPtr.IsValid()){
+		return false;
+	}
+
+	m_guiContainerPtr->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+	layoutPtr->addWidget(m_guiContainerPtr.GetPtr());
+
+	delegatePtr->ConnectPageIndexListener(*m_guiContainerPtr.GetPtr(), this, SLOT(OnPageIndexChanged(int)));
+
+	if (!m_pageIconSize.isNull() && m_pageIconSize.isValid() && !m_pageIconSize.isEmpty()){
+		delegatePtr->SetPageIconSize(*m_guiContainerPtr.GetPtr(), m_pageIconSize);
+	}
+
+	if (m_containerGuiFlags & IMultiPageWidgetDelegate::CGF_COMPACT){
+		switch (m_orientation){
+			case Qt::Vertical:
+				m_guiContainerPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+				break;
+
+			case Qt::Horizontal:
+				m_guiContainerPtr->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+				break;
+
+			default:
+				break;
+		}
+		
+		QBoxLayout* boxLayoutPtr = dynamic_cast<QBoxLayout*>(layoutPtr);
+		if (boxLayoutPtr != NULL){
+			boxLayoutPtr->insertStretch(-1);
+		}
+	}
+
+	if (m_containerGuiFlags & IMultiPageWidgetDelegate::CGF_FILTER_WHEEL_EVENTS){
+		m_widgetWheelEventBlockerPtr = new CWidgetWheelEventBlocker((m_guiContainerPtr.GetPtr()));
+	}
+
+	return m_guiContainerPtr.IsValid();
+}
+
+
+CMultiPageWidget::MultiPageWidgetDelegatePtr CMultiPageWidget::GetCurrentDelegate() const
+{
+	if (!m_guiContainerPtr.IsValid()){
+		qWarning("Container GUI was not created");
+
+		return MultiPageWidgetDelegatePtr();
+	}
+
+	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
+		qWarning("No container delegate registered for the current UI mode");
+
+		return MultiPageWidgetDelegatePtr();
+	}
+
+	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
+	Q_ASSERT(delegatePtr.IsValid());
+
+	return delegatePtr;
+}
+
+
+} // namespace iwidgets
+
+

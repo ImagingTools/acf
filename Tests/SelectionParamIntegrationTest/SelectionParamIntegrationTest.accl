@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5442" Description="ACF"/>
+            <Version Id="1" Number="2256" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="395266" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="Factory" X="175" Y="575" Note=""/>
+        <Element ComponentName="Fixed1" X="625" Y="575" Note=""/>
+        <Element ComponentName="ParamsManager" X="400" Y="450" Note=""/>
+        <Element ComponentName="Selection" X="400" Y="250" Note=""/>
+        <Element ComponentName="SelectionConstraints" X="800" Y="350" Note=""/>
+        <Element ComponentName="SelectionWithConstraints" X="800" Y="250" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries>
+        <EmbededRegistry Id="ParamsSet1">
+            <PositionMap>
+                <Element ComponentName="ParamsSet" X="350" Y="175" Note=""/>
+                <Element ComponentName="Selection" X="350" Y="350" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+    </EmbeddedRegistries>
+</Acf>

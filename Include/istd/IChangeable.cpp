@@ -1,0 +1,293 @@
+#include <istd/IChangeable.h>
+
+
+namespace istd
+{
+
+
+IChangeable::ChangeSet::ChangeSet()
+{
+}
+
+
+IChangeable::ChangeSet::ChangeSet(const QString& description)
+:	m_description(description)
+{
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, int id2, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+	m_ids << id2;
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, int id2, int id3, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+	m_ids << id2;
+	m_ids << id3;
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, int id2, int id3, int id4, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+	m_ids << id2;
+	m_ids << id3;
+	m_ids << id4;
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, int id2, int id3, int id4, int id5, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+	m_ids << id2;
+	m_ids << id3;
+	m_ids << id4;
+	m_ids << id5;
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, int id2, int id3, int id4, int id5, int id6, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+	m_ids << id2;
+	m_ids << id3;
+	m_ids << id4;
+	m_ids << id5;
+	m_ids << id6;
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, int id2, int id3, int id4, int id5, int id6, int id7, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+	m_ids << id2;
+	m_ids << id3;
+	m_ids << id4;
+	m_ids << id5;
+	m_ids << id6;
+	m_ids << id7;
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, int id2, int id3, int id4, int id5, int id6, int id7, int id8, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+	m_ids << id2;
+	m_ids << id3;
+	m_ids << id4;
+	m_ids << id5;
+	m_ids << id6;
+	m_ids << id7;
+	m_ids << id8;
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, int id2, int id3, int id4, int id5, int id6, int id7, int id8, int id9, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+	m_ids << id2;
+	m_ids << id3;
+	m_ids << id4;
+	m_ids << id5;
+	m_ids << id6;
+	m_ids << id7;
+	m_ids << id8;
+	m_ids << id9;
+}
+
+
+IChangeable::ChangeSet::ChangeSet(int id1, int id2, int id3, int id4, int id5, int id6, int id7, int id8, int id9, int id10, const QString& description)
+:	m_description(description)
+{
+	m_ids << id1;
+	m_ids << id2;
+	m_ids << id3;
+	m_ids << id4;
+	m_ids << id5;
+	m_ids << id6;
+	m_ids << id7;
+	m_ids << id8;
+	m_ids << id9;
+	m_ids << id10;
+}
+
+
+void IChangeable::ChangeSet::Reset()
+{
+	m_ids.clear();
+	m_infoMap.clear();
+	m_description.clear();
+}
+
+
+bool IChangeable::ChangeSet::IsEmpty() const
+{
+	return m_ids.empty();
+}
+
+
+bool IChangeable::ChangeSet::Contains(int changeId) const
+{
+	if (m_ids.contains(CF_ALL_DATA)){
+		return true;
+	}
+
+	return m_ids.contains(changeId);
+}
+
+
+bool IChangeable::ChangeSet::ContainsExplicit(int changeId, bool singleOnly) const
+{
+	if (singleOnly && (m_ids.size() != 1)){
+		return false;
+	}
+
+	return m_ids.contains(changeId);
+}
+
+
+bool IChangeable::ChangeSet::ContainsAny(const ChangeSet& changeSet) const
+{
+	if (m_ids.contains(CF_ALL_DATA) && !changeSet.m_ids.isEmpty()){
+		return true;
+	}
+
+	if (changeSet.m_ids.contains(CF_ALL_DATA) && !m_ids.isEmpty()){
+		return true;
+	}
+
+	return !(m_ids & changeSet.m_ids).empty();
+}
+
+
+void IChangeable::ChangeSet::MaskOut(const ChangeSet& changeSet)
+{
+	m_ids -= m_ids & changeSet.m_ids;
+}
+
+
+const QString& IChangeable::ChangeSet::GetDescription() const
+{
+	return m_description;
+}
+
+
+QSet<int> IChangeable::ChangeSet::GetIds() const
+{
+	return m_ids;
+}
+
+
+const IChangeable::ChangeInfoMap& IChangeable::ChangeSet::GetChangeInfoMap() const
+{
+	return m_infoMap;
+}
+
+
+void IChangeable::ChangeSet::SetChangeInfoMap(const IChangeable::ChangeInfoMap& infoMap)
+{
+	m_infoMap = infoMap;
+}
+
+
+QVariant IChangeable::ChangeSet::GetChangeInfo(const QByteArray& key) const
+{
+	return m_infoMap.value(key,QVariant());
+}
+
+
+void IChangeable::ChangeSet::SetChangeInfo(const QByteArray& key, const QVariant& value)
+{
+	m_infoMap.insert(key, value);
+}
+
+
+IChangeable::ChangeSet IChangeable::ChangeSet::operator+(const ChangeSet& changeSet) const
+{
+	ChangeSet retVal;
+
+	retVal.m_ids += m_ids;
+	retVal.m_ids += changeSet.m_ids;
+	retVal.m_infoMap += changeSet.m_infoMap;
+
+	if (!changeSet.m_description.isEmpty()){
+		retVal.m_description = changeSet.m_description;
+	}
+	else{
+		retVal.m_description = m_description;
+	}
+
+	return retVal;
+}
+
+
+IChangeable::ChangeSet& IChangeable::ChangeSet::operator+=(int changeId)
+{
+	m_ids << changeId;
+
+	return *this;
+}
+
+
+IChangeable::ChangeSet& IChangeable::ChangeSet::operator+=(const QSet<int>& ids)
+{
+	m_ids += ids;
+
+	return *this;
+}
+
+
+IChangeable::ChangeSet& IChangeable::ChangeSet::operator+=(const ChangeSet& changeSet)
+{
+	m_ids += changeSet.m_ids;
+	m_infoMap += changeSet.m_infoMap;
+
+	if (!changeSet.m_description.isEmpty()){
+		m_description = changeSet.m_description;
+	}
+
+	return *this;
+}
+
+
+// static attributes
+
+const IChangeable::ChangeSet IChangeable::s_emptyChanges;
+const IChangeable::ChangeSet IChangeable::s_anyChanges(CF_ANY);
+const IChangeable::ChangeSet IChangeable::s_allChanges(CF_ALL_DATA);
+const IChangeable::ChangeSet IChangeable::s_delegatedChanges(CF_DELEGATED);
+
+
+bool AreObjectsEqual(const IChangeable* a, const IChangeable* b)
+{
+	if (a && b){
+		return a->IsEqual(*b);
+	}
+	else{
+		return !a && !b;
+	}
+}
+
+
+} // namespace istd
+
+

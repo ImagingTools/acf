@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Binder of model editor and scene extender</Description>
+    <Keywords>Scene Model Observer Editor Gui Binder Delegator</Keywords>
+    <ElementsList>
+        <Element Id="ModelEditorGui" PackageId="QtGuiPck" ComponentId="ModelEditorGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Model" Type="Reference" ExportId="Model">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveEditorGui" Type="Reference" ExportId="Gui">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SceneExtenderDelegator" PackageId="QtViewPck" ComponentId="SceneExtenderDelegator">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="Gui">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="ModelEditorGui"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="SceneExtenderDelegator"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ModelEditorGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5127" Description="ACF"/>
+            <Version Id="1" Number="2198" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="ApplicationInfo" PackageId="BasePck" ComponentId="ApplicationInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="CompositeGuiTest"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CompanyName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="ImagingTools GmbH"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="LegalCopyright" Type="Text" ExportId="LegalCopyright">
+                        <Data IsEnabled="true" Value="(C) 2018 ImagingTools GmbH. All rights reserved."/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainVersionId" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="777"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ApplicationSettingsProvider" PackageId="QtPck" ComponentId="ApplicationSettingsProvider">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="GuiApplication" PackageId="QtGuiPck" ComponentId="GuiApplication">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MainGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TitleFormat" Type="String" ExportId="TitleFormat">
+                        <Data IsEnabled="true" Value="$(AppName) by $(CompanyName)"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UiStartMode" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Guis" PackageId="" ComponentId="Guis">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="GuiApplication/RuntimeStatus"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="MainComposedGui" PackageId="QtGuiPck" ComponentId="ComposedGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Guis" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Guis/Simple</Value>
+                                <Value>Guis/ToolBox</Value>
+                                <Value>Guis/TabBar</Value>
+                                <Value>Guis/Splitter</Value>
+                                <Value>Guis/Stacked</Value>
+                                <Value>Guis/CollapsibleGroups</Value>
+                                <Value>Guis/MiniWidgets</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Simple</Value>
+                                <Value>ToolBox</Value>
+                                <Value>TabBar</Value>
+                                <Value>Splitter</Value>
+                                <Value>Stacked</Value>
+                                <Value>CollapsibleGroups</Value>
+                                <Value>MiniWidgets</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PageIds" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Simple</Value>
+                                <Value>ToolBox</Value>
+                                <Value>TabBar</Value>
+                                <Value>Splitter</Value>
+                                <Value>Stacked</Value>
+                                <Value>CollapsibleGroups</Value>
+                                <Value>MiniWidgets</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="MainGui" PackageId="QtGuiPck" ComponentId="SimpleMainGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="SettingsProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ApplicationSettingsProvider"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Workspace" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MainComposedGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="VersionInfo" PackageId="BasePck" ComponentId="VersionInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="VersionId" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="777"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionNumber" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="100"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList>
+        <EmbeddedRegistry Id="Guis">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="CollapsibleGroups" PackageId="AcfTestVoce" ComponentId="AllVariants">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="5"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="CollapsibleGroups_Lazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="CollapsibleGroups_Lazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="CollapsibleGroups_NoLazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="CollapsibleGroups_NoLazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="MiniWidgets" PackageId="AcfTestVoce" ComponentId="AllVariants">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="6"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="MiniWidgets_Lazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="MiniWidgets_Lazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="MiniWidgets_NoLazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="MiniWidgets_NoLazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Simple" PackageId="AcfTestVoce" ComponentId="AllVariants">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Simple_Lazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Simple_Lazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Simple_NoLazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Simple_NoLazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Splitter" PackageId="AcfTestVoce" ComponentId="AllVariants">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="3"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Splitter_Lazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Splitter_Lazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Splitter_NoLazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Splitter_NoLazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Stacked" PackageId="AcfTestVoce" ComponentId="Stacked">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="4"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Stacked_Lazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Stacked_Lazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Stacked_NoLazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="Stacked_NoLazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="TabBar" PackageId="AcfTestVoce" ComponentId="AllVariants">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="TabBar_Lazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="TabBar_Lazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="TabBar_NoLazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="TabBar_NoLazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="ToolBox" PackageId="AcfTestVoce" ComponentId="AllVariants">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="1"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="ToolBox_Lazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_Lazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="ToolBox_Lazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(-1)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="ToolBox_NoLazy(-1).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FileName_NoLazy(0)" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="ToolBox_NoLazy(0).xml"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces/>
+                <ExportedComponents>
+                    <Component ExportedId="CollapsibleGroups" ComponentId="CollapsibleGroups"/>
+                    <Component ExportedId="MiniWidgets" ComponentId="MiniWidgets"/>
+                    <Component ExportedId="Simple" ComponentId="Simple"/>
+                    <Component ExportedId="Splitter" ComponentId="Splitter"/>
+                    <Component ExportedId="Stacked" ComponentId="Stacked"/>
+                    <Component ExportedId="TabBar" ComponentId="TabBar"/>
+                    <Component ExportedId="ToolBox" ComponentId="ToolBox"/>
+                </ExportedComponents>
+            </Data>
+        </EmbeddedRegistry>
+    </EmbeddedRegistriesList>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="GuiApplication"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

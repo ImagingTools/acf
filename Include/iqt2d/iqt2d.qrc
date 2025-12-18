@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="/Icons">
+    <file alias="Annulus">Resources/Icons/Annulus.svg</file>
+    <file alias="AnnulusAoi">Resources/Icons/AnnulusAoi.svg</file>
+    <file alias="AnnulusSegment">Resources/Icons/AnnulusSegment.svg</file>
+    <file alias="Circle">Resources/Icons/Circle.svg</file>
+    <file alias="CircleAoi">Resources/Icons/CircleAoi.svg</file>
+    <file alias="Polygon">Resources/Icons/Polygon.svg</file>
+    <file alias="PolygonAoi">Resources/Icons/PolygonAoi.svg</file>
+    <file alias="OpenCloseLine">Resources/Icons/OpenCloseLine.svg</file>
+    <file alias="FlipVertical">Resources/Icons/FlipVertical.svg</file>
+    <file alias="FlipHorizontal">Resources/Icons/FlipHorizontal.svg</file>
+  </qresource>
+</RCC>

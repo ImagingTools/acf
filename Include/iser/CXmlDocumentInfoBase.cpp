@@ -1,0 +1,225 @@
+#include <iser/CXmlDocumentInfoBase.h>
+
+#ifdef Q_OS_WIN
+//
+// On Windows, all strings are wide
+//
+#define _XPLATSTR(x) L##x
+
+#else
+//
+// On POSIX platforms, all strings are narrow
+//
+#define _XPLATSTR(x) x
+
+#endif
+
+namespace iser
+{
+
+
+CXmlDocumentInfoBase::CXmlDocumentInfoBase()
+:	m_isCommentEnabled(true)
+{
+}
+
+
+void CXmlDocumentInfoBase::EncodeXml(const QByteArray& text, QByteArray& xmlText)
+{
+	xmlText = "";
+
+	int textLength = int(text.size());
+	for (int i = 0; i < textLength; ++i){
+		char c = text[i];
+		CharToEntityMap::ConstIterator iter = s_charToEntityMap.constFind(c);
+		if (iter != s_charToEntityMap.constEnd()){
+			xmlText += iter.value();
+		}
+		else if ((c >= ' ') && (c <= '}')){
+			xmlText += c;
+		}
+		else{
+			xmlText +=  QString("&#%1;").arg(quint16((unsigned char)c)).toLocal8Bit();
+		}
+	}
+}
+
+
+void CXmlDocumentInfoBase::DecodeXml(const QByteArray& xmlText, QByteArray& text)
+{
+	text.clear();
+
+	int actPos = 0;
+
+	for (;;){
+		int ampPos = xmlText.indexOf('&', actPos);
+		if (ampPos >= 0){
+			QString subString = xmlText.mid(actPos, ampPos - actPos);
+
+			text += subString.toUtf8();
+
+			int semicolonPos = xmlText.indexOf(';', ampPos);
+			if ((semicolonPos >= 0) && (ampPos < semicolonPos - 2)){
+				actPos = semicolonPos + 1;
+
+				if (xmlText[ampPos + 1] == '#'){
+					QString number(xmlText.mid(ampPos + 2, semicolonPos - ampPos - 2));
+
+					text += char(number.toInt());
+				}
+				else{
+					QByteArray entityId = xmlText.mid(ampPos, semicolonPos - ampPos + 1);
+					EntityToChartMap::ConstIterator entityIter = s_entityToChartMap.constFind(entityId);
+					if (entityIter != s_entityToChartMap.constEnd()){
+						text += entityIter.value();
+					}
+					else{
+						text += entityId;
+					}
+				}
+			}
+			else{
+				text += "&";
+				actPos = ampPos + 1;
+			}
+		}
+		else{
+			text += xmlText.mid(actPos);
+
+			return;
+		}
+	}
+}
+
+
+void CXmlDocumentInfoBase::EncodeXml(const QString& text, QByteArray& xmlText)
+{
+	xmlText = "";
+
+	int textLength = text.size();
+	for (int i = 0; i < textLength; ++i){
+		QChar c = text.at(i);
+		WideCharToEntityMap::ConstIterator iter = s_wideCharToEntityMap.constFind(c);
+		if (iter != s_wideCharToEntityMap.constEnd()){
+			xmlText += iter.value();
+		}
+		else if ((c >= ' ') && (c <= '}')){
+			xmlText += c.toLatin1();
+		}
+		else{
+			quint16 unicodeChar = quint16(c.unicode());
+
+			xmlText +=  QString("&#%1;").arg(unicodeChar).toLocal8Bit();
+		}
+	}
+}
+
+
+void CXmlDocumentInfoBase::DecodeXml(const QByteArray& xmlText, QString& text)
+{
+	text.clear();
+
+	int actPos = 0;
+
+	for (;;){
+		int ampPos = xmlText.indexOf('&', actPos);
+		if (ampPos >= 0){
+			QString subString = xmlText.mid(actPos, ampPos - actPos);
+
+			text += subString;
+
+			int semicolonPos = xmlText.indexOf(';', actPos);
+			if ((semicolonPos >= 0) && (ampPos < semicolonPos - 2)){
+				actPos = semicolonPos + 1;
+
+				if (xmlText[ampPos + 1] == '#'){
+					QString number(xmlText.mid(ampPos + 2, semicolonPos - ampPos - 2));
+
+					text += QChar(number.toInt());
+				}
+				else{
+					QByteArray entityId = xmlText.mid(ampPos, semicolonPos - ampPos + 1);
+					EntityToWideChartMap::ConstIterator entityIter = s_entityToWideChartMap.constFind(entityId);
+					if (entityIter != s_entityToWideChartMap.constEnd()){
+						text += entityIter.value();
+					}
+					else{
+						text += entityId;
+					}
+				}
+			}
+			else{
+				text += "&";
+				actPos = ampPos + 1;
+			}
+		}
+		else{
+			QString subString = xmlText.mid(actPos);
+
+			text += subString;
+
+			return;
+		}
+	}
+}
+
+
+const QString& CXmlDocumentInfoBase::GetElementSeparator()
+{
+	return s_elementSeparator;
+}
+
+
+// public methods of embedded class CharToEntityMap
+
+CXmlDocumentInfoBase::CharToEntityMap::CharToEntityMap()
+{
+	operator[]('<') = "&lt;";
+	operator[]('>') = "&gt;";
+	operator[]('&') = "&amp;";
+}
+
+
+// public methods of embedded class EntityToChartMap
+
+CXmlDocumentInfoBase::EntityToChartMap::EntityToChartMap()
+{
+	operator[]("&lt;") = '<';
+	operator[]("&gt;") = '>';
+	operator[]("&amp;") = '&';
+}
+
+
+// public methods of embedded class WideCharToEntityMap
+
+CXmlDocumentInfoBase::WideCharToEntityMap::WideCharToEntityMap()
+{
+	operator[](_XPLATSTR('<')) = "&lt;";
+	operator[](_XPLATSTR('>')) = "&gt;";
+	operator[](_XPLATSTR('&')) = "&amp;";
+}
+
+
+// public methods of embedded class EntityToWideChartMap
+
+CXmlDocumentInfoBase::EntityToWideChartMap::EntityToWideChartMap()
+{
+	operator[]("&lt;") = _XPLATSTR('<');
+	operator[]("&gt;") = _XPLATSTR('>');
+	operator[]("&amp;") = _XPLATSTR('&');
+}
+
+
+// static attributes
+
+CXmlDocumentInfoBase::CharToEntityMap CXmlDocumentInfoBase::s_charToEntityMap;
+CXmlDocumentInfoBase::EntityToChartMap CXmlDocumentInfoBase::s_entityToChartMap;
+CXmlDocumentInfoBase::WideCharToEntityMap CXmlDocumentInfoBase::s_wideCharToEntityMap;
+CXmlDocumentInfoBase::EntityToWideChartMap CXmlDocumentInfoBase::s_entityToWideChartMap;
+
+QString CXmlDocumentInfoBase::s_elementSeparator("br");
+
+
+} // namespace iser
+
+

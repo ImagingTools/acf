@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="ShapeInfoGui" X="925" Y="350" Note=""/>
+        <Element ComponentName="ImagePropertiesFrame" X="300" Y="350" Note="Widget to show image properties"/>
+        <Element ComponentName="StatusBarWidget" X="575" Y="225" Note="General status bar widget, where the image frame will be placed."/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

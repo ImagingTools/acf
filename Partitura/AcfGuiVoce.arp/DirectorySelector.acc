@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Directory selector</Description>
+    <Keywords>Directory File</Keywords>
+    <ElementsList>
+        <Element Id="Directory" PackageId="FilePck" ComponentId="FileNameParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="DefaultPath">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="PathType">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="DirectoryGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Directory"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FileTypeInfo" Type="Reference" ExportId="FileTypeInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PathLabel" Type="Text" ExportId="PathLabel">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="StartHint" Type="Text" ExportId="StartHint">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ifile::IFileNameParam" ComponentId="Directory"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="Directory"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="DirectoryGui"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="Directory"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="Directory"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

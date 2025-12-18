@@ -1,0 +1,474 @@
+#include <iview/CConsoleBase.h>
+
+
+// Qt includes
+#include <QtCore/QString>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QWidget>
+#else
+#include <QtGui/QWidget>
+#endif
+
+// ACF includes
+#include <i2d/CRectangle.h>
+#include <iview/IViewEventObserver.h>
+#include <iview/CScreenTransform.h>
+#include <iview/CViewport.h>
+
+
+namespace iview
+{
+
+
+// public methods
+
+CConsoleBase::CConsoleBase(QWidget* parent)
+	:QWidget(parent),
+	m_updateBlockFlags(0)
+{
+	Init();
+}
+
+
+void CConsoleBase::SetZoomToFit(bool state)
+{
+	if (state != m_isZoomToFit){
+		m_isZoomToFit = state;
+
+		if (m_isZoomToFit){
+			m_storedFitTransform.SetDeformMatrix(i2d::CMatrix2d(0, 0, 0, 0));
+		}
+
+		UpdateComponentsPosition();
+
+		UpdateButtonsState();
+	}
+}
+
+
+void CConsoleBase::SetFitMode(FitMode mode)
+{
+	if (m_fitMode != mode){
+		m_fitMode = mode;
+
+		if (m_isZoomToFit){
+			CViewport& view = GetViewRef();
+			view.UpdateFitTransform();
+
+			UpdateComponentsPosition();
+		}
+	}
+}
+
+
+void CConsoleBase::SetGridVisible(bool state)
+{
+	CViewport& view = GetViewRef();
+	view.SetGridVisible(state);
+}
+
+
+void CConsoleBase::SetRulerVisible(bool state)
+{
+	if (state != m_isRulerVisible){
+		m_isRulerVisible = state;
+		UpdateComponentsPosition();
+		UpdateButtonsState();
+	}
+}
+
+
+void CConsoleBase::SetGridInMm(bool state)
+{
+	CViewport& view = GetViewRef();
+
+	if (state != view.IsGridInMm()){
+		view.SetGridInMm(state);
+
+		UpdateButtonsState();
+	}
+}
+
+
+// UI visibility
+
+void CConsoleBase::SetButtonsPanelVisible(bool state)
+{
+	if (state != m_isButtonsPanelVisible){
+		m_isButtonsPanelVisible = state;
+
+		UpdateComponentsPosition();
+	}
+}
+
+
+void CConsoleBase::SetButtonsPanelVertical(bool state)
+{
+	if (state != m_isButtonsPanelVertical){
+		m_isButtonsPanelVertical = state;
+		UpdateComponentsPosition();
+	}
+}
+
+
+void CConsoleBase::SetScrollbarsVisible(bool state)
+{
+	if (state != m_areScollbarsVisible){
+		m_areScollbarsVisible = state;
+		UpdateComponentsPosition();
+		UpdateButtonsState();
+	}
+}
+
+
+// Buttons visibility
+
+void CConsoleBase::SetZoomsVisible(bool state)
+{
+	if (state != m_areZoomsVisible){
+		m_areZoomsVisible = state;
+		UpdateComponentsPosition();
+	}
+}
+
+
+void CConsoleBase::SetZoomToFitVisible(bool state)
+{
+	if (state != m_isZoomToFitVisible){
+		m_isZoomToFitVisible = state;
+		UpdateComponentsPosition();
+	}
+}
+
+
+void CConsoleBase::SetPolylineButtonsVisible(bool state)
+{
+	if (state != m_arePolylineButtonsVisible){
+		m_arePolylineButtonsVisible = state;
+		UpdateComponentsPosition();
+
+		if ((m_updateBlockFlags & BF_COMMANDS) == 0){
+			UpdateCommands();
+		}
+	}
+}
+
+
+void CConsoleBase::SetUserModeButtonsVisible(bool state)
+{
+	if (state != m_areUserModeButtonsVisible){
+		m_areUserModeButtonsVisible = state;
+		UpdateComponentsPosition();
+
+		if ((m_updateBlockFlags & BF_COMMANDS) == 0){
+			UpdateCommands();
+		}
+	}
+}
+
+
+void CConsoleBase::SetScrollbarsButtonVisible(bool state)
+{
+	if (state != m_isScrollbarsButtonVisible){
+		m_isScrollbarsButtonVisible = state;
+		UpdateComponentsPosition();
+
+		if ((m_updateBlockFlags & BF_COMMANDS) == 0){
+			UpdateCommands();
+		}
+	}
+}
+
+
+void CConsoleBase::SetGridButtonVisible(bool state)
+{
+	if (state != m_isGridButtonVisible){
+		m_isGridButtonVisible = state;
+		UpdateComponentsPosition();
+
+		if ((m_updateBlockFlags & BF_COMMANDS) == 0){
+			UpdateCommands();
+		}
+	}
+}
+
+
+void CConsoleBase::SetRulerButtonVisible(bool state)
+{
+	if (state != m_isRulerButtonVisible){
+		m_isRulerButtonVisible = state;
+		UpdateComponentsPosition();
+
+		if ((m_updateBlockFlags & BF_COMMANDS) == 0){
+			UpdateCommands();
+		}
+	}
+}
+
+
+void CConsoleBase::SetMmButtonVisible(bool state)
+{
+	if (state != m_isMmButtonVisible){
+		m_isMmButtonVisible = state;
+		UpdateComponentsPosition();
+
+		if ((m_updateBlockFlags & BF_COMMANDS) == 0){
+			UpdateCommands();
+		}
+	}
+}
+
+
+bool CConsoleBase::IsDistanceMeasureButtonVisible() const
+{
+	return m_isDistanceMeasureButtonVisible;
+}
+
+
+void CConsoleBase::SetDistanceMeasureButtonVisible(bool state)
+{
+	if (state != m_isDistanceMeasureButtonVisible){
+		m_isDistanceMeasureButtonVisible = state;
+
+		UpdateComponentsPosition();
+
+		if ((m_updateBlockFlags & BF_COMMANDS) == 0){
+			UpdateCommands();
+		}
+	}
+}
+
+
+bool CConsoleBase::IsPointMeasureButtonVisible() const
+{
+	return m_isPointMeasureButtonVisible;
+}
+
+
+void CConsoleBase::SetPointMeasureButtonVisible(bool state)
+{
+	if (state != m_isPointMeasureButtonVisible){
+		m_isPointMeasureButtonVisible = state;
+
+		UpdateComponentsPosition();
+
+		if ((m_updateBlockFlags & BF_COMMANDS) == 0){
+			UpdateCommands();
+		}
+	}
+}
+
+
+void CConsoleBase::UpdateView()
+{
+	CViewport& view = GetViewRef();
+	if (m_isZoomToFit){
+		iview::CScreenTransform viewTransform = view.GetTransform();
+
+		if (viewTransform != m_storedFitTransform){
+			m_storedFitTransform = viewTransform;
+
+			UpdateComponentsPosition();
+
+			view.UpdateFitTransform();
+		}
+	}
+
+	view.Update();
+}
+
+
+void CConsoleBase::SetUpdateBlocked(bool isBlocked, int flags)
+{
+	if (!isBlocked){
+		if (m_updateBlockFlags & BF_COMMANDS){
+			UpdateCommands();
+		}
+
+		m_updateBlockFlags = 0;
+	}
+	else{
+		m_updateBlockFlags = flags;
+	}
+}
+
+// private methods
+
+void CConsoleBase::Init()
+{
+	m_isButtonsPanelVisible = true;
+	m_isButtonsPanelVertical = false;
+	m_areScollbarsVisible = true;
+	m_areZoomsVisible = true;
+	m_isZoomToFitVisible = true;
+	m_arePolylineButtonsVisible = true;
+	m_areUserModeButtonsVisible = false;
+	m_isScrollbarsButtonVisible = true;
+	m_isGridButtonVisible = true;
+	m_isRulerButtonVisible = false;
+	m_isRulerVisible = false;
+	m_isMmButtonVisible = true;
+	m_isBkActive = false;
+	m_isZoomToFit = false;
+	m_fitMode = FM_BOTH;
+	m_isFullScreenAllowed = true;
+	m_isDistanceMeasureButtonVisible = false;
+	m_isPointMeasureButtonVisible = false;
+}
+
+
+bool CConsoleBase::IsZoomToFit() const
+{
+	return m_isZoomToFit;
+}
+
+
+CConsoleBase::FitMode CConsoleBase::GetFitMode() const
+{
+	return m_fitMode;
+}
+
+
+bool CConsoleBase::IsGridVisible() const
+{
+	const CViewport& view = GetView();
+	return view.IsGridVisible();
+}
+
+
+bool CConsoleBase::IsRulerVisible() const
+{
+	return m_isRulerVisible;
+}
+
+
+bool CConsoleBase::IsDistanceMeasureToolActive() const
+{
+	const CViewport& view = GetView();
+
+	return view.IsDistanceMeasureToolActive();
+}
+
+
+void CConsoleBase::SetDistanceMeasureToolActive(bool state)
+{
+	CViewport& view = GetViewRef();
+
+	view.SetDistanceMeasureToolActive(state);
+}
+
+
+bool CConsoleBase::IsPointMeasureToolActive() const
+{
+	const CViewport& view = GetView();
+
+	return view.IsPointMeasureToolActive();
+}
+
+
+void CConsoleBase::SetPointMeasureToolActive(bool state)
+{
+	CViewport& view = GetViewRef();
+
+	view.SetPointMeasureToolActive(state);
+}
+
+
+bool CConsoleBase::IsGridInMm() const
+{
+	const CViewport& view = GetView();
+	return view.IsGridInMm();
+}
+
+
+// gui visibility
+
+bool CConsoleBase::IsButtonsPanelVisible() const
+{
+	return m_isButtonsPanelVisible;
+}
+
+
+bool CConsoleBase::IsButtonsPanelVertical() const
+{
+	return m_isButtonsPanelVertical;
+}
+
+
+bool CConsoleBase::AreScrollbarsVisible() const
+{
+	return m_areScollbarsVisible;
+}
+
+
+// buttons visibility
+
+bool CConsoleBase::AreZoomsVisible() const
+{
+	return m_areZoomsVisible;
+}
+
+
+bool CConsoleBase::IsZoomToFitVisible() const
+{
+	return m_isZoomToFitVisible;
+}
+
+
+bool CConsoleBase::ArePolylineButtonsVisible() const
+{
+	return m_arePolylineButtonsVisible;
+}
+
+
+bool CConsoleBase::AreUserModeButtonsVisible() const
+{
+	return m_areUserModeButtonsVisible;
+}
+
+
+bool CConsoleBase::IsScrollbarsButtonVisible() const
+{
+	return m_isScrollbarsButtonVisible;
+}
+
+
+bool CConsoleBase::IsGridButtonVisible() const
+{
+	return m_isGridButtonVisible;
+}
+
+
+bool CConsoleBase::IsRulerButtonVisible() const
+{
+	return m_isRulerButtonVisible;
+}
+
+
+bool CConsoleBase::IsMmButtonVisible() const
+{
+	return m_isMmButtonVisible;
+}
+
+
+bool CConsoleBase::IsBackgroundActive() const
+{
+	return m_isBkActive;
+}
+
+
+bool CConsoleBase::IsFullScreenAllowed() const
+{
+	return m_isFullScreenAllowed;
+}
+
+
+void CConsoleBase::SetFullScreenAllowed(bool allow /*= true*/)
+{
+	m_isFullScreenAllowed = allow;
+}
+
+
+} // namespace iview
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4243" Description="ACF"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <ConfigFiles/>
+    <PackageDirs/>
+    <PackageFiles>
+        <FilePath>../Partitura/AcfVoce.arp</FilePath>
+		<FilePath>$(ApplicationDir)/BasePck.arp</FilePath>
+		<FilePath>../Bin/$(ConfigurationDir)BasePck.arp</FilePath>
+    </PackageFiles>
+    <RegistryFiles/>
+</Acf>

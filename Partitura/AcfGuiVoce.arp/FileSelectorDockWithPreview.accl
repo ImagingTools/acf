@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4504" Description="ACF"/>
+            <Version Id="1" Number="1840" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="DockWidgetGui" X="550" Y="50" Note=""/>
+        <Element ComponentName="FileExplorerGui" X="275" Y="325" Note=""/>
+        <Element ComponentName="FilePath" X="550" Y="450" Note=""/>
+        <Element ComponentName="PreviewGui" X="800" Y="325" Note=""/>
+        <Element ComponentName="SettingsPersistence" X="550" Y="550" Note=""/>
+        <Element ComponentName="SplittedGui" X="550" Y="200" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

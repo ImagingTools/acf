@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="ImageTemplate" X="850" Y="275" Note=""/>
+        <Element ComponentName="Application" X="575" Y="450" Note=""/>
+        <Element ComponentName="Info" X="300" Y="625" Note=""/>
+        <Element ComponentName="DocumentTemplate" X="300" Y="275" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries>
+        <EmbededRegistry Id="ImageTemplate">
+            <PositionMap>
+                <Element ComponentName="BitmapLoader" X="300" Y="475" Note=""/>
+                <Element ComponentName="ImageView" X="950" Y="475" Note=""/>
+                <Element ComponentName="ImageTemplate" X="625" Y="475" Note=""/>
+                <Element ComponentName="ImageFactory" X="625" Y="350" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="Application">
+            <PositionMap>
+                <Element ComponentName="MainWindow" X="325" Y="475" Note=""/>
+                <Element ComponentName="Splash" X="775" Y="700" Note=""/>
+                <Element ComponentName="ApplicationInfo" X="650" Y="500" Note=""/>
+                <Element ComponentName="Workspace" X="325" Y="350" Note=""/>
+                <Element ComponentName="Application" X="325" Y="700" Note=""/>
+                <Element ComponentName="CompositeTemplate" X="325" Y="225" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="DocumentTemplate">
+            <PositionMap>
+                <Element ComponentName="DocumentLoader" X="675" Y="425" Note=""/>
+                <Element ComponentName="ViewFactory" X="925" Y="125" Note=""/>
+                <Element ComponentName="DocumentFactory" X="400" Y="125" Note=""/>
+                <Element ComponentName="DocumentTemplate" X="675" Y="275" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+    </EmbeddedRegistries>
+</Acf>

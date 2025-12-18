@@ -1,0 +1,308 @@
+# General base configuration should be included from all ACF-based projects
+
+CONFIG += stl
+CONFIG -= exceptions
+CONFIG -= silent
+CONFIG += rtti
+CONFIG += force_debug_info
+
+PLATFORM_CODE = i86
+win32:contains(QMAKE_HOST.arch, x86_64) | *-64{
+	PLATFORM_CODE = x64
+}
+
+CONFIG(release, debug|release){
+	#sse support
+	CONFIG += sse2
+}
+
+COMPILER_NAME = QMake
+
+CONFIG += depend_includepath
+
+win32-msvc*{
+	COMPILER_NAME = VC
+    COMPILER_TYPE = MSVC
+	QMAKE_CXXFLAGS += /wd4127 /wd4250 /wd4347 /wd4355 /wd4365 /wd4481 /wd4505 /wd4510 /wd4511 /wd4512 /wd4548 /wd4571 /wd4619 /wd4625 /wd4626 /wd4640 /wd4702 /wd4710 /wd4820 /wd4826 /wd4714
+	QMAKE_CXXFLAGS_WARN_ON = -W4
+	QMAKE_CXXFLAGS += /MP /fp:fast
+	QMAKE_CXXFLAGS += -D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS
+	QMAKE_CXXFLAGS += /bigobj
+
+	# Qt-BUG 31516. Remove it after the fix in Qt!!!
+	QMAKE_CXXFLAGS += /wd4718
+
+	contains(QMAKE_HOST.arch, x86_64){
+		PLATFORM_CODE = x64
+		# SSE2 enabled by default for x86_64
+	}
+	else{
+		PLATFORM_CODE = Win32
+		QMAKE_CXXFLAGS += /arch:SSE2
+	}
+}
+
+!isEmpty(MSVC_VER){
+	contains(MSVC_VER, "8.0"){
+		COMPILER_NAME = VC8
+
+#		message("Using Visual Studio 2005");
+	}
+
+	contains(MSVC_VER, "9.0"){
+		COMPILER_NAME = VC9
+		QMAKE_CXXFLAGS -= /Gd
+		QMAKE_CXXFLAGS -= /GD
+		QMAKE_CXXFLAGS -= -Gd
+		QMAKE_CXXFLAGS -= -GD
+
+#		message("Using Visual Studio 2008");
+	}
+
+	contains(MSVC_VER, "10.0"){
+		QMAKE_CXXFLAGS += /wd4996
+		COMPILER_NAME = VC10
+
+#		message("Using Visual Studio 2010");
+	}
+
+	contains(MSVC_VER, "11.0"){
+		QMAKE_CXXFLAGS += /wd4996
+		COMPILER_NAME = VC11
+
+#		message("Using Visual Studio 2012");
+	}
+
+	contains(MSVC_VER, "12.0"){
+		QMAKE_CXXFLAGS += /wd4996 /Qpar /Gy /Gw /FS
+		COMPILER_NAME = VC12
+		CONFIG += c++11
+
+#		message("Using Visual Studio 2013");
+	}
+
+	contains(MSVC_VER, "14.0"){
+		QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit-
+		COMPILER_NAME = VC14
+
+		CONFIG(release, debug|release){
+			#extra optimizations
+			QMAKE_CXXFLAGS += /Ot /Oi /Ob2 /GS-
+		}
+
+		win32:contains(QMAKE_HOST.arch, x86_64) | *-64{
+			QMAKE_LFLAGS += /MACHINE:X64
+		}
+
+#		message("Using Visual Studio 2015");
+	}
+
+	contains(MSVC_VER, "15.0"){
+		QMAKE_CXXFLAGS += /Qpar /Gy /Gw /FS /Zc:threadSafeInit- /D__STDC_LIMIT_MACROS
+		COMPILER_NAME = VC15
+		CONFIG += c++17
+
+		CONFIG(release, debug|release){
+			#extra optimizations
+			QMAKE_CXXFLAGS += /Ot /Oi /Ob2 /GS-
+		}
+
+		win32:contains(QMAKE_HOST.arch, x86_64) | *-64{
+			QMAKE_LFLAGS += /MACHINE:X64
+		}
+#		message("Using Visual Studio 2017");
+	}
+
+	greaterThan(QMAKE_MSC_VER, 1919){
+		greaterThan(QMAKE_MSC_VER, 1929){
+			QMAKE_CXXFLAGS += /Gy /FS /Zc:threadSafeInit- /D__STDC_LIMIT_MACROS
+			COMPILER_NAME = VC17
+			CONFIG += c++17
+
+			CONFIG(release, debug|release){
+				#extra optimizations
+				QMAKE_CXXFLAGS += /Ot /Oi /Ob2 /GS-
+			}
+
+			win32:contains(QMAKE_HOST.arch, x86_64) | *-64{
+				QMAKE_LFLAGS += /MACHINE:X64
+			}
+
+#			message("Using Visual Studio 2022");
+		}
+		else{
+			QMAKE_CXXFLAGS += /Gy /FS /Zc:threadSafeInit- /D__STDC_LIMIT_MACROS
+			COMPILER_NAME = VC16
+			CONFIG += c++17
+
+			CONFIG(release, debug|release){
+				#extra optimizations
+				QMAKE_CXXFLAGS += /Ot /Oi /Ob2 /GS-
+			}
+
+			win32:contains(QMAKE_HOST.arch, x86_64) | *-64{
+				QMAKE_LFLAGS += /MACHINE:X64
+			}
+
+			message("Using Visual Studio 2019");
+		}
+	}
+}
+else{
+	win32-msvc2005{
+		COMPILER_NAME = VC8
+
+		message("Using Visual Studio 2005");
+	}
+
+	win32-msvc2008{
+		COMPILER_NAME = VC9
+		QMAKE_CXXFLAGS -= /Gd
+		QMAKE_CXXFLAGS -= /GD
+		QMAKE_CXXFLAGS -= -Gd
+		QMAKE_CXXFLAGS -= -GD
+
+		message("Using Visual Studio 2008");
+	}
+
+	win32-msvc2010{
+		QMAKE_CXXFLAGS += /wd4996
+		COMPILER_NAME = VC10
+
+		message("Using Visual Studio 2010");
+	}
+
+	win32-msvc2012{
+		QMAKE_CXXFLAGS += /wd4996
+		COMPILER_NAME = VC11
+
+		message("Using Visual Studio 2012");
+	}
+
+	win32-msvc2013{
+		QMAKE_CXXFLAGS += /wd4996 /Qpar /Gy /Gw /FS
+		COMPILER_NAME = VC12
+		CONFIG += c++11
+
+		message("Using Visual Studio 2013");
+	}
+}
+
+*-icc*{
+	COMPILER_NAME = ICC
+	CONFIG += c++11
+	MAKE_CXXFLAGS += /arch:SSE3
+}
+
+*-clang* | *-llvm*{
+	CONFIG += c++17
+	COMPILER_NAME = Clang
+	QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-variable
+	QMAKE_CXXFLAGS_WARN_ON += -Wno-overloaded-virtual
+	QMAKE_CXXFLAGS_WARN_ON += -Wno-format-security
+}
+
+*-gcc*{
+	QMAKE_CXXFLAGS_WARN_ON += -wformat-security
+	QMAKE_CXXFLAGS += /openmp
+	LIBS += -lgomp
+	COMPILER_NAME = GCC
+}
+
+*-g++*{
+	QMAKE_CXXFLAGS += -fpermissive
+	QMAKE_CFLAGS_RELEASE = -Ofast
+	COMPILER_NAME = GCC
+}
+
+# MinGW compiler used under Windows instead of GCC
+win32{
+	*-gcc* | *-g++*{
+		COMPILER_NAME = MinGW
+	}
+}
+
+# Additional defines for CSystem
+macx{
+	COMPILER_NAME=ClangOSX
+	contains(QMAKE_APPLE_DEVICE_ARCHS, x86_64) {
+		PLATFORM_CODE = x64
+	}
+	else{
+		PLATFORM_CODE = arm64
+	}
+}
+
+linux { !macx { !android {
+	PLATFORM_CODE = x64
+	*-clang*{
+		COMPILER_NAME = ClangLinux
+	}
+	else{
+		COMPILER_NAME = GCCLinux
+	}
+} } }
+
+CONFIG(debug, debug|release){
+	CONFIGURATION_NAME = Debug
+}
+
+CONFIG(release, debug|release){
+	CONFIGURATION_NAME = Release
+}
+
+#message("COMPILER_NAME $$COMPILER_NAME MSVC_VER $$MSVC_VER QMAKE_MSC_VER $$QMAKE_MSC_VER");
+
+DEFINES += "ACF_QT_VERSION=Qt$${QT_MAJOR_VERSION}"
+DEFINES += "COMPILER_NAME=$$COMPILER_NAME"
+DEFINES += "PLATFORM_CODE=$$PLATFORM_CODE"
+
+COMPILER_CODE = $$COMPILER_NAME"_"$$PLATFORM_CODE
+
+COMPILER_DIR = $$CONFIGURATION_NAME"_Qt"$${QT_MAJOR_VERSION}_$$COMPILER_CODE
+
+AUXINCLUDEDIR = AuxInclude/Qt$${QT_MAJOR_VERSION}_$$COMPILER_CODE
+AUXINCLUDEPATH = ../../../$$AUXINCLUDEDIR
+
+!win32-msvc*{
+	QMAKE_LFLAGS -= -mthreads
+	QMAKE_CXXFLAGS += -fno-threadsafe-statics
+}
+
+# path definition
+INCLUDEPATH += $$AUXINCLUDEPATH
+UI_DIR = $$AUXINCLUDEPATH/GeneratedFiles/"$$TARGET"
+MOC_DIR = $$AUXINCLUDEPATH/GeneratedFiles/"$$TARGET"
+RCC_DIR = $$AUXINCLUDEPATH/GeneratedFiles/"$$TARGET"
+ACF_TRANSLATIONS_OUTDIR = $$AUXINCLUDEPATH/GeneratedFiles/"$$TARGET"
+
+# objects directory
+OBJECTS_DIR = $$AUXINCLUDEPATH/GeneratedFiles/$$CONFIGURATION_NAME/"$$TARGET"
+
+INCLUDEPATH += $$PWD/../../Include
+INCLUDEPATH += $$PWD/../../$$AUXINCLUDEDIR
+
+# Get build output directory of shadow build:
+ACFDIRBUILD = $$(ACFDIR_BUILD)
+
+# Add build output directory to include path
+!isEmpty( ACFDIRBUILD ){
+	INCLUDEPATH += $$(ACFDIR_BUILD)/$$AUXINCLUDEDIR
+}
+
+defineTest(copyToDestDir) {
+	files = $$1
+	dir = $$2
+	# replace slashes in destination path for Windows
+	win32:dir ~= s,/,\\,g
+
+	for(file, files) {
+		# replace slashes in source path for Windows
+		win32:file ~= s,/,\\,g
+
+		QMAKE_POST_LINK += $$QMAKE_COPY_DIR $$shell_quote($$file) $$shell_quote($$dir) $$escape_expand(\\n\\t)
+	}
+
+	export(QMAKE_POST_LINK)
+}
+

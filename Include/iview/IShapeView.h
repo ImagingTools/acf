@@ -1,0 +1,153 @@
+#ifndef iview_IShapeView_included
+#define iview_IShapeView_included
+
+
+// Qt includes
+#include <QtCore/QVector>
+
+// ACF includes
+#include <i2d/CRect.h>
+#include <i2d/CAffine2d.h>
+
+#include <iview/IDisplay.h>
+#include <iview/ISelectable.h>
+#include <iview/ISelectableLayer.h>
+
+
+namespace iview
+{
+
+
+class IViewEventObserver;
+
+
+/**
+	Common interface for a general shape view implementations.
+*/
+class IShapeView:
+			virtual public IDisplay,
+			virtual public ISelectable
+{
+public:
+	typedef IShapeObserver BaseClass;
+
+	/**
+		Add/remove external event observers.
+	*/
+	virtual void AddViewEventObserver(iview::IViewEventObserver* listenerPtr) = 0;
+	virtual void RemoveViewEventObserver(iview::IViewEventObserver* listenerPtr) = 0;
+
+	/**
+		Set area used for fitting of the view contents.
+	*/
+	virtual void SetFitArea(const i2d::CRectangle& area) = 0;
+
+	/**
+		Set a screen transformation.
+		\sa	GetTransform()
+	*/
+	virtual void SetTransform(const i2d::CAffine2d& transform) = 0;
+
+	/**
+		Changes the edit mode.
+	*/
+	virtual void SetEditMode(int mode) = 0;
+	
+	/**
+		Changes the display mode.
+	*/
+	virtual void SetDisplayMode(int mode) = 0;
+
+	/**
+		Check if is draggable mode.
+		If this function return true, user can move a view by dragging.
+	*/
+	virtual bool IsViewDraggable() const = 0;
+	
+	/**
+		Check, if it is possible to select more than one shape.
+	*/
+	virtual bool IsMultiselectable() const = 0;
+
+	/**
+		Updates all invalidates shapes.
+	*/
+	virtual void Update() = 0;
+
+	/**	
+		Update mouse pointer.
+	*/
+	virtual void UpdateMousePointer() = 0;
+	
+	/**
+		Insert layer to view.
+		\param	layerPtr	pointer to inserted layer.
+		\param	index		index of inserted layer. If equals -1,
+							layer will be inserted after last existing layer.
+		\param	layerType	used to set standard layers. \sa iview::IShapeView::LayerType
+		\return	index of this layer.
+	*/
+	virtual int InsertLayer(IViewLayer* layerPtr, int index = -1, int layerType = IViewLayer::LT_NONE) = 0;
+	
+	/**
+		Get index of layer.
+		\return	layer index, or -1 if not found.
+	*/
+	virtual int GetLayerIndex(const IViewLayer& layer) const = 0;
+
+	/**
+		Get index of layer by type.
+		\return	layer index, or -1 if not found.
+	*/
+	virtual int GetLayerIndex(int layerType) const = 0;
+
+	/**
+		Remove layer from view.
+	*/
+	virtual void RemoveLayer(int index) = 0;
+	
+	/**
+		Get count of layer in this view.
+	*/
+	virtual int GetLayersCount() const = 0;
+	
+	/**
+		Get layer with the given index.
+	*/
+	virtual IViewLayer& GetLayer(int index) const = 0;
+
+	/**
+		Connect shape object to view.
+		\param	shape	a shape object.
+		\return	true, if it was possible to connect this shape.
+	*/
+	virtual bool ConnectShape(IShape* shapePtr) = 0;
+	
+	/**
+		Get focused layer.
+	*/
+	virtual ISelectableLayer* GetFocusedLayerPtr() const = 0;
+	
+	/**
+		Called when shape in layer get focus.
+	*/
+	virtual void OnLayerShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr) = 0;
+
+	/**
+		Called when shape in layer loose focus.
+	*/
+	virtual void OnLayerShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr) = 0;
+	
+	/**
+		Inform that layer was invalidated.
+	*/
+	virtual void OnLayerInvalidated(const IViewLayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea) = 0;
+};
+
+
+} // namespace iview
+
+
+#endif // !iview_IShapeView_included
+
+

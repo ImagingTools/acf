@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4985" Description="ACF"/>
+            <Version Id="1" Number="2164" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331522" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Bitmap viewer with integrated bitmap object</Description>
+    <Keywords>Controller Image Bitmap Display Viewer Observer Qt GUI</Keywords>
+    <ElementsList>
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BackgroundMode" Type="Integer" ExportId="BackgroundMode">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ColorSchema" Type="Reference" ExportId="ColorSchema">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusIcon" Type="String" ExportId="DefaultStatusIcon">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusText" Type="Text" ExportId="DefaultStatusText">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FitMode" Type="Integer" ExportId="FitMode">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShapeStatusInfo" Type="Reference" ExportId="ShapeStatusInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseAntialiasing" Type="Boolean" ExportId="UseAntialiasing">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseGridCommands" Type="Boolean" ExportId="UseGridCommands">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseScrollBarCommands" Type="Boolean" ExportId="UseScrollBarCommands">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseShapeEditCommands" Type="Boolean" ExportId="UseShapeEditCommands">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ViewId" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ZoomToFitEnabled" Type="Boolean" ExportId="ZoomToFitEnabled">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::ICommandsProvider" ComponentId="ImageView"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="ImageView"/>
+        <Interface InterfaceId="iqt2d::IViewProvider" ComponentId="ImageView"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ImageView"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="Bitmap" ComponentId="Bitmap"/>
+        <Component ExportedId="VisualStatus" ComponentId="ImageView/VisualStatus"/>
+    </ExportedComponents>
+</Acf>

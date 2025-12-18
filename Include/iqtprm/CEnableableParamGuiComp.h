@@ -1,0 +1,55 @@
+#ifndef iqtprm_CEnableableParamGuiComp_included
+#define iqtprm_CEnableableParamGuiComp_included
+
+
+// ACF includes
+#include <iprm/IEnableableParam.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+
+#include <GeneratedFiles/iqtprm/ui_CEnableableParamGuiComp.h>
+
+
+namespace iqtprm
+{
+
+
+class CEnableableParamGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
+			Ui::CEnableableParamGuiComp,
+			iprm::IEnableableParam>
+{
+	Q_OBJECT
+
+public:
+	typedef iqtgui::TDesignerGuiObserverCompBase<
+				Ui::CEnableableParamGuiComp,
+				iprm::IEnableableParam> BaseClass;
+
+	I_BEGIN_COMPONENT(CEnableableParamGuiComp);
+		I_ASSIGN(m_enableableLabelAttrPtr, "Label", "Label for the enable/disable control", false, "");
+		I_ASSIGN(m_enableableToolTipAttrPtr, "ToolTip", "Tooltip to show", false, "");
+	I_END_COMPONENT;
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiRetranslate() override;
+
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void OnGuiModelAttached() override;
+	virtual void UpdateModel() const override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+
+protected Q_SLOTS:
+	void on_EnableableCheck_stateChanged(int state);
+
+private:
+	I_TEXTATTR(m_enableableLabelAttrPtr);
+	I_TEXTATTR(m_enableableToolTipAttrPtr);
+};
+
+
+} // namespace iqtprm
+
+
+#endif // !iqtprm_CEnableableParamGuiComp_included
+
+

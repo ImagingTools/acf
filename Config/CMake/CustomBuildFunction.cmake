@@ -1,0 +1,93 @@
+include(${CMAKE_CURRENT_LIST_DIR}/ProjectRoot.cmake)
+
+function(acf_get_root_dir identifier_to_use)
+	set(${identifier_to_use} "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../.." PARENT_SCOPE)
+endfunction()
+
+
+function (acf_custom_build PROJECT_BINARY_DIR ARXC_FILES ARXC_CONFIG ACF_CONVERT_REGISTRY ACF_CONVERT_CONFIG ACF_CONVERT_FILES ACF_ENV_VARS ACF_ARX_DEPS)
+	acf_custom_build_ext(${PROJECT_BINARY_DIR} ${ARXC_FILES} ${ARXC_CONFIG} ${ACF_CONVERT_REGISTRY} ${ACF_CONVERT_CONFIG} ${ACF_CONVERT_FILES} "${ACF_ENV_VARS}" "${ACF_ARX_DEPS}" ${PROJECT_NAME})
+endfunction()
+
+
+function (acf_custom_build_ext PROJECT_BINARY_DIR ARXC_FILES ARXC_CONFIG ACF_CONVERT_REGISTRY ACF_CONVERT_CONFIG ACF_CONVERT_FILES ACF_ENV_VARS ACF_ARX_DEPS A_PROJECT_NAME)
+	set(ACF_ENV_VARS_SINGLE_STRING)
+
+	foreach(_var ${ACF_ENV_VARS})
+		string(CONCAT ACF_ENV_VARS_SINGLE_STRING "${ACF_ENV_VARS_SINGLE_STRING}\;${_var}")
+	endforeach()
+	
+	if(WIN32)
+		set(ARX_COMPILER "Arxc.exe")
+		set(ACF_TOOL "Acf.exe")
+		set(QMAKE_RCC "rcc.exe")
+		set(QMAKE_LRELEASE "lrelease.exe")
+	elseif(APPLE)
+		set(ARX_COMPILER "Arxc.app/Contents/MacOS/Arxc")
+		set(ACF_TOOL "Acf.app/Contents/MacOS/Acf")
+		set(QMAKE_RCC "rcc")
+		set(QMAKE_LRELEASE "lrelease")
+	else()
+		set(ARX_COMPILER "Arxc")
+		set(ACF_TOOL "Acf")
+		set(QMAKE_RCC "rcc")
+		set(QMAKE_LRELEASE "lrelease")
+	endif()
+
+	get_target_name(TARGETNAME)
+
+	set(ARXCBIN "${ACFDIR_BUILD}/Bin/${CMAKE_BUILD_TYPE}_${TARGETNAME}/${ARX_COMPILER}")
+	set(ACFBIN "${ACFDIR_BUILD}/Bin/${CMAKE_BUILD_TYPE}_${TARGETNAME}/${ACF_TOOL}")
+
+	set(ARXC_OUTFILE "${PROJECT_BINARY_DIR}/Generated/${A_PROJECT_NAME}/C${A_PROJECT_NAME}")
+	file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/Generated/${A_PROJECT_NAME}")
+
+	set(HEADER_FILE_AUX "${ARXC_OUTFILE}.h")
+	set(SOURCES_FILE_AUX "${ARXC_OUTFILE}.cpp")
+	set(ARXC_OUTFILE "${ARXC_OUTFILE}.cpp")
+
+	# NOTE: OUTPUT order must be same as in the DEPFILE
+	add_custom_command(
+		OUTPUT ${HEADER_FILE_AUX} ${SOURCES_FILE_AUX}
+		COMMAND ${ARXCBIN}
+		ARGS ${ARXC_FILES} -o ${ARXC_OUTFILE} -d ${ARXC_OUTFILE}.d -config ${ARXC_CONFIG} -conf_name ${CMAKE_BUILD_TYPE}_${TARGETNAME} -env_vars ${ACF_ENV_VARS_SINGLE_STRING}
+		DEPENDS ${ARXCBIN} ${ARXC_FILES}
+		DEPFILE ${ARXC_OUTFILE}.d
+		VERBATIM
+		COMMENT "ArxcBinStarts: ${ARXCBIN} ${ARXC_FILES} -o ${ARXC_OUTFILE} -d ${ARXC_OUTFILE}.d -config ${ARXC_CONFIG} -conf_name ${TARGETNAME} -env_vars ${ACF_ENV_VARS_SINGLE_STRING} -v"
+	)
+
+	target_sources(${A_PROJECT_NAME} PRIVATE ${HEADER_FILE_AUX} ${SOURCES_FILE_AUX})
+	set_property(SOURCE ${SOURCES_FILE_AUX} ${HEADER_FILE_AUX} PROPERTY SKIP_AUTOGEN ON)
+
+	if(WIN32)
+		if(ACF_CONVERT_FILES)
+			set(RC_FILE "${PROJECT_BINARY_DIR}/${A_PROJECT_NAME}.rc")
+
+			set(ALL_ACF_ARX_DEPS ${ACF_CONVERT_FILES})
+			if(ACF_ARX_DEPS)
+				list(APPEND ALL_ACF_ARX_DEPS ${ACF_ARX_DEPS})
+			endif()
+
+			add_custom_command(
+				OUTPUT ${RC_FILE}
+				COMMAND ${ACFBIN}
+				ARGS ${ACF_CONVERT_REGISTRY} -console -config ${ACF_CONVERT_CONFIG} -input ${ACF_CONVERT_FILES} -o ${RC_FILE} -env_vars ${ACF_ENV_VARS_SINGLE_STRING}
+				COMMENT "Start convert ${A_PROJECT_NAME}.rc"
+				DEPENDS ${ALL_ACF_ARX_DEPS} ${ARX_DEPS_LIST} VERBATIM)
+			#add_custom_target(CONVERT_FILES${A_PROJECT_NAME} ALL DEPENDS ${RC_FILE})
+		endif()
+	endif()
+
+
+	if(ACF_TRANSLATIONS)
+		add_custom_command(OUTPUT ${TRANSLATION_OUTPUT_FILE}
+			COMMAND ${QMAKE_LRELEASE}
+			ARGS ${ACF_TRANSLATIONS} -qm ${TRANSLATION_OUTPUT_FILE}
+			DEPENDS ${ACF_TRANSLATIONS})
+		add_custom_target(LRELEASE${A_PROJECT_NAME} ALL DEPENDS ${TRANSLATION_OUTPUT_FILE})
+	endif()
+
+endfunction()
+
+

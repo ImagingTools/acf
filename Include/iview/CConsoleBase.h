@@ -1,0 +1,208 @@
+#ifndef iview_CConsoleBase_included
+#define iview_CConsoleBase_included
+
+
+// Qt includes
+#include <QtCore/QString>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QWidget>
+#else
+#include <QtGui/QWidget>
+#endif
+
+
+// ACF includes
+#include <i2d/CRectangle.h>
+
+#include <iview/IViewEventObserver.h>
+#include <iview/IEditModeButtons.h>
+#include <iview/CScreenTransform.h>
+
+
+namespace iview
+{
+
+
+class CViewport;
+
+
+class CConsoleBase: public QWidget, virtual public IEditModeButtons
+{
+public:
+	/**
+		Control fitting mode, to fit area of interest (AOI) to display.
+	*/
+	enum FitMode
+	{
+		/**
+			No fitting, frame use always identity transformation.
+		*/
+		FM_RESET,
+
+		/**
+			Scale both axes proportional to display biggest, but full visible AOI.
+		*/
+		FM_BOTH,
+
+		/**
+			Only horizontal size of AOI will be consider.
+		*/
+		FM_HORIZONTAL,
+
+		/**
+			Only vertical size of AOI will be consider.
+		*/
+		FM_VERTICAL,
+
+		/**
+			Both axes will be scaled separately.
+		*/
+		FM_UNPROP,
+
+		/**
+			Scale both axes proportional to display smallest AOI, which fully covers display.
+		*/
+		FM_COVER
+	};
+
+	enum BlockFlags
+	{
+		BF_COMMANDS = 1,
+		BF_VIEW = 2,
+		BF_ALL = 0xffff
+	};
+
+	explicit CConsoleBase(QWidget* parent);
+
+	// console visibility
+	bool IsZoomToFit() const;
+	void SetZoomToFit(bool state = true);
+	FitMode GetFitMode() const;
+	void SetFitMode(FitMode mode);
+	bool IsGridVisible() const;
+	void SetGridVisible(bool state = true);
+	bool IsRulerVisible() const;
+	void SetRulerVisible(bool state = true);
+	bool IsDistanceMeasureToolActive() const;
+	void SetDistanceMeasureToolActive(bool state = true);
+	bool IsPointMeasureToolActive() const;
+	void SetPointMeasureToolActive(bool state = true);
+	bool IsGridInMm() const;
+	void SetGridInMm(bool state = true);
+
+	// GUI visibility
+	bool IsButtonsPanelVisible() const;
+	void SetButtonsPanelVisible(bool state = true);
+	bool IsButtonsPanelVertical() const;
+	void SetButtonsPanelVertical(bool state = true);
+	bool AreScrollbarsVisible() const;
+	void SetScrollbarsVisible(bool state = true);
+
+	// buttons visibility
+	bool AreZoomsVisible() const;
+	void SetZoomsVisible(bool state = true);
+	bool IsZoomToFitVisible() const;
+	void SetZoomToFitVisible(bool state = true);
+	bool ArePolylineButtonsVisible() const;
+	void SetPolylineButtonsVisible(bool state = true);
+	bool AreUserModeButtonsVisible() const;
+	void SetUserModeButtonsVisible(bool state = true);
+	bool IsScrollbarsButtonVisible() const;
+	void SetScrollbarsButtonVisible(bool state = true);
+	bool IsGridButtonVisible() const;
+	void SetGridButtonVisible(bool state = true);
+	bool IsRulerButtonVisible() const;
+	void SetRulerButtonVisible(bool state = true);
+	bool IsMmButtonVisible() const;
+	void SetMmButtonVisible(bool state = true);
+	bool IsDistanceMeasureButtonVisible() const;
+	void SetDistanceMeasureButtonVisible(bool state = true);
+	bool IsPointMeasureButtonVisible() const;
+	void SetPointMeasureButtonVisible(bool state = true);
+
+	// fullscreen
+	bool IsFullScreenAllowed() const;
+	void SetFullScreenAllowed(bool allow = true);
+
+	/**
+		Check if background object is present and active.
+	*/
+	bool IsBackgroundActive() const;
+
+	void UpdateView();
+
+	void SetUpdateBlocked(bool isBlocked, int flags = BF_ALL);
+
+	// abstract methods
+
+	/**
+		Get access to internal view implementation.
+	*/
+	virtual const CViewport& GetView() const = 0;
+
+	/**
+		Get access to internal view implementation.
+	*/
+	virtual CViewport& GetViewRef() = 0;
+
+	/**
+		Recalculates enabling flags for buttons.
+	*/
+	virtual void UpdateButtonsState() = 0;
+
+	/**
+		Recalculates position of all components.
+	*/
+	virtual void UpdateComponentsPosition() = 0;
+
+	/**
+		Recalculate menu commands.
+	*/
+	virtual void UpdateCommands() = 0;
+
+	virtual void UpdateCursorInfo(const QString& infoText) = 0;
+
+protected:
+	// events
+	virtual bool OnSelectChange(const iview::IShapeView& view, const istd::CIndex2d& position, const iview::IInteractiveShape& shape, bool state) = 0;
+	virtual bool OnViewMouseButton(const iview::IShapeView& view, const istd::CIndex2d& position, Qt::MouseButton buttonType, bool state, const iview::IInteractiveShape* shapePtr) = 0;
+	virtual void OnBoundingBoxChanged() = 0;
+
+private:
+	void Init();
+
+	FitMode m_fitMode;
+	bool m_isRulerVisible;
+
+	bool m_areScollbarsVisible;
+	bool m_isButtonsPanelVisible;
+	bool m_isButtonsPanelVertical;
+
+	bool m_areZoomsVisible;
+	bool m_isZoomToFitVisible;
+	bool m_arePolylineButtonsVisible;
+	bool m_areUserModeButtonsVisible;
+	bool m_isScrollbarsButtonVisible;
+	bool m_isGridButtonVisible;
+	bool m_isRulerButtonVisible;
+	bool m_isMmButtonVisible;
+	bool m_isDistanceMeasureButtonVisible;
+	bool m_isPointMeasureButtonVisible;
+
+	iview::CScreenTransform m_storedFitTransform;
+
+	bool m_isZoomToFit;
+	bool m_isBkActive;
+	bool m_isFullScreenAllowed;
+
+	friend class CViewport;
+
+	int m_updateBlockFlags;
+};
+
+
+} // namespace iview
+
+
+#endif // !iview_CConsoleBase_included
+

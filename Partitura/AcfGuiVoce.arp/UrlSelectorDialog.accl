@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4446" Description="ACF"/>
+            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="ModelDialogGui" X="325" Y="375" Note=""/>
+        <Element ComponentName="SettingsPersistence" X="350" Y="175" Note=""/>
+        <Element ComponentName="UrlParam" X="325" Y="275" Note=""/>
+        <Element ComponentName="UrlParamFactory" X="675" Y="375" Note=""/>
+        <Element ComponentName="UrlParamGui" X="325" Y="525" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5126" Description="ACF"/>
+            <Version Id="1" Number="2197" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="1" X="475" Y="550" Note=""/>
+        <Element ComponentName="2" X="675" Y="550" Note=""/>
+        <Element ComponentName="ComposedGui_1" X="550" Y="200" Note=""/>
+        <Element ComponentName="ComposedGui_2" X="550" Y="450" Note=""/>
+        <Element ComponentName="SelectionParamGui" X="300" Y="450" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

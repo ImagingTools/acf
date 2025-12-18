@@ -1,0 +1,147 @@
+#ifndef ilog_CMessageContainer_included
+#define ilog_CMessageContainer_included
+
+
+// Qt includes
+#include <QtCore/QVector>
+#include <QtCore/QList>
+#include <QtCore/QMutex>
+
+// ACF includes
+#include <istd/IInformationProvider.h>
+#include <istd/THierarchicalBase.h>
+#include <istd/TComposedFactory.h>
+#include <istd/TSingleFactory.h>
+#include <istd/CClassInfo.h>
+#include <iser/IObject.h>
+#include <ilog/IMessageContainer.h>
+#include <ilog/IMessageConsumer.h>
+
+
+namespace ilog
+{
+
+
+/**
+	Basic implementation of a message container.
+
+	\ingroup Logging
+*/
+class CMessageContainer:
+			public istd::THierarchicalBase<IHierarchicalMessageContainer>,
+			virtual public IMessageConsumer
+{
+public:
+	CMessageContainer();
+	CMessageContainer(const CMessageContainer& container);
+
+	CMessageContainer& operator=(const CMessageContainer& container);
+
+	/**
+		Register a new message type.
+		Only messages of known (registered) types can be serialized.
+	*/
+	template <typename MessageType>
+	static bool RegisterMessageType(const QByteArray& messageTypeId = QByteArray());
+
+	/**
+		Get the number of messages in the container.
+		\note Messages in the child containers are not involved in the calculation.
+	*/
+	int GetMessagesCount() const;
+
+	/**
+		Add a child message container to this object.
+		GetMessages returns messages from this container and all its children.
+	*/
+	virtual void AddChildContainer(IHierarchicalMessageContainer* childContainerPtr);
+
+	/**
+		Set slave message consumer. All incoming messages will be delegated to this object.
+	*/
+	void SetSlaveConsumer(ilog::IMessageConsumer* consumerPtr);
+
+	/**
+		Set maximal number of messages in the container. 
+		If the container is full and a new message is added, the oldest message will be removed.
+		\param maxMessageCount maximal number of messages in the container. If the value equals -1,
+		no limit is set for.
+	*/
+	void SetMaxMessageCount(int maxMessageCount = -1);
+
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive) override;
+
+	// reimplemented (ilog::IMessageContainer)
+	virtual istd::IInformationProvider::InformationCategory GetWorstCategory() const override;
+	virtual Messages GetMessages() const override;
+	virtual void ClearMessages() override;
+
+	// reimplemented (ilog::IMessageConsumer)
+	virtual bool IsMessageSupported(
+				int messageCategory = -1,
+				int messageId = -1,
+				const istd::IInformationProvider* messagePtr = NULL) const override;
+	virtual void AddMessage(const IMessageConsumer::MessagePtr& messagePtr) override;
+
+	// reimplemented (ilog::IHierarchicalMessageContainer)
+	virtual int GetChildsCount() const override;
+	virtual IHierarchicalMessageContainer* GetChild(int index) const override;
+
+	// reimplemented (istd::IChangeable)
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual bool IsEqual(const istd::IChangeable& object) const override;
+	virtual istd::TUniqueInterfacePtr<istd::IChangeable> CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+	virtual bool ResetData(CompatibilityMode mode) override;
+
+private:
+	typedef istd::TComposedFactory<iser::IObject> MessageFactory;
+
+	static MessageFactory& GetMessageFactory();
+
+protected:
+	Messages m_messages;
+
+	typedef QVector<IHierarchicalMessageContainer*> Childs;
+	Childs m_childContainers;
+
+	ilog::IMessageConsumer* m_slaveConsumerPtr;
+	int m_maxMessagesCount;
+	mutable int m_worstCategory;
+};
+
+
+// public static methods
+
+template <typename MessageType>
+bool CMessageContainer::RegisterMessageType(const QByteArray& messageTypeId)
+{
+	QByteArray realTypeId = messageTypeId;
+
+	if (realTypeId.isEmpty()){
+		realTypeId = istd::CClassInfo::GetName<MessageType>();
+	}
+
+	typedef istd::TSingleFactory<iser::IObject, MessageType> FactoryImpl;
+	
+	return GetMessageFactory().RegisterFactory<FactoryImpl>(realTypeId);
+}
+
+
+#define I_REGISTER_MESSAGE_TYPE(messageType, messageTypeId)\
+	static struct DefaultMessageTypesRegistrator_##messageType\
+{\
+	DefaultMessageTypesRegistrator_##messageType()\
+{\
+	ilog::CMessageContainer::RegisterMessageType<messageType>(messageTypeId);\
+}\
+} s_defaultMessageTypesRegistrator_##messageType;
+
+
+} // namespace ilog
+
+
+#endif // !ilog_CMessageContainer_included
+
+

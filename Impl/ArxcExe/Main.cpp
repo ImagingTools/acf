@@ -1,0 +1,266 @@
+// Qt includes
+#include <QtCore/QCoreApplication>
+#include <QtCore/QDir>
+
+// ACF includes
+#include <istd/CSystem.h>
+#include <icomp/TSimComponentWrap.h>
+#include <icomp/TModelCompWrap.h>
+
+// ACF packages includes
+#include <QtPck/QtPck.h>
+#include <BasePck/BasePck.h>
+#include <FilePck/FilePck.h>
+#include <PackagePck/PackagePck.h>
+
+
+static void ShowUsage()
+{
+	std::cout << "ACF registry compiler" << std::endl;
+	std::cout << "It generates C++ code and/or dependencies for qmake" << std::endl << std::endl;
+	std::cout << "Usage:" << std::endl;
+	std::cout << "\tArxc.exe [registryName] {options}" << std::endl;
+	std::cout << "Options:" << std::endl;
+	std::cout << "\t-mode [sources|depends]      - working mode - source generation or dependencies output, default is 'sources'" << std::endl;
+	std::cout << "\t-o outputFile                - output file path" << std::endl;
+	std::cout << "\t-d depfile                   - optional CMake compatible dependency file" << std::endl;
+	std::cout << "\t-config configFile           - specify ACF packages configuration file" << std::endl;
+	std::cout << "\t-sources [on|off]            - enables/disables C++ sources output, default is 'on'" << std::endl;
+	std::cout << "\t-v                           - enable verbose mode" << std::endl;
+	std::cout << "\t-check_real                  - check if used real packages exist" << std::endl;
+	std::cout << "\t-no_binary                   - disable generating of binary coded registries" << std::endl;
+	std::cout << "\t-conf_name name              - name of configuration, e.g. 'DebugVC12_64'" << std::endl;
+	std::cout << "\t-env_vars environment variables - list of external environment variables" << std::endl;
+	std::cout << "\t-translate [off|project|all] - control generation of translation macros, default is 'project'" << std::endl;
+	std::cout << "\t-h or -help                  - showing this help" << std::endl;
+}
+
+
+int main(int argc, char *argv[])
+{
+	QCoreApplication app(argc, argv);
+
+	if (argc < 2){
+		ShowUsage();
+
+		return 0;
+	}
+
+	QString configFile;
+	QString configName;
+	bool verboseEnabled = false;
+	int workingMode = 0;
+	int translateMode = 1;
+	bool useBinaryCode = true;
+	bool checkRealPackages = false;
+	QString environment;
+	QString inputFilePath = argv[1];
+	QString outputFilePath;
+	QString depfilePath;
+
+	if ((inputFilePath == "-h") || (inputFilePath == "-help")){
+		ShowUsage();
+
+		return 0;
+	}
+
+	for (int index = 2; index < argc; index++){
+		QByteArray argument = argv[index];
+		if (!argument.isEmpty() && (argument[0] == '-')){
+			QByteArray option = argument.mid(1);
+
+			if (option == "v"){
+				verboseEnabled = true;
+			}
+			else if ((option == "h") || (option == "help")){
+				ShowUsage();
+
+				return 0;
+			}
+			else if (option == "no_binary"){
+				useBinaryCode = false;
+			}
+			else if (option == "check_real"){
+				checkRealPackages = true;
+			}
+			else if (index < argc - 1){
+				if (option == "config"){
+					configFile = argv[++index];
+				}
+				else if ((option == "o") || (option == "output")){
+					outputFilePath = QString::fromLocal8Bit(argv[index + 1]);
+					++index;
+				}
+				else if ((option == "d") || (option == "depfile")) {
+					depfilePath = QString::fromLocal8Bit(argv[index + 1]);
+					++index;
+				}
+				else if (option == "mode"){
+					QString modeText = argv[++index];
+					if ((modeText == "d") || (modeText == "depends")){
+						workingMode = 1;
+					}
+				}
+				else if (option == "conf_name"){
+					configName = argv[++index];
+				}
+				else if (option == "env_vars"){
+					environment = argv[++index];
+				}
+				else if (option == "translate"){
+					QString modeText = argv[++index];
+					if (modeText == "none"){
+						translateMode = 0;
+					}
+					else if (modeText == "project"){
+						translateMode = 1;
+					}
+					else if (modeText == "all"){
+						translateMode = -1;
+					}
+				}
+			}
+		}
+	}
+
+	if (!configName.isEmpty()){
+		QStringList configParts = configName.split("_");
+		if (configParts.count() > 3){
+			QString compilerMode = configParts[0];
+			QString acfQtVersion = configParts[1];
+			QString compilerName = configParts[2];
+			QString platformCode = configParts[3];
+
+			istd::CSystem::SetUserVariables(compilerMode, acfQtVersion, compilerName, platformCode);
+
+			if (verboseEnabled){
+				std::cout << "Extra configuration: compilerMode='" << compilerMode.toStdString() << "' acfQtVersion='" << acfQtVersion.toStdString() << "' compilerName='" << compilerName.toStdString() << "' platformCode='" << platformCode.toStdString() << "'" << std::endl;
+			}
+		}
+	}
+
+	if (!environment.isEmpty()){
+		QStringList environmentVars = environment.split(";");
+		for (int varIndex = 0; varIndex < environmentVars.count(); ++varIndex){
+			QString variableItem = environmentVars[varIndex];
+			QStringList keyValue = variableItem.split("=");
+			if (keyValue.count() == 2){
+				QString variableName = keyValue[0];
+				QString variableValue = keyValue[1];
+
+				if (qputenv(variableName.toStdString().c_str(), variableValue.toUtf8())){
+					if (verboseEnabled){
+						std::cout << "External environment variable " << variableName.toStdString() << " was set to: " << variableValue.toStdString() << std::endl;
+					}
+				}
+				else{
+					std::cerr << "External environment variable " << variableName.toStdString() << " could not be set to: " << variableValue.toStdString() << std::endl;
+				}
+			}
+		}
+	}
+
+	if (verboseEnabled){
+		std::cout << "ARX Compiler started in: " << QDir::currentPath().toLocal8Bit().constData() << std::endl;
+		std::cout << "Using configuration: " << configFile.toStdString() << std::endl;
+		std::cout << "Output file: '" << outputFilePath.toStdString() << std::endl;
+
+		istd::CSystem::EnvironmentVariables environmentVariables = istd::CSystem::GetEnvironmentVariables();
+
+		for (		istd::CSystem::EnvironmentVariables::const_iterator index = environmentVariables.begin();
+				index != environmentVariables.end();
+				++index){
+			std::cout << index.key().toLocal8Bit().constData() << " = " << index.value().toLocal8Bit().constData() << std::endl;
+		}
+	}
+
+	if ((workingMode == 0) && outputFilePath.isEmpty()){
+		std::cout << "Output file was not specified!" << std::endl;
+
+		return 1;
+	}
+
+	icomp::TSimSharedComponentPtr<BasePck::ApplicationInfo> applicationInfoPtr;
+	applicationInfoPtr->SetStringAttr("ApplicationName", "ARX Compiler");
+	applicationInfoPtr->SetStringAttr("CompanyName", "ImagingTools");
+	applicationInfoPtr->InitComponent();
+
+	icomp::TSimSharedComponentPtr<BasePck::ConsoleLog> log;
+	log->InitComponent();
+
+	icomp::TSimSharedComponentPtr<FilePck::SimpleXmlFileSerializer> oldFormatLoaderComp;
+	oldFormatLoaderComp->InsertMultiAttr("FileExtensions", QString("arx"));
+	if (verboseEnabled || workingMode == 0){
+		oldFormatLoaderComp->SetRef("Log", log);
+	}
+	oldFormatLoaderComp->SetRef("VersionInfo", applicationInfoPtr);
+	oldFormatLoaderComp->SetBoolAttr("EnableVerbose", verboseEnabled);
+	oldFormatLoaderComp->InitComponent();
+
+	icomp::TSimSharedComponentPtr<FilePck::CompactXmlFileSerializer> newFormatLoaderComp;
+	newFormatLoaderComp->InsertMultiAttr("FileExtensions", QString("acc"));
+	if (verboseEnabled || workingMode == 0){
+		newFormatLoaderComp->SetRef("Log", log);
+	}
+	newFormatLoaderComp->SetRef("VersionInfo", applicationInfoPtr);
+	newFormatLoaderComp->SetBoolAttr("EnableVerbose", verboseEnabled);
+	newFormatLoaderComp->InitComponent();
+
+	icomp::TSimSharedComponentPtr<FilePck::ComposedFilePersistence> registryLoaderComp;
+	registryLoaderComp->InsertMultiRef("SlaveLoaders", oldFormatLoaderComp);
+	registryLoaderComp->InsertMultiRef("SlaveLoaders", newFormatLoaderComp);
+	registryLoaderComp->SetStringAttr("CommonDescription", "ACF Registry");
+	registryLoaderComp->InitComponent();
+
+	icomp::TSimSharedComponentPtr<PackagePck::RegistriesManager> registriesManagerComp;
+	registriesManagerComp->SetRef("RegistryLoader", registryLoaderComp);
+	registriesManagerComp->SetBoolAttr("AreRealPackagesIgnored", !checkRealPackages);
+	if (verboseEnabled || workingMode == 0){
+		registriesManagerComp->SetRef("Log", log);
+	}
+	registriesManagerComp->SetBoolAttr("EnableVerbose", verboseEnabled);
+	registriesManagerComp->InitComponent();
+
+	registriesManagerComp->LoadPackages(configFile);
+
+	icomp::TSimSharedComponentPtr<PackagePck::RegistryCodeSaver> codeSaverComp;
+	if (verboseEnabled || workingMode == 0){
+		codeSaverComp->SetRef("Log", log);
+	}
+	codeSaverComp->SetRef("PackagesManager", registriesManagerComp);
+	codeSaverComp->SetRef("RegistriesManager", registriesManagerComp);
+	codeSaverComp->SetIntAttr("WorkingMode", workingMode);
+	if (translateMode >= 0){
+		codeSaverComp->SetIntAttr("TranslationLevel", (translateMode > 0)? 0: -1);
+	}
+	codeSaverComp->SetBoolAttr("UseBinaryCode", useBinaryCode);
+	if (!depfilePath.isEmpty()) {
+		codeSaverComp->SetStringAttr("DepfilePath", depfilePath);
+	}
+	codeSaverComp->InitComponent();
+
+	// registry model
+	icomp::TSimSharedComponentPtr<PackagePck::Registry> registryComp;
+	registryComp->InitComponent();
+
+	if (registryLoaderComp->LoadFromFile(*registryComp, inputFilePath) != ifile::IFilePersistence::OS_OK){
+		std::cout << "Cannot read input registry file '" << inputFilePath.toLocal8Bit().constData() << "'" << std::endl;
+
+		return 2;
+	}
+
+	if (codeSaverComp->SaveToFile(*registryComp, outputFilePath) != ifile::IFilePersistence::OS_OK){
+		std::cout << "Cannot write output file(s) '" << outputFilePath.toLocal8Bit().constData() << "'" << std::endl;
+
+		return 3;
+	}
+
+	if (log->GetWorseCategory() >= istd::IInformationProvider::IC_ERROR){
+		// there are errors
+		return 4;
+	}
+
+	return 0;
+}
+
+

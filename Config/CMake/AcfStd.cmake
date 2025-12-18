@@ -1,0 +1,1 @@
+target_link_libraries(${PROJECT_NAME} iqt ipackage ifile icmm i3d iprm ilog ibase icomp iattr imath iser imod istd)

@@ -1,0 +1,98 @@
+#ifndef iimg_CBitmap_included
+#define iimg_CBitmap_included
+
+
+// Qt includes
+#include <QtCore/QMutex>
+
+// ACF includes
+#include <istd/TOptDelPtr.h>
+#include <istd/TDelPtr.h>
+#include <i2d/ICalibrationProvider.h>
+#include <iimg/CBitmapBase.h>
+#include <iimg/IQImageProvider.h>
+
+
+namespace iimg
+{
+
+
+/**
+	Bitmap implementation based on Qt QImage.
+
+	\ingroup ImageProcessing
+	\ingroup Geometry
+*/
+class CBitmap:
+			public iimg::CBitmapBase,
+			virtual public IQImageProvider
+{
+	typedef iimg::CBitmapBase BaseClass;
+
+public:
+	static QByteArray GetTypeName();
+
+	CBitmap();
+	CBitmap(const CBitmap& bitmap);
+	CBitmap(const QImage& image);
+
+	QImage& GetQImageRef();
+
+	// reimplemented (iimg::IQImageProvider)
+	virtual const QImage& GetQImage() const override;
+	virtual bool CopyImageFrom(const QImage& image) override;
+
+	// reimplemented (iimg::IBitmap)
+	virtual bool IsFormatSupported(PixelFormat pixelFormat) const override;
+	virtual PixelFormat GetPixelFormat() const override;
+	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, int pixelBitsCount = 0, int componentsCount = 0) override;
+	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0) override;
+	virtual int GetLinesDifference() const override;
+	virtual int GetPixelsDifference() const override;
+	virtual const void* GetLinePtr(int positionY) const override;
+	virtual void* GetLinePtr(int positionY) override;
+
+	// reimplemented (iimg::IRasterImage)
+	virtual void ResetImage() override;
+	virtual void ClearImage() override;
+	virtual istd::CIndex2d GetImageSize() const override;
+
+	// reimplemented (iser::IObject)
+	virtual QByteArray GetFactoryId() const override;
+
+	// reimplemented (istd::IChangeable)
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual istd::TUniqueInterfacePtr<istd::IChangeable> CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+
+protected:
+	QImage::Format CalcQtFormat(PixelFormat pixelFormat) const;
+	PixelFormat CalcFromQtFormat(QImage::Format imageFormat) const;
+	bool SetQImage(const QImage& image);
+	void InitializeColorModel();
+
+private:
+	QImage m_image;
+	istd::TOptDelPtr<quint8, true> m_externalBuffer;
+
+	static QVector<QRgb> s_colorTableGray;
+	static QMutex s_colorTableLock;
+
+	istd::TDelPtr<icmm::IColorModel> m_colorModelPtr;
+};
+
+
+// inline methods
+
+inline QImage& CBitmap::GetQImageRef()
+{
+	return m_image;
+}
+
+
+} // namespace iimg
+
+
+#endif //!iimg_CBitmap_included
+
+

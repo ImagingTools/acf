@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4446" Description="ACF"/>
+            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Persistent directory selector</Description>
+    <Keywords>Directory File</Keywords>
+    <ElementsList>
+        <Element Id="ModelDialogGui" PackageId="QtGuiPck" ComponentId="ModelDialogGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DialogIconPath" Type="String" ExportId="IconPath">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DialogTitle" Type="Text" ExportId="Title">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Gui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="UrlParamGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Model" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="UrlParam"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="WorkingDataFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="UrlParamFactory"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SettingsPersistence" PackageId="AcfGuiVoce" ComponentId="SettingsPersistence">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="UrlParam"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RootKey" Type="Id" ExportId="SettingsRootKey">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="UrlParam" PackageId="FilePck" ComponentId="FileNameParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="DefaultUrl">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="3"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="UrlParamFactory" PackageId="FilePck" ComponentId="FileNameParam">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="DefaultUrl">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="3"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="UrlParamGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ifile::IFileNameParam" ComponentId="UrlParam"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="UrlParam"/>
+        <Interface InterfaceId="iqtgui::IDialog" ComponentId="ModelDialogGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="UrlParamGui"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="UrlParam"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="UrlParam"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

@@ -1,0 +1,179 @@
+#include <iqtprm/COptionsListEditorComp.h>
+
+
+// Qt includes
+#include <QtCore/QUuid>
+
+// ACF includes
+#include <istd/CChangeNotifier.h>
+#include <iprm/IParamsSet.h>
+#include <iprm/IOptionsList.h>
+#include <iprm/ISelectionParam.h>
+#include <iqtgui/IMultiVisualStatusProvider.h>
+#include <iwidgets/CItemDelegate.h>
+#include <iwidgets/CWidgetUpdateBlocker.h>
+
+
+namespace iqtprm
+{
+
+
+// public methods
+
+COptionsListEditorComp::COptionsListEditorComp()
+{
+}
+
+
+// protected slots
+
+void COptionsListEditorComp::on_OptionsList_itemSelectionChanged()
+{
+	if (!IsUpdateBlocked()){
+		UpdateBlocker updateBlocker(this);
+
+		iprm::ISelectionParam* selectionPtr = dynamic_cast<iprm::ISelectionParam*>(GetObservedObject());
+		if (selectionPtr != NULL){
+			static const istd::IChangeable::ChangeSet changeSet(iprm::ISelectionParam::CF_SELECTION_CHANGED);
+			istd::CChangeNotifier selectionNotifier(selectionPtr, &changeSet);
+			Q_UNUSED(selectionNotifier);
+
+			selectionPtr->SetSelectedOptionIndex(GetSelectedListOption());
+		}
+	}
+}
+
+
+// protected methods
+
+void COptionsListEditorComp::UpdateList()
+{
+	UpdateBlocker updateBlocker(this);
+
+	int lastSelectedIndex = -1;
+
+	iprm::ISelectionParam* selectionPtr = dynamic_cast<iprm::ISelectionParam*>(GetObservedObject());
+	if (selectionPtr != NULL){
+		lastSelectedIndex = selectionPtr->GetSelectedOptionIndex();
+	}
+
+	OptionsList->clear();
+	
+	iprm::IOptionsList* objectPtr = GetObservedObject();
+	if (objectPtr != NULL){
+		int optionsCount = objectPtr->GetOptionsCount();
+
+		for (int optionIndex = 0; optionIndex < optionsCount; ++optionIndex){
+			Qt::ItemFlags itemFlags = objectPtr->IsOptionEnabled(optionIndex) ? Qt::ItemIsEnabled | Qt::ItemIsSelectable : Qt::NoItemFlags;
+
+			iprm::IOptionsManager* managerPtr = dynamic_cast<iprm::IOptionsManager*>(objectPtr);
+			if (managerPtr != NULL){
+				int operationFlags = managerPtr->GetOptionOperationFlags(optionIndex);
+				if (objectPtr->IsOptionEnabled(optionIndex) && (operationFlags & iprm::IOptionsManager::OOF_SUPPORT_RENAME)){
+					itemFlags |= Qt::ItemIsEditable;
+				}
+			}
+
+			QString name = objectPtr->GetOptionName(optionIndex);
+			QString description = objectPtr->GetOptionDescription(optionIndex);
+			QListWidgetItem* optionItemPtr = new QListWidgetItem();
+			optionItemPtr->setText(name);
+
+			const iqtgui::IMultiVisualStatusProvider* visualStatusProviderPtr = dynamic_cast<const iqtgui::IMultiVisualStatusProvider*>(objectPtr);
+			if (visualStatusProviderPtr != NULL){
+				const iqtgui::IVisualStatus* visualStatusPtr = visualStatusProviderPtr->GetVisualStatus(optionIndex);
+				if (visualStatusPtr != NULL){
+					optionItemPtr->setIcon(visualStatusPtr->GetStatusIcon());
+				}
+			}
+
+			optionItemPtr->setData(Qt::UserRole, optionIndex);
+			optionItemPtr->setFlags(itemFlags);
+
+			if (m_iconSizeAttrPtr.IsValid()){
+				optionItemPtr->setSizeHint(QSize(optionItemPtr->sizeHint().width(), *m_iconSizeAttrPtr + 2));
+			}
+
+			OptionsList->addItem(optionItemPtr);
+
+			if (itemFlags & Qt::ItemIsSelectable){
+				optionItemPtr->setSelected(optionIndex == lastSelectedIndex);
+			}
+		}
+	}
+}
+
+
+int COptionsListEditorComp::GetSelectedListOption() const
+{
+	Q_ASSERT(IsGuiCreated());
+
+	int retVal = -1;
+
+	QList<QListWidgetItem*> items = OptionsList->selectedItems();
+	if (!items.isEmpty()){
+		QListWidgetItem* itemPtr = items.first();
+
+		if (itemPtr != NULL){
+			retVal = itemPtr->data(Qt::UserRole).toInt();
+		}
+	}
+
+	return retVal;
+}
+
+
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void COptionsListEditorComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	OptionsList->setVisible(true);
+}
+
+
+void COptionsListEditorComp::OnGuiModelDetached()
+{
+	OptionsList->setVisible(false);
+
+	BaseClass::OnGuiModelDetached();
+}
+
+
+void COptionsListEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	Q_ASSERT(IsGuiCreated());
+	
+	UpdateList();
+}
+
+
+// reimplemented (iqtgui::CComponentBase)
+
+void COptionsListEditorComp::OnGuiCreated()
+{
+	OptionsList->setVisible(false);
+
+	BaseClass::OnGuiCreated();
+
+	if (m_iconSizeAttrPtr.IsValid()){
+		OptionsList->setIconSize(QSize(*m_iconSizeAttrPtr, *m_iconSizeAttrPtr));
+		OptionsList->setUniformItemSizes(true);
+	}
+}
+
+
+void COptionsListEditorComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	UpdateList();
+}
+
+
+} // namespace iqtprm
+
+

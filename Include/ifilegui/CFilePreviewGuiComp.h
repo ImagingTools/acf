@@ -1,0 +1,126 @@
+#ifndef ifilegui_CFilePreviewGuiComp_included
+#define ifilegui_CFilePreviewGuiComp_included
+
+
+// Qt includes
+
+#include <QtCore/QFileSystemWatcher>
+#include <QtCore/QTimer>
+#include <QtCore/QDateTime>
+
+#include <QtCore/QFutureWatcher>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QGraphicsView>
+#else
+#include <QtGui/QGraphicsView>
+#endif
+
+// ACF includes
+#include <ifile/IFilePersistence.h>
+#include <ifile/IFileNameParam.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+
+#include <GeneratedFiles/ifilegui/ui_CFilePreviewGuiComp.h>
+
+
+namespace ifilegui
+{
+
+
+/**
+	Component for the preview of the file contents.
+
+	The component also observers the file system changes and updates the file preview automatically, if the file was changed.
+*/
+class CFilePreviewGuiComp:
+			public iqtgui::TDesignerGuiObserverCompBase<
+						Ui::CFilePreviewGuiComp, ifile::IFileNameParam>
+{
+	Q_OBJECT
+
+public:
+	typedef iqtgui::TDesignerGuiObserverCompBase<
+				Ui::CFilePreviewGuiComp, ifile::IFileNameParam> BaseClass;
+
+	I_BEGIN_COMPONENT(CFilePreviewGuiComp);
+		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "Object loader", true, "FileLoader");
+		I_ASSIGN(m_objectFactoryCompPtr, "ObjectFactory", "Factory for creation of data object to be previewed", true, "ObjectFactory");
+		I_ASSIGN(m_currentPreviewObjectCompPtr, "CurrentPreviewObject", "Current object will be copied here if set", false, "CurrentPreviewObject");
+		I_ASSIGN(m_objectObserverCompPtr, "ObjectView", "View component for the object", true, "ObjectView");
+		I_ASSIGN_TO(m_objectGuiCompPtr, m_objectObserverCompPtr, true);
+		I_ASSIGN(m_isAsynchronPreviewGenerationEnabledAttrPtr, "AsynchronPreviewGenerationEnabled", "If enabled, the preview generation will be done in a separate thread", true, true);
+		I_ASSIGN(m_noAvailableLabelAttrPtr, "NoAvailableLabel", "Text used for no available preview state", false, "");
+		I_ASSIGN(m_noAvailableIconPathAttrPtr, "NoAvailableIconPath", "Path to the icon used for no available preview state", false, "");
+	I_END_COMPONENT;
+
+	CFilePreviewGuiComp();
+
+protected:
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void OnGuiModelAttached() override;
+	virtual void OnGuiModelDetached() override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
+	virtual void OnGuiRetranslate() override;
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated() override;
+
+private Q_SLOTS:
+	void UpdateFilePreview();
+	void OnPreviewGenerationFinished();
+
+private:
+	void UpdateObjectFromFile();
+	void ResetPreview();
+	
+protected:
+	/**
+		Helper class to watch after QGraphicsView Resize
+	*/
+	class PreviewWidget : public QGraphicsView
+	{
+	public:
+		explicit PreviewWidget(QWidget *parent = NULL);
+
+	protected:
+		// reimplemented (QWidget)
+		virtual void resizeEvent(QResizeEvent* eventPtr) override;
+	};
+
+protected:
+	I_REF(ifile::IFilePersistence, m_fileLoaderCompPtr);
+	I_FACT(istd::IChangeable, m_objectFactoryCompPtr);
+	I_REF(imod::IObserver, m_objectObserverCompPtr);
+	I_REF(iqtgui::IGuiObject, m_objectGuiCompPtr);	
+	I_REF(istd::IChangeable, m_currentPreviewObjectCompPtr);
+	I_ATTR(bool, m_isAsynchronPreviewGenerationEnabledAttrPtr);
+	I_TEXTATTR(m_noAvailableLabelAttrPtr);
+	I_ATTR(QByteArray, m_noAvailableIconPathAttrPtr);
+
+	QFileSystemWatcher m_fileSystemObserver;
+
+	QDateTime m_lastModificationTimeStamp;
+	QString m_lastFilePath;
+
+	QFutureWatcher<void> m_previewGenerationWatcher;
+
+	istd::IChangeableUniquePtr m_previewObjectPtr;
+	istd::IChangeableUniquePtr m_workingObjectPtr;
+
+	QMutex m_mutex;
+
+	bool m_previewWasGenerated;
+	QTimer m_timer;
+};
+
+
+} // namespace ifilegui
+
+
+#endif // !ifilegui_CFilePreviewGuiComp_included
+
+

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4562" Description="ACF"/>
+            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Bitmap file selector with preview</Description>
+    <Keywords>File Name Preview Explorer Selector Choice Author='&quot;Witold Gantzke&quot;' Category='GUI'</Keywords>
+    <ElementsList>
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="BitmapLoader" PackageId="BitmapPck" ComponentId="BitmapLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="FileSelectorDockWithPreview" PackageId="AcfGuiVoce" ComponentId="FileSelectorDockWithPreview">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AllowOpenFile" Type="Boolean" ExportId="AllowOpenFile">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="AllowedDockAreas" Type="Integer" ExportId="AllowedDockAreas">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CurrentPreviewObject" Type="Reference" ExportId="CurrentPreviewObject">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="DefaultPath">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DockArea" Type="Integer" ExportId="DockArea">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DockFeatures" Type="Integer" ExportId="DockFeatures">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FileExplorerSettingsKey" Type="String" ExportId="FileExplorerSettingsKey">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FileInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ObjectFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PathPersistenceSettingsKey" Type="Id" ExportId="PathPersistenceSettingsKey">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="PathType">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PreviewObjectLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PreviewObjectView" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ImageView"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SettingsProvider" Type="Reference" ExportId="SettingsProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseHorizontalLayout" Type="Boolean" ExportId="UseHorizontalLayout">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BackgroundMode" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ColorSchema" Type="Reference" ExportId="ColorSchema">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FitMode" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ZoomToFitEnabled" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="iqt2d::IViewProvider" ComponentId="ImageView"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="FileSelectorDockWithPreview"/>
+        <Interface InterfaceId="iqtgui::IMainWindowComponent" ComponentId="FileSelectorDockWithPreview"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="BitmapFilePath" ComponentId="FileSelectorDockWithPreview/FilePath"/>
+        <Component ExportedId="Loader" ComponentId="BitmapLoader"/>
+    </ExportedComponents>
+</Acf>

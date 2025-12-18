@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4446" Description="ACF"/>
+            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Simple bitmaps preview</Description>
+    <Keywords>Bitmap Preview</Keywords>
+    <ElementsList>
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="BitmapLoader" PackageId="BitmapPck" ComponentId="BitmapLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="FilePreviewGui" PackageId="FileGuiPck" ComponentId="FilePreviewGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="DefaultPathModel">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusIcon" Type="String" ExportId="DefaultStatusIcon">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusText" Type="Text" ExportId="DefaultStatusText">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FileLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ObjectFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ObjectView" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ImageView"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BackgroundMode" Type="Integer" ExportId="BackgroundMode">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusIcon" Type="String" ExportId="DefaultStatusIcon">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusText" Type="Text" ExportId="DefaultStatusText">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FitMode" Type="Integer" ExportId="FitMode">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseAntialiasing" Type="Boolean" ExportId="UseAntialiasing">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseGridCommands" Type="Boolean" ExportId="UseGridCommands">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseScrollBarCommands" Type="Boolean" ExportId="UseScrollBarCommands">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseShapeEditCommands" Type="Boolean" ExportId="UseShapeEditCommands">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ViewId" Type="Integer" ExportId="ViewId">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ZoomToFitEnabled" Type="Boolean" ExportId="ZoomToFitEnabled">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::ICommandsProvider" ComponentId="ImageView"/>
+        <Interface InterfaceId="ifile::IFilePersistence" ComponentId="BitmapLoader"/>
+        <Interface InterfaceId="ifile::IFileTypeInfo" ComponentId="BitmapLoader"/>
+        <Interface InterfaceId="iimg::IBitmap" ComponentId="Bitmap"/>
+        <Interface InterfaceId="iimg::IRasterImage" ComponentId="Bitmap"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="Bitmap"/>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="FilePreviewGui"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="FilePreviewGui"/>
+        <Interface InterfaceId="iqt2d::IViewProvider" ComponentId="ImageView"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="FilePreviewGui"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="Bitmap"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="Bitmap"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="Loader" ComponentId="BitmapLoader"/>
+    </ExportedComponents>
+</Acf>

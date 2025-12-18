@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5126" Description="ACF"/>
+            <Version Id="1" Number="2197" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="CompactXmlFilePersistence" X="600" Y="225" Note=""/>
+        <Element ComponentName="RelativeFileNameParam" X="600" Y="325" Note=""/>
+        <Element ComponentName="SystemLocation" X="600" Y="425" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5181" Description="ACF"/>
+            <Version Id="1" Number="2199" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Log widget used as dock window</Description>
+    <Keywords>Log Dock Main Window GUI Float Error Warning Info Message</Keywords>
+    <ElementsList>
+        <Element Id="LogDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AllowedDockAreas" Type="Integer" ExportId="AllowedDockAreas">
+                        <Data IsEnabled="true" Value="12"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DockArea" Type="Integer" ExportId="DockArea">
+                        <Data IsEnabled="true" Value="3"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DockTitle" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="Log"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="LogGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="LogGui" PackageId="QtGuiPck" ComponentId="LogGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AllowDiagnosticMessages" Type="Boolean" ExportId="AllowDiagnosticMessages">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="AutoUpdateVisualStatus" Type="Boolean" ExportId="AutoUpdateVisualStatus">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultMode" Type="Integer" ExportId="DefaultMode">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusIcon" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value=":/Icons/Info"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Exporter" Type="Reference" ExportId="Exporter">
+                        <Data IsEnabled="true" Value="PersistentFileDialogLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MaxMessageCount" Type="Integer" ExportId="MaxMessageCount">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowLogDescription" Type="Boolean" ExportId="ShowLogDescription">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowMessageTextFilter" Type="Boolean" ExportId="ShowMessageTextFilter">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowPanel" Type="Boolean" ExportId="ShowPanel">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveMessageConsumer" Type="Reference" ExportId="SlaveMessageConsumer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="StyleSheet" Type="String" ExportId="StyleSheet">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TimeFormat" Type="String" ExportId="TimeFormat">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="PersistentFileDialogLoader" PackageId="AcfGuiVoce" ComponentId="PersistentFileDialogLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="LastPathSettingsKey" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="Log"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Loaders" Type="Reference[]" ExportId="LogSerializer">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>XmlLogSerializer</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ReferencePath" Type="Reference" ExportId="LogPath">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RuntimeStatus" Type="Reference" ExportId="RuntimeStatus">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="XmlLogSerializer" PackageId="FilePck" ComponentId="CompactXmlFileSerializer">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>log</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TypeDescriptions" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Log XML file</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ilog::IMessageConsumer" ComponentId="LogGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="LogGui"/>
+        <Interface InterfaceId="iqtgui::IMainWindowComponent" ComponentId="LogDock"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="DiagnosticState" ComponentId="LogGui/DiagnosticState"/>
+        <Component ExportedId="FileDialogLoader" ComponentId="PersistentFileDialogLoader"/>
+        <Component ExportedId="LogGui" ComponentId="LogGui"/>
+        <Component ExportedId="VisualStatus" ComponentId="LogGui/VisualStatus"/>
+    </ExportedComponents>
+</Acf>

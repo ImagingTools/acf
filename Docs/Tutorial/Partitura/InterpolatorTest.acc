@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="ColorSchema" PackageId="QtViewPck" ComponentId="ColorSchema">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="NormalPenColor" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="red"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SelectedPenColor" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="magenta"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Console" PackageId="AcfGuiVoce" ComponentId="Console">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="UseShapeEditCommands" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="InterpolatedObject" PackageId="BasePck" ComponentId="Polyline">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="IsClosed" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="InterpolatedPolylgonGui" PackageId="QtViewPck" ComponentId="PolylineParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="InterpolatedObject"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShapeColorSchema" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ColorSchema"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="InterpolationTest" PackageId="TutorialPck" ComponentId="InterpolationTest">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SourceObject"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InterpolatedNodesCount" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1000"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InterpolatorType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveObject" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="InterpolatedObject"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SceneConnector" PackageId="QtViewPck" ComponentId="SceneConnector">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ExtenderGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SourcePolygonEditor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SceneGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Console"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SourceObject" PackageId="BasePck" ComponentId="Polyline">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="IsClosed" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="X" Type="Real[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>0</Value>
+                                <Value>200</Value>
+                                <Value>400</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Y" Type="Real[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>0</Value>
+                                <Value>100</Value>
+                                <Value>50</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SourcePolygonEditor" PackageId="QtViewPck" ComponentId="PolylineParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SourceObject"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="InterpolatedPolylgonGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="StandaloneApp" PackageId="AcfGuiVoce" ComponentId="StandaloneApp">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="Interpolation Test"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ApplicationType" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="Tutorial"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainView" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SceneConnector"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="VersionInfo" PackageId="AcfVoce" ComponentId="VersionInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="StandaloneApp"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

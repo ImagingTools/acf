@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5181" Description="ACF"/>
+            <Version Id="1" Number="2199" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="LogDock" X="325" Y="125" Note="Dock widget where the log window is placed."/>
+        <Element ComponentName="LogGui" X="325" Y="250" Note="GUI representation of LOG model container"/>
+        <Element ComponentName="PersistentFileDialogLoader" X="325" Y="375" Note="File loader for log import/export"/>
+        <Element ComponentName="XmlLogSerializer" X="325" Y="500" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,9 @@
+%QTDIR%\bin\lrelease.exe Acf_de_DE.ts
+%QTDIR%\bin\lrelease.exe Acf_en_US.ts
+%QTDIR%\bin\lrelease.exe Acf_fr_FR.ts
+%QTDIR%\bin\lrelease.exe Acf_pl_PL.ts
+%QTDIR%\bin\lrelease.exe Acf_pt_PT.ts
+%QTDIR%\bin\lrelease.exe Acf_ru_RU.ts
+%QTDIR%\bin\lrelease.exe Acf_zh_ZH.ts
+%QTDIR%\bin\lrelease.exe Acf_jp_JP.ts
+%QTDIR%\bin\lrelease.exe Acf_it_IT.ts

@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="/Translations">
+    <file alias="Acf_de_DE">Translations/Acf_de_DE.qm</file>
+    <file alias="Acf_en_US">Translations/Acf_en_US.qm</file>
+    <file alias="Acf_fr_FR">Translations/Acf_fr_FR.qm</file>
+    <file alias="Acf_it_IT">Translations/Acf_it_IT.qm</file>
+    <file alias="Acf_jp_JP">Translations/Acf_jp_JP.qm</file>
+    <file alias="Acf_pl_PL">Translations/Acf_pl_PL.qm</file>
+    <file alias="Acf_pt_PT">Translations/Acf_pt_PT.qm</file>
+    <file alias="Acf_ru_RU">Translations/Acf_ru_RU.qm</file>
+    <file alias="Acf_zh_ZH">Translations/Acf_zh_ZH.qm</file>
+  </qresource>
+</RCC>

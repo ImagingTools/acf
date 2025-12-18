@@ -1,0 +1,57 @@
+#ifndef iprm_CVariableParamComp_included
+#define iprm_CVariableParamComp_included
+
+
+// ACF includes
+#include <imod/CModelUpdateBridge.h>
+#include <icomp/CComponentBase.h>
+#include <iprm/IVariableParam.h>
+
+
+namespace iprm
+{
+
+
+class CVariableParamComp:
+			public icomp::CComponentBase,
+			virtual public IVariableParam
+{
+public:
+	typedef icomp::CComponentBase BaseClass;
+
+	I_BEGIN_COMPONENT(CVariableParamComp);
+		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_REGISTER_INTERFACE(IVariableParam);
+		I_ASSIGN_MULTI_0(m_factoriesFact, "Factories", "List of factories for each type", true);
+		I_ASSIGN_MULTI_0(m_factoryIdsAttrPtr, "TypeIds", "List of factory ID for each factory object", true);
+	I_END_COMPONENT;
+
+	CVariableParamComp();
+
+	// reimplemented (iprm::IVariableParam)
+	virtual TypeIds GetKnownTypeIds() const;
+	virtual QByteArray GetParameterTypeId() const;
+	virtual iser::ISerializable* GetParameter() const;
+	virtual bool AssignTypeId(const QByteArray& typeId);
+
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive) override;
+	virtual quint32 GetMinimalVersion(int versionId) const override;
+
+private:
+	I_MULTIFACT(iser::ISerializable, m_factoriesFact);
+	I_MULTIATTR(QString, m_factoryIdsAttrPtr);
+
+	QByteArray m_paramTypeId;
+	iser::ISerializableUniquePtr m_paramPtr;
+
+	imod::CModelUpdateBridge m_updateBridge;
+};
+
+
+} // namespace iprm
+
+
+#endif // !iprm_CVariableParamComp_included
+
+

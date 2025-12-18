@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5127" Description="ACF"/>
+            <Version Id="1" Number="2198" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="AutoPersistence_Lazy(-1)" X="975" Y="525" Note=""/>
+        <Element ComponentName="AutoPersistence_Lazy(0)" X="975" Y="650" Note=""/>
+        <Element ComponentName="AutoPersistence_NoLazy(-1)" X="975" Y="200" Note=""/>
+        <Element ComponentName="AutoPersistence_NoLazy(0)" X="975" Y="325" Note=""/>
+        <Element ComponentName="ComposedGui" X="400" Y="425" Note=""/>
+        <Element ComponentName="Lazy" X="400" Y="525" Note=""/>
+        <Element ComponentName="Lazy(-1)" X="150" Y="525" Note=""/>
+        <Element ComponentName="Lazy(-1)_AP" X="650" Y="525" Note=""/>
+        <Element ComponentName="Lazy(0)" X="250" Y="650" Note=""/>
+        <Element ComponentName="Lazy(0)_AP" X="550" Y="650" Note=""/>
+        <Element ComponentName="NoLazy" X="400" Y="325" Note=""/>
+        <Element ComponentName="NoLazy(-1)" X="250" Y="200" Note=""/>
+        <Element ComponentName="NoLazy(-1)_AP" X="550" Y="200" Note=""/>
+        <Element ComponentName="NoLazy(0)" X="150" Y="325" Note=""/>
+        <Element ComponentName="NoLazy(0)_AP" X="650" Y="325" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

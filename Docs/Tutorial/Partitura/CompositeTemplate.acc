@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4439" Description="ACF"/>
+            <Version Id="1" Number="1778" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>Demonstrate using of multiple document tamplate for MDI application</Description>
+    <Keywords>Tutorial MDI Demo Application Multi Document Template</Keywords>
+    <ElementsList>
+        <Element Id="Application" PackageId="QtGuiPck" ComponentId="GuiApplication">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MainWindow"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SplashScreen" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Splash"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SplashTime" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ApplicationInfo" PackageId="BasePck" ComponentId="ApplicationInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="Composite Template"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ApplicationType" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="Tutorial"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CompanyName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="ImagingTools"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="LegalCopyright" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="See 'licence.txt' for copyright informations"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainVersionId" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProductName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="ACF"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Info"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="BitmapLoader" PackageId="BitmapPck" ComponentId="BitmapLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="CompositeTemplate" PackageId="BasePck" ComponentId="CompositeDocumentTemplate">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="SlaveTemplates" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>ImageTemplate</Value>
+                                <Value>DocumentTemplate</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="DocumentFactory" PackageId="BasePck" ComponentId="TextDocument">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultText" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="Ahoj przygodo!"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="DocumentLoader" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>xtxt</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TypeDescriptions" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>XML packed text</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Info"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="DocumentTemplate" PackageId="BasePck" ComponentId="SingleDocumentTemplate">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DocumentFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="DocumentFactory"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="DocumentLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentTypeId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="Text"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsEditSupported" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsNewSupported" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ViewFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="ViewFactory"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ImageFactory" PackageId="BitmapPck" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="ImageTemplate" PackageId="BasePck" ComponentId="SingleDocumentTemplate">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DocumentFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="ImageFactory"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentTypeId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="Image"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsEditSupported" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsNewSupported" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ViewFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="ImageView"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="Info" PackageId="AcfVoce" ComponentId="VersionInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="MainWindow" PackageId="QtGuiPck" ComponentId="MainWindowGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Application" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Workspace"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IconSize" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="32"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseIconText" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Workspace" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Workspace"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Splash" PackageId="QtGuiPck" ComponentId="SplashScreen">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ImagePath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="../../../Docs/Images/AcfSplashScreen.png"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowProductType" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ViewFactory" PackageId="TutorialPck" ComponentId="TextEditor">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="Workspace" PackageId="QtGuiPck" ComponentId="MultiDocWorkspaceGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DocumentTemplate" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="CompositeTemplate"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="Application"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

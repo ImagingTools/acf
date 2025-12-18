@@ -1,0 +1,221 @@
+#pragma once
+
+
+// Qt includes
+#include <QtCore/QList>
+
+// ACF includes
+#include <istd/TPointerVector.h>
+#include <istd/TDelPtr.h>
+#include <imod/CMultiModelDispatcherBase.h>
+#include <idoc/IUndoManager.h>
+#include <idoc/IDocumentTemplate.h>
+#include <idoc/CTmplBasedDocumentManagerBase.h>
+#include <iser/IArchive.h>
+
+
+namespace idoc
+{
+
+
+/**
+	Basic implementation of a template-based multiple document manager.
+*/
+class CMultiDocumentManagerBase: public idoc::CTmplBasedDocumentManagerBase
+{
+public:
+	enum ModelId
+	{
+		MI_UNDO_MANAGER = 1,
+		MI_DOCUMENT
+	};
+
+	/**
+		Default constructor.
+	*/
+	CMultiDocumentManagerBase();
+
+	// reimplemented (idoc::IDocumentManager)
+	virtual idoc::IUndoManager* GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const override;
+	virtual int GetDocumentsCount() const override;
+	virtual istd::IChangeable& GetDocumentFromIndex(int index, DocumentInfo* documentInfoPtr = NULL) const override;
+	virtual int GetViewsCount(int documentIndex) const override;
+	virtual istd::IPolymorphic* GetViewFromIndex(int documentIndex, int viewIndex) const override;
+	virtual istd::IPolymorphic* GetActiveView() const override;
+	virtual void SetActiveView(istd::IPolymorphic* viewPtr) override;
+	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view, DocumentInfo* documentInfoPtr = NULL) const override;
+	virtual istd::IPolymorphic* AddViewToDocument(const istd::IChangeable& document, const QByteArray& viewTypeId = QByteArray()) override;
+	virtual QByteArray GetDocumentTypeId(const istd::IChangeable& document) const override;
+	virtual bool InsertNewDocument(
+				const QByteArray& documentTypeId,
+				bool createView = true,
+				const QByteArray& viewTypeId = "",
+				istd::IChangeableSharedPtr* newDocumentPtr = nullptr,
+				bool beQuiet = false,
+				bool* ignoredPtr = NULL) override;
+	virtual bool OpenDocument(
+				const QByteArray* documentTypeIdPtr,
+				const QString* fileNamePtr = NULL,
+				bool createView = true,
+				const QByteArray& viewTypeId = "",
+				istd::IChangeableSharedPtr* documentPtr = nullptr,
+				FileToTypeMap* loadedMapPtr = NULL,
+				bool beQuiet = false,
+				bool* ignoredPtr = NULL,
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
+	virtual bool SaveDocument(
+				int documentIndex = -1,
+				bool requestFileName = false,
+				FileToTypeMap* savedMapPtr = NULL,
+				bool beQuiet = false,
+				bool* ignoredPtr = NULL,
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
+	virtual bool SaveDirtyDocuments(bool beQuiet = false, bool* ignoredPtr = NULL) override;
+	virtual bool CloseDocument(int documentIndex = -1, bool beQuiet = false, bool* ignoredPtr = NULL) override;
+	virtual bool CloseView(istd::IPolymorphic* viewPtr = NULL, bool beQuiet = false, bool* ignoredPtr = NULL) override;
+
+protected:
+	typedef istd::IChangeableSharedPtr DocumentPtr;
+	typedef idoc::IUndoManagerSharedPtr UndoManagerPtr;
+	typedef idoc::IDocumentTemplate::ViewSharedPtr ViewPtr;
+	struct ViewInfo
+	{
+		ViewPtr viewPtr;
+		QByteArray viewTypeId;
+	};
+	typedef QList<ViewInfo> Views;
+
+
+	/**
+		Document data definition.
+	*/
+	struct SingleDocumentData: public DocumentInfo, public imod::CMultiModelDispatcherBase
+	{
+		SingleDocumentData(
+					CMultiDocumentManagerBase* parentPtr,
+					const QByteArray& documentTypeId,
+					DocumentPtr& documentPtr);
+
+		virtual ~SingleDocumentData();
+
+		CMultiDocumentManagerBase* parentPtr;
+		DocumentPtr documentPtr;
+		UndoManagerPtr undoManagerPtr;
+		Views views;
+
+	protected:
+		// reimplemented (imod::CMultiModelDispatcherBase)
+		virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) override;
+	};
+
+	/**
+		Open single document using its file path.
+		\param	filePath		file path.
+		\param	createView		if true, instance of view will be created.
+		\param	viewTypeId		optional view type ID should be created.
+		\param	documentTypeId	output parameter returning loaded ducument type ID.
+		\return	instance of created document or NULL if error is occured.
+	*/
+	virtual istd::IChangeableSharedPtr OpenSingleDocument(
+				const QString& filePath,
+				bool createView,
+				const QByteArray& viewTypeId,
+				QByteArray& documentTypeId,
+				bool beQuiet,
+				bool* ignoredPtr,
+				ibase::IProgressManager* progressManagerPtr);
+
+	virtual void CloseAllDocuments();
+
+	/**
+		Get internal document data object.
+	*/
+	SingleDocumentData& GetSingleDocumentData(int index) const;
+
+	/**
+		Get document info assigned to active view.
+	*/
+	SingleDocumentData* GetActiveDocumentInfo() const;
+
+	/**
+		Get document info assigned to specified view.
+	*/
+	SingleDocumentData* GetDocumentInfoFromView(const istd::IPolymorphic& view) const;
+
+	/**
+		Get document info assigned to specified file.
+	*/
+	SingleDocumentData* GetDocumentInfoFromPath(const QString& filePath) const;
+
+	/**
+		Get position index of the given document in the document list.
+	*/
+	int GetDocumentIndex(const SingleDocumentData& document) const;
+
+	/**
+		Create instance of specified document without attaching to this manager.
+	*/
+	virtual SingleDocumentData* CreateUnregisteredDocument(
+				const QByteArray& documentTypeId,
+				bool createView,
+				const QByteArray& viewTypeId,
+				bool initialize,
+				bool beQuiet,
+				bool* ignoredPtr) const;
+
+	/**
+		Register (attach) created document as new working document.
+	*/
+	bool RegisterDocument(SingleDocumentData* documentPtr);
+
+	// abstract methods
+
+	/**
+		Called after view is registered.
+	*/
+	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr, const SingleDocumentData& documentData) = 0;
+
+	/**
+		Called before view is removed.
+	*/
+	virtual void OnViewRemoved(istd::IPolymorphic* viewPtr) = 0;
+
+	/**
+		Gets open file names.
+	*/
+	virtual QStringList GetOpenFilePaths(const QByteArray* documentTypeIdPtr = NULL) const  = 0;
+
+	/**
+		Gets save file name.
+	*/
+	virtual QString GetSaveFilePath(const QByteArray& documentTypeId, const istd::IChangeable* dataObjectPtr, const QString& currentFilePath) const = 0;
+
+	/**
+		Query user if this document should be saved.
+		\param	info		document info of document will be closed.
+		\param	ignoredPtr	optional return flag indicating that user ignored this close operation.
+	*/
+	virtual bool QueryDocumentSave(const SingleDocumentData& info, bool* ignoredPtr) = 0;
+
+	/**
+		Serializes open documents information
+	*/
+	bool SerializeOpenDocumentList(iser::IArchive& archive);
+
+	/**
+		Execute after document saved
+	*/
+	virtual void OnDocumentSaved();
+
+protected:
+	typedef istd::TPointerVector<SingleDocumentData> DocumentInfos;
+
+	DocumentInfos m_documentInfos;
+
+	istd::IPolymorphic* m_activeViewPtr;
+};
+
+
+} // namespace idoc
+
+

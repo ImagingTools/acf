@@ -1,0 +1,18 @@
+import qbs.base 1.0
+import AcfLibrary as AcfLibrary
+
+AcfLibrary{
+	files: ["../*.h", "../*.cpp", "../*.ui"]
+
+	Depends{ name: "ifilegui" }
+	Depends{ name: "idoc" }
+	Depends{ name: "Qt.widgets" }
+	Depends{ name: "Qt.gui" }
+
+	Export{
+		Depends{ name: "ifilegui" }
+		Depends{ name: "idoc" }
+		Depends{ name: "Qt.gui" }
+		Depends{ name: "Qt.widgets" }
+	}
+}

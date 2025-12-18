@@ -1,0 +1,92 @@
+#ifndef iqtprm_CFileNameParamGuiComp_included
+#define iqtprm_CFileNameParamGuiComp_included
+
+
+// Qt includes
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000 && QT_VERSION < 0x060000
+#include <QtWidgets/QFileSystemModel>
+#else
+#include <QtGui/QFileSystemModel>
+#endif
+
+// ACF includes
+#include <ifile/IFileTypeInfo.h>
+
+#include <ifile/IFileNameParam.h>
+
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+
+#include <GeneratedFiles/iqtprm/ui_CFileNameParamGuiComp.h>
+
+
+namespace iqtprm
+{
+
+
+class CFileNameParamGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
+			Ui::CFileNameParamGuiComp,
+			ifile::IFileNameParam>
+{
+	Q_OBJECT
+
+public:
+	typedef iqtgui::TDesignerGuiObserverCompBase<
+				Ui::CFileNameParamGuiComp,
+				ifile::IFileNameParam> BaseClass;
+
+	I_BEGIN_COMPONENT(CFileNameParamGuiComp);
+		I_ASSIGN(m_pathLabelAttrPtr, "PathLabel", "Label for the file editor", false, "Directory");
+		I_ASSIGN(m_startHintAttrPtr, "StartHint", "Start hint for the editor", false, "<Enter path>");
+		I_ASSIGN(m_fileTypeInfoPtr, "FileTypeInfo", "Allows to retrieve optional file type information for file selection dialog", false, "FileTypeInfo");
+		I_ASSIGN(m_readOnlyAttrPtr, "ReadOnly", "True if read only", true, false);
+		I_ASSIGN(m_filesComboAttrPtr, "FilesComboBox", "Show combobox with files", true, true);
+		I_ASSIGN(m_labelWidthAttrPtr, "LabelWidth", "Fixed label width (in pixels)", false, 100);
+		I_ASSIGN(m_defaultDirPtr, "DefaultPath", "Default path to search", false, "C:/");
+		I_ASSIGN(m_showBrowseButtonAttrPtr, "ShowBrowseButton", "If enabled, the browse button will be shown", true, true);
+	I_END_COMPONENT;
+
+protected:
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiRetranslate() override;
+	virtual void OnGuiDesignChanged() override;
+
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void OnGuiModelAttached() override;
+	virtual void UpdateModel() const override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+
+protected Q_SLOTS:
+	void on_BrowseButton_clicked();
+	void on_DirEdit_editTextChanged(const QString& text);
+	void OnDirectoryUp();
+
+private:
+	void SetPathToEditor(const QString& path) const;
+	void MakeSelectionHint(const QString& text) const;
+	QIcon GetFileIcon(const QString& filePath) const;
+	void OnPathEdited(const QString& path) const;
+	QString GetPathFromEditor() const;
+	bool IsLabelNeeded() const;
+
+private:
+	I_TEXTATTR(m_pathLabelAttrPtr);
+	I_TEXTATTR(m_startHintAttrPtr);
+	I_ATTR(bool, m_readOnlyAttrPtr);
+	I_ATTR(bool, m_filesComboAttrPtr);
+	I_ATTR(int, m_labelWidthAttrPtr);
+	I_ATTR(bool,m_showBrowseButtonAttrPtr);
+	I_REF(ifile::IFileTypeInfo, m_fileTypeInfoPtr);
+	I_REF(ifile::IFileNameParam, m_defaultDirPtr);
+
+	QFileSystemModel m_directoryModel;
+};
+
+
+} // namespace iqtprm
+
+
+#endif // !iqtprm_CFileNameParamGuiComp_included
+
+

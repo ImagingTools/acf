@@ -1,0 +1,266 @@
+#ifndef iprm_CParamsManagerCompBase_included
+#define iprm_CParamsManagerCompBase_included
+
+
+// Qt includes
+#include <QtCore/QVector>
+
+// ACF includes
+#include <istd/TDelPtr.h>
+#include <imod/TModelWrap.h>
+#include <imod/CModelUpdateBridge.h>
+#include <icomp/CComponentBase.h>
+#include <iprm/IParamsSet.h>
+#include <iprm/ISelectionParam.h>
+#include <iprm/IOptionsManager.h>
+#include <iprm/IParamsManager.h>
+#include <iprm/CNameParam.h>
+
+
+namespace iprm
+{
+
+
+class CParamsManagerCompBaseAttr: public icomp::CComponentBase
+{
+public:
+	typedef icomp::CComponentBase BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(CParamsManagerCompBaseAttr);
+		I_ASSIGN(m_elementIndexParamIdAttrPtr, "ElementIndexParamId", "ID of index of returned parameter set in manager list", false, "Index");
+		I_ASSIGN(m_elementUuidParamIdAttrPtr, "ElementUuidParamId", "ID of object uuid of returned parameter set in manager list", false, "Uuid");
+		I_ASSIGN(m_elementNameParamIdAttrPtr, "ElementNameParamId", "ID of the name of returned parameter set in manager list", false, "Name");
+		I_ASSIGN(m_elementDescriptionParamIdAttrPtr, "ElementDescriptionParamId", "ID of the description of returned parameter set in manager list", false, "Description");
+		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of references to fixed parameter set", false);
+		I_ASSIGN_MULTI_0(m_fixedSetNamesAttrPtr, "FixedSetNames", "List of fixed parameter names", false);
+		I_ASSIGN_MULTI_0(m_fixedSetDescriptionsAttrPtr, "FixedSetDescriptions", "List of fixed parameter descriptions", false);
+		I_ASSIGN_MULTI_0(m_fixedSetIdsAttrPtr, "FixedSetIds", "List of fixed parameter IDs", false);
+		I_ASSIGN(m_defaultSetNameAttrPtr, "DefaultSetName", "Default name of parameter set. Use %1 to insert automatic enumeration, %0 to substitute name of the corresponding factory (MultiParams only)", true, "<noname>");
+		I_ASSIGN(m_serializeSelectionAttrPtr, "SerializeSelection", "If enabled, the current parameter set selection will be serialized", true, true);
+		I_ASSIGN(m_defaultSelectedIndexAttrPtr, "DefaultSelection", "If enabled, the given parameter set will be automatically selected", false, -1);
+		I_ASSIGN(m_allowDisabledAttrPtr, "AllowDisabled", "Control if disabled parameters are supported", true, false);
+		I_ASSIGN(m_supportEnablingAttrPtr, "SupportEnabling", "Control if enabling or disabling of parameters is allowed (works only if disabled parameters are supported)", true, true);
+		I_ASSIGN(m_allowEditFixedAttrPtr, "AllowEditFixed", "If enabled, the editing of fixed parameters is enabled", true, true);
+	I_END_COMPONENT;
+
+protected:
+	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
+	I_MULTITEXTATTR(m_fixedSetNamesAttrPtr);
+	I_MULTITEXTATTR(m_fixedSetDescriptionsAttrPtr);
+	I_MULTIATTR(QByteArray, m_fixedSetIdsAttrPtr);
+	I_TEXTATTR(m_defaultSetNameAttrPtr);
+	I_ATTR(bool, m_serializeSelectionAttrPtr);
+	I_ATTR(int, m_defaultSelectedIndexAttrPtr);
+	I_ATTR(bool, m_allowDisabledAttrPtr);
+	I_ATTR(bool, m_supportEnablingAttrPtr);
+	I_ATTR(bool, m_allowEditFixedAttrPtr);
+	I_ATTR(QByteArray, m_elementIndexParamIdAttrPtr);
+	I_ATTR(QByteArray, m_elementUuidParamIdAttrPtr);
+	I_ATTR(QByteArray, m_elementNameParamIdAttrPtr);
+	I_ATTR(QByteArray, m_elementDescriptionParamIdAttrPtr);
+};
+
+
+/**
+	Implementation of parameter manager.
+*/
+class CParamsManagerCompBase:
+			public CParamsManagerCompBaseAttr,
+			virtual public IParamsManager,
+			virtual public IOptionsManager
+{
+public:
+	typedef CParamsManagerCompBaseAttr BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(CParamsManagerCompBase);
+		I_REGISTER_INTERFACE(ISelectionParam);
+		I_REGISTER_INTERFACE(IParamsManager);
+		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_REGISTER_INTERFACE(IOptionsManager);
+		I_REGISTER_INTERFACE(IOptionsList);
+		I_REGISTER_SUBELEMENT(SelectedParams);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectedParams, iprm::IParamsSet, ExtractCurrentParams);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectedParams, iser::IObject, ExtractCurrentParams);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectedParams, iser::ISerializable, ExtractCurrentParams);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectedParams, istd::IChangeable, ExtractCurrentParams);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectedParams, imod::IModel, ExtractCurrentParams);
+
+		I_ASSIGN(m_parentSelectionCompPtr, "ParentSelection", "Parent selection component", false, "ParentSelection");
+	I_END_COMPONENT;
+
+	CParamsManagerCompBase();
+
+	bool IsNameUnique(const QString& name) const;
+
+	// reimplemented (iprm::IParamsManager)
+	virtual int InsertParamsSet(int typeIndex = -1, int index = -1) override;
+	virtual bool RemoveParamsSet(int index) override;
+	virtual bool SwapParamsSet(int index1, int index2) override;
+	virtual IParamsSet* GetParamsSet(int index) const override;
+	virtual iprm::IParamsSetUniquePtr CreateParameterSet(int typeIndex = -1, int index = -1) const override;
+	virtual int GetIndexOperationFlags(int index = -1) const override;
+	virtual bool SetIndexOperationFlags(int index, int flags) override;
+	virtual int GetParamsSetsCount() const override;
+	virtual QString GetParamsSetName(int index) const override;
+	virtual bool SetParamsSetName(int index, const QString& name) override;
+	virtual QString GetParamsSetDescription(int index) const override;
+	virtual void SetParamsSetDescription(int index, const QString& description) override;
+
+	// reimplemented (iprm::ISelectionParam)
+	virtual const IOptionsList* GetSelectionConstraints() const override;
+	virtual int GetSelectedOptionIndex() const override;
+	virtual bool SetSelectedOptionIndex(int index) override;
+	virtual ISelectionParam* GetSubselection(int index) const override;
+
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const override;
+	virtual int GetOptionsCount() const override;
+	virtual QString GetOptionName(int index) const override;
+	virtual QString GetOptionDescription(int index) const override;
+	virtual QByteArray GetOptionId(int index) const override;
+	virtual bool IsOptionEnabled(int index) const override;
+
+protected:
+	void EnsureParamsSetModelDetached(iprm::IParamsSet* paramsSetPtr) const;
+	int FindParamSetIndex(const QString& name) const;
+	int FindFixedParamSetIndex(const QString& name) const;
+
+	// virtual methods
+	virtual QString CalculateNewDefaultName(int typeIndex = -1) const;
+
+	// abstract methods
+
+	/**
+		Return \c true if creation of parameter sets is supported by the implementation.
+	*/
+	virtual bool IsParameterCreationSupported() const = 0;
+
+	/**
+		Get the number of parameter sets created at the run time.
+	*/
+	virtual int GetCreatedParamsSetsCount() const = 0;
+
+	/**
+		Create a new instance of the parameter set.
+	*/
+	virtual iprm::IParamsSetUniquePtr CreateParamsSetInstance(int typeIndex = -1) const = 0;
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated() override;
+
+protected:
+	int m_selectedIndex;
+
+	class ParamSet;
+
+	class UuidParam: virtual public INameParam
+	{
+	public:
+		UuidParam(const ParamSet& parent);
+
+		// reimplemented (iprm::INameParam)
+		virtual const QString& GetName() const override;
+		virtual void SetName(const QString& name) override;
+		virtual bool IsNameFixed() const override;
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive) override;
+
+	private:
+		mutable QString m_uuid;
+		const ParamSet& m_parent;
+	};
+
+	class ParamSet:
+				virtual public IParamsSet,
+				virtual public ISelectionParam,
+				virtual public INameParam
+	{
+	public:
+		ParamSet();
+
+		// reimplemented (iprm::IParamsSet)
+		virtual Ids GetParamIds(bool editableOnly = false) const override;
+		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
+		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
+
+		// reimplemented (iprm::ISelectionParam)
+		virtual const IOptionsList* GetSelectionConstraints() const override;
+		virtual int GetSelectedOptionIndex() const override;
+		virtual bool SetSelectedOptionIndex(int index) override;
+		virtual ISelectionParam* GetSubselection(int index) const override;
+
+		// reimplemented (iprm::INameParam)
+		virtual const QString& GetName() const override;
+		virtual void SetName(const QString& name) override;
+		virtual bool IsNameFixed() const override;
+
+		// reimplemented (iser::IObject)
+		virtual QByteArray GetFactoryId() const override;
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive) override;
+
+		// reimplemented (istd::IChangeable)
+		virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS) override;
+
+		iprm::IParamsSetSharedPtr paramSetPtr;
+		QByteArray uuid;
+		QString name;
+		iprm::CNameParam description;
+		bool isEnabled;
+		int userFlags;
+		CParamsManagerCompBase* parentPtr;
+		UuidParam uuidParam;
+		imod::CModelUpdateBridge updateBridge;
+	};
+	
+	class SelectedParams: virtual public IParamsSet
+	{
+	public:
+		SelectedParams();
+
+		// reimplemented (iprm::IParamsSet)
+		virtual Ids GetParamIds(bool editableOnly = false) const override;
+		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
+		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
+
+		// reimplemented (iser::IObject)
+		virtual QByteArray GetFactoryId() const override;
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive) override;
+
+		CParamsManagerCompBase* parentPtr;
+	};
+
+	typedef istd::TDelPtr<ParamSet> ParamSetPtr;
+
+	typedef QList<ParamSetPtr> ParamSets;
+
+	ParamSets m_paramSets;
+
+	imod::CModelUpdateBridge m_updateBridge;
+
+	QMap<int, int> m_fixedParamsSetFlagsMap;
+
+private:
+	// static template methods for subelement access
+	template <class InterfaceType>
+	static InterfaceType* ExtractCurrentParams(CParamsManagerCompBase& component)
+	{
+		return &component.m_selectedParams;
+	}
+
+	imod::TModelWrap<SelectedParams> m_selectedParams;
+
+	I_REF(ISelectionParam, m_parentSelectionCompPtr);
+};
+
+
+} // namespace iprm
+
+
+#endif // !iprm_CParamsManagerCompBase_included
+
+

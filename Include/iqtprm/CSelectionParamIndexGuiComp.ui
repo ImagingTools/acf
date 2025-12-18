@@ -1,0 +1,89 @@
+<ui version="4.0" >
+ <class>CSelectionParamIndexGuiComp</class>
+ <widget class="QWidget" name="CSelectionParamIndexGuiComp" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>473</width>
+    <height>25</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" >
+   <property name="margin" >
+    <number>0</number>
+   </property>
+   <item row="0" column="0" >
+    <widget class="QLabel" name="label_2" >
+     <property name="text" >
+      <string>Iterations</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" >
+    <widget class="QSlider" name="OptionIndexSlider" >
+     <property name="minimum" >
+      <number>0</number>
+     </property>
+     <property name="maximum" >
+      <number>10</number>
+     </property>
+     <property name="pageStep" >
+      <number>100</number>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2" >
+    <widget class="QSpinBox" name="OptionIndexSpin" >
+     <property name="minimum" >
+      <number>0</number>
+     </property>
+     <property name="maximum" >
+      <number>1000</number>
+     </property>
+     <property name="singleStep" >
+      <number>1</number>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>OptionIndexSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>OptionIndexSpin</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>244</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>471</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OptionIndexSpin</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>OptionIndexSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>471</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>353</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
