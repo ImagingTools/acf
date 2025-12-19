@@ -43,14 +43,13 @@ bool CAffine3d::Serialize(iser::IArchive& archive)
 	bool retVal = true;
 	
 	retVal = retVal && archive.BeginTag(s_matrixTag);
-	// Matrix serialization needs implementation in CMatrix3d
-	// For now, serialize as individual elements
+	// Serialize matrix elements
 	for (int i = 0; i < 3; i++){
 		for (int j = 0; j < 3; j++){
 			double value = m_matrix.GetAt(i, j);
 			retVal = retVal && archive.Process(value);
 			if (archive.IsLoading()){
-				const_cast<CMatrix3d&>(m_matrix).SetAt(i, j, value);
+				m_matrix.SetAt(i, j, value);
 			}
 		}
 	}

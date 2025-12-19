@@ -1,10 +1,6 @@
 #include "CI3dTest.h"
 
 
-// Register test
-QTEST_MAIN(CI3dTest)
-
-
 void CI3dTest::initTestCase()
 {
 	// Setup
