@@ -1,5 +1,4 @@
-#ifndef icomp_CCachedEnvironmentManager_included
-#define icomp_CCachedEnvironmentManager_included
+#pragma once
 
 
 // Qt includes
@@ -60,8 +59,5 @@ private:
 
 
 } // namespace icomp
-
-
-#endif // !icomp_CCachedEnvironmentManager_included
 
 
