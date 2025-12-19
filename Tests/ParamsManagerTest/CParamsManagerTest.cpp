@@ -9,7 +9,7 @@
 
 // protected slots
 
-void CParamsManagerTest::initTestCase()
+void CParamsManagerTestRunner::initTestCase()
 {
 	m_testPartituraInstanceCompPtr.reset(new CParamsManagerTest);
 
@@ -19,7 +19,7 @@ void CParamsManagerTest::initTestCase()
 }
 
 
-void CParamsManagerTest::GetIndexOperationFlagsTest()
+void CParamsManagerTestRunner::GetIndexOperationFlagsTest()
 {
 	// Test general flags (negative index)
 	int generalFlags = m_paramsManagerPtr->GetIndexOperationFlags(-1);
@@ -34,7 +34,7 @@ void CParamsManagerTest::GetIndexOperationFlagsTest()
 }
 
 
-void CParamsManagerTest::SetIndexOperationFlagsTest()
+void CParamsManagerTestRunner::SetIndexOperationFlagsTest()
 {
 	// Get initial count
 	int initialCount = m_paramsManagerPtr->GetParamsSetsCount();
@@ -56,7 +56,7 @@ void CParamsManagerTest::SetIndexOperationFlagsTest()
 }
 
 
-void CParamsManagerTest::GetParamsSetsCountTest()
+void CParamsManagerTestRunner::GetParamsSetsCountTest()
 {
 	int count = m_paramsManagerPtr->GetParamsSetsCount();
 	
@@ -65,7 +65,7 @@ void CParamsManagerTest::GetParamsSetsCountTest()
 }
 
 
-void CParamsManagerTest::GetParamsTypeConstraintsTest()
+void CParamsManagerTestRunner::GetParamsTypeConstraintsTest()
 {
 	const iprm::IOptionsList* constraints = m_paramsManagerPtr->GetParamsTypeConstraints();
 	
@@ -75,7 +75,7 @@ void CParamsManagerTest::GetParamsTypeConstraintsTest()
 }
 
 
-void CParamsManagerTest::InsertParamsSetTest()
+void CParamsManagerTestRunner::InsertParamsSetTest()
 {
 	int initialCount = m_paramsManagerPtr->GetParamsSetsCount();
 	
@@ -100,7 +100,7 @@ void CParamsManagerTest::InsertParamsSetTest()
 }
 
 
-void CParamsManagerTest::RemoveParamsSetTest()
+void CParamsManagerTestRunner::RemoveParamsSetTest()
 {
 	int initialCount = m_paramsManagerPtr->GetParamsSetsCount();
 	
@@ -123,7 +123,7 @@ void CParamsManagerTest::RemoveParamsSetTest()
 }
 
 
-void CParamsManagerTest::SwapParamsSetTest()
+void CParamsManagerTestRunner::SwapParamsSetTest()
 {
 	// Insert two new parameter sets
 	int index1 = m_paramsManagerPtr->InsertParamsSet();
@@ -157,7 +157,7 @@ void CParamsManagerTest::SwapParamsSetTest()
 }
 
 
-void CParamsManagerTest::GetParamsSetTest()
+void CParamsManagerTestRunner::GetParamsSetTest()
 {
 	// Test getting the first fixed parameter set
 	const iprm::IParamsSet* paramsSet = m_paramsManagerPtr->GetParamsSet(0);
@@ -169,7 +169,7 @@ void CParamsManagerTest::GetParamsSetTest()
 }
 
 
-void CParamsManagerTest::CreateParameterSetTest()
+void CParamsManagerTestRunner::CreateParameterSetTest()
 {
 	// Create a parameter set without copying existing data
 	iprm::IParamsSetUniquePtr newParamsSet = m_paramsManagerPtr->CreateParameterSet(-1, -1);
@@ -181,7 +181,7 @@ void CParamsManagerTest::CreateParameterSetTest()
 }
 
 
-void CParamsManagerTest::GetSetParamsSetNameTest()
+void CParamsManagerTestRunner::GetSetParamsSetNameTest()
 {
 	// Insert a new parameter set
 	int newIndex = m_paramsManagerPtr->InsertParamsSet();
@@ -201,7 +201,7 @@ void CParamsManagerTest::GetSetParamsSetNameTest()
 }
 
 
-void CParamsManagerTest::GetSetParamsSetDescriptionTest()
+void CParamsManagerTestRunner::GetSetParamsSetDescriptionTest()
 {
 	// Insert a new parameter set
 	int newIndex = m_paramsManagerPtr->InsertParamsSet();
@@ -220,7 +220,7 @@ void CParamsManagerTest::GetSetParamsSetDescriptionTest()
 }
 
 
-void CParamsManagerTest::SerializeTest()
+void CParamsManagerTestRunner::SerializeTest()
 {
 	// Insert a parameter set and configure it
 	int newIndex = m_paramsManagerPtr->InsertParamsSet();
@@ -251,7 +251,7 @@ void CParamsManagerTest::SerializeTest()
 }
 
 
-void CParamsManagerTest::CopyTest()
+void CParamsManagerTestRunner::CopyTest()
 {
 	// Insert a parameter set
 	int sourceIndex = m_paramsManagerPtr->InsertParamsSet();
@@ -269,10 +269,10 @@ void CParamsManagerTest::CopyTest()
 }
 
 
-void CParamsManagerTest::cleanupTestCase()
+void CParamsManagerTestRunner::cleanupTestCase()
 {
 	m_testPartituraInstanceCompPtr.reset();
 }
 
 
-I_ADD_TEST(CParamsManagerTest);
+I_ADD_TEST(CParamsManagerTestRunner);

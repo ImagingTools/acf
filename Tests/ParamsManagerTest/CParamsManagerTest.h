@@ -10,7 +10,7 @@
 #include <itest/CStandardTestExecutor.h>
 #include <GeneratedFiles/ParamsManagerTest/CParamsManagerTest.h>
 
-class CParamsManagerTest: public QObject
+class CParamsManagerTestRunner: public QObject
 {
 	Q_OBJECT
 private slots:

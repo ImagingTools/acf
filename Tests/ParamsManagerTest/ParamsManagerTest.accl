@@ -2,7 +2,7 @@
 <LoadSettings>
     <Partitura>
         <Classes>
-            <Class ClassName="CParamsManagerTest" Flags="1"/>
+            <Class ClassName="CParamsManagerTestRunner" Flags="1"/>
         </Classes>
     </Partitura>
 </LoadSettings>
