@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LoadSettings>
+    <Partitura>
+        <Classes>
+            <Class ClassName="CParamsManagerTest" Flags="1"/>
+        </Classes>
+    </Partitura>
+</LoadSettings>
