@@ -22,3 +22,6 @@ ui_*.h
 
 # Generated files
 *.autosave
+
+# CodeQL
+_codeql_detected_source_root
