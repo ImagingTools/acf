@@ -18,11 +18,19 @@ private Q_SLOTS:
 	void initTestCase();
 
 	void GetSetTest();
+	void SetSameIdTest();
+	void SetEmptyIdTest();
+	void GetSupportedOperationsTest();
 	void ResetTest();
+	void ResetEmptyTest();
 	void SerializeTest();
 	void CopyFromTest();
+	void CopyFromIncompatibleTest();
 	void CloneTest();
+	void CloneWithModeTest();
 	void IsEqualTest();
+	void IsEqualDifferentIdTest();
+	void IsEqualIncompatibleTest();
 
 	void cleanupTestCase();
 
