@@ -22,16 +22,24 @@ set(TEST_SOURCES
 	${PROJECT_SOURCE_DIR}/../CRandomNumberTest.cpp
 	${PROJECT_SOURCE_DIR}/../CDoubleTest.cpp
 	${PROJECT_SOURCE_DIR}/../CIndex2dTest.cpp
+	${PROJECT_SOURCE_DIR}/../CVector2dTest.cpp
 	${PROJECT_SOURCE_DIR}/../CVector3dTest.cpp
 	${PROJECT_SOURCE_DIR}/../CMatrix3dTest.cpp
+	${PROJECT_SOURCE_DIR}/../CMemoryArchiveTest.cpp
+	${PROJECT_SOURCE_DIR}/../CBitManipTest.cpp
+	${PROJECT_SOURCE_DIR}/../CCrcCalculatorTest.cpp
 )
 
 set(TEST_HEADERS
 	${PROJECT_SOURCE_DIR}/../CRandomNumberTest.h
 	${PROJECT_SOURCE_DIR}/../CDoubleTest.h
 	${PROJECT_SOURCE_DIR}/../CIndex2dTest.h
+	${PROJECT_SOURCE_DIR}/../CVector2dTest.h
 	${PROJECT_SOURCE_DIR}/../CVector3dTest.h
 	${PROJECT_SOURCE_DIR}/../CMatrix3dTest.h
+	${PROJECT_SOURCE_DIR}/../CMemoryArchiveTest.h
+	${PROJECT_SOURCE_DIR}/../CBitManipTest.h
+	${PROJECT_SOURCE_DIR}/../CCrcCalculatorTest.h
 )
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCES} ${TEST_HEADERS})
