@@ -701,8 +701,8 @@ void CI2dTest::DoAnnulusSegmentTest()
 	i2d::CVector2d point2(5.0, 20.0);
 	QVERIFY(segment2.Contains(point2));
 	
-	// Point outside the angle range should not be inside
-	i2d::CVector2d point3(10.0, 15.0); // angle = -PI/2 (or 3*PI/2), outside [0, PI] range
+	// Point at (10, 15) relative to center (10, 20) is at angle -PI/2 (270°), outside [0, PI] range
+	i2d::CVector2d point3(10.0, 15.0);
 	QVERIFY(!segment2.Contains(point3));
 
 	// Test angle setters
@@ -1005,7 +1005,6 @@ void CI2dTest::DoRectTest()
 	istd::CIndex2d gotLeftTop = rect3.GetLeftTop();
 	QVERIFY(gotLeftTop.GetX() == 5);
 	QVERIFY(gotLeftTop.GetY() == 5);
-	
 	istd::CIndex2d gotRightBottom = rect3.GetRightBottom();
 	QVERIFY(gotRightBottom.GetX() == 15);
 	QVERIFY(gotRightBottom.GetY() == 15);
