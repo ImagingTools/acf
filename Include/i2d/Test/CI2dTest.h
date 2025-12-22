@@ -21,6 +21,15 @@ private Q_SLOTS:
 	void DoAnnulusTest();
 	void DoPolylineTest();
 	void DoPolygonTest();
+	void DoAffineTransformation2dTest();
+	void DoAnnulusSegmentTest();
+	void DoArcTest();
+	void DoDirection2dTest();
+	void DoOrientedCircleTest();
+	void DoParallelogramTest();
+	void DoPolypointTest();
+	void DoQuadrangleTest();
+	void DoRectTest();
 };
 
 
