@@ -12,6 +12,10 @@
 #include <i2d/CRectangle.h>
 #include <i2d/CLine2d.h>
 #include <i2d/CMatrix2d.h>
+#include <i2d/CAffine2d.h>
+#include <i2d/CAnnulus.h>
+#include <i2d/CPolyline.h>
+#include <i2d/CPolygon.h>
 #include <itest/CStandardTestExecutor.h>
 
 #ifndef M_PI
@@ -358,6 +362,258 @@ void CI2dTest::DoMatrix2dTest()
 	i2d::CMatrix2d inverse = mat5.GetInverted();
 	QVERIFY(qAbs(inverse.GetAt(0, 0) - 0.5) < I_EPSILON);
 	QVERIFY(qAbs(inverse.GetAt(1, 1) - 1.0/3.0) < I_EPSILON);
+}
+
+
+void CI2dTest::DoAffine2dTest()
+{
+	// Test default constructor
+	i2d::CAffine2d affine1;
+	affine1.Reset(); // Identity transformation
+	i2d::CVector2d v1(1.0, 2.0);
+	i2d::CVector2d result1 = affine1.GetApply(v1);
+	QVERIFY(qAbs(result1.GetX() - 1.0) < I_EPSILON);
+	QVERIFY(qAbs(result1.GetY() - 2.0) < I_EPSILON);
+
+	// Test translation only constructor
+	i2d::CAffine2d affine2(i2d::CVector2d(5.0, 10.0));
+	i2d::CVector2d result2 = affine2.GetApply(v1);
+	QVERIFY(qAbs(result2.GetX() - 6.0) < I_EPSILON);
+	QVERIFY(qAbs(result2.GetY() - 12.0) < I_EPSILON);
+
+	// Test translation getter/setter
+	QVERIFY(qAbs(affine2.GetTranslation().GetX() - 5.0) < I_EPSILON);
+	QVERIFY(qAbs(affine2.GetTranslation().GetY() - 10.0) < I_EPSILON);
+	
+	affine2.SetTranslation(i2d::CVector2d(3.0, 4.0));
+	QVERIFY(qAbs(affine2.GetTranslation().GetX() - 3.0) < I_EPSILON);
+	QVERIFY(qAbs(affine2.GetTranslation().GetY() - 4.0) < I_EPSILON);
+
+	// Test with rotation and scale
+	i2d::CAffine2d affine3;
+	affine3.Reset(i2d::CVector2d(0.0, 0.0), M_PI / 2.0, 2.0); // 90 degrees, scale 2
+	i2d::CVector2d v2(1.0, 0.0);
+	i2d::CVector2d result3 = affine3.GetApply(v2);
+	QVERIFY(qAbs(result3.GetX()) < I_BIG_EPSILON);
+	QVERIFY(qAbs(result3.GetY() - 2.0) < I_BIG_EPSILON);
+
+	// Test deformation matrix
+	i2d::CMatrix2d deform(2.0, 0.0, 0.0, 3.0);
+	i2d::CAffine2d affine4(deform, i2d::CVector2d(1.0, 1.0));
+	i2d::CVector2d v3(1.0, 1.0);
+	i2d::CVector2d result4 = affine4.GetApply(v3);
+	QVERIFY(qAbs(result4.GetX() - 3.0) < I_EPSILON); // 2*1 + 1 = 3
+	QVERIFY(qAbs(result4.GetY() - 4.0) < I_EPSILON); // 3*1 + 1 = 4
+
+	// Test apply to delta (no translation)
+	i2d::CVector2d delta(1.0, 1.0);
+	i2d::CVector2d resultDelta = affine4.GetApplyToDelta(delta);
+	QVERIFY(qAbs(resultDelta.GetX() - 2.0) < I_EPSILON); // 2*1
+	QVERIFY(qAbs(resultDelta.GetY() - 3.0) < I_EPSILON); // 3*1
+
+	// Test combined transformation
+	i2d::CAffine2d affine5;
+	affine5.Reset(i2d::CVector2d(1.0, 0.0));
+	i2d::CAffine2d affine6;
+	affine6.Reset(i2d::CVector2d(0.0, 1.0));
+	i2d::CAffine2d combined = affine5.GetApply(affine6);
+	i2d::CVector2d v4(0.0, 0.0);
+	i2d::CVector2d resultCombined = combined.GetApply(v4);
+	QVERIFY(qAbs(resultCombined.GetX() - 1.0) < I_EPSILON);
+	QVERIFY(qAbs(resultCombined.GetY() - 1.0) < I_EPSILON);
+
+	// Test inverted transformation
+	i2d::CAffine2d affine7;
+	affine7.Reset(i2d::CVector2d(5.0, 10.0));
+	i2d::CVector2d v5(10.0, 20.0);
+	i2d::CVector2d forward = affine7.GetApply(v5);
+	i2d::CVector2d backward = affine7.GetInvertedApply(forward);
+	QVERIFY(qAbs(backward.GetX() - v5.GetX()) < I_BIG_EPSILON);
+	QVERIFY(qAbs(backward.GetY() - v5.GetY()) < I_BIG_EPSILON);
+}
+
+
+void CI2dTest::DoAnnulusTest()
+{
+	// Test default constructor
+	i2d::CAnnulus annulus1;
+	annulus1.SetPosition(i2d::CVector2d(0.0, 0.0));
+	annulus1.SetInnerRadius(5.0);
+	annulus1.SetOuterRadius(10.0);
+	QVERIFY(qAbs(annulus1.GetInnerRadius() - 5.0) < I_EPSILON);
+	QVERIFY(qAbs(annulus1.GetOuterRadius() - 10.0) < I_EPSILON);
+
+	// Test parameterized constructor
+	i2d::CAnnulus annulus2(i2d::CVector2d(10.0, 20.0), 3.0, 8.0);
+	QVERIFY(qAbs(annulus2.GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(annulus2.GetY() - 20.0) < I_EPSILON);
+	QVERIFY(qAbs(annulus2.GetInnerRadius() - 3.0) < I_EPSILON);
+	QVERIFY(qAbs(annulus2.GetOuterRadius() - 8.0) < I_EPSILON);
+
+	// Test validity
+	QVERIFY(annulus2.IsAnnulusValid());
+
+	// Test with invalid radii (inner > outer)
+	i2d::CAnnulus annulus3(i2d::CVector2d(0.0, 0.0), 10.0, 5.0);
+	QVERIFY(!annulus3.IsAnnulusValid());
+
+	// Test SetInnerOuterRadius
+	annulus3.SetInnerOuterRadius(2.0, 7.0);
+	QVERIFY(qAbs(annulus3.GetInnerRadius() - 2.0) < I_EPSILON);
+	QVERIFY(qAbs(annulus3.GetOuterRadius() - 7.0) < I_EPSILON);
+	QVERIFY(annulus3.IsAnnulusValid());
+
+	// Test inner circle
+	i2d::CCircle innerCircle = annulus2.GetInnerCircle();
+	QVERIFY(qAbs(innerCircle.GetRadius() - 3.0) < I_EPSILON);
+	QVERIFY(qAbs(innerCircle.GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(innerCircle.GetY() - 20.0) < I_EPSILON);
+
+	// Test outer circle
+	i2d::CCircle outerCircle = annulus2.GetOuterCircle();
+	QVERIFY(qAbs(outerCircle.GetRadius() - 8.0) < I_EPSILON);
+	QVERIFY(qAbs(outerCircle.GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(outerCircle.GetY() - 20.0) < I_EPSILON);
+
+	// Test equality operator
+	i2d::CAnnulus annulus4(i2d::CVector2d(10.0, 20.0), 3.0, 8.0);
+	QVERIFY(annulus2 == annulus4);
+
+	// Test inequality
+	i2d::CAnnulus annulus5(i2d::CVector2d(10.0, 20.0), 3.0, 9.0);
+	QVERIFY(!(annulus2 == annulus5));
+
+	// Test bounding box
+	i2d::CRectangle bbox = annulus2.GetBoundingBox();
+	QVERIFY(qAbs(bbox.GetPosition().GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(bbox.GetPosition().GetY() - 20.0) < I_EPSILON);
+	QVERIFY(qAbs(bbox.GetWidth() - 16.0) < I_EPSILON);  // 2 * outer radius
+	QVERIFY(qAbs(bbox.GetHeight() - 16.0) < I_EPSILON); // 2 * outer radius
+}
+
+
+void CI2dTest::DoPolylineTest()
+{
+	// Test default constructor
+	i2d::CPolyline polyline1;
+	QVERIFY(polyline1.IsEmpty());
+	QVERIFY(polyline1.GetNodesCount() == 0);
+
+	// Test adding nodes
+	polyline1.InsertNode(i2d::CVector2d(0.0, 0.0));
+	polyline1.InsertNode(i2d::CVector2d(10.0, 0.0));
+	polyline1.InsertNode(i2d::CVector2d(10.0, 10.0));
+	QVERIFY(polyline1.GetNodesCount() == 3);
+	QVERIFY(!polyline1.IsEmpty());
+
+	// Test getting nodes
+	QVERIFY(qAbs(polyline1.GetNodePos(0).GetX() - 0.0) < I_EPSILON);
+	QVERIFY(qAbs(polyline1.GetNodePos(0).GetY() - 0.0) < I_EPSILON);
+	QVERIFY(qAbs(polyline1.GetNodePos(1).GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(polyline1.GetNodePos(1).GetY() - 0.0) < I_EPSILON);
+	QVERIFY(qAbs(polyline1.GetNodePos(2).GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(polyline1.GetNodePos(2).GetY() - 10.0) < I_EPSILON);
+
+	// Test closed state
+	QVERIFY(!polyline1.IsClosed()); // Open by default
+	polyline1.SetClosed(true);
+	QVERIFY(polyline1.IsClosed());
+
+	// Test segments count
+	int segmentsOpen = 2; // For 3 points open: 2 segments
+	int segmentsClosed = 3; // For 3 points closed: 3 segments
+	polyline1.SetClosed(false);
+	QVERIFY(polyline1.GetSegmentsCount() == segmentsOpen);
+	polyline1.SetClosed(true);
+	QVERIFY(polyline1.GetSegmentsCount() == segmentsClosed);
+
+	// Test length calculation
+	polyline1.SetClosed(false);
+	double expectedLength = 20.0; // 10 + 10
+	QVERIFY(qAbs(polyline1.GetLength() - expectedLength) < I_EPSILON);
+
+	// Test getting segment line
+	i2d::CLine2d segment1 = polyline1.GetSegmentLine(0);
+	QVERIFY(qAbs(segment1.GetPoint1().GetX() - 0.0) < I_EPSILON);
+	QVERIFY(qAbs(segment1.GetPoint1().GetY() - 0.0) < I_EPSILON);
+	QVERIFY(qAbs(segment1.GetPoint2().GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(segment1.GetPoint2().GetY() - 0.0) < I_EPSILON);
+
+	// Test setting node position
+	polyline1.SetNodePos(1, i2d::CVector2d(5.0, 5.0));
+	QVERIFY(qAbs(polyline1.GetNodePos(1).GetX() - 5.0) < I_EPSILON);
+	QVERIFY(qAbs(polyline1.GetNodePos(1).GetY() - 5.0) < I_EPSILON);
+
+	// Test removing node
+	polyline1.RemoveNode(1);
+	QVERIFY(polyline1.GetNodesCount() == 2);
+	QVERIFY(qAbs(polyline1.GetNodePos(1).GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(polyline1.GetNodePos(1).GetY() - 10.0) < I_EPSILON);
+
+	// Test clearing
+	polyline1.Clear();
+	QVERIFY(polyline1.IsEmpty());
+	QVERIFY(polyline1.GetNodesCount() == 0);
+}
+
+
+void CI2dTest::DoPolygonTest()
+{
+	// Test default constructor
+	i2d::CPolygon polygon1;
+	QVERIFY(polygon1.IsEmpty());
+	QVERIFY(polygon1.GetNodesCount() == 0);
+
+	// Test adding nodes to create a square
+	polygon1.InsertNode(i2d::CVector2d(0.0, 0.0));
+	polygon1.InsertNode(i2d::CVector2d(10.0, 0.0));
+	polygon1.InsertNode(i2d::CVector2d(10.0, 10.0));
+	polygon1.InsertNode(i2d::CVector2d(0.0, 10.0));
+	QVERIFY(polygon1.GetNodesCount() == 4);
+
+	// Test contains point
+	QVERIFY(polygon1.Contains(i2d::CVector2d(5.0, 5.0))); // Inside
+	QVERIFY(!polygon1.Contains(i2d::CVector2d(15.0, 15.0))); // Outside
+
+	// Test area calculation
+	double area = polygon1.GetArea();
+	QVERIFY(qAbs(area - 100.0) < I_EPSILON); // 10 * 10 = 100
+
+	// Test perimeter calculation
+	double perimeter = polygon1.GetPerimeter();
+	QVERIFY(qAbs(perimeter - 40.0) < I_EPSILON); // 4 * 10 = 40
+
+	// Test outline length (should be same as perimeter for polygon)
+	double outlineLength = polygon1.GetOutlineLength();
+	QVERIFY(qAbs(outlineLength - 40.0) < I_EPSILON);
+
+	// Test QPolygonF conversion
+	QPolygonF qpoly = polygon1;
+	QVERIFY(qpoly.size() == 4);
+	QVERIFY(qAbs(qpoly[0].x() - 0.0) < I_EPSILON);
+	QVERIFY(qAbs(qpoly[0].y() - 0.0) < I_EPSILON);
+
+	// Test constructor from QPolygonF
+	QPolygonF qpoly2;
+	qpoly2 << QPointF(1.0, 1.0) << QPointF(2.0, 1.0) << QPointF(2.0, 2.0);
+	i2d::CPolygon polygon2(qpoly2);
+	QVERIFY(polygon2.GetNodesCount() == 3);
+	QVERIFY(qAbs(polygon2.GetNodePos(0).GetX() - 1.0) < I_EPSILON);
+	QVERIFY(qAbs(polygon2.GetNodePos(0).GetY() - 1.0) < I_EPSILON);
+
+	// Test reverse nodes
+	polygon2.ReverseNodes();
+	QVERIFY(qAbs(polygon2.GetNodePos(0).GetX() - 2.0) < I_EPSILON);
+	QVERIFY(qAbs(polygon2.GetNodePos(0).GetY() - 2.0) < I_EPSILON);
+	QVERIFY(qAbs(polygon2.GetNodePos(2).GetX() - 1.0) < I_EPSILON);
+	QVERIFY(qAbs(polygon2.GetNodePos(2).GetY() - 1.0) < I_EPSILON);
+
+	// Test bounding box
+	i2d::CRectangle bbox = polygon1.GetBoundingBox();
+	QVERIFY(qAbs(bbox.GetLeft() - 0.0) < I_EPSILON);
+	QVERIFY(qAbs(bbox.GetRight() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(bbox.GetTop() - 0.0) < I_EPSILON);
+	QVERIFY(qAbs(bbox.GetBottom() - 10.0) < I_EPSILON);
 }
 
 

@@ -17,6 +17,10 @@ private Q_SLOTS:
 	void DoRectangleTest();
 	void DoLine2dTest();
 	void DoMatrix2dTest();
+	void DoAffine2dTest();
+	void DoAnnulusTest();
+	void DoPolylineTest();
+	void DoPolygonTest();
 };
 
 
