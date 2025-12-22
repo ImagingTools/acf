@@ -178,8 +178,9 @@ void CI2dTest::DoCircleTest()
 
 	// Test bounding box
 	i2d::CRectangle bbox = circle2.GetBoundingBox();
-	QVERIFY(qAbs(bbox.GetPosition().GetX() - 20.0) < I_EPSILON);
-	QVERIFY(qAbs(bbox.GetPosition().GetY() - 30.0) < I_EPSILON);
+	// Bounding box position is at top-left corner: center - radius
+	QVERIFY(qAbs(bbox.GetPosition().GetX() - 13.0) < I_EPSILON);  // 20 - 7 = 13
+	QVERIFY(qAbs(bbox.GetPosition().GetY() - 23.0) < I_EPSILON);  // 30 - 7 = 23
 	QVERIFY(qAbs(bbox.GetWidth() - 14.0) < I_EPSILON);  // 2 * radius
 	QVERIFY(qAbs(bbox.GetHeight() - 14.0) < I_EPSILON); // 2 * radius
 
@@ -485,8 +486,9 @@ void CI2dTest::DoAnnulusTest()
 
 	// Test bounding box
 	i2d::CRectangle bbox = annulus2.GetBoundingBox();
-	QVERIFY(qAbs(bbox.GetPosition().GetX() - 10.0) < I_EPSILON);
-	QVERIFY(qAbs(bbox.GetPosition().GetY() - 20.0) < I_EPSILON);
+	// Bounding box position is at top-left corner: center - radius
+	QVERIFY(qAbs(bbox.GetPosition().GetX() - 2.0) < I_EPSILON);  // 10 - 8 = 2
+	QVERIFY(qAbs(bbox.GetPosition().GetY() - 12.0) < I_EPSILON); // 20 - 8 = 12
 	QVERIFY(qAbs(bbox.GetWidth() - 16.0) < I_EPSILON);  // 2 * outer radius
 	QVERIFY(qAbs(bbox.GetHeight() - 16.0) < I_EPSILON); // 2 * outer radius
 }
