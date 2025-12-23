@@ -135,10 +135,10 @@ void CGraphData2dTest::testAxisRanges()
 	yRange = graph.GetYAxisRange();
 	QVERIFY(xRange.IsValid());
 	QVERIFY(yRange.IsValid());
-	QVERIFY(xRange.GetMin() <= 0.0);
-	QVERIFY(xRange.GetMax() >= 10.0);
-	QVERIFY(yRange.GetMin() <= 0.0);
-	QVERIFY(yRange.GetMax() >= 20.0);
+	QVERIFY(xRange.GetMinValue() <= 0.0);
+	QVERIFY(xRange.GetMaxValue() >= 10.0);
+	QVERIFY(yRange.GetMinValue() <= 0.0);
+	QVERIFY(yRange.GetMaxValue() >= 20.0);
 	
 	// Test manual ranges
 	graph.SetXAxisRange(istd::CRange(-5.0, 15.0));
@@ -147,10 +147,10 @@ void CGraphData2dTest::testAxisRanges()
 	xRange = graph.GetXAxisRange();
 	yRange = graph.GetYAxisRange();
 	
-	QCOMPARE(xRange.GetMin(), -5.0);
-	QCOMPARE(xRange.GetMax(), 15.0);
-	QCOMPARE(yRange.GetMin(), -10.0);
-	QCOMPARE(yRange.GetMax(), 30.0);
+	QCOMPARE(xRange.GetMinValue(), -5.0);
+	QCOMPARE(xRange.GetMaxValue(), 15.0);
+	QCOMPARE(yRange.GetMinValue(), -10.0);
+	QCOMPARE(yRange.GetMaxValue(), 30.0);
 }
 
 
@@ -200,8 +200,8 @@ void CGraphData2dTest::testBoundingBox()
 	QVERIFY(bbox.IsValid());
 	QVERIFY(bbox.GetLeft() <= 1.0);
 	QVERIFY(bbox.GetRight() >= 5.0);
-	QVERIFY(bbox.GetBottom() <= 2.0);
-	QVERIFY(bbox.GetTop() >= 8.0);
+	QVERIFY(bbox.GetTop() <= 2.0);
+	QVERIFY(bbox.GetBottom() >= 8.0);
 }
 
 

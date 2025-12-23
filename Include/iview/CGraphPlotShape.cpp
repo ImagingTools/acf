@@ -162,7 +162,7 @@ void CGraphPlotShape::DrawAxes(QPainter& drawContext, const QRectF& plotRect, co
 	QVector<double> xTicks = CalculateTickPositions(xRange);
 	for (int i = 0; i < xTicks.count(); ++i){
 		double xValue = xTicks[i];
-		double xScreen = plotRect.left() + (xValue - xRange.GetMin()) / xRange.GetLength() * plotRect.width();
+		double xScreen = plotRect.left() + (xValue - xRange.GetMinValue()) / xRange.GetLength() * plotRect.width();
 		
 		// Draw tick mark
 		drawContext.drawLine(QPointF(xScreen, plotRect.bottom()), 
@@ -178,7 +178,7 @@ void CGraphPlotShape::DrawAxes(QPainter& drawContext, const QRectF& plotRect, co
 	QVector<double> yTicks = CalculateTickPositions(yRange);
 	for (int i = 0; i < yTicks.count(); ++i){
 		double yValue = yTicks[i];
-		double yScreen = plotRect.bottom() - (yValue - yRange.GetMin()) / yRange.GetLength() * plotRect.height();
+		double yScreen = plotRect.bottom() - (yValue - yRange.GetMinValue()) / yRange.GetLength() * plotRect.height();
 		
 		// Draw tick mark
 		drawContext.drawLine(QPointF(plotRect.left(), yScreen), 
@@ -229,7 +229,7 @@ void CGraphPlotShape::DrawGrid(QPainter& drawContext, const QRectF& plotRect, co
 	QVector<double> xTicks = CalculateTickPositions(xRange);
 	for (int i = 0; i < xTicks.count(); ++i){
 		double xValue = xTicks[i];
-		double xScreen = plotRect.left() + (xValue - xRange.GetMin()) / xRange.GetLength() * plotRect.width();
+		double xScreen = plotRect.left() + (xValue - xRange.GetMinValue()) / xRange.GetLength() * plotRect.width();
 		drawContext.drawLine(QPointF(xScreen, plotRect.top()), 
 							QPointF(xScreen, plotRect.bottom()));
 	}
@@ -238,7 +238,7 @@ void CGraphPlotShape::DrawGrid(QPainter& drawContext, const QRectF& plotRect, co
 	QVector<double> yTicks = CalculateTickPositions(yRange);
 	for (int i = 0; i < yTicks.count(); ++i){
 		double yValue = yTicks[i];
-		double yScreen = plotRect.bottom() - (yValue - yRange.GetMin()) / yRange.GetLength() * plotRect.height();
+		double yScreen = plotRect.bottom() - (yValue - yRange.GetMinValue()) / yRange.GetLength() * plotRect.height();
 		drawContext.drawLine(QPointF(plotRect.left(), yScreen), 
 							QPointF(plotRect.right(), yScreen));
 	}
@@ -331,8 +331,8 @@ void CGraphPlotShape::DrawLegend(QPainter& drawContext, const QRectF& plotRect, 
 QPointF CGraphPlotShape::DataToScreen(const i2d::CVector2d& dataPoint, const QRectF& plotRect, 
 									  const istd::CRange& xRange, const istd::CRange& yRange) const
 {
-	double xNorm = (dataPoint.GetX() - xRange.GetMin()) / xRange.GetLength();
-	double yNorm = (dataPoint.GetY() - yRange.GetMin()) / yRange.GetLength();
+	double xNorm = (dataPoint.GetX() - xRange.GetMinValue()) / xRange.GetLength();
+	double yNorm = (dataPoint.GetY() - yRange.GetMinValue()) / yRange.GetLength();
 	
 	double xScreen = plotRect.left() + xNorm * plotRect.width();
 	double yScreen = plotRect.bottom() - yNorm * plotRect.height();
@@ -369,10 +369,10 @@ QVector<double> CGraphPlotShape::CalculateTickPositions(const istd::CRange& rang
 	}
 
 	// Generate tick positions
-	double firstTick = qCeil(range.GetMin() / niceStep) * niceStep;
+	double firstTick = qCeil(range.GetMinValue() / niceStep) * niceStep;
 	double tick = firstTick;
 	
-	while (tick <= range.GetMax()){
+	while (tick <= range.GetMaxValue()){
 		ticks.append(tick);
 		tick += niceStep;
 	}
