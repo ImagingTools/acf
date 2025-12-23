@@ -19,16 +19,16 @@ namespace i2d
 
 
 // static constants
-static const istd::IChangeable::ChangeSet s_addCurveChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Add curve to graph"));
-static const istd::IChangeable::ChangeSet s_removeCurveChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Remove curve from graph"));
-static const istd::IChangeable::ChangeSet s_clearCurvesChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Clear all curves"));
-static const istd::IChangeable::ChangeSet s_setXAxisLabelChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set X-axis label"));
-static const istd::IChangeable::ChangeSet s_setYAxisLabelChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set Y-axis label"));
-static const istd::IChangeable::ChangeSet s_setTitleChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set graph title"));
+static const istd::IChangeable::ChangeSet s_addCurveChange(CGraphData2d::CF_GRAPH_DATA, istd::IChangeable::CF_ALL_DATA, QObject::tr("Add curve to graph"));
+static const istd::IChangeable::ChangeSet s_removeCurveChange(CGraphData2d::CF_GRAPH_DATA, istd::IChangeable::CF_ALL_DATA, QObject::tr("Remove curve from graph"));
+static const istd::IChangeable::ChangeSet s_clearCurvesChange(CGraphData2d::CF_GRAPH_DATA, istd::IChangeable::CF_ALL_DATA, QObject::tr("Clear all curves"));
+static const istd::IChangeable::ChangeSet s_setXAxisLabelChange(CGraphData2d::CF_GRAPH_APPEARANCE, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set X-axis label"));
+static const istd::IChangeable::ChangeSet s_setYAxisLabelChange(CGraphData2d::CF_GRAPH_APPEARANCE, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set Y-axis label"));
+static const istd::IChangeable::ChangeSet s_setTitleChange(CGraphData2d::CF_GRAPH_APPEARANCE, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set graph title"));
 static const istd::IChangeable::ChangeSet s_setXAxisRangeChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set X-axis range"));
 static const istd::IChangeable::ChangeSet s_setYAxisRangeChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set Y-axis range"));
-static const istd::IChangeable::ChangeSet s_setLegendVisibleChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set legend visibility"));
-static const istd::IChangeable::ChangeSet s_setGridVisibleChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set grid visibility"));
+static const istd::IChangeable::ChangeSet s_setLegendVisibleChange(CGraphData2d::CF_GRAPH_DISPLAY_OPTIONS, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set legend visibility"));
+static const istd::IChangeable::ChangeSet s_setGridVisibleChange(CGraphData2d::CF_GRAPH_DISPLAY_OPTIONS, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set grid visibility"));
 
 // Archive tags for serialization
 static const iser::CArchiveTag s_titleTag("Title", "Graph title", iser::CArchiveTag::TT_LEAF);

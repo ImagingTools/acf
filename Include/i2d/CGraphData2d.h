@@ -25,6 +25,13 @@ namespace i2d
 class CGraphData2d: public CObject2dBase
 {
 public:
+	enum ChangeFlags
+	{
+		CF_GRAPH_DATA = 0x7c95a1,		///< Graph data (curves, points) changed
+		CF_GRAPH_APPEARANCE,			///< Graph appearance (colors, names, labels) changed
+		CF_GRAPH_DISPLAY_OPTIONS		///< Display options (legend, grid visibility) changed
+	};
+
 	/**
 		Structure representing a single curve in the graph.
 	*/
