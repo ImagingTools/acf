@@ -133,6 +133,66 @@ inline void CCmyk::SetK(double value)
 
 // operators
 
+inline CCmyk CCmyk::operator+(const CCmyk& color) const
+{
+	CCmyk retVal = *this;
+
+	retVal += color;
+
+	return retVal;
+}
+
+
+inline CCmyk CCmyk::operator-(const CCmyk& color) const
+{
+	CCmyk retVal = *this;
+
+	retVal -= color;
+
+	return retVal;
+}
+
+
+inline CCmyk CCmyk::operator*(const CCmyk& color) const
+{
+	CCmyk retVal = *this;
+
+	retVal *= color;
+
+	return retVal;
+}
+
+
+inline CCmyk CCmyk::operator/(const CCmyk& color) const
+{
+	CCmyk retVal = *this;
+
+	retVal /= color;
+
+	return retVal;
+}
+
+
+inline CCmyk CCmyk::operator*(double value) const
+{
+	CCmyk retVal = *this;
+
+	retVal *= value;
+
+	return retVal;
+}
+
+
+inline CCmyk CCmyk::operator/(double value) const
+{
+	CCmyk retVal = *this;
+
+	retVal /= value;
+
+	return retVal;
+}
+
+
 inline CCmyk& CCmyk::operator=(const CCmyk& color)
 {
 	BaseClass::operator=(color);

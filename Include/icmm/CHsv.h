@@ -122,8 +122,67 @@ inline void CHsv::SetValue(double value)
 }
 
 
-
 // operators
+
+inline CHsv CHsv::operator+(const CHsv& color) const
+{
+	CHsv retVal = *this;
+
+	retVal += color;
+
+	return retVal;
+}
+
+
+inline CHsv CHsv::operator-(const CHsv& color) const
+{
+	CHsv retVal = *this;
+
+	retVal -= color;
+
+	return retVal;
+}
+
+
+inline CHsv CHsv::operator*(const CHsv& color) const
+{
+	CHsv retVal = *this;
+
+	retVal *= color;
+
+	return retVal;
+}
+
+
+inline CHsv CHsv::operator/(const CHsv& color) const
+{
+	CHsv retVal = *this;
+
+	retVal /= color;
+
+	return retVal;
+}
+
+
+inline CHsv CHsv::operator*(double value) const
+{
+	CHsv retVal = *this;
+
+	retVal *= value;
+
+	return retVal;
+}
+
+
+inline CHsv CHsv::operator/(double value) const
+{
+	CHsv retVal = *this;
+
+	retVal /= value;
+
+	return retVal;
+}
+
 
 inline CHsv& CHsv::operator=(const CHsv& color)
 {

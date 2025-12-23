@@ -12,7 +12,7 @@ namespace i3d
 
 
 // static constants
-static const iser::CArchiveTag s_centerTag("Center", "Center position", iser::CArchiveTag::TT_BRANCH);
+static const iser::CArchiveTag s_centerTag("Center", "Center position", iser::CArchiveTag::TT_LEAF);
 static const iser::CArchiveTag s_radiusTag("Radius", "Radius", iser::CArchiveTag::TT_LEAF);
 
 
@@ -20,7 +20,7 @@ bool CSphere::Intersects(const CLine3d& line) const
 {
 	// Get closest point on line to sphere center
 	CVector3d closest = line.GetClosestPoint(m_center);
-	double distSq = (closest - m_center).GetLengthSq();
+	double distSq = (closest - m_center).GetLength2();
 	
 	return distSq <= m_radius * m_radius;
 }

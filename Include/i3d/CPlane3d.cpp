@@ -11,8 +11,8 @@ namespace i3d
 
 
 // static constants
-static const iser::CArchiveTag s_pointTag("Point", "Point on plane", iser::CArchiveTag::TT_BRANCH);
-static const iser::CArchiveTag s_normalTag("Normal", "Normal vector", iser::CArchiveTag::TT_BRANCH);
+static const iser::CArchiveTag s_pointTag("Point", "Point on plane", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_normalTag("Normal", "Normal vector", iser::CArchiveTag::TT_LEAF);
 
 
 CPlane3d::CPlane3d(const CVector3d& p1, const CVector3d& p2, const CVector3d& p3)

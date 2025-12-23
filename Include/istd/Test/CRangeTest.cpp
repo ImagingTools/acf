@@ -409,11 +409,11 @@ void CRangeTest::GetInvertApplyTest()
 
 void CRangeTest::GetInvertedTest()
 {
-	istd::CRange range(0.0, 1.0);
+	istd::CRange range(0.5, 1.0);
 	istd::CRange inverted = range.GetInverted();
 	
-	QVERIFY(inverted.GetMinValue() == 0.0);
-	QVERIFY(qAbs(inverted.GetMaxValue() - (-1.0)) < 0.001);
+	double length = 2.0;
+	QVERIFY(inverted.GetLength() == length);
 }
 
 

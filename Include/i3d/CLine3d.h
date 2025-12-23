@@ -174,7 +174,7 @@ inline double CLine3d::GetLength() const
 
 inline double CLine3d::GetLengthSq() const
 {
-	return (m_point2 - m_point1).GetLengthSq();
+	return (m_point2 - m_point1).GetLength2();
 }
 
 

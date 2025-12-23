@@ -11,8 +11,8 @@ namespace i3d
 
 
 // static constants
-static const iser::CArchiveTag s_minTag("Min", "Minimum corner", iser::CArchiveTag::TT_BRANCH);
-static const iser::CArchiveTag s_maxTag("Max", "Maximum corner", iser::CArchiveTag::TT_BRANCH);
+static const iser::CArchiveTag s_minTag("Min", "Minimum corner", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_maxTag("Max", "Maximum corner", iser::CArchiveTag::TT_LEAF);
 
 
 CVector3d CBox3d::GetClosestPoint(const CVector3d& point) const

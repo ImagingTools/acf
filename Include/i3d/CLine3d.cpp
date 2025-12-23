@@ -11,14 +11,14 @@ namespace i3d
 
 
 // static constants
-static const iser::CArchiveTag s_point1Tag("Point1", "First point", iser::CArchiveTag::TT_BRANCH);
-static const iser::CArchiveTag s_point2Tag("Point2", "Second point", iser::CArchiveTag::TT_BRANCH);
+static const iser::CArchiveTag s_point1Tag("Point1", "First point", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_point2Tag("Point2", "Second point", iser::CArchiveTag::TT_LEAF);
 
 
 double CLine3d::GetClosestParameter(const CVector3d& point) const
 {
 	CVector3d direction = m_point2 - m_point1;
-	double lengthSq = direction.GetLengthSq();
+	double lengthSq = direction.GetLength2();
 	
 	if (lengthSq < I_BIG_EPSILON){
 		return 0.0;
@@ -50,7 +50,7 @@ CVector3d CLine3d::GetClosestPoint(const CVector3d& point) const
 double CLine3d::GetDistanceSq(const CVector3d& point) const
 {
 	CVector3d closest = GetClosestPoint(point);
-	return (point - closest).GetLengthSq();
+	return (point - closest).GetLength2();
 }
 
 

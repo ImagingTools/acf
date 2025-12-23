@@ -13,7 +13,7 @@ void CCompactXmlArchiveTest::BasicCompactXmlSerializationTest()
 
 	iser::CCompactXmlMemWriteArchive writeArchive;
 	QVERIFY(writeModel.Serialize(writeArchive));
-	QByteArray xmlData = writeArchive.GetData();
+	QByteArray xmlData = writeArchive.GetString();
 
 	// Read data
 	SimpleModel readModel;
@@ -35,7 +35,7 @@ void CCompactXmlArchiveTest::CompactXmlComplexDataTest()
 
 	iser::CCompactXmlMemWriteArchive writeArchive;
 	QVERIFY(writeModel.Serialize(writeArchive));
-	QByteArray xmlData = writeArchive.GetData();
+	QByteArray xmlData = writeArchive.GetString();
 
 	// Read data
 	ComplexModel readModel;
@@ -56,7 +56,7 @@ void CCompactXmlArchiveTest::CompactXmlArrayTest()
 
 	iser::CCompactXmlMemWriteArchive writeArchive;
 	QVERIFY(writeModel.Serialize(writeArchive));
-	QByteArray xmlData = writeArchive.GetData();
+	QByteArray xmlData = writeArchive.GetString();
 
 	// Read data
 	ArrayModel readModel;

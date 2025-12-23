@@ -159,7 +159,7 @@ inline double CSphere::GetSurfaceArea() const
 
 inline bool CSphere::Contains(const CVector3d& point, double tolerance) const
 {
-	double distSq = (point - m_center).GetLengthSq();
+	double distSq = (point - m_center).GetLength2();
 	double radiusTol = m_radius + tolerance;
 	return distSq <= radiusTol * radiusTol;
 }

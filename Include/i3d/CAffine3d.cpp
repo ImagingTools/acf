@@ -11,8 +11,8 @@ namespace i3d
 
 
 // static constants
-static const iser::CArchiveTag s_matrixTag("Matrix", "Transformation matrix", iser::CArchiveTag::TT_BRANCH);
-static const iser::CArchiveTag s_translationTag("Translation", "Translation vector", iser::CArchiveTag::TT_BRANCH);
+static const iser::CArchiveTag s_matrixTag("Matrix", "Transformation matrix", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_translationTag("Translation", "Translation vector", iser::CArchiveTag::TT_LEAF);
 
 
 CAffine3d CAffine3d::GetInverse() const
@@ -48,7 +48,7 @@ bool CAffine3d::Serialize(iser::IArchive& archive)
 		for (int j = 0; j < 3; j++){
 			double value = m_matrix.GetAt(i, j);
 			retVal = retVal && archive.Process(value);
-			if (archive.IsLoading()){
+			if (!archive.IsStoring()){
 				m_matrix.SetAt(i, j, value);
 			}
 		}

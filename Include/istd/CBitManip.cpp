@@ -7,13 +7,18 @@ namespace istd
 
 CBitManip::CBitManip()
 {
-	qint8 firstBitIndex = -1;
-	for (int i = 0; i < 256; ++i){
-		if (i >= int(2 << firstBitIndex)){
-			++firstBitIndex;
+	// Build table: index of least significant set bit in byte, -1 for 0
+	for (int v = 0; v < 256; ++v){
+		int idx = -1;
+		if (v != 0){
+			for (int i = 0; i < 8; ++i){
+				if (v & (1 << i)){
+					idx = i;
+					break;
+				}
+			}
 		}
-
-		m_firstBitInByte[i] = firstBitIndex;
+		m_firstBitInByte[v] = static_cast<qint8>(idx);
 	}
 }
 

@@ -35,17 +35,20 @@ CMemoryReadArchive::CMemoryReadArchive(
 :	m_bufferPtr((const quint8*)writeArchive.GetBuffer()),
 	m_bufferSize(writeArchive.GetBufferSize()),
 	m_readPosition(0),
+	m_startPosition(0),
 	m_isValid(true)
 {
 	if (serializeHeader){
 		m_isValid = SerializeAcfHeader();
+
+		m_startPosition = m_readPosition;
 	}
 }
 
 
 void CMemoryReadArchive::ResetPosition()
 {
-	m_readPosition = 0;
+	m_readPosition = m_startPosition;
 
 	if (m_bufferSize > 0){
 		m_isValid = true;

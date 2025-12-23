@@ -60,10 +60,9 @@ void CIdParamTest::GetSupportedOperationsTest()
 
 void CIdParamTest::ResetTest()
 {
+	m_param.SetId(m_id);
 	QVERIFY(m_param.GetId() == m_id);
-
 	QVERIFY(m_param.ResetData());
-
 	QVERIFY(m_param.GetId().isEmpty());
 }
 

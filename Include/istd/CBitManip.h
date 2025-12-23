@@ -34,21 +34,28 @@ private:
 
 inline int CBitManip::GetFirstBitIndex(quint32 bits) const
 {
-	quint16* words = (quint16*)&bits;
-	quint8* bytes = (quint8*)&bits;
-	if (words[0] != 0){
-		if (bytes[0] != 0){
-			return int(m_firstBitInByte[bytes[0]]);
-		}
-
-		return int(m_firstBitInByte[bytes[1]]);
+	if (bits == 0) {
+		return -1;
 	}
-	else if (words[1] != 0){
-		if (bytes[2] != 0){
-			return int(m_firstBitInByte[bytes[2]]);
-		}
 
-		return int(m_firstBitInByte[bytes[3]]);
+	quint8 b0 = static_cast<quint8>(bits & 0xFFu);
+	if (b0 != 0){
+		return int(m_firstBitInByte[b0]);
+	}
+
+	quint8 b1 = static_cast<quint8>((bits >> 8) & 0xFFu);
+	if (b1 != 0) {
+		return int(m_firstBitInByte[b1]) + 8;
+	}
+
+	quint8 b2 = static_cast<quint8>((bits >> 16) & 0xFFu);
+	if (b2 != 0){
+		return int(m_firstBitInByte[b2]) + 16;
+	}
+
+	quint8 b3 = static_cast<quint8>((bits >> 24) & 0xFFu);
+	if (b3 != 0) {
+		return int(m_firstBitInByte[b3]) + 24;
 	}
 
 	return -1;

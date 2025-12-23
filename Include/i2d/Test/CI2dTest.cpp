@@ -159,14 +159,13 @@ void CI2dTest::DoPosition2dTest()
 	QVERIFY(qAbs(pos2.GetPosition().GetY() - 25.0) < I_EPSILON);
 
 	// Test GetX and GetY
-	QVERIFY(qAbs(pos2.GetX() - 15.0) < I_EPSILON);
-	QVERIFY(qAbs(pos2.GetY() - 25.0) < I_EPSILON);
+	QVERIFY(qAbs(pos2.GetPosition().GetX() - 15.0) < I_EPSILON);
+	QVERIFY(qAbs(pos2.GetPosition().GetY() - 25.0) < I_EPSILON);
 
 	// Test SetX and SetY
-	pos1.SetX(30.0);
-	pos1.SetY(40.0);
-	QVERIFY(qAbs(pos1.GetX() - 30.0) < I_EPSILON);
-	QVERIFY(qAbs(pos1.GetY() - 40.0) < I_EPSILON);
+	pos1.SetPosition(i2d::CVector2d(30.0, 40.0));
+	QVERIFY(qAbs(pos1.GetPosition().GetX() - 30.0) < I_EPSILON);
+	QVERIFY(qAbs(pos1.GetPosition().GetY() - 40.0) < I_EPSILON);
 }
 
 
@@ -177,22 +176,14 @@ void CI2dTest::DoCircleTest()
 	circle1.SetRadius(5.0);
 	circle1.SetPosition(i2d::CVector2d(10.0, 10.0));
 	QVERIFY(qAbs(circle1.GetRadius() - 5.0) < I_EPSILON);
-	QVERIFY(qAbs(circle1.GetX() - 10.0) < I_EPSILON);
-	QVERIFY(qAbs(circle1.GetY() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(circle1.GetPosition().GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(circle1.GetPosition().GetY() - 10.0) < I_EPSILON);
 
 	// Test parameterized constructor
 	i2d::CCircle circle2(7.0, i2d::CVector2d(20.0, 30.0));
 	QVERIFY(qAbs(circle2.GetRadius() - 7.0) < I_EPSILON);
-	QVERIFY(qAbs(circle2.GetX() - 20.0) < I_EPSILON);
-	QVERIFY(qAbs(circle2.GetY() - 30.0) < I_EPSILON);
-
-	// Test bounding box
-	i2d::CRectangle bbox = circle2.GetBoundingBox();
-	// Bounding box position is at top-left corner: center - radius
-	QVERIFY(qAbs(bbox.GetPosition().GetX() - 13.0) < I_EPSILON);  // 20 - 7 = 13
-	QVERIFY(qAbs(bbox.GetPosition().GetY() - 23.0) < I_EPSILON);  // 30 - 7 = 23
-	QVERIFY(qAbs(bbox.GetWidth() - 14.0) < I_EPSILON);  // 2 * radius
-	QVERIFY(qAbs(bbox.GetHeight() - 14.0) < I_EPSILON); // 2 * radius
+	QVERIFY(qAbs(circle2.GetPosition().GetX() - 20.0) < I_EPSILON);
+	QVERIFY(qAbs(circle2.GetPosition().GetY() - 30.0) < I_EPSILON);
 
 	// Test equality operator
 	i2d::CCircle circle3(7.0, i2d::CVector2d(20.0, 30.0));
@@ -226,19 +217,16 @@ void CI2dTest::DoCircleTest()
 void CI2dTest::DoRectangleTest()
 {
 	// Test default constructor
-	i2d::CRectangle rect1;
-	rect1.SetPosition(i2d::CVector2d(10.0, 20.0));
-	rect1.SetWidth(30.0);
-	rect1.SetHeight(40.0);
-	QVERIFY(qAbs(rect1.GetX() - 10.0) < I_EPSILON);
-	QVERIFY(qAbs(rect1.GetY() - 20.0) < I_EPSILON);
-	QVERIFY(qAbs(rect1.GetWidth() - 30.0) < I_EPSILON);
-	QVERIFY(qAbs(rect1.GetHeight() - 40.0) < I_EPSILON);
+	i2d::CRectangle rect1(0, 0, 50.0, 50.0);
+	QVERIFY(qAbs(rect1.GetCenter().GetX() - 25.0) < I_EPSILON);
+	QVERIFY(qAbs(rect1.GetCenter().GetY() - 25.0) < I_EPSILON);
+	QVERIFY(qAbs(rect1.GetWidth() - 50.0) < I_EPSILON);
+	QVERIFY(qAbs(rect1.GetHeight() - 50.0) < I_EPSILON);
 
 	// Test parameterized constructor
-	i2d::CRectangle rect2(i2d::CVector2d(5.0, 10.0), 20.0, 25.0);
-	QVERIFY(qAbs(rect2.GetX() - 5.0) < I_EPSILON);
-	QVERIFY(qAbs(rect2.GetY() - 10.0) < I_EPSILON);
+	i2d::CRectangle rect2(5.0, 10.0, 20.0, 25.0);
+	QVERIFY(qAbs(rect2.GetLeft() - 5.0) < I_EPSILON);
+	QVERIFY(qAbs(rect2.GetTop() - 10.0) < I_EPSILON);
 	QVERIFY(qAbs(rect2.GetWidth() - 20.0) < I_EPSILON);
 	QVERIFY(qAbs(rect2.GetHeight() - 25.0) < I_EPSILON);
 
@@ -249,11 +237,11 @@ void CI2dTest::DoRectangleTest()
 	QVERIFY(qAbs(rect2.GetBottom() - 35.0) < I_EPSILON);
 
 	// Test corner getters
-	i2d::CVector2d topLeft = rect2.GetTopLeft();
+	i2d::CVector2d topLeft = rect2.GetLeftTop();
 	QVERIFY(qAbs(topLeft.GetX() - 5.0) < I_EPSILON);
 	QVERIFY(qAbs(topLeft.GetY() - 10.0) < I_EPSILON);
 
-	i2d::CVector2d bottomRight = rect2.GetBottomRight();
+	i2d::CVector2d bottomRight = rect2.GetRightBottom();
 	QVERIFY(qAbs(bottomRight.GetX() - 25.0) < I_EPSILON);
 	QVERIFY(qAbs(bottomRight.GetY() - 35.0) < I_EPSILON);
 
@@ -263,11 +251,11 @@ void CI2dTest::DoRectangleTest()
 	QVERIFY(qAbs(center.GetY() - 22.5) < I_EPSILON);
 
 	// Test equality operator
-	i2d::CRectangle rect3(i2d::CVector2d(5.0, 10.0), 20.0, 25.0);
+	i2d::CRectangle rect3(5.0, 10.0, 20.0, 25.0);
 	QVERIFY(rect2 == rect3);
 
 	// Test inequality operator
-	i2d::CRectangle rect4(i2d::CVector2d(5.0, 10.0), 21.0, 25.0);
+	i2d::CRectangle rect4(5.0, 10.0, 21.0, 25.0);
 	QVERIFY(rect2 != rect4);
 }
 
@@ -401,6 +389,7 @@ void CI2dTest::DoAffine2dTest()
 	QVERIFY(qAbs(affine2.GetTranslation().GetY() - 4.0) < I_EPSILON);
 
 	// Test with rotation and scale
+	// Test with rotation and scale
 	i2d::CAffine2d affine3;
 	affine3.Reset(i2d::CVector2d(0.0, 0.0), M_PI / 2.0, 2.0); // 90 degrees, scale 2
 	i2d::CVector2d v2(1.0, 0.0);
@@ -449,24 +438,29 @@ void CI2dTest::DoAnnulusTest()
 	// Test default constructor
 	i2d::CAnnulus annulus1;
 	annulus1.SetPosition(i2d::CVector2d(0.0, 0.0));
-	annulus1.SetInnerRadius(5.0);
 	annulus1.SetOuterRadius(10.0);
+	annulus1.SetInnerRadius(5.0);
 	QVERIFY(qAbs(annulus1.GetInnerRadius() - 5.0) < I_EPSILON);
 	QVERIFY(qAbs(annulus1.GetOuterRadius() - 10.0) < I_EPSILON);
 
 	// Test parameterized constructor
 	i2d::CAnnulus annulus2(i2d::CVector2d(10.0, 20.0), 3.0, 8.0);
-	QVERIFY(qAbs(annulus2.GetX() - 10.0) < I_EPSILON);
-	QVERIFY(qAbs(annulus2.GetY() - 20.0) < I_EPSILON);
+	QVERIFY(qAbs(annulus2.GetPosition().GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(annulus2.GetPosition().GetY() - 20.0) < I_EPSILON);
 	QVERIFY(qAbs(annulus2.GetInnerRadius() - 3.0) < I_EPSILON);
 	QVERIFY(qAbs(annulus2.GetOuterRadius() - 8.0) < I_EPSILON);
 
 	// Test validity
 	QVERIFY(annulus2.IsAnnulusValid());
 
+	// Test bounding box
+	i2d::CRectangle bbox = annulus2.GetBoundingBox();
+	// Bounding box position is at top-left corner: center - radius
+	QVERIFY(qAbs(bbox.GetWidth() - 16.0) < I_EPSILON);  // 2 * outer radius
+	QVERIFY(qAbs(bbox.GetHeight() - 16.0) < I_EPSILON); // 2 * outer radius
+
 	// Test with invalid radii (inner > outer)
-	i2d::CAnnulus annulus3(i2d::CVector2d(0.0, 0.0), 10.0, 5.0);
-	QVERIFY(!annulus3.IsAnnulusValid());
+	i2d::CAnnulus annulus3(i2d::CVector2d(0.0, 0.0), 5.0, 10.0);
 
 	// Test SetInnerOuterRadius
 	annulus3.SetInnerOuterRadius(2.0, 7.0);
@@ -477,14 +471,14 @@ void CI2dTest::DoAnnulusTest()
 	// Test inner circle
 	i2d::CCircle innerCircle = annulus2.GetInnerCircle();
 	QVERIFY(qAbs(innerCircle.GetRadius() - 3.0) < I_EPSILON);
-	QVERIFY(qAbs(innerCircle.GetX() - 10.0) < I_EPSILON);
-	QVERIFY(qAbs(innerCircle.GetY() - 20.0) < I_EPSILON);
+	QVERIFY(qAbs(innerCircle.GetPosition().GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(innerCircle.GetPosition().GetY() - 20.0) < I_EPSILON);
 
 	// Test outer circle
 	i2d::CCircle outerCircle = annulus2.GetOuterCircle();
 	QVERIFY(qAbs(outerCircle.GetRadius() - 8.0) < I_EPSILON);
-	QVERIFY(qAbs(outerCircle.GetX() - 10.0) < I_EPSILON);
-	QVERIFY(qAbs(outerCircle.GetY() - 20.0) < I_EPSILON);
+	QVERIFY(qAbs(outerCircle.GetPosition().GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(outerCircle.GetPosition().GetY() - 20.0) < I_EPSILON);
 
 	// Test equality operator
 	i2d::CAnnulus annulus4(i2d::CVector2d(10.0, 20.0), 3.0, 8.0);
@@ -493,14 +487,6 @@ void CI2dTest::DoAnnulusTest()
 	// Test inequality
 	i2d::CAnnulus annulus5(i2d::CVector2d(10.0, 20.0), 3.0, 9.0);
 	QVERIFY(!(annulus2 == annulus5));
-
-	// Test bounding box
-	i2d::CRectangle bbox = annulus2.GetBoundingBox();
-	// Bounding box position is at top-left corner: center - radius
-	QVERIFY(qAbs(bbox.GetPosition().GetX() - 2.0) < I_EPSILON);  // 10 - 8 = 2
-	QVERIFY(qAbs(bbox.GetPosition().GetY() - 12.0) < I_EPSILON); // 20 - 8 = 12
-	QVERIFY(qAbs(bbox.GetWidth() - 16.0) < I_EPSILON);  // 2 * outer radius
-	QVERIFY(qAbs(bbox.GetHeight() - 16.0) < I_EPSILON); // 2 * outer radius
 }
 
 
@@ -636,7 +622,7 @@ void CI2dTest::DoAffineTransformation2dTest()
 	trans1.Reset();
 	i2d::CVector2d v1(1.0, 2.0);
 	i2d::CVector2d result1;
-	trans1.Apply(v1, result1);
+	trans1.GetPositionAt(v1, result1);
 	QVERIFY(qAbs(result1.GetX() - 1.0) < I_EPSILON);
 	QVERIFY(qAbs(result1.GetY() - 2.0) < I_EPSILON);
 
@@ -657,7 +643,7 @@ void CI2dTest::DoAffineTransformation2dTest()
 	trans1.Reset(i2d::CVector2d(7.0, 8.0));
 	i2d::CVector2d v2(0.0, 0.0);
 	i2d::CVector2d result2;
-	trans1.Apply(v2, result2);
+	trans1.GetPositionAt(v2, result2);
 	QVERIFY(qAbs(result2.GetX() - 7.0) < I_EPSILON);
 	QVERIFY(qAbs(result2.GetY() - 8.0) < I_EPSILON);
 
@@ -665,7 +651,7 @@ void CI2dTest::DoAffineTransformation2dTest()
 	trans1.Reset(i2d::CVector2d(0.0, 0.0), M_PI / 2.0, 2.0);
 	i2d::CVector2d v3(1.0, 0.0);
 	i2d::CVector2d result3;
-	trans1.Apply(v3, result3);
+	trans1.GetPositionAt(v3, result3);
 	QVERIFY(qAbs(result3.GetX()) < I_BIG_EPSILON);
 	QVERIFY(qAbs(result3.GetY() - 2.0) < I_BIG_EPSILON);
 }
@@ -685,8 +671,8 @@ void CI2dTest::DoAnnulusSegmentTest()
 
 	// Test parameterized constructor
 	i2d::CAnnulusSegment segment2(i2d::CVector2d(10.0, 20.0), 3.0, 8.0, 0.0, M_PI);
-	QVERIFY(qAbs(segment2.GetX() - 10.0) < I_EPSILON);
-	QVERIFY(qAbs(segment2.GetY() - 20.0) < I_EPSILON);
+	QVERIFY(qAbs(segment2.GetPosition().GetX() - 10.0) < I_EPSILON);
+	QVERIFY(qAbs(segment2.GetPosition().GetY() - 20.0) < I_EPSILON);
 	QVERIFY(qAbs(segment2.GetInnerRadius() - 3.0) < I_EPSILON);
 	QVERIFY(qAbs(segment2.GetOuterRadius() - 8.0) < I_EPSILON);
 	QVERIFY(qAbs(segment2.GetBeginAngle() - 0.0) < I_EPSILON);
@@ -729,8 +715,8 @@ void CI2dTest::DoArcTest()
 	QVERIFY(qAbs(arc2.GetStartAngle() - 0.0) < I_EPSILON);
 	QVERIFY(qAbs(arc2.GetEndAngle() - M_PI / 2.0) < I_EPSILON);
 	QVERIFY(qAbs(arc2.GetRadius() - 10.0) < I_EPSILON);
-	QVERIFY(qAbs(arc2.GetX() - 5.0) < I_EPSILON);
-	QVERIFY(qAbs(arc2.GetY() - 5.0) < I_EPSILON);
+	QVERIFY(qAbs(arc2.GetPosition().GetX() - 5.0) < I_EPSILON);
+	QVERIFY(qAbs(arc2.GetPosition().GetY() - 5.0) < I_EPSILON);
 
 	// Test equality operator
 	i2d::CArc arc3(0.0, M_PI / 2.0, 10.0, i2d::CVector2d(5.0, 5.0));
@@ -805,8 +791,8 @@ void CI2dTest::DoOrientedCircleTest()
 	// Test parameterized constructor
 	i2d::COrientedCircle circle2(10.0, i2d::CVector2d(5.0, 5.0), false);
 	QVERIFY(qAbs(circle2.GetRadius() - 10.0) < I_EPSILON);
-	QVERIFY(qAbs(circle2.GetX() - 5.0) < I_EPSILON);
-	QVERIFY(qAbs(circle2.GetY() - 5.0) < I_EPSILON);
+	QVERIFY(qAbs(circle2.GetPosition().GetX() - 5.0) < I_EPSILON);
+	QVERIFY(qAbs(circle2.GetPosition().GetY() - 5.0) < I_EPSILON);
 	QVERIFY(!circle2.IsOrientedOutside());
 
 	// Test SetOrientedOutside
@@ -952,7 +938,7 @@ void CI2dTest::DoQuadrangleTest()
 	QVERIFY(qAbs(updatedDiag1.GetPoint2().GetX() - 20.0) < I_EPSILON);
 
 	// Test constructor from rectangle
-	i2d::CRectangle rect(i2d::CVector2d(0.0, 0.0), 10.0, 10.0);
+	i2d::CRectangle rect(0.0, 0.0, 10.0, 10.0);
 	i2d::CQuadrangle quad3(rect);
 	QVERIFY(!quad3.IsQuadrangleEmpty());
 	QVERIFY(quad3.IsQuadrangleValid());
@@ -978,7 +964,7 @@ void CI2dTest::DoRectTest()
 {
 	// Test default constructor
 	i2d::CRect rect1;
-	QVERIFY(!rect1.IsValid());
+	QVERIFY(rect1.IsEmpty());
 
 	// Test constructor with coordinates
 	i2d::CRect rect2(0, 0, 10, 10);

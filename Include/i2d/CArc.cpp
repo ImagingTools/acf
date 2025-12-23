@@ -21,7 +21,7 @@ static iser::CArchiveTag s_endAngleTag("EndAngle", "End angle", iser::CArchiveTa
 // public methods
 
 CArc::CArc()
-:	m_startAngle(0), 
+:	m_startAngle(0),
 	m_endAngle(0)
 {
 }
@@ -77,8 +77,7 @@ CVector2d CArc::GetPositionFromAlpha(double alpha) const
 {
 	double angle = m_startAngle + ((m_endAngle - m_startAngle) * alpha);
 	i2d::CVector2d line;
-	line.Init(imath::GetRadianFromDegree(angle), m_radius);
-	line.SetY(-line.GetY());
+	line.Init(angle, m_radius);
 	line = line.GetTranslated(GetCenter());
 
 	return line;

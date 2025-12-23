@@ -72,7 +72,7 @@ inline double GetDistance(const CVector3d& p1, const CVector3d& p2)
 */
 inline double GetDistanceSq(const CVector3d& p1, const CVector3d& p2)
 {
-	return (p2 - p1).GetLengthSq();
+	return (p2 - p1).GetLength2();
 }
 
 
@@ -143,7 +143,7 @@ inline bool IsOnPositiveSide(const CVector3d& point, const CPlane3d& plane)
 */
 inline CVector3d ProjectVectorOntoVector(const CVector3d& vector, const CVector3d& onto)
 {
-	double ontoLengthSq = onto.GetLengthSq();
+	double ontoLengthSq = onto.GetLength2();
 	if (ontoLengthSq < I_BIG_EPSILON){
 		return CVector3d(0.0, 0.0, 0.0);
 	}

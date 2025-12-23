@@ -13,7 +13,7 @@ void CXmlStringArchiveTest::BasicXmlSerializationTest()
 
 	iser::CXmlStringWriteArchive writeArchive;
 	QVERIFY(writeModel.Serialize(writeArchive));
-	QByteArray xmlData = writeArchive.GetData();
+	QByteArray xmlData = writeArchive.GetString();
 
 	// Read data
 	SimpleModel readModel;
@@ -35,7 +35,7 @@ void CXmlStringArchiveTest::XmlPrimitiveTypesTest()
 
 	iser::CXmlStringWriteArchive writeArchive;
 	QVERIFY(writeModel.Serialize(writeArchive));
-	QByteArray xmlData = writeArchive.GetData();
+	QByteArray xmlData = writeArchive.GetString();
 
 	// Read data
 	ComplexModel readModel;
@@ -57,7 +57,7 @@ void CXmlStringArchiveTest::XmlArraySerializationTest()
 
 	iser::CXmlStringWriteArchive writeArchive;
 	QVERIFY(writeModel.Serialize(writeArchive));
-	QByteArray xmlData = writeArchive.GetData();
+	QByteArray xmlData = writeArchive.GetString();
 
 	// Read data
 	ArrayModel readModel;
