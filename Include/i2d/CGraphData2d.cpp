@@ -30,6 +30,21 @@ static const istd::IChangeable::ChangeSet s_setYAxisRangeChange(IObject2d::CF_OB
 static const istd::IChangeable::ChangeSet s_setLegendVisibleChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set legend visibility"));
 static const istd::IChangeable::ChangeSet s_setGridVisibleChange(IObject2d::CF_OBJECT_POSITION, istd::IChangeable::CF_ALL_DATA, QObject::tr("Set grid visibility"));
 
+// Archive tags for serialization
+static const iser::CArchiveTag s_titleTag("Title", "Graph title", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_xAxisLabelTag("XAxisLabel", "X-axis label", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_yAxisLabelTag("YAxisLabel", "Y-axis label", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_legendVisibleTag("LegendVisible", "Legend visibility flag", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_gridVisibleTag("GridVisible", "Grid visibility flag", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_curvesCountTag("CurvesCount", "Number of curves", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_curveTag("Curve", "Curve data", iser::CArchiveTag::TT_NODE);
+static const iser::CArchiveTag s_curveNameTag("Name", "Curve name", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_curveColorTag("Color", "Curve color", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_pointsCountTag("PointsCount", "Number of points", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_pointTag("Point", "Point data", iser::CArchiveTag::TT_NODE);
+static const iser::CArchiveTag s_pointXTag("X", "Point X coordinate", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_pointYTag("Y", "Point Y coordinate", iser::CArchiveTag::TT_LEAF);
+
 
 // public static methods
 
@@ -246,21 +261,41 @@ QByteArray CGraphData2d::GetFactoryId() const
 
 bool CGraphData2d::Serialize(iser::IArchive& archive)
 {
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, &GetAllChanges());
+	Q_UNUSED(notifier);
+
 	if (!BaseClass::Serialize(archive)){
 		return false;
 	}
 
 	// Serialize basic properties
 	bool retVal = true;
-	retVal = retVal && archive.Process("Title", m_title);
-	retVal = retVal && archive.Process("XAxisLabel", m_xAxisLabel);
-	retVal = retVal && archive.Process("YAxisLabel", m_yAxisLabel);
-	retVal = retVal && archive.Process("LegendVisible", m_isLegendVisible);
-	retVal = retVal && archive.Process("GridVisible", m_isGridVisible);
+	
+	retVal = retVal && archive.BeginTag(s_titleTag);
+	retVal = retVal && archive.Process(m_title);
+	retVal = retVal && archive.EndTag(s_titleTag);
+	
+	retVal = retVal && archive.BeginTag(s_xAxisLabelTag);
+	retVal = retVal && archive.Process(m_xAxisLabel);
+	retVal = retVal && archive.EndTag(s_xAxisLabelTag);
+	
+	retVal = retVal && archive.BeginTag(s_yAxisLabelTag);
+	retVal = retVal && archive.Process(m_yAxisLabel);
+	retVal = retVal && archive.EndTag(s_yAxisLabelTag);
+	
+	retVal = retVal && archive.BeginTag(s_legendVisibleTag);
+	retVal = retVal && archive.Process(m_isLegendVisible);
+	retVal = retVal && archive.EndTag(s_legendVisibleTag);
+	
+	retVal = retVal && archive.BeginTag(s_gridVisibleTag);
+	retVal = retVal && archive.Process(m_isGridVisible);
+	retVal = retVal && archive.EndTag(s_gridVisibleTag);
 
 	// Serialize curves count
 	int curvesCount = m_curves.count();
-	retVal = retVal && archive.Process("CurvesCount", curvesCount);
+	retVal = retVal && archive.BeginTag(s_curvesCountTag);
+	retVal = retVal && archive.Process(curvesCount);
+	retVal = retVal && archive.EndTag(s_curvesCountTag);
 
 	// Adjust curves vector size when loading
 	if (archive.IsLoading()){
@@ -269,14 +304,22 @@ bool CGraphData2d::Serialize(iser::IArchive& archive)
 
 	// Serialize each curve
 	for (int i = 0; i < curvesCount; ++i){
-		QString curvePrefix = QString("Curve%1_").arg(i);
+		retVal = retVal && archive.BeginTag(s_curveTag);
+		
 		Curve& curve = m_curves[i];
 		
-		retVal = retVal && archive.Process(curvePrefix + "Name", curve.name);
-		retVal = retVal && archive.Process(curvePrefix + "Color", curve.color);
+		retVal = retVal && archive.BeginTag(s_curveNameTag);
+		retVal = retVal && archive.Process(curve.name);
+		retVal = retVal && archive.EndTag(s_curveNameTag);
+		
+		retVal = retVal && archive.BeginTag(s_curveColorTag);
+		retVal = retVal && archive.Process(curve.color);
+		retVal = retVal && archive.EndTag(s_curveColorTag);
 		
 		int pointsCount = curve.points.count();
-		retVal = retVal && archive.Process(curvePrefix + "PointsCount", pointsCount);
+		retVal = retVal && archive.BeginTag(s_pointsCountTag);
+		retVal = retVal && archive.Process(pointsCount);
+		retVal = retVal && archive.EndTag(s_pointsCountTag);
 		
 		// Adjust points vector size when loading
 		if (archive.IsLoading()){
@@ -284,16 +327,27 @@ bool CGraphData2d::Serialize(iser::IArchive& archive)
 		}
 		
 		for (int j = 0; j < pointsCount; ++j){
-			QString pointPrefix = curvePrefix + QString("Point%1_").arg(j);
+			retVal = retVal && archive.BeginTag(s_pointTag);
+			
 			double x = curve.points[j].GetX();
 			double y = curve.points[j].GetY();
-			retVal = retVal && archive.Process(pointPrefix + "X", x);
-			retVal = retVal && archive.Process(pointPrefix + "Y", y);
+			
+			retVal = retVal && archive.BeginTag(s_pointXTag);
+			retVal = retVal && archive.Process(x);
+			retVal = retVal && archive.EndTag(s_pointXTag);
+			
+			retVal = retVal && archive.BeginTag(s_pointYTag);
+			retVal = retVal && archive.Process(y);
+			retVal = retVal && archive.EndTag(s_pointYTag);
+			
+			retVal = retVal && archive.EndTag(s_pointTag);
 			
 			if (archive.IsLoading()){
 				curve.points[j] = CVector2d(x, y);
 			}
 		}
+		
+		retVal = retVal && archive.EndTag(s_curveTag);
 	}
 
 	return retVal;
