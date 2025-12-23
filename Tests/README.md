@@ -73,6 +73,8 @@ Unit tests for each library are located in `Include/[library]/Test/` directories
 - **CBitManip** - Bit manipulation operations
 - **CCrcCalculator** - CRC-32 checksum calculations
 - **CInterfacePtr** - Smart pointer for interface management
+- **CRange** - Range operations for double values (min/max, intersection, union, translation, etc.)
+- **CRanges** - Set of ranges with set operations (union, intersection, morphological operations)
 
 #### imath (Mathematics) - Include/imath/Test/
 - **CDouble** - Double wrapper with rounding and comparison operations

@@ -1,1 +1,19 @@
 _codeql_detected_source_root
+# Build artifacts
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.user
+*.suo
+*.sdf
+*.opensdf
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
