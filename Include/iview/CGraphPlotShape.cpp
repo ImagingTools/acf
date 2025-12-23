@@ -15,6 +15,28 @@ namespace iview
 {
 
 
+// Constants for layout and sizing
+namespace
+{
+	const int TICK_MARK_LENGTH = 5;
+	const int TICK_LABEL_OFFSET = 8;
+	const int TICK_LABEL_WIDTH = 80;
+	const int TICK_LABEL_HEIGHT = 20;
+	const int Y_TICK_LABEL_WIDTH = 45;
+	const int X_AXIS_LABEL_OFFSET = 35;
+	const int Y_AXIS_LABEL_OFFSET = 45;
+	const int AXIS_LABEL_WIDTH = 200;
+	const int AXIS_LABEL_HEIGHT = 20;
+	const int LEGEND_PADDING = 10;
+	const int LEGEND_WIDTH = 150;
+	const int LEGEND_LINE_HEIGHT = 20;
+	const int LEGEND_ITEM_PADDING = 5;
+	const int LEGEND_LINE_LENGTH = 20;
+	const int LEGEND_TEXT_OFFSET = 30;
+	const int TITLE_OFFSET = 10;
+}
+
+
 CGraphPlotShape::CGraphPlotShape()
 :	m_plotMargin(60),
 	m_axisLabelFontSize(12),
@@ -126,8 +148,8 @@ void CGraphPlotShape::DrawTitle(QPainter& drawContext, const QRectF& plotRect, c
 	font.setBold(true);
 	drawContext.setFont(font);
 
-	QRectF titleRect(plotRect.left(), plotRect.top() - m_plotMargin + 10, 
-					 plotRect.width(), m_plotMargin - 20);
+	QRectF titleRect(plotRect.left(), plotRect.top() - m_plotMargin + TITLE_OFFSET, 
+					 plotRect.width(), m_plotMargin - AXIS_LABEL_HEIGHT);
 	drawContext.drawText(titleRect, Qt::AlignHCenter | Qt::AlignTop, title);
 }
 
@@ -166,11 +188,12 @@ void CGraphPlotShape::DrawAxes(QPainter& drawContext, const QRectF& plotRect, co
 		
 		// Draw tick mark
 		drawContext.drawLine(QPointF(xScreen, plotRect.bottom()), 
-							QPointF(xScreen, plotRect.bottom() + 5));
+							QPointF(xScreen, plotRect.bottom() + TICK_MARK_LENGTH));
 		
 		// Draw tick label
 		QString label = FormatTickLabel(xValue);
-		QRectF labelRect(xScreen - 40, plotRect.bottom() + 8, 80, 20);
+		QRectF labelRect(xScreen - TICK_LABEL_WIDTH / 2, plotRect.bottom() + TICK_LABEL_OFFSET, 
+						TICK_LABEL_WIDTH, TICK_LABEL_HEIGHT);
 		drawContext.drawText(labelRect, Qt::AlignHCenter | Qt::AlignTop, label);
 	}
 
@@ -182,11 +205,13 @@ void CGraphPlotShape::DrawAxes(QPainter& drawContext, const QRectF& plotRect, co
 		
 		// Draw tick mark
 		drawContext.drawLine(QPointF(plotRect.left(), yScreen), 
-							QPointF(plotRect.left() - 5, yScreen));
+							QPointF(plotRect.left() - TICK_MARK_LENGTH, yScreen));
 		
 		// Draw tick label
 		QString label = FormatTickLabel(yValue);
-		QRectF labelRect(plotRect.left() - 50, yScreen - 10, 45, 20);
+		QRectF labelRect(plotRect.left() - Y_TICK_LABEL_WIDTH - TICK_MARK_LENGTH, 
+						yScreen - TICK_LABEL_HEIGHT / 2, 
+						Y_TICK_LABEL_WIDTH, TICK_LABEL_HEIGHT);
 		drawContext.drawText(labelRect, Qt::AlignRight | Qt::AlignVCenter, label);
 	}
 
@@ -197,16 +222,18 @@ void CGraphPlotShape::DrawAxes(QPainter& drawContext, const QRectF& plotRect, co
 
 	const QString& xLabel = graphPtr->GetXAxisLabel();
 	if (!xLabel.isEmpty()){
-		QRectF xLabelRect(plotRect.left(), plotRect.bottom() + 35, plotRect.width(), 20);
+		QRectF xLabelRect(plotRect.left(), plotRect.bottom() + X_AXIS_LABEL_OFFSET, 
+						 plotRect.width(), AXIS_LABEL_HEIGHT);
 		drawContext.drawText(xLabelRect, Qt::AlignHCenter | Qt::AlignTop, xLabel);
 	}
 
 	const QString& yLabel = graphPtr->GetYAxisLabel();
 	if (!yLabel.isEmpty()){
 		drawContext.save();
-		drawContext.translate(plotRect.left() - 45, plotRect.top() + plotRect.height() / 2);
+		drawContext.translate(plotRect.left() - Y_AXIS_LABEL_OFFSET, plotRect.top() + plotRect.height() / 2);
 		drawContext.rotate(-90);
-		QRectF yLabelRect(-100, -10, 200, 20);
+		QRectF yLabelRect(-AXIS_LABEL_WIDTH / 2, -TICK_LABEL_HEIGHT / 2, 
+						 AXIS_LABEL_WIDTH, AXIS_LABEL_HEIGHT);
 		drawContext.drawText(yLabelRect, Qt::AlignHCenter | Qt::AlignVCenter, yLabel);
 		drawContext.restore();
 	}
@@ -288,14 +315,12 @@ void CGraphPlotShape::DrawLegend(QPainter& drawContext, const QRectF& plotRect, 
 	}
 
 	// Calculate legend size
-	int lineHeight = 20;
-	int legendHeight = curvesCount * lineHeight + 10;
-	int legendWidth = 150;
+	int legendHeight = curvesCount * LEGEND_LINE_HEIGHT + LEGEND_PADDING;
 
 	// Position legend in top-right corner of plot area
-	QRectF legendRect(plotRect.right() - legendWidth - 10, 
-					  plotRect.top() + 10, 
-					  legendWidth, 
+	QRectF legendRect(plotRect.right() - LEGEND_WIDTH - LEGEND_PADDING, 
+					  plotRect.top() + LEGEND_PADDING, 
+					  LEGEND_WIDTH, 
 					  legendHeight);
 
 	// Draw legend background
@@ -311,18 +336,18 @@ void CGraphPlotShape::DrawLegend(QPainter& drawContext, const QRectF& plotRect, 
 	for (int i = 0; i < curvesCount; ++i){
 		const i2d::CGraphData2d::Curve& curve = graphPtr->GetCurve(i);
 		
-		double yPos = legendRect.top() + 5 + i * lineHeight + lineHeight / 2;
+		double yPos = legendRect.top() + LEGEND_ITEM_PADDING + i * LEGEND_LINE_HEIGHT + LEGEND_LINE_HEIGHT / 2;
 		
 		// Draw color line
 		QPen linePen(curve.color, 2);
 		drawContext.setPen(linePen);
-		drawContext.drawLine(QPointF(legendRect.left() + 5, yPos), 
-							QPointF(legendRect.left() + 25, yPos));
+		drawContext.drawLine(QPointF(legendRect.left() + LEGEND_ITEM_PADDING, yPos), 
+							QPointF(legendRect.left() + LEGEND_ITEM_PADDING + LEGEND_LINE_LENGTH, yPos));
 		
 		// Draw curve name
 		drawContext.setPen(QPen(Qt::black));
-		QRectF textRect(legendRect.left() + 30, yPos - lineHeight / 2, 
-						legendWidth - 35, lineHeight);
+		QRectF textRect(legendRect.left() + LEGEND_TEXT_OFFSET, yPos - LEGEND_LINE_HEIGHT / 2, 
+						LEGEND_WIDTH - LEGEND_TEXT_OFFSET - LEGEND_ITEM_PADDING, LEGEND_LINE_HEIGHT);
 		drawContext.drawText(textRect, Qt::AlignLeft | Qt::AlignVCenter, curve.name);
 	}
 }
