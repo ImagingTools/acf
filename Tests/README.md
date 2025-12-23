@@ -34,7 +34,14 @@ Each test directory contains:
 
 ### Writing Tests
 
-1. **Create test class** inheriting from `QObject`:
+1. **Create test main.cpp** using the standard test main macro:
+```cpp
+#include <itest/TestMain.h>
+
+I_TEST_MAIN()
+```
+
+2. **Create test class** inheriting from `QObject`:
 ```cpp
 class CMyClassTest: public QObject
 {
@@ -46,7 +53,7 @@ private slots:
 };
 ```
 
-2. **Implement test methods** using QVERIFY/QCOMPARE macros:
+3. **Implement test methods** using QVERIFY/QCOMPARE macros:
 ```cpp
 void CMyClassTest::myTest()
 {
@@ -56,7 +63,7 @@ void CMyClassTest::myTest()
 }
 ```
 
-3. **Register test** at the end of the .cpp file:
+4. **Register test** at the end of the .cpp file:
 ```cpp
 I_ADD_TEST(CMyClassTest);
 ```
@@ -159,11 +166,12 @@ Tests are organized by library to maintain clear separation of concerns and enab
 When adding new tests:
 1. Place tests in the appropriate library's Test directory: `Include/[library]/Test/`
 2. Follow the existing naming conventions (C*Test for class tests)
-3. Include `initTestCase()` and `cleanupTestCase()` methods
-4. Use descriptive test method names ending in "Test"
-5. Update the library's CMakeLists.txt if needed
-6. Register your test using `I_ADD_TEST` macro
-7. Update this README with the new test information
+3. Create `main.cpp` using the `I_TEST_MAIN()` macro from `<itest/TestMain.h>`
+4. Include `initTestCase()` and `cleanupTestCase()` methods
+5. Use descriptive test method names ending in "Test"
+6. Update the library's CMakeLists.txt if needed
+7. Register your test using `I_ADD_TEST` macro
+8. Update this README with the new test information
 
 ## Notes
 
