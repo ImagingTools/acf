@@ -44,12 +44,12 @@ bool CAffine3d::Serialize(iser::IArchive& archive)
 	
 	retVal = retVal && archive.BeginTag(s_matrixTag);
 	// Serialize matrix elements
-	for (int i = 0; i < 3; i++){
-		for (int j = 0; j < 3; j++){
-			double value = m_matrix.GetAt(i, j);
+	for (int row = 0; row < 3; row++){
+		for (int col = 0; col < 3; col++){
+			double value = m_matrix.GetAt(row, col);
 			retVal = retVal && archive.Process(value);
 			if (!archive.IsStoring()){
-				m_matrix.SetAt(i, j, value);
+				m_matrix.SetAt(row, col, value);
 			}
 		}
 	}

@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	int retVal = 0;
+	int exitCode = 0;
 
 	istd::TDelPtr<QCoreApplication> coreAppPtr;
 
@@ -123,19 +123,19 @@ int main(int argc, char *argv[])
 	if (applicationPtr == NULL){
 		out << "Application interface cannot be found" << QT_ENDL;
 
-		retVal = -1;
+		exitCode = -1;
 	}
 	else if (showApplicationInfo){
 		out << applicationPtr->GetHelpText().toLocal8Bit().constData();
 
-		retVal = 0;
+		exitCode = 0;
 	}
 	else{
 		applicationPtr->InitializeApplication(argc, argv);
 
 		componentAccessor.EnsureAutoInitComponentsCreated();
 
-		retVal = applicationPtr->Execute(argc, argv);
+		exitCode = applicationPtr->Execute(argc, argv);
 	}
 
 	if (applicationPtr != NULL){
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	return retVal;
+	return exitCode;
 }
 
 

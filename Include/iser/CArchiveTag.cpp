@@ -29,10 +29,10 @@ CArchiveTag::CArchiveTag(
 {
 	int idSize = int(m_id.size());
 
-	for (int i = 0; i < idSize; ++i){
-		int character = m_id[i];
+	for (int charIndex = 0; charIndex < idSize; ++charIndex){
+		int character = m_id[charIndex];
 		int character2 = character * character;
-		m_binaryId += (character << i) ^ (character2 >> i);
+		m_binaryId += (character << charIndex) ^ (character2 >> charIndex);
 	}
 }
 

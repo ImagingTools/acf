@@ -24,8 +24,8 @@ void CLinearInterpolator::SetNodes(double* positions, double* values, int nodesC
 {
 	m_nodes.clear();
 
-	for (int i = 0; i < nodesCount; i++){
-		m_nodes[positions[i]] = values[i];
+	for (int nodeIndex = 0; nodeIndex < nodesCount; nodeIndex++){
+		m_nodes[positions[nodeIndex]] = values[nodeIndex];
 	}
 }
 
@@ -37,12 +37,12 @@ bool CLinearInterpolator::InitFromFunction(const ISampledFunction& function)
 	istd::CRange logicalRange = function.GetLogicalRange(0);
 	istd::CIntRange sampleRange = istd::CIntRange(0, function.GetTotalSamplesCount());
 
-	for (int i = 0; i < function.GetTotalSamplesCount(); i++){
-		double sampleAlpha = sampleRange.GetAlphaFromValue(i);
+	for (int sampleIndex = 0; sampleIndex < function.GetTotalSamplesCount(); sampleIndex++){
+		double sampleAlpha = sampleRange.GetAlphaFromValue(sampleIndex);
 
 		double logicalPosition = logicalRange.GetValueFromAlpha(sampleAlpha);
 
-		m_nodes[logicalPosition] = function.GetSampleAt(istd::TIndex<1>(i));
+		m_nodes[logicalPosition] = function.GetSampleAt(istd::TIndex<1>(sampleIndex));
 	}
 
 	return true;

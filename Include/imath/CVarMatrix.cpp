@@ -90,19 +90,19 @@ double CVarMatrix::GetMaxElement() const
 	}
 
 	istd::CIndex2d index(0, 0);
-	double retVal = GetAt(index);
+	double maxValue = GetAt(index);
 
 	for (index[1] = 0; index[1] < size[1]; ++index[1]){
 		for (index[0] = 0; index[0] < size[0]; ++index[0]){
 			double value = GetAt(index);
 
-			if (value > retVal){
-				retVal = value;
+			if (value > maxValue){
+				maxValue = value;
 			}
 		}
 	}
 
-	return retVal;
+	return maxValue;
 }
 
 
@@ -114,19 +114,19 @@ double CVarMatrix::GetMinElement() const
 	}
 
 	istd::CIndex2d index(0, 0);
-	double retVal = GetAt(index);
+	double minValue = GetAt(index);
 
 	for (index[1] = 0; index[1] < size[1]; ++index[1]){
 		for (index[0] = 0; index[0] < size[0]; ++index[0]){
 			double value = GetAt(index);
 
-			if (value < retVal){
-				retVal = value;
+			if (value < minValue){
+				minValue = value;
 			}
 		}
 	}
 
-	return retVal;
+	return minValue;
 }
 
 

@@ -325,8 +325,8 @@ void CGuiComponentBase::OnComponentDestroyed()
 
 void CGuiComponentBase::MakeAutoSlotConnection()
 {
-	const QMetaObject *mo = metaObject();
-	Q_ASSERT(mo != NULL);
+	const QMetaObject *metaObject = this->metaObject();
+	Q_ASSERT(metaObject != NULL);
 
 #if QT_VERSION < 0X050000
 	const QObjectList list = qFindChildren<QObject *>(m_widgetPtr, QString());
@@ -336,49 +336,49 @@ void CGuiComponentBase::MakeAutoSlotConnection()
 	#define GetMethodSignature methodSignature
 #endif
 
-	for (int i = 0; i < mo->methodCount(); ++i){
-		QByteArray methodSignature = mo->method(i).GetMethodSignature();
+	for (int methodIndex = 0; methodIndex < metaObject->methodCount(); ++methodIndex){
+		QByteArray methodSignature = metaObject->method(methodIndex).GetMethodSignature();
 
 		const char* slot = methodSignature.constData();
 		if (slot[0] != 'o' || slot[1] != 'n' || slot[2] != '_'){
 			continue;
 		}
 
-		bool foundIt = false;
-		for (int j = 0; j < list.count(); ++j){
-			const QObject *co = list.at(j);
-			QByteArray objName = co->objectName().toLatin1();
-			int len = objName.length();
-			if (!len || qstrncmp(slot + 3, objName.data(), len) || slot[len+3] != '_')
+		bool foundMatchingSignal = false;
+		for (int childIndex = 0; childIndex < list.count(); ++childIndex){
+			const QObject *childObject = list.at(childIndex);
+			QByteArray objName = childObject->objectName().toLatin1();
+			int nameLength = objName.length();
+			if (!nameLength || qstrncmp(slot + 3, objName.data(), nameLength) || slot[nameLength+3] != '_')
 				continue;
-			const QMetaObject *smo = co->metaObject();
-			int sigIndex = smo->indexOfMethod(slot + len + 4);
-			if (sigIndex < 0){ // search for compatible signals
-				int slotlen = int(qstrlen(slot + len + 4) - 1);
-				for (int k = 0; k < co->metaObject()->methodCount(); ++k){
-					if (smo->method(k).methodType() != QMetaMethod::Signal)
+			const QMetaObject *signalMetaObject = childObject->metaObject();
+			int signalIndex = signalMetaObject->indexOfMethod(slot + nameLength + 4);
+			if (signalIndex < 0){ // search for compatible signals
+				int slotNameLength = int(qstrlen(slot + nameLength + 4) - 1);
+				for (int signalMethodIndex = 0; signalMethodIndex < childObject->metaObject()->methodCount(); ++signalMethodIndex){
+					if (signalMetaObject->method(signalMethodIndex).methodType() != QMetaMethod::Signal)
 						continue;
 
-					if (!qstrncmp(smo->method(k).GetMethodSignature(), slot + len + 4, slotlen)){
-						sigIndex = k;
+					if (!qstrncmp(signalMetaObject->method(signalMethodIndex).GetMethodSignature(), slot + nameLength + 4, slotNameLength)){
+						signalIndex = signalMethodIndex;
 						break;
 					}
 				}
 			}
-			if (sigIndex < 0)
+			if (signalIndex < 0)
 				continue;
-			if (QMetaObject::connect(co, sigIndex, this, i)){
-				foundIt = true;
+			if (QMetaObject::connect(childObject, signalIndex, this, methodIndex)){
+				foundMatchingSignal = true;
 				break;
 			}
 		}
-		if (foundIt){
+		if (foundMatchingSignal){
 			// we found our slot, now skip all overloads
-			while (mo->method(i + 1).attributes() & QMetaMethod::Cloned){
-				  ++i;
+			while (metaObject->method(methodIndex + 1).attributes() & QMetaMethod::Cloned){
+				  ++methodIndex;
 			}
 		}
-		else if (!(mo->method(i).attributes() & QMetaMethod::Cloned)){
+		else if (!(metaObject->method(methodIndex).attributes() & QMetaMethod::Cloned)){
 			qWarning("QMetaObject::connectSlotsByName: No matching signal for %s", slot);
 		}
 	}

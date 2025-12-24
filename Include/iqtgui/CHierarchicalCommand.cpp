@@ -265,9 +265,9 @@ bool CHierarchicalCommand::operator==(const CHierarchicalCommand& command) const
 		return false;
 	}
 
-	for (int i = 0; i < childsCount; ++i){
-		const CHierarchicalCommand* childPtr = dynamic_cast<const CHierarchicalCommand*>(GetChild(i));
-		const CHierarchicalCommand* commandChildPtr = dynamic_cast<const CHierarchicalCommand*>(command.GetChild(i));
+	for (int childIndex = 0; childIndex < childsCount; ++childIndex){
+		const CHierarchicalCommand* childPtr = dynamic_cast<const CHierarchicalCommand*>(GetChild(childIndex));
+		const CHierarchicalCommand* commandChildPtr = dynamic_cast<const CHierarchicalCommand*>(command.GetChild(childIndex));
 		if (childPtr != commandChildPtr){
 			if (childPtr == NULL){
 				return false;

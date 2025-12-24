@@ -361,15 +361,15 @@ void CSimpleMainWindowGuiComp::UpdateMainWindowComponentsVisibility()
 	int visibleCommandsCount = 0;
 
 	int commandsCount = m_showOtherWindows.GetChildsCount();
-	for (int i = 0; i < commandsCount; ++i){
-		Q_ASSERT(m_commandIndexToMainCompMap.contains(i));
+	for (int commandIndex = 0; commandIndex < commandsCount; ++commandIndex){
+		Q_ASSERT(m_commandIndexToMainCompMap.contains(commandIndex));
 
-		QAction* commandActionPtr = dynamic_cast<QAction*>(m_showOtherWindows.GetChild(i));
+		QAction* commandActionPtr = dynamic_cast<QAction*>(m_showOtherWindows.GetChild(commandIndex));
 		Q_ASSERT(commandActionPtr != NULL);
 
 		bool isWindowVisible = commandActionPtr->isChecked();
 
-		int componentIndex = m_commandIndexToMainCompMap[i];
+		int componentIndex = m_commandIndexToMainCompMap[commandIndex];
 
 		bool isWindowActive = IsMainWindowActive(componentIndex);
 
@@ -418,8 +418,8 @@ void CSimpleMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
 	}
 
 	int otherWindowsCount = m_showOtherWindows.GetChildsCount();
-	for (int i = 0; i < otherWindowsCount; ++i){
-		iqtgui::CHierarchicalCommand* commandPtr = dynamic_cast<iqtgui::CHierarchicalCommand*>(m_showOtherWindows.GetChild(i));
+	for (int windowIndex = 0; windowIndex < otherWindowsCount; ++windowIndex){
+		iqtgui::CHierarchicalCommand* commandPtr = dynamic_cast<iqtgui::CHierarchicalCommand*>(m_showOtherWindows.GetChild(windowIndex));
 		Q_ASSERT(commandPtr != NULL);
 
 		iqt::CSignalBlocker commandBlocker(commandPtr);
@@ -445,8 +445,8 @@ void CSimpleMainWindowGuiComp::OnSaveSettings(QSettings& settings) const
 	settings.setValue("MainWindow/Geometry", windowGeometry);
 
 	int otherWindowsCount = m_showOtherWindows.GetChildsCount();
-	for (int i = 0; i < otherWindowsCount; ++i){
-		const iqtgui::CHierarchicalCommand* commandPtr = dynamic_cast<const iqtgui::CHierarchicalCommand*>(m_showOtherWindows.GetChild(i));
+	for (int windowIndex = 0; windowIndex < otherWindowsCount; ++windowIndex){
+		const iqtgui::CHierarchicalCommand* commandPtr = dynamic_cast<const iqtgui::CHierarchicalCommand*>(m_showOtherWindows.GetChild(windowIndex));
 		Q_ASSERT(commandPtr != NULL);
 
 		settings.setValue("OtherWindows/" + commandPtr->GetName(), commandPtr->isChecked());

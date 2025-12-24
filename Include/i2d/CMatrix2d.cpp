@@ -123,18 +123,18 @@ bool CMatrix2d::GetEigenVectors(i2d::CVector2d& vector1, i2d::CVector2d& vector2
 		value1 = (trace + deltaSqrt) * 0.5;
 		value2 = (trace - deltaSqrt) * 0.5;
 
-		double a = GetAt(0, 0);
-		double b = GetAt(1, 0);
-		double c = GetAt(0, 1);
-		double d = GetAt(1, 1);
+		double m00 = GetAt(0, 0);
+		double m10 = GetAt(1, 0);
+		double m01 = GetAt(0, 1);
+		double m11 = GetAt(1, 1);
 
-		if (qFabs(c) > I_BIG_EPSILON){
-			vector1 = CVector2d(value1 - d, c);
-			vector2 = CVector2d(value2 - d, c);
+		if (qFabs(m01) > I_BIG_EPSILON){
+			vector1 = CVector2d(value1 - m11, m01);
+			vector2 = CVector2d(value2 - m11, m01);
 		}
-		else if (qFabs(b) > I_BIG_EPSILON){
-			vector1 = CVector2d(b, value1 - a);
-			vector2 = CVector2d(b, value2 - a);
+		else if (qFabs(m10) > I_BIG_EPSILON){
+			vector1 = CVector2d(m10, value1 - m00);
+			vector2 = CVector2d(m10, value2 - m00);
 		}
 		else{
 			vector1 = CVector2d(1, 0);

@@ -37,39 +37,39 @@ bool GetIntersection(const CLine3d& line, const CPlane3d& plane, CVector3d& resu
 double GetClosestPoints(const CLine3d& line1, const CLine3d& line2, CVector3d& point1, CVector3d& point2)
 {
 	CVector3d p1 = line1.GetPoint1();
-	CVector3d d1 = line1.GetPoint2() - line1.GetPoint1();
+	CVector3d direction1 = line1.GetPoint2() - line1.GetPoint1();
 	
 	CVector3d p2 = line2.GetPoint1();
-	CVector3d d2 = line2.GetPoint2() - line2.GetPoint1();
+	CVector3d direction2 = line2.GetPoint2() - line2.GetPoint1();
 	
-	CVector3d w0 = p1 - p2;
+	CVector3d pointsDifference = p1 - p2;
 	
-	double a = d1.GetDotProduct(d1);
-	double b = d1.GetDotProduct(d2);
-	double c = d2.GetDotProduct(d2);
-	double d = d1.GetDotProduct(w0);
-	double e = d2.GetDotProduct(w0);
+	double dir1DotDir1 = direction1.GetDotProduct(direction1);
+	double dir1DotDir2 = direction1.GetDotProduct(direction2);
+	double dir2DotDir2 = direction2.GetDotProduct(direction2);
+	double dir1DotDiff = direction1.GetDotProduct(pointsDifference);
+	double dir2DotDiff = direction2.GetDotProduct(pointsDifference);
 	
-	double denominator = a * c - b * b;
+	double denominator = dir1DotDir1 * dir2DotDir2 - dir1DotDir2 * dir1DotDir2;
 	
-	double t1, t2;
+	double parameter1, parameter2;
 	
 	if (qAbs(denominator) < I_BIG_EPSILON){
 		// Lines are parallel
-		t1 = 0.0;
-		t2 = (b > c ? d / b : e / c);
+		parameter1 = 0.0;
+		parameter2 = (dir1DotDir2 > dir2DotDir2 ? dir1DotDiff / dir1DotDir2 : dir2DotDiff / dir2DotDir2);
 	}
 	else{
-		t1 = (b * e - c * d) / denominator;
-		t2 = (a * e - b * d) / denominator;
+		parameter1 = (dir1DotDir2 * dir2DotDiff - dir2DotDir2 * dir1DotDiff) / denominator;
+		parameter2 = (dir1DotDir1 * dir2DotDiff - dir1DotDir2 * dir1DotDiff) / denominator;
 	}
 	
 	// Clamp to line segments
-	t1 = qMax(0.0, qMin(1.0, t1));
-	t2 = qMax(0.0, qMin(1.0, t2));
+	parameter1 = qMax(0.0, qMin(1.0, parameter1));
+	parameter2 = qMax(0.0, qMin(1.0, parameter2));
 	
-	point1 = line1.GetPointAt(t1);
-	point2 = line2.GetPointAt(t2);
+	point1 = line1.GetPointAt(parameter1);
+	point2 = line2.GetPointAt(parameter2);
 	
 	return GetDistance(point1, point2);
 }
