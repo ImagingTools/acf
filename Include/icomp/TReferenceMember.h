@@ -1,5 +1,7 @@
 #pragma once
 
+// Standard includes
+#include <atomic>
 
 // Qt includes
 #include <QtCore/QMutex>
@@ -18,6 +20,14 @@ namespace icomp
 /**
 	Pointer to referenced component object.
 	Don't use direct this class, use macros \c I_REF and \c I_ASSIGN instead.
+
+	\par Thread-Safety:
+	This class uses double-checked locking with std::atomic for thread-safe lazy initialization.
+	The pattern is safe because:
+	- m_isInitialized is atomic with sequential consistency (default memory order)
+	- m_interfacePtr is atomic
+	- Once m_isInitialized is true, no further modifications occur to the cached data
+	- The mutex protects the initialization phase
 */
 template <class Interface>
 class TReferenceMember:
@@ -87,8 +97,19 @@ void TReferenceMember<Interface>::Init(const IComponent* ownerPtr, const IRealAt
 
 	BaseClass::InitInternal(ownerPtr, staticInfo, &m_definitionComponentPtr);
 
+	// CRITICAL: We reset the initialization flag BEFORE clearing pointers.
+	// This ordering is REQUIRED for thread-safety:
+	//
+	// If another thread checks m_isInitialized without the lock and sees:
+	// - true: The pointers are still valid (not yet cleared), safe to use
+	// - false: Thread will acquire lock and re-initialize, finding cleared state
+	//
+	// If we cleared pointers first, another thread might see m_isInitialized==true
+	// but access nullptr pointers, causing a crash.
+	//
+	// The lock ensures no thread is in EnsureInitialized() during this operation.
+	m_isInitialized = false;
 	m_interfacePtr = nullptr;
-
 	m_componentPtr.reset();
 }
 
@@ -158,10 +179,14 @@ template <class Interface>
 TReferenceMember<Interface>::TReferenceMember(const TReferenceMember& ptr)
 :	BaseClass(ptr),
 	m_definitionComponentPtr(ptr.m_definitionComponentPtr),
-	m_componentPtr(ptr.m_componentPtr),
-	m_interfacePtr(ptr.m_interfacePtr),
-	m_isInitialized(ptr.m_isInitialized)
+	m_interfacePtr(nullptr),
+	m_isInitialized(false)
 {
+	// Thread-safe copy: acquire lock on source object before copying
+	QMutexLocker lock(&ptr.m_mutex);
+	m_componentPtr = ptr.m_componentPtr;
+	m_interfacePtr = ptr.m_interfacePtr.load();
+	m_isInitialized = ptr.m_isInitialized.load();
 }
 
 

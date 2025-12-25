@@ -106,8 +106,10 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 	newElement.address = address;
 	newElement.elementPtr.TakeOver(registryElementPtr);
 
-	lock.unlock();
-
+	// NOTE: Returning a pointer to an element in the map.
+	// The caller must ensure no other thread modifies the map while using this pointer.
+	// In multi-threaded contexts, the caller should already hold a lock or ensure
+	// thread-safe access patterns.
 	return &newElement;
 }
 
@@ -246,6 +248,11 @@ bool CRegistry::RenameEmbeddedRegistry(const QByteArray& oldRegistryId, const QB
 
 const IRegistry::ExportedInterfacesMap& CRegistry::GetExportedInterfacesMap() const
 {
+	// WARNING: This method returns a reference to internal data that is protected by m_mutex.
+	// The mutex is held during the call, but released when the function returns.
+	// Callers must ensure they make a copy if they need to iterate or store the map,
+	// as concurrent modifications from other threads could invalidate iterators or cause races.
+	// Consider making a copy: auto mapCopy = registry.GetExportedInterfacesMap();
 	QMutexLocker lock(&m_mutex);
 
 	return m_exportedInterfacesMap;
@@ -254,6 +261,11 @@ const IRegistry::ExportedInterfacesMap& CRegistry::GetExportedInterfacesMap() co
 
 const IRegistry::ExportedElementsMap& CRegistry::GetExportedElementsMap() const
 {
+	// WARNING: This method returns a reference to internal data that is protected by m_mutex.
+	// The mutex is held during the call, but released when the function returns.
+	// Callers must ensure they make a copy if they need to iterate or store the map,
+	// as concurrent modifications from other threads could invalidate iterators or cause races.
+	// Consider making a copy: auto mapCopy = registry.GetExportedElementsMap();
 	QMutexLocker lock(&m_mutex);
 
 	return m_exportedComponentsMap;

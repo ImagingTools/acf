@@ -1,5 +1,7 @@
 #pragma once
 
+// Standard includes
+#include <atomic>
 
 // Qt includes
 #include <QtCore/QMutex>
@@ -17,6 +19,15 @@ namespace icomp
 /**
 	Pointer to list of referenced component objects.
 	Don't use direct this class, use macros \c I_MULTI_REF and \c I_ASSIGN_MULTI_* instead.
+
+	\par Thread-Safety:
+	This class uses double-checked locking with std::atomic for thread-safe lazy initialization.
+	The pattern is safe because:
+	- m_isInitialized is atomic with sequential consistency (default memory order)
+	- Once m_isInitialized is true, no further modifications occur to m_components
+	- The mutex protects the initialization phase
+	- Sequential consistency ensures all writes to m_components are visible to threads
+	  that observe m_isInitialized == true
 */
 template <class Interface>
 class TMultiReferenceMember: public TMultiAttributeMember<CMultiReferenceAttribute>, public CInterfaceManipBase
@@ -87,6 +98,18 @@ void TMultiReferenceMember<Interface>::Init(const IComponent* ownerPtr, const IR
 
 	BaseClass::InitInternal(ownerPtr, staticInfo, &m_definitionComponentPtr);
 
+	// CRITICAL: We reset the initialization flag BEFORE clearing data.
+	// This ordering is REQUIRED for thread-safety:
+	//
+	// If another thread checks m_isInitialized without the lock and sees:
+	// - true: The data is still valid (not yet cleared), safe to use
+	// - false: Thread will acquire lock and re-initialize, finding cleared state
+	//
+	// If we cleared data first, another thread might see m_isInitialized==true
+	// but access partially cleared or invalid data in m_components.
+	//
+	// The lock ensures no thread is in EnsureInitialized() during this operation.
+	m_isInitialized = false;
 	m_components.clear();
 }
 
@@ -157,9 +180,12 @@ template <class Interface>
 TMultiReferenceMember<Interface>::TMultiReferenceMember(const TMultiReferenceMember& ptr)
 :	BaseClass(ptr),
 	m_definitionComponentPtr(ptr.m_definitionComponentPtr),
-	m_components(ptr.m_components),
-	m_isInitialized(ptr.m_isInitialized)
+	m_isInitialized(false)
 {
+	// Thread-safe copy: acquire lock on source object before copying
+	QMutexLocker lock(&ptr.m_mutex);
+	m_components = ptr.m_components;
+	m_isInitialized = ptr.m_isInitialized.load();
 }
 
 

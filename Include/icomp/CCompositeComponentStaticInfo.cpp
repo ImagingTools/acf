@@ -18,7 +18,8 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 	:m_registry(registry)
 {
 	// register exported interfaces
-	const IRegistry::ExportedInterfacesMap& interfacesMap = registry.GetExportedInterfacesMap();
+	// Make a copy to avoid holding the lock during iteration
+	const IRegistry::ExportedInterfacesMap interfacesMap = registry.GetExportedInterfacesMap();
 	for (		IRegistry::ExportedInterfacesMap::const_iterator interfaceIter = interfacesMap.begin();
 				interfaceIter != interfacesMap.end();
 				++interfaceIter){
@@ -43,7 +44,8 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 	}
 
 	// register exported subcomponents
-	const IRegistry::ExportedElementsMap& exportedComponentsMap = registry.GetExportedElementsMap();
+	// Make a copy to avoid holding the lock during iteration
+	const IRegistry::ExportedElementsMap exportedComponentsMap = registry.GetExportedElementsMap();
 	for (		IRegistry::ExportedElementsMap::const_iterator subcomponentIter = exportedComponentsMap.begin();
 				subcomponentIter != exportedComponentsMap.end();
 				++subcomponentIter){
@@ -221,7 +223,8 @@ const IRegistry::ElementInfo* CCompositeComponentStaticInfo::GetElementInfoFromR
 			const icomp::IRegistry* subRegistryPtr = manager.GetRegistry(subElementInfoPtr->address, &registry);
 			if (subRegistryPtr != NULL){
 				// get right component path for exported components:
-				const IRegistry::ExportedElementsMap& exportedComponentsMap = subRegistryPtr->GetExportedElementsMap();
+				// Make a copy to avoid holding the lock during iteration
+				const IRegistry::ExportedElementsMap exportedComponentsMap = subRegistryPtr->GetExportedElementsMap();
 				const IRegistry::ExportedElementsMap::ConstIterator foundComponentExportIter = exportedComponentsMap.constFind(subId);
 				if (foundComponentExportIter != exportedComponentsMap.constEnd()){
 					subId = foundComponentExportIter.value();
