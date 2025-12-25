@@ -98,6 +98,9 @@ void TReferenceMember<Interface>::Init(const IComponent* ownerPtr, const IRealAt
 
 	BaseClass::InitInternal(ownerPtr, staticInfo, &m_definitionComponentPtr);
 
+	// Reset initialization flag BEFORE clearing pointers to prevent race conditions
+	// where another thread might see m_isInitialized=true but m_interfacePtr=nullptr
+	m_isInitialized = false;
 	m_interfacePtr = nullptr;
 
 	m_componentPtr.reset();
@@ -168,11 +171,13 @@ Interface* TReferenceMember<Interface>::operator->() const
 template <class Interface>
 TReferenceMember<Interface>::TReferenceMember(const TReferenceMember& ptr)
 :	BaseClass(ptr),
-	m_definitionComponentPtr(ptr.m_definitionComponentPtr),
-	m_componentPtr(ptr.m_componentPtr),
-	m_interfacePtr(ptr.m_interfacePtr),
-	m_isInitialized(ptr.m_isInitialized)
+	m_definitionComponentPtr(ptr.m_definitionComponentPtr)
 {
+	// Thread-safe copy: acquire lock on source object before copying
+	QMutexLocker lock(&ptr.m_mutex);
+	m_componentPtr = ptr.m_componentPtr;
+	m_interfacePtr = ptr.m_interfacePtr.load();
+	m_isInitialized = ptr.m_isInitialized.load();
 }
 
 

@@ -99,6 +99,8 @@ void TMultiReferenceMember<Interface>::Init(const IComponent* ownerPtr, const IR
 
 	BaseClass::InitInternal(ownerPtr, staticInfo, &m_definitionComponentPtr);
 
+	// Reset initialization flag BEFORE clearing data to prevent race conditions
+	m_isInitialized = false;
 	m_components.clear();
 }
 
@@ -168,10 +170,12 @@ Interface* TMultiReferenceMember<Interface>::operator[](int index) const
 template <class Interface>
 TMultiReferenceMember<Interface>::TMultiReferenceMember(const TMultiReferenceMember& ptr)
 :	BaseClass(ptr),
-	m_definitionComponentPtr(ptr.m_definitionComponentPtr),
-	m_components(ptr.m_components),
-	m_isInitialized(ptr.m_isInitialized)
+	m_definitionComponentPtr(ptr.m_definitionComponentPtr)
 {
+	// Thread-safe copy: acquire lock on source object before copying
+	QMutexLocker lock(&ptr.m_mutex);
+	m_components = ptr.m_components;
+	m_isInitialized = ptr.m_isInitialized.load();
 }
 
 
