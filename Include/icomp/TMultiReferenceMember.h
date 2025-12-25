@@ -99,7 +99,10 @@ void TMultiReferenceMember<Interface>::Init(const IComponent* ownerPtr, const IR
 
 	BaseClass::InitInternal(ownerPtr, staticInfo, &m_definitionComponentPtr);
 
-	// Reset initialization flag BEFORE clearing data to prevent race conditions
+	// Reset initialization flag BEFORE clearing data to prevent race conditions.
+	// Even though we hold the lock, setting this flag first ensures that if any thread
+	// checks m_isInitialized after this lock is released, it sees a consistent state.
+	// The lock ensures that no thread is in the middle of EnsureInitialized() when we do this.
 	m_isInitialized = false;
 	m_components.clear();
 }
