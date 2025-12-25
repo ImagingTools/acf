@@ -233,7 +233,8 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 	const IRegistry& registry = contextPtr->GetRegistry();
 
 	if (subId.isEmpty()){
-		const IRegistry::ExportedInterfacesMap& interfaceInfos = registry.GetExportedInterfacesMap();
+		// Make a copy to avoid holding the lock during iteration
+		const IRegistry::ExportedInterfacesMap interfaceInfos = registry.GetExportedInterfacesMap();
 
 		IRegistry::ExportedInterfacesMap::const_iterator iter;
 		if (interfaceType.IsVoid()){
@@ -270,7 +271,8 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 		QByteArray restId;
 		SplitId(subId, componentId, restId);
 
-		const IRegistry::ExportedElementsMap& subcomponentMap = registry.GetExportedElementsMap();
+		// Make a copy to avoid holding the lock during iteration
+		const IRegistry::ExportedElementsMap subcomponentMap = registry.GetExportedElementsMap();
 
 		IRegistry::ExportedElementsMap::ConstIterator iter = subcomponentMap.constFind(componentId);
 		if (iter != subcomponentMap.constEnd()){
