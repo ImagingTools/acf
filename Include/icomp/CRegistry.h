@@ -18,6 +18,25 @@ namespace icomp
 
 /**
 	Standard implementation of registry.
+
+	\par Thread-Safety Notes:
+	This class uses internal locking (QMutex/QRecursiveMutex) to protect
+	internal data structures. However, callers must be aware of the following:
+	
+	- GetExportedInterfacesMap() and GetExportedElementsMap() return const references to
+	  internal maps. While the reference is returned under lock protection, the lock is
+	  released when the function returns. Callers should make a copy if they need to
+	  iterate or store the map to avoid race conditions:
+	  \code
+	  // Thread-safe pattern - make a copy
+	  auto mapCopy = registry.GetExportedInterfacesMap();
+	  for (auto iter = mapCopy.begin(); iter != mapCopy.end(); ++iter) { ... }
+	  \endcode
+	
+	- InsertElementInfo() returns a pointer to an element in the internal map. This pointer
+	  is only safe to use if the caller ensures no concurrent modifications occur. When
+	  called from within other registry methods (like Serialize), the pointer is safe because
+	  the calling method holds the lock.
 */
 class CRegistry: virtual public IRegistry
 {
