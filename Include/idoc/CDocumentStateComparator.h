@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include <istd/TDelPtr.h>
 #include <iser/CMemoryWriteArchive.h>
 #include <iser/ISerializable.h>
 #include <imod/TSingleModelObserverBase.h>
@@ -41,9 +42,27 @@ protected:
 	// reimplemented (imod::TSingleModelObserverBase<iser::ISerializable>)
 	virtual iser::ISerializable* CastFromModel(imod::IModel* modelPtr) const override;
 
+	/**
+		Set version information used to create internal memory archives.
+		Without version information all version dependent data will be skipped during serialization.
+		\note It resets the stored document state.
+	*/
+	void SetVersionInfo(const iser::IVersionInfo* versionInfoPtr);
+
+	/**
+		Get version information used to create internal memory archives.
+	*/
+	const iser::IVersionInfo* GetVersionInfo() const;
+
 private:
+	/**
+		Get internal archive storing the document state. It will be created on demand.
+	*/
+	iser::CMemoryWriteArchive& GetStoredStateArchive() const;
+
 	bool m_hasStoredDocumentState;
-	iser::CMemoryWriteArchive m_storedStateArchive;
+	const iser::IVersionInfo* m_versionInfoPtr;
+	mutable istd::TDelPtr<iser::CMemoryWriteArchive> m_storedStateArchivePtr;
 	mutable DocumentChangeFlag m_stateChangedFlag;
 	mutable bool m_isStateChangedFlagValid;
 };

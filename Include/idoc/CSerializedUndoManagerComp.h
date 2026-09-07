@@ -8,6 +8,7 @@
 // ACF includes
 #include <istd/TDelPtr.h>
 #include <icomp/CComponentBase.h>
+#include <iser/IVersionInfo.h>
 #include <idoc/CDocumentStateComparator.h>
 #include <idoc/IUndoManager.h>
 
@@ -29,6 +30,8 @@ namespace idoc
 	
 	\par Component Attributes
 	- \b MaxBufferSize - Maximum memory size for undo buffer in megabytes (default: 100 MB)
+	- \b VersionInfo - Optional reference to iser::IVersionInfo used to create the internal memory archives.
+	If it is not set, all version dependent data will be skipped during serialization of the document state.
 	
 	\par Registered Interfaces
 	- idoc::IUndoManager - Provides undo/redo operations
@@ -39,6 +42,7 @@ namespace idoc
 	\code
 	CSerializedUndoManagerComp {
 		MaxBufferSize = 50  // Limit undo buffer to 50 MB
+		VersionInfo = "VersionInfo"  // Version info of the application
 	}
 	\endcode
 	
@@ -113,6 +117,7 @@ public:
 		I_REGISTER_INTERFACE(idoc::IDocumentStateComparator);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_ASSIGN(m_maxBufferSizeAttrPtr, "MaxBufferSize", "Maximal memory size of the Undo-buffer in MByte", false, 100);
+		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions used to serialize the document state", false, "VersionInfo");
 	I_END_COMPONENT;
 
 	CSerializedUndoManagerComp();
@@ -149,6 +154,7 @@ protected:
 	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated() override;
 	virtual void OnComponentDestroyed() override;
 
 private:
@@ -162,6 +168,7 @@ private:
 	bool m_isBlocked;
 
 	I_ATTR(int, m_maxBufferSizeAttrPtr);
+	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
 };
 
 
