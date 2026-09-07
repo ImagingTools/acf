@@ -2,6 +2,8 @@
 
 ACF (Application Component Framework) is a flexible and extensible framework for building component-based applications with support for parameters, serialization, and document management.
 
+> **📢 Repository Consolidation**: We are consolidating three ACF repositories (Acf, AcfSln, IAcf) into a unified domain-oriented structure. See [REPOSITORY_CONSOLIDATION_PLAN.md](REPOSITORY_CONSOLIDATION_PLAN.md) for details.
+
 ## Documentation
 
 The full API documentation is available at: [https://imagingtools.github.io/Acf/](https://imagingtools.github.io/Acf/)
@@ -128,6 +130,28 @@ ACF is designed to support EU Cyber Resilience Act compliance:
 - **Vulnerability Management**: Documented process for handling security issues
 
 See [CRA_COMPLIANCE.md](CRA_COMPLIANCE.md) for complete information about how ACF supports CRA requirements.
+
+## Repository Consolidation
+
+ACF is consolidating three repositories (Acf, AcfSln, IAcf) into a unified domain-oriented structure:
+
+### Current Repositories
+- **Acf**: 27 core framework libraries
+- **AcfSln**: 33 application domain libraries
+- **IAcf**: 11 third-party integration libraries
+
+### Future Unified Structure
+All 71 libraries organized into 11 functional domains:
+- Core, Math, Geometry, Platform
+- ImageProcessing, Calibration, Acquisition
+- Production, DocumentView, UI, Services
+
+### Documentation
+- **[Repository Consolidation Plan](REPOSITORY_CONSOLIDATION_PLAN.md)**: Complete consolidation proposal
+- **[Domain-Oriented Structure](DOMAIN_ORIENTED_STRUCTURE.md)**: Detailed domain design
+- **[Migration Guide](MIGRATION_GUIDE.md)**: Step-by-step migration instructions
+
+**Benefits**: Improved discoverability, simplified maintenance, better dependency management, enhanced developer experience
 
 ## License
 
