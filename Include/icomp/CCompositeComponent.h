@@ -83,6 +83,14 @@ private:
 				ComponentInfo& componentInfo,
 				bool isOwned) const;
 
+	/**
+		Get the lock guarding subcomponent creation. All composites share one lock on purpose:
+		creating or destroying a subcomponent locks other composites too - a parent locks its
+		children to auto-init them, a child locks its parent to detach - so per-composite locks
+		get taken in both orders and two threads can end up waiting for each other.
+	*/
+	static QRecursiveMutex& GetCreationMutex();
+
 
 private:
 	enum ComponentState
@@ -135,12 +143,6 @@ private:
 
 	mutable bool m_autoInitialized;
 	mutable IRegistry::Ids m_autoInitComponentIds;
-
-#if QT_VERSION >= 0x060000
-	mutable QRecursiveMutex m_mutex;
-#else
-	mutable QMutex m_mutex;
-#endif
 };
 
 
