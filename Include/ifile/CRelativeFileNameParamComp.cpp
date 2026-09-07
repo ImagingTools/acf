@@ -81,10 +81,23 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	QString documentPath;
-	const ifile::IFileArchiveInfo* fileArchiveInfoPtr = dynamic_cast<const ifile::IFileArchiveInfo*>(&archive);
-	if (fileArchiveInfoPtr != NULL){
-		documentPath = fileArchiveInfoPtr->GetCurrentFilePath();
+	// When a ReferencePath is configured, serialize relative to it instead of
+	// the document path. This avoids path corruption when the archive writes
+	// to a temporary location (e.g. /tmp/) before moving to the final path.
+	QString basePath;
+	if (m_relativeToCompPtr.IsValid()){
+		basePath = m_relativeToCompPtr->GetPath();
+	}
+
+	if (basePath.isEmpty()){
+		const ifile::IFileArchiveInfo* fileArchiveInfoPtr = dynamic_cast<const ifile::IFileArchiveInfo*>(&archive);
+		if (fileArchiveInfoPtr != NULL){
+			QString documentPath = fileArchiveInfoPtr->GetCurrentFilePath();
+			if (!documentPath.isEmpty()){
+				QFileInfo docuInfo(documentPath);
+				basePath = docuInfo.absoluteDir().absolutePath();
+			}
+		}
 	}
 
 	static iser::CArchiveTag pathTag("Path", "File path", iser::CArchiveTag::TT_LEAF);
@@ -92,10 +105,10 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 	if (archive.IsStoring()){
 		QString filePath = GetPath();
 
-		if (!documentPath.isEmpty()){
-			QFileInfo docuInfo(documentPath);
+		if (!basePath.isEmpty()){
+			QDir baseDir(basePath);
 
-			filePath = docuInfo.absoluteDir().relativeFilePath(filePath);
+			filePath = baseDir.relativeFilePath(filePath);
 		}
 
 		retVal = retVal && archive.BeginTag(pathTag);
@@ -113,10 +126,10 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 			return false;
 		}
 
-		if (!documentPath.isEmpty()){
-			QFileInfo docuInfo(documentPath);
+		if (!basePath.isEmpty()){
+			QDir baseDir(basePath);
 
-			filePath = docuInfo.absoluteDir().absoluteFilePath(filePath);
+			filePath = baseDir.absoluteFilePath(filePath);
 		}
 
 		if (filePath != GetPath()){
