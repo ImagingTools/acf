@@ -75,7 +75,7 @@ protected:
 private:
 	QString m_text;
 
-	I_TEXTATTR(m_defaultTextAttrPtr);
+	I_ATTR(QString, m_defaultTextAttrPtr);
 };
 
 

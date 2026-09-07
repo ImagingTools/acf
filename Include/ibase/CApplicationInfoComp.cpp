@@ -14,24 +14,24 @@ namespace ibase
 
 // reimplemented (ibase::IApplicationInfo)
 
-QString CApplicationInfoComp::GetApplicationAttribute(int attributeId, bool allowTranslation) const
+QString CApplicationInfoComp::GetApplicationAttribute(int attributeId, bool /*allowTranslation*/) const
 {
 	switch (attributeId){
 	case AA_COMPANY_NAME:
 		if (m_companyNameAttrPtr.IsValid()){
-			return allowTranslation? *m_companyNameAttrPtr: m_companyNameAttrPtr.GetOriginalValue();
+			return *m_companyNameAttrPtr;
 		}
 		break;
 
 	case AA_PRODUCT_NAME:
 		if (m_productNameAttrPtr.IsValid()){
-			return allowTranslation? *m_productNameAttrPtr: m_productNameAttrPtr.GetOriginalValue();
+			return *m_productNameAttrPtr;
 		}
 		break;
 
 	case AA_PRODUCT_EDITION:
 		if (m_productEditionAttrPtr.IsValid()){
-			return allowTranslation? *m_productEditionAttrPtr: m_productEditionAttrPtr.GetOriginalValue();
+			return *m_productEditionAttrPtr;
 		}
 		break;
 
@@ -43,19 +43,19 @@ QString CApplicationInfoComp::GetApplicationAttribute(int attributeId, bool allo
 
 	case AA_APPLICATION_NAME:
 		if (m_applicationNameAttrPtr.IsValid()){
-			return allowTranslation? *m_applicationNameAttrPtr: m_applicationNameAttrPtr.GetOriginalValue();
+			return *m_applicationNameAttrPtr;
 		}
 		break;
 
 	case AA_APPLICATION_SUBNAME:
 		if (m_applicationSubnameAttrPtr.IsValid()){
-			return allowTranslation? *m_applicationSubnameAttrPtr: m_applicationSubnameAttrPtr.GetOriginalValue();
+			return *m_applicationSubnameAttrPtr;
 		}
 		break;
 
 	case AA_APPLICATION_TYPE:
 		if (m_applicationTypeAttrPtr.IsValid()){
-			return allowTranslation? *m_applicationTypeAttrPtr: m_applicationTypeAttrPtr.GetOriginalValue();
+			return *m_applicationTypeAttrPtr;
 		}
 		break;
 
@@ -65,7 +65,7 @@ QString CApplicationInfoComp::GetApplicationAttribute(int attributeId, bool allo
 
 	case AA_LEGAL_COPYRIGHT:
 		if (m_legalCopyrightAttrPtr.IsValid()){
-			return allowTranslation? *m_legalCopyrightAttrPtr: m_legalCopyrightAttrPtr.GetOriginalValue();
+			return *m_legalCopyrightAttrPtr;
 		}
 		break;
 
