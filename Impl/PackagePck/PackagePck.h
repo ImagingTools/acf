@@ -9,6 +9,7 @@
 #include <ipackage/CPackagesLoaderComp.h>
 #include <ipackage/CRegistriesManagerComp.h>
 #include <ipackage/CRegistryCodeSaverComp.h>
+#include <ipackage/CRegistryConsistInfoComp.h>
 
 
 /**
@@ -33,6 +34,7 @@ typedef icomp::TMakeComponentWrap<
 typedef ipackage::CPackagesLoaderComp PackagesLoader;
 typedef ipackage::CRegistriesManagerComp RegistriesManager;
 typedef ipackage::CRegistryCodeSaverComp RegistryCodeSaver;
+typedef ipackage::CRegistryConsistInfoComp RegistryConsistInfo;
 
 
 } // namespace PackagePck

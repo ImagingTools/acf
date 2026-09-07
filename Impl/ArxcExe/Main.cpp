@@ -32,6 +32,7 @@ static void ShowUsage()
 	std::cout << "\t-sources [on|off]            - enables/disables C++ sources output, default is 'on'" << std::endl;
 	std::cout << "\t-v                           - enable verbose mode" << std::endl;
 	std::cout << "\t-check_real                  - check if used real packages exist" << std::endl;
+	std::cout << "\t-strong-check                - fail if consistency errors are found in the registry" << std::endl;
 	std::cout << "\t-no_binary                   - disable generating of binary coded registries" << std::endl;
 	std::cout << "\t-conf_name name              - name of configuration, e.g. 'DebugVC12_64'" << std::endl;
 	std::cout << "\t-env_vars environment variables - list of external environment variables" << std::endl;
@@ -57,6 +58,7 @@ int main(int argc, char *argv[])
 	int translateMode = 1;
 	bool useBinaryCode = true;
 	bool checkRealPackages = false;
+	bool strongCheck = false;
 	QString environment;
 	QString inputFilePath = argv[1];
 	QString outputFilePath;
@@ -87,6 +89,10 @@ int main(int argc, char *argv[])
 			}
 			else if (option == "check_real"){
 				checkRealPackages = true;
+			}
+			else if (option == "strong-check"){
+				std::cout << "Strong check active" << std::endl;
+				strongCheck = true;
 			}
 			else if (index < argc - 1){
 				if (option == "config"){
@@ -282,6 +288,22 @@ int main(int argc, char *argv[])
 		std::cout << "Cannot read input registry file '" << inputFilePath.toLocal8Bit().constData() << "'" << std::endl;
 
 		return 2;
+	}
+
+	if (strongCheck){
+		icomp::TSimSharedComponentPtr<PackagePck::RegistryConsistInfo> consistInfoComp;
+		if (verboseEnabled || workingMode == 0){
+			consistInfoComp->SetRef("Log", log);
+		}
+		consistInfoComp->SetRef("PackagesManager", registriesManagerComp);
+		consistInfoComp->SetRef("RegistriesManager", registriesManagerComp);
+		consistInfoComp->InitComponent();
+
+		if (!consistInfoComp->IsRegistryConsistent(*registryComp)){
+			std::cout << "Registry consistency check failed for '" << inputFilePath.toLocal8Bit().constData() << "'" << std::endl;
+
+			return 5;
+		}
 	}
 
 	if (codeSaverComp->SaveToFile(*registryComp, outputFilePath) != ifile::IFilePersistence::OS_OK){

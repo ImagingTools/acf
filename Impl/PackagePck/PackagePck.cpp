@@ -39,6 +39,11 @@ I_EXPORT_COMPONENT(
 			"Stores registry as C++ code",
 			"Code C++ File Store Save Registry Compile" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Loader"));
 
+I_EXPORT_COMPONENT(
+			RegistryConsistInfo,
+			"Validates structural consistency of registries",
+			"Registry Consistency Check Validation Verify");
+
 
 } // namespace PackagePck
 
