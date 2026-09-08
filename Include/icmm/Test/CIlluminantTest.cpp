@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include <iser/CCompactXmlMemReadArchive.h>
 #include <iser/CJsonMemReadArchive.h>
 #include <iser/CJsonMemWriteArchive.h>
 #include <itest/CStandardTestExecutor.h>
@@ -168,6 +169,35 @@ void CIlluminantTest::SerializeTest()
 		QCOMPARE(restored.GetIlluminantName(), QString("Custom Illuminant"));
 		QVERIFY(restored.GetSpectralPowerDistribution().IsEqual(source.GetSpectralPowerDistribution()));
 	}
+}
+
+
+void CIlluminantTest::SerializeLegacyWhitePointTest()
+{
+	// Data written before Acf commit 1f0b426b3 
+	// ("icmm: replace illuminant white point by spectral power distribution", revision 6526) 
+	// stored not used "WhitePoint" tag. Loading it should succeed and discard the white point,
+	// new "SpectralPowerDistribution" field remains empty.
+	static const QByteArray legacyData = R"(<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="6525" Description="ACF"/>
+        </VersionInfos>
+    </AcfHeader>
+    <IlluminantType>D50</IlluminantType>
+    <IlluminantName>D50</IlluminantName>
+    <WhitePoint>
+        <ColorComponents/>
+    </WhitePoint>
+</Acf>)";
+
+	iser::CCompactXmlMemReadArchive readArchive(legacyData);
+	icmm::CIlluminant illuminant;
+	QVERIFY(illuminant.Serialize(readArchive));
+	QCOMPARE(illuminant.GetIlluminantType(), icmm::StandardIlluminant::D50);
+	QCOMPARE(illuminant.GetIlluminantName(), QString("D50"));
+	QCOMPARE(illuminant.GetSpectralPowerDistribution().GetSamplesCount(), 0);
 }
 
 
