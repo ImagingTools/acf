@@ -142,6 +142,7 @@ bool CIlluminant::Serialize(iser::IArchive& archive)
 	}
 	else if (!archive.IsStoring()){
 		// Pre-1f0b426b3 data stored an illuminant white point, it had no real use case.
+		retVal = retVal && m_spectralPowerDistribution.ResetData();
 		icmm::CVarColor whitePoint;
 		iser::CArchiveTag whitePointTag("WhitePoint", "White point of the illuminant", iser::CArchiveTag::TT_GROUP);
 		retVal = retVal && archive.BeginTag(whitePointTag);
