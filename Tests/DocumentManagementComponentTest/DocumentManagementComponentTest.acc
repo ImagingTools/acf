@@ -48,6 +48,21 @@
                 <AttributeInfoMap/>
             </Data>
         </Element>
+        <Element Id="TestVersionInfo" PackageId="BasePck" ComponentId="VersionInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="VersionId" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1024"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionIdDesc" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="Test Version"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionNumber" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
         <Element Id="TextDocument" PackageId="BasePck" ComponentId="TextDocument">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
@@ -76,6 +91,15 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
+        <Element Id="UndoManagerWithVersionInfo" PackageId="BasePck" ComponentId="SerializedUndoManager">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="TestVersionInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
     </ElementsList>
     <EmbeddedRegistriesList/>
     <ExportedInterfaces/>
@@ -85,5 +109,6 @@
         <Component ExportedId="TextDocumentWithDefault" ComponentId="TextDocumentWithDefault"/>
         <Component ExportedId="UndoManager" ComponentId="UndoManager"/>
         <Component ExportedId="UndoManagerSmallBuffer" ComponentId="UndoManagerSmallBuffer"/>
+        <Component ExportedId="UndoManagerWithVersionInfo" ComponentId="UndoManagerWithVersionInfo"/>
     </ExportedComponents>
 </Acf>

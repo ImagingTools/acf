@@ -345,6 +345,9 @@ This example demonstrates integrating full undo/redo support into your document 
     <!-- Undo Manager Configuration -->
     <Component Type="idoc::CSerializedUndoManagerComp" Name="UndoManager">
         <Property Name="MaxBufferSize" Value="100"/>
+        <!-- Optional reference to iser::IVersionInfo. Without it version dependent
+             document data will be skipped during the undo state serialization. -->
+        <Property Name="VersionInfo" Value="VersionInfo"/>
     </Component>
 </Component>
 ```

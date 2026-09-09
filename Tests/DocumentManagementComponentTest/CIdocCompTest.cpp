@@ -21,12 +21,14 @@ void CIdocCompTest::initTestCase()
 	m_textDocumentWithDefaultPtr = m_testInstanceCompPtr->GetInterface<idoc::ITextDocument>("TextDocumentWithDefault");
 	m_undoManagerPtr = m_testInstanceCompPtr->GetInterface<idoc::IUndoManager>("UndoManager");
 	m_undoManagerSmallBufferPtr = m_testInstanceCompPtr->GetInterface<idoc::IUndoManager>("UndoManagerSmallBuffer");
+	m_undoManagerWithVersionInfoPtr = m_testInstanceCompPtr->GetInterface<idoc::IUndoManager>("UndoManagerWithVersionInfo");
 	m_documentTemplatePtr = m_testInstanceCompPtr->GetInterface<idoc::IDocumentTemplate>("DocumentTemplate");
 
 	QVERIFY(m_textDocumentPtr != nullptr);
 	QVERIFY(m_textDocumentWithDefaultPtr != nullptr);
 	QVERIFY(m_undoManagerPtr != nullptr);
 	QVERIFY(m_undoManagerSmallBufferPtr != nullptr);
+	QVERIFY(m_undoManagerWithVersionInfoPtr != nullptr);
 	QVERIFY(m_documentTemplatePtr != nullptr);
 }
 
@@ -305,6 +307,65 @@ void CIdocCompTest::testUndoManagerObserverSeesChangedDocumentState()
 
 	undoManagerModel->DetachObserver(&stateObserver);
 	documentModel->DetachObserver(undoManagerObserver);
+	m_undoManagerPtr->ResetUndo();
+}
+
+
+void CIdocCompTest::testUndoManagerVersionDependentDocument()
+{
+	idoc::IDocumentStateComparator* comparator =
+		dynamic_cast<idoc::IDocumentStateComparator*>(m_undoManagerWithVersionInfoPtr);
+	QVERIFY(comparator != nullptr);
+
+	imod::IObserver* undoManagerObserver = dynamic_cast<imod::IObserver*>(m_undoManagerWithVersionInfoPtr);
+	QVERIFY(undoManagerObserver != nullptr);
+
+	VersionDependentDocumentModel document;
+	QVERIFY(document.AttachObserver(undoManagerObserver));
+
+	m_undoManagerWithVersionInfoPtr->ResetUndo();
+
+	document.SetVersionedValue(1);
+	QVERIFY(comparator->StoreDocumentState());
+	QCOMPARE(comparator->GetDocumentChangeFlag(), idoc::IDocumentStateComparator::DCF_EQUAL);
+	m_undoManagerWithVersionInfoPtr->ResetUndo();
+
+	// Change of the version dependent value is only visible in the serialized stream
+	// if the version information is provided to the internal archives.
+	document.SetVersionedValue(42);
+	QCOMPARE(m_undoManagerWithVersionInfoPtr->GetAvailableUndoSteps(), 1);
+	QCOMPARE(comparator->GetDocumentChangeFlag(), idoc::IDocumentStateComparator::DCF_DIFFERENT);
+
+	QVERIFY(m_undoManagerWithVersionInfoPtr->DoUndo());
+	QCOMPARE(document.GetVersionedValue(), 1);
+	QCOMPARE(comparator->GetDocumentChangeFlag(), idoc::IDocumentStateComparator::DCF_EQUAL);
+
+	QVERIFY(m_undoManagerWithVersionInfoPtr->DoRedo());
+	QCOMPARE(document.GetVersionedValue(), 42);
+	QCOMPARE(comparator->GetDocumentChangeFlag(), idoc::IDocumentStateComparator::DCF_DIFFERENT);
+
+	document.DetachObserver(undoManagerObserver);
+	m_undoManagerWithVersionInfoPtr->ResetUndo();
+
+	// Without configured version information the version dependent value is skipped
+	// during the serialization, so no undo step and no state difference can be detected.
+	imod::IObserver* undoManagerWithoutVersionObserver = dynamic_cast<imod::IObserver*>(m_undoManagerPtr);
+	QVERIFY(undoManagerWithoutVersionObserver != nullptr);
+
+	idoc::IDocumentStateComparator* comparatorWithoutVersion =
+		dynamic_cast<idoc::IDocumentStateComparator*>(m_undoManagerPtr);
+	QVERIFY(comparatorWithoutVersion != nullptr);
+
+	QVERIFY(document.AttachObserver(undoManagerWithoutVersionObserver));
+	m_undoManagerPtr->ResetUndo();
+
+	QVERIFY(comparatorWithoutVersion->StoreDocumentState());
+
+	document.SetVersionedValue(123);
+	QCOMPARE(m_undoManagerPtr->GetAvailableUndoSteps(), 0);
+	QCOMPARE(comparatorWithoutVersion->GetDocumentChangeFlag(), idoc::IDocumentStateComparator::DCF_EQUAL);
+
+	document.DetachObserver(undoManagerWithoutVersionObserver);
 	m_undoManagerPtr->ResetUndo();
 }
 

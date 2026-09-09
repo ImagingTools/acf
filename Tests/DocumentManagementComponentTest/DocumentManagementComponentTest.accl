@@ -15,6 +15,8 @@
         <Element ComponentName="TextDocumentWithDefault" X="525" Y="550" Note=""/>
         <Element ComponentName="UndoManager" X="225" Y="325" Note=""/>
         <Element ComponentName="UndoManagerSmallBuffer" X="300" Y="175" Note=""/>
+        <Element ComponentName="TestVersionInfo" X="75" Y="175" Note=""/>
+        <Element ComponentName="UndoManagerWithVersionInfo" X="75" Y="325" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -13,6 +13,7 @@ namespace idoc
 
 CDocumentStateComparator::CDocumentStateComparator()
 :	m_hasStoredDocumentState(false),
+	m_versionInfoPtr(NULL),
 	m_stateChangedFlag(DCF_UNKNOWN),
 	m_isStateChangedFlagValid(false)
 {
@@ -32,10 +33,11 @@ bool CDocumentStateComparator::StoreDocumentState()
 	istd::CChangeNotifier notifier(this);
 	Q_UNUSED(notifier);
 
-	m_storedStateArchive.Reset();
+	iser::CMemoryWriteArchive& storedStateArchive = GetStoredStateArchive();
+	storedStateArchive.Reset();
 
 	iser::ISerializable* serializablePtr = GetObservedObject();
-	if ((serializablePtr != NULL) && serializablePtr->Serialize(m_storedStateArchive)){
+	if ((serializablePtr != NULL) && serializablePtr->Serialize(storedStateArchive)){
 		m_stateChangedFlag = DCF_EQUAL;
 		m_hasStoredDocumentState = true;
 	}
@@ -53,7 +55,7 @@ bool CDocumentStateComparator::StoreDocumentState()
 bool CDocumentStateComparator::RestoreDocumentState()
 {
 	if (m_hasStoredDocumentState){
-		iser::CMemoryReadArchive restoreArchive(m_storedStateArchive);
+		iser::CMemoryReadArchive restoreArchive(GetStoredStateArchive());
 		istd::CChangeNotifier notifier(this);
 		Q_UNUSED(notifier);
 
@@ -79,11 +81,11 @@ CDocumentStateComparator::DocumentChangeFlag CDocumentStateComparator::GetDocume
 		m_stateChangedFlag = DCF_UNKNOWN;
 
 		if (m_hasStoredDocumentState){
-			iser::CMemoryWriteArchive compareArchive;
+			iser::CMemoryWriteArchive compareArchive(m_versionInfoPtr);
 
 			iser::ISerializable* serializablePtr = GetObservedObject();
 			if ((serializablePtr != NULL) && const_cast<iser::ISerializable*>(serializablePtr)->Serialize(compareArchive)){
-				m_stateChangedFlag = (compareArchive != m_storedStateArchive)? DCF_DIFFERENT: DCF_EQUAL;
+				m_stateChangedFlag = (compareArchive != GetStoredStateArchive())? DCF_DIFFERENT: DCF_EQUAL;
 			}
 		}
 
@@ -100,7 +102,7 @@ bool CDocumentStateComparator::OnModelAttached(imod::IModel* modelPtr, istd::ICh
 {
 	if (BaseClass::OnModelAttached(modelPtr, changeMask)){
 		m_hasStoredDocumentState = false;
-		m_storedStateArchive.Reset();
+		m_storedStateArchivePtr.Reset();
 		m_stateChangedFlag = DCF_UNKNOWN;
 		m_isStateChangedFlagValid = false;
 
@@ -115,7 +117,7 @@ bool CDocumentStateComparator::OnModelDetached(imod::IModel* modelPtr)
 {
 	if (BaseClass::OnModelDetached(modelPtr)){
 		m_hasStoredDocumentState = false;
-		m_storedStateArchive.Reset();
+		m_storedStateArchivePtr.Reset();
 		m_stateChangedFlag = DCF_UNKNOWN;
 		m_isStateChangedFlagValid = false;
 
@@ -138,6 +140,39 @@ void CDocumentStateComparator::AfterUpdate(imod::IModel* modelPtr, const istd::I
 iser::ISerializable* CDocumentStateComparator::CastFromModel(imod::IModel* modelPtr) const
 {
 	return dynamic_cast<iser::ISerializable*>(modelPtr);
+}
+
+
+void CDocumentStateComparator::SetVersionInfo(const iser::IVersionInfo* versionInfoPtr)
+{
+	if (m_versionInfoPtr == versionInfoPtr){
+		return;
+	}
+
+	m_versionInfoPtr = versionInfoPtr;
+
+	m_storedStateArchivePtr.Reset();
+	m_hasStoredDocumentState = false;
+	m_stateChangedFlag = DCF_UNKNOWN;
+	m_isStateChangedFlagValid = false;
+}
+
+
+const iser::IVersionInfo* CDocumentStateComparator::GetVersionInfo() const
+{
+	return m_versionInfoPtr;
+}
+
+
+// private methods
+
+iser::CMemoryWriteArchive& CDocumentStateComparator::GetStoredStateArchive() const
+{
+	if (!m_storedStateArchivePtr.IsValid()){
+		m_storedStateArchivePtr.SetPtr(new iser::CMemoryWriteArchive(m_versionInfoPtr));
+	}
+
+	return *m_storedStateArchivePtr;
 }
 
 

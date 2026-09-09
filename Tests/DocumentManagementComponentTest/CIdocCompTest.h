@@ -10,7 +10,13 @@
 #include <QtTest/QtTest>
 
 // ACF includes
+#include <istd/CChangeNotifier.h>
+#include <iser/CArchiveTag.h>
+#include <iser/IArchive.h>
+#include <iser/ISerializable.h>
+#include <iser/IVersionInfo.h>
 #include <imod/CSingleModelObserverBase.h>
+#include <imod/TModelWrap.h>
 #include <idoc/ITextDocument.h>
 #include <idoc/IUndoManager.h>
 #include <idoc/IDocumentTemplate.h>
@@ -37,6 +43,7 @@ private slots:
 	void testUndoManagerReset();
 	void testUndoManagerStateComparison();
 	void testUndoManagerObserverSeesChangedDocumentState();
+	void testUndoManagerVersionDependentDocument();
 
 	// Tests for CSingleDocumentTemplateComp
 	void testDocumentTemplateCreation();
@@ -85,11 +92,65 @@ private:
 		std::optional<idoc::IDocumentStateComparator::DocumentChangeFlag> m_expectedDocumentChangeFlag;
 	};
 
+	// Serializable fixture containing a data field which is only serialized if the archive
+	// provides the user version information configured at the undo manager.
+	class CVersionDependentDocument: public virtual iser::ISerializable
+	{
+	public:
+		enum{
+			VersionedValueVersion = 2
+		};
+
+		CVersionDependentDocument()
+			: m_versionedValue(0)
+		{
+		}
+
+		int GetVersionedValue() const
+		{
+			return m_versionedValue;
+		}
+
+		void SetVersionedValue(int value)
+		{
+			if (m_versionedValue != value){
+				istd::CChangeNotifier notifier(this);
+				Q_UNUSED(notifier);
+
+				m_versionedValue = value;
+			}
+		}
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive) override
+		{
+			static iser::CArchiveTag versionedValueTag("VersionedValue", "Version dependent value", iser::CArchiveTag::TT_LEAF);
+
+			quint32 versionNumber = 0;
+			if (		!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::UserVersionId, versionNumber) ||
+						(versionNumber < VersionedValueVersion)){
+				return true;
+			}
+
+			bool retVal = archive.BeginTag(versionedValueTag);
+			retVal = retVal && archive.Process(m_versionedValue);
+			retVal = retVal && archive.EndTag(versionedValueTag);
+
+			return retVal;
+		}
+
+	private:
+		int m_versionedValue;
+	};
+
+	typedef imod::TModelWrap<CVersionDependentDocument> VersionDependentDocumentModel;
+
 	std::shared_ptr<CDocumentManagementComponentTest> m_testInstanceCompPtr;
 
 	idoc::ITextDocument* m_textDocumentPtr = nullptr;
 	idoc::ITextDocument* m_textDocumentWithDefaultPtr = nullptr;
 	idoc::IUndoManager* m_undoManagerPtr = nullptr;
 	idoc::IUndoManager* m_undoManagerSmallBufferPtr = nullptr;
+	idoc::IUndoManager* m_undoManagerWithVersionInfoPtr = nullptr;
 	idoc::IDocumentTemplate* m_documentTemplatePtr = nullptr;
 };

@@ -86,7 +86,7 @@ bool CSerializedUndoManagerComp::DoListShift(int steps, UndoList& fromList, Undo
 {
 	bool retVal = false;
 
-	UndoArchivePtr currentStateArchivePtr(new iser::CMemoryWriteArchive());
+	UndoArchivePtr currentStateArchivePtr(new iser::CMemoryWriteArchive(GetVersionInfo()));
 	if ((steps > 0) && (fromList.size() >= steps) && currentStateArchivePtr.IsValid()){
 		istd::CChangeNotifier notifier(this);
 		Q_UNUSED(notifier);
@@ -195,7 +195,7 @@ void CSerializedUndoManagerComp::BeforeUpdate(imod::IModel* modelPtr)
 	if (!m_isBlocked && !m_beginStateArchivePtr.IsValid()){
 		iser::ISerializable* objectPtr = GetObservedObject();
 		if (objectPtr != NULL){
-			UndoArchivePtr archivePtr(new iser::CMemoryWriteArchive());
+			UndoArchivePtr archivePtr(new iser::CMemoryWriteArchive(GetVersionInfo()));
 
 			if (		archivePtr.IsValid() &&
 						objectPtr->Serialize(*archivePtr) &&
@@ -220,7 +220,7 @@ void CSerializedUndoManagerComp::AfterUpdate(imod::IModel* modelPtr, const istd:
 				m_beginStateArchivePtr.IsValid()){
 		iser::ISerializable* objectPtr = GetObservedObject();
 		if (objectPtr != NULL){
-			UndoArchivePtr archivePtr(new iser::CMemoryWriteArchive());
+			UndoArchivePtr archivePtr(new iser::CMemoryWriteArchive(GetVersionInfo()));
 
 			if (objectPtr->Serialize(*archivePtr)){
 				if (*archivePtr != *m_beginStateArchivePtr){
@@ -252,9 +252,21 @@ void CSerializedUndoManagerComp::AfterUpdate(imod::IModel* modelPtr, const istd:
 
 // reimplemented (icomp::CComponentBase)
 
+void CSerializedUndoManagerComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_versionInfoCompPtr.EnsureInitialized();
+
+	SetVersionInfo(m_versionInfoCompPtr.GetPtr());
+}
+
+
 void CSerializedUndoManagerComp::OnComponentDestroyed()
 {
 	EnsureModelDetached();
+
+	SetVersionInfo(NULL);
 
 	BaseClass::OnComponentDestroyed();
 }
