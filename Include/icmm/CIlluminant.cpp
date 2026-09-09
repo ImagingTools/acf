@@ -3,10 +3,15 @@
 
 
 // ACF includes
+#include <icmm/CVarColor.h>
 #include <istd/CChangeNotifier.h>
 #include <iser/IArchive.h>
+#include <iser/IVersionInfo.h>
 #include <iser/CArchiveTag.h>
 #include <iser/CPrimitiveTypesSerializer.h>
+
+// Qt includes
+#include <QtCore/QDebug>
 
 
 namespace icmm
@@ -123,11 +128,28 @@ bool CIlluminant::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_illuminantName);
 	retVal = retVal && archive.EndTag(illuminantNameTag);
 
-	iser::CArchiveTag spectrumTag(
-				"SpectralPowerDistribution", "Spectral power distribution of the illuminant", iser::CArchiveTag::TT_GROUP);
-	retVal = retVal && archive.BeginTag(spectrumTag);
-	retVal = retVal && m_spectralPowerDistribution.Serialize(archive);
-	retVal = retVal && archive.EndTag(spectrumTag);
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+	quint32 frameworkVersion = 0;
+	bool hasSpectralPowerDistribution =
+		!versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion) || (frameworkVersion >= 6526);
+
+	if (hasSpectralPowerDistribution){
+		iser::CArchiveTag spectrumTag(
+					"SpectralPowerDistribution", "Spectral power distribution of the illuminant", iser::CArchiveTag::TT_GROUP);
+		retVal = retVal && archive.BeginTag(spectrumTag);
+		retVal = retVal && m_spectralPowerDistribution.Serialize(archive);
+		retVal = retVal && archive.EndTag(spectrumTag);
+	}
+	else if (!archive.IsStoring()){
+		// Pre-1f0b426b3 data stored an illuminant white point, it had no real use case.
+		retVal = retVal && m_spectralPowerDistribution.ResetData();
+		icmm::CVarColor whitePoint;
+		iser::CArchiveTag whitePointTag("WhitePoint", "White point of the illuminant", iser::CArchiveTag::TT_GROUP);
+		retVal = retVal && archive.BeginTag(whitePointTag);
+		retVal = retVal && whitePoint.Serialize(archive);
+		retVal = retVal && archive.EndTag(whitePointTag);
+		qWarning() << "Legacy Illuminant WhitePoint data discarded";
+	}
 
 	return retVal;
 }

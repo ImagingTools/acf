@@ -18,6 +18,7 @@ private Q_SLOTS:
 	void SettersTest();
 	void FactoryIdTest();
 	void SerializeTest();
+	void SerializeLegacyWhitePointTest();
 	void IsEqualTest();
 	void CopyFromTest();
 	void CloneMeTest();
